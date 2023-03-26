@@ -16,6 +16,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{bbb81f9a-33bb-42bc-a694-bd1173796d15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{c0bf71e7-1d05-474d-88e6-7d8d34625a2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -31,7 +34,7 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="jhD3DApp.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +42,7 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="jhD3DApp.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,5 +65,8 @@
     <FxCompile Include="jhPixelShader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -6,11 +6,23 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 #include <assert.h>
+#include <DirectXMath.h>
+#include <d3dcompiler.h>
 
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+static constexpr const UINT VERTEX_COUNT = 3;
 
 namespace jh
 {
+	struct Vertex
+	{
+		DirectX::XMFLOAT3 Position;
+		DirectX::XMFLOAT4 Color;
+	};
+
+
 	class D3DApp final
 	{
 	public:
@@ -29,13 +41,16 @@ namespace jh
 		void RenderFrame();
 		void Release();
 		
+		void WriteDataAtBuffer(ID3D11Resource* pResource, const void* pData, const size_t dataSize);
+
 		bool IfFailedHR(HRESULT hr);
 
 	private:
 		void initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow);
 		void initializeDirectX();
-
-
+		void initializeVertexAndIndexBuffer();
+		void createShaderAndSetShaders();
+		void initializeAndSetIA();
 		__forceinline HWND GetHWND() const { return mHwnd; }
 		__forceinline UINT GetScreenWidth() const { return mScreenWidth; }
 		__forceinline UINT GetScreenHeight() const { return mScreenHeight; }
@@ -47,10 +62,11 @@ namespace jh
 			, mHwnd()
 			, mcpDevice(nullptr)
 			, mcpDeviceContext(nullptr)
+			, mVertices{}
 		{
-
 		}
 		~D3DApp() = default;
+
 	private:
 		UINT mScreenWidth;
 		UINT mScreenHeight;
@@ -65,7 +81,12 @@ namespace jh
 		Microsoft::WRL::ComPtr<ID3D11Texture2D>			mcpDepthStencilTextrue;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	mcpDepthStencilView;
 
+		Vertex mVertices[VERTEX_COUNT];
+		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpVertexBuffer;
 
+		Microsoft::WRL::ComPtr<ID3DBlob>				mcpErrorBlob;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>		mcpVertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>		mcpPixelShader;
 
 	};
 }
