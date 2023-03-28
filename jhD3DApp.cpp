@@ -1,4 +1,7 @@
 #include "jhD3DApp.h"
+#include "jhTime.h"
+#include "jhInput.h"
+
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -10,6 +13,16 @@ namespace jh
 	{
 		initializeWindow(className, titleName, screenWidth, screenHeight, hInstance, nCmdShow);
 		initializeDirectX();
+
+		initializeVertexAndIndexBuffer();
+		createAndSetShaders();
+		initializeInputLayoutAndSetIA();
+		loadTexture();
+		createAndSetSamplerState();
+		createAndSetBlendState();
+		createConstantBufferForTransform();
+		Time::Initialize();
+		Input::Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
@@ -22,8 +35,8 @@ namespace jh
 			className,
 			titleName,
 			WS_OVERLAPPEDWINDOW,
-			screenWidth / 2,
-			screenHeight / 2 - 300,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
 			wr.right - wr.left,
 			wr.bottom - wr.top,
 			nullptr,
@@ -36,7 +49,7 @@ namespace jh
 		{
 			assert(false);
 		}
-
+		mHDC = GetDC(mHwnd);
 		ShowWindow(mHwnd, nCmdShow);
 		SetForegroundWindow(mHwnd);
 		SetFocus(mHwnd);
@@ -145,9 +158,10 @@ namespace jh
 
 	void D3DApp::initializeVertexAndIndexBuffer()
 	{
-		mVertices[0] = { {0.5f,		0.5f,		0.5f},	{1.0f, 0.0f, 0.0f, 1.0f} };
-		mVertices[1] = { {0.5f,		-0.5f,		0.5f},	{0.0f, 1.0f, 0.0f, 1.0f} };
-		mVertices[2] = { {-0.5f,	-0.5f,		0.5f},	{0.0f, 0.0f, 1.0f, 1.0f} };
+		mVertices[0] = { {-0.5f,		0.5f,		0.0f},	{0.0f, 0.0f} };
+		mVertices[1] = { {0.5f,			0.5f,		0.0f},	{1.0f, 0.0f} };
+		mVertices[2] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
+		mVertices[3] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
 		D3D11_BUFFER_DESC vbDesc;
 		ZeroMemory(&vbDesc, sizeof(D3D11_BUFFER_DESC));
 		vbDesc.ByteWidth = sizeof(Vertex) * VERTEX_COUNT;
@@ -167,10 +181,8 @@ namespace jh
 		//mcpDeviceContext->IASetVertexBuffers();
 	}
 
-	void D3DApp::createShaderAndSetShaders()
+	void D3DApp::createAndSetShaders()
 	{
-		ComPtr<ID3DBlob> cpVertexShader;
-		ComPtr<ID3DBlob> cpPixelShader;
 
 		HRESULT hr;
 		hr = D3DCompileFromFile(
@@ -181,7 +193,7 @@ namespace jh
 			"vs_4_0_level_9_3",
 			0,
 			0,
-			cpVertexShader.GetAddressOf(),
+			mcpVSBlob.GetAddressOf(),
 			mcpErrorBlob.ReleaseAndGetAddressOf()
 		);
 
@@ -194,8 +206,8 @@ namespace jh
 		}
 
 		hr = mcpDevice->CreateVertexShader(
-			cpVertexShader->GetBufferPointer(),
-			cpVertexShader->GetBufferSize(),
+			mcpVSBlob->GetBufferPointer(),
+			mcpVSBlob->GetBufferSize(),
 			nullptr,
 			mcpVertexShader.ReleaseAndGetAddressOf()
 		);
@@ -210,7 +222,7 @@ namespace jh
 			"ps_4_0_level_9_3",
 			0,
 			0,
-			cpPixelShader.GetAddressOf(),
+			mcpPSBlob.GetAddressOf(),
 			mcpErrorBlob.ReleaseAndGetAddressOf()
 		);
 		if (FAILED(hr))
@@ -222,8 +234,8 @@ namespace jh
 		}
 
 		hr = mcpDevice->CreatePixelShader(
-			cpPixelShader->GetBufferPointer(),
-			cpPixelShader->GetBufferSize(),
+			mcpPSBlob->GetBufferPointer(),
+			mcpPSBlob->GetBufferSize(),
 			nullptr,
 			mcpPixelShader.ReleaseAndGetAddressOf()
 		);
@@ -240,11 +252,73 @@ namespace jh
 		);
 	}
 
-	void D3DApp::initializeAndSetIA()
+	void D3DApp::createAndSetSamplerState()
+	{
+
+		D3D11_SAMPLER_DESC samplerDesc;
+		ZeroMemory(&samplerDesc, sizeof(samplerDesc));
+		samplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
+		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.MipLODBias = 0.0f;
+		samplerDesc.MaxAnisotropy = 1;
+		samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		samplerDesc.MinLOD = 0;
+		samplerDesc.MaxLOD = 0;
+		mcpDevice->CreateSamplerState(
+			&samplerDesc,
+			mcpPointSampler.ReleaseAndGetAddressOf()
+		);
+
+
+	}
+
+	void D3DApp::createAndSetBlendState()
+	{
+		D3D11_BLEND_DESC desc;
+		HRESULT hr;
+		ZeroMemory(&desc, sizeof(D3D11_BLEND_DESC));
+		desc.RenderTarget[0].BlendEnable = true;
+		desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;				// SRC -> PixelShader의 출력 RGB값
+		desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;		// Dest-> RenderTarget에 있는 RGB 값
+		desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;				// 위 두 값을 연산하는 방법
+			
+		desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;			// PixelShader의 출력 Alpha값
+		desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;			// RenderTarget에 있는 Alpha 값
+		desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+		desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		hr = mcpDevice->CreateBlendState(&desc, mcpBlendState.ReleaseAndGetAddressOf());
+		IfFailedHR(hr);
+
+	}
+	void D3DApp::createConstantBufferForTransform()
+	{
+		D3D11_BUFFER_DESC desc;
+		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
+		desc = CD3D11_BUFFER_DESC(sizeof(MatrixBuffer), D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DEFAULT);
+		mcpDevice->CreateBuffer(
+			&desc,
+			nullptr,
+			mcpConstantBuffer.ReleaseAndGetAddressOf()
+		);
+		mcpDeviceContext->VSSetConstantBuffers(
+			0,
+			1,
+			mcpConstantBuffer.GetAddressOf()
+		);
+		mX = 0.0f;
+		mY = 0.0f;
+		mZ = 0.0f;
+	}
+	void D3DApp::initializeInputLayoutAndSetIA()
 	{
 		/*
 			이제 InputAssembler에 값을 넘겨주기 위해서, 입력값이 어떤 식으로 구성되어 있는지를 알려주어야 함.
-			이를 입력 레이아웃이라고 부름. 이런 입력 레이아웃을 이용해서, 셰이더 코드에서 각각의 입력이 어떤 형태로 구성되어 있는지 판단함.
+			이를 입력 레이아웃이라고 부름. 
+			이런 입력 레이아웃을 이용해서, 셰이더 코드에서 각각의 입력이 어떤 형태로 구성되어 있는지 판단함.
 		*/
 		const UINT INPUT_ELEMENT_COUNT = 2;
 		D3D11_INPUT_ELEMENT_DESC inputElementDesc[INPUT_ELEMENT_COUNT] =
@@ -254,17 +328,26 @@ namespace jh
 				D3D11_INPUT_PER_VERTEX_DATA, 0
 			},
 			{
-				"COLOR", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, 0, sizeof(float) * 3,
+				"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, sizeof(float) * 3,
 				D3D11_INPUT_PER_VERTEX_DATA, 0
 			}
 		};
 
-		//HRESULT hr = mcpDevice->CreateInputLayout(
-		//	inputElementDesc,
-		//	2,
+		HRESULT hr = mcpDevice->CreateInputLayout(
+			inputElementDesc,
+			2,
+			mcpVSBlob->GetBufferPointer(),
+			mcpVSBlob->GetBufferSize(),
+			mcpInputLayout.ReleaseAndGetAddressOf()
+		);
+		IfFailedHR(hr);
 
-		//);
+		mcpDeviceContext->IASetInputLayout(mcpInputLayout.Get());
+	}
 
+	void D3DApp::loadTexture()
+	{
+		mspTexture->Load(L"T_Splash_Logo_HumbleGames.png");
 	}
 
 	void D3DApp::Run()
@@ -275,17 +358,118 @@ namespace jh
 	}
 	void D3DApp::Update()
 	{
+		Time::Update();
+		Input::Update();
+		static const float SPEED = 1.0f;
+		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
+		{
+			mZ -= XM_PI * Time::DeltaTime();
+		} 
+		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
+		{
+			mZ += XM_PI * Time::DeltaTime();
+		}
+
+
+		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		{
+			mX -= SPEED * Time::DeltaTime();
+		}
+		else if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		{
+			mX += SPEED * Time::DeltaTime();
+		}
+
+		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		{
+			mY += SPEED * Time::DeltaTime();
+		}
+		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		{
+			mY -= SPEED * Time::DeltaTime();
+		}
+
+		if (Input::GetKeyState(eKeyCode::N_1) == eKeyState::PRESSED)
+		{
+			Time::SetScale(1.0f);
+		}
+		if (Input::GetKeyState(eKeyCode::N_2) == eKeyState::PRESSED)
+		{
+			Time::SetScale(2.0f);
+		}
+		if (Input::GetKeyState(eKeyCode::N_3) == eKeyState::PRESSED)
+		{
+			Time::SetScale(3.0f);
+		}
+
+		mWorldMat = XMMatrixIdentity();
+		mWorldMat *= XMMatrixRotationZ(mZ);
+		mWorldMat *= XMMatrixTranslation(mX, mY, 0.0f);
 	}
 	void D3DApp::FixedUpdate()
 	{
 	}
 	void D3DApp::RenderFrame()
 	{
+		Time::Render(mHDC);
+
+		static float CLEAR_COLOR[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		mcpDeviceContext->ClearRenderTargetView(
+			mcpRenderTargetView.Get(),
+			CLEAR_COLOR
+		);
+		mcpDeviceContext->ClearDepthStencilView(
+			mcpDepthStencilView.Get(),
+			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,
+			1.0f,                                               // 이 값으로 뎊스 버퍼를 지움.
+			0                                                   // 이 값으로 스텐실 버퍼를 지움
+		);
+
+		UINT stride = sizeof(Vertex);		// 하나의 버텍스 정보가 몇 바이트인지를 표시
+		UINT offset = 0;					// 데이터의 첫번째 위치를 바이트로 지정
+
+		mcpDeviceContext->IASetVertexBuffers(
+			0,
+			1,
+			mcpVertexBuffer.GetAddressOf(),
+			&stride,
+			&offset
+		);
+		mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+		mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
+
+		mcpDeviceContext->PSSetShaderResources(
+			DEFAULT_TEXTURE_SLOT_NUMBER, 
+			1, 
+			mspTexture->GetSRV().GetAddressOf()
+		);
+		mcpDeviceContext->OMSetBlendState(mcpBlendState.Get(), nullptr, 0xffffffff);
+
+
+		MatrixBuffer matBuffer;
+		matBuffer.worldMat = DirectX::XMMatrixTranspose(mWorldMat);
+		mcpDeviceContext->UpdateSubresource(
+			mcpConstantBuffer.Get(),
+			0,
+			nullptr,
+			&matBuffer,
+			0,
+			0
+		);
+		mcpDeviceContext->Draw(VERTEX_COUNT, 0);
+		mcpSwapChain->Present(0, 0);
+
 	}
 	void D3DApp::Release()
 	{
+		mcpConstantBuffer.Reset();
+		mcpBlendState.Reset();
+		mspTexture.reset();
+		mcpPointSampler.Reset();
 		mcpPixelShader.Reset();
 		mcpVertexShader.Reset();
+		mcpVSBlob.Reset();
+		mcpPSBlob.Reset();
 		mcpErrorBlob.Reset();
 		mcpVertexBuffer.Reset();
 		mcpDepthStencilView.Reset();

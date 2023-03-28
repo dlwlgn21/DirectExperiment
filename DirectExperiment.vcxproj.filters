@@ -19,6 +19,18 @@
     <Filter Include="App">
       <UniqueIdentifier>{c0bf71e7-1d05-474d-88e6-7d8d34625a2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{590762ac-42e2-49e7-943f-26851f45d7df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{0df7cfc1-d914-470b-86e1-31ab57457c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{93358ae8-0def-4f1f-9a9e-6215a98ad2a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{3bb7b734-4232-4934-8b83-11336ceb026f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -36,6 +48,15 @@
     <ClInclude Include="jhD3DApp.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="jhTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="jhInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectExperiment.cpp">
@@ -43,6 +64,15 @@
     </ClCompile>
     <ClCompile Include="jhD3DApp.cpp">
       <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="jhInput.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,23 +5,50 @@
 #include <memory>
 #include <d3d11.h>
 #include <wrl/client.h>
-#include <assert.h>
+#include <cassert>
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
+#include <string>
+
+#include <vector>
+#include <list>
+#include <map>
+#include <unordered_map>
+#include <unordered_set>
+#include <bitset>
+#include <cmath>
+#include <algorithm>
+#include <limits>
+#include <memory>
+#include <filesystem>
+
+
+#include <cstdlib>
+#include <cstring>
+#include <cstdint>
+#include <type_traits>
+
+#include "jhTexture.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
-static constexpr const UINT VERTEX_COUNT = 3;
+static constexpr const UINT VERTEX_COUNT = 4;
+static constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
+static constexpr const UINT DEFAULT_TEXTURE_SLOT_NUMBER = 0;
 
 namespace jh
 {
 	struct Vertex
 	{
 		DirectX::XMFLOAT3 Position;
-		DirectX::XMFLOAT4 Color;
+		DirectX::XMFLOAT2 UV;
 	};
 
+	struct MatrixBuffer
+	{
+		DirectX::XMMATRIX worldMat;
+	};
 
 	class D3DApp final
 	{
@@ -45,12 +72,22 @@ namespace jh
 
 		bool IfFailedHR(HRESULT hr);
 
+		ID3D11Device* GetDevice() const { return mcpDevice.Get(); }
+		ID3D11DeviceContext* GetDeviceContext() const { return mcpDeviceContext.Get(); }
+		HWND GetHwnd() const { return mHwnd; }
+
 	private:
 		void initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow);
 		void initializeDirectX();
 		void initializeVertexAndIndexBuffer();
-		void createShaderAndSetShaders();
-		void initializeAndSetIA();
+		void createAndSetShaders();
+		void createAndSetSamplerState();
+		void createAndSetBlendState();
+		void createConstantBufferForTransform();
+
+		void initializeInputLayoutAndSetIA();
+		void loadTexture();
+
 		__forceinline HWND GetHWND() const { return mHwnd; }
 		__forceinline UINT GetScreenWidth() const { return mScreenWidth; }
 		__forceinline UINT GetScreenHeight() const { return mScreenHeight; }
@@ -63,6 +100,10 @@ namespace jh
 			, mcpDevice(nullptr)
 			, mcpDeviceContext(nullptr)
 			, mVertices{}
+			, mspTexture(std::make_unique<class Texture>())
+			, mX(0.0f)
+			, mY(0.0f)
+			, mZ(0.0f)
 		{
 		}
 		~D3DApp() = default;
@@ -71,6 +112,7 @@ namespace jh
 		UINT mScreenWidth;
 		UINT mScreenHeight;
 		HWND mHwnd;
+		HDC	 mHDC;
 
 		Microsoft::WRL::ComPtr<ID3D11Device>			mcpDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext>		mcpDeviceContext;
@@ -85,8 +127,23 @@ namespace jh
 		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpVertexBuffer;
 
 		Microsoft::WRL::ComPtr<ID3DBlob>				mcpErrorBlob;
+		Microsoft::WRL::ComPtr<ID3DBlob>				mcpVSBlob;
+		Microsoft::WRL::ComPtr<ID3DBlob>				mcpPSBlob;
 		Microsoft::WRL::ComPtr<ID3D11VertexShader>		mcpVertexShader;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader>		mcpPixelShader;
 
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>		mcpInputLayout;
+		
+
+		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
+		std::unique_ptr<class Texture>					mspTexture;
+
+		Microsoft::WRL::ComPtr<ID3D11BlendState>		mcpBlendState;
+
+		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpConstantBuffer;
+		float mX;
+		float mY;
+		float mZ;
+		DirectX::XMMATRIX mWorldMat;
 	};
 }
