@@ -1,5 +1,5 @@
 #include "jhTexture.h"
-
+#include "jhGraphicDeviceDX11.h"
 
 namespace jh
 {
@@ -53,7 +53,7 @@ namespace jh
 	void Texture::createSRVFromLoadedFile()
 	{
 		HRESULT hr = DirectX::CreateShaderResourceView(
-			D3DApp::GetInstance().GetDevice(),
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivce(),
 			mImage.GetImages(),
 			mImage.GetImageCount(),
 			mImage.GetMetadata(),

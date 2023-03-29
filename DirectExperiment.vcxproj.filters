@@ -31,6 +31,24 @@
     <Filter Include="Input">
       <UniqueIdentifier>{3bb7b734-4232-4934-8b83-11336ceb026f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GraphicDevice">
+      <UniqueIdentifier>{12bc3ab4-de6e-49c0-9ca2-6ea105dd1d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{806831b7-1f1f-4aee-81a7-02726a5e45ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{38cbbe14-e830-47d6-90ac-b4928fe9335b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{584f7279-b330-44cb-bfbc-7ac1abd639dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{c35dcc29-da59-4495-9be4-0bf459ae93b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{75333d50-b30a-4c2c-b638-23d3d83c7825}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,6 +75,18 @@
     <ClInclude Include="jhInput.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="jhGraphicDeviceDX11.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGraphics.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="jhEngine.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectExperiment.cpp">
@@ -73,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="jhInput.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGraphicDeviceDX11.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
