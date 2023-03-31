@@ -22,5 +22,7 @@
 #include <cstring>
 #include <cstdint>
 #include <type_traits>
+#include <DirectXMath.h>
 
+#include "jhEnums.h"
 

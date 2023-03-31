@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{bbb81f9a-33bb-42bc-a694-bd1173796d15}</UniqueIdentifier>
-    </Filter>
     <Filter Include="App">
       <UniqueIdentifier>{c0bf71e7-1d05-474d-88e6-7d8d34625a2a}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,30 @@
     </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{75333d50-b30a-4c2c-b638-23d3d83c7825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderResource">
+      <UniqueIdentifier>{bbb81f9a-33bb-42bc-a694-bd1173796d15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{14384661-6f66-4e6e-a01f-63318cad43fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{21a4bb4b-850c-4488-b23a-331932e5922a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Base">
+      <UniqueIdentifier>{1f49e4ae-6893-4625-ba6c-7f78748d1a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Base">
+      <UniqueIdentifier>{c58622d2-8c80-4f01-8dfa-e4dbd1b050a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer">
+      <UniqueIdentifier>{0a36c19c-bae2-4c2c-9d98-fe295e4a2da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer\Base">
+      <UniqueIdentifier>{a23d680b-9887-4bfb-bc82-7e850ccfe616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer\SpriteRenderer">
+      <UniqueIdentifier>{3f7b0b9b-31dd-4e1b-96a8-5e6ff857255d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +108,27 @@
     <ClInclude Include="jhEngine.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="jhShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="jhComponent.h">
+      <Filter>Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGameObject.h">
+      <Filter>GameObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhRenderer.h">
+      <Filter>Component\Renderer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSpriteRenderer.h">
+      <Filter>Component\Renderer\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DirectExperiment.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="jhD3DApp.cpp">
@@ -110,6 +149,27 @@
     <ClCompile Include="jhMesh.cpp">
       <Filter>Resource\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="jhShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="jhEnums.h">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="jhComponent.cpp">
+      <Filter>Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGameObject.cpp">
+      <Filter>GameObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRenderer.cpp">
+      <Filter>Component\Renderer\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSpriteRenderer.cpp">
+      <Filter>Component\Renderer\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -126,10 +186,10 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="jhVertexShader.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>ShaderResource</Filter>
     </FxCompile>
     <FxCompile Include="jhPixelShader.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>ShaderResource</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

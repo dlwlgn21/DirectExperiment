@@ -18,4 +18,11 @@ namespace jh
 	{
 		DirectX::XMMATRIX worldMat;
 	};
+
+	enum class eShaderStage
+	{
+		VS,
+		PS,
+		COUNT
+	};
 }

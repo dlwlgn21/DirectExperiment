@@ -129,25 +129,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhComponent.h" />
     <ClInclude Include="jhD3DApp.h" />
     <ClInclude Include="DirectExperiment.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="jhEngine.h" />
+    <ClInclude Include="jhGameObject.h" />
     <ClInclude Include="jhGraphicDeviceDX11.h" />
     <ClInclude Include="jhGraphics.h" />
     <ClInclude Include="jhInput.h" />
+    <ClInclude Include="jhMaterial.h" />
     <ClInclude Include="jhMesh.h" />
+    <ClInclude Include="jhRenderer.h" />
+    <ClInclude Include="jhShader.h" />
+    <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhComponent.cpp" />
     <ClCompile Include="jhD3DApp.cpp" />
-    <ClCompile Include="DirectExperiment.cpp" />
+    <ClCompile Include="jhEnums.h" />
+    <ClCompile Include="jhGameObject.cpp" />
+    <ClCompile Include="jhMaterial.cpp" />
+    <ClCompile Include="jhRenderer.cpp" />
+    <ClCompile Include="jhSpriteRenderer.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhMesh.cpp" />
+    <ClCompile Include="jhShader.cpp" />
     <ClCompile Include="jhTexture.cpp" />
     <ClCompile Include="jhTime.cpp" />
   </ItemGroup>

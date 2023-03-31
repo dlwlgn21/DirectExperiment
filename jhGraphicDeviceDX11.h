@@ -3,6 +3,8 @@
 #include "jhGraphics.h"
 #include "jhTexture.h"
 #include "jhMesh.h"
+#include "jhShader.h"
+
 
 static constexpr const UINT VERTEX_COUNT = 4;
 static constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
@@ -40,18 +42,18 @@ namespace jh::graphics
 		void initializePipelineAndReources();
 
 		void initializeVertexAndIndexBuffer();
-		void createAndSetShaders();
-		void createAndSetSamplerState();
-		void createAndSetBlendState();
+		void createShader();
+		void createSamplerState();
 		void createConstantBufferForTransform();
 
-		void initializeInputLayoutAndSetIA();
 		void loadTexture();
 
 	private:
 		GraphicDeviceDX11()
 			: mspTexture(std::make_unique<Texture>())
 			, mspMesh(std::make_unique<Mesh>())
+			, mspMesh2(std::make_unique<Mesh>())
+			, mspShader()
 			, mcpDevice()
 			, mcpDeviceContext()
 			, mcpSwapChain()
@@ -60,14 +62,8 @@ namespace jh::graphics
 			, mcpDepthStencilTextrue()
 			, mcpDepthStencilView()
 			, mcpVertexBuffer()
-			, mcpErrorBlob()
-			, mcpVSBlob()
-			, mcpPSBlob()
-			, mcpVertexShader()
-			, mcpPixelShader()
 			, mcpInputLayout()
 			, mcpPointSampler()
-			, mcpBlendState()
 			, mcpConstantBuffer()
 			, mX(0.0f)
 			, mY(0.0f)
@@ -98,11 +94,6 @@ namespace jh::graphics
 		Vertex mVertices[VERTEX_COUNT];
 		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpVertexBuffer;
 
-		Microsoft::WRL::ComPtr<ID3DBlob>				mcpErrorBlob;
-		Microsoft::WRL::ComPtr<ID3DBlob>				mcpVSBlob;
-		Microsoft::WRL::ComPtr<ID3DBlob>				mcpPSBlob;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>		mcpVertexShader;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>		mcpPixelShader;
 
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>		mcpInputLayout;
 
@@ -110,9 +101,9 @@ namespace jh::graphics
 		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
 		std::unique_ptr<class Texture>					mspTexture;
 		std::unique_ptr<class Mesh>						mspMesh;
+		std::unique_ptr<class Mesh>						mspMesh2;
+		std::unique_ptr<class Shader>					mspShader;
 
-
-		Microsoft::WRL::ComPtr<ID3D11BlendState>		mcpBlendState;
 
 		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpConstantBuffer;
 		float mX;

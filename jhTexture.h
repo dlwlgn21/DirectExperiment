@@ -13,8 +13,11 @@ namespace jh
 		HRESULT Load(const std::wstring& filePath);
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() const { return mcpSRV; }
 
+		void PSSetShaderResources(const UINT slotNumber, ID3D11ShaderResourceView* const* ppShaderResourceView);
+
 	private:
-		void createSRVFromLoadedFile();
+		HRESULT loadFromFile(const std::wstring& filePath);
+		HRESULT createSRVFromLoadedFile();
 	private:
 		DirectX::ScratchImage								mImage;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D>				mcpTexture;

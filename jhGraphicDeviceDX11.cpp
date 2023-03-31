@@ -185,25 +185,13 @@ namespace jh::graphics
 		UINT stride = sizeof(Vertex);		// 하나의 버텍스 정보가 몇 바이트인지를 표시
 		UINT offset = 0;					// 데이터의 첫번째 위치를 바이트로 지정
 
-		/*mcpDeviceContext->IASetVertexBuffers(
-			0,
-			1,
-			mcpVertexBuffer.GetAddressOf(),
-			&stride,
-			&offset
-		);*/
+		mspShader->SetPipeline();
 		mspMesh->SetVertexBuffer();
 
-
-		mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+		mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
 
-		mcpDeviceContext->PSSetShaderResources(
-			DEFAULT_TEXTURE_SLOT_NUMBER,
-			1,
-			mspTexture->GetSRV().GetAddressOf()
-		);
-		mcpDeviceContext->OMSetBlendState(mcpBlendState.Get(), nullptr, 0xffffffff);
+		mspTexture->PSSetShaderResources(DEFAULT_TEXTURE_SLOT_NUMBER, mspTexture->GetSRV().GetAddressOf());
 
 		mspMesh->Render();
 		mcpSwapChain->Present(0, 0);
@@ -245,15 +233,9 @@ namespace jh::graphics
 	void GraphicDeviceDX11::Release()
 	{
 		mcpConstantBuffer.Reset();
-		mcpBlendState.Reset();
 		mspTexture.reset();
 		mspMesh.reset();
 		mcpPointSampler.Reset();
-		mcpPixelShader.Reset();
-		mcpVertexShader.Reset();
-		mcpVSBlob.Reset();
-		mcpPSBlob.Reset();
-		mcpErrorBlob.Reset();
 		mcpVertexBuffer.Reset();
 		mcpDepthStencilView.Reset();
 		mcpDepthStencilTextrue.Reset();
@@ -275,93 +257,36 @@ namespace jh::graphics
 	void GraphicDeviceDX11::initializePipelineAndReources()
 	{
 		initializeVertexAndIndexBuffer();
-		createAndSetShaders();
-		createAndSetSamplerState();
-		createAndSetBlendState();
+		createShader();
+		createSamplerState();
 		createConstantBufferForTransform();
-		initializeInputLayoutAndSetIA();
 		loadTexture();
 	}
 	void GraphicDeviceDX11::initializeVertexAndIndexBuffer()
 	{
-		mVertices[0] = { {-0.5f,		0.5f,		0.0f},	{0.0f, 0.0f} };
-		mVertices[1] = { {0.5f,			0.5f,		0.0f},	{1.0f, 0.0f} };
-		mVertices[2] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
-		mVertices[3] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
+
+		mVertices[0] = { {-0.1f,		0.1f,		0.0f},	{0.0f, 0.0f} };
+		mVertices[1] = { {0.1f,			0.1f,		0.0f},	{1.0f, 0.0f} };
+		mVertices[2] = { {-0.1f,		-0.1f,		0.0f},	{0.0f, 1.0f} };
+		mVertices[3] = { {0.1f,			-0.1f,		0.0f},	{1.0f, 1.0f} };
 		mspMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * VERTEX_COUNT);
+
+		mVertices[0] = { {-0.75f,		0.75f,		0.0f},		{0.0f, 0.0f} };
+		mVertices[1] = { {0.75f,			0.75f,		0.0f},	{1.0f, 0.0f} };
+		mVertices[2] = { {-0.75f,		-0.75f,		0.0f},		{0.0f, 1.0f} };
+		mVertices[3] = { {0.75f,			-0.75f,		0.0f},	{1.0f, 1.0f} };
+		mspMesh2->CreateVertexBuffer(mVertices, sizeof(Vertex) * VERTEX_COUNT);
+
 
 		//WriteDataAtBuffer(mcpVertexBuffer.Get(), mVertices, sizeof(Vertex) * VERTEX_COUNT);
 	}
-	void GraphicDeviceDX11::createAndSetShaders()
+
+	void GraphicDeviceDX11::createShader()
 	{
-		HRESULT hr;
-		hr = D3DCompileFromFile(
-			L"jhVertexShader.hlsl",
-			0,
-			0,
-			"main",
-			"vs_4_0_level_9_3",
-			0,
-			0,
-			mcpVSBlob.GetAddressOf(),
-			mcpErrorBlob.ReleaseAndGetAddressOf()
-		);
-
-		if (FAILED(hr))
-		{
-			OutputDebugStringA((char*)mcpErrorBlob->GetBufferPointer());
-			mcpErrorBlob->Release();
-			assert(false);
-			return;
-		}
-
-		hr = mcpDevice->CreateVertexShader(
-			mcpVSBlob->GetBufferPointer(),
-			mcpVSBlob->GetBufferSize(),
-			nullptr,
-			mcpVertexShader.ReleaseAndGetAddressOf()
-		);
-		ifFailedHR(hr);
-
-
-		hr = D3DCompileFromFile(
-			L"jhPixelShader.hlsl",
-			0,
-			0,
-			"main",
-			"ps_4_0_level_9_3",
-			0,
-			0,
-			mcpPSBlob.GetAddressOf(),
-			mcpErrorBlob.ReleaseAndGetAddressOf()
-		);
-		if (FAILED(hr))
-		{
-			OutputDebugStringA((char*)mcpErrorBlob->GetBufferPointer());
-			mcpErrorBlob->Release();
-			assert(false);
-			return;
-		}
-
-		hr = mcpDevice->CreatePixelShader(
-			mcpPSBlob->GetBufferPointer(),
-			mcpPSBlob->GetBufferSize(),
-			nullptr,
-			mcpPixelShader.ReleaseAndGetAddressOf()
-		);
-		ifFailedHR(hr);
-		mcpDeviceContext->VSSetShader(
-			mcpVertexShader.Get(),
-			nullptr,
-			0
-		);
-		mcpDeviceContext->PSSetShader(
-			mcpPixelShader.Get(),
-			nullptr,
-			0
-		);
+		mspShader = std::make_unique<Shader>();
 	}
-	void GraphicDeviceDX11::createAndSetSamplerState()
+
+	void GraphicDeviceDX11::createSamplerState()
 	{
 		D3D11_SAMPLER_DESC samplerDesc;
 		ZeroMemory(&samplerDesc, sizeof(samplerDesc));
@@ -379,25 +304,7 @@ namespace jh::graphics
 			mcpPointSampler.ReleaseAndGetAddressOf()
 		);
 	}
-	void GraphicDeviceDX11::createAndSetBlendState()
-	{
-		D3D11_BLEND_DESC desc;
-		HRESULT hr;
-		ZeroMemory(&desc, sizeof(D3D11_BLEND_DESC));
-		desc.RenderTarget[0].BlendEnable = true;
-		desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;				// SRC -> PixelShader의 출력 RGB값
-		desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;		// Dest-> RenderTarget에 있는 RGB 값
-		desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;				// 위 두 값을 연산하는 방법
 
-		desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;			// PixelShader의 출력 Alpha값
-		desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;			// RenderTarget에 있는 Alpha 값
-		desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-
-		desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-		hr = mcpDevice->CreateBlendState(&desc, mcpBlendState.ReleaseAndGetAddressOf());
-		ifFailedHR(hr);
-	}
 	void GraphicDeviceDX11::createConstantBufferForTransform()
 	{
 		D3D11_BUFFER_DESC BufferDesc;
@@ -425,37 +332,7 @@ namespace jh::graphics
 		mY = 0.0f;
 		mZ = 0.0f;
 	}
-	void GraphicDeviceDX11::initializeInputLayoutAndSetIA()
-	{
-		/*
-			이제 InputAssembler에 값을 넘겨주기 위해서, 입력값이 어떤 식으로 구성되어 있는지를 알려주어야 함.
-			이를 입력 레이아웃이라고 부름.
-			이런 입력 레이아웃을 이용해서, 셰이더 코드에서 각각의 입력이 어떤 형태로 구성되어 있는지 판단함.
-		*/
-		const UINT INPUT_ELEMENT_COUNT = 2;
-		D3D11_INPUT_ELEMENT_DESC inputElementDesc[INPUT_ELEMENT_COUNT] =
-		{
-			{
-				"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,
-				D3D11_INPUT_PER_VERTEX_DATA, 0
-			},
-			{
-				"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, sizeof(float) * 3,
-				D3D11_INPUT_PER_VERTEX_DATA, 0
-			}
-		};
 
-		HRESULT hr = mcpDevice->CreateInputLayout(
-			inputElementDesc,
-			2,
-			mcpVSBlob->GetBufferPointer(),
-			mcpVSBlob->GetBufferSize(),
-			mcpInputLayout.ReleaseAndGetAddressOf()
-		);
-		ifFailedHR(hr);
-
-		mcpDeviceContext->IASetInputLayout(mcpInputLayout.Get());
-	}
 	void GraphicDeviceDX11::loadTexture()
 	{
 		mspTexture->Load(L"T_Splash_Logo_HumbleGames.png");

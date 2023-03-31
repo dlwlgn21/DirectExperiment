@@ -18,6 +18,19 @@ namespace jh
 
 	HRESULT Texture::Load(const std::wstring& filePath)
 	{
+		HRESULT hr;
+		hr = loadFromFile(filePath);
+		if (FAILED(hr)) {assert(false); return S_FALSE;}
+		createSRVFromLoadedFile();
+		return S_OK;
+	}
+	void Texture::PSSetShaderResources(const UINT slotNumber, ID3D11ShaderResourceView*const* ppShaderResourceView)
+	{
+		assert(mcpSRV != nullptr);
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetShaderResources(slotNumber, 1, mcpSRV.GetAddressOf());
+	}
+	HRESULT Texture::loadFromFile(const std::wstring& filePath)
+	{
 		std::filesystem::path path = std::filesystem::current_path();
 		path += L"\\Resources\\" + filePath;
 
@@ -27,6 +40,7 @@ namespace jh
 		{
 			// FAILED _wsplitpath_s
 			assert(false);
+			return S_FALSE;
 		}
 
 		std::wstring extension(szExtension);
@@ -46,11 +60,10 @@ namespace jh
 			if (FAILED(DirectX::LoadFromWICFile(path.c_str(), DirectX::WIC_FLAGS::WIC_FLAGS_NONE, nullptr, mImage)))
 				return S_FALSE;
 		}
-		createSRVFromLoadedFile();
 
 		return S_OK;
 	}
-	void Texture::createSRVFromLoadedFile()
+	HRESULT Texture::createSRVFromLoadedFile()
 	{
 		HRESULT hr = DirectX::CreateShaderResourceView(
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivce(),
@@ -59,11 +72,8 @@ namespace jh
 			mImage.GetMetadata(),
 			mcpSRV.ReleaseAndGetAddressOf()
 		);
-		if (FAILED(hr))
-		{
-			assert(false);
-			return;
-		}
+		if (FAILED(hr)) {assert(false); return S_FALSE;}
 		mcpSRV->GetResource(reinterpret_cast<ID3D11Resource**>(mcpTexture.GetAddressOf()));
+		return S_OK;
 	}
 }
