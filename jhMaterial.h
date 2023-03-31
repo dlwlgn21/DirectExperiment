@@ -10,8 +10,8 @@ namespace jh
 	public:
 		Material(Shader* pShader, Texture* pTexture);
 		~Material() = default;
-		void Render();
-
+		void SetPipeline();
+		void Clear();
 	private:
 		void setPipeline();
 	private:

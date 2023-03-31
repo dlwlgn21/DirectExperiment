@@ -1,6 +1,7 @@
 #pragma once
 #include "jhComponent.h"
-
+#include "jhMesh.h"
+#include "jhMaterial.h"
 namespace jh
 {
 	enum class eComponentRendererType
@@ -9,11 +10,10 @@ namespace jh
 		MESH_RENDERER,
 		COUNT
 	};
-
 	class Renderer : public Component
 	{
 	public:
-		Renderer(const eComponentRendererType eRendererType);
+		Renderer(const eComponentRendererType eRendererType, Mesh* pMesh, Material* pMaterial);
 		virtual ~Renderer();
 
 
@@ -21,8 +21,13 @@ namespace jh
 		virtual void Update() override;
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
+
+	protected:
+		virtual void SetPipeline() = 0;
 	protected:
 		const eComponentRendererType meRendererType;
+		Mesh* mpMesh;
+		Material* mpMaterial;
 	};
 }
 

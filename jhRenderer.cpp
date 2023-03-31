@@ -1,11 +1,14 @@
 #include "jhRenderer.h"
 
 
+
 namespace jh
 {
-	Renderer::Renderer(const eComponentRendererType eRendererType)
+	Renderer::Renderer(const eComponentRendererType eRendererType, Mesh* pMesh, Material* pMaterial)
 		: Component(eComponentType::RENDERER)
 		, meRendererType(eRendererType)
+		, mpMesh(pMesh)
+		, mpMaterial(pMaterial)
 	{
 	}
 	Renderer::~Renderer()

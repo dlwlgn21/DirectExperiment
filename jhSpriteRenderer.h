@@ -6,13 +6,15 @@ namespace jh
 	class SpriteRenderer final : public Renderer
 	{
 	public:
-		SpriteRenderer();
+		SpriteRenderer(Mesh* pMesh, Material* pMaterial);
 		virtual ~SpriteRenderer() = default;
 
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
+		void SetPipeline() override;
 		void Render() override;
+
 	};
 
 }

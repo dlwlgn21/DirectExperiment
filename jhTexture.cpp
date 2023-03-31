@@ -15,7 +15,6 @@ namespace jh
 		mcpTexture.Reset();
 	}
 
-
 	HRESULT Texture::Load(const std::wstring& filePath)
 	{
 		HRESULT hr;
@@ -24,11 +23,20 @@ namespace jh
 		createSRVFromLoadedFile();
 		return S_OK;
 	}
-	void Texture::PSSetShaderResources(const UINT slotNumber, ID3D11ShaderResourceView*const* ppShaderResourceView)
+	void Texture::SetPipeline(const UINT textureSlotNumber)
 	{
 		assert(mcpSRV != nullptr);
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetShaderResources(slotNumber, 1, mcpSRV.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetShaderResources(textureSlotNumber, 1, mcpSRV.GetAddressOf());
 	}
+
+	void Texture::ClearSRV(const UINT textureSlotNumber)
+	{
+		assert(mcpSRV != nullptr);
+		ID3D11ShaderResourceView* pNULLSrv = nullptr;
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetShaderResources(textureSlotNumber, 1, &pNULLSrv);
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetShaderResources(textureSlotNumber, 1, &pNULLSrv);
+	}
+
 	HRESULT Texture::loadFromFile(const std::wstring& filePath)
 	{
 		std::filesystem::path path = std::filesystem::current_path();

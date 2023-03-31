@@ -2,8 +2,8 @@
 
 namespace jh
 {
-	SpriteRenderer::SpriteRenderer()
-		: Renderer(eComponentRendererType::SPRITE_RENDERER)
+	SpriteRenderer::SpriteRenderer(Mesh* pMesh, Material* pMaterial)
+		: Renderer(eComponentRendererType::SPRITE_RENDERER, pMesh, pMaterial)
 	{
 	}
 
@@ -18,5 +18,15 @@ namespace jh
 	}
 	void SpriteRenderer::Render()
 	{
+		mpMesh->Render();
+		
 	}
+
+	void SpriteRenderer::SetPipeline()
+	{
+		assert(mpMesh != nullptr && mpMaterial != nullptr);
+		mpMaterial->SetPipeline();
+		mpMesh->SetVertexBuffer();
+	}
+
 }

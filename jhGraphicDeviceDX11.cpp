@@ -191,7 +191,7 @@ namespace jh::graphics
 		mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
 
-		mspTexture->PSSetShaderResources(DEFAULT_TEXTURE_SLOT_NUMBER, mspTexture->GetSRV().GetAddressOf());
+		mspTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER);
 
 		mspMesh->Render();
 		mcpSwapChain->Present(0, 0);
