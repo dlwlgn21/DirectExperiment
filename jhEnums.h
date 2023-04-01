@@ -7,4 +7,27 @@ namespace jh
 		RENDERER,
 		COUNT
 	};
+
+	enum class eReousrceType
+	{
+		MESH,
+		MATERIAL,
+		SHADER,
+		TEXTURE,
+		COUNT
+	};
+
+	enum class eLayerType
+	{
+		NONE = 0,
+		CAMERA,
+		BACKGROUND,
+		GRID,
+		MONSTER,
+		PLAYER,
+
+		PARTICLE,
+		UI,
+		COUNT = 16,
+	};
 }

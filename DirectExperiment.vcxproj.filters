@@ -70,6 +70,24 @@
     <Filter Include="Component\Renderer\SpriteRenderer">
       <UniqueIdentifier>{3f7b0b9b-31dd-4e1b-96a8-5e6ff857255d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ResourcesManager">
+      <UniqueIdentifier>{4f9378bf-bde0-41c8-a9b6-802b1ce305f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Base">
+      <UniqueIdentifier>{d05891a8-f324-4d61-b3e0-593a8b6c8a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{3a0fd1a5-e8ed-4f59-8b7d-8c4dd7fe517f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{d16c7a4c-8db2-43ae-a29e-9fcc12439bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{bb66ce38-2d91-4d3e-8647-467c5e11f558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager">
+      <UniqueIdentifier>{2d58f921-b4b6-4c1b-9fb2-488ce433db0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,6 +144,15 @@
     <ClInclude Include="jhMaterial.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
+    <ClInclude Include="jhResourcesManager.h">
+      <Filter>ResourcesManager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhResource.h">
+      <Filter>Resource\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhLayer.h">
+      <Filter>Scene\Layer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -169,6 +196,15 @@
     </ClCompile>
     <ClCompile Include="jhMaterial.cpp">
       <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="jhResourcesManager.cpp">
+      <Filter>ResourcesManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhResource.cpp">
+      <Filter>Resource\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhLayer.cpp">
+      <Filter>Scene\Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

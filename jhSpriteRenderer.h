@@ -14,7 +14,6 @@ namespace jh
 		void FixedUpdate() override;
 		void SetPipeline() override;
 		void Render() override;
-
 	};
 
 }

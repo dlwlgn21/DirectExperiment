@@ -1,15 +1,16 @@
 #pragma once
-#include "jhGraphics.h"
+#include "jhResource.h"
 
 namespace jh
 {
-	class Shader final
+	class Shader final : public Resource
 	{
 	public:
 		Shader();
-		~Shader();
+		virtual ~Shader();
 
 		void SetPipeline();
+
 
 	private:
 		void createResource();

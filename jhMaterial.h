@@ -1,15 +1,16 @@
 #pragma once
-#include "jhEngine.h"
+#include "jhResource.h"
 
 namespace jh
 {
 	class Shader;
 	class Texture;
-	class Material final
+	class Material final : public Resource
 	{
 	public:
 		Material(Shader* pShader, Texture* pTexture);
-		~Material() = default;
+		virtual ~Material() = default;
+
 		void SetPipeline();
 		void Clear();
 	private:

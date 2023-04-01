@@ -1,13 +1,15 @@
 #include "jhMaterial.h"
-#include "jhShader.h"
 #include "jhTexture.h"
+#include "jhShader.h"
 
-static constexpr UINT DEFAULT_TEXTURE_SLOT_NUMBER = 0;
+
+static constexpr const UINT DEFAULT_TEXTURE_SLOT_NUMBER_0 = 0;
 
 namespace jh
 {
 	Material::Material(Shader* pShader, Texture* pTexture)
-		: mpShader(pShader)
+		: Resource(eReousrceType::MATERIAL)
+		, mpShader(pShader)
 		, mpTexture(pTexture)
 	{
 	}
@@ -16,7 +18,7 @@ namespace jh
 	{
 		assert(mpShader != nullptr && mpTexture != nullptr);
 		mpShader->SetPipeline();
-		mpTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER);
+		mpTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER_0);
 	}
 
 	void Material::SetPipeline()
@@ -27,7 +29,7 @@ namespace jh
 	void Material::Clear()
 	{
 		assert(mpTexture != nullptr);
-		mpTexture->ClearSRV(DEFAULT_TEXTURE_SLOT_NUMBER);
+		mpTexture->ClearSRV(DEFAULT_TEXTURE_SLOT_NUMBER_0);
 	}
 
 }

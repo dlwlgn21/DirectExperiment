@@ -138,9 +138,12 @@
     <ClInclude Include="jhGraphicDeviceDX11.h" />
     <ClInclude Include="jhGraphics.h" />
     <ClInclude Include="jhInput.h" />
+    <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhMaterial.h" />
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhRenderer.h" />
+    <ClInclude Include="jhResource.h" />
+    <ClInclude Include="jhResourcesManager.h" />
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhTexture.h" />
@@ -153,8 +156,11 @@
     <ClCompile Include="jhD3DApp.cpp" />
     <ClCompile Include="jhEnums.h" />
     <ClCompile Include="jhGameObject.cpp" />
+    <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhMaterial.cpp" />
     <ClCompile Include="jhRenderer.cpp" />
+    <ClCompile Include="jhResource.cpp" />
+    <ClCompile Include="jhResourcesManager.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />

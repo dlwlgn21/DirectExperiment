@@ -17,8 +17,12 @@ namespace jh
 		void AddComponent(class Component* pComponent);
 		Component* GetComponentOrNull(const eComponentType eType);
 
+		void SetLayerType(const eLayerType eType) { meLayerType = eType; }
+		eLayerType GetLayerType() const { return meLayerType; }
+
 	private:
-		std::vector<class Component*> mComponents;
+		std::vector<class Component*>	mComponents;
+		eLayerType						meLayerType;
 	};
 }
 

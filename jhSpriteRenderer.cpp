@@ -16,10 +16,11 @@ namespace jh
 	void SpriteRenderer::FixedUpdate()
 	{
 	}
+
 	void SpriteRenderer::Render()
 	{
+		SetPipeline();
 		mpMesh->Render();
-		
 	}
 
 	void SpriteRenderer::SetPipeline()

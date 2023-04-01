@@ -50,9 +50,9 @@ namespace jh::graphics
 
 	private:
 		GraphicDeviceDX11()
-			: mspTexture(std::make_unique<Texture>())
-			, mspMesh(std::make_unique<Mesh>())
-			, mspMesh2(std::make_unique<Mesh>())
+			: mspTexture()
+			, mspMesh()
+			, mspMesh2()
 			, mspShader()
 			, mcpDevice()
 			, mcpDeviceContext()
@@ -99,6 +99,7 @@ namespace jh::graphics
 
 
 		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
+		
 		std::unique_ptr<class Texture>					mspTexture;
 		std::unique_ptr<class Mesh>						mspMesh;
 		std::unique_ptr<class Mesh>						mspMesh2;

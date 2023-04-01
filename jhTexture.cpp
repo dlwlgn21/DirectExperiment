@@ -4,11 +4,14 @@
 namespace jh
 {
 	Texture::Texture()
-		: mcpTexture(nullptr)
+		: Resource(eReousrceType::TEXTURE)
+		, mcpTexture(nullptr)
 		, mcpSRV(nullptr)
 		, mTextureDesc{}
 	{
 	}
+
+
 	Texture::~Texture()
 	{
 		mcpSRV.Reset();

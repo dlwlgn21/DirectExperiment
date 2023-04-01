@@ -1,7 +1,6 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhGraphics.h"
-#include "jhTexture.h"
 
 namespace jh
 {

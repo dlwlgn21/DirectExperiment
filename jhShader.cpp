@@ -4,7 +4,8 @@
 namespace jh
 {
 	Shader::Shader()
-		: mcpErrorBlob()
+		: Resource(eReousrceType::SHADER)
+		, mcpErrorBlob()
 		, mcpVSBlob()
 		, mcpPSBlob()
 		, mcpVS()
@@ -96,6 +97,7 @@ namespace jh
 		setShaders();
 		setBlendState();
 	}
+
 
 	void Shader::createVS(ID3D11Device* pDevice)
 	{

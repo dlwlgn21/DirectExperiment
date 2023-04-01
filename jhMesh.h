@@ -1,14 +1,14 @@
 #pragma once
-#include "jhGraphics.h"
+#include "jhResource.h"
+
 
 namespace jh
 {
-	class Mesh final
+	class Mesh final : public Resource
 	{
 	public:
 		Mesh();
-		~Mesh();
-
+		virtual ~Mesh();
 		bool CreateVertexBuffer(void* data, UINT size);
 		
 		void SetVertexBuffer();

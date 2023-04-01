@@ -1,16 +1,16 @@
 #pragma once
-#include "jhD3DApp.h"
+#include "jhResource.h"
 #include <DirectXTex.h>
 
 namespace jh
 {
-	class Texture final
+	class Texture final : public Resource
 	{
 	public:
 		Texture();
-		~Texture();
+		virtual ~Texture();
 
-		HRESULT Load(const std::wstring& filePath);
+		HRESULT Load(const std::wstring& filePath) override;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() const { return mcpSRV; }
 
 		void SetPipeline(const UINT textureSlotNumber);
@@ -19,6 +19,7 @@ namespace jh
 	private:
 		HRESULT loadFromFile(const std::wstring& filePath);
 		HRESULT createSRVFromLoadedFile();
+
 	private:
 		DirectX::ScratchImage								mImage;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D>				mcpTexture;

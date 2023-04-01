@@ -4,7 +4,8 @@
 namespace jh
 {
 	Mesh::Mesh()
-		: mcpVertexBuffer()
+		: Resource(eReousrceType::MESH)
+		, mcpVertexBuffer()
 		, mBufferDesc()
 	{
 		ZeroMemory(&mBufferDesc, sizeof(D3D11_BUFFER_DESC));
@@ -13,6 +14,8 @@ namespace jh
 	{
 		mcpVertexBuffer.Reset();
 	}
+
+
 	bool Mesh::CreateVertexBuffer(void* data, UINT size)
 	{
 		static const UINT VERTEX_COUNT = 4;

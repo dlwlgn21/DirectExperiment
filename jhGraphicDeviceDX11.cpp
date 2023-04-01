@@ -264,13 +264,14 @@ namespace jh::graphics
 	}
 	void GraphicDeviceDX11::initializeVertexAndIndexBuffer()
 	{
-
+		mspMesh = std::make_unique<Mesh>();
 		mVertices[0] = { {-0.1f,		0.1f,		0.0f},	{0.0f, 0.0f} };
 		mVertices[1] = { {0.1f,			0.1f,		0.0f},	{1.0f, 0.0f} };
 		mVertices[2] = { {-0.1f,		-0.1f,		0.0f},	{0.0f, 1.0f} };
 		mVertices[3] = { {0.1f,			-0.1f,		0.0f},	{1.0f, 1.0f} };
 		mspMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * VERTEX_COUNT);
-
+		
+		mspMesh2 = std::make_unique<Mesh>();
 		mVertices[0] = { {-0.75f,		0.75f,		0.0f},		{0.0f, 0.0f} };
 		mVertices[1] = { {0.75f,			0.75f,		0.0f},	{1.0f, 0.0f} };
 		mVertices[2] = { {-0.75f,		-0.75f,		0.0f},		{0.0f, 1.0f} };
@@ -335,6 +336,7 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::loadTexture()
 	{
+		mspTexture = std::make_unique<Texture>();
 		mspTexture->Load(L"T_Splash_Logo_HumbleGames.png");
 	}
 }
