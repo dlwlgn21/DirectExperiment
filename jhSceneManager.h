@@ -21,7 +21,9 @@ namespace jh
 		void FixedUpdate();
 		void Render();
 		void Release();
+		
 
+		Scene* GetCurrentScene() const { return mpCurrScene; }
 	private:
 		SceneManager() = default;
 		~SceneManager() = default;

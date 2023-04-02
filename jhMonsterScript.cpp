@@ -1,10 +1,10 @@
-#include "jhPlayerScript.h"
+#include "jhMonsterScript.h"
 #include "jhInput.h"
 #include "jhTime.h"
 
 namespace jh
 {
-	PlayerScript::PlayerScript()
+	MonsterScript::MonsterScript()
 		: Script()
 		, mX(0.0f)
 		, mY(0.0f)
@@ -30,42 +30,42 @@ namespace jh
 		if (FAILED(hr)) { assert(false); }
 
 	}
-	PlayerScript::~PlayerScript()
+	MonsterScript::~MonsterScript()
 	{
 		mcpConstantBuffer.Reset();
 	}
-	void PlayerScript::Initialize()
+	void MonsterScript::Initialize()
 	{
 	}
-	void PlayerScript::Update()
+	void MonsterScript::Update()
 	{
 		static const float SPEED = 1.0f;
 		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
 		{
-			mZ -= DirectX::XM_PI * Time::DeltaTime();
+			mZ += DirectX::XM_PI * Time::DeltaTime();
 		}
 		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
 		{
-			mZ += DirectX::XM_PI * Time::DeltaTime();
+			mZ -= DirectX::XM_PI * Time::DeltaTime();
 		}
 
 
 		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
-			mX -= SPEED * Time::DeltaTime();
+			mX += SPEED * Time::DeltaTime();
 		}
 		else if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
-			mX += SPEED * Time::DeltaTime();
+			mX -= SPEED * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
 		{
-			mY += SPEED * Time::DeltaTime();
+			mY -= SPEED * Time::DeltaTime();
 		}
 		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
 		{
-			mY -= SPEED * Time::DeltaTime();
+			mY += SPEED * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyState(eKeyCode::N_1) == eKeyState::PRESSED)
@@ -85,17 +85,17 @@ namespace jh
 		mWorldMat *= DirectX::XMMatrixRotationZ(mZ);
 		mWorldMat *= DirectX::XMMatrixTranslation(mX, mY, 0.0f);
 	}
-	void PlayerScript::FixedUpdate()
+	void MonsterScript::FixedUpdate()
 	{
 		MatrixBuffer matBuffer;
 		matBuffer.worldMat = DirectX::XMMatrixTranspose(mWorldMat);
 		graphics::GraphicDeviceDX11::GetInstance().WriteDataAtBuffer(mcpConstantBuffer.Get(), &matBuffer, sizeof(MatrixBuffer));
 	}
-	void PlayerScript::Render()
+	void MonsterScript::Render()
 	{
 		setPipeline();
 	}
-	void PlayerScript::setPipeline()
+	void MonsterScript::setPipeline()
 	{
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(
 			0,

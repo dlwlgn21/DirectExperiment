@@ -24,4 +24,37 @@ namespace jh
 		mLayers[static_cast<UINT>(eType)]->AddGameObject(pGameObject, eType);
 	}
 
+
+	void Scene::Initialize()
+	{
+		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
+		{
+			mLayers[i]->Initalize();
+		}
+	}
+	void Scene::Update()
+	{
+		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
+		{
+			mLayers[i]->Update();
+		}
+	}
+	void Scene::FixedUpdate()
+	{
+		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
+		{
+			mLayers[i]->FixedUpdate();
+		}
+	}
+	void Scene::Render()
+	{
+		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
+		{
+			mLayers[i]->Render();
+		}
+	}
+	void Scene::Release()
+	{
+
+	}
 }

@@ -21,13 +21,14 @@ namespace jh
 	{
 		SetPipeline();
 		mpMesh->Render();
+		mpMaterial->Clear();
 	}
 
 	void SpriteRenderer::SetPipeline()
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
 		mpMaterial->SetPipeline();
-		mpMesh->SetVertexBuffer();
+		mpMesh->SetPipeline();
 	}
 
 }

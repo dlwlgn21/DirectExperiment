@@ -4,11 +4,11 @@
 
 namespace jh
 {
-	class PlayerScript final : public Script
+	class MonsterScript final : public Script
 	{
 	public:
-		PlayerScript();
-		virtual ~PlayerScript();
+		MonsterScript();
+		virtual ~MonsterScript();
 
 		void Initialize() override;
 		void Update() override;

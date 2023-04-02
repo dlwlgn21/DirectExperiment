@@ -6,7 +6,16 @@ namespace jh
 		: Component(eComponentType::SCRIPT)
 	{
 	}
-	Script::~Script()
+	void Script::Initialize()
+	{
+	}
+	void Script::Update()
+	{
+	}
+	void Script::FixedUpdate()
+	{
+	}
+	void Script::Render()
 	{
 	}
 }

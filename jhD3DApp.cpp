@@ -2,8 +2,7 @@
 #include "jhTime.h"
 #include "jhInput.h"
 #include "jhSceneManager.h"
-#include "jhGraphicDeviceDX11.h"
-
+#include "jhResourceMaker.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -17,6 +16,7 @@ namespace jh
 		Time::Initialize();
 		Input::Initialize();
 		graphics::GraphicDeviceDX11::GetInstance().InitializeDevice(mScreenWidth, mScreenHeight, mHwnd);
+		ResourceMaker::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
@@ -61,17 +61,17 @@ namespace jh
 	{
 		Time::Update();
 		Input::Update();
-		graphics::GraphicDeviceDX11::GetInstance().Update();
 		SceneManager::GetInstance().Update();
 	}
 	void D3DApp::FixedUpdate()
 	{
-		graphics::GraphicDeviceDX11::GetInstance().FixedUpdate();
 		SceneManager::GetInstance().FixedUpdate();
 	}
 	void D3DApp::RenderFrame()
 	{
 		Time::Render(mHDC);
+		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
+
 		SceneManager::GetInstance().Render();
 
 		graphics::GraphicDeviceDX11::GetInstance().Render();
@@ -79,6 +79,7 @@ namespace jh
 	void D3DApp::Release()
 	{
 		SceneManager::GetInstance().Release();
+		ResourceMaker::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
 
 	}

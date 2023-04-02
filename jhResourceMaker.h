@@ -1,11 +1,16 @@
 #pragma once
+#include "jhGraphicDeviceDX11.h"
+
+constexpr const UINT RECT_VERTEX_COUNT = 4;
+constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
 
 namespace jh
 {
+
+
 	class ResourceMaker final
 	{
 	public:
-		
 		static ResourceMaker& GetInstance()
 		{
 			static ResourceMaker instance;
@@ -16,14 +21,38 @@ namespace jh
 		ResourceMaker& operator=(const ResourceMaker& other) = delete;
 
 		void Initialize();
+		void Release();
+
+
+	public:
+		static const std::wstring RECT_MESH_KEY;
+
+		static const std::wstring SPRITE_SHADER_KEY;
+
+		static const std::wstring LOGO_TEXTURE_KEY;
+
+		static const std::wstring LOGO_MATERIAL_KEY;
+
+
+	private:
 		void createMeshs();
 		void createShaders();
 		void createTextures();
 		void createMaterial();
+		void createSamplerState();
 
 	private:
-		ResourceMaker();
+		ResourceMaker()
+			: mVertices{}
+			, mcpPointSampler()
+		{
+
+		}
 		~ResourceMaker() = default;
+
+	private:
+		Vertex											mVertices[RECT_VERTEX_COUNT];
+		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
 	};
 }
 

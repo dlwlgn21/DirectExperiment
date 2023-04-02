@@ -108,22 +108,8 @@ namespace jh::graphics
 			&viewPort
 		);
 
-
-		initializePipelineAndReources();
 	}
-
-	void GraphicDeviceDX11::Update()
-	{
-
-
-	}
-
-	void GraphicDeviceDX11::FixedUpdate()
-	{
-
-	}
-
-	void GraphicDeviceDX11::Render()
+	void GraphicDeviceDX11::ClearRenderTargetAndDepthStencilView()
 	{
 		static float CLEAR_COLOR[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 		mcpDeviceContext->ClearRenderTargetView(
@@ -136,19 +122,10 @@ namespace jh::graphics
 			1.0f,                                               // 이 값으로 뎊스 버퍼를 지움.
 			0                                                   // 이 값으로 스텐실 버퍼를 지움
 		);
+	}
 
-		UINT stride = sizeof(Vertex);		// 하나의 버텍스 정보가 몇 바이트인지를 표시
-		UINT offset = 0;					// 데이터의 첫번째 위치를 바이트로 지정
-
-		//mspShader->SetPipeline();
-		//mspMesh->SetPipeline();
-
-		//mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-		//mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
-
-		//mspTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER);
-
-		//mspMesh->Render();
+	void GraphicDeviceDX11::Render()
+	{
 		mcpSwapChain->Present(0, 0);
 	}
 
@@ -187,9 +164,6 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::Release()
 	{
-		mspTexture.reset();
-		mspMesh.reset();
-		mcpPointSampler.Reset();
 		mcpVertexBuffer.Reset();
 		mcpDepthStencilView.Reset();
 		mcpDepthStencilTextrue.Reset();
@@ -208,66 +182,5 @@ namespace jh::graphics
 		}
 		return true;
 	}
-	void GraphicDeviceDX11::initializePipelineAndReources()
-	{
-		initializeVertexAndIndexBuffer();
-		createShader();
-		createSamplerState();
-		createConstantBufferForTransform();
-		loadTexture();
-	}
-	void GraphicDeviceDX11::initializeVertexAndIndexBuffer()
-	{
-		mspMesh = std::make_unique<Mesh>();
-		mVertices[0] = { {-0.1f,		0.1f,		0.0f},	{0.0f, 0.0f} };
-		mVertices[1] = { {0.1f,			0.1f,		0.0f},	{1.0f, 0.0f} };
-		mVertices[2] = { {-0.1f,		-0.1f,		0.0f},	{0.0f, 1.0f} };
-		mVertices[3] = { {0.1f,			-0.1f,		0.0f},	{1.0f, 1.0f} };
-		mspMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * VERTEX_COUNT);
-		
-		mspMesh2 = std::make_unique<Mesh>();
-		mVertices[0] = { {-0.75f,		0.75f,		0.0f},		{0.0f, 0.0f} };
-		mVertices[1] = { {0.75f,			0.75f,		0.0f},	{1.0f, 0.0f} };
-		mVertices[2] = { {-0.75f,		-0.75f,		0.0f},		{0.0f, 1.0f} };
-		mVertices[3] = { {0.75f,			-0.75f,		0.0f},	{1.0f, 1.0f} };
-		mspMesh2->CreateVertexBuffer(mVertices, sizeof(Vertex) * VERTEX_COUNT);
 
-
-		//WriteDataAtBuffer(mcpVertexBuffer.Get(), mVertices, sizeof(Vertex) * VERTEX_COUNT);
-	}
-
-	void GraphicDeviceDX11::createShader()
-	{
-		mspShader = std::make_unique<Shader>();
-	}
-
-	void GraphicDeviceDX11::createSamplerState()
-	{
-		D3D11_SAMPLER_DESC samplerDesc;
-		ZeroMemory(&samplerDesc, sizeof(samplerDesc));
-		samplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
-		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-		samplerDesc.MipLODBias = 0.0f;
-		samplerDesc.MaxAnisotropy = 1;
-		samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-		samplerDesc.MinLOD = 0;
-		samplerDesc.MaxLOD = 0;
-		mcpDevice->CreateSamplerState(
-			&samplerDesc,
-			mcpPointSampler.ReleaseAndGetAddressOf()
-		);
-	}
-
-	void GraphicDeviceDX11::createConstantBufferForTransform()
-	{
-
-	}
-
-	void GraphicDeviceDX11::loadTexture()
-	{
-		mspTexture = std::make_unique<Texture>();
-		mspTexture->Load(L"T_Splash_Logo_HumbleGames.png");
-	}
 }

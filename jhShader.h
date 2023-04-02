@@ -10,18 +10,18 @@ namespace jh
 		virtual ~Shader();
 
 		void SetPipeline();
-
+		void CreateShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
 
 	private:
 		void createResource();
-		void createShaders();
+		void createShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
 		void setShaders();
 
 		void createInputLayout();
 		void setInputLayout();
 
-		void createVS(ID3D11Device* pDevice);
-		void createPS(ID3D11Device* pDevice);
+		void createVS(ID3D11Device* pDevice, const std::wstring& VSFileName);
+		void createPS(ID3D11Device* pDevice, const std::wstring& PSFileName);
 
 		void createBlendState();
 		void setBlendState();

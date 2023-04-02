@@ -97,6 +97,9 @@
     <Filter Include="Component\Script\Base">
       <UniqueIdentifier>{d89125ba-50cc-4458-bf33-981ec3ebc00c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Maker">
+      <UniqueIdentifier>{95cf1013-f796-4790-8b72-c955eb465a15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -178,7 +181,13 @@
       <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="jhResourceMaker.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Resource\Maker</Filter>
+    </ClInclude>
+    <ClInclude Include="jhHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterScript.h">
+      <Filter>Component\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +258,10 @@
       <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="jhResourceMaker.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Resource\Maker</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterScript.cpp">
+      <Filter>Component\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

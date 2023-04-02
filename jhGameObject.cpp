@@ -12,36 +12,23 @@ namespace jh
 		mComponents.reserve(static_cast<UINT>(eComponentType::COUNT));
 		mComponents.resize(static_cast<UINT>(eComponentType::COUNT));
 		mScripts.reserve(4);
+		mScripts.resize(4);
 	}
 	GameObject::~GameObject()
 	{
-		for (auto* pCom : mComponents)
-		{
-			if (pCom != nullptr)
-			{
-				delete pCom;
-			}
-		}
 		mComponents.clear();
-		for (auto* pScript : mScripts)
-		{
-			if (pScript != nullptr)
-			{
-				delete pScript;
-			}
-		}
 		mScripts.clear();
 	}
 	void GameObject::Initialize()
 	{
-		for (auto* pCom : mComponents)
+		for (auto& pCom : mComponents)
 		{
 			if (pCom != nullptr)
 			{
 				pCom->Initialize();
 			}
 		}
-		for (auto* pScript : mScripts)
+		for (auto& pScript : mScripts)
 		{
 			if (pScript != nullptr)
 			{
@@ -51,14 +38,14 @@ namespace jh
 	}
 	void GameObject::Update()
 	{
-		for (auto* pCom : mComponents)
+		for (auto& pCom : mComponents)
 		{
 			if (pCom != nullptr)
 			{
 				pCom->Update();
 			}
 		}
-		for (auto* pScript : mScripts)
+		for (auto& pScript : mScripts)
 		{
 			if (pScript != nullptr)
 			{
@@ -68,7 +55,7 @@ namespace jh
 	}
 	void GameObject::FixedUpdate()
 	{
-		for (auto* pCom : mComponents)
+		for (auto& pCom : mComponents)
 		{
 			if (pCom != nullptr)
 			{
@@ -76,7 +63,7 @@ namespace jh
 			}
 		}
 
-		for (auto* pScript : mScripts)
+		for (auto& pScript : mScripts)
 		{
 			if (pScript != nullptr)
 			{
@@ -86,14 +73,14 @@ namespace jh
 	}
 	void GameObject::Render()
 	{
-		for (auto* pCom : mComponents)
+		for (auto& pCom : mComponents)
 		{
 			if (pCom != nullptr)
 			{
 				pCom->Render();
 			}
 		}
-		for (auto* pScript : mScripts)
+		for (auto& pScript : mScripts)
 		{
 			if (pScript != nullptr)
 			{
@@ -105,12 +92,14 @@ namespace jh
 	{
 		assert(pComponent != nullptr);
 		assert(GetComponentOrNull(pComponent->GetType()) == nullptr);
+		pComponent->SetOwner(this);
 		mComponents[static_cast<UINT>(pComponent->GetType())] = pComponent;
 	}
 	void GameObject::AddScript(Script* pScript)
 	{
 		assert(pScript != nullptr);
-		mScripts.push_back(pScript);
+		mScripts[0] = pScript;
+		pScript->SetOwner(this);
 	}
 	Component* GameObject::GetComponentOrNull(const eComponentType eType)
 	{

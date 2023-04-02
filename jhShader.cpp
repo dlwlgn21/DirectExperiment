@@ -14,7 +14,6 @@ namespace jh
 		, mcpBlendState()
 		, mPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP)
 	{
-		createResource();
 	}
 
 	Shader::~Shader()
@@ -28,11 +27,11 @@ namespace jh
 		mcpBlendState.Reset();
 	}
 
-	void Shader::createShaders()
+	void Shader::createShaders(const std::wstring& VSFileName, const std::wstring& PSFileName)
 	{
 		auto* pGraphicDevice = graphics::GraphicDeviceDX11::GetInstance().GetDeivce();
-		createVS(pGraphicDevice);
-		createPS(pGraphicDevice);
+		createVS(pGraphicDevice, VSFileName);
+		createPS(pGraphicDevice, PSFileName);
 	}
 	void Shader::setShaders()
 	{
@@ -85,7 +84,6 @@ namespace jh
 
 	void Shader::createResource()
 	{
-		createShaders();
 		createInputLayout();
 		createBlendState();
 	}
@@ -98,12 +96,18 @@ namespace jh
 		setBlendState();
 	}
 
+	void Shader::CreateShaders(const std::wstring& VSFileName, const std::wstring& PSFileName)
+	{
+		createShaders(VSFileName, PSFileName);
+		createResource();
+	}
 
-	void Shader::createVS(ID3D11Device* pDevice)
+
+	void Shader::createVS(ID3D11Device* pDevice, const std::wstring& VSFileName)
 	{
 		HRESULT hr;
 		hr = D3DCompileFromFile(
-			L"jhVertexShader.hlsl",
+			VSFileName.c_str(),
 			0,
 			0,
 			"main",
@@ -130,11 +134,11 @@ namespace jh
 		);
 		if (FAILED(hr)) { assert(false); }
 	}
-	void Shader::createPS(ID3D11Device* pDevice)
+	void Shader::createPS(ID3D11Device* pDevice, const std::wstring& PSFileName)
 	{
 		HRESULT hr;
 		hr = D3DCompileFromFile(
-			L"jhPixelShader.hlsl",
+			PSFileName.c_str(),
 			0,
 			0,
 			"main",

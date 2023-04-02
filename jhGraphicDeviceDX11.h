@@ -1,14 +1,6 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhGraphics.h"
-#include "jhTexture.h"
-#include "jhMesh.h"
-#include "jhShader.h"
-
-
-static constexpr const UINT VERTEX_COUNT = 4;
-static constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
-static constexpr const UINT DEFAULT_TEXTURE_SLOT_NUMBER = 0;
 
 namespace jh::graphics
 {
@@ -25,10 +17,9 @@ namespace jh::graphics
 
 
 		void InitializeDevice(const UINT screenWidth, const UINT screenHeight, HWND hwnd);
-		void Update();
-		void FixedUpdate();
-
+		void ClearRenderTargetAndDepthStencilView();
 		void Render();
+
 		void WriteDataAtBuffer(ID3D11Resource* pResource, const void* pData, const size_t dataSize);
 
 		void Release();
@@ -39,22 +30,10 @@ namespace jh::graphics
 		
 	private:
 		bool ifFailedHR(HRESULT hr);
-		void initializePipelineAndReources();
-
-		void initializeVertexAndIndexBuffer();
-		void createShader();
-		void createSamplerState();
-		void createConstantBufferForTransform();
-
-		void loadTexture();
 
 	private:
 		GraphicDeviceDX11()
-			: mspTexture()
-			, mspMesh()
-			, mspMesh2()
-			, mspShader()
-			, mcpDevice()
+			: mcpDevice()
 			, mcpDeviceContext()
 			, mcpSwapChain()
 			, mcpRenderTargetTextrue()
@@ -63,10 +42,8 @@ namespace jh::graphics
 			, mcpDepthStencilView()
 			, mcpVertexBuffer()
 			, mcpInputLayout()
-			, mcpPointSampler()
 			, mScreenWidth(0)
 			, mScreenHeight(0)
-			, mVertices{}
 		{
 
 		}
@@ -86,19 +63,10 @@ namespace jh::graphics
 		Microsoft::WRL::ComPtr<ID3D11Texture2D>			mcpDepthStencilTextrue;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	mcpDepthStencilView;
 
-		Vertex mVertices[VERTEX_COUNT];
 		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpVertexBuffer;
 
 
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>		mcpInputLayout;
-
-
-		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
-		
-		std::unique_ptr<class Texture>					mspTexture;
-		std::unique_ptr<class Mesh>						mspMesh;
-		std::unique_ptr<class Mesh>						mspMesh2;
-		std::unique_ptr<class Shader>					mspShader;
 
 	};
 }
