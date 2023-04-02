@@ -41,7 +41,11 @@ namespace jh
 
 		return true;
 	}
-	void Mesh::SetVertexBuffer()
+	void Mesh::SetPipeline()
+	{
+		setVertexBuffer();
+	}
+	void Mesh::setVertexBuffer()
 	{
 		assert(mcpVertexBuffer != nullptr);
 

@@ -88,6 +88,15 @@
     <Filter Include="Scene\Manager">
       <UniqueIdentifier>{2d58f921-b4b6-4c1b-9fb2-488ce433db0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\PlayScene">
+      <UniqueIdentifier>{1350a7ec-3ed2-4539-b9d2-a8ac9013f34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script">
+      <UniqueIdentifier>{2f18406a-7ca0-4854-b8fd-3c411f76070b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Base">
+      <UniqueIdentifier>{d89125ba-50cc-4458-bf33-981ec3ebc00c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -153,6 +162,24 @@
     <ClInclude Include="jhLayer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
+    <ClInclude Include="jhScene.h">
+      <Filter>Scene\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayScene.h">
+      <Filter>Scene\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSceneManager.h">
+      <Filter>Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScript.h">
+      <Filter>Component\Script\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="jhResourceMaker.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -205,6 +232,24 @@
     </ClCompile>
     <ClCompile Include="jhLayer.cpp">
       <Filter>Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScene.cpp">
+      <Filter>Scene\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayScene.cpp">
+      <Filter>Scene\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSceneManager.cpp">
+      <Filter>Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScript.cpp">
+      <Filter>Component\Script\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jhResourceMaker.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,11 @@ namespace jh
 		virtual ~Mesh();
 		bool CreateVertexBuffer(void* data, UINT size);
 		
-		void SetVertexBuffer();
+		void SetPipeline();
 		void Render();
+
+	private:
+		void setVertexBuffer();
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Buffer>	mcpVertexBuffer;
 		D3D11_BUFFER_DESC						mBufferDesc;

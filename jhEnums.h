@@ -5,6 +5,7 @@ namespace jh
 	{
 		TRANSFORM,
 		RENDERER,
+		SCRIPT,
 		COUNT
 	};
 
@@ -29,5 +30,11 @@ namespace jh
 		PARTICLE,
 		UI,
 		COUNT = 16,
+	};
+
+	enum class eSceneType
+	{
+		PLAY_SCENE,
+		COUNT
 	};
 }

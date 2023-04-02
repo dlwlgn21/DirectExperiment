@@ -114,58 +114,13 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::Update()
 	{
-		static const float SPEED = 1.0f;
-		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
-		{
-			mZ -= XM_PI * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
-		{
-			mZ += XM_PI * Time::DeltaTime();
-		}
 
 
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			mX -= SPEED * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			mX += SPEED * Time::DeltaTime();
-		}
-
-		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		{
-			mY += SPEED * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			mY -= SPEED * Time::DeltaTime();
-		}
-
-		if (Input::GetKeyState(eKeyCode::N_1) == eKeyState::PRESSED)
-		{
-			Time::SetScale(1.0f);
-		}
-		if (Input::GetKeyState(eKeyCode::N_2) == eKeyState::PRESSED)
-		{
-			Time::SetScale(2.0f);
-		}
-		if (Input::GetKeyState(eKeyCode::N_3) == eKeyState::PRESSED)
-		{
-			Time::SetScale(3.0f);
-		}
-
-		mWorldMat = XMMatrixIdentity();
-		mWorldMat *= XMMatrixRotationZ(mZ);
-		mWorldMat *= XMMatrixTranslation(mX, mY, 0.0f);
 	}
 
 	void GraphicDeviceDX11::FixedUpdate()
 	{
-		MatrixBuffer matBuffer;
-		matBuffer.worldMat = DirectX::XMMatrixTranspose(mWorldMat);
-		WriteDataAtBuffer(mcpConstantBuffer.Get(), &matBuffer, sizeof(MatrixBuffer));
+
 	}
 
 	void GraphicDeviceDX11::Render()
@@ -185,15 +140,15 @@ namespace jh::graphics
 		UINT stride = sizeof(Vertex);		// 하나의 버텍스 정보가 몇 바이트인지를 표시
 		UINT offset = 0;					// 데이터의 첫번째 위치를 바이트로 지정
 
-		mspShader->SetPipeline();
-		mspMesh->SetVertexBuffer();
+		//mspShader->SetPipeline();
+		//mspMesh->SetPipeline();
 
-		mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-		mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
+		//mcpDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+		//mcpDeviceContext->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
 
-		mspTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER);
+		//mspTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER);
 
-		mspMesh->Render();
+		//mspMesh->Render();
 		mcpSwapChain->Present(0, 0);
 	}
 
@@ -232,7 +187,6 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::Release()
 	{
-		mcpConstantBuffer.Reset();
 		mspTexture.reset();
 		mspMesh.reset();
 		mcpPointSampler.Reset();
@@ -308,30 +262,7 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::createConstantBufferForTransform()
 	{
-		D3D11_BUFFER_DESC BufferDesc;
-		ZeroMemory(&BufferDesc, sizeof(D3D11_BUFFER_DESC));
-		BufferDesc.ByteWidth = sizeof(MatrixBuffer);
-		BufferDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-		BufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
-		BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		BufferDesc.MiscFlags = 0;
-		BufferDesc.StructureByteStride = 0;
 
-		HRESULT hr = mcpDevice->CreateBuffer(
-			&BufferDesc,
-			nullptr,
-			mcpConstantBuffer.ReleaseAndGetAddressOf()
-		);
-
-		ifFailedHR(hr);
-		mcpDeviceContext->VSSetConstantBuffers(
-			0,
-			1,
-			mcpConstantBuffer.GetAddressOf()
-		);
-		mX = 0.0f;
-		mY = 0.0f;
-		mZ = 0.0f;
 	}
 
 	void GraphicDeviceDX11::loadTexture()

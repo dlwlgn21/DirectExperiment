@@ -3,6 +3,8 @@
 
 namespace jh
 {
+	class Component;
+	class Script;
 	class GameObject
 	{
 	public:
@@ -14,14 +16,16 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
-		void AddComponent(class Component* pComponent);
+		void AddComponent(Component* pComponent);
+		void AddScript(Script* pScript);
 		Component* GetComponentOrNull(const eComponentType eType);
 
 		void SetLayerType(const eLayerType eType) { meLayerType = eType; }
 		eLayerType GetLayerType() const { return meLayerType; }
 
 	private:
-		std::vector<class Component*>	mComponents;
+		std::vector<Component*>	mComponents;
+		std::vector<Script*>		mScripts;
 		eLayerType						meLayerType;
 	};
 }

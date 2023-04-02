@@ -64,11 +64,6 @@ namespace jh::graphics
 			, mcpVertexBuffer()
 			, mcpInputLayout()
 			, mcpPointSampler()
-			, mcpConstantBuffer()
-			, mX(0.0f)
-			, mY(0.0f)
-			, mZ(0.0f)
-			, mWorldMat()
 			, mScreenWidth(0)
 			, mScreenHeight(0)
 			, mVertices{}
@@ -105,12 +100,6 @@ namespace jh::graphics
 		std::unique_ptr<class Mesh>						mspMesh2;
 		std::unique_ptr<class Shader>					mspShader;
 
-
-		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpConstantBuffer;
-		float mX;
-		float mY;
-		float mZ;
-		DirectX::XMMATRIX mWorldMat;
 	};
 }
 

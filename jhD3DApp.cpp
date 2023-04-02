@@ -1,6 +1,7 @@
 #include "jhD3DApp.h"
 #include "jhTime.h"
 #include "jhInput.h"
+#include "jhSceneManager.h"
 #include "jhGraphicDeviceDX11.h"
 
 
@@ -16,6 +17,7 @@ namespace jh
 		Time::Initialize();
 		Input::Initialize();
 		graphics::GraphicDeviceDX11::GetInstance().InitializeDevice(mScreenWidth, mScreenHeight, mHwnd);
+		SceneManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
@@ -60,19 +62,25 @@ namespace jh
 		Time::Update();
 		Input::Update();
 		graphics::GraphicDeviceDX11::GetInstance().Update();
+		SceneManager::GetInstance().Update();
 	}
 	void D3DApp::FixedUpdate()
 	{
 		graphics::GraphicDeviceDX11::GetInstance().FixedUpdate();
+		SceneManager::GetInstance().FixedUpdate();
 	}
 	void D3DApp::RenderFrame()
 	{
 		Time::Render(mHDC);
+		SceneManager::GetInstance().Render();
+
 		graphics::GraphicDeviceDX11::GetInstance().Render();
 	}
 	void D3DApp::Release()
 	{
+		SceneManager::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
+
 	}
 	bool D3DApp::IfFailedHR(HRESULT hr)
 	{

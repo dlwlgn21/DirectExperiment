@@ -141,14 +141,20 @@
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhMaterial.h" />
     <ClInclude Include="jhMesh.h" />
+    <ClInclude Include="jhPlayerScript.h" />
+    <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhRenderer.h" />
     <ClInclude Include="jhResource.h" />
+    <ClInclude Include="jhResourceMaker.h" />
     <ClInclude Include="jhResourcesManager.h" />
+    <ClInclude Include="jhSceneManager.h" />
+    <ClInclude Include="jhScript.h" />
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +164,14 @@
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhMaterial.cpp" />
+    <ClCompile Include="jhPlayerScript.cpp" />
+    <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhRenderer.cpp" />
     <ClCompile Include="jhResource.cpp" />
+    <ClCompile Include="jhResourceMaker.cpp" />
     <ClCompile Include="jhResourcesManager.cpp" />
+    <ClCompile Include="jhSceneManager.cpp" />
+    <ClCompile Include="jhScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
@@ -169,6 +180,7 @@
     <ClCompile Include="jhShader.cpp" />
     <ClCompile Include="jhTexture.cpp" />
     <ClCompile Include="jhTime.cpp" />
+    <ClCompile Include="jhScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc" />
