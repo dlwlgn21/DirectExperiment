@@ -1,21 +1,24 @@
 #pragma once
 #include "jhScript.h"
-#include "jhGraphicDeviceDX11.h"
-#include "jhMath.h"
+#include "jhGraphics.h"
 
 namespace jh
 {
 	class Transform;
-	class MonsterScript final : public Script
+	class CameraScript final : public Script
 	{
 	public:
-		MonsterScript();
-		virtual ~MonsterScript();
+		CameraScript();
+		virtual ~CameraScript() = default;
 
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
 		void Render() override;
+
+	private:
+		Transform* mpTranform;
+		float mSpeed;
 	};
 }
 

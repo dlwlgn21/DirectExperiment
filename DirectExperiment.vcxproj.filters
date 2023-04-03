@@ -100,6 +100,30 @@
     <Filter Include="Resource\Maker">
       <UniqueIdentifier>{95cf1013-f796-4790-8b72-c955eb465a15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{c3c23fab-c289-4988-bc8b-236092aed4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Math">
+      <UniqueIdentifier>{921268f6-2799-426b-a07d-ef8a8caaba25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\ConstantBuffer">
+      <UniqueIdentifier>{9bb34be3-5d99-4384-85b1-afeaf2327313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderResource\PS">
+      <UniqueIdentifier>{f39418de-642c-4df7-9417-a58fc7913a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderResource\VS">
+      <UniqueIdentifier>{1a77f59c-efd0-437d-8c77-32a373e024b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera">
+      <UniqueIdentifier>{86158d09-e652-4f80-9500-6486924cf0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera\CameraManager">
+      <UniqueIdentifier>{49ccdcf4-3b1c-47fd-8148-859d6740d2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\CameraScript">
+      <UniqueIdentifier>{029e8b48-f2c2-4c58-afed-a9729775cedb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -189,6 +213,27 @@
     <ClInclude Include="jhMonsterScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
+    <ClInclude Include="jhTransform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMath.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="jhConstantBuffer.h">
+      <Filter>Resource\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhEntity.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCameraManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCameraScript.h">
+      <Filter>Component\Script\CameraScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -263,6 +308,27 @@
     <ClCompile Include="jhMonsterScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
+    <ClCompile Include="jhTransform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMath.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="jhConstantBuffer.cpp">
+      <Filter>Resource\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhEntity.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCameraManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCameraScript.cpp">
+      <Filter>Component\Script\CameraScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -278,14 +344,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="jhVertexShader.hlsl">
-      <Filter>ShaderResource</Filter>
-    </FxCompile>
     <FxCompile Include="jhPixelShader.hlsl">
-      <Filter>ShaderResource</Filter>
+      <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhVertexShader.hlsl">
+      <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="jhMath.inl">
+      <Filter>Common\Math</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ namespace jh
 	enum class eComponentType
 	{
 		TRANSFORM,
+		CAMERA,
 		RENDERER,
 		SCRIPT,
 		COUNT
@@ -36,5 +37,15 @@ namespace jh
 	{
 		PLAY_SCENE,
 		COUNT
+	};
+
+
+	enum class eConstantBufferType
+	{
+		TRANSFORM,
+		MATERIAL,
+		GRID,
+		ANIMATION,
+		COUNT,
 	};
 }

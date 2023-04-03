@@ -16,6 +16,7 @@ namespace jh
 
 		eComponentType GetType() const { return meType; }
 		void SetOwner(GameObject* pOwner) { assert(pOwner != nullptr); mpOwner = pOwner; }
+		GameObject* GetOwner() const { assert(mpOwner != nullptr); return mpOwner; }
 
 	protected:
 		GameObject* mpOwner;

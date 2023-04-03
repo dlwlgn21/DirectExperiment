@@ -1,9 +1,12 @@
 #pragma once
 #include "jhScript.h"
 #include "jhGraphicDeviceDX11.h"
+#include "jhMath.h"
+
 
 namespace jh
 {
+	class Transform;
 	class PlayerScript final : public Script
 	{
 	public:
@@ -15,16 +18,6 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-
-	private:
-		void setPipeline();
-
-	private:
-		float mX;
-		float mY;
-		float mZ;
-		DirectX::XMMATRIX mWorldMat;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>			mcpConstantBuffer;
 	};
 }
 

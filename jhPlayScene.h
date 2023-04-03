@@ -13,9 +13,7 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
-		void Render() override;
 		void Release() override;
-	private:
 	};
 }
 

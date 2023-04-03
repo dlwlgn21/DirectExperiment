@@ -23,11 +23,7 @@ namespace jh
 		assert(mpCurrScene != nullptr);
 		mpCurrScene->FixedUpdate();
 	}
-	void SceneManager::Render()
-	{
-		assert(mpCurrScene != nullptr);
-		mpCurrScene->Render();
-	}
+
 	void SceneManager::Release()
 	{
 		for (auto* pScene : mpScenes)

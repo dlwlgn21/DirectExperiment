@@ -1,12 +1,12 @@
 #pragma once
 #include "jhGraphicDeviceDX11.h"
+#include "jhConstantBuffer.h"
 
 constexpr const UINT RECT_VERTEX_COUNT = 4;
 constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
 
 namespace jh
 {
-
 
 	class ResourceMaker final
 	{
@@ -23,6 +23,7 @@ namespace jh
 		void Initialize();
 		void Release();
 
+		ConstantBuffer* GetTransformCBOrNull() const { return mspTransformConstantBuffer.get(); }
 
 	public:
 		static const std::wstring RECT_MESH_KEY;
@@ -40,11 +41,14 @@ namespace jh
 		void createTextures();
 		void createMaterial();
 		void createSamplerState();
+		void createConstantBuffer();
+
 
 	private:
 		ResourceMaker()
 			: mVertices{}
 			, mcpPointSampler()
+			, mspTransformConstantBuffer()
 		{
 
 		}
@@ -53,6 +57,7 @@ namespace jh
 	private:
 		Vertex											mVertices[RECT_VERTEX_COUNT];
 		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
+		std::unique_ptr<ConstantBuffer>					mspTransformConstantBuffer;
 	};
 }
 

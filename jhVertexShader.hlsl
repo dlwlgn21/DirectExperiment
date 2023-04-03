@@ -1,6 +1,8 @@
-cbuffer MatrixBuffer
+cbuffer MatrixBuffer : register (b0)
 {
-    matrix worldMat;
+    row_major matrix WorldMat;
+    row_major matrix ViewMat;
+    row_major matrix ProjectionMat;
 };
 
 struct VertexIn
@@ -18,7 +20,12 @@ struct VertexOut
 VertexOut main(VertexIn vIn)
 {
     VertexOut vOut;
-    vOut.Position = mul(vIn.Position, worldMat);
+    
+    float4 wolrdPos = mul(vIn.Position, WorldMat);
+    float4 viewPos = mul(wolrdPos, ViewMat);
+    float4 projectionPos = mul(viewPos, ProjectionMat);
+    
+    vOut.Position = projectionPos;
     vOut.UV = vIn.UV;
 	return vOut;
 }

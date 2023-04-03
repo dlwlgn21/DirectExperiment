@@ -53,16 +53,7 @@ namespace jh
 			}
 		}
 	}
-	void Layer::Render()
-	{
-		for (auto* pGameObject : mGameObjects)
-		{
-			if (pGameObject != nullptr)
-			{
-				pGameObject->Render();
-			}
-		}
-	}
+
 	void Layer::Release()
 	{
 		for (auto* pGameObject : mGameObjects)
@@ -77,11 +68,10 @@ namespace jh
 	void Layer::Destroy()
 	{
 	}
-	void Layer::AddGameObject(GameObject* pGameObject, const eLayerType eType)
+	void Layer::AddGameObject(GameObject* pGameObject)
 	{
 		assert(pGameObject != nullptr);
 		mGameObjects.push_back(pGameObject);
-		pGameObject->SetLayerType(eType);
 	}
 	std::vector<GameObject*> Layer::GetDontDestroyGameObjects()
 	{

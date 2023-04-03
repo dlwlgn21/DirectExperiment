@@ -19,7 +19,6 @@ namespace jh
 		void Initialize();
 		void Update();
 		void FixedUpdate();
-		void Render();
 		void Release();
 		
 

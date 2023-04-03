@@ -6,17 +6,23 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
+#include "jhMath.h"
+
+static constexpr const UINT TRANSFORM_CB_SLOT_NUMBER = 0;
+
 namespace jh
 {
 	struct Vertex
 	{
-		DirectX::XMFLOAT3 Position;
-		DirectX::XMFLOAT2 UV;
+		jh::math::Vector3 Position;
+		jh::math::Vector2 UV;
 	};
 
-	struct MatrixBuffer
+	struct TransformBuffer
 	{
-		DirectX::XMMATRIX worldMat;
+		jh::math::Matrix WorldMat;
+		jh::math::Matrix ViewMat;
+		jh::math::Matrix ProjectionMat;
 	};
 
 	enum class eShaderStage

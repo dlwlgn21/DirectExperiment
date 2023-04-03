@@ -21,6 +21,7 @@ namespace jh
 		createTextures();
 		createMaterial();
 		createSamplerState();
+		createConstantBuffer();
 	}
 
 	void ResourceMaker::createMeshs()
@@ -78,10 +79,16 @@ namespace jh
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
 	}
+
+	void ResourceMaker::createConstantBuffer()
+	{
+		mspTransformConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::TRANSFORM);
+	}
 	
 
 	void ResourceMaker::Release()
 	{
+		mspTransformConstantBuffer.reset();
 		mcpPointSampler.Reset();
 	}
 

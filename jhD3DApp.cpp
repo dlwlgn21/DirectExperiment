@@ -3,6 +3,8 @@
 #include "jhInput.h"
 #include "jhSceneManager.h"
 #include "jhResourceMaker.h"
+#include "jhCameraManager.h"
+
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -72,7 +74,7 @@ namespace jh
 		Time::Render(mHDC);
 		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
 
-		SceneManager::GetInstance().Render();
+		CameraManager::GetInstance().GetMainCamera()->Render();
 
 		graphics::GraphicDeviceDX11::GetInstance().Render();
 	}

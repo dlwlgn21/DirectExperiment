@@ -18,10 +18,15 @@ namespace jh
 		mLayers.clear();
 	}
 
+	Layer* Scene::GetLayer(const eLayerType eLayer)
+	{
+		return mLayers[static_cast<UINT>(eLayer)].get();
+	}
+
 	void Scene::AddGameObject(GameObject* pGameObject, const eLayerType eType)
 	{
 		assert(pGameObject != nullptr);
-		mLayers[static_cast<UINT>(eType)]->AddGameObject(pGameObject, eType);
+		mLayers[static_cast<UINT>(eType)]->AddGameObject(pGameObject);
 	}
 
 
@@ -46,13 +51,7 @@ namespace jh
 			mLayers[i]->FixedUpdate();
 		}
 	}
-	void Scene::Render()
-	{
-		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
-		{
-			mLayers[i]->Render();
-		}
-	}
+
 	void Scene::Release()
 	{
 

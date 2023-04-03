@@ -3,6 +3,7 @@
 
 namespace jh
 {
+	class Transform;
 	class SpriteRenderer final : public Renderer
 	{
 	public:
@@ -14,6 +15,7 @@ namespace jh
 		void FixedUpdate() override;
 		void SetPipeline() override;
 		void Render() override;
+
 	};
 
 }

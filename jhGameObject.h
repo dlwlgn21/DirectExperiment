@@ -1,12 +1,12 @@
 #pragma once
-#include "jhEngine.h"
-
+#include "jhEntity.h"
 
 namespace jh
 {
 	class Component;
 	class Script;
-	class GameObject
+	class Transform;
+	class GameObject : public Entity
 	{
 	public:
 		GameObject();
@@ -22,13 +22,12 @@ namespace jh
 
 		Component* GetComponentOrNull(const eComponentType eType);
 
-		void SetLayerType(const eLayerType eType) { meLayerType = eType; }
-		eLayerType GetLayerType() const { return meLayerType; }
+		Transform* GetTransform() const { return mpTransform; }
 
 	private:
-		std::vector<Component*>			mComponents;
-		std::vector<Script*>			mScripts;
-		eLayerType										meLayerType;
+		std::vector<Component*>							mComponents;
+		std::vector<Script*>							mScripts;
+		Transform*										mpTransform;
 	};
 }
 

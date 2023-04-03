@@ -131,11 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhCamera.h" />
+    <ClInclude Include="jhCameraManager.h" />
+    <ClInclude Include="jhCameraScript.h" />
     <ClInclude Include="jhComponent.h" />
+    <ClInclude Include="jhConstantBuffer.h" />
     <ClInclude Include="jhD3DApp.h" />
     <ClInclude Include="DirectExperiment.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="jhEngine.h" />
+    <ClInclude Include="jhEntity.h" />
     <ClInclude Include="jhGameObject.h" />
     <ClInclude Include="jhGraphicDeviceDX11.h" />
     <ClInclude Include="jhGraphics.h" />
@@ -143,6 +148,7 @@
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhMaterial.h" />
+    <ClInclude Include="jhMath.h" />
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhPlayerScript.h" />
@@ -157,17 +163,24 @@
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
+    <ClInclude Include="jhTransform.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhCamera.cpp" />
+    <ClCompile Include="jhCameraManager.cpp" />
+    <ClCompile Include="jhCameraScript.cpp" />
     <ClCompile Include="jhComponent.cpp" />
+    <ClCompile Include="jhConstantBuffer.cpp" />
     <ClCompile Include="jhD3DApp.cpp" />
+    <ClCompile Include="jhEntity.cpp" />
     <ClCompile Include="jhEnums.h" />
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhMaterial.cpp" />
+    <ClCompile Include="jhMath.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
@@ -178,6 +191,7 @@
     <ClCompile Include="jhSceneManager.cpp" />
     <ClCompile Include="jhScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
+    <ClCompile Include="jhTransform.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
     <ClCompile Include="jhInput.cpp" />
@@ -209,6 +223,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="jhMath.inl" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

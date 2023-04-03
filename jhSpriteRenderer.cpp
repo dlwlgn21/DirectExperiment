@@ -1,4 +1,5 @@
 #include "jhSpriteRenderer.h"
+#include "jhTransform.h"
 
 namespace jh
 {
@@ -19,6 +20,8 @@ namespace jh
 
 	void SpriteRenderer::Render()
 	{
+		Transform* pTranform = GetOwner()->GetTransform();
+		pTranform->WriteMatrixDataAtContantBuffer();
 		SetPipeline();
 		mpMesh->Render();
 		mpMaterial->Clear();
@@ -27,6 +30,8 @@ namespace jh
 	void SpriteRenderer::SetPipeline()
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
+		Transform* pTranform = GetOwner()->GetTransform();
+		pTranform->SetPipeline();
 		mpMaterial->SetPipeline();
 		mpMesh->SetPipeline();
 	}
