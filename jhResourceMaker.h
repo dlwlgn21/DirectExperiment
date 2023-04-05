@@ -38,10 +38,12 @@ namespace jh
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_ATLAS_KEY;
 		static const std::wstring BATTLE_BG_TEXTURE_KEY;
+		static const std::wstring BATTLE_PARRARELL_BG_TEXTURE_KEY;
 
 		static const std::wstring PLAYER_MATERIAL_KEY;
 		static const std::wstring MONSTER_MATERIAL_KEY;
 		static const std::wstring BATTLE_BG_MATERIAL_KEY;
+		static const std::wstring BATTLE_PARRARELL_BG_MATERIAL_KEY;
 
 
 	private:

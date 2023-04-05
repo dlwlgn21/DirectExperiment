@@ -6,21 +6,37 @@
 
 using namespace jh::math;
 
-static constexpr const float BATTLE_BG_Z_VALUE = 10.0f;
+static constexpr const float BATTLE_BG_Z_VALUE = 100.0f;
+static constexpr const float BATTLE_PARRALL_BG_Z_VALUE = 200.0f;
 
 namespace jh
 {
-	BattleBGScript::BattleBGScript()
+	BattleBGScript::BattleBGScript(const eBGType eType)
 		: Script()
-		, mSpeed(1.0f)
+		, mSpeed(0.4f)
 		, mUVMove(Vector2::Zero)
+		, meType(eType)
 	{
 	}
 	void BattleBGScript::Initialize()
 	{
 		Transform* pTransform = GetOwner()->GetTransform();
 		Vector3 prePos = pTransform->GetPosition();
-		pTransform->SetPosition(Vector3(prePos.x, prePos.y, 1.0f));
+
+		switch (meType)
+		{
+		case jh::eBGType::NORMAL:
+			mSpeed = 0.4f;
+			pTransform->SetPosition(Vector3(prePos.x, prePos.y, BATTLE_BG_Z_VALUE));
+			break;
+		case jh::eBGType::PARRARELL:
+			mSpeed = 0.2f;
+			pTransform->SetPosition(Vector3(prePos.x, prePos.y, BATTLE_PARRALL_BG_Z_VALUE));
+			break;
+		default:
+			assert(false);
+			break;
+		}
 	}
 	void BattleBGScript::Update()
 	{

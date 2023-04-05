@@ -31,6 +31,9 @@ namespace jh
 	void SpriteRenderer::clearPipeline()
 	{
 		mpMaterial->ClearPipeline();
+
+
+		// ANIMATOR PART
 		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		if (pAnimator != nullptr) { pAnimator->ClearPipeline(); }
 	}
@@ -42,6 +45,8 @@ namespace jh
 		pTranform->SetPipeline();
 		mpMaterial->SetPipeline();
 		mpMesh->SetPipeline();
+
+		// ANIMATOR PART
 		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		if (pAnimator != nullptr)	{pAnimator->SetPipeline();}
 	}

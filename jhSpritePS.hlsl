@@ -18,6 +18,10 @@ float4 main(VertexOut vIn) : SV_TARGET
             discard;
         }
         color = AtlasTexture.Sample(PointSampler, uv);
+        if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
+        {
+            discard;
+        }
     }
     else
     {

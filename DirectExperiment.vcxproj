@@ -136,6 +136,7 @@
     <ClInclude Include="jhAnimator.h" />
     <ClInclude Include="jhBattleBGImageObject.h" />
     <ClInclude Include="jhBattleBGScript.h" />
+    <ClInclude Include="jhBattleParrarellImageObject.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraManager.h" />
     <ClInclude Include="jhCameraScript.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="jhAnimator.cpp" />
     <ClCompile Include="jhBattleBGImageObject.cpp" />
     <ClCompile Include="jhBattleBGScript.cpp" />
+    <ClCompile Include="jhBattleParrarellImageObject.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraManager.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />

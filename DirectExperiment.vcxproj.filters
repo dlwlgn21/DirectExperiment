@@ -267,6 +267,9 @@
     <ClInclude Include="jhBattleBGScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
+    <ClInclude Include="jhBattleParrarellImageObject.h">
+      <Filter>GameObject\Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="jhBattleBGScript.cpp">
       <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleParrarellImageObject.cpp">
+      <Filter>GameObject\Content</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

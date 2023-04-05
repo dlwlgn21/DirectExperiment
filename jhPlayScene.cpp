@@ -13,7 +13,7 @@
 #include "jhPlayer.h"
 #include "jhMonster.h"
 #include "jhBattleBGImageObject.h"
-
+#include "jhBattleParrarellImageObject.h"
 
 using namespace jh::math;
 
@@ -33,7 +33,7 @@ namespace jh
 			GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
 			pCameraObject->SetName(L"MainCamera");
 			Camera* pCameraComponent = new Camera();
-			pCameraComponent->SetProjectionMode(eProjectionMode::PERSPECTIVE_MODE);
+			pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
 			pCameraObject->AddComponent(pCameraComponent);
 			CameraManager::GetInstance().SetCamera(pCameraComponent);
 			CameraScript* pCameraScript = new CameraScript();
@@ -44,7 +44,7 @@ namespace jh
 		{
 			Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 			pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
-			pPlayer->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 3.0f));
+			pPlayer->GetTransform()->SetScale(Vector3(7.0f, 7.0f, 1.0f));
 		}
 
 		// Monster
@@ -54,12 +54,20 @@ namespace jh
 			pMonster->GetTransform()->SetScale(Vector3(3.0f, 3.0f, 4.0f));
 		}
 
+		// Parrarell
+		{
+			BattleParrarellImageObject* pBGPObject = Instantiate<BattleParrarellImageObject>(eLayerType::BACKGROUND);
+			pBGPObject->SetName(L"BGParrarelObject");
+			pBGPObject->GetTransform()->SetScale(Vector3(3.0f, 1.0f, 1.0f));
+		}
 		// BattleBG
 		{
-			//BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
-			//pBGObject->SetName(L"BGObject");
-			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
+			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
+			pBGObject->SetName(L"BGObject");
+			pBGObject->GetTransform()->SetScale(Vector3(2.0f, 1.0f, 1.0f));
+			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 7.0f, 10.0f));
 		}
+
 
 		Scene::Initialize();
 	}

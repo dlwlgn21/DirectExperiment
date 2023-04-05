@@ -4,10 +4,16 @@
 
 namespace jh
 {
+	enum class eBGType
+	{
+		NORMAL,
+		PARRARELL,
+		COUNT
+	};
 	class BattleBGScript final : public Script
 	{
 	public:
-		BattleBGScript();
+		BattleBGScript(const eBGType eType);
 		virtual ~BattleBGScript() = default;
 
 		void Initialize() override;
@@ -19,8 +25,9 @@ namespace jh
 		void wirteDataAtBuffer();
 		void setPipeline();
 	private:
-		const float					mSpeed;
-		jh::math::Vector2			mUVMove;
+		float					mSpeed;
+		jh::math::Vector2		mUVMove;
+		eBGType					meType;
 	};
 
 }

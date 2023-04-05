@@ -41,7 +41,7 @@ namespace jh
 	}
 	void BattleBGImageObject::setScript()
 	{
-		BattleBGScript* pScript = new BattleBGScript();
+		BattleBGScript* pScript = new BattleBGScript(eBGType::NORMAL);
 		this->AddScript(pScript);
 	}
 }
