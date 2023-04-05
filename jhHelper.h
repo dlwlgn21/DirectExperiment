@@ -4,7 +4,7 @@
 namespace jh
 {
 	template<typename T>
-	static T* Intantiate(const eLayerType eType)
+	static T* Instantiate(const eLayerType eType)
 	{
 		Scene* pCurrScene = SceneManager::GetInstance().GetCurrentScene();
 		assert(pCurrScene);

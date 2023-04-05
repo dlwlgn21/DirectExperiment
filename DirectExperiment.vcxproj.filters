@@ -124,6 +124,18 @@
     <Filter Include="Component\Script\CameraScript">
       <UniqueIdentifier>{029e8b48-f2c2-4c58-afed-a9729775cedb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Animation">
+      <UniqueIdentifier>{b7bce650-ea96-4fa0-a276-25b195c1885c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{1ed0b0cf-79a5-458c-9ec3-f4764d828afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content">
+      <UniqueIdentifier>{593a9077-7c30-469f-b2bc-f01496ec62d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimatedGameObject">
+      <UniqueIdentifier>{1b4ef4f6-b53d-4964-822a-fc9c7dfbc017}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -228,11 +240,32 @@
     <ClInclude Include="jhCamera.h">
       <Filter>Component\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="jhCameraManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="jhCameraScript.h">
       <Filter>Component\Script\CameraScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimation.h">
+      <Filter>Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCameraManager.h">
+      <Filter>Component\Camera\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayer.h">
+      <Filter>GameObject\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonster.h">
+      <Filter>GameObject\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimatedGameObject.h">
+      <Filter>GameObject\AnimatedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBattleBGImageObject.h">
+      <Filter>GameObject\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBattleBGScript.h">
+      <Filter>Component\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -323,11 +356,32 @@
     <ClCompile Include="jhCamera.cpp">
       <Filter>Component\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="jhCameraManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="jhCameraScript.cpp">
       <Filter>Component\Script\CameraScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimation.cpp">
+      <Filter>Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCameraManager.cpp">
+      <Filter>Component\Camera\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimator.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayer.cpp">
+      <Filter>GameObject\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonster.cpp">
+      <Filter>GameObject\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimatedGameObject.cpp">
+      <Filter>GameObject\AnimatedGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleBGImageObject.cpp">
+      <Filter>GameObject\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleBGScript.cpp">
+      <Filter>Component\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,10 +398,16 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="jhPixelShader.hlsl">
+    <FxCompile Include="jhSpritePS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhSpriteVS.hlsl">
       <Filter>ShaderResource\VS</Filter>
     </FxCompile>
-    <FxCompile Include="jhVertexShader.hlsl">
+    <FxCompile Include="jhBackGroundVS.hlsl">
+      <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhBackGroundPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>
@@ -355,6 +415,9 @@
     <None Include="packages.config" />
     <None Include="jhMath.inl">
       <Filter>Common\Math</Filter>
+    </None>
+    <None Include="globals.hlsli">
+      <Filter>ShaderResource</Filter>
     </None>
   </ItemGroup>
 </Project>

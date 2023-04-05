@@ -10,7 +10,12 @@
 #include "jhCameraManager.h"
 #include "jhCameraScript.h"
 #include "jhTransform.h"
+#include "jhPlayer.h"
+#include "jhMonster.h"
+#include "jhBattleBGImageObject.h"
 
+
+using namespace jh::math;
 
 namespace jh
 {
@@ -25,45 +30,35 @@ namespace jh
 	{
 		// CAMERA
 		{
-			GameObject* pCameraObject = Intantiate<GameObject>(eLayerType::CAMERA);
+			GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
 			pCameraObject->SetName(L"MainCamera");
 			Camera* pCameraComponent = new Camera();
-			pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
+			pCameraComponent->SetProjectionMode(eProjectionMode::PERSPECTIVE_MODE);
 			pCameraObject->AddComponent(pCameraComponent);
 			CameraManager::GetInstance().SetCamera(pCameraComponent);
 			CameraScript* pCameraScript = new CameraScript();
 			pCameraObject->AddComponent(pCameraScript);
 		}
 
-
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::LOGO_MATERIAL_KEY);
-
-		// PLAYER
+		// Player
 		{
-			GameObject* pPlayer = Intantiate<GameObject>(eLayerType::PLAYER);
-			pPlayer->SetName(L"PlayerObject");
-			pPlayer->GetTransform()->SetPosition(jh::math::Vector3(-1.0f, 0.0f, 1.0f));
-			assert(pMesh != nullptr);
-			assert(pMaterial != nullptr);
-			SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
-			pPlayer->AddComponent(pSpriteRenderer);
-			PlayerScript* pScript = new PlayerScript();
-			pPlayer->AddScript(pScript);
+			Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
+			pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
+			pPlayer->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 3.0f));
 		}
 
-
-		// MONSTER
+		// Monster
 		{
-			GameObject* pMonster = Intantiate<GameObject>(eLayerType::MONSTER);
-			pMonster->SetName(L"MonsterObject");
-			pMonster->GetTransform()->SetPosition(jh::math::Vector3(1.0f, 0.0f, 2.0f));
+			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER);
+			pMonster->GetTransform()->SetPosition(Vector3(1.0f, 0.0f, 4.0f));
+			pMonster->GetTransform()->SetScale(Vector3(3.0f, 3.0f, 4.0f));
+		}
 
-			SpriteRenderer* pMonsterSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
-			pMonster->AddComponent(pMonsterSpriteRenderer);
-
-			MonsterScript* pMonsterScript = new MonsterScript();
-			pMonster->AddScript(pMonsterScript);
+		// BattleBG
+		{
+			//BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
+			//pBGObject->SetName(L"BGObject");
+			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
 		}
 
 		Scene::Initialize();

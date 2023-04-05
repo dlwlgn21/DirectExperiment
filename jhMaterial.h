@@ -12,7 +12,7 @@ namespace jh
 		virtual ~Material() = default;
 
 		void SetPipeline();
-		void Clear();
+		void ClearPipeline();
 	private:
 		void setPipeline();
 	private:

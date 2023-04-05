@@ -56,14 +56,7 @@ namespace jh
 
 	void Layer::Release()
 	{
-		for (auto* pGameObject : mGameObjects)
-		{
-			if (pGameObject != nullptr)
-			{
-				delete pGameObject;
-			}
-		}
-		mGameObjects.clear();
+
 	}
 	void Layer::Destroy()
 	{

@@ -1,11 +1,19 @@
 #pragma once
 namespace jh
 {
+	enum class eAnimatedObjectLookDirection
+	{
+		LEFT,
+		RIGHT,
+		COUNT
+	};
+
 	enum class eComponentType
 	{
 		TRANSFORM,
 		CAMERA,
 		RENDERER,
+		ANIMATOR,
 		SCRIPT,
 		COUNT
 	};
@@ -46,6 +54,7 @@ namespace jh
 		MATERIAL,
 		GRID,
 		ANIMATION,
+		UV_TRANSLATION,
 		COUNT,
 	};
 }

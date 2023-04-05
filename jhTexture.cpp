@@ -85,6 +85,7 @@ namespace jh
 		);
 		if (FAILED(hr)) {assert(false); return S_FALSE;}
 		mcpSRV->GetResource(reinterpret_cast<ID3D11Resource**>(mcpTexture.GetAddressOf()));
+		mcpTexture->GetDesc(&mTextureDesc);
 		return S_OK;
 	}
 }

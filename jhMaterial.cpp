@@ -26,7 +26,7 @@ namespace jh
 		setPipeline();
 	}
 
-	void Material::Clear()
+	void Material::ClearPipeline()
 	{
 		assert(mpTexture != nullptr);
 		mpTexture->ClearSRV(DEFAULT_TEXTURE_SLOT_NUMBER_0);

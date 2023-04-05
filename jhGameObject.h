@@ -24,7 +24,7 @@ namespace jh
 
 		Transform* GetTransform() const { return mpTransform; }
 
-	private:
+	protected:
 		std::vector<Component*>							mComponents;
 		std::vector<Script*>							mScripts;
 		Transform*										mpTransform;

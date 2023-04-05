@@ -19,7 +19,21 @@ namespace jh
 	}
 	GameObject::~GameObject()
 	{
+		for (auto* pCom : mComponents)
+		{
+			if (pCom != nullptr)
+			{
+				delete pCom;
+			}
+		}
 		mComponents.clear();
+		for (auto* pScript : mScripts)
+		{
+			if (pScript != nullptr)
+			{
+				delete pScript;
+			}
+		}
 		mScripts.clear();
 	}
 	void GameObject::Initialize()

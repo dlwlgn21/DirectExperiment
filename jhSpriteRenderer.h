@@ -16,6 +16,8 @@ namespace jh
 		void SetPipeline() override;
 		void Render() override;
 
+	private:
+		void clearPipeline();
 	};
 
 }

@@ -1,5 +1,6 @@
 #include "jhSpriteRenderer.h"
 #include "jhTransform.h"
+#include "jhAnimator.h"
 
 namespace jh
 {
@@ -24,7 +25,14 @@ namespace jh
 		pTranform->WriteMatrixDataAtContantBuffer();
 		SetPipeline();
 		mpMesh->Render();
-		mpMaterial->Clear();
+		clearPipeline();
+	}
+
+	void SpriteRenderer::clearPipeline()
+	{
+		mpMaterial->ClearPipeline();
+		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		if (pAnimator != nullptr) { pAnimator->ClearPipeline(); }
 	}
 
 	void SpriteRenderer::SetPipeline()
@@ -34,6 +42,8 @@ namespace jh
 		pTranform->SetPipeline();
 		mpMaterial->SetPipeline();
 		mpMesh->SetPipeline();
+		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		if (pAnimator != nullptr)	{pAnimator->SetPipeline();}
 	}
 
 }

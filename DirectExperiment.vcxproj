@@ -131,6 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhAnimatedGameObject.h" />
+    <ClInclude Include="jhAnimation.h" />
+    <ClInclude Include="jhAnimator.h" />
+    <ClInclude Include="jhBattleBGImageObject.h" />
+    <ClInclude Include="jhBattleBGScript.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraManager.h" />
     <ClInclude Include="jhCameraScript.h" />
@@ -150,7 +155,9 @@
     <ClInclude Include="jhMaterial.h" />
     <ClInclude Include="jhMath.h" />
     <ClInclude Include="jhMesh.h" />
+    <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMonsterScript.h" />
+    <ClInclude Include="jhPlayer.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhRenderer.h" />
@@ -169,6 +176,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhAnimatedGameObject.cpp" />
+    <ClCompile Include="jhAnimation.cpp" />
+    <ClCompile Include="jhAnimator.cpp" />
+    <ClCompile Include="jhBattleBGImageObject.cpp" />
+    <ClCompile Include="jhBattleBGScript.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraManager.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
@@ -181,7 +193,9 @@
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhMaterial.cpp" />
     <ClCompile Include="jhMath.cpp" />
+    <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
+    <ClCompile Include="jhPlayer.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhRenderer.cpp" />
@@ -209,13 +223,25 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="jhPixelShader.hlsl">
+    <FxCompile Include="jhBackGroundVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhBackGroundPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="jhVertexShader.hlsl">
+    <FxCompile Include="jhSpritePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhSpriteVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -223,6 +249,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="globals.hlsli" />
     <None Include="jhMath.inl" />
     <None Include="packages.config" />
   </ItemGroup>

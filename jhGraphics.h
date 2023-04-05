@@ -9,6 +9,9 @@
 #include "jhMath.h"
 
 static constexpr const UINT TRANSFORM_CB_SLOT_NUMBER = 0;
+static constexpr const UINT ANINATION_CB_SLOT_NUMBER = 1;
+static constexpr const UINT BG_UV_TRANSLATION_CB_SLOT_NUMBER = 2;
+static constexpr const UINT SIMD_ALIGN_SIZE = 16;
 
 namespace jh
 {
@@ -18,17 +21,43 @@ namespace jh
 		jh::math::Vector2 UV;
 	};
 
-	struct TransformBuffer
+	struct alignas(SIMD_ALIGN_SIZE) TransformBuffer
 	{
 		jh::math::Matrix WorldMat;
 		jh::math::Matrix ViewMat;
 		jh::math::Matrix ProjectionMat;
 	};
 
+	struct alignas(SIMD_ALIGN_SIZE) AnimationBuffer
+	{
+		jh::math::Vector2				LeftTop;
+		jh::math::Vector2				Size;
+		jh::math::Vector2				Offset;
+		jh::math::Vector2				AtlasImageSize;
+
+		UINT							AnimationType;
+		UINT							IsFlip;
+	};
+
+
+	struct alignas(SIMD_ALIGN_SIZE) UVTranslatationBuffer
+	{
+		jh::math::Vector4			    UVPosition;
+	};
+
+
 	enum class eShaderStage
 	{
 		VS,
 		PS,
+		COUNT
+	};
+
+	enum class eAnimatnionType
+	{
+		NO_ANIMATION,
+		SECOND_DIMENTION,
+		THIRD_DIMENTION,
 		COUNT
 	};
 }

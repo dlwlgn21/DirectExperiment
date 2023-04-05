@@ -3,6 +3,7 @@
 #include "jhTime.h"
 #include "jhGameObject.h"
 #include "jhTransform.h"
+#include "jhAnimator.h"
 
 using namespace jh::math;
 
@@ -10,61 +11,62 @@ namespace jh
 {
 	MonsterScript::MonsterScript()
 		: Script()
+		, mpTranform(nullptr)
+		, mpAnimator(nullptr)
+		, mSpeed(1.0f)
+		, mAnimIdleKey(L"MonsterIdle")
+		, meLookDir(eAnimatedObjectLookDirection::RIGHT)
 	{
 	}
-	MonsterScript::~MonsterScript()
-	{
-	}
+
 	void MonsterScript::Initialize()
 	{
+		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		assert(mpAnimator != nullptr);
+		mpAnimator->GetStartEvent(mAnimIdleKey) = std::bind(&MonsterScript::Start, this);
+		mpAnimator->GetCompleteEvent(mAnimIdleKey) = std::bind(&MonsterScript::Complete, this);
+		mpAnimator->GetEndEvent(mAnimIdleKey) = std::bind(&MonsterScript::End, this);
 	}
 	void MonsterScript::Update()
 	{
-		static const float SPEED = 1.0f;
-		Transform* pTransform = GetOwner()->GetTransform();
-		assert(pTransform != nullptr);
-		Vector3 moveVector = pTransform->GetPosition();
-		if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
-		{
-			moveVector.z += DirectX::XM_PI * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
-		{
-			moveVector.z -= DirectX::XM_PI * Time::DeltaTime();
-		}
+		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
+		assert(mpTranform != nullptr);
+		Vector3 pos = mpTranform->GetPosition();
+		mpAnimator->PlayAnimation(mAnimIdleKey, true);
 
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			moveVector.x += SPEED * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			moveVector.x -= SPEED * Time::DeltaTime();
-		}
 
 		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
 		{
-			moveVector.y -= SPEED * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			moveVector.y += SPEED * Time::DeltaTime();
+			pos.y -= mSpeed * Time::DeltaTime();
 		}
 
-		if (Input::GetKeyState(eKeyCode::N_1) == eKeyState::PRESSED)
+		if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
 		{
-			Time::SetScale(1.0f);
+			pos.y += mSpeed * Time::DeltaTime();
 		}
-		if (Input::GetKeyState(eKeyCode::N_2) == eKeyState::PRESSED)
+		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
-			Time::SetScale(2.0f);
+			pos.x -= mSpeed * Time::DeltaTime();
+			meLookDir = eAnimatedObjectLookDirection::RIGHT;
 		}
-		if (Input::GetKeyState(eKeyCode::N_3) == eKeyState::PRESSED)
+		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
-			Time::SetScale(3.0f);
+			pos.x += mSpeed * Time::DeltaTime();
+			meLookDir = eAnimatedObjectLookDirection::LEFT;
 		}
 
-		pTransform->SetPosition(moveVector);
+		assert(mpAnimator != nullptr);
+		if (meLookDir == eAnimatedObjectLookDirection::RIGHT)
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
+		else
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
+
+
+		mpTranform->SetPosition(pos);
 	}
 	void MonsterScript::FixedUpdate()
 	{
@@ -73,4 +75,15 @@ namespace jh
 	{
 	}
 
+	void MonsterScript::Start()
+	{
+	}
+
+	void MonsterScript::Complete()
+	{
+	}
+
+	void MonsterScript::End()
+	{
+	}
 }

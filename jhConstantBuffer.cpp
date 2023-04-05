@@ -1,6 +1,5 @@
 #include "jhConstantBuffer.h"
 
-
 namespace jh
 {
 	ConstantBuffer::ConstantBuffer(const eConstantBufferType eType)
@@ -21,7 +20,10 @@ namespace jh
 			assert(false);
 			break;
 		case eConstantBufferType::ANIMATION:
-			assert(false);
+			mBufferDesc.ByteWidth = sizeof(AnimationBuffer);
+			break;
+		case eConstantBufferType::UV_TRANSLATION:
+			mBufferDesc.ByteWidth = sizeof(UVTranslatationBuffer);
 			break;
 		default:
 			assert(false);
@@ -61,7 +63,12 @@ namespace jh
 			assert(false);
 			break;
 		case eConstantBufferType::ANIMATION:
-			assert(false);
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(ANINATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(ANINATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			break;
+		case eConstantBufferType::UV_TRANSLATION:
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 		default:
 			assert(false);

@@ -13,6 +13,9 @@ namespace jh
 		HRESULT Load(const std::wstring& filePath) override;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() const { return mcpSRV; }
 
+		UINT GetHeight() const { return static_cast<UINT>(mTextureDesc.Height); }
+		UINT GetWidth() const { return static_cast<UINT>(mTextureDesc.Width); }
+
 		void SetPipeline(const UINT textureSlotNumber);
 		void ClearSRV(const UINT textureSlotNumber);
 

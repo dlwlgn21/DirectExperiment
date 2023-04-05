@@ -11,7 +11,7 @@ namespace jh
 	CameraScript::CameraScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(50.0f)
+		, mSpeed(80.0f)
 	{
 	}
 

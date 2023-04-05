@@ -23,16 +23,25 @@ namespace jh
 		void Initialize();
 		void Release();
 
-		ConstantBuffer* GetTransformCBOrNull() const { return mspTransformConstantBuffer.get(); }
+		ConstantBuffer* GetTransformCBOrNull() const		{ return mspTransformConstantBuffer.get(); }
+		ConstantBuffer* GetAnimationCBOrNull() const		{ return mspAnimationConstantBuffer.get(); }
+		ConstantBuffer* GetUVTranslationCBOrNull() const	{ return mspUVTranslationConstantBuffer.get(); }
+
 
 	public:
 		static const std::wstring RECT_MESH_KEY;
+		static const std::wstring BATTLE_BG_MESH_KEY;
 
 		static const std::wstring SPRITE_SHADER_KEY;
+		static const std::wstring BATTLE_BG_SHADER_KEY;
 
-		static const std::wstring LOGO_TEXTURE_KEY;
+		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
+		static const std::wstring MONSTER_TEXTURE_ATLAS_KEY;
+		static const std::wstring BATTLE_BG_TEXTURE_KEY;
 
-		static const std::wstring LOGO_MATERIAL_KEY;
+		static const std::wstring PLAYER_MATERIAL_KEY;
+		static const std::wstring MONSTER_MATERIAL_KEY;
+		static const std::wstring BATTLE_BG_MATERIAL_KEY;
 
 
 	private:
@@ -43,12 +52,15 @@ namespace jh
 		void createSamplerState();
 		void createConstantBuffer();
 
+		void setSamplerState();
 
 	private:
 		ResourceMaker()
 			: mVertices{}
 			, mcpPointSampler()
 			, mspTransformConstantBuffer()
+			, mspAnimationConstantBuffer()
+			, mspUVTranslationConstantBuffer()
 		{
 
 		}
@@ -58,6 +70,8 @@ namespace jh
 		Vertex											mVertices[RECT_VERTEX_COUNT];
 		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
 		std::unique_ptr<ConstantBuffer>					mspTransformConstantBuffer;
+		std::unique_ptr<ConstantBuffer>					mspAnimationConstantBuffer;
+		std::unique_ptr<ConstantBuffer>					mspUVTranslationConstantBuffer;
 	};
 }
 

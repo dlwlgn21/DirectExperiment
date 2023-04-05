@@ -109,9 +109,9 @@ namespace jh
 		hr = D3DCompileFromFile(
 			VSFileName.c_str(),
 			0,
-			0,
+			D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			"main",
-			"vs_4_0_level_9_3",
+			"vs_5_0",
 			0,
 			0,
 			mcpVSBlob.GetAddressOf(),
@@ -140,9 +140,9 @@ namespace jh
 		hr = D3DCompileFromFile(
 			PSFileName.c_str(),
 			0,
-			0,
+			D3D_COMPILE_STANDARD_FILE_INCLUDE,
 			"main",
-			"ps_4_0_level_9_3",
+			"ps_5_0",
 			0,
 			0,
 			mcpPSBlob.GetAddressOf(),
