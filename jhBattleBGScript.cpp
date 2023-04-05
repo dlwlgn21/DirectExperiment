@@ -7,7 +7,7 @@
 using namespace jh::math;
 
 static constexpr const float BATTLE_BG_Z_VALUE = 100.0f;
-static constexpr const float BATTLE_PARRALL_BG_Z_VALUE = 200.0f;
+static constexpr const float BATTLE_PARRALL_BG_Z_VALUE = 150.0f;
 
 namespace jh
 {
