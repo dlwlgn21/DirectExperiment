@@ -136,6 +136,9 @@
     <Filter Include="GameObject\AnimatedGameObject">
       <UniqueIdentifier>{1b4ef4f6-b53d-4964-822a-fc9c7dfbc017}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Weapons">
+      <UniqueIdentifier>{c7bfdb07-c4af-4f26-912e-ea6342500c8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -270,6 +273,9 @@
     <ClInclude Include="jhBattleParrarellImageObject.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
+    <ClInclude Include="jhSword.h">
+      <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -388,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="jhBattleParrarellImageObject.cpp">
       <Filter>GameObject\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSword.cpp">
+      <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

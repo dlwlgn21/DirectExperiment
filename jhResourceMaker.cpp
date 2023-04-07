@@ -28,6 +28,9 @@ namespace jh
 
 #pragma region TEXTURE
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
+	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
+
+
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ATLAS_KEY = L"MonsterTextureAtalsKey";
 	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
@@ -39,6 +42,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_MATERIAL_KEY = L"MonsterMaterialKey";
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
+	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
 
 
 #pragma endregion
@@ -116,6 +120,11 @@ namespace jh
 		Texture* pBattleParrarellBGTxtrue = new Texture();
 		pBattleParrarellBGTxtrue->Load(L"Flat Night 4 BG.png");
 		ResourcesManager::Insert<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY, pBattleParrarellBGTxtrue);
+
+
+		Texture* pWeaponSwordTxtrue = new Texture();
+		pWeaponSwordTxtrue->Load(L"SwordSwingTopDown.png");
+		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
 	}
 
 	void ResourceMaker::createMaterial()
@@ -129,8 +138,15 @@ namespace jh
 		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_BG_TEXTURE_KEY));
 		ResourcesManager::Insert<Material>(BATTLE_BG_MATERIAL_KEY, pBattleBGMaterial);
 
-		Material* pBattleParrarellBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY));
-		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY, pBattleParrarellBGMaterial);
+		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY, 
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), 
+				ResourcesManager::Find<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY))
+		);
+
+		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY, 
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), 
+				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
+		);
 	}
 
 	void ResourceMaker::createSamplerState()

@@ -1,5 +1,6 @@
 #pragma once
 #include "jhGameObject.h"
+#include "jhMath.h"
 
 namespace jh
 {
@@ -17,6 +18,7 @@ namespace jh
 	protected:
 		virtual void setAnimator() = 0;
 		virtual void setRenderer() = 0;
+		virtual void setScript() = 0;
 	};
 }
 

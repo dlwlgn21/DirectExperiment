@@ -14,6 +14,7 @@
 #include "jhMonster.h"
 #include "jhBattleBGImageObject.h"
 #include "jhBattleParrarellImageObject.h"
+#include "jhSword.h"
 
 using namespace jh::math;
 
@@ -68,6 +69,13 @@ namespace jh
 			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 7.0f, 10.0f));
 		}
 
+
+		// Sword
+		{
+			Sword* pSword = Instantiate<Sword>(eLayerType::PLAYER);
+			pSword->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
+			pSword->GetTransform()->SetScale(Vector3(3.0f, 3.0f, 1.0f));
+		}
 
 		Scene::Initialize();
 	}
