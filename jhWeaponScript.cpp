@@ -3,7 +3,7 @@
 #include "jhGameObject.h"
 #include "jhInput.h"
 #include "jhTime.h"
-#include "jhAnimator.h"
+#include "jhOnceAnimator.h"
 #include "jhAnimation.h"
 #include "jhPlayerScript.h"
 
@@ -21,7 +21,7 @@ namespace jh
 	}
 	void WeaponScript::Initialize()
 	{
-		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		mpAnimator = static_cast<OnceAnimator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
 		assert(mpPlayerScript != nullptr);
 		mpAnimator->GetStartEvent(mAnimTopDownSwingKey) = std::bind(&WeaponScript::Start, this);
@@ -37,6 +37,8 @@ namespace jh
 				mePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
 				if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 				{
+					mpAnimator->SetActive(true);
+					mpAnimator->SetPlaying(true);
 					meState = eWeaponState::ATTACKING;
 					switch (mePlayerLookDir)
 					{
@@ -68,6 +70,7 @@ namespace jh
 	void WeaponScript::Complete()
 	{
 		meState = eWeaponState::WAITING;
+		mpAnimator->SetComplete();
 	}
 	void WeaponScript::End()
 	{

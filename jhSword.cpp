@@ -2,14 +2,13 @@
 #include "jhResourceMaker.h"
 #include "jhTexture.h"
 #include "jhResourcesManager.h"
-#include "jhAnimator.h"
+#include "jhOnceAnimator.h"
 #include "jhMesh.h"
 #include "jhMaterial.h"
 #include "jhSpriteRenderer.h"
 #include "jhWeaponScript.h"
 #include "jhPlayerScript.h"
 #include "jhAnimation.h"
-
 using namespace jh::math;
 
 namespace jh
@@ -54,7 +53,7 @@ namespace jh
 		const float HEIGHT = 85.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
-		Animator* pAnimator = new Animator();
+		OnceAnimator* pAnimator = new OnceAnimator();
 		Animation* pAnimation = pAnimator->Create(
 			L"SwingTopDown",
 			pAtlas,

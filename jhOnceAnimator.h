@@ -22,7 +22,7 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-		void SetPlaying(bool isPlaying);
+		void SetPlaying(const bool isPlaying);
 		void SetComplete() { meState = eOnceAnimationState::COMPLETE; }
 	private:
 		eOnceAnimationState			meState;

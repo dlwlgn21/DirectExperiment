@@ -21,6 +21,16 @@ namespace jh
 
 	void SpriteRenderer::Render()
 	{
+		// Added Part At 2023-04-11
+		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		if (pAnimator != nullptr)
+		{
+			if (!pAnimator->IsActive())	
+			{
+				return;
+			}
+		}
+
 		Transform* pTranform = GetOwner()->GetTransform();
 		pTranform->WriteMatrixDataAtContantBuffer();
 		SetPipeline();
@@ -35,7 +45,14 @@ namespace jh
 
 		// ANIMATOR PART
 		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
-		if (pAnimator != nullptr) { pAnimator->ClearPipeline(); }
+		if (pAnimator != nullptr) 
+		{ 
+			// Added Part At 2023-04-11
+			if (pAnimator->IsActive())	
+			{
+				pAnimator->ClearPipeline(); 
+			}
+		}
 	}
 
 	void SpriteRenderer::SetPipeline()
@@ -48,7 +65,14 @@ namespace jh
 
 		// ANIMATOR PART
 		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
-		if (pAnimator != nullptr)	{pAnimator->SetPipeline();}
+		if (pAnimator != nullptr)
+		{
+			// Added Part At 2023-04-11
+			if (pAnimator->IsActive())
+			{
+				pAnimator->SetPipeline();
+			}
+		}
 	}
 
 }

@@ -10,6 +10,7 @@ namespace jh
 		: Component(eComponentType::ANIMATOR)
 		, mpCurrAnimatingAnimation(nullptr)
 		, mbIsAnimationLooping(false)
+		, mbIsActive(true)
 	{
 		mAnimationMap.reserve(RESEVE_SIZE);
 		mEventsMap.reserve(RESEVE_SIZE);

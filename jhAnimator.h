@@ -70,12 +70,16 @@ namespace jh
 		std::function<void()>& GetEndEvent(const std::wstring& key);
 
 		void SetCurrAnimationHorizontalFlip(const bool isFlip);
+		void SetActive(const bool isActive) { mbIsActive = isActive; }
+
+		bool IsActive() const { return mbIsActive; }
 
 	protected:
 		std::unordered_map<std::wstring, Animation*>	mAnimationMap;
 		std::unordered_map<std::wstring, Events*>		mEventsMap;
 		Animation*										mpCurrAnimatingAnimation;
 		bool											mbIsAnimationLooping;
+		bool											mbIsActive;
 	};
 }
 

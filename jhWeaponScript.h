@@ -6,7 +6,7 @@
 namespace jh
 {
 	class Transform;
-	class Animator;
+	class OnceAnimator;
 	class PlayerScript;
 
 	enum class eWeaponState
@@ -32,7 +32,7 @@ namespace jh
 		void End();
 
 	private:
-		Animator*						mpAnimator;
+		OnceAnimator*					mpAnimator;
 		PlayerScript*					mpPlayerScript;
 		const std::wstring				mAnimTopDownSwingKey;
 		eAnimatedObjectLookDirection    mePlayerLookDir;

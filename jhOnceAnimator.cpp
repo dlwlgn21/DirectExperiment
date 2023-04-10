@@ -7,6 +7,7 @@ namespace jh
 		: Animator()
 		, meState(eOnceAnimationState::WAIT)
 	{
+		mbIsActive = false;
 	}
 	void OnceAnimator::Initialize()
 	{
@@ -23,6 +24,7 @@ namespace jh
 			break;
 		case eOnceAnimationState::COMPLETE:
 			meState = eOnceAnimationState::WAIT;
+			mbIsActive = false;
 			break;
 		default:
 			assert(false);
@@ -45,7 +47,7 @@ namespace jh
 		}
 		Animator::Render();
 	}
-	void OnceAnimator::SetPlaying(bool isPlaying)
+	void OnceAnimator::SetPlaying(const bool isPlaying)
 	{
 		if (isPlaying)	{meState = eOnceAnimationState::PLAYING;}
 		else            {meState = eOnceAnimationState::WAIT;}
