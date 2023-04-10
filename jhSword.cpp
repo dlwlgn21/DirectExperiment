@@ -6,6 +6,9 @@
 #include "jhMesh.h"
 #include "jhMaterial.h"
 #include "jhSpriteRenderer.h"
+#include "jhWeaponScript.h"
+#include "jhPlayerScript.h"
+#include "jhAnimation.h"
 
 using namespace jh::math;
 
@@ -13,10 +16,10 @@ namespace jh
 {
 	Sword::Sword()
 		: AnimatedGameObject()
+		, mpPlayerScript(nullptr)
 	{
 		setAnimator();
 		setRenderer();
-		setScript();
 	}
 
 	void Sword::Initialize()
@@ -36,6 +39,13 @@ namespace jh
 		AnimatedGameObject::Render();
 	}
 
+	void Sword::SetScript(PlayerScript* pPlayerScript)
+	{
+		assert(pPlayerScript != nullptr);
+		mpPlayerScript = pPlayerScript;
+		setScript();
+	}
+
 	void Sword::setAnimator()
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::WEAPON_SWORD_TEXTURE_KEY);
@@ -45,7 +55,7 @@ namespace jh
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
 		Animator* pAnimator = new Animator();
-		pAnimator->Create(
+		Animation* pAnimation = pAnimator->Create(
 			L"SwingTopDown",
 			pAtlas,
 			Vector2::Zero,
@@ -56,7 +66,7 @@ namespace jh
 			100
 		);
 		this->AddComponent(pAnimator);
-		pAnimator->PlayAnimation(L"SwingTopDown", true);
+		pAnimator->SetCurrentAnimation(pAnimation);
 	}
 	void Sword::setRenderer()
 	{
@@ -66,8 +76,12 @@ namespace jh
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
 		this->AddComponent(pSpriteRenderer);
+
 	}
 	void Sword::setScript()
 	{
+		assert(mpPlayerScript != nullptr);
+		WeaponScript* pScript = new WeaponScript(mpPlayerScript);
+		this->AddScript(pScript);
 	}
 }

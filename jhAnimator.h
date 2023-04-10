@@ -8,7 +8,7 @@ namespace jh
 {
 	class Texture;
 	class Animation;
-	class Animator final : public Component
+	class Animator : public Component
 	{
 	public:
 		struct Events
@@ -40,12 +40,12 @@ namespace jh
 		Animator();
 		virtual ~Animator();
 
-		void Initialize() override;
-		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
+		virtual void Initialize() override;
+		virtual void Update() override;
+		virtual void FixedUpdate() override;
+		virtual void Render() override;
 
-		void Create(
+		Animation* Create(
 			const std::wstring& animKey,
 			Texture* pAtalsImage,
 			const jh::math::Vector2 leftTop,
@@ -55,7 +55,9 @@ namespace jh
 			const float duration,
 			const float magnification
 		);
+		void SetCurrentAnimation(Animation* pAnimation) { assert(pAnimation != nullptr); mpCurrAnimatingAnimation = pAnimation; }
 		void PlayAnimation(const std::wstring& key, bool bIsLooping);
+		void PlayAnimationWithReset(const std::wstring& key, bool bIsLooping);
 		void SetPipeline();
 		void ClearPipeline();
 
@@ -69,10 +71,10 @@ namespace jh
 
 		void SetCurrAnimationHorizontalFlip(const bool isFlip);
 
-	private:
+	protected:
 		std::unordered_map<std::wstring, Animation*>	mAnimationMap;
 		std::unordered_map<std::wstring, Events*>		mEventsMap;
-		Animation* mpCurrAnimatingAnimation;
+		Animation*										mpCurrAnimatingAnimation;
 		bool											mbIsAnimationLooping;
 	};
 }

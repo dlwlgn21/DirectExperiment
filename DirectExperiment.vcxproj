@@ -158,6 +158,7 @@
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMonsterScript.h" />
+    <ClInclude Include="jhOnceAnimator.h" />
     <ClInclude Include="jhPlayer.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayScene.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="jhTransform.h" />
+    <ClInclude Include="jhWeaponScript.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
@@ -198,6 +200,7 @@
     <ClCompile Include="jhMath.cpp" />
     <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
+    <ClCompile Include="jhOnceAnimator.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
@@ -210,6 +213,7 @@
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhSword.cpp" />
     <ClCompile Include="jhTransform.cpp" />
+    <ClCompile Include="jhWeaponScript.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
     <ClCompile Include="jhInput.cpp" />

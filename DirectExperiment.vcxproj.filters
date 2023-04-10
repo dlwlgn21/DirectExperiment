@@ -139,6 +139,24 @@
     <Filter Include="GameObject\AnimatedGameObject\Weapons">
       <UniqueIdentifier>{c7bfdb07-c4af-4f26-912e-ea6342500c8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\Player">
+      <UniqueIdentifier>{bc0cbd53-47f2-4cf1-8187-bc5c4c83aaf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Monster">
+      <UniqueIdentifier>{73f810c6-a518-41f2-a3d5-ef2206a92745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Weapon">
+      <UniqueIdentifier>{d672c597-e3b2-4f05-a3f7-fd799ed97da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround">
+      <UniqueIdentifier>{cd5dbae0-afae-4dba-b85a-461940cb1ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator\Base">
+      <UniqueIdentifier>{f46c0ea1-b0e2-4865-88ec-ab5156d8b486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator\OnceAnimator">
+      <UniqueIdentifier>{1f7ff125-e68d-43e6-8da3-cd6699a6af8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -216,17 +234,11 @@
     <ClInclude Include="jhScript.h">
       <Filter>Component\Script\Base</Filter>
     </ClInclude>
-    <ClInclude Include="jhPlayerScript.h">
-      <Filter>Component\Script</Filter>
-    </ClInclude>
     <ClInclude Include="jhResourceMaker.h">
       <Filter>Resource\Maker</Filter>
     </ClInclude>
     <ClInclude Include="jhHelper.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMonsterScript.h">
-      <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="jhTransform.h">
       <Filter>Component\Transform</Filter>
@@ -252,9 +264,6 @@
     <ClInclude Include="jhCameraManager.h">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClInclude>
-    <ClInclude Include="jhAnimator.h">
-      <Filter>Component\Animator</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayer.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
@@ -267,14 +276,29 @@
     <ClInclude Include="jhBattleBGImageObject.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
-    <ClInclude Include="jhBattleBGScript.h">
-      <Filter>Component\Script</Filter>
-    </ClInclude>
     <ClInclude Include="jhBattleParrarellImageObject.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
     <ClInclude Include="jhSword.h">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBattleBGScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerScript.h">
+      <Filter>Component\Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhWeaponScript.h">
+      <Filter>Component\Script\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterScript.h">
+      <Filter>Component\Script\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimator.h">
+      <Filter>Component\Animator\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhOnceAnimator.h">
+      <Filter>Component\Animator\OnceAnimator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,14 +365,8 @@
     <ClCompile Include="jhScript.cpp">
       <Filter>Component\Script\Base</Filter>
     </ClCompile>
-    <ClCompile Include="jhPlayerScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jhResourceMaker.cpp">
       <Filter>Resource\Maker</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMonsterScript.cpp">
-      <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="jhTransform.cpp">
       <Filter>Component\Transform</Filter>
@@ -374,9 +392,6 @@
     <ClCompile Include="jhCameraManager.cpp">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClCompile>
-    <ClCompile Include="jhAnimator.cpp">
-      <Filter>Component\Animator</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayer.cpp">
       <Filter>GameObject\Content</Filter>
     </ClCompile>
@@ -389,14 +404,29 @@
     <ClCompile Include="jhBattleBGImageObject.cpp">
       <Filter>GameObject\Content</Filter>
     </ClCompile>
-    <ClCompile Include="jhBattleBGScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jhBattleParrarellImageObject.cpp">
       <Filter>GameObject\Content</Filter>
     </ClCompile>
     <ClCompile Include="jhSword.cpp">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleBGScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerScript.cpp">
+      <Filter>Component\Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWeaponScript.cpp">
+      <Filter>Component\Script\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterScript.cpp">
+      <Filter>Component\Script\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimator.cpp">
+      <Filter>Component\Animator\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhOnceAnimator.cpp">
+      <Filter>Component\Animator\OnceAnimator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

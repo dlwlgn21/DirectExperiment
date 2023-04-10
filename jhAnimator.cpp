@@ -41,7 +41,7 @@ namespace jh
 	{
 		if (mpCurrAnimatingAnimation == nullptr)
 		{
-			assert(false);
+			//assert(false);
 			return;
 		}
 
@@ -71,7 +71,7 @@ namespace jh
 	{
 	}
 
-	void Animator::Create(const std::wstring& animKey, Texture* pAtalsImage, const jh::math::Vector2 leftTop, const jh::math::Vector2 seperatingSize, const jh::math::Vector2 offset, const UINT spriteCount, const float duration, const float magnification)
+	Animation* Animator::Create(const std::wstring& animKey, Texture* pAtalsImage, const jh::math::Vector2 leftTop, const jh::math::Vector2 seperatingSize, const jh::math::Vector2 offset, const UINT spriteCount, const float duration, const float magnification)
 	{
 		if (pAtalsImage == nullptr) {assert(false);}
 
@@ -83,6 +83,7 @@ namespace jh
 		mAnimationMap.insert(std::make_pair(animKey, pAnimation));
 		Events* pEvents = new Events();
 		mEventsMap.insert(std::make_pair(animKey, pEvents));
+		return pAnimation;
 	}
 
 	void Animator::PlayAnimation(const std::wstring& key, bool bIsLooping)
@@ -120,11 +121,47 @@ namespace jh
 		pEvents->StartEvent();
 	}
 
+	void Animator::PlayAnimationWithReset(const std::wstring& key, bool bIsLooping)
+	{
+		Animation* pPrevAnim = mpCurrAnimatingAnimation;
+		Events* pEvents = nullptr;
+
+		if (pPrevAnim != nullptr)
+		{
+			Events* pEvents = FindEventsOrNull(pPrevAnim->GetAnimationKey());
+			if (pEvents == nullptr)
+			{
+				return;
+			}
+		}
+		if (pEvents != nullptr)
+		{
+			pEvents->EndEvent();
+		}
+
+		mpCurrAnimatingAnimation = FindAnimationOrNull(key);
+		if (mpCurrAnimatingAnimation == nullptr)
+		{
+			assert(false); return;
+		}
+		mpCurrAnimatingAnimation->Reset();
+		mbIsAnimationLooping = bIsLooping;
+
+		pEvents = FindEventsOrNull(mpCurrAnimatingAnimation->GetAnimationKey());
+		if (pEvents == nullptr)
+		{
+			return;
+		}
+
+		pEvents->StartEvent();
+	}
+
 	void Animator::SetPipeline()
 	{
 		if (mpCurrAnimatingAnimation == nullptr)
 		{
-			assert(false);
+			//assert(false);
+			return;
 		}
 
 		mpCurrAnimatingAnimation->SetPipeline();
@@ -134,7 +171,8 @@ namespace jh
 	{
 		if (mpCurrAnimatingAnimation == nullptr)
 		{
-			assert(false);
+			//assert(false);
+			return;
 		}
 
 		mpCurrAnimatingAnimation->Clear();

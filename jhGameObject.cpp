@@ -126,4 +126,9 @@ namespace jh
 		}
 		return nullptr;
 	}
+	Script* GameObject::GetScriptOrNull()
+	{
+		if (mScripts.empty())	{	return nullptr;		}
+		else					{	return mScripts[0]; }
+	}
 }

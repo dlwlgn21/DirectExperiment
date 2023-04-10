@@ -3,6 +3,7 @@
 
 namespace jh
 {
+	class PlayerScript;
 	class Sword final : public AnimatedGameObject
 	{
 	public:
@@ -12,11 +13,15 @@ namespace jh
 		void Update() override;
 		void FixedUpdate() override;
 		void Render() override;
+		void SetScript(PlayerScript* pPlayerScript);
 
 	protected:
 		void setAnimator() override;
 		void setRenderer() override;
 		void setScript() override;
+	
+	private:
+		PlayerScript* mpPlayerScript;
 	};
 }
 

@@ -21,8 +21,8 @@ namespace jh
 		void AddScript(Script* pScript);
 
 		Component* GetComponentOrNull(const eComponentType eType);
-
 		Transform* GetTransform() const { return mpTransform; }
+		Script* GetScriptOrNull();
 
 	protected:
 		std::vector<Component*>							mComponents;

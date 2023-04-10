@@ -14,6 +14,7 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
+
 	private:
 		void setAnimator();
 		void setRenderer();

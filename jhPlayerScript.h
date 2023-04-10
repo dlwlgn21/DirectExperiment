@@ -24,6 +24,8 @@ namespace jh
 		void Complete();
 		void End();
 
+		eAnimatedObjectLookDirection GetPlayerLookDirection() const { return meLookDir; }
+
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
@@ -33,7 +35,7 @@ namespace jh
 		const std::wstring				mAnimLeftPunchKey;
 		const std::wstring				mAnimRightPunchKey;
 		bool							mbIsMoving;
-		bool							mbIsPunching;
+		bool							mbIsAttacking;
 		eAnimatedObjectLookDirection    meLookDir;
 	};
 }

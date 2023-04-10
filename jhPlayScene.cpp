@@ -72,8 +72,9 @@ namespace jh
 		// Sword
 		{
 			Sword* pSword = Instantiate<Sword>(eLayerType::PLAYER);
+			pSword->SetScript(static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 			pSword->GetTransform()->SetParent(pPlayer);
-			pSword->GetTransform()->SetPosition(Vector3(0.1f, 0.0f, -1.0f));
+			pSword->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -1.0f));
 			pSword->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		}
 

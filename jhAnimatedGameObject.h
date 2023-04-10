@@ -4,6 +4,7 @@
 
 namespace jh
 {
+	class Player;
 	class AnimatedGameObject : public GameObject
 	{
 	public:
@@ -19,6 +20,9 @@ namespace jh
 		virtual void setAnimator() = 0;
 		virtual void setRenderer() = 0;
 		virtual void setScript() = 0;
+
+	private:
+		
 	};
 }
 
