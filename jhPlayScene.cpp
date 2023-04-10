@@ -42,11 +42,10 @@ namespace jh
 		}
 
 		// Player
-		{
-			Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
-			pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
-			pPlayer->GetTransform()->SetScale(Vector3(7.0f, 7.0f, 1.0f));
-		}
+		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
+		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
+		pPlayer->GetTransform()->SetScale(Vector3(7.0f, 7.0f, 1.0f));
+
 
 		// Monster
 		{
@@ -73,8 +72,9 @@ namespace jh
 		// Sword
 		{
 			Sword* pSword = Instantiate<Sword>(eLayerType::PLAYER);
-			pSword->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
-			pSword->GetTransform()->SetScale(Vector3(3.0f, 3.0f, 1.0f));
+			pSword->GetTransform()->SetParent(pPlayer);
+			pSword->GetTransform()->SetPosition(Vector3(0.1f, 0.0f, -1.0f));
+			pSword->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		}
 
 		Scene::Initialize();

@@ -22,6 +22,7 @@ namespace jh
 		__forceinline void SetPosition(const jh::math::Vector3 pos)			{ mPosition = pos; }
 		__forceinline void SetRotation(const jh::math::Vector3 rotation)	{ mRotation = rotation; }
 		__forceinline void SetScale(const jh::math::Vector3 scale)			{ mScale = scale; }
+		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 
 		__forceinline jh::math::Vector3 GetPosition() const { return mPosition; }
 		__forceinline jh::math::Vector3 GetRotation() const { return mRotation; }
