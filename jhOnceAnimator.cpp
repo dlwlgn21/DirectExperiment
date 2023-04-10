@@ -31,10 +31,18 @@ namespace jh
 	}
 	void OnceAnimator::FixedUpdate()
 	{
+		if (meState == eOnceAnimationState::WAIT || meState == eOnceAnimationState::COMPLETE)
+		{
+			return;
+		}
 		Animator::FixedUpdate();
 	}
 	void OnceAnimator::Render()
 	{
+		if (meState == eOnceAnimationState::WAIT || meState == eOnceAnimationState::COMPLETE)
+		{
+			return;
+		}
 		Animator::Render();
 	}
 	void OnceAnimator::SetPlaying(bool isPlaying)
