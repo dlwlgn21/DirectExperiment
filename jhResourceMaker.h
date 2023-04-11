@@ -40,12 +40,14 @@ namespace jh
 		static const std::wstring BATTLE_BG_TEXTURE_KEY;
 		static const std::wstring BATTLE_PARRARELL_BG_TEXTURE_KEY;
 		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
+		static const std::wstring EFFECT_SWORD_TEXTURE_KEY;
 
 		static const std::wstring PLAYER_MATERIAL_KEY;
 		static const std::wstring MONSTER_MATERIAL_KEY;
 		static const std::wstring BATTLE_BG_MATERIAL_KEY;
 		static const std::wstring BATTLE_PARRARELL_BG_MATERIAL_KEY;
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
+		static const std::wstring EFFECT_SWORD_MATERIAL_KEY;
 
 
 	private:

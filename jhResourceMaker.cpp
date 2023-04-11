@@ -28,12 +28,16 @@ namespace jh
 
 #pragma region TEXTURE
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
-	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ATLAS_KEY = L"MonsterTextureAtalsKey";
 	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
+
+
+	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
+	const std::wstring ResourceMaker::EFFECT_SWORD_TEXTURE_KEY = L"EffectSwordTextureKey";
+
 
 #pragma endregion
 
@@ -43,6 +47,9 @@ namespace jh
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
 	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
+
+
+	const std::wstring ResourceMaker::EFFECT_SWORD_MATERIAL_KEY = L"EffectSwordMaterialKey";
 
 
 #pragma endregion
@@ -125,6 +132,10 @@ namespace jh
 		Texture* pWeaponSwordTxtrue = new Texture();
 		pWeaponSwordTxtrue->Load(L"SwordSwingTopDown.png");
 		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
+
+		Texture* pEffectSwordTxtrue = new Texture();
+		pEffectSwordTxtrue->Load(L"SwordEffect.png");
+		ResourcesManager::Insert<Texture>(EFFECT_SWORD_TEXTURE_KEY, pEffectSwordTxtrue);
 	}
 
 	void ResourceMaker::createMaterial()
@@ -146,6 +157,11 @@ namespace jh
 		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY, 
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), 
 				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
+		);
+
+		ResourcesManager::Insert<Material>(EFFECT_SWORD_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(EFFECT_SWORD_TEXTURE_KEY))
 		);
 	}
 

@@ -157,6 +157,15 @@
     <Filter Include="Component\Animator\OnceAnimator">
       <UniqueIdentifier>{1f7ff125-e68d-43e6-8da3-cd6699a6af8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Base">
+      <UniqueIdentifier>{ddf2f7af-cc1b-4c9f-895e-7cf0a2891f63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect">
+      <UniqueIdentifier>{30ed5a33-3d8f-4771-8cac-3a2105f81ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Effect">
+      <UniqueIdentifier>{9aa0e674-63a3-4ee2-88cc-27cf7b435c28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -270,9 +279,6 @@
     <ClInclude Include="jhMonster.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
-    <ClInclude Include="jhAnimatedGameObject.h">
-      <Filter>GameObject\AnimatedGameObject</Filter>
-    </ClInclude>
     <ClInclude Include="jhBattleBGImageObject.h">
       <Filter>GameObject\Content</Filter>
     </ClInclude>
@@ -299,6 +305,15 @@
     </ClInclude>
     <ClInclude Include="jhOnceAnimator.h">
       <Filter>Component\Animator\OnceAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimatedGameObject.h">
+      <Filter>GameObject\AnimatedGameObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerEffect.h">
+      <Filter>GameObject\AnimatedGameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="jhEffectScript.h">
+      <Filter>Component\Script\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +413,6 @@
     <ClCompile Include="jhMonster.cpp">
       <Filter>GameObject\Content</Filter>
     </ClCompile>
-    <ClCompile Include="jhAnimatedGameObject.cpp">
-      <Filter>GameObject\AnimatedGameObject</Filter>
-    </ClCompile>
     <ClCompile Include="jhBattleBGImageObject.cpp">
       <Filter>GameObject\Content</Filter>
     </ClCompile>
@@ -427,6 +439,15 @@
     </ClCompile>
     <ClCompile Include="jhOnceAnimator.cpp">
       <Filter>Component\Animator\OnceAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimatedGameObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerEffect.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="jhEffectScript.cpp">
+      <Filter>Component\Script\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

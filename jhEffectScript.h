@@ -2,6 +2,7 @@
 #include "jhScript.h"
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
+#include "jhWeaponScript.h"
 
 
 namespace jh
@@ -10,18 +11,11 @@ namespace jh
 	class OnceAnimator;
 	class PlayerScript;
 
-	enum class eWeaponState
-	{
-		WAITING,
-		ATTACKING,
-		COUNT
-	};
-
-	class WeaponScript : public Script
+	class EffectScript : public Script
 	{
 	public:
-		WeaponScript(PlayerScript* pPlayer);
-		virtual ~WeaponScript() = default;
+		EffectScript(PlayerScript* pPlayer);
+		virtual ~EffectScript() = default;
 
 		void Initialize() override;
 		void Update() override;
@@ -35,7 +29,7 @@ namespace jh
 	private:
 		OnceAnimator*					mpAnimator;
 		PlayerScript*					mpPlayerScript;
-		const std::wstring				mAnimTopDownSwingKey;
+		const std::wstring				mAinmSwingEffectKey;
 		eAnimatedObjectLookDirection    mePlayerLookDir;
 		eWeaponState					meState;
 	};
