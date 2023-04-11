@@ -16,8 +16,7 @@ namespace jh
 		, mSpeed(3.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
-		, mAnimLeftPunchKey(L"PlayerLeftPunch")
-		, mAnimRightPunchKey(L"PlayerRightPunch")
+		, mAnimWeaponSwingKey(L"PlayerWeaponSwing")
 		, mpAnimator(nullptr)
 		, mbIsMoving(false)
 		, mbIsAttacking(false)
@@ -106,14 +105,14 @@ PROCESSING_INPUT:
 
 		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 		{
-			mpAnimator->PlayAnimation(mAnimLeftPunchKey, true);
+			mpAnimator->PlayAnimation(mAnimWeaponSwingKey, true);
 			mbIsAttacking = true;
 		}
-		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
-		{
-			mpAnimator->PlayAnimation(mAnimRightPunchKey, true);
-			mbIsAttacking = true;
-		}
+		//else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
+		//{
+		//	mpAnimator->PlayAnimation(mAnimRightPunchKey, true);
+		//	mbIsAttacking = true;
+		//}
 		mpTranform->SetPosition(pos);
 	}
 

@@ -65,23 +65,13 @@ namespace jh
 			100
 		);
 		pPlayerAnimator->Create(
-			L"PlayerLeftPunch",
+			L"PlayerWeaponSwing",
 			pAtlas,
-			Vector2(0.0f, HEIGHT * 12),
+			Vector2(0.0f, HEIGHT * 14),
 			animSize,
 			offset,
 			6,
-			0.05f,
-			100
-		);
-		pPlayerAnimator->Create(
-			L"PlayerRightPunch",
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 13),
-			animSize,
-			offset,
-			5,
-			0.05f,
+			0.07f,
 			100
 		);
 		this->AddComponent(pPlayerAnimator);
