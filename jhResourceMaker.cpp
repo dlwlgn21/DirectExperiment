@@ -134,7 +134,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
 
 		Texture* pEffectSwordTxtrue = new Texture();
-		pEffectSwordTxtrue->Load(L"SwordEffect.png");
+		pEffectSwordTxtrue->Load(L"SIDEPUFF.png");
 		ResourcesManager::Insert<Texture>(EFFECT_SWORD_TEXTURE_KEY, pEffectSwordTxtrue);
 	}
 
@@ -180,14 +180,14 @@ namespace jh
 		samplerDesc.MaxLOD = 0;
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivce()->CreateSamplerState(
 			&samplerDesc,
-			mcpPointSampler.ReleaseAndGetAddressOf()
+			mcpPointWrapSampler.ReleaseAndGetAddressOf()
 		);
 	}
 
 	void ResourceMaker::setSamplerState()
 	{
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_SAMPLER_SLOT_NUMBER, 1, mcpPointSampler.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
 	}
 
 	void ResourceMaker::createConstantBuffer()
@@ -203,7 +203,7 @@ namespace jh
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
-		mcpPointSampler.Reset();
+		mcpPointWrapSampler.Reset();
 	}
 
 }

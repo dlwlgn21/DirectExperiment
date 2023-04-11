@@ -50,8 +50,8 @@ namespace jh
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_SWORD_TEXTURE_KEY);
 		assert(pAtlas != nullptr);
-		const float WIDTH = 109.0f;
-		const float HEIGHT = 38.0f;
+		const float WIDTH = 41.0f;
+		const float HEIGHT = 32.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
@@ -61,7 +61,7 @@ namespace jh
 			Vector2::Zero,
 			animSize,
 			offset,
-			12,
+			8,
 			0.1f,
 			100
 		);

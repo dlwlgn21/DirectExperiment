@@ -3,7 +3,7 @@
 #include "jhConstantBuffer.h"
 
 constexpr const UINT RECT_VERTEX_COUNT = 4;
-constexpr const UINT POINT_SAMPLER_SLOT_NUMBER = 0;
+constexpr const UINT POINT_WRAP_SAMPLER_SLOT_NUMBER = 0;
 
 namespace jh
 {
@@ -63,7 +63,7 @@ namespace jh
 	private:
 		ResourceMaker()
 			: mVertices{}
-			, mcpPointSampler()
+			, mcpPointWrapSampler()
 			, mspTransformConstantBuffer()
 			, mspAnimationConstantBuffer()
 			, mspUVTranslationConstantBuffer()
@@ -74,7 +74,7 @@ namespace jh
 
 	private:
 		Vertex											mVertices[RECT_VERTEX_COUNT];
-		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointSampler;
+		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointWrapSampler;
 		std::unique_ptr<ConstantBuffer>					mspTransformConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspAnimationConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspUVTranslationConstantBuffer;
