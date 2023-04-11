@@ -62,7 +62,7 @@ namespace jh
 			animSize,
 			offset,
 			12,
-			0.05f,
+			0.1f,
 			100
 		);
 		this->AddComponent(pAnimator);

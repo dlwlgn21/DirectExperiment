@@ -15,6 +15,7 @@
 #include "jhBattleBGImageObject.h"
 #include "jhBattleParrarellImageObject.h"
 #include "jhSword.h"
+#include "jhPlayerEffect.h"
 
 using namespace jh::math;
 
@@ -77,6 +78,16 @@ namespace jh
 			pSword->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -1.0f));
 			pSword->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		}
+
+		// Effect
+		{
+			PlayerEffect* pEffect = Instantiate<PlayerEffect>(eLayerType::PLAYER);
+			pEffect->SetScript(static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
+			pEffect->GetTransform()->SetParent(pPlayer);
+			pEffect->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -2.0f));
+			pEffect->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+		}
+
 
 		Scene::Initialize();
 	}
