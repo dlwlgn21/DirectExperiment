@@ -89,10 +89,11 @@ namespace jh
 		const Vector2 UV_RIGHT_TOP(RIGHT_U, HIGH_V);
 		const Vector2 UV_LEFT_BOTTOM(LEFT_U, LOW_V);
 		const Vector2 UV_RIGHT_BOTTOM(RIGHT_U, LOW_V);
-		mVertices[0] = { {-0.5f * MAGNIFICATION_VALUE,		0.5f * MAGNIFICATION_VALUE,		0.0f},	UV_LEFT_TOP };
-		mVertices[1] = { {0.5f * MAGNIFICATION_VALUE,		0.5f * MAGNIFICATION_VALUE,		0.0f},	UV_RIGHT_TOP };
-		mVertices[2] = { {-0.5f * MAGNIFICATION_VALUE,		-0.5f * MAGNIFICATION_VALUE,	0.0f},	UV_LEFT_BOTTOM };
-		mVertices[3] = { {0.5f * MAGNIFICATION_VALUE,		-0.5f * MAGNIFICATION_VALUE,	0.0f},	UV_RIGHT_BOTTOM };
+		mVertices[0] = { {-0.5f,	0.5f,	0.0f},	UV_LEFT_TOP };
+		mVertices[1] = { {0.5f,		0.5f,	0.0f},	UV_RIGHT_TOP };
+		mVertices[2] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
+		mVertices[3] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
+
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
 		ResourcesManager::Insert<Mesh>(BATTLE_BG_MESH_KEY, pBattleBGMesh);
 #pragma endregion
@@ -121,11 +122,11 @@ namespace jh
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"Merge.png");
+		pBattleBGTexture->Load(L"Cataclysm_Street_2.png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
-		pBattleParrarellBGTxtrue->Load(L"Flat Night 4 BG.png");
+		pBattleParrarellBGTxtrue->Load(L"SkyMerge.png");
 		ResourcesManager::Insert<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY, pBattleParrarellBGTxtrue);
 
 
@@ -170,24 +171,42 @@ namespace jh
 		D3D11_SAMPLER_DESC samplerDesc;
 		ZeroMemory(&samplerDesc, sizeof(samplerDesc));
 		samplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
-		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
 		samplerDesc.MipLODBias = 0.0f;
 		samplerDesc.MaxAnisotropy = 1;
 		samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
 		samplerDesc.MinLOD = 0;
 		samplerDesc.MaxLOD = 0;
+		samplerDesc.BorderColor[0] = 0.0f;
+		samplerDesc.BorderColor[1] = 0.0f;
+		samplerDesc.BorderColor[2] = 0.0f;
+		samplerDesc.BorderColor[3] = 1.0f;
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivce()->CreateSamplerState(
 			&samplerDesc,
-			mcpPointWrapSampler.ReleaseAndGetAddressOf()
+			mcpPointBorderSampler.ReleaseAndGetAddressOf()
 		);
+
+		//samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		//samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		//samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+
+		//graphics::GraphicDeviceDX11::GetInstance().GetDeivce()->CreateSamplerState(
+		//	&samplerDesc,
+		//	mcpPointWrapSampler.ReleaseAndGetAddressOf()
+		//);
 	}
 
 	void ResourceMaker::setSamplerState()
 	{
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
+	
+		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+
+	
 	}
 
 	void ResourceMaker::createConstantBuffer()
@@ -203,7 +222,8 @@ namespace jh
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
-		mcpPointWrapSampler.Reset();
+		mcpPointBorderSampler.Reset();
+		//mcpPointWrapSampler.Reset();
 	}
 
 }

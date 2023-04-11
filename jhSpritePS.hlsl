@@ -17,7 +17,7 @@ float4 main(VertexOut vIn) : SV_TARGET
         {
             discard;
         }
-        color = AtlasTexture.Sample(PointSampler, uv);
+        color = AtlasTexture.Sample(PointBorderSampler, uv);
         if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
         {
             discard;
@@ -25,7 +25,7 @@ float4 main(VertexOut vIn) : SV_TARGET
     }
     else
     {
-        color = DefaultTexture.Sample(PointSampler, vIn.UV);
+        color = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
     }
 
     return color;

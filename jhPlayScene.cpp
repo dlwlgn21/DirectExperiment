@@ -35,7 +35,7 @@ namespace jh
 			GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
 			pCameraObject->SetName(L"MainCamera");
 			Camera* pCameraComponent = new Camera();
-			pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
+			pCameraComponent->SetProjectionMode(eProjectionMode::PERSPECTIVE_MODE);
 			pCameraObject->AddComponent(pCameraComponent);
 			CameraManager::GetInstance().SetCamera(pCameraComponent);
 			CameraScript* pCameraScript = new CameraScript();
@@ -45,7 +45,7 @@ namespace jh
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
-		pPlayer->GetTransform()->SetScale(Vector3(7.0f, 7.0f, 1.0f));
+		pPlayer->GetTransform()->SetScale(Vector3(8.0f, 8.0f, 1.0f));
 
 
 		// Monster
@@ -59,14 +59,15 @@ namespace jh
 		{
 			BattleParrarellImageObject* pBGPObject = Instantiate<BattleParrarellImageObject>(eLayerType::BACKGROUND);
 			pBGPObject->SetName(L"BGParrarelObject");
-			pBGPObject->GetTransform()->SetScale(Vector3(3.0f, 1.0f, 1.0f));
+			pBGPObject->GetTransform()->SetPosition(Vector3(0.0f, 5.0f, 11.0f));
+			pBGPObject->GetTransform()->SetScale(Vector3(36.0f, 9.0f, 9.0f));
 		}
 		// BattleBG
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"BGObject");
-			pBGObject->GetTransform()->SetScale(Vector3(2.0f, 1.0f, 1.0f));
-			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 7.0f, 10.0f));
+			pBGObject->GetTransform()->SetScale(Vector3(36.0f, 9.0f, 1.0f));
+			//pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
 		}
 
 

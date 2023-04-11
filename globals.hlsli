@@ -33,6 +33,9 @@ struct VertexOut
     float2 UV : TEXCOORD0;
 };
 
-SamplerState PointSampler : register(s0);
+SamplerState PointBorderSampler : register(s0);
+SamplerState PointWrapSampler : register(s1);
+
+
 Texture2D DefaultTexture : register(t0);
 Texture2D AtlasTexture : register(t12);

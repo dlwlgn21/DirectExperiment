@@ -14,16 +14,16 @@ namespace jh
 	{
 	}
 
+	void Material::SetPipeline()
+	{
+		setPipeline();
+	}
+
 	void Material::setPipeline()
 	{
 		assert(mpShader != nullptr && mpTexture != nullptr);
 		mpShader->SetPipeline();
 		mpTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER_0);
-	}
-
-	void Material::SetPipeline()
-	{
-		setPipeline();
 	}
 
 	void Material::ClearPipeline()
