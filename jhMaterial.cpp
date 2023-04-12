@@ -3,7 +3,6 @@
 #include "jhShader.h"
 
 
-static constexpr const UINT DEFAULT_TEXTURE_SLOT_NUMBER_0 = 0;
 
 namespace jh
 {
@@ -14,22 +13,22 @@ namespace jh
 	{
 	}
 
-	void Material::SetPipeline()
+	void Material::SetPipeline(const UINT textureSlotNumber)
 	{
-		setPipeline();
+		setPipeline(textureSlotNumber);
 	}
 
-	void Material::setPipeline()
+	void Material::setPipeline(const UINT textureSlotNumber)
 	{
 		assert(mpShader != nullptr && mpTexture != nullptr);
 		mpShader->SetPipeline();
-		mpTexture->SetPipeline(DEFAULT_TEXTURE_SLOT_NUMBER_0);
+		mpTexture->SetPipeline(textureSlotNumber);
 	}
 
-	void Material::ClearPipeline()
+	void Material::ClearPipeline(const UINT textureSlotNumber)
 	{
 		assert(mpTexture != nullptr);
-		mpTexture->ClearSRV(DEFAULT_TEXTURE_SLOT_NUMBER_0);
+		mpTexture->ClearSRV(textureSlotNumber);
 	}
 
 }

@@ -33,46 +33,47 @@ namespace jh
 
 		Transform* pTranform = GetOwner()->GetTransform();
 		pTranform->WriteMatrixDataAtContantBuffer();
-		SetPipeline();
+
+		setPipeline(pAnimator);
+
 		mpMesh->Render();
-		clearPipeline();
+
+		clearPipeline(pAnimator);
 	}
 
-	void SpriteRenderer::clearPipeline()
+	void SpriteRenderer::clearPipeline(Animator* pAnimator)
 	{
-		mpMaterial->ClearPipeline();
-
-
-		// ANIMATOR PART
-		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
-		if (pAnimator != nullptr) 
-		{ 
-			// Added Part At 2023-04-11
-			if (pAnimator->IsActive())	
-			{
-				pAnimator->ClearPipeline(); 
-			}
+		if (pAnimator != nullptr)
+		{
+			mpMaterial->ClearPipeline(Material::ATLAS_TEXTURE_SLOT_NUMBER_12);
+			if (pAnimator->IsActive())	{pAnimator->ClearPipeline();}
 		}
+		else
+		{
+			mpMaterial->ClearPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
+		}
+
 	}
 
-	void SpriteRenderer::SetPipeline()
+	void SpriteRenderer::setPipeline(Animator* pAnimator)
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
 		Transform* pTranform = GetOwner()->GetTransform();
 		pTranform->SetPipeline();
-		mpMaterial->SetPipeline();
-		mpMesh->SetPipeline();
 
-		// ANIMATOR PART
-		Animator* pAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		if (pAnimator != nullptr)
 		{
-			// Added Part At 2023-04-11
+			mpMaterial->SetPipeline(Material::ATLAS_TEXTURE_SLOT_NUMBER_12);
 			if (pAnimator->IsActive())
 			{
 				pAnimator->SetPipeline();
 			}
 		}
-	}
+		else
+		{
+			mpMaterial->SetPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
+		}
 
+		mpMesh->SetPipeline();
+	}
 }

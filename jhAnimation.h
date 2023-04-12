@@ -46,7 +46,7 @@ namespace jh
 		);
 
 		void SetPipeline();
-		void Clear();
+		void ClearPipeline();
 		void Reset();
 
 		__forceinline bool IsAnimComplete()   const	{ return mbIsAnimComplete; }

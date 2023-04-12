@@ -96,7 +96,7 @@ namespace jh
 		pAnimCB->WirteDataAtBuffer(pAnimCB->GetBuffer(), &animBuffer, sizeof(AnimationBuffer));
 		pAnimCB->SetPipeline();
 	}
-	void Animation::Clear()
+	void Animation::ClearPipeline()
 	{
 		clearTexureSRV();
 		clearCB();

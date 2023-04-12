@@ -26,7 +26,4 @@ namespace jh
 	void Renderer::Render()
 	{
 	}
-	void Renderer::SetPipeline()
-	{
-	}
 }

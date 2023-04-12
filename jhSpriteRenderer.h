@@ -4,6 +4,7 @@
 namespace jh
 {
 	class Transform;
+	class Animator;
 	class SpriteRenderer final : public Renderer
 	{
 	public:
@@ -13,11 +14,12 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
-		void SetPipeline() override;
 		void Render() override;
 
 	private:
-		void clearPipeline();
+		void setPipeline(Animator* pAnimator);
+		void clearPipeline(Animator* pAnimator);
+
 	};
 
 }

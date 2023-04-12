@@ -176,7 +176,7 @@ namespace jh
 			return;
 		}
 
-		mpCurrAnimatingAnimation->Clear();
+		mpCurrAnimatingAnimation->ClearPipeline();
 	}
 	Animation* Animator::FindAnimationOrNull(const std::wstring& key)
 	{

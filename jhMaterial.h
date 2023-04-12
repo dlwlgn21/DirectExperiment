@@ -11,10 +11,16 @@ namespace jh
 		Material(Shader* pShader, Texture* pTexture);
 		virtual ~Material() = default;
 
-		void SetPipeline();
-		void ClearPipeline();
+		void SetPipeline(const UINT textureSlotNumber);
+		void ClearPipeline(const UINT textureSlotNumber);
 	private:
-		void setPipeline();
+		void setPipeline(const UINT textureSlotNumber);
+
+
+	public:
+		static constexpr const UINT DEFAULT_TEXTURE_SLOT_NUMBER_0 = 0;
+		static constexpr const UINT ATLAS_TEXTURE_SLOT_NUMBER_12 = 12;
+
 	private:
 		Shader*		mpShader;
 		Texture*	mpTexture;

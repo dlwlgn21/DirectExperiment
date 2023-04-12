@@ -100,7 +100,7 @@ namespace jh
 		float height = (windowRect.bottom - windowRect.top) * mScale;
 
 		mAspectRatio = width / height;
-
+		
 		switch (meProjectionMode)
 		{
 		case jh::eProjectionMode::PERSPECTIVE_MODE:

@@ -35,7 +35,7 @@ namespace jh
 			GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
 			pCameraObject->SetName(L"MainCamera");
 			Camera* pCameraComponent = new Camera();
-			pCameraComponent->SetProjectionMode(eProjectionMode::PERSPECTIVE_MODE);
+			pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
 			pCameraObject->AddComponent(pCameraComponent);
 			CameraManager::GetInstance().SetCamera(pCameraComponent);
 			CameraScript* pCameraScript = new CameraScript();

@@ -17,11 +17,11 @@ namespace jh
 
 	void CameraScript::Initialize()
 	{
+		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
 	}
 
 	void CameraScript::Update()
 	{
-		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)

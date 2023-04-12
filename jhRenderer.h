@@ -22,8 +22,7 @@ namespace jh
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
-	protected:
-		virtual void SetPipeline();
+
 	protected:
 		const eComponentRendererType meRendererType;
 		Mesh* mpMesh;
