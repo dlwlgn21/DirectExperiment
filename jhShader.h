@@ -11,6 +11,7 @@ namespace jh
 
 		void SetPipeline();
 		void CreateShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
+		void SetPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology) { mPrimitiveTopology = topology; }
 
 	private:
 		void createResource();

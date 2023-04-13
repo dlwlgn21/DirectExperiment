@@ -22,7 +22,7 @@ namespace jh
 		void RenderFrame();
 		void Release();
 		
-
+		void Present();
 		bool IfFailedHR(HRESULT hr);
 		HWND GetHwnd() const { return mHwnd; }
 

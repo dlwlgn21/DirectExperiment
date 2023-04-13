@@ -16,6 +16,8 @@
 #include "jhBattleParrarellImageObject.h"
 #include "jhSword.h"
 #include "jhPlayerEffect.h"
+#include "jhCollider2D.h"
+#include "jhCollisionManager.h"
 
 using namespace jh::math;
 
@@ -46,13 +48,18 @@ namespace jh
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(8.0f, 8.0f, 1.0f));
-
+		Collider2D* pPlayerCollider = new Collider2D();
+		pPlayerCollider->SetSize(Vector2(0.1f, 0.25f));
+		pPlayer->AddComponent(pPlayerCollider);
 
 		// Monster
 		{
 			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER);
 			pMonster->GetTransform()->SetPosition(Vector3(1.0f, 0.0f, 4.0f));
 			pMonster->GetTransform()->SetScale(Vector3(3.0f, 3.0f, 4.0f));
+			Collider2D* pMonsterCollider = new Collider2D();
+			//pMonsterCollider->SetSize(Vector2(0.1f, 0.25f));
+			pMonster->AddComponent(pMonsterCollider);
 		}
 
 		// Parrarell
@@ -78,6 +85,9 @@ namespace jh
 			pSword->GetTransform()->SetParent(pPlayer);
 			pSword->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -1.0f));
 			pSword->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+
+			//Collider2D* pSwordCollider = new Collider2D();
+			//pSword->AddComponent(pSwordCollider);
 		}
 
 		// Effect
@@ -89,7 +99,7 @@ namespace jh
 			pEffect->GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		}
 
-
+		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		Scene::Initialize();
 	}
 

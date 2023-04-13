@@ -18,7 +18,7 @@ namespace jh::graphics
 
 		void InitializeDevice(const UINT screenWidth, const UINT screenHeight, HWND hwnd);
 		void ClearRenderTargetAndDepthStencilView();
-		void Render();
+		void Present();
 
 		void WriteDataAtBuffer(ID3D11Resource* pResource, const void* pData, const size_t dataSize);
 

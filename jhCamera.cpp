@@ -49,14 +49,14 @@ namespace jh
 			if (mLayerMasks[i])
 			{
 				Layer* pLayer = pCurrScene->GetLayer(static_cast<eLayerType>(i));
-				const std::vector<GameObject*>& layerGameObjects = pLayer->GetGameObjects();
+				const std::vector<GameObject*>& layerGameObjects = pLayer->GetAllGameObjects();
 
 				if (layerGameObjects.empty())	{continue;}
 
 				for (auto* pGameObject : layerGameObjects)
 				{
 					if (pGameObject == nullptr) {continue;}
-
+					if (pGameObject->GetState() != GameObject::eGameObjectState::ACTIVE) { continue; }
 					Renderer* pRenderer = static_cast<Renderer*>(pGameObject->GetComponentOrNull(eComponentType::RENDERER));
 					if (pRenderer != nullptr)	
 					{ 

@@ -19,7 +19,7 @@ namespace jh
 
 		void AddGameObject(GameObject* pGameObj);
 
-		const std::vector<GameObject*>& GetGameObjects() const { return mGameObjects; }
+		const std::vector<GameObject*>& GetAllGameObjects() const { return mGameObjects; }
 		std::vector<GameObject*> GetDontDestroyGameObjects();
 	private:
 		std::vector<GameObject*> mGameObjects;

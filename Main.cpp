@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "DirectExperiment.h"
 #include "jhD3DApp.h"
+#include "jhEditor.h"
 
 #define MAX_LOADSTRING 100
 
@@ -18,7 +19,7 @@ static constexpr UINT SCREEN_HEIGHT = 900;
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-jh::D3DApp& instance = jh::D3DApp::GetInstance();
+jh::D3DApp& app = jh::D3DApp::GetInstance();
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -29,7 +30,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    //_CrtSetBreakAlloc(426);
+
+    // TODO : MUST CHECK WHY THIS IS HAPPNING
+    //_CrtSetBreakAlloc(730);
     //_CrtSetBreakAlloc(2090);
     //_CrtSetBreakAlloc(2089);
     //_CrtSetBreakAlloc(2088);
@@ -39,7 +42,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_DIRECTEXPERIMENT, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
-    instance.Initialize(szWindowClass, szTitle, SCREEN_WIDTH, SCREEN_HEIGHT, hInstance, nCmdShow);
+    app.Initialize(szWindowClass, szTitle, SCREEN_WIDTH, SCREEN_HEIGHT, hInstance, nCmdShow);
+    jh::Editor::GetInstance().Initalize();
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DIRECTEXPERIMENT));
 
     MSG msg{};
@@ -57,12 +61,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            instance.Run();
+            app.Run();
+            jh::Editor::GetInstance().Run();
+            app.Present();
         }
     }
 
-    instance.Release();
-
+    app.Release();
+    jh::Editor::GetInstance().Release();
     return (int) msg.wParam;
 }
 

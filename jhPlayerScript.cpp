@@ -135,4 +135,28 @@ PROCESSING_INPUT:
 	{
 	}
 
+	void PlayerScript::OnCollisionEnter(Collider2D* pOtherCollider)
+	{
+	}
+
+	void PlayerScript::OnCollisionStay(Collider2D* pOtherCollider)
+	{
+	}
+
+	void PlayerScript::OnCollisionExit(Collider2D* pOtherCollider)
+	{
+	}
+
+	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
+	{
+	}
+
+	void PlayerScript::OnTriggerStay(Collider2D* pOtherCollider)
+	{
+	}
+
+	void PlayerScript::OnTriggerExit(Collider2D* pOtherCollider)
+	{
+	}
+
 }

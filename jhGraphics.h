@@ -45,6 +45,17 @@ namespace jh
 		jh::math::Vector4			    UVPosition;
 	};
 
+	struct alignas(SIMD_ALIGN_SIZE) DebugMesh
+	{
+		eColliderShapeType	EColiiderShapeType;
+		jh::math::Vector3	Position;
+		jh::math::Vector3	Rotation;
+		jh::math::Vector3	Scale;
+		float				Radius;
+		float				Duration;
+		float				Time;
+	};
+
 
 	enum class eShaderStage
 	{

@@ -32,6 +32,9 @@ namespace jh
 		__forceinline jh::math::Vector3 GetRight()   const	{ return mRightVector; }
 		__forceinline jh::math::Vector3 GetUp()	     const	{ return mUpVector; }
 
+
+		const jh::math::Matrix& GetWorldMatrix() { return mWolrdMat; }
+
 	private:
 		Transform*				mpParent;
 

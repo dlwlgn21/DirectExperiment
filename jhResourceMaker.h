@@ -28,13 +28,18 @@ namespace jh
 		ConstantBuffer* GetAnimationCBOrNull() const		{ return mspAnimationConstantBuffer.get(); }
 		ConstantBuffer* GetUVTranslationCBOrNull() const	{ return mspUVTranslationConstantBuffer.get(); }
 
+		void PushBackDebugMesh(DebugMesh debugMesh)			{ mDebugMeshs.push_back(debugMesh); }
+		std::vector<DebugMesh>& GetDebugMeshs()				{ return mDebugMeshs; }
+
 
 	public:
 		static const std::wstring RECT_MESH_KEY;
 		static const std::wstring BATTLE_BG_MESH_KEY;
+		static const std::wstring DEBUG_RECT_MESH_KEY;
 
 		static const std::wstring SPRITE_SHADER_KEY;
 		static const std::wstring BATTLE_BG_SHADER_KEY;
+		static const std::wstring DEBUG_SHADER_KEY;
 
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_ATLAS_KEY;
@@ -49,6 +54,7 @@ namespace jh
 		static const std::wstring BATTLE_PARRARELL_BG_MATERIAL_KEY;
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring EFFECT_SWORD_MATERIAL_KEY;
+		static const std::wstring DEBUG_MATERIAL_KEY;
 
 
 	private:
@@ -69,8 +75,9 @@ namespace jh
 			, mspTransformConstantBuffer()
 			, mspAnimationConstantBuffer()
 			, mspUVTranslationConstantBuffer()
+			, mDebugMeshs()
 		{
-
+			mDebugMeshs.reserve(128);
 		}
 		~ResourceMaker() = default;
 
@@ -82,6 +89,8 @@ namespace jh
 		std::unique_ptr<ConstantBuffer>					mspTransformConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspAnimationConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspUVTranslationConstantBuffer;
+
+		std::vector<DebugMesh>							mDebugMeshs;
 	};
 }
 

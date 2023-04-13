@@ -21,6 +21,7 @@ namespace jh
 		Layer* GetLayer(const eLayerType eLayer);
 
 		void AddGameObject(GameObject* pGameObject, const eLayerType eType);
+		const std::vector<GameObject*>& GetAllGameObjectsFromSpecifiedLayer(const eLayerType eType);
 	protected:
 		std::vector<std::unique_ptr<Layer>>	mLayers;
 		eSceneType							meSceneType;

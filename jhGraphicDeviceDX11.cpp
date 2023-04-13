@@ -124,7 +124,7 @@ namespace jh::graphics
 		);
 	}
 
-	void GraphicDeviceDX11::Render()
+	void GraphicDeviceDX11::Present()
 	{
 		mcpSwapChain->Present(0, 0);
 	}

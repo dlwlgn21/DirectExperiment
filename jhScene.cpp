@@ -29,6 +29,11 @@ namespace jh
 		mLayers[static_cast<UINT>(eType)]->AddGameObject(pGameObject);
 	}
 
+	const std::vector<GameObject*>& Scene::GetAllGameObjectsFromSpecifiedLayer(const eLayerType eType)
+	{
+		return mLayers[static_cast<UINT>(eType)]->GetAllGameObjects();
+	}
+
 
 	void Scene::Initialize()
 	{

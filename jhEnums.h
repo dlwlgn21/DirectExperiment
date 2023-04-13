@@ -12,9 +12,17 @@ namespace jh
 	{
 		TRANSFORM,
 		CAMERA,
+		COLLIDER,
 		RENDERER,
 		ANIMATOR,
 		SCRIPT,
+		COUNT
+	};
+
+	enum class eColliderShapeType
+	{
+		RECT,
+		CIRCLE,
 		COUNT
 	};
 

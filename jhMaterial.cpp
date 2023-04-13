@@ -10,7 +10,12 @@ namespace jh
 		: Resource(eReousrceType::MATERIAL)
 		, mpShader(pShader)
 		, mpTexture(pTexture)
+		, meType(eMaterialType::NORMAL)
 	{
+		if (pTexture == nullptr)
+		{
+			meType = eMaterialType::DEBUG;
+		}
 	}
 
 	void Material::SetPipeline(const UINT textureSlotNumber)
@@ -20,15 +25,20 @@ namespace jh
 
 	void Material::setPipeline(const UINT textureSlotNumber)
 	{
-		assert(mpShader != nullptr && mpTexture != nullptr);
+		assert(mpShader != nullptr);
 		mpShader->SetPipeline();
-		mpTexture->SetPipeline(textureSlotNumber);
+		if (meType == eMaterialType::NORMAL)
+		{
+			mpTexture->SetPipeline(textureSlotNumber);
+		}
 	}
 
 	void Material::ClearPipeline(const UINT textureSlotNumber)
 	{
-		assert(mpTexture != nullptr);
-		mpTexture->ClearSRV(textureSlotNumber);
+		if (meType == eMaterialType::NORMAL)
+		{
+			mpTexture->ClearSRV(textureSlotNumber);
+		}
 	}
 
 }

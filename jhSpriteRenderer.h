@@ -20,6 +20,8 @@ namespace jh
 		void setPipeline(Animator* pAnimator);
 		void clearPipeline(Animator* pAnimator);
 
+	private:
+		Transform* mpTransform;
 	};
 
 }

@@ -10,6 +10,7 @@ namespace jh
 	GameObject::GameObject()
 		: Entity()
 		, mpTransform(new Transform())
+		, meState(GameObject::eGameObjectState::ACTIVE)
 	{
 		mComponents.reserve(static_cast<UINT>(eComponentType::COUNT));
 		mComponents.resize(static_cast<UINT>(eComponentType::COUNT));

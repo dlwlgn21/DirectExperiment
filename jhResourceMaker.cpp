@@ -13,6 +13,7 @@ namespace jh
 #pragma region MESH
 	const std::wstring ResourceMaker::RECT_MESH_KEY = L"RectMeshKey";
 	const std::wstring ResourceMaker::BATTLE_BG_MESH_KEY = L"BattleBGMeshKey";
+	const std::wstring ResourceMaker::DEBUG_RECT_MESH_KEY = L"DebugRectMeshKey";
 
 
 
@@ -21,7 +22,7 @@ namespace jh
 #pragma region SHADER
 	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
 	const std::wstring ResourceMaker::BATTLE_BG_SHADER_KEY = L"BattleBGShaderKey";
-
+	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
 
 
 #pragma endregion
@@ -52,6 +53,9 @@ namespace jh
 	const std::wstring ResourceMaker::EFFECT_SWORD_MATERIAL_KEY = L"EffectSwordMaterialKey";
 
 
+	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
+
+
 #pragma endregion
 
 	void ResourceMaker::Initialize()
@@ -73,6 +77,19 @@ namespace jh
 		mVertices[1] = { {0.5f,			0.5f,		0.0f},	{1.0f, 0.0f} };
 		mVertices[2] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
 		mVertices[3] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
+
+		//mVertices[0].Position = Vector3(-0.5f, 0.5f, 0.0f);
+		//mVertices[0].UV = Vector2(0.f, 0.f);
+
+		//mVertices[1].Position = Vector3(0.5f, 0.5f, 0.0f);
+		//mVertices[1].UV = Vector2(1.0f, 0.0f);
+
+		//mVertices[2].Position = Vector3(0.5f, -0.5f, 0.0f);
+		//mVertices[2].UV = Vector2(1.0f, 1.0f);
+
+		//mVertices[3].Position = Vector3(-0.5f, -0.5f, 0.0f);
+		//mVertices[3].UV = Vector2(0.0f, 1.0f);
+
 		pRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
 		ResourcesManager::Insert<Mesh>(RECT_MESH_KEY, pRectMesh);
 
@@ -97,6 +114,18 @@ namespace jh
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
 		ResourcesManager::Insert<Mesh>(BATTLE_BG_MESH_KEY, pBattleBGMesh);
 #pragma endregion
+
+#pragma region DEBUG_MESH
+		mVertices[0] = { {-0.5f,		0.5f,		-0.01f},	{0.0f, 0.0f} };
+		mVertices[1] = { {0.5f,			0.5f,		-0.01f},	{1.0f, 0.0f} };
+		mVertices[2] = { {-0.5f,		-0.5f,		-0.01f},	{0.0f, 1.0f} };
+		mVertices[3] = { {0.5f,			-0.5f,		-0.01f},	{1.0f, 1.0f} };
+
+		Mesh* pDebugRectMesh = new Mesh();
+		pDebugRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
+		ResourcesManager::Insert<Mesh>(DEBUG_RECT_MESH_KEY, pDebugRectMesh);
+#pragma endregion
+
 	}
 
 	void ResourceMaker::createShaders()
@@ -108,6 +137,11 @@ namespace jh
 		Shader* pBattleBGShader = new Shader();
 		pBattleBGShader->CreateShaders(L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
 		ResourcesManager::Insert<Shader>(BATTLE_BG_SHADER_KEY, pBattleBGShader);
+
+		Shader* pDebugShader = new Shader();
+		pDebugShader->CreateShaders(L"DebugVS.hlsl", L"DebugPS.hlsl");
+		pDebugShader->SetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		ResourcesManager::Insert<Shader>(DEBUG_SHADER_KEY, pDebugShader);
 
 	}
 
@@ -164,6 +198,13 @@ namespace jh
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(EFFECT_SWORD_TEXTURE_KEY))
 		);
+
+#pragma region DEBUG
+		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
+		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);
+
+#pragma endregion
+
 	}
 
 	void ResourceMaker::createSamplerState()

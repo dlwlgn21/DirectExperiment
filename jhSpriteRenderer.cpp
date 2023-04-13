@@ -6,11 +6,14 @@ namespace jh
 {
 	SpriteRenderer::SpriteRenderer(Mesh* pMesh, Material* pMaterial)
 		: Renderer(eComponentRendererType::SPRITE_RENDERER, pMesh, pMaterial)
+		, mpTransform(nullptr)
 	{
 	}
 
 	void SpriteRenderer::Initialize()
 	{
+		mpTransform = GetOwner()->GetTransform();
+		assert(mpTransform != nullptr);
 	}
 	void SpriteRenderer::Update()
 	{
@@ -31,8 +34,7 @@ namespace jh
 			}
 		}
 
-		Transform* pTranform = GetOwner()->GetTransform();
-		pTranform->WriteMatrixDataAtContantBuffer();
+		mpTransform->WriteMatrixDataAtContantBuffer();
 
 		setPipeline(pAnimator);
 
@@ -58,8 +60,7 @@ namespace jh
 	void SpriteRenderer::setPipeline(Animator* pAnimator)
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
-		Transform* pTranform = GetOwner()->GetTransform();
-		pTranform->SetPipeline();
+		mpTransform->SetPipeline();
 
 		if (pAnimator != nullptr)
 		{

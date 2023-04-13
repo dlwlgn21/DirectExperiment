@@ -4,6 +4,7 @@
 #include "jhSceneManager.h"
 #include "jhResourceMaker.h"
 #include "jhCameraManager.h"
+#include "jhCollisionManager.h"
 
 
 using namespace DirectX;
@@ -18,6 +19,7 @@ namespace jh
 		Time::Initialize();
 		Input::Initialize();
 		graphics::GraphicDeviceDX11::GetInstance().InitializeDevice(mScreenWidth, mScreenHeight, mHwnd);
+		CollisionManager::GetInstance().Initialize();
 		ResourceMaker::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
 	}
@@ -63,10 +65,12 @@ namespace jh
 	{
 		Time::Update();
 		Input::Update();
+		CollisionManager::GetInstance().Update();
 		SceneManager::GetInstance().Update();
 	}
 	void D3DApp::FixedUpdate()
 	{
+		CollisionManager::GetInstance().FixedUpdate();
 		SceneManager::GetInstance().FixedUpdate();
 	}
 	void D3DApp::RenderFrame()
@@ -75,15 +79,17 @@ namespace jh
 		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
 
 		CameraManager::GetInstance().GetMainCamera()->Render();
-
-		graphics::GraphicDeviceDX11::GetInstance().Render();
+		CollisionManager::GetInstance().Render();
 	}
 	void D3DApp::Release()
 	{
 		SceneManager::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
-
+	}
+	void D3DApp::Present()
+	{
+		graphics::GraphicDeviceDX11::GetInstance().Present();
 	}
 	bool D3DApp::IfFailedHR(HRESULT hr)
 	{

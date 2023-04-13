@@ -39,6 +39,7 @@ namespace jh
 		{
 			if (pGameObject != nullptr)
 			{
+				if (pGameObject->GetState() != GameObject::eGameObjectState::ACTIVE) { continue; }
 				pGameObject->Update();
 			}
 		}
@@ -49,6 +50,7 @@ namespace jh
 		{
 			if (pGameObject != nullptr)
 			{
+				if (pGameObject->GetState() != GameObject::eGameObjectState::ACTIVE) { continue; }
 				pGameObject->FixedUpdate();
 			}
 		}

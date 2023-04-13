@@ -3,6 +3,13 @@
 
 namespace jh
 {
+	enum class eMaterialType
+	{
+		NORMAL,
+		DEBUG,
+		COUNT
+	};
+
 	class Shader;
 	class Texture;
 	class Material final : public Resource
@@ -22,8 +29,9 @@ namespace jh
 		static constexpr const UINT ATLAS_TEXTURE_SLOT_NUMBER_12 = 12;
 
 	private:
-		Shader*		mpShader;
-		Texture*	mpTexture;
+		Shader*			mpShader;
+		Texture*		mpTexture;
+		eMaterialType	meType;
 	};
 }
 
