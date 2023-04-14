@@ -3,15 +3,29 @@
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
 
+static constexpr const UCHAR INITIAL_HP = 10;
+static constexpr const UCHAR INITIAL_STAMINA = 5;
 
 namespace jh
 {
+
 	class Animator;
 	class Transform;
 	class Collider2D;
 	class PlayerScript final : public Script
 	{
 	public:
+		struct PlayerStat
+		{
+			UCHAR HP;
+			UCHAR Stamina;
+			PlayerStat()
+				: HP(INITIAL_HP)
+				, Stamina(INITIAL_STAMINA)
+			{
+			}
+		};
+
 		PlayerScript();
 		virtual ~PlayerScript() = default;
 
@@ -42,9 +56,13 @@ namespace jh
 		const std::wstring				mAnimIdleKey;
 		const std::wstring				mAnimMoveKey;
 		const std::wstring				mAnimWeaponSwingKey;
+		const std::wstring				mAnimHittedKey;
 		bool							mbIsMoving;
 		bool							mbIsAttacking;
 		eAnimatedObjectLookDirection    meLookDir;
+
+		PlayerStat						mStat;
+
 	};
 }
 

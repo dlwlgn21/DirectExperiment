@@ -38,10 +38,10 @@ namespace jh
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ATLAS_KEY);
 		assert(pAtlas != nullptr);
-		const float WIDTH = 96.0f;
-		const float HEIGHT = 96.0f;
+		const float WIDTH = 110.0f;
+		const float HEIGHT = 42.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(Vector2::Zero);
+		Vector2 offset(0.007f, 0.0f);
 		Animator* pMonsterAnimator = new Animator();
 		pMonsterAnimator->Create(
 			L"MonsterIdle",
@@ -49,8 +49,8 @@ namespace jh
 			Vector2::Zero,
 			animSize,
 			offset,
-			9,
-			0.15f,
+			15,
+			0.1f,
 			100
 		);
 		//pPlayerAnimator->Create(

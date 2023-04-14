@@ -39,40 +39,56 @@ namespace jh
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY);
 		assert(pAtlas != nullptr);
-		const float WIDTH = 48.0f;
-		const float HEIGHT = 32.0f;
+		const float WIDTH = 90.0f;
+		const float HEIGHT = 37.0f;
+		const float MAGNINICATION = 120.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(0.015f, 0.0f);
+		Vector2 offset(0.02f, 0.0f);
 		Animator* pPlayerAnimator = new Animator();
 		pPlayerAnimator->Create(
 			L"PlayerIdle",
 			pAtlas,
-			Vector2::Zero,
-			animSize,
-			offset,
-			4,
-			0.15f,
-			100
-		);
-		pPlayerAnimator->Create(
-			L"PlayerMove",
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 4),
+			Vector2(0.0f, HEIGHT * 1),
 			animSize,
 			offset,
 			9,
-			0.1f,
-			100
+			0.15f,
+			MAGNINICATION
 		);
+
+
+		pPlayerAnimator->Create(
+			L"PlayerMove",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 2),
+			animSize,
+			offset,
+			8,
+			0.1f,
+			MAGNINICATION
+		);
+
+
 		pPlayerAnimator->Create(
 			L"PlayerWeaponSwing",
 			pAtlas,
-			Vector2(0.0f, HEIGHT * 14),
+			Vector2(0.0f, HEIGHT * 9),
 			animSize,
 			offset,
-			6,
-			0.07f,
-			100
+			5,
+			0.15f,
+			MAGNINICATION
+		);
+
+		pPlayerAnimator->Create(
+			L"PlayerHitted",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 25),
+			animSize,
+			offset,
+			2,
+			0.15f,
+			MAGNINICATION
 		);
 		this->AddComponent(pPlayerAnimator);
 		pPlayerAnimator->PlayAnimation(L"PlayerIdle", true);

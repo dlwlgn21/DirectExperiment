@@ -49,7 +49,7 @@ namespace jh
 						mpAnimator->SetCurrAnimationHorizontalFlip(false);
 						break;
 					default:
-						assert(false);
+						//assert(false);
 						break;
 					}
 					mpAnimator->PlayAnimationWithReset(mAinmSwingEffectKey, false);

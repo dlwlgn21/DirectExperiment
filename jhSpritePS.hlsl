@@ -18,15 +18,16 @@ float4 main(VertexOut vIn) : SV_TARGET
             discard;
         }
         color = AtlasTexture.Sample(PointBorderSampler, uv);
-        if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
-        {
-            discard;
-        }
+        //if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
+        //{
+        //    discard;
+        //}
     }
     else
     {
         color = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
     }
 
+    //return float4(color.x + 0.5f, color.y + 0.5f, color.z + 0.5f, color.w);
     return color;
 }

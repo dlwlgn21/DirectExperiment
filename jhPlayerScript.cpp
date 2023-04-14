@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "jhPlayerScript.h"
 #include "jhTransform.h"
 #include "jhGameObject.h"
@@ -17,10 +19,12 @@ namespace jh
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimWeaponSwingKey(L"PlayerWeaponSwing")
+		, mAnimHittedKey(L"PlayerHitted")
 		, mpAnimator(nullptr)
 		, mbIsMoving(false)
 		, mbIsAttacking(false)
 		, meLookDir(eAnimatedObjectLookDirection::RIGHT)
+		, mStat(PlayerStat())
 	{
 	}
 
@@ -53,18 +57,18 @@ namespace jh
 		}
 
 
-PROCESSING_INPUT:
-		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		{
-			pos.y += mSpeed * Time::DeltaTime();
-			mbIsMoving = true;
-		}
+	PROCESSING_INPUT:
+		//if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		//{
+		//	pos.y += mSpeed * Time::DeltaTime();
+		//	mbIsMoving = true;
+		//}
 
-		if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			pos.y -= mSpeed * Time::DeltaTime();
-			mbIsMoving = true;
-		}
+		//if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		//{
+		//	pos.y -= mSpeed * Time::DeltaTime();
+		//	mbIsMoving = true;
+		//}
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
 			pos.x += mSpeed * Time::DeltaTime();
@@ -149,6 +153,10 @@ PROCESSING_INPUT:
 
 	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
+		char buffer[64];
+		ZeroMemory(buffer, 64);
+		sprintf(buffer, "%d\n", mStat.HP);
+		OutputDebugStringA(buffer);
 	}
 
 	void PlayerScript::OnTriggerStay(Collider2D* pOtherCollider)

@@ -148,15 +148,15 @@ namespace jh
 	void ResourceMaker::createTextures()
 	{
 		Texture* pPlayerAtalsTexture = new Texture();
-		pPlayerAtalsTexture->Load(L"CharacterAtlas.png");
+		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37.png");
 		ResourcesManager::Insert<Texture>(PLAYER_TEXTURE_ATLAS_KEY, pPlayerAtalsTexture);
 
 		Texture* pZombieAtlasTexture = new Texture();
-		pZombieAtlasTexture->Load(L"WildZombie.png");
+		pZombieAtlasTexture->Load(L"caged shocker 110x42.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"Cataclysm_Street_2.png");
+		pBattleBGTexture->Load(L"wPRLoh.png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
