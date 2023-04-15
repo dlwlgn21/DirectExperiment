@@ -6,6 +6,7 @@
 #include "jhTexture.h"
 #include "jhResourcesManager.h"
 #include "jhMath.h"
+#include "jhCollider2D.h"
 
 using namespace jh::math;
 
@@ -17,6 +18,7 @@ namespace jh
 		setRenderer();
 		setAnimator();
 		setScript();
+		setCollider();
 	}
 	void Monster::Initialize()
 	{
@@ -100,5 +102,11 @@ namespace jh
 	{
 		MonsterScript* pScript = new MonsterScript();
 		this->AddScript(pScript);
+	}
+	void Monster::setCollider()
+	{
+		Collider2D* pMonsterCollider = new Collider2D();
+		pMonsterCollider->SetSize(Vector2(0.1f, 0.25f));
+		this->AddComponent(pMonsterCollider);
 	}
 }

@@ -18,6 +18,7 @@ namespace jh
 		void setAnimator();
 		void setRenderer();
 		void setScript();
+		void setCollider();
 	};
 }
 

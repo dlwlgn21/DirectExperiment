@@ -6,6 +6,7 @@
 #include "jhTexture.h"
 #include "jhResourcesManager.h"
 #include "jhMath.h"
+#include "jhCollider2D.h"
 
 using namespace jh::math;
 
@@ -18,6 +19,7 @@ namespace jh
 		setRenderer();
 		setAnimator();
 		setScript();
+		setCollider();
 	}
 	void Player::Initialize()
 	{
@@ -107,5 +109,11 @@ namespace jh
 	{
 		PlayerScript* pScript = new PlayerScript();
 		this->AddScript(pScript);
+	}
+	void Player::setCollider()
+	{
+		Collider2D* pHitPlayerCollider = new Collider2D();
+		pHitPlayerCollider->SetSize(Vector2(0.1f, 0.25f));
+		this->AddComponent(pHitPlayerCollider);
 	}
 }
