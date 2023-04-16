@@ -18,6 +18,8 @@
 #include "jhPlayerEffect.h"
 #include "jhCollider2D.h"
 #include "jhCollisionManager.h"
+#include "jhPlayerWeaponColliderObject.h"
+
 
 using namespace jh::math;
 
@@ -49,6 +51,10 @@ namespace jh
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -1.3f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+
+		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::MONSTER);
+		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -1.5f, 0.0f));
+		pPlayerWeaponColliderObject->SetPlayerTransform(pPlayer->GetTransform());
 
 		// Monster
 		{

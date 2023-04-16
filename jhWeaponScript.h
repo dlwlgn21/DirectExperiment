@@ -36,7 +36,7 @@ namespace jh
 		OnceAnimator*					mpAnimator;
 		PlayerScript*					mpPlayerScript;
 		const std::wstring				mAnimTopDownSwingKey;
-		eAnimatedObjectLookDirection    mePlayerLookDir;
+		eObjectLookDirection			mePlayerLookDir;
 		eWeaponState					meState;
 	};
 

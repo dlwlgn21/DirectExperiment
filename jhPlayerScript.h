@@ -38,7 +38,7 @@ namespace jh
 		void Complete();
 		void End();
 
-		eAnimatedObjectLookDirection GetPlayerLookDirection() const { return meLookDir; }
+		eObjectLookDirection GetPlayerLookDirection() const { return meLookDir; }
 
 
 		void OnCollisionEnter(Collider2D* pOtherCollider) override;
@@ -59,7 +59,7 @@ namespace jh
 		const std::wstring				mAnimHittedKey;
 		bool							mbIsMoving;
 		bool							mbIsAttacking;
-		eAnimatedObjectLookDirection    meLookDir;
+		eObjectLookDirection    meLookDir;
 
 		PlayerStat						mStat;
 

@@ -15,7 +15,7 @@ namespace jh
 		, mpAnimator(nullptr)
 		, mSpeed(1.0f)
 		, mAnimIdleKey(L"MonsterIdle")
-		, meLookDir(eAnimatedObjectLookDirection::RIGHT)
+		, meLookDir(eObjectLookDirection::RIGHT)
 	{
 	}
 
@@ -47,16 +47,16 @@ namespace jh
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
 			pos.x -= mSpeed * Time::DeltaTime();
-			meLookDir = eAnimatedObjectLookDirection::RIGHT;
+			meLookDir = eObjectLookDirection::RIGHT;
 		}
 		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
 			pos.x += mSpeed * Time::DeltaTime();
-			meLookDir = eAnimatedObjectLookDirection::LEFT;
+			meLookDir = eObjectLookDirection::LEFT;
 		}
 
 		assert(mpAnimator != nullptr);
-		if (meLookDir == eAnimatedObjectLookDirection::RIGHT)
+		if (meLookDir == eObjectLookDirection::RIGHT)
 		{
 			mpAnimator->SetCurrAnimationHorizontalFlip(false);
 		}

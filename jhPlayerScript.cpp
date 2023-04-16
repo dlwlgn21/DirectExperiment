@@ -23,7 +23,7 @@ namespace jh
 		, mpAnimator(nullptr)
 		, mbIsMoving(false)
 		, mbIsAttacking(false)
-		, meLookDir(eAnimatedObjectLookDirection::RIGHT)
+		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
 	{
 	}
@@ -58,32 +58,21 @@ namespace jh
 
 
 	PROCESSING_INPUT:
-		//if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		//{
-		//	pos.y += mSpeed * Time::DeltaTime();
-		//	mbIsMoving = true;
-		//}
-
-		//if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		//{
-		//	pos.y -= mSpeed * Time::DeltaTime();
-		//	mbIsMoving = true;
-		//}
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
 			pos.x += mSpeed * Time::DeltaTime();
-			meLookDir = eAnimatedObjectLookDirection::RIGHT;
+			meLookDir = eObjectLookDirection::RIGHT;
 			mbIsMoving = true;
 		}
 		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
 			pos.x -= mSpeed * Time::DeltaTime();
 			mbIsMoving = true;
-			meLookDir = eAnimatedObjectLookDirection::LEFT;
+			meLookDir = eObjectLookDirection::LEFT;
 		}
 
 		assert(mpAnimator != nullptr);
-		if (meLookDir == eAnimatedObjectLookDirection::RIGHT)
+		if (meLookDir == eObjectLookDirection::RIGHT)
 		{
 			mpAnimator->SetCurrAnimationHorizontalFlip(false);
 		}
@@ -112,11 +101,6 @@ namespace jh
 			mpAnimator->PlayAnimation(mAnimWeaponSwingKey, true);
 			mbIsAttacking = true;
 		}
-		//else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
-		//{
-		//	mpAnimator->PlayAnimation(mAnimRightPunchKey, true);
-		//	mbIsAttacking = true;
-		//}
 		mpTranform->SetPosition(pos);
 	}
 

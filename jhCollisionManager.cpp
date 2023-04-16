@@ -73,9 +73,8 @@ namespace jh
 				if (pRightObject->GetState() != GameObject::eGameObjectState::ACTIVE) { continue; }
 				Collider2D* pRightCollider = static_cast<Collider2D*>(pRightObject->GetComponentOrNull(eComponentType::COLLIDER));
 				if (pRightCollider == nullptr) {continue;}
-
 				if (pLeftCollider == pRightCollider) {continue;}
-
+				//if (pLeftCollider->GetState() != eColliderState::ACTIVE || pRightCollider->GetState() != eColliderState::ACTIVE) { continue; }
 				checkValidColliderCollision(pLeftCollider, pRightCollider);
 			}
 

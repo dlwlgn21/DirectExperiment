@@ -42,10 +42,10 @@ namespace jh
 					meState = eWeaponState::ATTACKING;
 					switch (mePlayerLookDir)
 					{
-					case eAnimatedObjectLookDirection::LEFT:
+					case eObjectLookDirection::LEFT:
 						mpAnimator->SetCurrAnimationHorizontalFlip(true);
 						break;
-					case eAnimatedObjectLookDirection::RIGHT:
+					case eObjectLookDirection::RIGHT:
 						mpAnimator->SetCurrAnimationHorizontalFlip(false);
 						break;
 					default:

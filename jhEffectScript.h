@@ -30,7 +30,7 @@ namespace jh
 		OnceAnimator*					mpAnimator;
 		PlayerScript*					mpPlayerScript;
 		const std::wstring				mAinmSwingEffectKey;
-		eAnimatedObjectLookDirection    mePlayerLookDir;
+		eObjectLookDirection    mePlayerLookDir;
 		eWeaponState					meState;
 	};
 

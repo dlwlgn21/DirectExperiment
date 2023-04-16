@@ -27,7 +27,7 @@ namespace jh
 		Animator*						mpAnimator;
 		float							mSpeed;
 		const std::wstring				mAnimIdleKey;
-		eAnimatedObjectLookDirection    meLookDir;
+		eObjectLookDirection			meLookDir;
 	};
 }
 

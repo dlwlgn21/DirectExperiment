@@ -21,6 +21,7 @@ namespace jh
 		, mPosition(Vector2::Zero)
 		, mbIsUsePhysics(false)
 		, mUniqueColliderNumber(sTotalColliderCount++)
+		, meState(eColliderState::ACTIVE)
 	{
 	}
 
@@ -74,7 +75,6 @@ namespace jh
 	void Collider2D::Render()
 	{
 	}
-
 
 	void Collider2D::OnCollisionEnter(Collider2D* pOtherCollider)
 	{

@@ -1,7 +1,7 @@
 #pragma once
 namespace jh
 {
-	enum class eAnimatedObjectLookDirection
+	enum class eObjectLookDirection
 	{
 		LEFT,
 		RIGHT,

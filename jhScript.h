@@ -22,7 +22,6 @@ namespace jh
 		virtual void OnTriggerEnter(Collider2D* pOtherCollider);
 		virtual void OnTriggerStay(Collider2D* pOtherCollider);
 		virtual void OnTriggerExit(Collider2D* pOtherCollider);
-
 	};
 }
 

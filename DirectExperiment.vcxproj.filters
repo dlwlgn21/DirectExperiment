@@ -348,6 +348,12 @@
     <ClInclude Include="jhMeshRenderer.h">
       <Filter>Component\Renderer\MeshRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="jhWeaponColliderScript.h">
+      <Filter>Component\Script\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerWeaponColliderObject.h">
+      <Filter>GameObject\Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -496,6 +502,12 @@
     </ClCompile>
     <ClCompile Include="jhMeshRenderer.cpp">
       <Filter>Component\Renderer\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWeaponColliderScript.cpp">
+      <Filter>Component\Script\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerWeaponColliderObject.cpp">
+      <Filter>GameObject\Content</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
