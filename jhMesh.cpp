@@ -6,29 +6,33 @@ namespace jh
 	Mesh::Mesh()
 		: Resource(eReousrceType::MESH)
 		, mcpVertexBuffer()
-		, mBufferDesc()
+		, mcpIndexBuffer()
+		, mVertexBufferDesc()
+		, mIndexBufferDesc()
+		, mIndexCount(0)
 	{
-		ZeroMemory(&mBufferDesc, sizeof(D3D11_BUFFER_DESC));
+		ZeroMemory(&mVertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
+		ZeroMemory(&mIndexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	}
 	Mesh::~Mesh()
 	{
+		mcpIndexBuffer.Reset();
 		mcpVertexBuffer.Reset();
 	}
 
-
-	bool Mesh::CreateVertexBuffer(void* data, UINT size)
+	bool Mesh::CreateVertexBuffer(void* pData, UINT size)
 	{
 		static const UINT VERTEX_COUNT = 4;
-		mBufferDesc.ByteWidth = sizeof(Vertex) * VERTEX_COUNT;
-		mBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-		mBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-		mBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+		mVertexBufferDesc.ByteWidth = sizeof(Vertex) * VERTEX_COUNT;
+		mVertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		mVertexBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
+		mVertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
 		
 		D3D11_SUBRESOURCE_DATA subData = {};
-		subData.pSysMem = data;
+		subData.pSysMem = pData;
 
 		HRESULT hr = graphics::GraphicDeviceDX11::GetInstance().GetDeivce()->CreateBuffer(
-			&mBufferDesc, 
+			&mVertexBufferDesc,
 			&subData,
 			mcpVertexBuffer.ReleaseAndGetAddressOf()
 		);
@@ -41,9 +45,33 @@ namespace jh
 
 		return true;
 	}
+	bool Mesh::CreateIndexBuffer(void* pData, UINT indexCount)
+	{
+		mIndexCount = indexCount;
+		mIndexBufferDesc.ByteWidth = sizeof(UINT) * mIndexCount;
+		mIndexBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
+		mIndexBufferDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+		mIndexBufferDesc.CPUAccessFlags = 0;
+
+		D3D11_SUBRESOURCE_DATA subData = {};
+		subData.pSysMem = pData;
+
+		HRESULT hr = graphics::GraphicDeviceDX11::GetInstance().GetDeivce()->CreateBuffer(
+			&mIndexBufferDesc,
+			&subData,
+			mcpIndexBuffer.ReleaseAndGetAddressOf()
+		);
+		if (FAILED(hr))
+		{
+			assert(false);
+			return false;
+		}
+		return true;
+	}
 	void Mesh::SetPipeline()
 	{
 		setVertexBuffer();
+		setIndexBuffer();
 	}
 	void Mesh::setVertexBuffer()
 	{
@@ -59,9 +87,18 @@ namespace jh
 			&offset
 		);
 	}
+	void Mesh::setIndexBuffer()
+	{
+		assert(mcpIndexBuffer != nullptr);
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->IASetIndexBuffer(
+			mcpIndexBuffer.Get(),
+			DXGI_FORMAT_R32_UINT,
+			0
+		);
+	}
 	void Mesh::Render()
 	{
 		static const UINT VERTEX_COUNT = 4;
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->Draw(VERTEX_COUNT, 0);
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->DrawIndexed(mIndexCount, 0, 0);
 	}
 }

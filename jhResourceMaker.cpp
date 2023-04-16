@@ -71,26 +71,27 @@ namespace jh
 
 	void ResourceMaker::createMeshs()
 	{
+		std::vector<UINT> rectIndexes;
+		rectIndexes.reserve(32);
+		rectIndexes.push_back(0);
+		rectIndexes.push_back(1);
+		rectIndexes.push_back(2);
+		rectIndexes.push_back(0);
+		rectIndexes.push_back(2);
+		rectIndexes.push_back(3);
+		rectIndexes.push_back(0);
+
 #pragma region SPRITE_RECT_MESH
 		Mesh* pRectMesh = new Mesh();
 		mVertices[0] = { {-0.5f,		0.5f,		0.0f},	{0.0f, 0.0f} };
 		mVertices[1] = { {0.5f,			0.5f,		0.0f},	{1.0f, 0.0f} };
-		mVertices[2] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
-		mVertices[3] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
-
-		//mVertices[0].Position = Vector3(-0.5f, 0.5f, 0.0f);
-		//mVertices[0].UV = Vector2(0.f, 0.f);
-
-		//mVertices[1].Position = Vector3(0.5f, 0.5f, 0.0f);
-		//mVertices[1].UV = Vector2(1.0f, 0.0f);
-
-		//mVertices[2].Position = Vector3(0.5f, -0.5f, 0.0f);
-		//mVertices[2].UV = Vector2(1.0f, 1.0f);
-
-		//mVertices[3].Position = Vector3(-0.5f, -0.5f, 0.0f);
-		//mVertices[3].UV = Vector2(0.0f, 1.0f);
-
+		mVertices[2] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
+		mVertices[3] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
 		pRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
+
+
+
+		pRectMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
 		ResourcesManager::Insert<Mesh>(RECT_MESH_KEY, pRectMesh);
 
 #pragma endregion
@@ -108,21 +109,24 @@ namespace jh
 		const Vector2 UV_RIGHT_BOTTOM(RIGHT_U, LOW_V);
 		mVertices[0] = { {-0.5f,	0.5f,	0.0f},	UV_LEFT_TOP };
 		mVertices[1] = { {0.5f,		0.5f,	0.0f},	UV_RIGHT_TOP };
-		mVertices[2] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
-		mVertices[3] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
+		mVertices[2] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
+		mVertices[3] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
 
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
+		pBattleBGMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
 		ResourcesManager::Insert<Mesh>(BATTLE_BG_MESH_KEY, pBattleBGMesh);
 #pragma endregion
 
 #pragma region DEBUG_MESH
-		mVertices[0] = { {-0.5f,		0.5f,		-0.01f},	{0.0f, 0.0f} };
-		mVertices[1] = { {0.5f,			0.5f,		-0.01f},	{1.0f, 0.0f} };
-		mVertices[2] = { {-0.5f,		-0.5f,		-0.01f},	{0.0f, 1.0f} };
-		mVertices[3] = { {0.5f,			-0.5f,		-0.01f},	{1.0f, 1.0f} };
+		mVertices[0] = { {-0.5f,		0.5f,		-0.1f},	{0.0f, 0.0f} };
+		mVertices[1] = { {0.5f,			0.5f,		-0.1f},	{1.0f, 0.0f} };
+		mVertices[2] = { {0.5f,			-0.5f,		-0.1f},	{1.0f, 1.0f} };
+		mVertices[3] = { {-0.5f,		-0.5f,		-0.1f},	{0.0f, 1.0f} };
 
 		Mesh* pDebugRectMesh = new Mesh();
 		pDebugRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
+		pDebugRectMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
+
 		ResourcesManager::Insert<Mesh>(DEBUG_RECT_MESH_KEY, pDebugRectMesh);
 #pragma endregion
 
