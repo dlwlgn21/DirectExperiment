@@ -55,7 +55,6 @@ namespace jh
 					mpAnimator->PlayAnimationWithReset(mAinmSwingEffectKey, false);
 				}
 			}
-
 		}
 	}
 	void EffectScript::FixedUpdate()
@@ -63,6 +62,10 @@ namespace jh
 	}
 
 	void EffectScript::Render()
+	{
+	}
+
+	void EffectScript::PlayAnimation()
 	{
 	}
 

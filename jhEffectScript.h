@@ -22,6 +22,8 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
+		void PlayAnimation();
+
 		void Start();
 		void Complete();
 		void End();
