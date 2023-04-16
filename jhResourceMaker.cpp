@@ -173,7 +173,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
 
 		Texture* pEffectSwordTxtrue = new Texture();
-		pEffectSwordTxtrue->Load(L"SIDEPUFF.png");
+		pEffectSwordTxtrue->Load(L"BloodEffect.png");
 		ResourcesManager::Insert<Texture>(EFFECT_SWORD_TEXTURE_KEY, pEffectSwordTxtrue);
 	}
 

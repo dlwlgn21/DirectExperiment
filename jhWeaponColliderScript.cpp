@@ -5,6 +5,7 @@
 #include "jhTime.h"
 #include "jhGameObject.h"
 #include "jhTransform.h"
+#include "jhEffectScript.h"
 
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.25f;
@@ -13,7 +14,7 @@ static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
 
 namespace jh
 {
-	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform)
+	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, EffectScript* pEffectScript)
 		: Script()
 		, mpCollider(pCollider)
 		, mColliderStartTimer(START_COUNTING_TIME)
@@ -22,10 +23,12 @@ namespace jh
 		, meState(eWeponCoilderTimerState::WAITING)
 		, mpTransform(nullptr)
 		, mpPlayerTransform(pPlayerTransform)
+		, mpEffectScript(pEffectScript)
 		, meLookDir(eObjectLookDirection::RIGHT)
 	{
 		assert(mpCollider != nullptr);
 		assert(mpPlayerTransform != nullptr);
+		assert(mpEffectScript != nullptr);
 		pCollider->SetState(eColliderState::INACTIVE);
 	}
 	void WeaponColliderScript::Initialize()
@@ -63,6 +66,7 @@ namespace jh
 			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 			{
 				changeState(eWeponCoilderTimerState::START_TIME_COUNTING);
+				//mpEffectScript->PlayAnimation();
 			}
 			break;
 
@@ -123,6 +127,8 @@ namespace jh
 	}
 	void WeaponColliderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
+		assert(mpEffectScript != nullptr);
+		mpEffectScript->PlayAnimation();
 	}
 	void WeaponColliderScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{

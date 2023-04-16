@@ -327,7 +327,7 @@
     <ClInclude Include="jhAnimatedGameObject.h">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
     </ClInclude>
-    <ClInclude Include="jhPlayerEffect.h">
+    <ClInclude Include="jhWeaponEffectObjectt.h">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClInclude>
     <ClInclude Include="jhEffectScript.h">
@@ -482,7 +482,7 @@
     <ClCompile Include="jhAnimatedGameObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
     </ClCompile>
-    <ClCompile Include="jhPlayerEffect.cpp">
+    <ClCompile Include="jhWeaponEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClCompile>
     <ClCompile Include="jhEffectScript.cpp">

@@ -30,12 +30,23 @@ namespace jh
 	}
 	void EffectScript::Update()
 	{
+		
+	}
+	void EffectScript::FixedUpdate()
+	{
+	}
+
+	void EffectScript::Render()
+	{
+	}
+
+	void EffectScript::PlayAnimation()
+	{
 		if (mpPlayerScript != nullptr)
 		{
 			if (meState == eWeaponState::WAITING)
 			{
 				mePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
-				if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 				{
 					mpAnimator->SetActive(true);
 					mpAnimator->SetPlaying(true);
@@ -57,17 +68,7 @@ namespace jh
 			}
 		}
 	}
-	void EffectScript::FixedUpdate()
-	{
-	}
 
-	void EffectScript::Render()
-	{
-	}
-
-	void EffectScript::PlayAnimation()
-	{
-	}
 
 	void EffectScript::Start()
 	{

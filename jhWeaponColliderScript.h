@@ -11,12 +11,13 @@ namespace jh
 		COLIDER_CHECK_TIME_COUNTING,
 		COUNT
 	};
+	class EffectScript;
 	class Transform;
 	class Collider2D;
 	class WeaponColliderScript : public Script
 	{
 	public:
-		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform);
+		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, EffectScript* pEffectScript);
 		virtual ~WeaponColliderScript() = default;
 
 
@@ -47,6 +48,7 @@ namespace jh
 		eWeponCoilderTimerState		meState;
 		Transform*					mpTransform;
 		Transform*					mpPlayerTransform;
+		EffectScript*				mpEffectScript;
 		eObjectLookDirection		meLookDir;
 	};
 }

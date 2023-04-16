@@ -166,7 +166,7 @@
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhOnceAnimator.h" />
     <ClInclude Include="jhPlayer.h" />
-    <ClInclude Include="jhPlayerEffect.h" />
+    <ClInclude Include="jhWeaponEffectObjectt.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayerWeaponColliderObject.h" />
     <ClInclude Include="jhPlayScene.h" />
@@ -217,7 +217,7 @@
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhOnceAnimator.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
-    <ClCompile Include="jhPlayerEffect.cpp" />
+    <ClCompile Include="jhWeaponEffectObject.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />

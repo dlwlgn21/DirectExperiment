@@ -5,12 +5,11 @@
 namespace jh
 {
 	class PlayerScript;
-
-	class PlayerEffect : public AnimatedGameObject
+	class WeaponEffectObject : public AnimatedGameObject
 	{
 	public:
-		PlayerEffect();
-		virtual ~PlayerEffect() = default;
+		WeaponEffectObject();
+		virtual ~WeaponEffectObject() = default;
 
 		void Initialize() override;
 		void Update() override;

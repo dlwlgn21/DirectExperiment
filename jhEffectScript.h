@@ -10,7 +10,6 @@ namespace jh
 	class Transform;
 	class OnceAnimator;
 	class PlayerScript;
-
 	class EffectScript : public Script
 	{
 	public:
@@ -24,6 +23,7 @@ namespace jh
 
 		void PlayAnimation();
 
+
 		void Start();
 		void Complete();
 		void End();
@@ -32,7 +32,7 @@ namespace jh
 		OnceAnimator*					mpAnimator;
 		PlayerScript*					mpPlayerScript;
 		const std::wstring				mAinmSwingEffectKey;
-		eObjectLookDirection    mePlayerLookDir;
+		eObjectLookDirection			mePlayerLookDir;
 		eWeaponState					meState;
 	};
 
