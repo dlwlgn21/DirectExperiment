@@ -4,26 +4,23 @@
 
 namespace jh
 {
-	class PlayerScript;
-	class WeaponEffectObject : public AnimatedGameObject
+	class MonsterScript;
+	class HitEffectObject : public AnimatedGameObject
 	{
 	public:
-		WeaponEffectObject();
-		virtual ~WeaponEffectObject() = default;
+		HitEffectObject();
+		virtual ~HitEffectObject() = default;
 
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
 		void Render() override;
-		void SetScript(PlayerScript* pPlayerScript);
 
 	protected:
 		void setAnimator() override;
 		void setRenderer() override;
 		void setScript() override;
 
-	private:
-		PlayerScript* mpPlayerScript;
 	};
 }
 

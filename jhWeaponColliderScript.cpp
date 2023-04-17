@@ -6,29 +6,27 @@
 #include "jhGameObject.h"
 #include "jhTransform.h"
 #include "jhEffectScript.h"
+#include "jhDebugHelper.h"
+
 
 using namespace jh::math;
-static constexpr const float START_COUNTING_TIME = 0.25f;
-static constexpr const float COLIDER_DURATION_CHECK_TIME = 0.5f;
+static constexpr const float START_COUNTING_TIME = 0.1f;
 static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
 
 namespace jh
 {
-	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, EffectScript* pEffectScript)
+	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform)
 		: Script()
 		, mpCollider(pCollider)
 		, mColliderStartTimer(START_COUNTING_TIME)
-		, mColliderDurationTimer(COLIDER_DURATION_CHECK_TIME)
 		, mSpeed(3.0f)
 		, meState(eWeponCoilderTimerState::WAITING)
 		, mpTransform(nullptr)
 		, mpPlayerTransform(pPlayerTransform)
-		, mpEffectScript(pEffectScript)
 		, meLookDir(eObjectLookDirection::RIGHT)
 	{
 		assert(mpCollider != nullptr);
 		assert(mpPlayerTransform != nullptr);
-		assert(mpEffectScript != nullptr);
 		pCollider->SetState(eColliderState::INACTIVE);
 	}
 	void WeaponColliderScript::Initialize()
@@ -60,37 +58,31 @@ namespace jh
 			meLookDir = eObjectLookDirection::LEFT;
 		}
 
+		if (mpCollider->GetState() == eColliderState::ACTIVE)
+		{
+			mpCollider->SetState(eColliderState::INACTIVE);
+		}
+
 		switch (meState)
 		{
 		case eWeponCoilderTimerState::WAITING:
-			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
 			{
 				changeState(eWeponCoilderTimerState::START_TIME_COUNTING);
-				//mpEffectScript->PlayAnimation();
 			}
 			break;
 
 		case eWeponCoilderTimerState::START_TIME_COUNTING:
 			mColliderStartTimer -= Time::DeltaTime();
+
 			if (mColliderStartTimer <= 0.0f)
 			{
 				mColliderStartTimer = START_COUNTING_TIME;
-				changeState(eWeponCoilderTimerState::COLIDER_CHECK_TIME_COUNTING);
-			}
-			break;
-
-		case eWeponCoilderTimerState::COLIDER_CHECK_TIME_COUNTING:
-			if (mpCollider->GetState() != eColliderState::ACTIVE)
-			{
-				mpCollider->SetState(eColliderState::ACTIVE);
-			}
-
-			mColliderDurationTimer -= Time::DeltaTime();
-			if (mColliderDurationTimer <= 0.0f)
-			{
-				mColliderDurationTimer = COLIDER_DURATION_CHECK_TIME;
+				if (mpCollider->GetState() != eColliderState::ACTIVE)
+				{
+					mpCollider->SetState(eColliderState::ACTIVE);
+				}
 				changeState(eWeponCoilderTimerState::WAITING);
-				mpCollider->SetState(eColliderState::INACTIVE);
 			}
 			break;
 		default:
@@ -127,8 +119,6 @@ namespace jh
 	}
 	void WeaponColliderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-		assert(mpEffectScript != nullptr);
-		mpEffectScript->PlayAnimation();
 	}
 	void WeaponColliderScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{

@@ -5,17 +5,14 @@
 #include "jhTime.h"
 #include "jhOnceAnimator.h"
 #include "jhAnimation.h"
-#include "jhPlayerScript.h"
 
 
 namespace jh
 {
-	EffectScript::EffectScript(PlayerScript* pPlayerScript)
+	EffectScript::EffectScript()
 		: Script()
-		, mpPlayerScript(pPlayerScript)
 		, mpAnimator(nullptr)
-		, mAinmSwingEffectKey(L"SwordSwingEffect")
-		, mePlayerLookDir()
+		, mAnimHitEffectKey(L"MonsterHitAnim")
 		, meState(eWeaponState::WAITING)
 	{
 	}
@@ -23,10 +20,9 @@ namespace jh
 	{
 		mpAnimator = static_cast<OnceAnimator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		assert(mpPlayerScript != nullptr);
-		mpAnimator->GetStartEvent(mAinmSwingEffectKey) = std::bind(&EffectScript::Start, this);
-		mpAnimator->GetCompleteEvent(mAinmSwingEffectKey) = std::bind(&EffectScript::Complete, this);
-		mpAnimator->GetEndEvent(mAinmSwingEffectKey) = std::bind(&EffectScript::End, this);
+		mpAnimator->GetStartEvent(mAnimHitEffectKey) = std::bind(&EffectScript::Start, this);
+		mpAnimator->GetCompleteEvent(mAnimHitEffectKey) = std::bind(&EffectScript::Complete, this);
+		mpAnimator->GetEndEvent(mAnimHitEffectKey) = std::bind(&EffectScript::End, this);
 	}
 	void EffectScript::Update()
 	{
@@ -40,40 +36,27 @@ namespace jh
 	{
 	}
 
-	void EffectScript::PlayAnimation()
+	void EffectScript::PlayAnimation(eObjectLookDirection eLookDir)
 	{
-		if (mpPlayerScript != nullptr)
+		mpAnimator->SetActive(true);
+		mpAnimator->SetPlaying(true);
+		meState = eWeaponState::ATTACKING;
+		switch (eLookDir)
 		{
-			if (meState == eWeaponState::WAITING)
-			{
-				mePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
-				{
-					mpAnimator->SetActive(true);
-					mpAnimator->SetPlaying(true);
-					meState = eWeaponState::ATTACKING;
-					switch (mePlayerLookDir)
-					{
-					case eObjectLookDirection::LEFT:
-						mpAnimator->SetCurrAnimationHorizontalFlip(true);
-						break;
-					case eObjectLookDirection::RIGHT:
-						mpAnimator->SetCurrAnimationHorizontalFlip(false);
-						break;
-					default:
-						//assert(false);
-						break;
-					}
-					mpAnimator->PlayAnimationWithReset(mAinmSwingEffectKey, false);
-				}
-			}
+		case eObjectLookDirection::LEFT:
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+			break;
+		case eObjectLookDirection::RIGHT:
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+			break;
+		default:
+			break;
 		}
+		mpAnimator->PlayAnimationWithReset(mAnimHitEffectKey, false);
 	}
-
-
 	void EffectScript::Start()
 	{
 	}
-
 	void EffectScript::Complete()
 	{
 		meState = eWeaponState::WAITING;
@@ -82,5 +65,4 @@ namespace jh
 	void EffectScript::End()
 	{
 	}
-
 }

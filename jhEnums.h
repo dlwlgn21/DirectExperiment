@@ -63,6 +63,7 @@ namespace jh
 		GRID,
 		ANIMATION,
 		UV_TRANSLATION,
+		COLLIDER_COLOR,
 		COUNT,
 	};
 }

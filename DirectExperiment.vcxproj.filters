@@ -327,7 +327,7 @@
     <ClInclude Include="jhAnimatedGameObject.h">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
     </ClInclude>
-    <ClInclude Include="jhWeaponEffectObjectt.h">
+    <ClInclude Include="jhHitEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClInclude>
     <ClInclude Include="jhEffectScript.h">
@@ -353,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="jhPlayerWeaponColliderObject.h">
       <Filter>GameObject\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="jhDebugHelper.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -482,7 +485,7 @@
     <ClCompile Include="jhAnimatedGameObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
     </ClCompile>
-    <ClCompile Include="jhWeaponEffectObject.cpp">
+    <ClCompile Include="jhHitEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClCompile>
     <ClCompile Include="jhEffectScript.cpp">

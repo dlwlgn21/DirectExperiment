@@ -15,6 +15,11 @@ namespace jh
 
 	void CollisionManager::Update()
 	{
+
+	}
+
+	void CollisionManager::FixedUpdate()
+	{
 		Scene* pCurrScene = SceneManager::GetInstance().GetCurrentScene();
 		assert(pCurrScene != nullptr);
 
@@ -28,10 +33,6 @@ namespace jh
 				}
 			}
 		}
-	}
-
-	void CollisionManager::FixedUpdate()
-	{
 	}
 	void CollisionManager::Render()
 	{

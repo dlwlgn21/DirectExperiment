@@ -18,8 +18,8 @@
 #include "jhCollider2D.h"
 #include "jhCollisionManager.h"
 #include "jhPlayerWeaponColliderObject.h"
-#include "jhWeaponEffectObjectt.h"
 #include "jhEffectScript.h"
+#include "jhHitEffectObject.h"
 
 using namespace jh::math;
 
@@ -53,21 +53,20 @@ namespace jh
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 
 		// Effect
-		WeaponEffectObject* pEffect = Instantiate<WeaponEffectObject>(eLayerType::PLAYER);
-		pEffect->SetScript(static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
-		pEffect->GetTransform()->SetParent(pPlayer);
-		pEffect->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -2.0f));
-		pEffect->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
-
+		//WeaponEffectObject* pEffect = Instantiate<WeaponEffectObject>(eLayerType::PLAYER);
+		//pEffect->SetScript(static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
+		//pEffect->GetTransform()->SetParent(pPlayer);
+		//pEffect->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -2.0f));
+		//pEffect->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
-		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -1.5f, 0.0f));
+		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -1.5f, 3.0f));
 		pPlayerWeaponColliderObject->SetPlayerTransform(pPlayer->GetTransform());
-		pPlayerWeaponColliderObject->SetEffectScript(static_cast<EffectScript*>(pEffect->GetScriptOrNull()));
+		//pPlayerWeaponColliderObject->SetEffectScript(static_cast<EffectScript*>(pEffect->GetScriptOrNull()));
 
 		// Monster
 		{
-			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER);
+			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
 			pMonster->GetTransform()->SetPosition(Vector3(1.0f, -1.0f, 4.0f));
 			pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 		}

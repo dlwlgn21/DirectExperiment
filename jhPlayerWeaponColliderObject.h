@@ -14,12 +14,10 @@ namespace jh
 		virtual ~PlayerWeaponColliderObject() = default;
 
 		void SetPlayerTransform(Transform* pPlayerTransform);
-		void SetEffectScript(EffectScript* pEffectScript);
 	private:
 		void setScript();
 	private:
 		Transform*			mpPlayerTransform;
-		EffectScript*		mpEffectScript;
 	};
 }
 

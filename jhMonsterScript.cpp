@@ -4,15 +4,17 @@
 #include "jhGameObject.h"
 #include "jhTransform.h"
 #include "jhAnimator.h"
+#include "jhEffectScript.h"
 
 using namespace jh::math;
 
 namespace jh
 {
-	MonsterScript::MonsterScript()
+	MonsterScript::MonsterScript(EffectScript* pEffectScript)
 		: Script()
 		, mpTranform(nullptr)
 		, mpAnimator(nullptr)
+		, mpEffectScript(pEffectScript)
 		, mSpeed(1.0f)
 		, mAnimIdleKey(L"MonsterIdle")
 		, meLookDir(eObjectLookDirection::RIGHT)
@@ -26,6 +28,9 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimIdleKey) = std::bind(&MonsterScript::Start, this);
 		mpAnimator->GetCompleteEvent(mAnimIdleKey) = std::bind(&MonsterScript::Complete, this);
 		mpAnimator->GetEndEvent(mAnimIdleKey) = std::bind(&MonsterScript::End, this);
+
+		assert(mpEffectScript != nullptr);
+		mpEffectScript->Initialize();
 	}
 	void MonsterScript::Update()
 	{
@@ -33,7 +38,6 @@ namespace jh
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
 		mpAnimator->PlayAnimation(mAnimIdleKey, true);
-
 
 		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
 		{
@@ -65,6 +69,10 @@ namespace jh
 			mpAnimator->SetCurrAnimationHorizontalFlip(true);
 		}
 
+		//if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+		//{
+		//	mpEffectScript->PlayAnimation(meLookDir);
+		//}
 
 		mpTranform->SetPosition(pos);
 	}
@@ -84,6 +92,25 @@ namespace jh
 	}
 
 	void MonsterScript::End()
+	{
+	}
+	void MonsterScript::OnCollisionEnter(Collider2D* pOtherCollider)
+	{
+	}
+	void MonsterScript::OnCollisionStay(Collider2D* pOtherCollider)
+	{
+	}
+	void MonsterScript::OnCollisionExit(Collider2D* pOtherCollider)
+	{
+	}
+	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
+	{
+		mpEffectScript->PlayAnimation(meLookDir);
+	}
+	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
+	{
+	}
+	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}
 }

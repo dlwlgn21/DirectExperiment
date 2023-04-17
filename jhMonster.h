@@ -3,10 +3,11 @@
 
 namespace jh
 {
+	class HitEffectObject;
 	class Monster : public GameObject
 	{
 	public:
-		Monster();
+		Monster(HitEffectObject* pHitEffectObject);
 		virtual ~Monster() = default;
 
 		void Initialize() override;
@@ -19,6 +20,9 @@ namespace jh
 		void setRenderer();
 		void setScript();
 		void setCollider();
+
+	private:
+		HitEffectObject*		mpHitEffectObject;
 	};
 }
 

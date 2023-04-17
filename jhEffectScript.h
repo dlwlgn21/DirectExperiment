@@ -9,11 +9,10 @@ namespace jh
 {
 	class Transform;
 	class OnceAnimator;
-	class PlayerScript;
 	class EffectScript : public Script
 	{
 	public:
-		EffectScript(PlayerScript* pPlayer);
+		EffectScript();
 		virtual ~EffectScript() = default;
 
 		void Initialize() override;
@@ -21,7 +20,7 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-		void PlayAnimation();
+		void PlayAnimation(eObjectLookDirection eLookDir);
 
 
 		void Start();
@@ -30,9 +29,7 @@ namespace jh
 
 	private:
 		OnceAnimator*					mpAnimator;
-		PlayerScript*					mpPlayerScript;
-		const std::wstring				mAinmSwingEffectKey;
-		eObjectLookDirection			mePlayerLookDir;
+		const std::wstring				mAnimHitEffectKey;
 		eWeaponState					meState;
 	};
 

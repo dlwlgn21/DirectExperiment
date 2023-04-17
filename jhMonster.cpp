@@ -7,19 +7,27 @@
 #include "jhResourcesManager.h"
 #include "jhMath.h"
 #include "jhCollider2D.h"
+#include "jhHitEffectObject.h"
+#include "jhEffectScript.h"
+#include "jhTransform.h"
 
 using namespace jh::math;
 
 namespace jh
 {
-	Monster::Monster()
+	Monster::Monster(HitEffectObject* pHitEffectObject)
 		: GameObject()
+		, mpHitEffectObject(pHitEffectObject)
 	{
 		setRenderer();
 		setAnimator();
 		setScript();
 		setCollider();
+		mpHitEffectObject->GetTransform()->SetParent(this);
+		mpHitEffectObject->GetTransform()->SetPosition(Vector3(0.0f, 0.1f, -1.0f));
+		mpHitEffectObject->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 	}
+
 	void Monster::Initialize()
 	{
 		GameObject::Initialize();
@@ -100,7 +108,7 @@ namespace jh
 	}
 	void Monster::setScript()
 	{
-		MonsterScript* pScript = new MonsterScript();
+		MonsterScript* pScript = new MonsterScript(static_cast<EffectScript*>(mpHitEffectObject->GetScriptOrNull()));
 		this->AddScript(pScript);
 	}
 	void Monster::setCollider()

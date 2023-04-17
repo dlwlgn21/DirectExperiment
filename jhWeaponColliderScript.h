@@ -8,7 +8,6 @@ namespace jh
 	{
 		WAITING,
 		START_TIME_COUNTING,
-		COLIDER_CHECK_TIME_COUNTING,
 		COUNT
 	};
 	class EffectScript;
@@ -17,7 +16,7 @@ namespace jh
 	class WeaponColliderScript : public Script
 	{
 	public:
-		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, EffectScript* pEffectScript);
+		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform);
 		virtual ~WeaponColliderScript() = default;
 
 
@@ -40,15 +39,14 @@ namespace jh
 		
 	private:
 		void changeState(const eWeponCoilderTimerState eState) { meState = eState; }
+
 	private:
 		Collider2D*					mpCollider;
-		float						mColliderDurationTimer;
 		float						mColliderStartTimer;
 		float						mSpeed;
 		eWeponCoilderTimerState		meState;
 		Transform*					mpTransform;
 		Transform*					mpPlayerTransform;
-		EffectScript*				mpEffectScript;
 		eObjectLookDirection		meLookDir;
 	};
 }

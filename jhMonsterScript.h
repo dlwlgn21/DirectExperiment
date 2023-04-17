@@ -7,10 +7,11 @@ namespace jh
 {
 	class Animator;
 	class Transform;
+	class EffectScript;
 	class MonsterScript final : public Script
 	{
 	public:
-		MonsterScript();
+		MonsterScript(EffectScript* pEffectScript);
 		virtual ~MonsterScript() = default;
 
 		void Initialize() override;
@@ -22,9 +23,18 @@ namespace jh
 		void Complete();
 		void End();
 
+		void OnCollisionEnter(Collider2D* pOtherCollider) override;
+		void OnCollisionStay(Collider2D* pOtherCollider) override;
+		void OnCollisionExit(Collider2D* pOtherCollider) override;
+
+		void OnTriggerEnter(Collider2D* pOtherCollider) override;
+		void OnTriggerStay(Collider2D* pOtherCollider) override;
+		void OnTriggerExit(Collider2D* pOtherCollider) override;
+
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
+		EffectScript*					mpEffectScript;
 		float							mSpeed;
 		const std::wstring				mAnimIdleKey;
 		eObjectLookDirection			meLookDir;

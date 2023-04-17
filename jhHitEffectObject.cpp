@@ -1,4 +1,4 @@
-#include "jhWeaponEffectObjectt.h"
+#include "jhHitEffectObject.h"
 #include "jhResourceMaker.h"
 #include "jhTexture.h"
 #include "jhResourcesManager.h"
@@ -9,44 +9,37 @@
 #include "jhEffectScript.h"
 #include "jhPlayerScript.h"
 #include "jhAnimation.h"
-
+#include "jhEffectScript.h"
 using namespace jh::math;
 
 namespace jh
 {
-	WeaponEffectObject::WeaponEffectObject()
+	HitEffectObject::HitEffectObject()
 		: AnimatedGameObject()
-		, mpPlayerScript(nullptr)
 	{
 		setAnimator();
 		setRenderer();
+		setScript();
 	}
 
-	void WeaponEffectObject::Initialize()
+	void HitEffectObject::Initialize()
 	{
 		AnimatedGameObject::Initialize();
 	}
-	void WeaponEffectObject::Update()
+	void HitEffectObject::Update()
 	{
 		AnimatedGameObject::Update();
 	}
-	void WeaponEffectObject::FixedUpdate()
+	void HitEffectObject::FixedUpdate()
 	{
 		AnimatedGameObject::FixedUpdate();
 	}
-	void WeaponEffectObject::Render()
+	void HitEffectObject::Render()
 	{
 		AnimatedGameObject::Render();
 	}
 
-	void WeaponEffectObject::SetScript(PlayerScript* pPlayerScript)
-	{
-		assert(pPlayerScript != nullptr);
-		mpPlayerScript = pPlayerScript;
-		setScript();
-	}
-
-	void WeaponEffectObject::setAnimator()
+	void HitEffectObject::setAnimator()
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_SWORD_TEXTURE_KEY);
 		assert(pAtlas != nullptr);
@@ -56,7 +49,7 @@ namespace jh
 		Vector2 offset(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
 		Animation* pAnimation = pAnimator->Create(
-			L"SwordSwingEffect",
+			L"MonsterHitAnim",
 			pAtlas,
 			Vector2::Zero,
 			animSize,
@@ -68,7 +61,7 @@ namespace jh
 		this->AddComponent(pAnimator);
 		pAnimator->SetCurrentAnimation(pAnimation);
 	}
-	void WeaponEffectObject::setRenderer()
+	void HitEffectObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
 		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::EFFECT_SWORD_MATERIAL_KEY);
@@ -76,12 +69,11 @@ namespace jh
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
 		this->AddComponent(pSpriteRenderer);
-
 	}
-	void WeaponEffectObject::setScript()
+
+	void HitEffectObject::setScript()
 	{
-		assert(mpPlayerScript != nullptr);
-		EffectScript* pScript = new EffectScript(mpPlayerScript);
+		EffectScript* pScript = new EffectScript();
 		this->AddScript(pScript);
 	}
 }
