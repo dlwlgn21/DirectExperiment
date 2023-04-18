@@ -49,7 +49,7 @@ namespace jh
 
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
-		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -1.3f, 3.0f));
+		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 
 		// Effect
@@ -60,30 +60,30 @@ namespace jh
 		//pEffect->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
-		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -1.5f, 3.0f));
+		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, 3.0f));
 		pPlayerWeaponColliderObject->SetPlayerTransform(pPlayer->GetTransform());
 		//pPlayerWeaponColliderObject->SetEffectScript(static_cast<EffectScript*>(pEffect->GetScriptOrNull()));
 
 		// Monster
 		{
 			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
-			pMonster->GetTransform()->SetPosition(Vector3(1.0f, -1.0f, 4.0f));
+			pMonster->GetTransform()->SetPosition(Vector3(4.0f, -2.0f, 4.0f));
 			pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 		}
 
 		// Parrarell
 		{
-			BattleParrarellImageObject* pBGPObject = Instantiate<BattleParrarellImageObject>(eLayerType::BACKGROUND);
-			pBGPObject->SetName(L"BGParrarelObject");
-			pBGPObject->GetTransform()->SetPosition(Vector3(0.0f, 5.0f, 11.0f));
-			pBGPObject->GetTransform()->SetScale(Vector3(36.0f, 9.0f, 9.0f));
+			//BattleParrarellImageObject* pBGPObject = Instantiate<BattleParrarellImageObject>(eLayerType::BACKGROUND);
+			//pBGPObject->SetName(L"BGParrarelObject");
+			//pBGPObject->GetTransform()->SetPosition(Vector3(0.0f, 5.0f, 11.0f));
+			//pBGPObject->GetTransform()->SetScale(Vector3(36.0f, 9.0f, 9.0f));
 		}
 		// BattleBG
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"BGObject");
-			pBGObject->GetTransform()->SetScale(Vector3(5 * WIDTH_RATIO, 4 * WIDTH_RATIO, 1.0f));
-			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 2.0f, 10.0f));
+			pBGObject->GetTransform()->SetScale(Vector3(9 * WIDTH_RATIO, 3 * WIDTH_RATIO, 1.0f));
+			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
 		}
 
 

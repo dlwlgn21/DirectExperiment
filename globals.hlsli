@@ -21,10 +21,10 @@ cbuffer UVTranslationBuffer : register(b2)
     float4 UVTranslationPostion;
 }
 
-cbuffer ColliderBuffer : register(b3)
-{
-    float4 Color;
-}
+//cbuffer ColliderBuffer : register(b3)
+//{
+//    float4 ColliderColor;
+//}
 
 struct VertexIn
 {

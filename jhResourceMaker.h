@@ -24,13 +24,13 @@ namespace jh
 		void Initialize();
 		void Release();
 
-		ConstantBuffer* GetTransformCBOrNull() const		{ return mspTransformConstantBuffer.get(); }
-		ConstantBuffer* GetAnimationCBOrNull() const		{ return mspAnimationConstantBuffer.get(); }
-		ConstantBuffer* GetUVTranslationCBOrNull() const	{ return mspUVTranslationConstantBuffer.get(); }
-		ConstantBuffer* GetColliderCBOrNull() const			{ return mspColliderConstantBuffer.get(); }
+		ConstantBuffer* GetTransformCBOrNull() const { return mspTransformConstantBuffer.get(); }
+		ConstantBuffer* GetAnimationCBOrNull() const { return mspAnimationConstantBuffer.get(); }
+		ConstantBuffer* GetUVTranslationCBOrNull() const { return mspUVTranslationConstantBuffer.get(); }
+		//ConstantBuffer* GetColliderCBOrNull() const { return mspColliderConstantBuffer.get(); }
 
-		void PushBackDebugMesh(DebugMesh debugMesh)			{ mDebugMeshs.push_back(debugMesh); }
-		std::vector<DebugMesh>& GetDebugMeshs()				{ return mDebugMeshs; }
+		void PushBackDebugMesh(DebugMesh debugMesh) { mDebugMeshs.push_back(debugMesh); }
+		std::vector<DebugMesh>& GetDebugMeshs() { return mDebugMeshs; }
 
 
 	public:

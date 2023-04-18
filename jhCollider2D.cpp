@@ -31,11 +31,9 @@ namespace jh
 		assert(mpTransform != nullptr);
 	}
 
-
 	void Collider2D::Update()
 	{
 	}
-
 
 	void Collider2D::FixedUpdate()
 	{
@@ -74,6 +72,7 @@ namespace jh
 
 	void Collider2D::Render()
 	{
+
 	}
 
 	void Collider2D::OnCollisionEnter(Collider2D* pOtherCollider)

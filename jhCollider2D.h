@@ -49,7 +49,6 @@ namespace jh
 		void OnTriggerStay(Collider2D* pOtherCollider);
 		void OnTriggerExit(Collider2D* pOtherCollider);
 
-
 	private:
 		static UINT					sTotalColliderCount;
 		UINT						mUniqueColliderNumber;

@@ -160,7 +160,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"wPRLoh.png");
+		pBattleBGTexture->Load(L"wPRLoh2.png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
@@ -181,27 +181,27 @@ namespace jh
 	{
 		Material* pPlayerMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(PLAYER_MATERIAL_KEY, pPlayerMaterial);
-	
+
 		Material* pMonsterMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_MATERIAL_KEY, pMonsterMaterial);
 
 		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_BG_TEXTURE_KEY));
 		ResourcesManager::Insert<Material>(BATTLE_BG_MATERIAL_KEY, pBattleBGMaterial);
 
-		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY, 
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), 
+		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
 				ResourcesManager::Find<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY))
-		);
+			);
 
-		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY, 
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), 
+		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
-		);
+			);
 
 		ResourcesManager::Insert<Material>(EFFECT_SWORD_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(EFFECT_SWORD_TEXTURE_KEY))
-		);
+			);
 
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
@@ -247,7 +247,7 @@ namespace jh
 	{
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
-	
+
 		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
 		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
 	}
@@ -257,12 +257,12 @@ namespace jh
 		mspTransformConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::TRANSFORM);
 		mspAnimationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::ANIMATION);
 		mspUVTranslationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UV_TRANSLATION);
-		mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
+		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 	}
 
 	void ResourceMaker::Release()
 	{
-		mspColliderConstantBuffer.reset();
+		//mspColliderConstantBuffer.reset();
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
@@ -271,4 +271,3 @@ namespace jh
 	}
 
 }
-
