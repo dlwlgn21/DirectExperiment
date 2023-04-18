@@ -15,7 +15,7 @@ namespace jh
 	PlayerScript::PlayerScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(3.0f)
+		, mSpeed(1.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimWeaponSwingKey(L"PlayerWeaponSwing")

@@ -39,15 +39,15 @@ namespace jh
 		Vector3 pos = mpTranform->GetPosition();
 		mpAnimator->PlayAnimation(mAnimIdleKey, true);
 
-		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		{
-			pos.y -= mSpeed * Time::DeltaTime();
-		}
+		//if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		//{
+		//	pos.y -= mSpeed * Time::DeltaTime();
+		//}
 
-		if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			pos.y += mSpeed * Time::DeltaTime();
-		}
+		//if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		//{
+		//	pos.y += mSpeed * Time::DeltaTime();
+		//}
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
 			pos.x -= mSpeed * Time::DeltaTime();

@@ -13,7 +13,7 @@ namespace jh
 {
 	BattleBGScript::BattleBGScript(const eBGType eType)
 		: Script()
-		, mSpeed(0.4f)
+		, mSpeed(0.1f)
 		, mUVMove(Vector2::Zero)
 		, meType(eType)
 	{
@@ -26,11 +26,11 @@ namespace jh
 		switch (meType)
 		{
 		case jh::eBGType::NORMAL:
-			mSpeed = 0.4f;
+			mSpeed = 0.1f;
 			pTransform->SetPosition(Vector3(prePos.x, prePos.y, BATTLE_BG_Z_VALUE));
 			break;
 		case jh::eBGType::PARRARELL:
-			mSpeed = 0.2f;
+			mSpeed = 0.1f;
 			pTransform->SetPosition(Vector3(prePos.x, prePos.y, BATTLE_PARRALL_BG_Z_VALUE));
 			break;
 		default:
@@ -40,14 +40,14 @@ namespace jh
 	}
 	void BattleBGScript::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		{
-			mUVMove.y -= mSpeed * Time::DeltaTime();
-		}
-		if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			mUVMove.y += mSpeed * Time::DeltaTime();
-		}
+		//if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		//{
+		//	mUVMove.y -= mSpeed * Time::DeltaTime();
+		//}
+		//if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		//{
+		//	mUVMove.y += mSpeed * Time::DeltaTime();
+		//}
 		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
 			mUVMove.x -= mSpeed * Time::DeltaTime();
