@@ -37,41 +37,42 @@ namespace jh
 	void WeaponColliderScript::Update()
 	{
 		Vector3 pos = mpTransform->GetPosition();
-		if (meLookDir == eObjectLookDirection::LEFT)
-		{
-			pos.x = mpPlayerTransform->GetPosition().x - LEFT_RIGHT_DISTANCE;
-		}
-		else
-		{
-			pos.x = mpPlayerTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
-		}
 
-		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			pos.x += mSpeed * Time::DeltaTime();
-			meLookDir = eObjectLookDirection::RIGHT;
-			
-		}
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			meLookDir = eObjectLookDirection::LEFT;
-		}
-
-		if (mpCollider->GetState() == eColliderState::ACTIVE)
-		{
-			mpCollider->SetState(eColliderState::INACTIVE);
-		}
 
 		switch (meState)
 		{
 		case eWeponCoilderTimerState::WAITING:
+			if (meLookDir == eObjectLookDirection::LEFT)
+			{
+				pos.x = mpPlayerTransform->GetPosition().x - LEFT_RIGHT_DISTANCE;
+			}
+			else
+			{
+				pos.x = mpPlayerTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
+			}
+
+			if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+			{
+				pos.x += mSpeed * Time::DeltaTime();
+				meLookDir = eObjectLookDirection::RIGHT;
+
+			}
+			if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+			{
+				pos.x -= mSpeed * Time::DeltaTime();
+				meLookDir = eObjectLookDirection::LEFT;
+			}
+
+			if (mpCollider->GetState() == eColliderState::ACTIVE)
+			{
+				mpCollider->SetState(eColliderState::INACTIVE);
+			}
+
 			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
 			{
 				changeState(eWeponCoilderTimerState::START_TIME_COUNTING);
 			}
 			break;
-
 		case eWeponCoilderTimerState::START_TIME_COUNTING:
 			mColliderStartTimer -= Time::DeltaTime();
 
