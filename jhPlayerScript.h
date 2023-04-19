@@ -13,6 +13,7 @@ namespace jh
 		IDLE,
 		MOVING,
 		ATTACKING,
+		DASH,
 		HITTED,
 		DEAD,
 		COUNT
@@ -48,6 +49,10 @@ namespace jh
 		void Complete();
 		void End();
 
+		void AttackAnimationComplete();
+		void DashAnimationComplete();
+		void HitAnimationComplete();
+
 		eObjectLookDirection GetPlayerLookDirection() const { return meLookDir; }
 
 
@@ -60,20 +65,23 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
 	private:
+		void setState(const ePlayerState eState);
+		void setStateByInput(jh::math::Vector3& pos);
+		void setAnimationFlip();
+
+	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
 		float							mSpeed;
 		const std::wstring				mAnimIdleKey;
 		const std::wstring				mAnimMoveKey;
-		const std::wstring				mAnimWeaponSwingKey;
+		const std::wstring				mAnimAttackKey;
+		const std::wstring				mAnimDashKey;
 		const std::wstring				mAnimHittedKey;
-		bool							mbIsMoving;
-		bool							mbIsAttacking;
 		eObjectLookDirection			meLookDir;
 		ePlayerState					meState;
 
 		PlayerStat						mStat;
-
 	};
 }
 

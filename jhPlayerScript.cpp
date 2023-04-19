@@ -19,11 +19,10 @@ namespace jh
 		, mSpeed(2.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
-		, mAnimWeaponSwingKey(L"PlayerWeaponSwing")
+		, mAnimAttackKey(L"PlayerWeaponSwing")
+		, mAnimDashKey(L"PlayerDash")
 		, mAnimHittedKey(L"PlayerHitted")
 		, mpAnimator(nullptr)
-		, mbIsMoving(false)
-		, mbIsAttacking(false)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
@@ -37,6 +36,11 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimMoveKey) = std::bind(&PlayerScript::Start, this);
 		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
 		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
+
+		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
+		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
+		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
+
 		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
 
 	}
@@ -44,66 +48,33 @@ namespace jh
 	{
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
-		if (mbIsAttacking)
-		{
-			if (mpAnimator->GetCurrentAnimatingAnimation()->IsAnimComplete())
-			{
-				mbIsAttacking = false;
-			}
-			goto PROCESSING_INPUT;
-		}
+		setStateByInput(pos);
+		setAnimationFlip();
 
-		if (!Input::IsAnyKeyPressed())
+		switch (meState)
 		{
+		case ePlayerState::IDLE:
 			mpAnimator->PlayAnimation(mAnimIdleKey, true);
-			mbIsMoving = false;
-		}
-
-
-	PROCESSING_INPUT:
-		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			pos.x += mSpeed * Time::DeltaTime();
-			meLookDir = eObjectLookDirection::RIGHT;
-			mbIsMoving = true;
-		}
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			mbIsMoving = true;
-			meLookDir = eObjectLookDirection::LEFT;
-		}
-
-		assert(mpAnimator != nullptr);
-		if (meLookDir == eObjectLookDirection::RIGHT)
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(false);
-		}
-		else
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(true);
-		}
-
-		if (mbIsMoving && !mbIsAttacking)
-		{
+			break;
+		case ePlayerState::MOVING:
 			mpAnimator->PlayAnimation(mAnimMoveKey, true);
+			break;
+		case ePlayerState::ATTACKING:
+			mpAnimator->PlayAnimation(mAnimAttackKey, true);
+			break;
+		case ePlayerState::DASH:
+			mpAnimator->PlayAnimation(mAnimDashKey, true);
+			break;
+		case ePlayerState::HITTED:
+			mpAnimator->PlayAnimation(mAnimHittedKey, true);
+			break;
+		case ePlayerState::DEAD:
+			break;
+		default:
+			assert(false);
+			break;
 		}
 
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::PRESSED)
-		{
-			pos.z -= mSpeed * Time::DeltaTime();
-		}
-
-		if (Input::GetKeyState(eKeyCode::O) == eKeyState::PRESSED)
-		{
-			pos.z += mSpeed * Time::DeltaTime();
-		}
-
-		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
-		{
-			mpAnimator->PlayAnimation(mAnimWeaponSwingKey, true);
-			mbIsAttacking = true;
-		}
 		mpTranform->SetPosition(pos);
 	}
 
@@ -126,6 +97,23 @@ namespace jh
 	{
 	}
 
+
+	void PlayerScript::AttackAnimationComplete()
+	{
+		setState(ePlayerState::IDLE);
+	}
+
+	void PlayerScript::DashAnimationComplete()
+	{
+		setState(ePlayerState::IDLE);
+	}
+
+	void PlayerScript::HitAnimationComplete()
+	{
+		setState(ePlayerState::IDLE);
+	}
+
+
 	void PlayerScript::OnCollisionEnter(Collider2D* pOtherCollider)
 	{
 
@@ -143,7 +131,7 @@ namespace jh
 	{
 		if (pOtherCollider->GetOwner()->GetLayer() == eLayerType::MONSTER)
 		{
-			mpAnimator->PlayAnimation(mAnimHittedKey, false);
+			setState(ePlayerState::HITTED);
 		}
 	}
 
@@ -153,6 +141,63 @@ namespace jh
 
 	void PlayerScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
+	}
+
+	void PlayerScript::setState(const ePlayerState eState)
+	{
+		assert(eState != ePlayerState::COUNT);
+		meState = eState;
+	}
+
+	void PlayerScript::setStateByInput(Vector3& pos)
+	{
+		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)	{return;}
+		if (!Input::IsAnyKeyPressed())			{ setState(ePlayerState::IDLE); }
+
+		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		{
+			pos.x += (mSpeed * Time::DeltaTime());
+			setState(ePlayerState::MOVING);
+			meLookDir = eObjectLookDirection::RIGHT;
+		}
+		else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		{
+			pos.x -= (mSpeed * Time::DeltaTime());
+			setState(ePlayerState::MOVING);
+			meLookDir = eObjectLookDirection::LEFT;
+		}
+
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+		{
+			setState(ePlayerState::ATTACKING);
+		}
+		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
+		{
+			setState(ePlayerState::DASH);
+			const float DASH_AMOUNT = 2.0f;
+			if (meLookDir == eObjectLookDirection::LEFT)
+			{
+				pos.x -= (mSpeed * DASH_AMOUNT);
+			}
+			else
+			{
+				pos.x += (mSpeed * DASH_AMOUNT);
+			}
+		}
+	}
+
+	void PlayerScript::setAnimationFlip()
+	{
+		assert(mpAnimator != nullptr);
+		if (meLookDir == eObjectLookDirection::RIGHT)
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
+		else
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
+
 	}
 
 }

@@ -48,16 +48,16 @@ namespace jh
 		//{
 		//	pos.y += mSpeed * Time::DeltaTime();
 		//}
-		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			pos.x -= mSpeed * Time::DeltaTime();
-			meLookDir = eObjectLookDirection::RIGHT;
-		}
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			pos.x += mSpeed * Time::DeltaTime();
-			meLookDir = eObjectLookDirection::LEFT;
-		}
+		//if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		//{
+		//	pos.x -= mSpeed * Time::DeltaTime();
+		//	meLookDir = eObjectLookDirection::RIGHT;
+		//}
+		//if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		//{
+		//	pos.x += mSpeed * Time::DeltaTime();
+		//	meLookDir = eObjectLookDirection::LEFT;
+		//}
 
 		assert(mpAnimator != nullptr);
 		if (meLookDir == eObjectLookDirection::RIGHT)

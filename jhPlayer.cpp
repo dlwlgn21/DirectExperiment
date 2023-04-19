@@ -89,7 +89,18 @@ namespace jh
 			animSize,
 			offset,
 			2,
-			0.15f,
+			0.1f,
+			MAGNINICATION
+		);
+
+		pPlayerAnimator->Create(
+			L"PlayerDash",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 12),
+			animSize,
+			offset,
+			6,
+			0.05f,
 			MAGNINICATION
 		);
 		this->AddComponent(pPlayerAnimator);
