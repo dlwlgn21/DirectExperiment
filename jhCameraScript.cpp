@@ -11,7 +11,8 @@ namespace jh
 	CameraScript::CameraScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(80.0f)
+		, mpPlayerTransform(nullptr)
+		, mSpeed(50.0f)
 	{
 	}
 
@@ -23,7 +24,15 @@ namespace jh
 	void CameraScript::Update()
 	{
 		assert(mpTranform != nullptr);
+		assert(mpPlayerTransform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
+
+		// Added Part At 2023-04-19 15:49 For Chasing playerTransform
+
+		Vector3 dir = mpPlayerTransform->GetPosition() - mpTranform->GetPosition();
+		dir.Normalize();
+		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), dir.y * mSpeed * Time::DeltaTime(), 0.0f);
+
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)
 		{
 			pos += mSpeed * mpTranform->GetForward() * Time::DeltaTime();

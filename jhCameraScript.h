@@ -16,9 +16,12 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
+		void SetPlayerTransform(Transform* pPlayerTransform) { assert(pPlayerTransform != nullptr); mpPlayerTransform = pPlayerTransform; }
+
 	private:
-		Transform* mpTranform;
-		float mSpeed;
+		Transform*	mpTranform;
+		Transform*	mpPlayerTransform;
+		float		mSpeed;
 	};
 }
 

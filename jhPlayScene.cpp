@@ -36,22 +36,25 @@ namespace jh
 	{
 		const float WIDTH_RATIO = 9.24f;
 		// CAMERA
-		{
-			GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
-			pCameraObject->SetName(L"MainCamera");
-			Camera* pCameraComponent = new Camera();
-			pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
-			pCameraObject->AddComponent(pCameraComponent);
-			CameraManager::GetInstance().SetCamera(pCameraComponent);
-			CameraScript* pCameraScript = new CameraScript();
-			pCameraObject->AddComponent(pCameraScript);
-		}
+		
+		GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
+		pCameraObject->SetName(L"MainCamera");
+		Camera* pCameraComponent = new Camera();
+		pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
+		pCameraObject->AddComponent(pCameraComponent);
+		CameraManager::GetInstance().SetCamera(pCameraComponent);
+		CameraScript* pCameraScript = new CameraScript();
+		pCameraObject->AddComponent(pCameraScript);
+		
 
+		
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-
+		
+		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
+		
 		// Effect
 		//WeaponEffectObject* pEffect = Instantiate<WeaponEffectObject>(eLayerType::PLAYER);
 		//pEffect->SetScript(static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));

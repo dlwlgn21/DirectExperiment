@@ -48,14 +48,14 @@ namespace jh
 		//{
 		//	mUVMove.y += mSpeed * Time::DeltaTime();
 		//}
-		if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			mUVMove.x -= mSpeed * Time::DeltaTime();
-		}
-		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			mUVMove.x += mSpeed * Time::DeltaTime();
-		}
+		//if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		//{
+		//	mUVMove.x -= mSpeed * Time::DeltaTime();
+		//}
+		//if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		//{
+		//	mUVMove.x += mSpeed * Time::DeltaTime();
+		//}
 
 	}
 	void BattleBGScript::FixedUpdate()
