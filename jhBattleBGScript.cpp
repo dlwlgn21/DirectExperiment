@@ -60,8 +60,8 @@ namespace jh
 	}
 	void BattleBGScript::FixedUpdate()
 	{
-		wirteDataAtBuffer();
-		setPipeline();
+		//wirteDataAtBuffer();
+		//setPipeline();
 	}
 	void BattleBGScript::Render()
 	{

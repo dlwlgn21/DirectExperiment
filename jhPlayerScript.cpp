@@ -125,6 +125,7 @@ namespace jh
 
 	void PlayerScript::OnCollisionEnter(Collider2D* pOtherCollider)
 	{
+		
 	}
 
 	void PlayerScript::OnCollisionStay(Collider2D* pOtherCollider)
