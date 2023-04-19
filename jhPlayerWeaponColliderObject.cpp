@@ -5,7 +5,7 @@
 namespace jh
 {
 	PlayerWeaponColliderObject::PlayerWeaponColliderObject()
-		: GameObject()
+		: GameObject(eLayerType::PLAYER)
 		, mpPlayerTransform(nullptr)
 	{
 		Collider2D* pCollider = new Collider2D();

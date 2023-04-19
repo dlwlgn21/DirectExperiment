@@ -19,6 +19,7 @@ namespace jh
 
 	public:
 		GameObject();
+		GameObject(const eLayerType eType);
 		virtual ~GameObject();
 
 		virtual void Initialize();
@@ -37,11 +38,14 @@ namespace jh
 
 		std::vector<Script*>& GetScripts()								{ return mScripts; }
 
+		eLayerType GetLayer() const { return meLayer; }
+
 	protected:
 		std::vector<Component*>							mComponents;
 		std::vector<Script*>							mScripts;
 		Transform*										mpTransform;
 		eGameObjectState								meState;
+		eLayerType								meLayer;
 	};
 }
 

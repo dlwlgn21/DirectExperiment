@@ -43,7 +43,7 @@ namespace jh
 		GRID,
 		MONSTER,
 		PLAYER,
-
+		EFFECT,
 		PARTICLE,
 		UI,
 		COUNT = 16,

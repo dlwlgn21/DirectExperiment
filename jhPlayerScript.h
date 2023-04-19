@@ -8,6 +8,16 @@ static constexpr const UCHAR INITIAL_STAMINA = 5;
 
 namespace jh
 {
+	enum class ePlayerState
+	{
+		IDLE,
+		MOVING,
+		ATTACKING,
+		HITTED,
+		DEAD,
+		COUNT
+	};
+
 
 	class Animator;
 	class Transform;
@@ -59,7 +69,8 @@ namespace jh
 		const std::wstring				mAnimHittedKey;
 		bool							mbIsMoving;
 		bool							mbIsAttacking;
-		eObjectLookDirection    meLookDir;
+		eObjectLookDirection			meLookDir;
+		ePlayerState					meState;
 
 		PlayerStat						mStat;
 

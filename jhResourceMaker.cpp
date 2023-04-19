@@ -99,18 +99,23 @@ namespace jh
 #pragma region BATTLE_BG_MESH
 		const UINT MAGNIFICATION_VALUE = 8;
 		Mesh* pBattleBGMesh = new Mesh();
-		const float LEFT_U = 0.15f;
-		const float RIGHT_U = 0.95f;
-		const float HIGH_V = 0.15f;
-		const float LOW_V = 0.95f;
-		const Vector2 UV_LEFT_TOP(LEFT_U, HIGH_V);
-		const Vector2 UV_RIGHT_TOP(RIGHT_U, HIGH_V);
-		const Vector2 UV_LEFT_BOTTOM(LEFT_U, LOW_V);
-		const Vector2 UV_RIGHT_BOTTOM(RIGHT_U, LOW_V);
-		mVertices[0] = { {-0.5f,	0.5f,	0.0f},	UV_LEFT_TOP };
-		mVertices[1] = { {0.5f,		0.5f,	0.0f},	UV_RIGHT_TOP };
-		mVertices[2] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
-		mVertices[3] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
+		//const float LEFT_U = 0.15f;
+		//const float RIGHT_U = 0.95f;
+		//const float HIGH_V = 0.15f;
+		//const float LOW_V = 0.95f;
+
+		//const float LEFT_U = 0.0f;
+		//const float RIGHT_U = 1.0f;
+		//const float HIGH_V = 0.0f;
+		//const float LOW_V = 1.0f;
+		//const Vector2 UV_LEFT_TOP(LEFT_U, HIGH_V);
+		//const Vector2 UV_RIGHT_TOP(RIGHT_U, HIGH_V);
+		//const Vector2 UV_LEFT_BOTTOM(LEFT_U, LOW_V);
+		//const Vector2 UV_RIGHT_BOTTOM(RIGHT_U, LOW_V);
+		//mVertices[0] = { {-0.5f,	0.5f,	0.0f},	UV_LEFT_TOP };
+		//mVertices[1] = { {0.5f,		0.5f,	0.0f},	UV_RIGHT_TOP };
+		//mVertices[2] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
+		//mVertices[3] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
 
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
 		pBattleBGMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));

@@ -23,7 +23,7 @@ namespace jh
 		assert(pHitEffectObject != nullptr);
 		T* pGameObejct = new T(pHitEffectObject);
 		pCurrScene->AddGameObject(pGameObejct, eType);
-		pCurrScene->AddGameObject(pHitEffectObject, eType);
+		pCurrScene->AddGameObject(pHitEffectObject, eLayerType::EFFECT);
 		return pGameObejct;
 	}
 

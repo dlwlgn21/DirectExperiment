@@ -16,7 +16,7 @@ using namespace jh::math;
 namespace jh
 {
 	Monster::Monster(HitEffectObject* pHitEffectObject)
-		: GameObject()
+		: GameObject(eLayerType::MONSTER)
 		, mpHitEffectObject(pHitEffectObject)
 	{
 		setRenderer();

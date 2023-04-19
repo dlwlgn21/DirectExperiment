@@ -7,6 +7,7 @@
 #include "jhTime.h"
 #include "jhAnimator.h"
 #include "jhAnimation.h"
+#include "jhCollider2D.h"
 
 using namespace jh::math;
 
@@ -15,7 +16,7 @@ namespace jh
 	PlayerScript::PlayerScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(1.0f)
+		, mSpeed(2.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimWeaponSwingKey(L"PlayerWeaponSwing")
@@ -25,6 +26,7 @@ namespace jh
 		, mbIsAttacking(false)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
+		, meState(ePlayerState::IDLE)
 	{
 	}
 
@@ -35,10 +37,11 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimMoveKey) = std::bind(&PlayerScript::Start, this);
 		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
 		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
+		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
+
 	}
 	void PlayerScript::Update()
 	{
-		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
 		if (mbIsAttacking)
@@ -125,7 +128,7 @@ namespace jh
 
 	void PlayerScript::OnCollisionEnter(Collider2D* pOtherCollider)
 	{
-		
+
 	}
 
 	void PlayerScript::OnCollisionStay(Collider2D* pOtherCollider)
@@ -138,10 +141,10 @@ namespace jh
 
 	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-		char buffer[64];
-		ZeroMemory(buffer, 64);
-		sprintf(buffer, "%d\n", mStat.HP);
-		OutputDebugStringA(buffer);
+		if (pOtherCollider->GetOwner()->GetLayer() == eLayerType::MONSTER)
+		{
+			mpAnimator->PlayAnimation(mAnimHittedKey, false);
+		}
 	}
 
 	void PlayerScript::OnTriggerStay(Collider2D* pOtherCollider)

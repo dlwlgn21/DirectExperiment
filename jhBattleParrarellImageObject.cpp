@@ -4,7 +4,7 @@
 namespace jh
 {
 	BattleParrarellImageObject::BattleParrarellImageObject()
-		: GameObject()
+		: GameObject(eLayerType::BACKGROUND)
 	{
 		setRenderer();
 		setScript();

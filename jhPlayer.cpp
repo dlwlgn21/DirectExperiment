@@ -14,7 +14,7 @@ using namespace jh::math;
 namespace jh
 {
 	Player::Player()
-		: GameObject()
+		: GameObject(eLayerType::PLAYER)
 	{
 		setRenderer();
 		setAnimator();

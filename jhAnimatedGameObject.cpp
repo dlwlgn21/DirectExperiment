@@ -4,7 +4,7 @@
 namespace jh
 {
 	AnimatedGameObject::AnimatedGameObject()
-		: GameObject()
+		: GameObject(eLayerType::EFFECT)
 	{
 
 	}

@@ -7,10 +7,11 @@ static constexpr const UINT MAX_SCIPRTS_COUNT = 4;
 
 namespace jh
 {
-	GameObject::GameObject()
+	GameObject::GameObject(const eLayerType eType)
 		: Entity()
 		, mpTransform(new Transform())
 		, meState(GameObject::eGameObjectState::ACTIVE)
+		, meLayer(eType)
 	{
 		mComponents.reserve(static_cast<UINT>(eComponentType::COUNT));
 		mComponents.resize(static_cast<UINT>(eComponentType::COUNT));
@@ -18,6 +19,19 @@ namespace jh
 		AddComponent(mpTransform);
 		mpTransform->SetOwner(this);
 	}
+	GameObject::GameObject()
+		: Entity()
+		, mpTransform(new Transform())
+		, meState(GameObject::eGameObjectState::ACTIVE)
+		, meLayer(eLayerType::NONE)
+	{
+		mComponents.reserve(static_cast<UINT>(eComponentType::COUNT));
+		mComponents.resize(static_cast<UINT>(eComponentType::COUNT));
+		mScripts.reserve(MAX_SCIPRTS_COUNT);
+		AddComponent(mpTransform);
+		mpTransform->SetOwner(this);
+	}
+
 	GameObject::~GameObject()
 	{
 		for (auto* pCom : mComponents)
