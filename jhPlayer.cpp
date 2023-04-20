@@ -100,7 +100,7 @@ namespace jh
 			animSize,
 			offset,
 			6,
-			0.05f,
+			0.07f,
 			MAGNINICATION
 		);
 		this->AddComponent(pPlayerAnimator);
