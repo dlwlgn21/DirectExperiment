@@ -31,17 +31,8 @@ namespace jh
 
 	void PlayerScript::Initialize()
 	{
-		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
-		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimMoveKey) = std::bind(&PlayerScript::Start, this);
-		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
-		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
-
-		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
-		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
-		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
-
-		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
+		setAnimationEvent();
+		mpTranform = GetOwner()->GetTransform();
 
 	}
 	void PlayerScript::Update()
@@ -50,31 +41,7 @@ namespace jh
 		Vector3 pos = mpTranform->GetPosition();
 		setStateByInput(pos);
 		setAnimationFlip();
-
-		switch (meState)
-		{
-		case ePlayerState::IDLE:
-			mpAnimator->PlayAnimation(mAnimIdleKey, true);
-			break;
-		case ePlayerState::MOVING:
-			mpAnimator->PlayAnimation(mAnimMoveKey, true);
-			break;
-		case ePlayerState::ATTACKING:
-			mpAnimator->PlayAnimation(mAnimAttackKey, true);
-			break;
-		case ePlayerState::DASH:
-			mpAnimator->PlayAnimation(mAnimDashKey, true);
-			break;
-		case ePlayerState::HITTED:
-			mpAnimator->PlayAnimation(mAnimHittedKey, true);
-			break;
-		case ePlayerState::DEAD:
-			break;
-		default:
-			assert(false);
-			break;
-		}
-
+		setAnimatorByState();
 		mpTranform->SetPosition(pos);
 	}
 
@@ -143,6 +110,19 @@ namespace jh
 	{
 	}
 
+	void PlayerScript::setAnimationEvent()
+	{
+		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+		assert(mpAnimator != nullptr);
+		mpAnimator->GetStartEvent(mAnimMoveKey) = std::bind(&PlayerScript::Start, this);
+		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
+		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
+
+		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
+		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
+		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
+	}
+
 	void PlayerScript::setState(const ePlayerState eState)
 	{
 		assert(eState != ePlayerState::COUNT);
@@ -198,6 +178,33 @@ namespace jh
 			mpAnimator->SetCurrAnimationHorizontalFlip(true);
 		}
 
+	}
+
+	void PlayerScript::setAnimatorByState()
+	{
+		switch (meState)
+		{
+		case ePlayerState::IDLE:
+			mpAnimator->PlayAnimation(mAnimIdleKey, true);
+			break;
+		case ePlayerState::MOVING:
+			mpAnimator->PlayAnimation(mAnimMoveKey, true);
+			break;
+		case ePlayerState::ATTACKING:
+			mpAnimator->PlayAnimation(mAnimAttackKey, true);
+			break;
+		case ePlayerState::DASH:
+			mpAnimator->PlayAnimation(mAnimDashKey, true);
+			break;
+		case ePlayerState::HITTED:
+			mpAnimator->PlayAnimation(mAnimHittedKey, true);
+			break;
+		case ePlayerState::DEAD:
+			break;
+		default:
+			assert(false);
+			break;
+		}
 	}
 
 }

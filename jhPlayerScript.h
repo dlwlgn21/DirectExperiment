@@ -65,10 +65,11 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
 	private:
+		void setAnimationEvent();
 		void setState(const ePlayerState eState);
 		void setStateByInput(jh::math::Vector3& pos);
 		void setAnimationFlip();
-
+		void setAnimatorByState();
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
