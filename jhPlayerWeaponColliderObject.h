@@ -7,17 +7,14 @@ namespace jh
 	class EffectScript;
 	class Transform;
 	class Player;
+	class PlayerScript;
 	class PlayerWeaponColliderObject : public GameObject
 	{
 	public:
 		PlayerWeaponColliderObject();
 		virtual ~PlayerWeaponColliderObject() = default;
 
-		void SetPlayerTransform(Transform* pPlayerTransform);
-	private:
-		void setScript();
-	private:
-		Transform*			mpPlayerTransform;
+		void SetPlayerTransformAndScript(Transform* pPlayerTransform, PlayerScript* pPlayerScript);
 	};
 }
 

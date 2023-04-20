@@ -49,6 +49,14 @@ namespace jh
 		COUNT = 16,
 	};
 
+	enum class eColliderLayerType
+	{
+		MONSTER,
+		PLAYER,
+		PLAYER_WEAPON,
+		COUNT
+	};
+
 	enum class eSceneType
 	{
 		PLAY_SCENE,

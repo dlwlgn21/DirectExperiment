@@ -105,10 +105,10 @@ namespace jh
 	}
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-		mpEffectScript->PlayAnimation(meLookDir);
 	}
 	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
+		mpEffectScript->PlayAnimation(meLookDir);
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{

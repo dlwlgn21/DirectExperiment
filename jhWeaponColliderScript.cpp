@@ -1,5 +1,6 @@
 #include "jhWeaponColliderScript.h"
 #include "jhInput.h"
+#include "jhPlayer.h"
 #include "jhPlayerScript.h"
 #include "jhCollider2D.h"
 #include "jhTime.h"
@@ -8,14 +9,13 @@
 #include "jhEffectScript.h"
 #include "jhDebugHelper.h"
 
-
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
 static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
 
 namespace jh
 {
-	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform)
+	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, PlayerScript* pPlayerScript)
 		: Script()
 		, mpCollider(pCollider)
 		, mColliderStartTimer(START_COUNTING_TIME)
@@ -23,11 +23,13 @@ namespace jh
 		, meState(eWeponCoilderTimerState::WAITING)
 		, mpTransform(nullptr)
 		, mpPlayerTransform(pPlayerTransform)
+		, mpPlayerScript(pPlayerScript)
 		, meLookDir(eObjectLookDirection::RIGHT)
 	{
 		assert(mpCollider != nullptr);
 		assert(mpPlayerTransform != nullptr);
-		pCollider->SetState(eColliderState::INACTIVE);
+		assert(mpPlayerScript != nullptr);
+		mpCollider->SetState(eColliderState::INACTIVE);
 	}
 	void WeaponColliderScript::Initialize()
 	{
@@ -37,59 +39,8 @@ namespace jh
 	void WeaponColliderScript::Update()
 	{
 		Vector3 pos = mpTransform->GetPosition();
-
-
-		switch (meState)
-		{
-		case eWeponCoilderTimerState::WAITING:
-			if (meLookDir == eObjectLookDirection::LEFT)
-			{
-				pos.x = mpPlayerTransform->GetPosition().x - LEFT_RIGHT_DISTANCE;
-			}
-			else
-			{
-				pos.x = mpPlayerTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
-			}
-
-			if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-			{
-				pos.x += mSpeed * Time::DeltaTime();
-				meLookDir = eObjectLookDirection::RIGHT;
-
-			}
-			if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-			{
-				pos.x -= mSpeed * Time::DeltaTime();
-				meLookDir = eObjectLookDirection::LEFT;
-			}
-
-			if (mpCollider->GetState() == eColliderState::ACTIVE)
-			{
-				mpCollider->SetState(eColliderState::INACTIVE);
-			}
-
-			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
-			{
-				changeState(eWeponCoilderTimerState::START_TIME_COUNTING);
-			}
-			break;
-		case eWeponCoilderTimerState::START_TIME_COUNTING:
-			mColliderStartTimer -= Time::DeltaTime();
-
-			if (mColliderStartTimer <= 0.0f)
-			{
-				mColliderStartTimer = START_COUNTING_TIME;
-				if (mpCollider->GetState() != eColliderState::ACTIVE)
-				{
-					mpCollider->SetState(eColliderState::ACTIVE);
-				}
-				changeState(eWeponCoilderTimerState::WAITING);
-			}
-			break;
-		default:
-			break;
-		}
-
+		setPosByPlayerLookDirection(pos);
+		setColliderStateByPlayerState();
 		mpTransform->SetPosition(pos);
 	}
 	void WeaponColliderScript::FixedUpdate()
@@ -97,6 +48,34 @@ namespace jh
 	}
 	void WeaponColliderScript::Render()
 	{
+	}
+	void WeaponColliderScript::setPosByPlayerLookDirection(Vector3& pos)
+	{
+		const eObjectLookDirection ePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
+		switch (ePlayerLookDir)
+		{
+		case eObjectLookDirection::LEFT:
+			pos.x = mpPlayerTransform->GetPosition().x - LEFT_RIGHT_DISTANCE;
+			break;
+		case eObjectLookDirection::RIGHT:
+			pos.x = mpPlayerTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
+			break;
+		default:
+			assert(false);
+			break;
+		}
+	}
+	void WeaponColliderScript::setColliderStateByPlayerState()
+	{
+		const ePlayerState eState = mpPlayerScript->GetPlayerState();
+		if (eState == ePlayerState::ATTACKING)
+		{
+			mpCollider->SetState(eColliderState::ACTIVE);
+		}
+		else
+		{
+			mpCollider->SetState(eColliderState::INACTIVE);
+		}
 	}
 
 	void WeaponColliderScript::Start()
@@ -120,6 +99,7 @@ namespace jh
 	}
 	void WeaponColliderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
+		int a = 0;
 	}
 	void WeaponColliderScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
@@ -127,4 +107,6 @@ namespace jh
 	void WeaponColliderScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}
+
+
 }

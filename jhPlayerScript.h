@@ -53,7 +53,8 @@ namespace jh
 		void DashAnimationComplete();
 		void HitAnimationComplete();
 
-		eObjectLookDirection GetPlayerLookDirection() const { return meLookDir; }
+		const eObjectLookDirection GetPlayerLookDirection() const	{ return meLookDir; }
+		const ePlayerState GetPlayerState() const					{ return meState; }
 
 
 		void OnCollisionEnter(Collider2D* pOtherCollider) override;
@@ -63,6 +64,8 @@ namespace jh
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
+
+
 
 	private:
 		void setAnimationEvent();

@@ -20,6 +20,7 @@
 #include "jhPlayerWeaponColliderObject.h"
 #include "jhEffectScript.h"
 #include "jhHitEffectObject.h"
+#include "jhPlayerScript.h"
 
 using namespace jh::math;
 
@@ -64,7 +65,7 @@ namespace jh
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, 3.0f));
-		pPlayerWeaponColliderObject->SetPlayerTransform(pPlayer->GetTransform());
+		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 		//pPlayerWeaponColliderObject->SetEffectScript(static_cast<EffectScript*>(pEffect->GetScriptOrNull()));
 
 		// Monster

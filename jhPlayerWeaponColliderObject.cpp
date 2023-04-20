@@ -6,21 +6,15 @@ namespace jh
 {
 	PlayerWeaponColliderObject::PlayerWeaponColliderObject()
 		: GameObject(eLayerType::PLAYER)
-		, mpPlayerTransform(nullptr)
 	{
 		Collider2D* pCollider = new Collider2D();
 		AddComponent(pCollider);
 		pCollider->SetSize({2.0f, 1.0f});
 	}
-	void PlayerWeaponColliderObject::SetPlayerTransform(Transform* pPlayerTransform)
+	void PlayerWeaponColliderObject::SetPlayerTransformAndScript(Transform* pPlayerTransform, PlayerScript* pPlayerScript)
 	{
-		assert(pPlayerTransform != nullptr); 
-		mpPlayerTransform = pPlayerTransform; 
-		setScript();
-	}
-	void PlayerWeaponColliderObject::setScript()
-	{
-		WeaponColliderScript* pScript = new WeaponColliderScript(static_cast<Collider2D*>(GetComponentOrNull(eComponentType::COLLIDER)), mpPlayerTransform);
+		assert(pPlayerTransform != nullptr && pPlayerScript != nullptr); 
+		WeaponColliderScript* pScript = new WeaponColliderScript(static_cast<Collider2D*>(GetComponentOrNull(eComponentType::COLLIDER)), pPlayerTransform, pPlayerScript);
 		AddScript(pScript);
 	}
 }

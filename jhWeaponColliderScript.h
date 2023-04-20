@@ -13,10 +13,11 @@ namespace jh
 	class EffectScript;
 	class Transform;
 	class Collider2D;
+	class PlayerScript;
 	class WeaponColliderScript : public Script
 	{
 	public:
-		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform);
+		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, PlayerScript* pPlayerScript);
 		virtual ~WeaponColliderScript() = default;
 
 
@@ -38,6 +39,8 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 		
 	private:
+		void setPosByPlayerLookDirection(jh::math::Vector3& pos);
+		void setColliderStateByPlayerState();
 		void changeState(const eWeponCoilderTimerState eState) { meState = eState; }
 
 	private:
@@ -47,6 +50,7 @@ namespace jh
 		eWeponCoilderTimerState		meState;
 		Transform*					mpTransform;
 		Transform*					mpPlayerTransform;
+		PlayerScript*				mpPlayerScript;
 		eObjectLookDirection		meLookDir;
 	};
 }

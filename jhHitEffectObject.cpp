@@ -20,6 +20,7 @@ namespace jh
 		setAnimator();
 		setRenderer();
 		setScript();
+		
 	}
 
 	void HitEffectObject::Initialize()
