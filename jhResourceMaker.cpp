@@ -35,6 +35,13 @@ namespace jh
 	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
 
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_1_KEY = L"Parallax1TextureKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_2_KEY = L"Parallax2TextureKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_3_KEY = L"Parallax3TextureKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_4_KEY = L"Parallax4TextureKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_5_KEY = L"Parallax5TextureKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_6_KEY = L"Parallax6TextureKey";
+
 
 	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 	const std::wstring ResourceMaker::EFFECT_SWORD_TEXTURE_KEY = L"EffectSwordTextureKey";
@@ -54,6 +61,13 @@ namespace jh
 
 
 	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
+
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY = L"ParallaxMaterial1Key";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY = L"ParallaxMaterial2Key";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY = L"ParallaxMaterial3Key";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4Key";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5Key";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6Key";
 
 
 #pragma endregion
@@ -165,7 +179,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"GroundFinal2.png");
+		pBattleBGTexture->Load(L"ForeGround.png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
@@ -180,6 +194,31 @@ namespace jh
 		Texture* pEffectSwordTxtrue = new Texture();
 		pEffectSwordTxtrue->Load(L"BloodEffect.png");
 		ResourcesManager::Insert<Texture>(EFFECT_SWORD_TEXTURE_KEY, pEffectSwordTxtrue);
+
+		Texture* pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax1.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_1_KEY, pParralaxTxtrue);
+
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax2.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_2_KEY, pParralaxTxtrue);
+
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax3.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
+
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax4.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
+
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax5.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_5_KEY, pParralaxTxtrue);
+
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax6.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
+
 	}
 
 	void ResourceMaker::createMaterial()
@@ -208,6 +247,32 @@ namespace jh
 				ResourcesManager::Find<Texture>(EFFECT_SWORD_TEXTURE_KEY))
 			);
 
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_1_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_1_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_2_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_2_KEY))
+			);
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_3_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_3_KEY))
+			);
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_4_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_4_KEY))
+			);
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_5_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_5_KEY))
+			);
+		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_6_KEY,
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_6_KEY))
+			);
+
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);
@@ -221,9 +286,9 @@ namespace jh
 		D3D11_SAMPLER_DESC samplerDesc;
 		ZeroMemory(&samplerDesc, sizeof(samplerDesc));
 		samplerDesc.Filter = D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
-		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
-		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
-		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		samplerDesc.MipLODBias = 0.0f;
 		samplerDesc.MaxAnisotropy = 1;
 		samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;

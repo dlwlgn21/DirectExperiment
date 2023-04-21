@@ -16,6 +16,17 @@ namespace jh
 	}
 
 	template<typename T>
+	static T* Instantiate(const eLayerType eType, const float zValue)
+	{
+		Scene* pCurrScene = SceneManager::GetInstance().GetCurrentScene();
+		assert(pCurrScene != nullptr);
+		T* pGameObejct = new T(zValue);
+		pCurrScene->AddGameObject(pGameObejct, eType);
+		return pGameObejct;
+	}
+
+
+	template<typename T>
 	static T* Instantiate(const eLayerType eType, HitEffectObject* pHitEffectObject)
 	{
 		Scene* pCurrScene = SceneManager::GetInstance().GetCurrentScene();

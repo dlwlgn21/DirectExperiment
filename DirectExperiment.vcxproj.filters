@@ -184,6 +184,12 @@
     <Filter Include="Component\Renderer\MeshRenderer">
       <UniqueIdentifier>{59807237-9ae5-4e89-9835-26f67659661c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Parallax">
+      <UniqueIdentifier>{831ef3d3-b4d7-4ddf-b055-7507fdf0654d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Parallax">
+      <UniqueIdentifier>{65ca2b4b-7f8a-4bc6-8f82-4aedc52b2450}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -357,6 +363,12 @@
     <ClInclude Include="jhDebugHelper.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="jhParallaxObject.h">
+      <Filter>GameObject\Parallax</Filter>
+    </ClInclude>
+    <ClInclude Include="jhParallaxScript.h">
+      <Filter>Component\Script\Parallax</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -511,6 +523,12 @@
     </ClCompile>
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp">
       <Filter>GameObject\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="jhParallaxObject.cpp">
+      <Filter>GameObject\Parallax</Filter>
+    </ClCompile>
+    <ClCompile Include="jhParallaxScript.cpp">
+      <Filter>Component\Script\Parallax</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

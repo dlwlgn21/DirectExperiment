@@ -14,6 +14,13 @@ namespace jh
 		void Update() override;
 		void FixedUpdate() override;
 		void Release() override;
+
+	private:
+		void instantiateCameraAndPlayer();
+		void instantiateMonsters();
+		void instantiateParallaxObjects();
+		void instantiateOtherObjects();
+
 	};
 }
 

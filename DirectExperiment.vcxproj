@@ -166,6 +166,8 @@
     <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhOnceAnimator.h" />
+    <ClInclude Include="jhParallaxObject.h" />
+    <ClInclude Include="jhParallaxScript.h" />
     <ClInclude Include="jhPlayer.h" />
     <ClInclude Include="jhHitEffectObject.h" />
     <ClInclude Include="jhPlayerScript.h" />
@@ -217,6 +219,8 @@
     <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhOnceAnimator.cpp" />
+    <ClCompile Include="jhParallaxObject.cpp" />
+    <ClCompile Include="jhParallaxScript.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
     <ClCompile Include="jhHitEffectObject.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
