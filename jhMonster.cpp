@@ -60,39 +60,9 @@ namespace jh
 			animSize,
 			offset,
 			15,
-			0.05f,
+			0.1f,
 			100
 		);
-		//pPlayerAnimator->Create(
-		//	L"PlayerMove",
-		//	pAtlas,
-		//	Vector2(0.0f, HEIGHT * 4),
-		//	animSize,
-		//	offset,
-		//	9,
-		//	0.15f,
-		//	100
-		//);
-		//pPlayerAnimator->Create(
-		//	L"PlayerLeftPunch",
-		//	pAtlas,
-		//	Vector2(0.0f, HEIGHT * 12),
-		//	animSize,
-		//	offset,
-		//	6,
-		//	0.1f,
-		//	100
-		//);
-		//pPlayerAnimator->Create(
-		//	L"PlayerRightPunch",
-		//	pAtlas,
-		//	Vector2(0.0f, HEIGHT * 13),
-		//	animSize,
-		//	offset,
-		//	5,
-		//	0.1f,
-		//	100
-		//);
 		this->AddComponent(pMonsterAnimator);
 		pMonsterAnimator->PlayAnimation(L"MonsterIdle", true);
 	}
@@ -113,7 +83,7 @@ namespace jh
 	}
 	void Monster::setCollider()
 	{
-		Collider2D* pMonsterCollider = new Collider2D();
+		Collider2D* pMonsterCollider = new Collider2D(eColliderLayerType::MONSTER);
 		pMonsterCollider->SetSize(Vector2(0.1f, 0.25f));
 		this->AddComponent(pMonsterCollider);
 	}

@@ -39,7 +39,7 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 		
 	private:
-		void setPosByPlayerLookDirection(jh::math::Vector3& pos);
+		void setPosByPlayerLookDirection();
 		void setColliderStateByPlayerState();
 		void changeState(const eWeponCoilderTimerState eState) { meState = eState; }
 

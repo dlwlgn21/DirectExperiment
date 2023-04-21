@@ -7,7 +7,7 @@ namespace jh
 	PlayerWeaponColliderObject::PlayerWeaponColliderObject()
 		: GameObject(eLayerType::PLAYER)
 	{
-		Collider2D* pCollider = new Collider2D();
+		Collider2D* pCollider = new Collider2D(eColliderLayerType::PLAYER_WEAPON);
 		AddComponent(pCollider);
 		pCollider->SetSize({2.0f, 1.0f});
 	}

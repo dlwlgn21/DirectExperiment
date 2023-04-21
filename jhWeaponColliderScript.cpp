@@ -38,10 +38,8 @@ namespace jh
 	}
 	void WeaponColliderScript::Update()
 	{
-		Vector3 pos = mpTransform->GetPosition();
-		setPosByPlayerLookDirection(pos);
+		setPosByPlayerLookDirection();
 		setColliderStateByPlayerState();
-		mpTransform->SetPosition(pos);
 	}
 	void WeaponColliderScript::FixedUpdate()
 	{
@@ -49,8 +47,9 @@ namespace jh
 	void WeaponColliderScript::Render()
 	{
 	}
-	void WeaponColliderScript::setPosByPlayerLookDirection(Vector3& pos)
+	void WeaponColliderScript::setPosByPlayerLookDirection()
 	{
+		Vector3 pos = mpTransform->GetPosition();
 		const eObjectLookDirection ePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
 		switch (ePlayerLookDir)
 		{
@@ -64,6 +63,7 @@ namespace jh
 			assert(false);
 			break;
 		}
+		mpTransform->SetPosition(pos);
 	}
 	void WeaponColliderScript::setColliderStateByPlayerState()
 	{

@@ -123,7 +123,7 @@ namespace jh
 	}
 	void Player::setCollider()
 	{
-		Collider2D* pHitPlayerCollider = new Collider2D();
+		Collider2D* pHitPlayerCollider = new Collider2D(eColliderLayerType::PLAYER);
 		pHitPlayerCollider->SetSize(Vector2(0.1f, 0.25f));
 		this->AddComponent(pHitPlayerCollider);
 	}

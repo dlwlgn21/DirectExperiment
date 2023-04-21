@@ -11,7 +11,7 @@ namespace jh
 {
 	UINT Collider2D::sTotalColliderCount = 0;
 
-	Collider2D::Collider2D()
+	Collider2D::Collider2D(eColliderLayerType eCollierLayer)
 		: Component(eComponentType::COLLIDER)
 		, meColliderShapeType(eColliderShapeType::RECT)
 		, mpTransform(nullptr)
@@ -22,6 +22,7 @@ namespace jh
 		, mbIsUsePhysics(false)
 		, mUniqueColliderNumber(sTotalColliderCount++)
 		, meState(eColliderState::ACTIVE)
+		, meColliderLayer(eCollierLayer)
 	{
 	}
 

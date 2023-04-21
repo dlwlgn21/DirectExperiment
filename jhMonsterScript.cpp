@@ -5,6 +5,7 @@
 #include "jhTransform.h"
 #include "jhAnimator.h"
 #include "jhEffectScript.h"
+#include "jhCollider2D.h"
 
 using namespace jh::math;
 
@@ -31,10 +32,11 @@ namespace jh
 
 		assert(mpEffectScript != nullptr);
 		mpEffectScript->Initialize();
+		mpTranform = GetOwner()->GetTransform();
+		assert(mpTranform != nullptr);
 	}
 	void MonsterScript::Update()
 	{
-		mpTranform = static_cast<Transform*>(GetOwner()->GetComponentOrNull(eComponentType::TRANSFORM));
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
 		mpAnimator->PlayAnimation(mAnimIdleKey, true);
@@ -108,7 +110,10 @@ namespace jh
 	}
 	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
-		mpEffectScript->PlayAnimation(meLookDir);
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
+		{
+			mpEffectScript->PlayAnimation(meLookDir);
+		}
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{

@@ -71,7 +71,7 @@ namespace jh
 		// Monster
 		{
 			Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
-			pMonster->GetTransform()->SetPosition(Vector3(4.0f, -2.0f, 4.0f));
+			pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
 			pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 		}
 
