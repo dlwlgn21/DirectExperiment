@@ -27,7 +27,7 @@ namespace jh
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
-		, mbIsAttackKeyPreesed(false)
+		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 	{
 	}
 
@@ -44,6 +44,7 @@ namespace jh
 		setStateByInput(pos);
 		setAnimationFlip();
 		setAnimatorByState();
+		recoverStamina();
 		mpTranform->SetPosition(pos);
 	}
 
@@ -69,19 +70,17 @@ namespace jh
 
 	void PlayerScript::AttackAnimationStart()
 	{
-		if (mbIsAttackKeyPreesed)
-		{
-			mStat.Stamina -= ATTACK_STAMINA_COST;
-			debuger::CustomOutputDebugString("Stamina: ", static_cast<int>(mStat.Stamina));
-		}
+		decreaseStamina(ATTACK_STAMINA_COST);
 	}
 
 	void PlayerScript::AttackAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
-		mbIsAttackKeyPreesed = false;
-		debuger::CustomOutputDebugString("AttackAnimationCompleteCalled");
+	}
 
+	void PlayerScript::DashAnimationStart()
+	{
+		decreaseStamina(DASH_STAMINA_COST);
 	}
 
 	void PlayerScript::DashAnimationComplete()
@@ -134,6 +133,9 @@ namespace jh
 
 		mpAnimator->GetStartEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
+
+		
+		mpAnimator->GetStartEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
 	}
@@ -162,28 +164,23 @@ namespace jh
 			meLookDir = eObjectLookDirection::LEFT;
 		}
 
-		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
 		{
-			if (!mbIsAttackKeyPreesed)
+			if (mStat.Stamina >= ATTACK_STAMINA_COST)
 			{
-				if (mStat.Stamina >= ATTACK_STAMINA_COST)
-				{
-					setState(ePlayerState::ATTACKING);
-				}
-				mbIsAttackKeyPreesed = true;
+				setState(ePlayerState::ATTACKING);
 			}
 		}
-		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
+		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN)
 		{
-			setState(ePlayerState::DASH);
-			const float DASH_AMOUNT = 2.0f;
-			if (meLookDir == eObjectLookDirection::LEFT)
+			if (mStat.Stamina >= DASH_STAMINA_COST)
 			{
-				pos.x -= (mSpeed * DASH_AMOUNT);
-			}
-			else
-			{
-				pos.x += (mSpeed * DASH_AMOUNT);
+				setState(ePlayerState::DASH);
+				const float DASH_AMOUNT = 2.0f;
+				if (meLookDir == eObjectLookDirection::LEFT)
+					{pos.x -= (mSpeed * DASH_AMOUNT);}
+				else
+					{pos.x += (mSpeed * DASH_AMOUNT);}
 			}
 		}
 	}
@@ -192,13 +189,9 @@ namespace jh
 	{
 		assert(mpAnimator != nullptr);
 		if (meLookDir == eObjectLookDirection::RIGHT)
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(false);
-		}
+			{mpAnimator->SetCurrAnimationHorizontalFlip(false);}
 		else
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(true);
-		}
+			{mpAnimator->SetCurrAnimationHorizontalFlip(true);}
 
 	}
 
@@ -227,6 +220,22 @@ namespace jh
 			assert(false);
 			break;
 		}
+	}
+
+	void PlayerScript::recoverStamina()
+	{
+		mStaminaTimer -= Time::DeltaTime();
+		if (mStaminaTimer <= 0.0f)
+		{
+			mStaminaTimer = STAMINA_RECOVER_SECOND;
+			if (mStat.Stamina >= INITIAL_STAMINA)	{return;}
+			mStat.Stamina += STAMINA_RECOVER_AMOUNT;
+		}
+	}
+
+	void PlayerScript::decreaseStamina(CHAR amount)
+	{
+		mStat.Stamina -= amount;
 	}
 
 }

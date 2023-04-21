@@ -3,9 +3,12 @@
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
 
-static constexpr const CHAR INITIAL_HP = 10;
-static constexpr const CHAR INITIAL_STAMINA = 5;
-static constexpr const CHAR ATTACK_STAMINA_COST = 2;
+static constexpr const CHAR		INITIAL_HP = 10;
+static constexpr const CHAR		INITIAL_STAMINA = 5;
+static constexpr const CHAR		ATTACK_STAMINA_COST = 2;
+static constexpr const CHAR		DASH_STAMINA_COST = 1;
+static constexpr const float 	STAMINA_RECOVER_SECOND = 2.0f;
+static constexpr const CHAR 	STAMINA_RECOVER_AMOUNT = 1;
 
 namespace jh
 {
@@ -52,6 +55,7 @@ namespace jh
 
 		void AttackAnimationStart();
 		void AttackAnimationComplete();
+		void DashAnimationStart();
 		void DashAnimationComplete();
 		void HitAnimationComplete();
 
@@ -75,6 +79,9 @@ namespace jh
 		void setStateByInput(jh::math::Vector3& pos);
 		void setAnimationFlip();
 		void setAnimatorByState();
+		void recoverStamina();
+		void decreaseStamina(CHAR amount);
+
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
@@ -89,8 +96,7 @@ namespace jh
 
 		PlayerStat						mStat;
 
-
-		bool							mbIsAttackKeyPreesed;
+		float							mStaminaTimer;
 	};
 }
 
