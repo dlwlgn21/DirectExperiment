@@ -69,14 +69,19 @@ namespace jh
 
 	void PlayerScript::AttackAnimationStart()
 	{
-		mStat.Stamina -= ATTACK_STAMINA_COST;
-		debuger::CustomOutputDebugStringWithNumber("Stamina: ", static_cast<int>(mStat.Stamina));
+		if (mbIsAttackKeyPreesed)
+		{
+			mStat.Stamina -= ATTACK_STAMINA_COST;
+			debuger::CustomOutputDebugString("Stamina: ", static_cast<int>(mStat.Stamina));
+		}
 	}
 
 	void PlayerScript::AttackAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
 		mbIsAttackKeyPreesed = false;
+		debuger::CustomOutputDebugString("AttackAnimationCompleteCalled");
+
 	}
 
 	void PlayerScript::DashAnimationComplete()

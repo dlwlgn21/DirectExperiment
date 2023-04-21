@@ -90,8 +90,12 @@ namespace jh
 	void Animator::PlayAnimation(const std::wstring& key, bool bIsLooping)
 	{
 		Animation* pPrevAnim = mpCurrAnimatingAnimation;
-		Events* pEvents = nullptr;
+		if (pPrevAnim == FindAnimationOrNull(key))
+		{
+			return;
+		}
 
+		Events* pEvents = nullptr;
 		if (pPrevAnim != nullptr)
 		{
 			Events* pEvents = FindEventsOrNull(pPrevAnim->GetAnimationKey());

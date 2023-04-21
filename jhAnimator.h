@@ -80,6 +80,7 @@ namespace jh
 		Animation*										mpCurrAnimatingAnimation;
 		bool											mbIsAnimationLooping;
 		bool											mbIsActive;
+		bool											mbIsFirstCalled;
 	};
 }
 
