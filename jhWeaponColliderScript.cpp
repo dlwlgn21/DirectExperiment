@@ -7,7 +7,6 @@
 #include "jhGameObject.h"
 #include "jhTransform.h"
 #include "jhEffectScript.h"
-#include "jhDebugHelper.h"
 
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;

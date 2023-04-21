@@ -15,5 +15,16 @@ namespace jh
 			sprintf(buffer, "%s\n", pChar);
 			OutputDebugStringA(buffer);
 		}
+
+		void CustomOutputDebugStringWithNumber(const char* pChar, int number)
+		{
+			char buffer[64];
+			if (strlen(pChar) >= 64)
+			{
+				assert(false);
+			}
+			sprintf(buffer, "%s, %d\n", pChar, number);
+			OutputDebugStringA(buffer);
+		}
 	}
 }

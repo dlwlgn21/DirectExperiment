@@ -8,6 +8,7 @@
 #include "jhAnimator.h"
 #include "jhAnimation.h"
 #include "jhCollider2D.h"
+#include "jhDebugHelper.h"
 
 using namespace jh::math;
 
@@ -26,6 +27,7 @@ namespace jh
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
+		, mbIsAttackKeyPreesed(false)
 	{
 	}
 
@@ -65,9 +67,16 @@ namespace jh
 	}
 
 
+	void PlayerScript::AttackAnimationStart()
+	{
+		mStat.Stamina -= ATTACK_STAMINA_COST;
+		debuger::CustomOutputDebugStringWithNumber("Stamina: ", static_cast<int>(mStat.Stamina));
+	}
+
 	void PlayerScript::AttackAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
+		mbIsAttackKeyPreesed = false;
 	}
 
 	void PlayerScript::DashAnimationComplete()
@@ -118,6 +127,7 @@ namespace jh
 		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
 		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
 
+		mpAnimator->GetStartEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
 		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
@@ -149,7 +159,14 @@ namespace jh
 
 		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 		{
-			setState(ePlayerState::ATTACKING);
+			if (!mbIsAttackKeyPreesed)
+			{
+				if (mStat.Stamina >= ATTACK_STAMINA_COST)
+				{
+					setState(ePlayerState::ATTACKING);
+				}
+				mbIsAttackKeyPreesed = true;
+			}
 		}
 		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
 		{

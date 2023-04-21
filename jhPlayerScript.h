@@ -3,8 +3,9 @@
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
 
-static constexpr const UCHAR INITIAL_HP = 10;
-static constexpr const UCHAR INITIAL_STAMINA = 5;
+static constexpr const CHAR INITIAL_HP = 10;
+static constexpr const CHAR INITIAL_STAMINA = 5;
+static constexpr const CHAR ATTACK_STAMINA_COST = 2;
 
 namespace jh
 {
@@ -28,8 +29,8 @@ namespace jh
 	public:
 		struct PlayerStat
 		{
-			UCHAR HP;
-			UCHAR Stamina;
+			CHAR HP;
+			CHAR Stamina;
 			PlayerStat()
 				: HP(INITIAL_HP)
 				, Stamina(INITIAL_STAMINA)
@@ -49,6 +50,7 @@ namespace jh
 		void Complete();
 		void End();
 
+		void AttackAnimationStart();
 		void AttackAnimationComplete();
 		void DashAnimationComplete();
 		void HitAnimationComplete();
@@ -86,6 +88,9 @@ namespace jh
 		ePlayerState					meState;
 
 		PlayerStat						mStat;
+
+
+		bool							mbIsAttackKeyPreesed;
 	};
 }
 
