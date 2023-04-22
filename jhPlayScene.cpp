@@ -22,6 +22,8 @@
 #include "jhHitEffectObject.h"
 #include "jhPlayerScript.h"
 #include "jhParallaxObject.h"
+
+
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;

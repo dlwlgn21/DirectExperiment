@@ -2,6 +2,7 @@
 
 float4 main(VertexOut vIn) : SV_TARGET
 {
+    const float ADD = 0.1f;
     float4 color = (float) 0.0f;
     const uint SECOND_DIMENTION = 1;
     const uint THIRD_DIMENTION = 2;
@@ -18,10 +19,10 @@ float4 main(VertexOut vIn) : SV_TARGET
             discard;
         }
         color = AtlasTexture.Sample(PointBorderSampler, uv);
-        if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
-        {
-            discard;
-        }
+        //if (color.x == 1.0f && color.y == 1.0f && color.z == 1.0f)
+        //{
+        //    discard;
+        //}
     }
     else
     {

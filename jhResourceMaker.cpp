@@ -171,7 +171,7 @@ namespace jh
 	void ResourceMaker::createTextures()
 	{
 		Texture* pPlayerAtalsTexture = new Texture();
-		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37.png");
+		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37(2).png");
 		ResourcesManager::Insert<Texture>(PLAYER_TEXTURE_ATLAS_KEY, pPlayerAtalsTexture);
 
 		Texture* pZombieAtlasTexture = new Texture();
@@ -179,7 +179,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"ForeGround.png");
+		pBattleBGTexture->Load(L"ForeGround23.png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
