@@ -28,6 +28,7 @@ namespace jh
 		ConstantBuffer* GetAnimationCBOrNull() const { return mspAnimationConstantBuffer.get(); }
 		ConstantBuffer* GetUVTranslationCBOrNull() const { return mspUVTranslationConstantBuffer.get(); }
 		//ConstantBuffer* GetColliderCBOrNull() const { return mspColliderConstantBuffer.get(); }
+		ConstantBuffer* GetUIBarCBOrNull() const { return mspUIBarConstantBuffer.get(); }
 
 		void PushBackDebugMesh(DebugMesh debugMesh) { mDebugMeshs.push_back(debugMesh); }
 		std::vector<DebugMesh>& GetDebugMeshs() { return mDebugMeshs; }
@@ -101,6 +102,7 @@ namespace jh
 			, mspAnimationConstantBuffer()
 			, mspUVTranslationConstantBuffer()
 			, mspColliderConstantBuffer()
+			, mspUIBarConstantBuffer()
 			, mDebugMeshs()
 		{
 			mDebugMeshs.reserve(128);
@@ -116,6 +118,7 @@ namespace jh
 		std::unique_ptr<ConstantBuffer>					mspAnimationConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspUVTranslationConstantBuffer;
 		std::unique_ptr<ConstantBuffer>					mspColliderConstantBuffer;
+		std::unique_ptr<ConstantBuffer>					mspUIBarConstantBuffer;
 
 		std::vector<DebugMesh>							mDebugMeshs;
 	};

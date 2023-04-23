@@ -371,6 +371,7 @@ namespace jh
 		mspAnimationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::ANIMATION);
 		mspUVTranslationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UV_TRANSLATION);
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
+		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
 	}
 
 	void ResourceMaker::Release()
@@ -379,6 +380,7 @@ namespace jh
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
+		mspUIBarConstantBuffer.reset();
 		mcpPointBorderSampler.Reset();
 		//mcpPointWrapSampler.Reset();
 	}

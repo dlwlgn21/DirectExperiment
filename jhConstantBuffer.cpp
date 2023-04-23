@@ -28,6 +28,9 @@ namespace jh
 		//case eConstantBufferType::COLLIDER_COLOR:
 		//	mBufferDesc.ByteWidth = sizeof(ColliderBuffer);
 		//	break;
+		case eConstantBufferType::UI_BAR:
+			mBufferDesc.ByteWidth = sizeof(UIBarBuffer);
+			break;
 		default:
 			assert(false);
 			break;
@@ -76,6 +79,10 @@ namespace jh
 		//case eConstantBufferType::COLLIDER_COLOR:
 		//	graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(COLLIDER_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 		//	break;
+		case eConstantBufferType::UI_BAR:
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(UI_BAR_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(UI_BAR_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			break;
 		default:
 			assert(false);
 			break;

@@ -72,6 +72,7 @@ namespace jh
 		ANIMATION,
 		UV_TRANSLATION,
 		COLLIDER_COLOR,
+		UI_BAR,
 		COUNT,
 	};
 }
