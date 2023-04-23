@@ -166,14 +166,14 @@ namespace jh
 
 		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
 		{
-			if (mStat.Stamina >= ATTACK_STAMINA_COST)
+			if (mStat.CurrentStamina >= ATTACK_STAMINA_COST)
 			{
 				setState(ePlayerState::ATTACKING);
 			}
 		}
 		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN)
 		{
-			if (mStat.Stamina >= DASH_STAMINA_COST)
+			if (mStat.CurrentStamina >= DASH_STAMINA_COST)
 			{
 				setState(ePlayerState::DASH);
 				const float DASH_AMOUNT = 2.0f;
@@ -228,14 +228,14 @@ namespace jh
 		if (mStaminaTimer <= 0.0f)
 		{
 			mStaminaTimer = STAMINA_RECOVER_SECOND;
-			if (mStat.Stamina >= INITIAL_STAMINA)	{return;}
-			mStat.Stamina += STAMINA_RECOVER_AMOUNT;
+			if (mStat.CurrentStamina >= mStat.MaxStamina)	{return;}
+			mStat.CurrentStamina += STAMINA_RECOVER_AMOUNT;
 		}
 	}
 
 	void PlayerScript::decreaseStamina(CHAR amount)
 	{
-		mStat.Stamina -= amount;
+		mStat.CurrentStamina -= amount;
 	}
 
 }

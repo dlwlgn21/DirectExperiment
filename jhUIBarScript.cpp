@@ -1,6 +1,6 @@
 #include "jhUIBarScript.h"
 #include "jhPlayerScript.h"
-
+#include "jhDebugHelper.h"
 
 namespace jh
 {
@@ -17,6 +17,19 @@ namespace jh
 	}
 	void UIBarScript::Update()
 	{
+		const PlayerScript::PlayerStat& playerStat = mpPlayerScript->GetPlayerStat();
+		switch (meType)
+		{
+		case eUIBarType::HEALTH_BAR:
+			break;
+		case eUIBarType::STAMINA_BAR:
+			debuger::CustomOutputDebugString("InUIBarScript!!\n\n", playerStat.CurrentStamina);
+			break;
+		default:
+			assert(false);
+			break;
+		}
+
 		Script::Update();
 	}
 	void UIBarScript::FixedUpdate()

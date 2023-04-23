@@ -45,10 +45,11 @@ namespace jh
 	}
 	void PlayScene::Initialize()
 	{
-		instantiateCameraAndPlayer();
+		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
+		assert(pPlayerScript != nullptr);
 		//instantiateMonsters();
 		instantiateParallaxObjects();
-		instantiateUIObject();
+		instantiateUIObject(pPlayerScript);
 
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		Scene::Initialize();
@@ -69,7 +70,7 @@ namespace jh
 	{
 		Scene::Release();
 	}
-	void PlayScene::instantiateCameraAndPlayer()
+	PlayerScript* PlayScene::instantiateCameraAndPlayer()
 	{
 		// MainCamera
 		GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
@@ -104,6 +105,8 @@ namespace jh
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, 3.0f));
 		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
+	
+		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
 
 	void PlayScene::instantiateMonsters()
@@ -157,19 +160,19 @@ namespace jh
 		}
 	}
 
-	void PlayScene::instantiateUIObject()
+	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{
-		//UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER);
-		//this->AddGameObject(pHealthBorderOject, eLayerType::UI);
+		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);
+		this->AddGameObject(pHealthBorderOject, eLayerType::UI);
 
-		//UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR);
-		//this->AddGameObject(pHpBarOject, eLayerType::UI);
+		UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR, pPlayerScript);
+		this->AddGameObject(pHpBarOject, eLayerType::UI);
 
-		//UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER);
-		//this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
+		UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER, pPlayerScript);
+		this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
 
-		//UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR);
-		//this->AddGameObject(pStaminarBarOject, eLayerType::UI);
+		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, pPlayerScript);
+		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
 	}
 
 	void PlayScene::instantiateOtherObjects()

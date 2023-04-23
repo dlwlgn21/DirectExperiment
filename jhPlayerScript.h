@@ -5,8 +5,10 @@
 
 static constexpr const CHAR		INITIAL_HP = 10;
 static constexpr const CHAR		INITIAL_STAMINA = 5;
+
 static constexpr const CHAR		ATTACK_STAMINA_COST = 2;
 static constexpr const CHAR		DASH_STAMINA_COST = 1;
+
 static constexpr const float 	STAMINA_RECOVER_SECOND = 2.0f;
 static constexpr const CHAR 	STAMINA_RECOVER_AMOUNT = 1;
 
@@ -32,11 +34,15 @@ namespace jh
 	public:
 		struct PlayerStat
 		{
-			CHAR HP;
-			CHAR Stamina;
+			CHAR MaxHP;
+			CHAR MaxStamina;
+			CHAR CurrentHP;
+			CHAR CurrentStamina;
 			PlayerStat()
-				: HP(INITIAL_HP)
-				, Stamina(INITIAL_STAMINA)
+				: MaxHP(INITIAL_HP)
+				, MaxStamina(INITIAL_STAMINA)
+				, CurrentHP(INITIAL_HP)
+				, CurrentStamina(INITIAL_STAMINA)
 			{
 			}
 		};
@@ -61,7 +67,7 @@ namespace jh
 
 		const eObjectLookDirection GetPlayerLookDirection() const	{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
-
+		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
 
 		void OnCollisionEnter(Collider2D* pOtherCollider) override;
 		void OnCollisionStay(Collider2D* pOtherCollider) override;

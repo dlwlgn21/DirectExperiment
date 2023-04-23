@@ -3,6 +3,7 @@
 
 namespace jh
 {
+	class PlayerScript;
 	class PlayScene final : public Scene
 	{
 	public:
@@ -16,10 +17,10 @@ namespace jh
 		void Release() override;
 
 	private:
-		void instantiateCameraAndPlayer();
+		PlayerScript* instantiateCameraAndPlayer();
 		void instantiateMonsters();
 		void instantiateParallaxObjects();
-		void instantiateUIObject();
+		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();
 
 	};

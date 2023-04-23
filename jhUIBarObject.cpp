@@ -32,9 +32,11 @@ namespace jh
 			break;
 		case eUIBarType::HEALTH_BAR:
 			GetTransform()->SetPosition(Vector3(0.0f, HEALTH_BORDER_Y_VALUE, BORDER_Z_VALUE));
+			setScript(pPlayerScript);
 			break;
 		case eUIBarType::STAMINA_BAR:
 			GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE, BAR_Z_VALUE));
+			setScript(pPlayerScript);
 			break;
 		default:
 			assert(false);
@@ -42,7 +44,6 @@ namespace jh
 		}
 		GetTransform()->SetScale(Vector3(3.0f, 0.6f, 1.0f));
 		setRenderer();
-		setScript(pPlayerScript);
 	}
 
 	void UIBarObject::Initialize()
