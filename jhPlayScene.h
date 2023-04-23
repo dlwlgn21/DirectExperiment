@@ -19,6 +19,7 @@ namespace jh
 		void instantiateCameraAndPlayer();
 		void instantiateMonsters();
 		void instantiateParallaxObjects();
+		void instantiateUIObject();
 		void instantiateOtherObjects();
 
 	};

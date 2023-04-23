@@ -23,6 +23,7 @@ namespace jh
 	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
 	const std::wstring ResourceMaker::BATTLE_BG_SHADER_KEY = L"BattleBGShaderKey";
 	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
+	const std::wstring ResourceMaker::UI_SHADER_KEY = L"UIShaderKey";
 
 
 #pragma endregion
@@ -46,6 +47,8 @@ namespace jh
 	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 	const std::wstring ResourceMaker::EFFECT_SWORD_TEXTURE_KEY = L"EffectSwordTextureKey";
 
+	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorderKey";
+	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBarKey";
 
 #pragma endregion
 
@@ -68,6 +71,12 @@ namespace jh
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4Key";
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5Key";
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6Key";
+
+
+	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
+	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIBarMaterialKey";
+
+
 
 
 #pragma endregion
@@ -166,6 +175,10 @@ namespace jh
 		pDebugShader->SetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 		ResourcesManager::Insert<Shader>(DEBUG_SHADER_KEY, pDebugShader);
 
+
+		Shader* pUIShader = new Shader();
+		pUIShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserInterfacePS.hlsl");
+		ResourcesManager::Insert<Shader>(UI_SHADER_KEY, pUIShader);
 	}
 
 	void ResourceMaker::createTextures()
@@ -218,6 +231,11 @@ namespace jh
 		pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax6.png");
 		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
+
+
+		Texture* pUITextrue = new Texture();
+		pUITextrue->Load(L"HpBarBorder.png");
+		ResourcesManager::Insert<Texture>(UI_HP_BORDER_TEXTURE_KEY, pUITextrue);
 
 	}
 
@@ -273,6 +291,10 @@ namespace jh
 				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_6_KEY))
 			);
 
+		ResourcesManager::Insert<Material>(UI_HP_BORDER_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+				ResourcesManager::Find<Texture>(UI_HP_BORDER_TEXTURE_KEY))
+			);
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);

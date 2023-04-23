@@ -17,16 +17,21 @@ namespace jh
 		
 
 		void SetCamera(Camera* pCamera) { assert(pCamera != nullptr); mpMainCam = pCamera; }
+		void SetUICamera(Camera* pUICamera) { assert(pUICamera != nullptr); mpUICam = pUICamera; }
 		Camera* GetMainCamera() { assert(mpMainCam != nullptr); return mpMainCam; }
-
-		void Render() { assert(mpMainCam != nullptr); mpMainCam->Render(); }
+		
+		__forceinline void Render() { assert(mpMainCam != nullptr && mpUICam != nullptr); mpMainCam->Render(); mpUICam->Render(); }
 
 	private:
-		CameraManager() : mpMainCam(nullptr) {}
+		CameraManager() 
+			: mpMainCam(nullptr)
+			, mpUICam(nullptr)
+		{}
 		~CameraManager() = default;
 
 	private:
 		Camera* mpMainCam;
+		Camera* mpUICam;
 	};
 }
 

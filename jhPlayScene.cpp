@@ -22,7 +22,7 @@
 #include "jhHitEffectObject.h"
 #include "jhPlayerScript.h"
 #include "jhParallaxObject.h"
-
+#include "jhUIObject.h"
 
 using namespace jh::math;
 
@@ -46,8 +46,9 @@ namespace jh
 	void PlayScene::Initialize()
 	{
 		instantiateCameraAndPlayer();
-		instantiateMonsters();
+		//instantiateMonsters();
 		instantiateParallaxObjects();
+		instantiateUIObject();
 
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		Scene::Initialize();
@@ -70,17 +71,27 @@ namespace jh
 	}
 	void PlayScene::instantiateCameraAndPlayer()
 	{
-		// CAMERA
-
+		// MainCamera
 		GameObject* pCameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
 		pCameraObject->SetName(L"MainCamera");
 		Camera* pCameraComponent = new Camera();
 		pCameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
 		pCameraObject->AddComponent(pCameraComponent);
+		pCameraComponent->TurnLayerMask(eLayerType::UI, false);
 		CameraManager::GetInstance().SetCamera(pCameraComponent);
 		CameraScript* pCameraScript = new CameraScript();
 		pCameraObject->AddComponent(pCameraScript);
 
+		// UICamera
+		GameObject* pUICameraObject = Instantiate<GameObject>(eLayerType::CAMERA);
+		pUICameraObject->SetName(L"UICamera");
+		Camera* pUICameraComponent = new Camera();
+		pUICameraComponent->SetProjectionMode(eProjectionMode::ORTHOGRAPHIC_MODE);
+		pUICameraComponent->DisableAllLayerMasks();
+		pUICameraComponent->TurnLayerMask(eLayerType::UI, true);
+
+		pUICameraObject->AddComponent(pUICameraComponent);
+		CameraManager::GetInstance().SetUICamera(pUICameraComponent);
 
 
 		// Player
@@ -144,6 +155,13 @@ namespace jh
 			pParallaxSix->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
 			pParallaxSix->GetTransform()->SetPosition(Vector3(0.0f, 0.6f, PARALLAX_6_DEPTH));
 		}
+	}
+
+	void PlayScene::instantiateUIObject()
+	{
+		UIObject* pUIOject = Instantiate<UIObject>(eLayerType::UI);
+		//pUIOject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+		//pUIOject->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 	}
 
 	void PlayScene::instantiateOtherObjects()

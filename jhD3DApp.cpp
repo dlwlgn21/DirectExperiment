@@ -78,7 +78,7 @@ namespace jh
 		Time::Render(mHDC);
 		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
 
-		CameraManager::GetInstance().GetMainCamera()->Render();
+		CameraManager::GetInstance().Render();
 		CollisionManager::GetInstance().Render();
 	}
 	void D3DApp::Release()

@@ -185,6 +185,7 @@
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="jhTransform.h" />
+    <ClInclude Include="jhUIObject.h" />
     <ClInclude Include="jhWeaponColliderScript.h" />
     <ClInclude Include="jhWeaponScript.h" />
     <ClInclude Include="Resource.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhSword.cpp" />
     <ClCompile Include="jhTransform.cpp" />
+    <ClCompile Include="jhUIObject.cpp" />
     <ClCompile Include="jhWeaponColliderScript.cpp" />
     <ClCompile Include="jhWeaponScript.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -285,6 +287,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="jhSpriteVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfacePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

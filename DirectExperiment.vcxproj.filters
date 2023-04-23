@@ -190,6 +190,9 @@
     <Filter Include="Component\Script\Parallax">
       <UniqueIdentifier>{65ca2b4b-7f8a-4bc6-8f82-4aedc52b2450}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI">
+      <UniqueIdentifier>{d1444279-024d-4102-ae56-4605d14098a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -369,6 +372,9 @@
     <ClInclude Include="jhParallaxScript.h">
       <Filter>Component\Script\Parallax</Filter>
     </ClInclude>
+    <ClInclude Include="jhUIObject.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -530,6 +536,9 @@
     <ClCompile Include="jhParallaxScript.cpp">
       <Filter>Component\Script\Parallax</Filter>
     </ClCompile>
+    <ClCompile Include="jhUIObject.cpp">
+      <Filter>GameObject\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -561,6 +570,12 @@
       <Filter>ShaderResource\VS</Filter>
     </FxCompile>
     <FxCompile Include="DebugPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceVS.hlsl">
+      <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfacePS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>

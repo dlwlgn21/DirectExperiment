@@ -41,6 +41,8 @@ namespace jh
 		static const std::wstring SPRITE_SHADER_KEY;
 		static const std::wstring BATTLE_BG_SHADER_KEY;
 		static const std::wstring DEBUG_SHADER_KEY;
+		static const std::wstring UI_SHADER_KEY;
+
 
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_ATLAS_KEY;
@@ -52,6 +54,8 @@ namespace jh
 		static const std::wstring PARALLAX_BG_TEXTURE_4_KEY;
 		static const std::wstring PARALLAX_BG_TEXTURE_5_KEY;
 		static const std::wstring PARALLAX_BG_TEXTURE_6_KEY;
+		static const std::wstring UI_HP_BORDER_TEXTURE_KEY;
+		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
 
 
 		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
@@ -64,6 +68,9 @@ namespace jh
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring EFFECT_SWORD_MATERIAL_KEY;
 		static const std::wstring DEBUG_MATERIAL_KEY;
+		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
+		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
+
 
 		static const std::wstring PARALLAX_BG_MATERIAL_1_KEY;
 		static const std::wstring PARALLAX_BG_MATERIAL_2_KEY;
