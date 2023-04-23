@@ -193,6 +193,9 @@
     <Filter Include="GameObject\UI">
       <UniqueIdentifier>{d1444279-024d-4102-ae56-4605d14098a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\UI">
+      <UniqueIdentifier>{95514071-a3d6-4c71-89c2-0612ce54c04f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -372,8 +375,11 @@
     <ClInclude Include="jhParallaxScript.h">
       <Filter>Component\Script\Parallax</Filter>
     </ClInclude>
-    <ClInclude Include="jhUIObject.h">
+    <ClInclude Include="jhUIBarObject.h">
       <Filter>GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUIBarScript.h">
+      <Filter>Component\Script\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -536,8 +542,11 @@
     <ClCompile Include="jhParallaxScript.cpp">
       <Filter>Component\Script\Parallax</Filter>
     </ClCompile>
-    <ClCompile Include="jhUIObject.cpp">
+    <ClCompile Include="jhUIBarObject.cpp">
       <Filter>GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUIBarScript.cpp">
+      <Filter>Component\Script\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

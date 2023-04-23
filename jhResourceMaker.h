@@ -56,6 +56,7 @@ namespace jh
 		static const std::wstring PARALLAX_BG_TEXTURE_6_KEY;
 		static const std::wstring UI_HP_BORDER_TEXTURE_KEY;
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
+		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 
 
 		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
@@ -70,6 +71,7 @@ namespace jh
 		static const std::wstring DEBUG_MATERIAL_KEY;
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 
 
 		static const std::wstring PARALLAX_BG_MATERIAL_1_KEY;

@@ -22,7 +22,7 @@
 #include "jhHitEffectObject.h"
 #include "jhPlayerScript.h"
 #include "jhParallaxObject.h"
-#include "jhUIObject.h"
+#include "jhUIBarObject.h"
 
 using namespace jh::math;
 
@@ -159,9 +159,17 @@ namespace jh
 
 	void PlayScene::instantiateUIObject()
 	{
-		UIObject* pUIOject = Instantiate<UIObject>(eLayerType::UI);
-		//pUIOject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-		//pUIOject->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		//UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER);
+		//this->AddGameObject(pHealthBorderOject, eLayerType::UI);
+
+		//UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR);
+		//this->AddGameObject(pHpBarOject, eLayerType::UI);
+
+		//UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER);
+		//this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
+
+		//UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR);
+		//this->AddGameObject(pStaminarBarOject, eLayerType::UI);
 	}
 
 	void PlayScene::instantiateOtherObjects()

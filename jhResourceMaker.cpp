@@ -49,6 +49,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorderKey";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBarKey";
+	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBarKey";
 
 #pragma endregion
 
@@ -74,7 +75,8 @@ namespace jh
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
-	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIBarMaterialKey";
+	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterialKey";
+	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
 
 
 
@@ -237,6 +239,14 @@ namespace jh
 		pUITextrue->Load(L"HpBarBorder.png");
 		ResourcesManager::Insert<Texture>(UI_HP_BORDER_TEXTURE_KEY, pUITextrue);
 
+		Texture* pUIHPBarTextrue = new Texture();
+		pUIHPBarTextrue->Load(L"HPBar.png");
+		ResourcesManager::Insert<Texture>(UI_HP_BAR_TEXTURE_KEY, pUIHPBarTextrue);
+
+
+		Texture* pStaminaBarTextrue = new Texture();
+		pStaminaBarTextrue->Load(L"StaminarBar.png");
+		ResourcesManager::Insert<Texture>(UI_STAMINA_BAR_TEXTURE_KEY, pStaminaBarTextrue);
 	}
 
 	void ResourceMaker::createMaterial()
@@ -295,6 +305,17 @@ namespace jh
 			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_HP_BORDER_TEXTURE_KEY))
 			);
+
+		ResourcesManager::Insert<Material>(UI_HP_BAR_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+				ResourcesManager::Find<Texture>(UI_HP_BAR_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(UI_STAMINA_BAR_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+				ResourcesManager::Find<Texture>(UI_STAMINA_BAR_TEXTURE_KEY))
+			);
+
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);

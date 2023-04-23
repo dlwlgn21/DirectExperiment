@@ -185,7 +185,8 @@
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="jhTransform.h" />
-    <ClInclude Include="jhUIObject.h" />
+    <ClInclude Include="jhUIBarObject.h" />
+    <ClInclude Include="jhUIBarScript.h" />
     <ClInclude Include="jhWeaponColliderScript.h" />
     <ClInclude Include="jhWeaponScript.h" />
     <ClInclude Include="Resource.h" />
@@ -236,7 +237,8 @@
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhSword.cpp" />
     <ClCompile Include="jhTransform.cpp" />
-    <ClCompile Include="jhUIObject.cpp" />
+    <ClCompile Include="jhUIBarObject.cpp" />
+    <ClCompile Include="jhUIBarScript.cpp" />
     <ClCompile Include="jhWeaponColliderScript.cpp" />
     <ClCompile Include="jhWeaponScript.cpp" />
     <ClCompile Include="Main.cpp" />
