@@ -61,6 +61,10 @@ namespace jh
 
 		void AttackAnimationStart();
 		void AttackAnimationComplete();
+
+		void PushAttackAnimationStart();
+		void PushAttackAnimationComplete();
+
 		void DashAnimationStart();
 		void DashAnimationComplete();
 		void HitAnimationComplete();
@@ -95,6 +99,7 @@ namespace jh
 		const std::wstring				mAnimIdleKey;
 		const std::wstring				mAnimMoveKey;
 		const std::wstring				mAnimAttackKey;
+		const std::wstring				mAnimPushAttackKey;
 		const std::wstring				mAnimDashKey;
 		const std::wstring				mAnimHittedKey;
 		eObjectLookDirection			meLookDir;

@@ -103,6 +103,17 @@ namespace jh
 			0.07f,
 			MAGNINICATION
 		);
+		pPlayerAnimator->Create(
+			L"PlayerPushAttack",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 10),
+			animSize,
+			offset,
+			6,
+			0.15f,
+			MAGNINICATION
+		);
+
 		this->AddComponent(pPlayerAnimator);
 		pPlayerAnimator->PlayAnimation(L"PlayerIdle", true);
 	}

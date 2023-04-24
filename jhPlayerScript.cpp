@@ -21,6 +21,7 @@ namespace jh
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimAttackKey(L"PlayerWeaponSwing")
+		, mAnimPushAttackKey(L"PlayerPushAttack")
 		, mAnimDashKey(L"PlayerDash")
 		, mAnimHittedKey(L"PlayerHitted")
 		, mpAnimator(nullptr)
@@ -74,6 +75,16 @@ namespace jh
 	}
 
 	void PlayerScript::AttackAnimationComplete()
+	{
+		setState(ePlayerState::IDLE);
+	}
+
+	void PlayerScript::PushAttackAnimationStart()
+	{
+		decreaseStamina(ATTACK_STAMINA_COST);
+	}
+
+	void PlayerScript::PushAttackAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
 	}
@@ -134,6 +145,9 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
 
+
+		mpAnimator->GetStartEvent(mAnimPushAttackKey) = std::bind(&PlayerScript::PushAttackAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimPushAttackKey) = std::bind(&PlayerScript::PushAttackAnimationComplete, this);
 		
 		mpAnimator->GetStartEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
@@ -173,6 +187,13 @@ namespace jh
 		}
 		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN)
 		{
+			if (mStat.CurrentStamina >= ATTACK_STAMINA_COST)
+			{
+				setState(ePlayerState::ATTACKING);
+			}
+		}
+		else if (Input::GetKeyState(eKeyCode::C) == eKeyState::DOWN)
+		{
 			if (mStat.CurrentStamina >= DASH_STAMINA_COST)
 			{
 				setState(ePlayerState::DASH);
@@ -206,7 +227,14 @@ namespace jh
 			mpAnimator->PlayAnimation(mAnimMoveKey, true);
 			break;
 		case ePlayerState::ATTACKING:
-			mpAnimator->PlayAnimation(mAnimAttackKey, true);
+			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN || Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+			{
+				mpAnimator->PlayAnimation(mAnimAttackKey, true);
+			}
+			else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN || Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
+			{
+				mpAnimator->PlayAnimation(mAnimPushAttackKey, true);
+			}
 			break;
 		case ePlayerState::DASH:
 			mpAnimator->PlayAnimation(mAnimDashKey, true);

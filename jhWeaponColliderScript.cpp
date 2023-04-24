@@ -59,7 +59,8 @@ namespace jh
 			pos.x = mpPlayerTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
 			break;
 		default:
-			assert(false);
+			// TODO : why..??
+			//assert(false);
 			break;
 		}
 		mpTransform->SetPosition(pos);
