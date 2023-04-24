@@ -131,6 +131,7 @@ namespace jh::graphics
 
 	void GraphicDeviceDX11::WriteDataAtBuffer(ID3D11Resource* pResource, const void* pData, const size_t dataSize)
 	{
+		assert(pResource != nullptr);
 		/*
 			DYNAMIC 버퍼는 Data를 쓰는 과정을 조금 특이하게 진행해야 함.
 			CPU가 값을 쓰고 GPU가 읽어간다고 했는데, 이 과정이 서로 맞지 않으면,

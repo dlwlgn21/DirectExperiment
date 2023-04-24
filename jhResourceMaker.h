@@ -123,4 +123,3 @@ namespace jh
 		std::vector<DebugMesh>							mDebugMeshs;
 	};
 }
-

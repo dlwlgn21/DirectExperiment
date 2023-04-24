@@ -194,7 +194,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_ATLAS_KEY, pZombieAtlasTexture);
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"ForeGround23.png");
+		pBattleBGTexture->Load(L"ForeGround23(1).png");
 		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();

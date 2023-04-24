@@ -39,8 +39,8 @@ namespace jh
 	void Editor::Render()
 	{
 		std::vector<DebugMesh>& debugMeshs = ResourceMaker::GetInstance().GetDebugMeshs();
-		
-		for (const auto& debugMesh : debugMeshs)
+
+		for (auto& debugMesh : debugMeshs)
 		{
 			DebugRender(debugMesh);
 		}
@@ -77,7 +77,7 @@ namespace jh
 		}
 
 		Camera* pCamera = CameraManager::GetInstance().GetMainCamera();
-		
+
 		pTransform->FixedUpdate();
 
 		Camera::SetGpuViewMatrix(pCamera->GetViewMatrix());

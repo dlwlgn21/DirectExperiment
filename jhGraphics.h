@@ -12,7 +12,7 @@ static constexpr const UINT TRANSFORM_CB_SLOT_NUMBER = 0;
 static constexpr const UINT ANINATION_CB_SLOT_NUMBER = 1;
 static constexpr const UINT BG_UV_TRANSLATION_CB_SLOT_NUMBER = 2;
 static constexpr const UINT COLLIDER_CB_SLOT_NUMBER = 3;
-static constexpr const UINT UI_BAR_CB_SLOT_NUMBER = 4;
+static constexpr const UINT UI_BAR_CB_SLOT_NUMBER = 3;
 
 static constexpr const UINT SIMD_ALIGN_SIZE = 16;
 
