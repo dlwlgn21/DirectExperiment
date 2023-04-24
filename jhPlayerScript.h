@@ -25,6 +25,12 @@ namespace jh
 		COUNT
 	};
 
+	enum class eAttackType
+	{
+		NORMAL,
+		PUSH,
+		COUNT
+	};
 
 	class Animator;
 	class Transform;
@@ -86,6 +92,7 @@ namespace jh
 	private:
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
+		void setAttackType(const eAttackType eType);
 		void setStateByInput(jh::math::Vector3& pos);
 		void setAnimationFlip();
 		void setAnimatorByState();
@@ -104,7 +111,7 @@ namespace jh
 		const std::wstring				mAnimHittedKey;
 		eObjectLookDirection			meLookDir;
 		ePlayerState					meState;
-
+		eAttackType						meAttackType;
 		PlayerStat						mStat;
 
 		float							mStaminaTimer;

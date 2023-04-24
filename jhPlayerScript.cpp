@@ -28,6 +28,7 @@ namespace jh
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
+		, meAttackType(eAttackType::NORMAL)
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 	{
 	}
@@ -160,6 +161,11 @@ namespace jh
 		meState = eState;
 	}
 
+	void PlayerScript::setAttackType(const eAttackType eType)
+	{
+		meAttackType = eType;
+	}
+
 	void PlayerScript::setStateByInput(Vector3& pos)
 	{
 		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)	{return;}
@@ -183,6 +189,7 @@ namespace jh
 			if (mStat.CurrentStamina >= ATTACK_STAMINA_COST)
 			{
 				setState(ePlayerState::ATTACKING);
+				setAttackType(eAttackType::NORMAL);
 			}
 		}
 		else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN)
@@ -190,6 +197,7 @@ namespace jh
 			if (mStat.CurrentStamina >= ATTACK_STAMINA_COST)
 			{
 				setState(ePlayerState::ATTACKING);
+				setAttackType(eAttackType::PUSH);
 			}
 		}
 		else if (Input::GetKeyState(eKeyCode::C) == eKeyState::DOWN)
@@ -227,13 +235,16 @@ namespace jh
 			mpAnimator->PlayAnimation(mAnimMoveKey, true);
 			break;
 		case ePlayerState::ATTACKING:
-			if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN || Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
+			switch (meAttackType)
 			{
+			case eAttackType::NORMAL:
 				mpAnimator->PlayAnimation(mAnimAttackKey, true);
-			}
-			else if (Input::GetKeyState(eKeyCode::X) == eKeyState::DOWN || Input::GetKeyState(eKeyCode::X) == eKeyState::PRESSED)
-			{
+				break;
+			case eAttackType::PUSH:
 				mpAnimator->PlayAnimation(mAnimPushAttackKey, true);
+				break;
+			default:
+				break;
 			}
 			break;
 		case ePlayerState::DASH:
