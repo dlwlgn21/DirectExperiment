@@ -47,7 +47,7 @@ namespace jh
 	{
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
-		//instantiateMonsters();
+		instantiateMonsters();
 		instantiateParallaxObjects();
 		instantiateUIObject(pPlayerScript);
 
