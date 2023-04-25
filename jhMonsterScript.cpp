@@ -6,16 +6,18 @@
 #include "jhAnimator.h"
 #include "jhEffectScript.h"
 #include "jhCollider2D.h"
-
+#include "jhPlayerScript.h"
 using namespace jh::math;
 
 namespace jh
 {
-	MonsterScript::MonsterScript(EffectScript* pEffectScript)
+	MonsterScript::MonsterScript(EffectScript* pEffectScript, PlayerScript* pPlayerScript)
 		: Script()
 		, mpTranform(nullptr)
+		, mpPlayerTransform(nullptr)
 		, mpAnimator(nullptr)
 		, mpEffectScript(pEffectScript)
+		, mpPlayerScript(pPlayerScript)
 		, mSpeed(1.0f)
 		, mAnimIdleKey(L"MonsterIdle")
 		, meLookDir(eObjectLookDirection::RIGHT)
@@ -34,49 +36,20 @@ namespace jh
 		mpEffectScript->Initialize();
 		mpTranform = GetOwner()->GetTransform();
 		assert(mpTranform != nullptr);
+
+		assert(mpPlayerScript != nullptr);
+		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
+		assert(mpPlayerTransform != nullptr);
+
+		mpTranform->SetPosition(Vector3(6.0f, -1.7f, 4.0f));
+		mpTranform->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 	}
+
 	void MonsterScript::Update()
 	{
-		assert(mpTranform != nullptr);
-		Vector3 pos = mpTranform->GetPosition();
-		mpAnimator->PlayAnimation(mAnimIdleKey, true);
-
-		//if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		//{
-		//	pos.y -= mSpeed * Time::DeltaTime();
-		//}
-
-		//if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		//{
-		//	pos.y += mSpeed * Time::DeltaTime();
-		//}
-		//if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		//{
-		//	pos.x -= mSpeed * Time::DeltaTime();
-		//	meLookDir = eObjectLookDirection::RIGHT;
-		//}
-		//if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		//{
-		//	pos.x += mSpeed * Time::DeltaTime();
-		//	meLookDir = eObjectLookDirection::LEFT;
-		//}
-
-		assert(mpAnimator != nullptr);
-		if (meLookDir == eObjectLookDirection::RIGHT)
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(false);
-		}
-		else
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(true);
-		}
-
-		//if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
-		//{
-		//	mpEffectScript->PlayAnimation(meLookDir);
-		//}
-
-		mpTranform->SetPosition(pos);
+		setPosition();
+		setAnimationFlip();
+		playAnimation();
 	}
 	void MonsterScript::FixedUpdate()
 	{
@@ -117,5 +90,41 @@ namespace jh
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
+	}
+	void MonsterScript::setPosition()
+	{
+		assert(mpTranform != nullptr);
+		Vector3 monCurrPos = mpTranform->GetPosition();
+		Vector3 dir = mpPlayerTransform->GetPosition() - monCurrPos;
+		Vector3 lookDirVector(dir);
+		dir.Normalize();
+		Vector3 moveVector = monCurrPos;
+		moveVector += dir * mSpeed * Time::DeltaTime();
+		mpTranform->SetPosition(Vector3(moveVector.x, monCurrPos.y, monCurrPos.z));
+
+		if (lookDirVector.x < 0.0f)
+		{
+			meLookDir = eObjectLookDirection::LEFT;
+		}
+		else
+		{
+			meLookDir = eObjectLookDirection::RIGHT;
+		}
+	}
+	void MonsterScript::setAnimationFlip()
+	{
+		assert(mpAnimator != nullptr);
+		if (meLookDir == eObjectLookDirection::RIGHT)
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
+		else
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
+	}
+	void MonsterScript::playAnimation()
+	{
+		mpAnimator->PlayAnimation(mAnimIdleKey, true);
 	}
 }

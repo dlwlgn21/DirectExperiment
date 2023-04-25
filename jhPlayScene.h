@@ -18,7 +18,7 @@ namespace jh
 
 	private:
 		PlayerScript* instantiateCameraAndPlayer();
-		void instantiateMonsters();
+		void instantiateMonsters(PlayerScript* pPlayerScript);
 		void instantiateParallaxObjects();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();

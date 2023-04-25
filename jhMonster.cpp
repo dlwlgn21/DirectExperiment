@@ -15,13 +15,14 @@ using namespace jh::math;
 
 namespace jh
 {
-	Monster::Monster(HitEffectObject* pHitEffectObject)
+	Monster::Monster(HitEffectObject* pHitEffectObject, PlayerScript* pPlayerScript)
 		: GameObject(eLayerType::MONSTER)
 		, mpHitEffectObject(pHitEffectObject)
 	{
+		assert(pPlayerScript != nullptr);
 		setRenderer();
 		setAnimator();
-		setScript();
+		setScript(pPlayerScript);
 		setCollider();
 		mpHitEffectObject->GetTransform()->SetParent(this);
 		mpHitEffectObject->GetTransform()->SetPosition(Vector3(0.0f, 0.1f, -3.0f));
@@ -44,6 +45,7 @@ namespace jh
 	{
 		GameObject::Render();
 	}
+
 	void Monster::setAnimator()
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ATLAS_KEY);
@@ -76,9 +78,10 @@ namespace jh
 		this->AddComponent(pSpriteRenderer);
 
 	}
-	void Monster::setScript()
+	void Monster::setScript(PlayerScript* pPlayerScript)
 	{
-		MonsterScript* pScript = new MonsterScript(static_cast<EffectScript*>(mpHitEffectObject->GetScriptOrNull()));
+		assert(pPlayerScript);
+		MonsterScript* pScript = new MonsterScript(static_cast<EffectScript*>(mpHitEffectObject->GetScriptOrNull()), pPlayerScript);
 		this->AddScript(pScript);
 	}
 	void Monster::setCollider()

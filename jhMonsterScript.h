@@ -5,13 +5,21 @@
 
 namespace jh
 {
+	enum class eMonsterState
+	{
+		SEARCHING,
+		TRACING,
+		ATTACKING,
+	};
+
 	class Animator;
 	class Transform;
 	class EffectScript;
+	class PlayerScript;
 	class MonsterScript final : public Script
 	{
 	public:
-		MonsterScript(EffectScript* pEffectScript);
+		MonsterScript(EffectScript* pEffectScript, PlayerScript* pPlayerScript);
 		virtual ~MonsterScript() = default;
 
 		void Initialize() override;
@@ -32,12 +40,18 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
 	private:
+		void setPosition();
+		void setAnimationFlip();
+		void playAnimation();
+	private:
 		Transform*						mpTranform;
+		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
 		EffectScript*					mpEffectScript;
 		float							mSpeed;
 		const std::wstring				mAnimIdleKey;
 		eObjectLookDirection			meLookDir;
+		PlayerScript*					mpPlayerScript;
 	};
 }
 

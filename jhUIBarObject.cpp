@@ -42,7 +42,7 @@ namespace jh
 			assert(false);
 			break;
 		}
-		GetTransform()->SetScale(Vector3(3.0f, 0.6f, 1.0f));
+		GetTransform()->SetScale(Vector3(1.2f, 0.6f, 1.0f));
 		setRenderer();
 	}
 

@@ -2,6 +2,7 @@
 #include "jhScene.h"
 #include "jhSceneManager.h"
 #include "jhHitEffectObject.h"
+#include "jhPlayerScript.h"
 
 namespace jh
 {
@@ -27,12 +28,12 @@ namespace jh
 
 
 	template<typename T>
-	static T* Instantiate(const eLayerType eType, HitEffectObject* pHitEffectObject)
+	static T* InstantiateMonster(const eLayerType eType, HitEffectObject* pHitEffectObject, PlayerScript* pPlayerScript)
 	{
 		Scene* pCurrScene = SceneManager::GetInstance().GetCurrentScene();
 		assert(pCurrScene != nullptr);
 		assert(pHitEffectObject != nullptr);
-		T* pGameObejct = new T(pHitEffectObject);
+		T* pGameObejct = new T(pHitEffectObject, pPlayerScript);
 		pCurrScene->AddGameObject(pGameObejct, eType);
 		pCurrScene->AddGameObject(pHitEffectObject, eLayerType::EFFECT);
 		return pGameObejct;

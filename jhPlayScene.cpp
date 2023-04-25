@@ -47,7 +47,7 @@ namespace jh
 	{
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
-		instantiateMonsters();
+		instantiateMonsters(pPlayerScript);
 		instantiateParallaxObjects();
 		instantiateUIObject(pPlayerScript);
 
@@ -109,11 +109,13 @@ namespace jh
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
 
-	void PlayScene::instantiateMonsters()
+	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
 	{	
-		Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
-		pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
-		pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		assert(pPlayerScript);
+		//Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
+		Monster* pMonster = InstantiateMonster<Monster>(eLayerType::MONSTER, new HitEffectObject(), pPlayerScript);
+		//pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
+		//pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
 	}
 
 	void PlayScene::instantiateParallaxObjects()
