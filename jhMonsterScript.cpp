@@ -88,10 +88,15 @@ namespace jh
 	}
 	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
+		if (meState == eMonsterState::HITTED)
+		{
+			return;
+		}
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
 		{
 			setState(eMonsterState::HITTED);
 		}
+
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
