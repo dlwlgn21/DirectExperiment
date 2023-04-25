@@ -42,7 +42,8 @@ namespace jh
 		static const std::wstring SPRITE_SHADER_KEY;
 		static const std::wstring BATTLE_BG_SHADER_KEY;
 		static const std::wstring DEBUG_SHADER_KEY;
-		static const std::wstring UI_SHADER_KEY;
+		static const std::wstring UI_HP_SHADER_KEY;
+		static const std::wstring UI_STAMINA_SHADER_KEY;
 
 
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;

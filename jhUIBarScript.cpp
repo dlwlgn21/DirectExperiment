@@ -22,30 +22,31 @@ namespace jh
 	void UIBarScript::Update()
 	{
 		const PlayerScript::PlayerStat& playerStat = mpPlayerScript->GetPlayerStat();
+		UIBarBuffer buffer;
+		ZeroMemory(&buffer, sizeof(UIBarBuffer));
 		
 		switch (meType)
 		{
 		case eUIBarType::HEALTH_BAR:
+		{
+			buffer.UV.y = static_cast<float>(playerStat.CurrentHP) / playerStat.MaxHP;
+			debuger::CustomOutputDebugString("HP is :", buffer.UV.y);
 			break;
+		}
 		case eUIBarType::STAMINA_BAR:
 		{
-			UIBarBuffer buffer;
-			ZeroMemory(&buffer, sizeof(UIBarBuffer));
-			buffer.UV = Vector4(static_cast<float>(playerStat.CurrentStamina) / playerStat.MaxStamina, 1.0f, 0.0f, 0.0f);
-
-			ConstantBuffer* pCB = ResourceMaker::GetInstance().GetUIBarCBOrNull();
-			assert(pCB != nullptr);
-
-			pCB->WirteDataAtBuffer(pCB->GetBuffer(), &buffer, sizeof(UIBarBuffer));
-			pCB->SetPipeline();
-			debuger::CustomOutputDebugString("x Coordinate : ", buffer.UV.x);
+			buffer.UV.x = static_cast<float>(playerStat.CurrentStamina) / playerStat.MaxStamina;
 			break;
 		}
 		default:
 			assert(false);
 			break;
 		}
+		ConstantBuffer* pCB = ResourceMaker::GetInstance().GetUIBarCBOrNull();
+		assert(pCB != nullptr);
 
+		pCB->WirteDataAtBuffer(pCB->GetBuffer(), &buffer, sizeof(UIBarBuffer));
+		pCB->SetPipeline();
 		//Script::Update();
 	}
 	void UIBarScript::FixedUpdate()

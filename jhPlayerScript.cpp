@@ -124,6 +124,7 @@ namespace jh
 		if (pOtherCollider->GetOwner()->GetLayer() == eLayerType::MONSTER)
 		{
 			setState(ePlayerState::HITTED);
+			decreaseHP(1);
 		}
 	}
 
@@ -276,7 +277,16 @@ namespace jh
 
 	void PlayerScript::decreaseStamina(CHAR amount)
 	{
-		mStat.CurrentStamina -= amount;
+		mStat.CurrentStamina -= std::abs(amount);
+	}
+
+	void PlayerScript::decreaseHP(CHAR amount)
+	{
+		mStat.CurrentHP -= std::abs(amount);
+		if (mStat.CurrentHP <= 0)
+		{
+			mStat.CurrentHP = 0;
+		}
 	}
 
 }

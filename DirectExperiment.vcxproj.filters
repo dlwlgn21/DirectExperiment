@@ -584,7 +584,10 @@
     <FxCompile Include="jhUserInterfaceVS.hlsl">
       <Filter>ShaderResource\VS</Filter>
     </FxCompile>
-    <FxCompile Include="jhUserInterfacePS.hlsl">
+    <FxCompile Include="jhUserInterfaceHealthPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserIntefaceStaminaPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>

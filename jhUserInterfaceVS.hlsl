@@ -9,7 +9,7 @@ VertexOut main(VertexIn vIn)
     float4 viewPos = mul(worldPos, ViewMat);
     float4 projectionPos = mul(viewPos, ProjectionMat);
     
-    vOut.Position = projectionPos;
     vOut.UV = vIn.UV;
+    vOut.Position = projectionPos;
     return vOut;
 }

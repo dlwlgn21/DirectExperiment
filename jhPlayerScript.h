@@ -98,7 +98,7 @@ namespace jh
 		void setAnimatorByState();
 		void recoverStamina();
 		void decreaseStamina(CHAR amount);
-
+		void decreaseHP(CHAR amount);
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;

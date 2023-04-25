@@ -23,7 +23,8 @@ namespace jh
 	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
 	const std::wstring ResourceMaker::BATTLE_BG_SHADER_KEY = L"BattleBGShaderKey";
 	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
-	const std::wstring ResourceMaker::UI_SHADER_KEY = L"UIShaderKey";
+	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShaderKey";
+	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShaderKey";
 
 
 #pragma endregion
@@ -124,24 +125,6 @@ namespace jh
 #pragma region BATTLE_BG_MESH
 		const UINT MAGNIFICATION_VALUE = 8;
 		Mesh* pBattleBGMesh = new Mesh();
-		//const float LEFT_U = 0.15f;
-		//const float RIGHT_U = 0.95f;
-		//const float HIGH_V = 0.15f;
-		//const float LOW_V = 0.95f;
-
-		//const float LEFT_U = 0.0f;
-		//const float RIGHT_U = 1.0f;
-		//const float HIGH_V = 0.0f;
-		//const float LOW_V = 1.0f;
-		//const Vector2 UV_LEFT_TOP(LEFT_U, HIGH_V);
-		//const Vector2 UV_RIGHT_TOP(RIGHT_U, HIGH_V);
-		//const Vector2 UV_LEFT_BOTTOM(LEFT_U, LOW_V);
-		//const Vector2 UV_RIGHT_BOTTOM(RIGHT_U, LOW_V);
-		//mVertices[0] = { {-0.5f,	0.5f,	0.0f},	UV_LEFT_TOP };
-		//mVertices[1] = { {0.5f,		0.5f,	0.0f},	UV_RIGHT_TOP };
-		//mVertices[2] = { {0.5f,		-0.5f,	0.0f},	UV_RIGHT_BOTTOM };
-		//mVertices[3] = { {-0.5f,	-0.5f,	0.0f},	UV_LEFT_BOTTOM };
-
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
 		pBattleBGMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
 		ResourcesManager::Insert<Mesh>(BATTLE_BG_MESH_KEY, pBattleBGMesh);
@@ -178,9 +161,13 @@ namespace jh
 		ResourcesManager::Insert<Shader>(DEBUG_SHADER_KEY, pDebugShader);
 
 
-		Shader* pUIShader = new Shader();
-		pUIShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserInterfacePS.hlsl");
-		ResourcesManager::Insert<Shader>(UI_SHADER_KEY, pUIShader);
+		Shader* pUIHPShader = new Shader();
+		pUIHPShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
+		ResourcesManager::Insert<Shader>(UI_HP_SHADER_KEY, pUIHPShader);
+
+		Shader* pUIStaminaShader = new Shader();
+		pUIStaminaShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
+		ResourcesManager::Insert<Shader>(UI_STAMINA_SHADER_KEY, pUIStaminaShader);
 	}
 
 	void ResourceMaker::createTextures()
@@ -302,17 +289,17 @@ namespace jh
 			);
 
 		ResourcesManager::Insert<Material>(UI_HP_BORDER_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_HP_BORDER_TEXTURE_KEY))
 			);
 
 		ResourcesManager::Insert<Material>(UI_HP_BAR_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+			new Material(ResourcesManager::Find<Shader>(UI_HP_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_HP_BAR_TEXTURE_KEY))
 			);
 
 		ResourcesManager::Insert<Material>(UI_STAMINA_BAR_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(UI_SHADER_KEY),
+			new Material(ResourcesManager::Find<Shader>(UI_STAMINA_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_STAMINA_BAR_TEXTURE_KEY))
 			);
 
