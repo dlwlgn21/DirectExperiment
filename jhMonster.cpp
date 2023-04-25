@@ -52,6 +52,7 @@ namespace jh
 		assert(pAtlas != nullptr);
 		const float WIDTH = 110.0f;
 		const float HEIGHT = 42.0f;
+		const float MAG = 130.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(0.007f, 0.0f);
 		Animator* pMonsterAnimator = new Animator();
@@ -63,7 +64,7 @@ namespace jh
 			offset,
 			15,
 			0.1f,
-			100
+			MAG
 		);
 		pMonsterAnimator->Create(
 			L"MonsterMove",
@@ -73,7 +74,7 @@ namespace jh
 			offset,
 			12,
 			0.1f,
-			100
+			MAG
 		);
 
 		pMonsterAnimator->Create(
@@ -84,7 +85,7 @@ namespace jh
 			offset,
 			16,
 			0.1f,
-			100
+			MAG
 		);
 
 		pMonsterAnimator->Create(
@@ -95,7 +96,7 @@ namespace jh
 			offset,
 			2,
 			0.2f,
-			100
+			MAG
 		);
 		this->AddComponent(pMonsterAnimator);
 		pMonsterAnimator->PlayAnimation(L"MonsterIdle", true);

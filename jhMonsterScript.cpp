@@ -41,8 +41,8 @@ namespace jh
 		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
 		assert(mpPlayerTransform != nullptr);
 
-		mpTranform->SetPosition(Vector3(6.0f, -1.7f, 4.0f));
-		mpTranform->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		mpTranform->SetPosition(Vector3(6.0f, -1.8f, 4.0f));
+		mpTranform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 	}
 
 	void MonsterScript::Update()
@@ -85,16 +85,11 @@ namespace jh
 			setState(eMonsterState::ATTACKING);
 		}
 
-		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
-		{
-			mpEffectScript->PlayAnimation(meLookDir);
-		}
 	}
 	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
 		{
-			mpEffectScript->PlayAnimation(meLookDir);
 			setState(eMonsterState::HITTED);
 		}
 	}
@@ -143,6 +138,7 @@ namespace jh
 			mpTranform->SetPosition(Vector3(moveVector.x, monCurrPos.y, monCurrPos.z));
 			setLookDir(lookDirVector);
 			break;
+			return;
 		}
 		case jh::eMonsterState::ATTACKING:
 			return;
@@ -198,14 +194,24 @@ namespace jh
 		switch (meState)
 		{
 		case eMonsterState::TRACING:
+		{
 			mpAnimator->PlayAnimation(mAnimMoveKey, true);
 			break;
+		}
 		case eMonsterState::ATTACKING:
+		{
 			mpAnimator->PlayAnimation(mAnimAttackKey, true);
 			break;
+		}
 		case eMonsterState::HITTED:
+		{
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
+			if (mpPlayerScript->GetAttackType() == eAttackType::NORMAL)
+			{
+				mpEffectScript->PlayAnimation(meLookDir);
+			}
 			break;
+		}
 		default:
 			break;
 		}
