@@ -1,6 +1,7 @@
 #include "jhUIBarScript.h"
 #include "jhPlayerScript.h"
 #include "jhDebugHelper.h"
+#include "jhResourceMaker.h"
 
 namespace jh
 {

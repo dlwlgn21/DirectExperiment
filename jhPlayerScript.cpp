@@ -168,8 +168,10 @@ namespace jh
 
 	void PlayerScript::setStateByInput(Vector3& pos)
 	{
-		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)	{return;}
-		if (!Input::IsAnyKeyPressed())			{ setState(ePlayerState::IDLE); }
+		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)	
+			{return;}
+		if (!Input::IsAnyKeyPressed())			
+			{ setState(ePlayerState::IDLE); }
 
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
