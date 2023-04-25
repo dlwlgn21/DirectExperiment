@@ -65,6 +65,38 @@ namespace jh
 			0.1f,
 			100
 		);
+		pMonsterAnimator->Create(
+			L"MonsterMove",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 1),
+			animSize,
+			offset,
+			12,
+			0.1f,
+			100
+		);
+
+		pMonsterAnimator->Create(
+			L"MonsterAttack",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 2),
+			animSize,
+			offset,
+			16,
+			0.1f,
+			100
+		);
+
+		pMonsterAnimator->Create(
+			L"MonsterHitted",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 3),
+			animSize,
+			offset,
+			2,
+			0.2f,
+			100
+		);
 		this->AddComponent(pMonsterAnimator);
 		pMonsterAnimator->PlayAnimation(L"MonsterIdle", true);
 	}

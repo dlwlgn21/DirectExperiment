@@ -196,6 +196,18 @@
     <Filter Include="Component\Script\UI">
       <UniqueIdentifier>{95514071-a3d6-4c71-89c2-0612ce54c04f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Content\Player">
+      <UniqueIdentifier>{4464a1ed-f6b1-4174-9ec8-3de634f0a36d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\Monster">
+      <UniqueIdentifier>{41eef0b9-bb98-411b-bee7-89e6a2dd2da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\BG">
+      <UniqueIdentifier>{3100ebab-f778-4d9b-8599-6efc0d62c00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\Weapon">
+      <UniqueIdentifier>{dfff78de-5518-4ed6-9099-735a2383cf3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -303,18 +315,6 @@
     <ClInclude Include="jhCameraManager.h">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClInclude>
-    <ClInclude Include="jhPlayer.h">
-      <Filter>GameObject\Content</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMonster.h">
-      <Filter>GameObject\Content</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBattleBGImageObject.h">
-      <Filter>GameObject\Content</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBattleParrarellImageObject.h">
-      <Filter>GameObject\Content</Filter>
-    </ClInclude>
     <ClInclude Include="jhSword.h">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
     </ClInclude>
@@ -363,9 +363,6 @@
     <ClInclude Include="jhWeaponColliderScript.h">
       <Filter>Component\Script\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="jhPlayerWeaponColliderObject.h">
-      <Filter>GameObject\Content</Filter>
-    </ClInclude>
     <ClInclude Include="jhDebugHelper.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -380,6 +377,21 @@
     </ClInclude>
     <ClInclude Include="jhUIBarScript.h">
       <Filter>Component\Script\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonster.h">
+      <Filter>GameObject\Content\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayer.h">
+      <Filter>GameObject\Content\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBattleBGImageObject.h">
+      <Filter>GameObject\Content\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBattleParrarellImageObject.h">
+      <Filter>GameObject\Content\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerWeaponColliderObject.h">
+      <Filter>GameObject\Content\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,18 +485,6 @@
     <ClCompile Include="jhCameraManager.cpp">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClCompile>
-    <ClCompile Include="jhPlayer.cpp">
-      <Filter>GameObject\Content</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMonster.cpp">
-      <Filter>GameObject\Content</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBattleBGImageObject.cpp">
-      <Filter>GameObject\Content</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBattleParrarellImageObject.cpp">
-      <Filter>GameObject\Content</Filter>
-    </ClCompile>
     <ClCompile Include="jhSword.cpp">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
     </ClCompile>
@@ -533,9 +533,6 @@
     <ClCompile Include="jhWeaponColliderScript.cpp">
       <Filter>Component\Script\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="jhPlayerWeaponColliderObject.cpp">
-      <Filter>GameObject\Content</Filter>
-    </ClCompile>
     <ClCompile Include="jhParallaxObject.cpp">
       <Filter>GameObject\Parallax</Filter>
     </ClCompile>
@@ -547,6 +544,21 @@
     </ClCompile>
     <ClCompile Include="jhUIBarScript.cpp">
       <Filter>Component\Script\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonster.cpp">
+      <Filter>GameObject\Content\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayer.cpp">
+      <Filter>GameObject\Content\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleBGImageObject.cpp">
+      <Filter>GameObject\Content\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBattleParrarellImageObject.cpp">
+      <Filter>GameObject\Content\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerWeaponColliderObject.cpp">
+      <Filter>GameObject\Content\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

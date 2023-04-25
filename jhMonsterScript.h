@@ -7,9 +7,10 @@ namespace jh
 {
 	enum class eMonsterState
 	{
-		SEARCHING,
 		TRACING,
 		ATTACKING,
+		HITTED,
+		DEAD
 	};
 
 	class Animator;
@@ -39,9 +40,18 @@ namespace jh
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
+		void AnimationAttackStart();
+		void AnimationAttackComplete();
+
+		void AnimationHittedStart();
+		void AnimationHittedComplete();
+
 	private:
+		void setAnimator();
 		void setPosition();
+		void setLookDir(const jh::math::Vector3& lookDirvector);
 		void setAnimationFlip();
+		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
 	private:
 		Transform*						mpTranform;
@@ -49,9 +59,14 @@ namespace jh
 		Animator*						mpAnimator;
 		EffectScript*					mpEffectScript;
 		float							mSpeed;
+		float							mHittedPushDistance;
 		const std::wstring				mAnimIdleKey;
+		const std::wstring				mAnimMoveKey;
+		const std::wstring				mAnimAttackKey;
+		const std::wstring				mAnimHittedKey;
 		eObjectLookDirection			meLookDir;
 		PlayerScript*					mpPlayerScript;
+		eMonsterState					meState;
 	};
 }
 

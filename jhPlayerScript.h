@@ -78,6 +78,7 @@ namespace jh
 		const eObjectLookDirection GetPlayerLookDirection() const	{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
+		eAttackType GetAttackType() const							{ return meAttackType; }
 
 		void OnCollisionEnter(Collider2D* pOtherCollider) override;
 		void OnCollisionStay(Collider2D* pOtherCollider) override;
