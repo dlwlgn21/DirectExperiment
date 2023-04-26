@@ -1,5 +1,4 @@
 #include "jhAnimator.h"
-#include "jhAnimation.h"
 #include "jhTexture.h"
 
 static constexpr const UINT RESEVE_SIZE = 16;

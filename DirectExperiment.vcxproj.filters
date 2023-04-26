@@ -220,6 +220,9 @@
     <Filter Include="Component\Script\Weapon\Monster">
       <UniqueIdentifier>{11270529-fd8c-409f-8438-1941a0e34ba4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\BG">
+      <UniqueIdentifier>{d9aef993-1526-4b41-84c5-4f4898eb31b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -411,6 +414,9 @@
     <ClInclude Include="jhMonsterAttackColiderScript.h">
       <Filter>Component\Script\Weapon\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="jhBGMoonObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -583,6 +589,9 @@
     </ClCompile>
     <ClCompile Include="jhMonsterAttackColiderScript.cpp">
       <Filter>Component\Script\Weapon\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBGMoonObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

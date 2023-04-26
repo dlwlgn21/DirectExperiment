@@ -84,7 +84,7 @@ namespace jh
 			animSize,
 			offset,
 			16,
-			0.1f,
+			0.15f,
 			MAG
 		);
 

@@ -2,7 +2,7 @@
 #include "jhComponent.h"
 #include <functional>
 #include "jhMath.h"
-
+#include "jhAnimation.h"
 
 namespace jh
 {
@@ -61,7 +61,9 @@ namespace jh
 		void SetPipeline();
 		void ClearPipeline();
 
-		__forceinline Animation* GetCurrentAnimatingAnimation() const { return mpCurrAnimatingAnimation; }
+		__forceinline Animation* GetCurrentAnimatingAnimation() const	{ assert(mpCurrAnimatingAnimation != nullptr); return mpCurrAnimatingAnimation; }
+		__forceinline UINT GetCurrentAnimationIndex() const				{ return GetCurrentAnimatingAnimation()->GetCurrentIndex(); }
+
 		Animation* FindAnimationOrNull(const std::wstring& key);
 		Events* FindEventsOrNull(const std::wstring& key);
 

@@ -51,7 +51,9 @@ namespace jh
 
 		__forceinline bool IsAnimComplete()   const	{ return mbIsAnimComplete; }
 		const std::wstring& GetAnimationKey() const	{ return mAnimKey; }
+		UINT GetCurrentIndex() const { return mIndex; }
 		void SetHorizontalFlip(const bool isFlip)	{ mbIsHorizontalFlip = isFlip; }
+
 
 	private:
 		void clearTexureSRV();

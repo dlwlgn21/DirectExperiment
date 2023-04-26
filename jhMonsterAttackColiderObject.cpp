@@ -14,10 +14,10 @@ namespace jh
 		pCollider->SetSize({ 2.0f, 1.0f });
 	}
 
-	void MonsterAttackColiderObject::SetMonsterTransformAndScript(Transform* pMonsterTransform, MonsterScript* pMonsterScript)
+	void MonsterAttackColiderObject::SetMonsterTransformAndScriptAndAnimator(Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator)
 	{
-		assert(pMonsterTransform != nullptr && pMonsterScript != nullptr);
-		MonsterAttackColiderScript* pScript = new MonsterAttackColiderScript(static_cast<Collider2D*>(GetComponentOrNull(eComponentType::COLLIDER)), pMonsterTransform, pMonsterScript);
+		assert(pMonsterTransform != nullptr && pMonsterScript != nullptr && pAnimator != nullptr);
+		MonsterAttackColiderScript* pScript = new MonsterAttackColiderScript(static_cast<Collider2D*>(GetComponentOrNull(eComponentType::COLLIDER)), pMonsterTransform, pMonsterScript, pAnimator);
 		AddScript(pScript);
 	}
 }

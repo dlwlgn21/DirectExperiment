@@ -23,22 +23,6 @@ namespace jh
 		
 	}
 
-	void HitEffectObject::Initialize()
-	{
-		AnimatedGameObject::Initialize();
-	}
-	void HitEffectObject::Update()
-	{
-		AnimatedGameObject::Update();
-	}
-	void HitEffectObject::FixedUpdate()
-	{
-		AnimatedGameObject::FixedUpdate();
-	}
-	void HitEffectObject::Render()
-	{
-		AnimatedGameObject::Render();
-	}
 
 	void HitEffectObject::setAnimator()
 	{

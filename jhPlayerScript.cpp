@@ -107,7 +107,11 @@ namespace jh
 
 	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-		if (pOtherCollider->GetOwner()->GetLayer() == eLayerType::MONSTER)
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::MONSTER_WEAPON)
+		{
+			return;
+		}
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::MONSTER)
 		{
 			setState(ePlayerState::HITTED);
 			decreaseHP(1);
@@ -275,4 +279,13 @@ namespace jh
 		}
 	}
 
+	void PlayerScript::EnemyAttackHiited(UINT damage)
+	{
+		if (meState == ePlayerState::HITTED)
+		{
+			return;
+		}
+		setState(ePlayerState::HITTED);
+		decreaseHP(damage);
+	}
 }

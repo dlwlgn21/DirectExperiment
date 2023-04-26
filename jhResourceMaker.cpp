@@ -52,6 +52,8 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBarKey";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBarKey";
 
+	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTextureKey";
+
 #pragma endregion
 
 #pragma region MATERIAL
@@ -73,6 +75,7 @@ namespace jh
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4Key";
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5Key";
 	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6Key";
+	const std::wstring ResourceMaker::BG_MOON_MATERIAL_KEY = L"BGMoonMaterialKey";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
@@ -221,6 +224,10 @@ namespace jh
 		pParralaxTxtrue->Load(L"parallax6.png");
 		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
 
+		Texture* pBGMoonTexture = new Texture();
+		pBGMoonTexture->Load(L"MoonSprite.png");
+		ResourcesManager::Insert<Texture>(BG_MOON_ATLAS_TEXTURE_KEY, pBGMoonTexture);
+
 
 		Texture* pUITextrue = new Texture();
 		pUITextrue->Load(L"HpBarBorder.png");
@@ -301,6 +308,11 @@ namespace jh
 		ResourcesManager::Insert<Material>(UI_STAMINA_BAR_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(UI_STAMINA_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_STAMINA_BAR_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_MOON_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY))
 			);
 
 #pragma region DEBUG

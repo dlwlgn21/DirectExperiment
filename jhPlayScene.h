@@ -20,6 +20,7 @@ namespace jh
 		PlayerScript* instantiateCameraAndPlayer();
 		void instantiateMonsters(PlayerScript* pPlayerScript);
 		void instantiateParallaxObjects();
+		void instantiateEnvObject();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();
 

@@ -85,7 +85,7 @@ namespace jh
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
-
+		void EnemyAttackHiited(UINT damage);
 
 	private:
 		void setAnimationEvent();

@@ -1,21 +1,18 @@
-#pragma once
 #include "jhAnimatedGameObject.h"
 
 
 namespace jh
 {
-	class MonsterScript;
-	class HitEffectObject : public AnimatedGameObject
+	class BGMoonObject : public AnimatedGameObject
 	{
 	public:
-		HitEffectObject();
-		virtual ~HitEffectObject() = default;
+		BGMoonObject();
+		virtual ~BGMoonObject() = default;
 
 	protected:
 		void setAnimator() override;
 		void setRenderer() override;
 		void setScript() override;
-
 	};
 }
 

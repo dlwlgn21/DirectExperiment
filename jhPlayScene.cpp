@@ -26,6 +26,8 @@
 #include "jhMonsterAttackColiderObject.h"
 #include "jhMonsterAttackColiderScript.h"
 #include "jhMonsterScript.h"
+#include "jhAnimator.h"
+#include "jhBGMoonObject.h"
 
 using namespace jh::math;
 
@@ -53,8 +55,8 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		instantiateMonsters(pPlayerScript);
 		instantiateParallaxObjects();
+		instantiateEnvObject();
 		instantiateUIObject(pPlayerScript);
-
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		Scene::Initialize();
 	}
@@ -124,7 +126,7 @@ namespace jh
 		Transform* pMonsterTransform = pMonster->GetTransform();
 		Vector3 monsterPos = pMonsterTransform->GetPosition();
 		pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, -2.2f, COLLIDER_Z_VALUE));
-		pMonsterColiderObject->SetMonsterTransformAndScript(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		pMonsterColiderObject->SetMonsterTransformAndScriptAndAnimator(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), static_cast<Animator*>(pMonster->GetComponentOrNull(eComponentType::ANIMATOR)));
 	}
 
 	void PlayScene::instantiateParallaxObjects()
@@ -171,6 +173,13 @@ namespace jh
 		}
 	}
 
+	void PlayScene::instantiateEnvObject()
+	{
+		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
+		pBGMoon->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		pBGMoon->GetTransform()->SetPosition(Vector3(0.0f, 2.0f, 10.0f));
+
+	}
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{
 		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);

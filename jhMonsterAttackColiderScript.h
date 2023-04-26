@@ -1,16 +1,19 @@
 #pragma once
 #include "jhScript.h"
 #include "jhMath.h"
+
 namespace jh
 {
 
 	class Transform;
 	class Collider2D;
 	class MonsterScript;
+	class Animator;
+	class PlayerScript;
 	class MonsterAttackColiderScript : public Script
 	{
 	public:
-		MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript);
+		MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator);
 		virtual ~MonsterAttackColiderScript() = default;
 
 
@@ -35,6 +38,7 @@ namespace jh
 		Transform*					mpTransform;
 		Transform*					mpMonsterTransform;
 		MonsterScript*				mpMonsterScript;
+		Animator*					mpAnimator;
 		eObjectLookDirection		meLookDir;
 	};
 }
