@@ -118,13 +118,13 @@ namespace jh
 		assert(pPlayerScript);
 		//Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
 		Monster* pMonster = InstantiateMonster<Monster>(eLayerType::MONSTER, new HitEffectObject(), pPlayerScript);
-		//pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
-		//pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
-		//MonsterAttackColiderObject* pMonsterColiderObject = Instantiate<MonsterAttackColiderObject>(eLayerType::MONSTER);
-		//Transform* pMonsterTransform = pMonster->GetTransform();
-		//Vector3 monsterPos = pMonsterTransform->GetPosition();
-		//pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, -2.2f, COLLIDER_Z_VALUE));
-		//pMonsterColiderObject->SetMonsterTransformAndScript(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
+		pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		MonsterAttackColiderObject* pMonsterColiderObject = Instantiate<MonsterAttackColiderObject>(eLayerType::MONSTER);
+		Transform* pMonsterTransform = pMonster->GetTransform();
+		Vector3 monsterPos = pMonsterTransform->GetPosition();
+		pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, -2.2f, COLLIDER_Z_VALUE));
+		pMonsterColiderObject->SetMonsterTransformAndScript(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
 	}
 
 	void PlayScene::instantiateParallaxObjects()

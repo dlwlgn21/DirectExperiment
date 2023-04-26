@@ -6,8 +6,8 @@
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
 static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
-static constexpr const float WAIT_FLOATING_DISTANCE = 0.5f;
-static constexpr const float ATTACING_FLOATING_DISTANCE = -1.5f;
+static constexpr const float ATTACING_FLOATING_DISTANCE = -2.0f;
+static constexpr const float WAIT_FLOATING_DISTANCE = -4.0f;
 
 namespace jh
 {
@@ -52,17 +52,15 @@ namespace jh
 			pos.x = mpMonsterTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
 			break;
 		default:
-			// TODO : why..??
-			//assert(false);
 			break;
 		}
-		//pos.y = WAIT_FLOATING_DISTANCE;
+		pos.y = WAIT_FLOATING_DISTANCE;
 
-		//const ePlayerState eState = mpPlayerScript->GetPlayerState();
-		//if (eState == ePlayerState::ATTACKING)
-		//{
-		//	pos.y = ATTACING_FLOATING_DISTANCE;
-		//}
+		const eMonsterState eState = mpMonsterScript->GetMonsterState();
+		if (eState == eMonsterState::ATTACKING)
+		{
+			pos.y = ATTACING_FLOATING_DISTANCE;
+		}
 
 		mpTransform->SetPosition(pos);
 	}

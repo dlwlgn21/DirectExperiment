@@ -42,7 +42,8 @@ namespace jh
 		void AnimationHittedStart();
 		void AnimationHittedComplete();
 
-		eObjectLookDirection GetMonsterLookDirection() const { return meLookDir; }
+		eObjectLookDirection GetMonsterLookDirection() const	{ return meLookDir; }
+		eMonsterState		 GetMonsterState() const			{ return meState; }
 
 	private:
 		void setAnimator();
