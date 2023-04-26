@@ -4,12 +4,7 @@
 
 namespace jh
 {
-	enum class eWeponCoilderTimerState
-	{
-		WAITING,
-		START_TIME_COUNTING,
-		COUNT
-	};
+
 	class EffectScript;
 	class Transform;
 	class Collider2D;
@@ -39,15 +34,12 @@ namespace jh
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 		
 	private:
-		void setPosByPlayerLookDirection();
-		void setColliderStateByPlayerState();
-		void changeState(const eWeponCoilderTimerState eState) { meState = eState; }
+		void setPosByPlayerLookDirectionAndPlayerState();
 
 	private:
 		Collider2D*					mpCollider;
 		float						mColliderStartTimer;
 		float						mSpeed;
-		eWeponCoilderTimerState		meState;
 		Transform*					mpTransform;
 		Transform*					mpPlayerTransform;
 		PlayerScript*				mpPlayerScript;

@@ -110,7 +110,7 @@ namespace jh
 			animSize,
 			offset,
 			6,
-			0.15f,
+			0.1f,
 			MAGNINICATION
 		);
 

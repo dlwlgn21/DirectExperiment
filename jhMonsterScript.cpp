@@ -19,7 +19,7 @@ namespace jh
 		, mpEffectScript(pEffectScript)
 		, mpPlayerScript(pPlayerScript)
 		, mSpeed(1.0f)
-		, mHittedPushDistance(1.0f)
+		, mHittedPushDistance(2.0f)
 		, mAnimIdleKey(L"MonsterIdle")
 		, mAnimMoveKey(L"MonsterMove")
 		, mAnimAttackKey(L"MonsterAttack")
@@ -69,25 +69,14 @@ namespace jh
 	void MonsterScript::End()
 	{
 	}
-	void MonsterScript::OnCollisionEnter(Collider2D* pOtherCollider)
-	{
-	}
-	void MonsterScript::OnCollisionStay(Collider2D* pOtherCollider)
-	{
-	}
-	void MonsterScript::OnCollisionExit(Collider2D* pOtherCollider)
-	{
-	}
+
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
+
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			setState(eMonsterState::ATTACKING);
 		}
-
-	}
-	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
-	{
 		if (meState == eMonsterState::HITTED)
 		{
 			return;
@@ -96,7 +85,9 @@ namespace jh
 		{
 			setState(eMonsterState::HITTED);
 		}
-
+	}
+	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
+	{
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{

@@ -11,6 +11,8 @@
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
 static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
+static constexpr const float WAIT_FLOATING_DISTANCE = 0.5f;
+static constexpr const float ATTACING_FLOATING_DISTANCE = -1.5f;
 
 namespace jh
 {
@@ -19,7 +21,6 @@ namespace jh
 		, mpCollider(pCollider)
 		, mColliderStartTimer(START_COUNTING_TIME)
 		, mSpeed(3.0f)
-		, meState(eWeponCoilderTimerState::WAITING)
 		, mpTransform(nullptr)
 		, mpPlayerTransform(pPlayerTransform)
 		, mpPlayerScript(pPlayerScript)
@@ -28,7 +29,7 @@ namespace jh
 		assert(mpCollider != nullptr);
 		assert(mpPlayerTransform != nullptr);
 		assert(mpPlayerScript != nullptr);
-		mpCollider->SetState(eColliderState::INACTIVE);
+		mpCollider->SetState(eColliderState::ACTIVE);
 	}
 	void WeaponColliderScript::Initialize()
 	{
@@ -37,8 +38,7 @@ namespace jh
 	}
 	void WeaponColliderScript::Update()
 	{
-		setPosByPlayerLookDirection();
-		setColliderStateByPlayerState();
+		setPosByPlayerLookDirectionAndPlayerState();
 	}
 	void WeaponColliderScript::FixedUpdate()
 	{
@@ -46,7 +46,7 @@ namespace jh
 	void WeaponColliderScript::Render()
 	{
 	}
-	void WeaponColliderScript::setPosByPlayerLookDirection()
+	void WeaponColliderScript::setPosByPlayerLookDirectionAndPlayerState()
 	{
 		Vector3 pos = mpTransform->GetPosition();
 		const eObjectLookDirection ePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
@@ -63,19 +63,15 @@ namespace jh
 			//assert(false);
 			break;
 		}
-		mpTransform->SetPosition(pos);
-	}
-	void WeaponColliderScript::setColliderStateByPlayerState()
-	{
+		pos.y = WAIT_FLOATING_DISTANCE;
+
 		const ePlayerState eState = mpPlayerScript->GetPlayerState();
 		if (eState == ePlayerState::ATTACKING)
 		{
-			mpCollider->SetState(eColliderState::ACTIVE);
+			pos.y = ATTACING_FLOATING_DISTANCE;
 		}
-		else
-		{
-			mpCollider->SetState(eColliderState::INACTIVE);
-		}
+
+		mpTransform->SetPosition(pos);
 	}
 
 	void WeaponColliderScript::Start()

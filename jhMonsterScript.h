@@ -32,10 +32,6 @@ namespace jh
 		void Complete();
 		void End();
 
-		void OnCollisionEnter(Collider2D* pOtherCollider) override;
-		void OnCollisionStay(Collider2D* pOtherCollider) override;
-		void OnCollisionExit(Collider2D* pOtherCollider) override;
-
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
