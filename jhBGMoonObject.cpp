@@ -6,6 +6,10 @@
 #include "jhAnimator.h"
 #include "jhTexture.h"
 #include "jhResourcesManager.h"
+#include "jhParallaxScript.h"
+#include "jhTransform.h"
+
+
 using namespace jh::math;
 
 namespace jh
@@ -16,6 +20,8 @@ namespace jh
 		setAnimator();
 		setRenderer();
 		setScript();
+		Vector3 prePos = GetTransform()->GetPosition();
+		GetTransform()->SetPosition(Vector3(prePos.x, 2.0f, prePos.z));
 	}
 
 	void BGMoonObject::setAnimator()
@@ -51,6 +57,9 @@ namespace jh
 	}
 	void BGMoonObject::setScript()
 	{
-
+		ParallaxScript* pScript;
+		float parallaxFactor = 0.85f;
+		pScript = new ParallaxScript(95.0f, parallaxFactor);
+		this->AddScript(pScript);
 	}
 }
