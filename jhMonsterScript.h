@@ -42,10 +42,13 @@ namespace jh
 		void AnimationHittedStart();
 		void AnimationHittedComplete();
 
+		eObjectLookDirection GetMonsterLookDirection() const { return meLookDir; }
+
 	private:
 		void setAnimator();
 		void setPosition();
-		void setLookDir(const jh::math::Vector3& lookDirvector);
+		void setLookDir(const jh::math::Vector3& lookDirVector);
+		bool isDistanceCloseToPlayer(const jh::math::Vector3& lookDirVector);
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();

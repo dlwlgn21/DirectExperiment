@@ -80,9 +80,6 @@ namespace jh
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
 		eAttackType GetAttackType() const							{ return meAttackType; }
 
-		void OnCollisionEnter(Collider2D* pOtherCollider) override;
-		void OnCollisionStay(Collider2D* pOtherCollider) override;
-		void OnCollisionExit(Collider2D* pOtherCollider) override;
 
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;

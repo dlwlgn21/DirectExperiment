@@ -23,6 +23,9 @@
 #include "jhPlayerScript.h"
 #include "jhParallaxObject.h"
 #include "jhUIBarObject.h"
+#include "jhMonsterAttackColiderObject.h"
+#include "jhMonsterAttackColiderScript.h"
+#include "jhMonsterScript.h"
 
 using namespace jh::math;
 
@@ -33,6 +36,7 @@ static constexpr const float PARALLAX_4_DEPTH = 70.0f;
 static constexpr const float PARALLAX_5_DEPTH = 60.0f;
 static constexpr const float PARALLAX_6_DEPTH = 50.0f;
 
+static constexpr const float COLLIDER_Z_VALUE = 3.0f;
 
 namespace jh
 {
@@ -103,7 +107,7 @@ namespace jh
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
-		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, 3.0f));
+		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, COLLIDER_Z_VALUE));
 		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 	
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
@@ -116,6 +120,11 @@ namespace jh
 		Monster* pMonster = InstantiateMonster<Monster>(eLayerType::MONSTER, new HitEffectObject(), pPlayerScript);
 		//pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
 		//pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		//MonsterAttackColiderObject* pMonsterColiderObject = Instantiate<MonsterAttackColiderObject>(eLayerType::MONSTER);
+		//Transform* pMonsterTransform = pMonster->GetTransform();
+		//Vector3 monsterPos = pMonsterTransform->GetPosition();
+		//pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, -2.2f, COLLIDER_Z_VALUE));
+		//pMonsterColiderObject->SetMonsterTransformAndScript(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
 	}
 
 	void PlayScene::instantiateParallaxObjects()

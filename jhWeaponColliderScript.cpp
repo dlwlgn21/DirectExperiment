@@ -19,8 +19,6 @@ namespace jh
 	WeaponColliderScript::WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, PlayerScript* pPlayerScript)
 		: Script()
 		, mpCollider(pCollider)
-		, mColliderStartTimer(START_COUNTING_TIME)
-		, mSpeed(3.0f)
 		, mpTransform(nullptr)
 		, mpPlayerTransform(pPlayerTransform)
 		, mpPlayerScript(pPlayerScript)
@@ -84,15 +82,6 @@ namespace jh
 	{
 	}
 
-	void WeaponColliderScript::OnCollisionEnter(Collider2D* pOtherCollider)
-	{
-	}
-	void WeaponColliderScript::OnCollisionStay(Collider2D* pOtherCollider)
-	{
-	}
-	void WeaponColliderScript::OnCollisionExit(Collider2D* pOtherCollider)
-	{
-	}
 	void WeaponColliderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
 		int a = 0;

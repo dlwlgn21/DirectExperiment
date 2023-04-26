@@ -54,6 +54,7 @@ namespace jh
 		MONSTER,
 		PLAYER,
 		PLAYER_WEAPON,
+		MONSTER_WEAPON,
 		COUNT
 	};
 

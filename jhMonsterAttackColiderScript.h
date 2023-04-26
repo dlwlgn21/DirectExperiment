@@ -1,19 +1,17 @@
 #pragma once
 #include "jhScript.h"
 #include "jhMath.h"
-
 namespace jh
 {
 
-	class EffectScript;
 	class Transform;
 	class Collider2D;
-	class PlayerScript;
-	class WeaponColliderScript : public Script
+	class MonsterScript;
+	class MonsterAttackColiderScript : public Script
 	{
 	public:
-		WeaponColliderScript(Collider2D* pCollider, Transform* pPlayerTransform, PlayerScript* pPlayerScript);
-		virtual ~WeaponColliderScript() = default;
+		MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript);
+		virtual ~MonsterAttackColiderScript() = default;
 
 
 		void Initialize() override;
@@ -28,15 +26,15 @@ namespace jh
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
-		
+
 	private:
-		void setPosByPlayerLookDirectionAndPlayerState();
+		void setPosByMonsterLookDirectionAndMonsterState();
 
 	private:
 		Collider2D*					mpCollider;
 		Transform*					mpTransform;
-		Transform*					mpPlayerTransform;
-		PlayerScript*				mpPlayerScript;
+		Transform*					mpMonsterTransform;
+		MonsterScript*				mpMonsterScript;
 		eObjectLookDirection		meLookDir;
 	};
 }

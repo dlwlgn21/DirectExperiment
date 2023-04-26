@@ -7,7 +7,9 @@
 #include "jhEffectScript.h"
 #include "jhCollider2D.h"
 #include "jhPlayerScript.h"
+
 using namespace jh::math;
+static constexpr const float ATTACK_RANGE_DISTANCE = 2.0f;
 
 namespace jh
 {
@@ -76,6 +78,7 @@ namespace jh
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			setState(eMonsterState::ATTACKING);
+			return;
 		}
 		if (meState == eMonsterState::HITTED)
 		{
@@ -128,11 +131,18 @@ namespace jh
 			Vector3 monCurrPos = mpTranform->GetPosition();
 			Vector3 dir = mpPlayerTransform->GetPosition() - monCurrPos;
 			Vector3 lookDirVector(dir);
+			if (isDistanceCloseToPlayer(lookDirVector))
+			{
+				setState(eMonsterState::ATTACKING);
+				return;
+			}
+
 			dir.Normalize();
 			Vector3 moveVector = monCurrPos;
 			moveVector += dir * mSpeed * Time::DeltaTime();
 			mpTranform->SetPosition(Vector3(moveVector.x, monCurrPos.y, monCurrPos.z));
 			setLookDir(lookDirVector);
+			
 			break;
 			return;
 		}
@@ -162,9 +172,9 @@ namespace jh
 		}
 	}
 
-	void MonsterScript::setLookDir(const jh::math::Vector3& lookDirvector)
+	void MonsterScript::setLookDir(const jh::math::Vector3& lookDirVector)
 	{
-		if (lookDirvector.x < 0.0f)
+		if (lookDirVector.x < 0.0f)
 		{
 			meLookDir = eObjectLookDirection::LEFT;
 		}
@@ -173,6 +183,17 @@ namespace jh
 			meLookDir = eObjectLookDirection::RIGHT;
 		}
 	}
+
+	bool MonsterScript::isDistanceCloseToPlayer(const Vector3& lookDirVector)
+	{
+		if (std::abs(lookDirVector.x) <= ATTACK_RANGE_DISTANCE)
+		{
+			setLookDir(lookDirVector);
+			return true;
+		}
+		return false;
+	}
+
 	void MonsterScript::setAnimationFlip()
 	{
 		assert(mpAnimator != nullptr);

@@ -205,8 +205,20 @@
     <Filter Include="GameObject\Content\BG">
       <UniqueIdentifier>{3100ebab-f778-4d9b-8599-6efc0d62c00e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Content\Weapon">
+    <Filter Include="GameObject\Content\Colider">
       <UniqueIdentifier>{dfff78de-5518-4ed6-9099-735a2383cf3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\Colider\Player">
+      <UniqueIdentifier>{08e962d9-4335-444e-8f3d-e81db3857780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\Colider\Monster">
+      <UniqueIdentifier>{e78b19f7-7dbc-4bd0-8326-d1fba21390cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Weapon\Player">
+      <UniqueIdentifier>{ec8149f3-8dae-4f6c-b2a6-8c1ca350d653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Weapon\Monster">
+      <UniqueIdentifier>{11270529-fd8c-409f-8438-1941a0e34ba4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -324,9 +336,6 @@
     <ClInclude Include="jhPlayerScript.h">
       <Filter>Component\Script\Player</Filter>
     </ClInclude>
-    <ClInclude Include="jhWeaponScript.h">
-      <Filter>Component\Script\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="jhMonsterScript.h">
       <Filter>Component\Script\Monster</Filter>
     </ClInclude>
@@ -360,9 +369,6 @@
     <ClInclude Include="jhMeshRenderer.h">
       <Filter>Component\Renderer\MeshRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="jhWeaponColliderScript.h">
-      <Filter>Component\Script\Weapon</Filter>
-    </ClInclude>
     <ClInclude Include="jhDebugHelper.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -391,7 +397,19 @@
       <Filter>GameObject\Content\BG</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerWeaponColliderObject.h">
-      <Filter>GameObject\Content\Weapon</Filter>
+      <Filter>GameObject\Content\Colider\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterAttackColiderObject.h">
+      <Filter>GameObject\Content\Colider\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhWeaponColliderScript.h">
+      <Filter>Component\Script\Weapon\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhWeaponScript.h">
+      <Filter>Component\Script\Weapon\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterAttackColiderScript.h">
+      <Filter>Component\Script\Weapon\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -494,9 +512,6 @@
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\Player</Filter>
     </ClCompile>
-    <ClCompile Include="jhWeaponScript.cpp">
-      <Filter>Component\Script\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="jhMonsterScript.cpp">
       <Filter>Component\Script\Monster</Filter>
     </ClCompile>
@@ -530,9 +545,6 @@
     <ClCompile Include="jhMeshRenderer.cpp">
       <Filter>Component\Renderer\MeshRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="jhWeaponColliderScript.cpp">
-      <Filter>Component\Script\Weapon</Filter>
-    </ClCompile>
     <ClCompile Include="jhParallaxObject.cpp">
       <Filter>GameObject\Parallax</Filter>
     </ClCompile>
@@ -558,7 +570,19 @@
       <Filter>GameObject\Content\BG</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp">
-      <Filter>GameObject\Content\Weapon</Filter>
+      <Filter>GameObject\Content\Colider\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterAttackColiderObject.cpp">
+      <Filter>GameObject\Content\Colider\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWeaponColliderScript.cpp">
+      <Filter>Component\Script\Weapon\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWeaponScript.cpp">
+      <Filter>Component\Script\Weapon\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterAttackColiderScript.cpp">
+      <Filter>Component\Script\Weapon\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

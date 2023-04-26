@@ -105,20 +105,6 @@ namespace jh
 		setState(ePlayerState::IDLE);
 	}
 
-
-	void PlayerScript::OnCollisionEnter(Collider2D* pOtherCollider)
-	{
-
-	}
-
-	void PlayerScript::OnCollisionStay(Collider2D* pOtherCollider)
-	{
-	}
-
-	void PlayerScript::OnCollisionExit(Collider2D* pOtherCollider)
-	{
-	}
-
 	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
 		if (pOtherCollider->GetOwner()->GetLayer() == eLayerType::MONSTER)
