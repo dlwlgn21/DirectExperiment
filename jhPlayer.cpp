@@ -62,7 +62,7 @@ namespace jh
 		pPlayerAnimator->Create(
 			L"PlayerMove",
 			pAtlas,
-			Vector2(0.0f, HEIGHT * 2),
+			Vector2(0.0f, HEIGHT * 4),
 			animSize,
 			offset,
 			8,

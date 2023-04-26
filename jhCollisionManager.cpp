@@ -169,10 +169,10 @@ namespace jh
 				{
 					pRightCollider->OnTriggerExit(pLeftCollider);
 				}
-
 				// 빠져나왔으니까 충돌중이 아님. 빠져나온 상태 업데이트.
 				findResIter->second = false;
 			}
+
 		}
 	}
 
