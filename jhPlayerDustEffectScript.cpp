@@ -7,7 +7,7 @@
 #include "jhAnimation.h"
 #include "jhPlayerScript.h"
 
-static constexpr const float LEFT_RIGHT_DISTANCE = 1.0f;
+static constexpr const float LEFT_RIGHT_DISTANCE = 0.0f;
 
 using namespace jh::math;
 
@@ -19,6 +19,7 @@ namespace jh
 		, mpPlayerScript(pPlayerScript)
 		, mAnimDashEffectKey(L"PlayerDashAnimKey")
 		, mpTransform(nullptr)
+		, mePlayerLookDirection(eObjectLookDirection::RIGHT)
 		, mpPlayerTransform(pPlayerScript->GetOwner()->GetTransform())
 	{
 		assert(mpPlayerScript != nullptr && mpPlayerTransform != nullptr);
@@ -31,21 +32,8 @@ namespace jh
 	}
 	void PlayerDustEffectScript::Update()
 	{
-		Vector3 playerPos = mpPlayerTransform->GetPosition();
-		Vector3 pos = mpTransform->GetPosition();
-		const eObjectLookDirection ePlayerLookDir = mpPlayerScript->GetPlayerLookDirection();
-		switch (ePlayerLookDir)
-		{
-		case eObjectLookDirection::LEFT:
-			pos.x = playerPos.x + LEFT_RIGHT_DISTANCE;
-			break;
-		case eObjectLookDirection::RIGHT:
-			pos.x = playerPos.x - LEFT_RIGHT_DISTANCE;
-			break;
-		default:
-			break;
-		}
-		mpTransform->SetPosition(pos);
+		if (isPlayingAnmation()) { return; }
+		mpTransform->SetPosition(mpPlayerTransform->GetPosition());
 	}
 	void PlayerDustEffectScript::FixedUpdate()
 	{
@@ -55,13 +43,12 @@ namespace jh
 	{
 	}
 
-	void PlayerDustEffectScript::PlayAnimation(eObjectLookDirection eLookDir)
+	void PlayerDustEffectScript::PlayAnimation()
 	{
-
-
 		mpAnimator->SetActive(true);
 		mpAnimator->SetPlaying(true);
-		switch (eLookDir)
+		mePlayerLookDirection = mpPlayerScript->GetPlayerLookDirection();
+		switch (mePlayerLookDirection)
 		{
 		case eObjectLookDirection::LEFT:
 			mpAnimator->SetCurrAnimationHorizontalFlip(false);
@@ -86,6 +73,15 @@ namespace jh
 		mpAnimator = static_cast<OnceAnimator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
 		mpAnimator->GetStartEvent(mAnimDashEffectKey) = std::bind(&PlayerDustEffectScript::DashStart, this);
-		mpAnimator->GetCompleteEvent(mAnimDashEffectKey) = std::bind(&PlayerDustEffectScript::DashStart, this);
+		mpAnimator->GetCompleteEvent(mAnimDashEffectKey) = std::bind(&PlayerDustEffectScript::DashComplete, this);
 	}
+	bool PlayerDustEffectScript::isPlayingAnmation()
+	{
+		if (mpAnimator->GetState() == eOnceAnimationState::PLAYING)
+		{
+			return true;
+		}
+		return false;
+	}
+
 }

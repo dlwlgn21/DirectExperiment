@@ -76,7 +76,7 @@ namespace jh
 		void DashAnimationComplete();
 		void HitAnimationComplete();
 
-		const eObjectLookDirection GetPlayerLookDirection() const	{ return meLookDir; }
+		eObjectLookDirection GetPlayerLookDirection() const			{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
 		eAttackType GetAttackType() const							{ return meAttackType; }
@@ -101,6 +101,7 @@ namespace jh
 		void recoverStamina();
 		void decreaseStamina(CHAR amount);
 		void decreaseHP(CHAR amount);
+
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;

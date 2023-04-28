@@ -20,19 +20,21 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-		void PlayAnimation(eObjectLookDirection eLookDir);
+		void PlayAnimation();
 
 		void DashStart();
 		void DashComplete();
 
 	private:
 		void setAnimator();
+		bool isPlayingAnmation();
 
 	private:
 		OnceAnimator*					mpAnimator;
 		const std::wstring				mAnimDashEffectKey;
 		PlayerScript*					mpPlayerScript;
 		Transform*						mpTransform;
+		eObjectLookDirection			mePlayerLookDirection;
 		Transform*						mpPlayerTransform;
 	};
 

@@ -244,7 +244,7 @@ namespace jh
 		ResourcesManager::Insert<Texture>(UI_STAMINA_BAR_TEXTURE_KEY, pStaminaBarTextrue);
 
 		Texture* pPlayerDashDustEffectTexture = new Texture();
-		pPlayerDashDustEffectTexture->Load(L"SIDEPUFF.png");
+		pPlayerDashDustEffectTexture->Load(L"DASHSMOKE2.png");
 		ResourcesManager::Insert<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY, pPlayerDashDustEffectTexture);
 	}
 

@@ -11,6 +11,8 @@
 #include "jhDebugHelper.h"
 #include "jhPlayerDustEffectScript.h"
 
+static constexpr const UINT DASH_MOVING_TIMING_INDEX = 3;
+
 using namespace jh::math;
 
 namespace jh
@@ -202,9 +204,13 @@ namespace jh
 				setState(ePlayerState::DASH);
 				const float DASH_AMOUNT = 2.0f;
 				if (meLookDir == eObjectLookDirection::LEFT)
-					{pos.x -= (mSpeed * DASH_AMOUNT);}
+				{
+					pos.x -= (DASH_AMOUNT);
+				}
 				else
-					{pos.x += (mSpeed * DASH_AMOUNT);}
+				{
+					pos.x += (DASH_AMOUNT);
+				}
 			}
 		}
 	}
@@ -243,10 +249,12 @@ namespace jh
 			}
 			break;
 		case ePlayerState::DASH:
+		{
 			mpAnimator->PlayAnimation(mAnimDashKey, true);
 			assert(mpPlayerDustEffetScript != nullptr);
-			mpPlayerDustEffetScript->PlayAnimation(meLookDir);
+			mpPlayerDustEffetScript->PlayAnimation();
 			break;
+		}
 		case ePlayerState::HITTED:
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
 			break;

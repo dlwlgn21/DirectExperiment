@@ -24,6 +24,8 @@ namespace jh
 
 		void SetPlaying(const bool isPlaying);
 		void SetComplete() { meState = eOnceAnimationState::COMPLETE; }
+
+		eOnceAnimationState GetState() const { return meState; }
 	private:
 		eOnceAnimationState			meState;
 	};

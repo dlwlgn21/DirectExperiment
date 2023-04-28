@@ -26,8 +26,8 @@ namespace jh
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY);
 		assert(pAtlas != nullptr);
-		const float WIDTH = 41.0f;
-		const float HEIGHT = 32.0f;
+		const float WIDTH = 59.0f;
+		const float HEIGHT = 42.0f;
 		const UINT EMPTY_SPACE = 1;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
@@ -38,9 +38,9 @@ namespace jh
 			Vector2::Zero,
 			animSize,
 			offset,
-			8 + EMPTY_SPACE,
-			0.1f,
-			100
+			7 + EMPTY_SPACE,
+			0.05f,
+			120
 		);
 		this->AddComponent(pAnimator);
 		pAnimator->SetCurrentAnimation(pAnimation);
