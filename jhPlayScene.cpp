@@ -29,6 +29,7 @@
 #include "jhAnimator.h"
 #include "jhBGMoonObject.h"
 #include "jhPlayerDustEffectObject.h"
+#include "jhTexture.h"
 
 using namespace jh::math;
 
@@ -121,9 +122,18 @@ namespace jh
 	{	
 		assert(pPlayerScript);
 		//Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
-		Monster* pMonster = InstantiateMonster<Monster>(eLayerType::MONSTER, new HitEffectObject(), pPlayerScript);
-		pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
-		pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		HitEffectObject* pHitEffectObject = new HitEffectObject();
+		pHitEffectObject->SetEffectAnimation(ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_SWORD_TEXTURE_KEY), 128.0f, 128.0f, L"MonsterHitAnim", 12, 0.05f);
+		Monster* pMonster = new Monster(pHitEffectObject, pPlayerScript);
+		pHitEffectObject->SetScriptAndAnimKey(pMonster->GetScriptOrNull(), L"MonsterHitAnim");
+		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(pHitEffectObject->GetScriptOrNull()));
+		//pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
+		//pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+
+
+		this->AddGameObject(pMonster, eLayerType::MONSTER);
+		this->AddGameObject(pHitEffectObject, eLayerType::EFFECT);
+
 		MonsterAttackColiderObject* pMonsterColiderObject = Instantiate<MonsterAttackColiderObject>(eLayerType::MONSTER);
 		Transform* pMonsterTransform = pMonster->GetTransform();
 		Vector3 monsterPos = pMonsterTransform->GetPosition();

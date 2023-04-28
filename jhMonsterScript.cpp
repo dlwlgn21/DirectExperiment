@@ -13,12 +13,12 @@ static constexpr const float ATTACK_RANGE_DISTANCE = 2.0f;
 
 namespace jh
 {
-	MonsterScript::MonsterScript(HitEffectScript* pEffectScript, PlayerScript* pPlayerScript)
+	MonsterScript::MonsterScript(PlayerScript* pPlayerScript)
 		: Script()
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)
 		, mpAnimator(nullptr)
-		, mpEffectScript(pEffectScript)
+		, mpEffectScript(nullptr)
 		, mpPlayerScript(pPlayerScript)
 		, mSpeed(1.0f)
 		, mHittedPushDistance(2.0f)
@@ -34,8 +34,8 @@ namespace jh
 	void MonsterScript::Initialize()
 	{
 		setAnimator();
-		assert(mpEffectScript != nullptr);
-		mpEffectScript->Initialize();
+		//assert(mpEffectScript != nullptr);
+		//mpEffectScript->Initialize();
 		mpTranform = GetOwner()->GetTransform();
 		assert(mpTranform != nullptr);
 
@@ -223,9 +223,11 @@ namespace jh
 		case eMonsterState::HITTED:
 		{
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
+			// TODO: 이곳에서 몬스터 Hit 이펙트 처리 해줄거임.
 			if (mpPlayerScript->GetAttackType() == eAttackType::NORMAL)
 			{
-				mpEffectScript->PlayAnimation(meLookDir);
+				assert(mpEffectScript != nullptr);
+				mpEffectScript->SetStatePlaying();
 			}
 			break;
 		}

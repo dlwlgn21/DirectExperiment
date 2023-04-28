@@ -1,5 +1,5 @@
 #pragma once
-#include "jhScript.h"
+#include "jhEffectScript.h"
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
 #include "jhWeaponScript.h"
@@ -7,12 +7,19 @@
 
 namespace jh
 {
+	enum eHitObjectType
+	{
+		MONSTER,
+		PLAYER,
+		COUNT
+	};
 	class Transform;
 	class OnceAnimator;
-	class HitEffectScript : public Script
+	class Script;
+	class HitEffectScript : public EffectScript
 	{
 	public:
-		HitEffectScript();
+		HitEffectScript(Script* pFollwingScript, const std::wstring& animKey);
 		virtual ~HitEffectScript() = default;
 
 		void Initialize() override;
@@ -20,17 +27,19 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-		void PlayAnimation(eObjectLookDirection eLookDir);
+		void setAnimator() override;
 
+		void HitStart();
+		void HitComplete();
 
-		void Start();
-		void Complete();
-		void End();
+	public:
+		void PlayAnimation();
 
 	private:
-		OnceAnimator*					mpAnimator;
 		const std::wstring				mAnimHitEffectKey;
-		eWeaponState					meState;
+		Script*							mpFollwingScript;
+		Transform*						mpFollwingTransform;
+		eHitObjectType					meType;
 	};
 
 }

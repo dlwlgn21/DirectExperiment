@@ -10,7 +10,7 @@ namespace jh
 		Script();
 		virtual ~Script() = default;
 		virtual void Initialize();
-		virtual void Update() ;
+		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
 

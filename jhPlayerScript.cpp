@@ -252,7 +252,7 @@ namespace jh
 		{
 			mpAnimator->PlayAnimation(mAnimDashKey, true);
 			assert(mpPlayerDustEffetScript != nullptr);
-			mpPlayerDustEffetScript->PlayAnimation();
+			mpPlayerDustEffetScript->SetStatePlaying();
 			break;
 		}
 		case ePlayerState::HITTED:

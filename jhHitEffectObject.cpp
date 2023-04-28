@@ -16,12 +16,38 @@ namespace jh
 	HitEffectObject::HitEffectObject()
 		: AnimatedGameObject()
 	{
-		setAnimator();
+		//setAnimator();
 		setRenderer();
-		setScript();
-		
+		//setScript();
 	}
 
+
+	void HitEffectObject::SetScriptAndAnimKey(Script* pScript, const std::wstring& animKey)
+	{
+		HitEffectScript* pHitEffectScript = new HitEffectScript(pScript, animKey);
+		this->AddScript(pHitEffectScript);
+	}
+
+	void HitEffectObject::SetEffectAnimation(Texture* pAtlas, const float width, const float height, const std::wstring& animKey, const UINT spriteCount, const float duration)
+	{
+		assert(pAtlas != nullptr);
+		const float MAGNIFICATION = 100.0f;
+		Vector2 animSize(width, height);
+		Vector2 offset(Vector2::Zero);
+		OnceAnimator* pAnimator = new OnceAnimator();
+		Animation* pAnimation = pAnimator->Create(
+			animKey,
+			pAtlas,
+			Vector2::Zero,
+			animSize,
+			offset,
+			spriteCount,
+			duration,
+			MAGNIFICATION
+		);
+		this->AddComponent(pAnimator);
+		pAnimator->SetCurrentAnimation(pAnimation);
+	}
 
 	void HitEffectObject::setAnimator()
 	{
@@ -57,7 +83,6 @@ namespace jh
 
 	void HitEffectObject::setScript()
 	{
-		HitEffectScript* pScript = new HitEffectScript();
-		this->AddScript(pScript);
+
 	}
 }

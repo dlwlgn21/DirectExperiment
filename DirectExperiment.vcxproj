@@ -151,6 +151,7 @@
     <ClInclude Include="jhDebugHelper.h" />
     <ClInclude Include="jhDebugObject.h" />
     <ClInclude Include="jhEditor.h" />
+    <ClInclude Include="jhEffectScript.h" />
     <ClInclude Include="jhHitEffectScript.h" />
     <ClInclude Include="jhEngine.h" />
     <ClInclude Include="jhEntity.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="jhD3DApp.cpp" />
     <ClCompile Include="jhDebugObject.cpp" />
     <ClCompile Include="jhEditor.cpp" />
+    <ClCompile Include="jhEffectScript.cpp" />
     <ClCompile Include="jhHitEffectScript.cpp" />
     <ClCompile Include="jhEntity.cpp" />
     <ClCompile Include="jhEnums.h" />

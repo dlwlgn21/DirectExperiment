@@ -24,4 +24,5 @@ namespace jh
 	{
 		GameObject::Render();
 	}
+
 }

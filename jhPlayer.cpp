@@ -114,7 +114,7 @@ namespace jh
 			animSize,
 			offset,
 			6,
-			0.15f,
+			0.075f,
 			MAGNINICATION
 		);
 		pPlayerAnimator->Create(

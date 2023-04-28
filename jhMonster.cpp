@@ -24,9 +24,9 @@ namespace jh
 		setAnimator();
 		setScript(pPlayerScript);
 		setCollider();
-		mpHitEffectObject->GetTransform()->SetParent(this);
-		mpHitEffectObject->GetTransform()->SetPosition(Vector3(0.0f, 0.1f, -3.0f));
-		mpHitEffectObject->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
+		//mpHitEffectObject->GetTransform()->SetParent(this);
+		//mpHitEffectObject->GetTransform()->SetPosition(Vector3(0.0f, 0.1f, -3.0f));
+		//mpHitEffectObject->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 	}
 
 	void Monster::Initialize()
@@ -114,7 +114,7 @@ namespace jh
 	void Monster::setScript(PlayerScript* pPlayerScript)
 	{
 		assert(pPlayerScript);
-		MonsterScript* pScript = new MonsterScript(static_cast<HitEffectScript*>(mpHitEffectObject->GetScriptOrNull()), pPlayerScript);
+		MonsterScript* pScript = new MonsterScript(pPlayerScript);
 		this->AddScript(pScript);
 	}
 	void Monster::setCollider()

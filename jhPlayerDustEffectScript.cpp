@@ -14,11 +14,9 @@ using namespace jh::math;
 namespace jh
 {
 	PlayerDustEffectScript::PlayerDustEffectScript(PlayerScript* pPlayerScript)
-		: Script()
-		, mpAnimator(nullptr)
+		: EffectScript()
 		, mpPlayerScript(pPlayerScript)
 		, mAnimDashEffectKey(L"PlayerDashAnimKey")
-		, mpTransform(nullptr)
 		, mePlayerLookDirection(eObjectLookDirection::RIGHT)
 		, mpPlayerTransform(pPlayerScript->GetOwner()->GetTransform())
 	{
@@ -33,14 +31,17 @@ namespace jh
 	void PlayerDustEffectScript::Update()
 	{
 		if (isPlayingAnmation()) { return; }
-		mpTransform->SetPosition(mpPlayerTransform->GetPosition());
-	}
-	void PlayerDustEffectScript::FixedUpdate()
-	{
-	}
-
-	void PlayerDustEffectScript::Render()
-	{
+		switch (meState)
+		{
+		case eEffectState::WAIT:
+			mpTransform->SetPosition(mpPlayerTransform->GetPosition());
+			break;
+		case eEffectState::PLAYING:
+			PlayAnimation();
+			break;
+		default:
+			break;
+		}
 	}
 
 	void PlayerDustEffectScript::PlayAnimation()
@@ -67,6 +68,7 @@ namespace jh
 	void PlayerDustEffectScript::DashComplete()
 	{
 		mpAnimator->SetComplete();
+		SetState(eEffectState::WAIT);
 	}
 	void PlayerDustEffectScript::setAnimator()
 	{
@@ -74,14 +76,6 @@ namespace jh
 		assert(mpAnimator != nullptr);
 		mpAnimator->GetStartEvent(mAnimDashEffectKey) = std::bind(&PlayerDustEffectScript::DashStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDashEffectKey) = std::bind(&PlayerDustEffectScript::DashComplete, this);
-	}
-	bool PlayerDustEffectScript::isPlayingAnmation()
-	{
-		if (mpAnimator->GetState() == eOnceAnimationState::PLAYING)
-		{
-			return true;
-		}
-		return false;
 	}
 
 }

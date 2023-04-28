@@ -20,7 +20,7 @@ namespace jh
 	class MonsterScript final : public Script
 	{
 	public:
-		MonsterScript(HitEffectScript* pEffectScript, PlayerScript* pPlayerScript);
+		MonsterScript(PlayerScript* pPlayerScript);
 		virtual ~MonsterScript() = default;
 
 		void Initialize() override;
@@ -44,6 +44,8 @@ namespace jh
 
 		eObjectLookDirection GetMonsterLookDirection() const	{ return meLookDir; }
 		eMonsterState		 GetMonsterState() const			{ return meState; }
+
+		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	private:
 		void setAnimator();
