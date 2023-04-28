@@ -7,7 +7,7 @@
 #include "jhAnimation.h"
 #include "jhPlayerScript.h"
 
-static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
+static constexpr const float LEFT_RIGHT_DISTANCE = 1.0f;
 
 using namespace jh::math;
 

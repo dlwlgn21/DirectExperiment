@@ -44,10 +44,10 @@ namespace jh
 		switch (eLookDir)
 		{
 		case eObjectLookDirection::LEFT:
-			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
 			break;
 		case eObjectLookDirection::RIGHT:
-			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
 			break;
 		default:
 			break;
