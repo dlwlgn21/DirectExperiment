@@ -223,6 +223,12 @@
     <Filter Include="GameObject\AnimatedGameObject\BG">
       <UniqueIdentifier>{d9aef993-1526-4b41-84c5-4f4898eb31b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\Player">
+      <UniqueIdentifier>{d394964c-293a-4aa5-a2ab-37d0e9cdd207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Effect\Player">
+      <UniqueIdentifier>{bd06211b-7ebd-4a44-a8e0-3ae6e076291a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -417,6 +423,12 @@
     <ClInclude Include="jhBGMoonObject.h">
       <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerDustEffectObject.h">
+      <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerDustEffectScript.h">
+      <Filter>Component\Script\Effect\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -592,6 +604,12 @@
     </ClCompile>
     <ClCompile Include="jhBGMoonObject.cpp">
       <Filter>GameObject\AnimatedGameObject\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerDustEffectObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerDustEffectScript.cpp">
+      <Filter>Component\Script\Effect\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

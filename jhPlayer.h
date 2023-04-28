@@ -20,6 +20,7 @@ namespace jh
 		void setRenderer();
 		void setScript();
 		void setCollider();
+		void setEffect();
 	};
 }
 

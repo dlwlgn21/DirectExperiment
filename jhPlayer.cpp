@@ -138,4 +138,7 @@ namespace jh
 		pHitPlayerCollider->SetSize(Vector2(0.1f, 0.25f));
 		this->AddComponent(pHitPlayerCollider);
 	}
+	void Player::setEffect()
+	{
+	}
 }

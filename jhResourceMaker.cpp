@@ -54,6 +54,8 @@ namespace jh
 
 	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTextureKey";
 
+	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTextureKey";
+
 #pragma endregion
 
 #pragma region MATERIAL
@@ -82,8 +84,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterialKey";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
 
-
-
+	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 
 #pragma endregion
 
@@ -241,6 +242,10 @@ namespace jh
 		Texture* pStaminaBarTextrue = new Texture();
 		pStaminaBarTextrue->Load(L"StaminarBar.png");
 		ResourcesManager::Insert<Texture>(UI_STAMINA_BAR_TEXTURE_KEY, pStaminaBarTextrue);
+
+		Texture* pPlayerDashDustEffectTexture = new Texture();
+		pPlayerDashDustEffectTexture->Load(L"SIDEPUFF.png");
+		ResourcesManager::Insert<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY, pPlayerDashDustEffectTexture);
 	}
 
 	void ResourceMaker::createMaterial()
@@ -313,6 +318,12 @@ namespace jh
 		ResourcesManager::Insert<Material>(BG_MOON_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY))
+			);
+
+
+		ResourcesManager::Insert<Material>(PLAYER_DASH_EFFECT_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY))
 			);
 
 #pragma region DEBUG

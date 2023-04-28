@@ -4,12 +4,12 @@
 
 namespace jh
 {
-	class MonsterScript;
-	class HitEffectObject : public AnimatedGameObject
+	class PlayerDustEffectScript;
+	class PlayerDustEffectObject : public AnimatedGameObject
 	{
 	public:
-		HitEffectObject();
-		virtual ~HitEffectObject() = default;
+		PlayerDustEffectObject();
+		virtual ~PlayerDustEffectObject() = default;
 
 	protected:
 		void setAnimator() override;
