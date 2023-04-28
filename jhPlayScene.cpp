@@ -18,7 +18,7 @@
 #include "jhCollider2D.h"
 #include "jhCollisionManager.h"
 #include "jhPlayerWeaponColliderObject.h"
-#include "jhEffectScript.h"
+#include "jhHitEffectScript.h"
 #include "jhHitEffectObject.h"
 #include "jhPlayerScript.h"
 #include "jhParallaxObject.h"

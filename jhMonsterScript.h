@@ -15,12 +15,12 @@ namespace jh
 
 	class Animator;
 	class Transform;
-	class EffectScript;
+	class HitEffectScript;
 	class PlayerScript;
 	class MonsterScript final : public Script
 	{
 	public:
-		MonsterScript(EffectScript* pEffectScript, PlayerScript* pPlayerScript);
+		MonsterScript(HitEffectScript* pEffectScript, PlayerScript* pPlayerScript);
 		virtual ~MonsterScript() = default;
 
 		void Initialize() override;
@@ -57,7 +57,7 @@ namespace jh
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
-		EffectScript*					mpEffectScript;
+		HitEffectScript*					mpEffectScript;
 		float							mSpeed;
 		float							mHittedPushDistance;
 		const std::wstring				mAnimIdleKey;

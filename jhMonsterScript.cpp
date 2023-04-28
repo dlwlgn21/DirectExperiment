@@ -4,7 +4,7 @@
 #include "jhGameObject.h"
 #include "jhTransform.h"
 #include "jhAnimator.h"
-#include "jhEffectScript.h"
+#include "jhHitEffectScript.h"
 #include "jhCollider2D.h"
 #include "jhPlayerScript.h"
 
@@ -13,7 +13,7 @@ static constexpr const float ATTACK_RANGE_DISTANCE = 2.0f;
 
 namespace jh
 {
-	MonsterScript::MonsterScript(EffectScript* pEffectScript, PlayerScript* pPlayerScript)
+	MonsterScript::MonsterScript(HitEffectScript* pEffectScript, PlayerScript* pPlayerScript)
 		: Script()
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)

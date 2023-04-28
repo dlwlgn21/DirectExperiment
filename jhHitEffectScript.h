@@ -9,11 +9,11 @@ namespace jh
 {
 	class Transform;
 	class OnceAnimator;
-	class EffectScript : public Script
+	class HitEffectScript : public Script
 	{
 	public:
-		EffectScript();
-		virtual ~EffectScript() = default;
+		HitEffectScript();
+		virtual ~HitEffectScript() = default;
 
 		void Initialize() override;
 		void Update() override;

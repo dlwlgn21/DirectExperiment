@@ -8,7 +8,7 @@
 #include "jhMath.h"
 #include "jhCollider2D.h"
 #include "jhHitEffectObject.h"
-#include "jhEffectScript.h"
+#include "jhHitEffectScript.h"
 #include "jhTransform.h"
 
 using namespace jh::math;
@@ -114,7 +114,7 @@ namespace jh
 	void Monster::setScript(PlayerScript* pPlayerScript)
 	{
 		assert(pPlayerScript);
-		MonsterScript* pScript = new MonsterScript(static_cast<EffectScript*>(mpHitEffectObject->GetScriptOrNull()), pPlayerScript);
+		MonsterScript* pScript = new MonsterScript(static_cast<HitEffectScript*>(mpHitEffectObject->GetScriptOrNull()), pPlayerScript);
 		this->AddScript(pScript);
 	}
 	void Monster::setCollider()

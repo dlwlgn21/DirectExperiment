@@ -1,4 +1,4 @@
-#include "jhEffectScript.h"
+#include "jhHitEffectScript.h"
 #include "jhTransform.h"
 #include "jhGameObject.h"
 #include "jhInput.h"
@@ -9,34 +9,34 @@
 
 namespace jh
 {
-	EffectScript::EffectScript()
+	HitEffectScript::HitEffectScript()
 		: Script()
 		, mpAnimator(nullptr)
 		, mAnimHitEffectKey(L"MonsterHitAnim")
 		, meState(eWeaponState::WAITING)
 	{
 	}
-	void EffectScript::Initialize()
+	void HitEffectScript::Initialize()
 	{
 		mpAnimator = static_cast<OnceAnimator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimHitEffectKey) = std::bind(&EffectScript::Start, this);
-		mpAnimator->GetCompleteEvent(mAnimHitEffectKey) = std::bind(&EffectScript::Complete, this);
-		mpAnimator->GetEndEvent(mAnimHitEffectKey) = std::bind(&EffectScript::End, this);
+		mpAnimator->GetStartEvent(mAnimHitEffectKey) = std::bind(&HitEffectScript::Start, this);
+		mpAnimator->GetCompleteEvent(mAnimHitEffectKey) = std::bind(&HitEffectScript::Complete, this);
+		mpAnimator->GetEndEvent(mAnimHitEffectKey) = std::bind(&HitEffectScript::End, this);
 	}
-	void EffectScript::Update()
+	void HitEffectScript::Update()
 	{
 		
 	}
-	void EffectScript::FixedUpdate()
+	void HitEffectScript::FixedUpdate()
 	{
 	}
 
-	void EffectScript::Render()
+	void HitEffectScript::Render()
 	{
 	}
 
-	void EffectScript::PlayAnimation(eObjectLookDirection eLookDir)
+	void HitEffectScript::PlayAnimation(eObjectLookDirection eLookDir)
 	{
 		mpAnimator->SetActive(true);
 		mpAnimator->SetPlaying(true);
@@ -54,15 +54,15 @@ namespace jh
 		}
 		mpAnimator->PlayAnimationWithReset(mAnimHitEffectKey, false);
 	}
-	void EffectScript::Start()
+	void HitEffectScript::Start()
 	{
 	}
-	void EffectScript::Complete()
+	void HitEffectScript::Complete()
 	{
 		meState = eWeaponState::WAITING;
 		mpAnimator->SetComplete();
 	}
-	void EffectScript::End()
+	void HitEffectScript::End()
 	{
 	}
 }

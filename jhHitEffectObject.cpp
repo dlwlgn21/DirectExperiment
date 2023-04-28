@@ -6,10 +6,9 @@
 #include "jhMesh.h"
 #include "jhMaterial.h"
 #include "jhSpriteRenderer.h"
-#include "jhEffectScript.h"
+#include "jhHitEffectScript.h"
 #include "jhPlayerScript.h"
 #include "jhAnimation.h"
-#include "jhEffectScript.h"
 using namespace jh::math;
 
 namespace jh
@@ -58,7 +57,7 @@ namespace jh
 
 	void HitEffectObject::setScript()
 	{
-		EffectScript* pScript = new EffectScript();
+		HitEffectScript* pScript = new HitEffectScript();
 		this->AddScript(pScript);
 	}
 }

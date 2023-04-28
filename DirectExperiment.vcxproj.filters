@@ -229,6 +229,9 @@
     <Filter Include="Component\Script\Effect\Player">
       <UniqueIdentifier>{bd06211b-7ebd-4a44-a8e0-3ae6e076291a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\Effect\Common">
+      <UniqueIdentifier>{8d9d4f81-f63e-4a35-aa89-6efc2940390f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -360,9 +363,6 @@
     <ClInclude Include="jhHitEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="jhEffectScript.h">
-      <Filter>Component\Script\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="jhCollisionManager.h">
       <Filter>Collision</Filter>
     </ClInclude>
@@ -428,6 +428,9 @@
     </ClInclude>
     <ClInclude Include="jhPlayerDustEffectScript.h">
       <Filter>Component\Script\Effect\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhHitEffectScript.h">
+      <Filter>Component\Script\Effect\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -545,9 +548,6 @@
     <ClCompile Include="jhHitEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="jhEffectScript.cpp">
-      <Filter>Component\Script\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="jhCollisionManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
@@ -610,6 +610,9 @@
     </ClCompile>
     <ClCompile Include="jhPlayerDustEffectScript.cpp">
       <Filter>Component\Script\Effect\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhHitEffectScript.cpp">
+      <Filter>Component\Script\Effect\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
