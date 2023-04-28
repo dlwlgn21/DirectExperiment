@@ -9,6 +9,7 @@
 #include "jhAnimation.h"
 #include "jhCollider2D.h"
 #include "jhDebugHelper.h"
+#include "jhPlayerDustEffectScript.h"
 
 using namespace jh::math;
 
@@ -30,6 +31,7 @@ namespace jh
 		, meState(ePlayerState::IDLE)
 		, meAttackType(eAttackType::NORMAL)
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
+		, mpPlayerDustEffetScript(nullptr)
 	{
 	}
 
@@ -242,6 +244,8 @@ namespace jh
 			break;
 		case ePlayerState::DASH:
 			mpAnimator->PlayAnimation(mAnimDashKey, true);
+			assert(mpPlayerDustEffetScript != nullptr);
+			mpPlayerDustEffetScript->PlayAnimation(meLookDir);
 			break;
 		case ePlayerState::HITTED:
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);

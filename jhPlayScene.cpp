@@ -28,6 +28,7 @@
 #include "jhMonsterScript.h"
 #include "jhAnimator.h"
 #include "jhBGMoonObject.h"
+#include "jhPlayerDustEffectObject.h"
 
 using namespace jh::math;
 
@@ -105,7 +106,8 @@ namespace jh
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-
+		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
+		pPlayer->SetEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);

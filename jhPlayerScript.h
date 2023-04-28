@@ -35,6 +35,7 @@ namespace jh
 	class Animator;
 	class Transform;
 	class Collider2D;
+	class PlayerDustEffectScript;
 	class PlayerScript final : public Script
 	{
 	public:
@@ -87,6 +88,9 @@ namespace jh
 
 		void EnemyAttackHiited(UINT damage);
 
+
+		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
+	
 	private:
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
@@ -111,8 +115,8 @@ namespace jh
 		ePlayerState					meState;
 		eAttackType						meAttackType;
 		PlayerStat						mStat;
-
 		float							mStaminaTimer;
+		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 	};
 }
 

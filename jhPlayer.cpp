@@ -7,6 +7,9 @@
 #include "jhResourcesManager.h"
 #include "jhMath.h"
 #include "jhCollider2D.h"
+#include "jhPlayerDustEffectObject.h"
+#include "jhPlayerDustEffectScript.h"
+#include "jhTransform.h"
 
 using namespace jh::math;
 
@@ -36,6 +39,14 @@ namespace jh
 	void Player::Render()
 	{
 		GameObject::Render();
+	}
+	void Player::SetEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject)
+	{
+		assert(pPlayerDustEffectObject != nullptr);
+		pPlayerDustEffectObject->GetTransform()->SetParent(this);
+		PlayerDustEffectScript* pScript = new PlayerDustEffectScript();
+		pPlayerDustEffectObject->AddScript(pScript);
+		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerDustEffectScript(pScript);
 	}
 	void Player::setAnimator()
 	{
@@ -138,7 +149,5 @@ namespace jh
 		pHitPlayerCollider->SetSize(Vector2(0.1f, 0.25f));
 		this->AddComponent(pHitPlayerCollider);
 	}
-	void Player::setEffect()
-	{
-	}
+
 }

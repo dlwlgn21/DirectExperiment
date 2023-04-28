@@ -3,6 +3,7 @@
 
 namespace jh
 {
+	class PlayerDustEffectObject;
 	class Player final : public GameObject
 	{
 	public:
@@ -15,12 +16,15 @@ namespace jh
 		void Render() override;
 
 
+	// Added Part At 2023/04/28 15:21
+		void SetEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject);
+
+
 	private:
 		void setAnimator();
 		void setRenderer();
 		void setScript();
 		void setCollider();
-		void setEffect();
 	};
 }
 

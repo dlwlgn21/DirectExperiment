@@ -4,7 +4,6 @@
 
 namespace jh
 {
-	class PlayerDustEffectScript;
 	class PlayerDustEffectObject : public AnimatedGameObject
 	{
 	public:
