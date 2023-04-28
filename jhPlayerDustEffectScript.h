@@ -8,10 +8,11 @@ namespace jh
 {
 	class Transform;
 	class OnceAnimator;
+	class PlayerScript;
 	class PlayerDustEffectScript : public Script
 	{
 	public:
-		PlayerDustEffectScript();
+		PlayerDustEffectScript(PlayerScript* pPlayerScript);
 		virtual ~PlayerDustEffectScript() = default;
 
 		void Initialize() override;
@@ -25,8 +26,14 @@ namespace jh
 		void DashComplete();
 
 	private:
+		void setAnimator();
+
+	private:
 		OnceAnimator*					mpAnimator;
 		const std::wstring				mAnimDashEffectKey;
+		PlayerScript*					mpPlayerScript;
+		Transform*						mpTransform;
+		Transform*						mpPlayerTransform;
 	};
 
 }

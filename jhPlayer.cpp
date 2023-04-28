@@ -43,8 +43,11 @@ namespace jh
 	void Player::SetEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject)
 	{
 		assert(pPlayerDustEffectObject != nullptr);
-		pPlayerDustEffectObject->GetTransform()->SetParent(this);
-		PlayerDustEffectScript* pScript = new PlayerDustEffectScript();
+		//pPlayerDustEffectObject->GetTransform()->SetParent(this);
+		Vector3 playerPos = this->GetTransform()->GetPosition();
+		pPlayerDustEffectObject->GetTransform()->SetPosition(Vector3(playerPos.x, playerPos.y - 0.1f, playerPos.z));
+		pPlayerDustEffectObject->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		PlayerDustEffectScript* pScript = new PlayerDustEffectScript(static_cast<PlayerScript*>(this->GetScriptOrNull()));
 		pPlayerDustEffectObject->AddScript(pScript);
 		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerDustEffectScript(pScript);
 	}
