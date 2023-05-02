@@ -2,6 +2,7 @@
 #include "jhScript.h"
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
+#include "jhMonsterManager.h"
 
 namespace jh
 {
@@ -20,7 +21,7 @@ namespace jh
 	class MonsterScript final : public Script
 	{
 	public:
-		MonsterScript(PlayerScript* pPlayerScript);
+		MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript);
 		virtual ~MonsterScript() = default;
 
 		void Initialize() override;
@@ -50,20 +51,21 @@ namespace jh
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
 
-	private:
+	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
 		HitEffectScript*				mpEffectScript;
 		float							mSpeed;
 		float							mHittedPushDistance;
-		const std::wstring				mAnimIdleKey;
-		const std::wstring				mAnimMoveKey;
-		const std::wstring				mAnimAttackKey;
-		const std::wstring				mAnimHittedKey;
+		std::wstring					mAnimIdleKey;
+		std::wstring					mAnimMoveKey;
+		std::wstring					mAnimAttackKey;
+		std::wstring					mAnimHittedKey;
 		eObjectLookDirection			meLookDir;
 		PlayerScript*					mpPlayerScript;
 		eMonsterState					meState;
+		eMonsterType					meMonsterType;
 	};
 }
 

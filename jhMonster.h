@@ -1,5 +1,6 @@
 #pragma once
 #include "jhGameObject.h"
+#include "jhMonsterManager.h"
 
 namespace jh
 {
@@ -15,6 +16,7 @@ namespace jh
 		Mesh*				pMesh;
 		Material*			pMaterial;
 		Animator*			pAnimator;
+		eMonsterType		eMonType;
 	};
 
 	class Monster : public GameObject

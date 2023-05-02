@@ -30,7 +30,6 @@
 #include "jhBGMoonObject.h"
 #include "jhPlayerDustEffectObject.h"
 #include "jhTexture.h"
-#include "jhMonsterManager.h"
 
 using namespace jh::math;
 
@@ -79,6 +78,7 @@ namespace jh
 	{
 		Scene::Release();
 	}
+
 	PlayerScript* PlayScene::instantiateCameraAndPlayer()
 	{
 		// MainCamera
@@ -122,13 +122,21 @@ namespace jh
 	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
 	{	
 		assert(pPlayerScript);
-		MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.8f, 4.0f), Vector3(6.0f, 6.0f, 1.0f));
+		//MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		//MonstePackage monPack2 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(-6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		//addMonster(monPack);
+		//addMonster(monPack2);
 
+		MonstePackage monPack3 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		addMonster(monPack3);
+	}
+
+	void PlayScene::addMonster(const MonstePackage& monPack)
+	{
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::EFFECT);
 		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
 	}
-
 	void PlayScene::instantiateParallaxObjects()
 	{
 		// BattleBG

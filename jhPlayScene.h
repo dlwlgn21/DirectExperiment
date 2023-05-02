@@ -1,5 +1,6 @@
 #pragma once
 #include "jhScene.h"
+#include "jhMonsterManager.h"
 
 namespace jh
 {
@@ -15,6 +16,9 @@ namespace jh
 		void Update() override;
 		void FixedUpdate() override;
 		void Release() override;
+
+	private:
+		void addMonster(const MonstePackage& monPack);
 
 	private:
 		PlayerScript* instantiateCameraAndPlayer();

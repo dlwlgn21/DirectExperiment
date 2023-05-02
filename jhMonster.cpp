@@ -56,13 +56,13 @@ namespace jh
 	void Monster::setScript()
 	{
 		assert(mMonsterInfo.pPlayerScript != nullptr);
-		MonsterScript* pScript = new MonsterScript(mMonsterInfo.pPlayerScript);
+		MonsterScript* pScript = new MonsterScript(mMonsterInfo.eMonType, mMonsterInfo.pPlayerScript);
 		this->AddScript(pScript);
 	}
 	void Monster::setHitCollider()
 	{
 		Collider2D* pMonsterCollider = new Collider2D(eColliderLayerType::MONSTER);
-		pMonsterCollider->SetSize(Vector2(0.1f, 0.25f));
+		pMonsterCollider->SetSize(Vector2(0.1f, 0.2f));
 		this->AddComponent(pMonsterCollider);
 	}
 }

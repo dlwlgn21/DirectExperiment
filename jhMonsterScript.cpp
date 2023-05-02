@@ -14,7 +14,7 @@ static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
 namespace jh
 {
-	MonsterScript::MonsterScript(PlayerScript* pPlayerScript)
+	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
 		: Script()
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)
@@ -23,13 +23,35 @@ namespace jh
 		, mpPlayerScript(pPlayerScript)
 		, mSpeed(2.0f)
 		, mHittedPushDistance(2.0f)
-		, mAnimIdleKey(L"MonsterIdle")
-		, mAnimMoveKey(L"MonsterMove")
-		, mAnimAttackKey(L"MonsterAttack")
-		, mAnimHittedKey(L"MonsterHitted")
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, meState(eMonsterState::TRACING)
+		, meMonsterType(eMonsterType)
 	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			mAnimIdleKey = MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY;
+			mAnimMoveKey = MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY;
+			mAnimAttackKey = MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY;
+			mAnimHittedKey = MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			mAnimIdleKey = MonsterManager::SWEEPER_IDLE_ANIM_KEY;
+			mAnimMoveKey = MonsterManager::SWEEPER_MOVING_ANIM_KEY;
+			mAnimAttackKey = MonsterManager::SWEEPER_ATTACK_ANIM_KEY;
+			mAnimHittedKey = MonsterManager::SWEEPER_HITTED_ANIM_KEY;
+			break;
+		}
+		case eMonsterType::COUNT:
+			assert(false);
+			break;
+		default:
+			assert(false);
+			break;
+		}
 	}
 
 	void MonsterScript::Initialize()

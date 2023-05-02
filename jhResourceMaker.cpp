@@ -33,7 +33,10 @@ namespace jh
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
 
 
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"MonsterTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
+
+
 	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
 
@@ -60,7 +63,10 @@ namespace jh
 
 #pragma region MATERIAL
 	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"MonsterCagedShokerMaterialKey";
+
+	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
+
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
 	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
@@ -180,9 +186,14 @@ namespace jh
 		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37(2).png");
 		ResourcesManager::Insert<Texture>(PLAYER_TEXTURE_ATLAS_KEY, pPlayerAtalsTexture);
 
-		Texture* pZombieAtlasTexture = new Texture();
-		pZombieAtlasTexture->Load(L"caged shocker 110x42.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, pZombieAtlasTexture);
+		Texture* pCagedShokerAtlasTexture = new Texture();
+		pCagedShokerAtlasTexture->Load(L"caged shocker 110x42.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, pCagedShokerAtlasTexture);
+
+		Texture* pSweeperAtlasTexture = new Texture();
+		pSweeperAtlasTexture->Load(L"Sweeper.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
+
 
 		Texture* pBattleBGTexture = new Texture();
 		pBattleBGTexture->Load(L"ForeGround23(1).png");
@@ -253,8 +264,12 @@ namespace jh
 		Material* pPlayerMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(PLAYER_MATERIAL_KEY, pPlayerMaterial);
 
-		Material* pMonsterMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pMonsterMaterial);
+		Material* pCagedMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pCagedMaterial);
+
+		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);
+
 
 		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_BG_TEXTURE_KEY));
 		ResourcesManager::Insert<Material>(BATTLE_BG_MATERIAL_KEY, pBattleBGMaterial);
