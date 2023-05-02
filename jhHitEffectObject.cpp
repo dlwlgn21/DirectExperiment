@@ -83,6 +83,5 @@ namespace jh
 
 	void HitEffectObject::setScript()
 	{
-
 	}
 }

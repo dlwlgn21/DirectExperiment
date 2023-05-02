@@ -18,7 +18,7 @@ namespace jh
 	{
 		setAnimator();
 		setRenderer();
-		setScript();
+		//setScript();
 	}
 
 
