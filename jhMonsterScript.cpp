@@ -10,6 +10,7 @@
 
 using namespace jh::math;
 static constexpr const float ATTACK_RANGE_DISTANCE = 2.0f;
+static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
 namespace jh
 {

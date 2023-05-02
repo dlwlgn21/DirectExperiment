@@ -11,7 +11,6 @@
 #include "jhDebugHelper.h"
 #include "jhPlayerDustEffectScript.h"
 
-static constexpr const UINT DASH_MOVING_TIMING_INDEX = 3;
 static constexpr const float DASH_AMOUNT = 3.0f;
 using namespace jh::math;
 
