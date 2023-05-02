@@ -21,15 +21,18 @@
 
 */
 using namespace jh::math;
+static constexpr const float MONSTER_INITIAL_Z_POS = 4.0f;
 
 static constexpr const float CAGED_SHOKER_WIDTH = 110.0f;
 static constexpr const float CAGED_SHOKER_HEIGHT = 42.0f;
 static constexpr const float CAGED_SHOKER_MAG = 130.0f;
+static constexpr const float CAGED_SHOKER_SCALE = 6.0f;
+static constexpr const float CAGED_SHOKER_INITIAL_Y_POS = -1.8f;
 
 static constexpr const float COLLIDER_Z_VALUE = 3.0f;
 namespace jh
 {
-	MonstePackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript)
+	MonstePackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position, const Vector3& scale)
 	{
 		assert(pPlayerScript != nullptr);
 		MonstePackage retMonsterPackage;
@@ -102,12 +105,15 @@ namespace jh
 			
 			retMonsterPackage.pMonsterAttackColliderObject = pMonsterColiderObject;
 			
-			return retMonsterPackage;
+			break;
 		}
 		default:
 			assert(false);
 			break;
 		}
+
+		setTransform(retMonsterPackage.pMonster->GetTransform(), position, scale);
+
 		return retMonsterPackage;
 	}
 	Animator* MonsterManager::createAnimatorOrNull()
@@ -126,5 +132,11 @@ namespace jh
 			animInfo.Duration,
 			animInfo.Magnification
 		);
+	}
+	void MonsterManager::setTransform(Transform* pMonsterTransform, const Vector3& position, const Vector3& scale)
+	{
+		assert(pMonsterTransform != nullptr);
+		pMonsterTransform->SetPosition(position);
+		pMonsterTransform->SetScale(scale);
 	}
 }

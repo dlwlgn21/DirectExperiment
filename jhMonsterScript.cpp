@@ -21,7 +21,7 @@ namespace jh
 		, mpAnimator(nullptr)
 		, mpEffectScript(nullptr)
 		, mpPlayerScript(pPlayerScript)
-		, mSpeed(1.0f)
+		, mSpeed(2.0f)
 		, mHittedPushDistance(2.0f)
 		, mAnimIdleKey(L"MonsterIdle")
 		, mAnimMoveKey(L"MonsterMove")
@@ -37,13 +37,8 @@ namespace jh
 		setAnimator();
 		mpTranform = GetOwner()->GetTransform();
 		assert(mpTranform != nullptr);
-
 		assert(mpPlayerScript != nullptr);
 		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
-		assert(mpPlayerTransform != nullptr);
-
-		mpTranform->SetPosition(Vector3(6.0f, -1.8f, 4.0f));
-		mpTranform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 	}
 
 	void MonsterScript::Update()
@@ -209,7 +204,6 @@ namespace jh
 		case eMonsterState::HITTED:
 		{
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
-			// TODO: 이곳에서 몬스터 Hit 이펙트 처리 해줄거임.
 			if (mpPlayerScript->GetAttackType() == eAttackType::NORMAL)
 			{
 				assert(mpEffectScript != nullptr);

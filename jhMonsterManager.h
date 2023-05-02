@@ -11,6 +11,7 @@ namespace jh
 		COUNT
 	};
 
+	class Transform;
 	class Texture;
 	class Monster;
 	class HitEffectObject;
@@ -64,13 +65,14 @@ namespace jh
 		MonsterManager& operator=(const MonsterManager& other) = delete;
 
 
-		MonstePackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript);
+		MonstePackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position, const jh::math::Vector3& scale);
 
 
 	private:
 		 Animator* createAnimatorOrNull();
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
-
+		 void setTransform(Transform* pMonsterTransform, const jh::math::Vector3& position, const jh::math::Vector3& scale);
+	
 	private:
 		MonsterManager() = default;
 		~MonsterManager() = default;
