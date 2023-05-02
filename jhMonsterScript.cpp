@@ -35,8 +35,6 @@ namespace jh
 	void MonsterScript::Initialize()
 	{
 		setAnimator();
-		//assert(mpEffectScript != nullptr);
-		//mpEffectScript->Initialize();
 		mpTranform = GetOwner()->GetTransform();
 		assert(mpTranform != nullptr);
 
@@ -53,24 +51,6 @@ namespace jh
 		setPosition();
 		setAnimationFlip();
 		playAnimation();
-	}
-	void MonsterScript::FixedUpdate()
-	{
-	}
-	void MonsterScript::Render()
-	{
-	}
-
-	void MonsterScript::Start()
-	{
-	}
-
-	void MonsterScript::Complete()
-	{
-	}
-
-	void MonsterScript::End()
-	{
 	}
 
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)

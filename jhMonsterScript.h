@@ -25,12 +25,6 @@ namespace jh
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
-
-		void Start();
-		void Complete();
-		void End();
 
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
@@ -55,11 +49,12 @@ namespace jh
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
+
 	private:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
-		HitEffectScript*					mpEffectScript;
+		HitEffectScript*				mpEffectScript;
 		float							mSpeed;
 		float							mHittedPushDistance;
 		const std::wstring				mAnimIdleKey;
