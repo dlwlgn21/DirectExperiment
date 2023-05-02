@@ -75,23 +75,28 @@ namespace jh
 
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			setState(eMonsterState::ATTACKING);
 			return;
 		}
+
+	}
+	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
+	{
 		if (meState == eMonsterState::HITTED)
 		{
 			return;
 		}
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
 		{
-			setState(eMonsterState::HITTED);
+			Animator* pPlayerAnimator = static_cast<Animator*>(mpPlayerScript->GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+			assert(pPlayerAnimator != nullptr);
+			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX)
+			{
+				setState(eMonsterState::HITTED);
+			}
 		}
-	}
-	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
-	{
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
