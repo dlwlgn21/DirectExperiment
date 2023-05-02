@@ -30,6 +30,7 @@
 #include "jhBGMoonObject.h"
 #include "jhPlayerDustEffectObject.h"
 #include "jhTexture.h"
+#include "jhMonsterManager.h"
 
 using namespace jh::math;
 
@@ -40,7 +41,7 @@ static constexpr const float PARALLAX_4_DEPTH = 70.0f;
 static constexpr const float PARALLAX_5_DEPTH = 60.0f;
 static constexpr const float PARALLAX_6_DEPTH = 50.0f;
 
-static constexpr const float COLLIDER_Z_VALUE = 3.0f;
+static constexpr const float SCENE_COLLIDER_Z_VALUE = 3.0f;
 
 namespace jh
 {
@@ -112,7 +113,7 @@ namespace jh
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
-		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, COLLIDER_Z_VALUE));
+		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, SCENE_COLLIDER_Z_VALUE));
 		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 	
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
@@ -121,24 +122,11 @@ namespace jh
 	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
 	{	
 		assert(pPlayerScript);
-		//Monster* pMonster = Instantiate<Monster>(eLayerType::MONSTER, new HitEffectObject());
-		HitEffectObject* pHitEffectObject = new HitEffectObject();
-		pHitEffectObject->SetEffectAnimation(ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_SWORD_TEXTURE_KEY), 128.0f, 128.0f, L"MonsterHitAnim", 12, 0.05f);
-		Monster* pMonster = new Monster(pHitEffectObject, pPlayerScript);
-		pHitEffectObject->SetScriptAndAnimKey(pMonster->GetScriptOrNull(), L"MonsterHitAnim");
-		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(pHitEffectObject->GetScriptOrNull()));
-		//pMonster->GetTransform()->SetPosition(Vector3(4.0f, -1.7f, 4.0f));
-		//pMonster->GetTransform()->SetScale(Vector3(5.0f, 5.0f, 1.0f));
+		MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript);
 
-
-		this->AddGameObject(pMonster, eLayerType::MONSTER);
-		this->AddGameObject(pHitEffectObject, eLayerType::EFFECT);
-
-		MonsterAttackColiderObject* pMonsterColiderObject = Instantiate<MonsterAttackColiderObject>(eLayerType::MONSTER);
-		Transform* pMonsterTransform = pMonster->GetTransform();
-		Vector3 monsterPos = pMonsterTransform->GetPosition();
-		pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, -2.2f, COLLIDER_Z_VALUE));
-		pMonsterColiderObject->SetMonsterTransformAndScriptAndAnimator(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), static_cast<Animator*>(pMonster->GetComponentOrNull(eComponentType::ANIMATOR)));
+		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::EFFECT);
+		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
 	}
 
 	void PlayScene::instantiateParallaxObjects()

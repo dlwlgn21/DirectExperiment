@@ -1,10 +1,10 @@
 #include "jhMonster.h"
-#include "jhResourceMaker.h"
 #include "jhSpriteRenderer.h"
+#include "jhResourcesManager.h"
 #include "jhMonsterScript.h"
 #include "jhAnimator.h"
 #include "jhTexture.h"
-#include "jhResourcesManager.h"
+#include "jhResourceMaker.h"
 #include "jhMath.h"
 #include "jhCollider2D.h"
 #include "jhHitEffectObject.h"
@@ -15,18 +15,15 @@ using namespace jh::math;
 
 namespace jh
 {
-	Monster::Monster(HitEffectObject* pHitEffectObject, PlayerScript* pPlayerScript)
+	Monster::Monster(MonsterInfo& monsterInfo)
 		: GameObject(eLayerType::MONSTER)
-		, mpHitEffectObject(pHitEffectObject)
+		, mMonsterInfo(monsterInfo)
 	{
-		assert(pPlayerScript != nullptr);
+		assert(mMonsterInfo.pAnimator != nullptr && mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMesh != nullptr && mMonsterInfo.pPlayerScript != nullptr);
 		setRenderer();
 		setAnimator();
-		setScript(pPlayerScript);
-		setCollider();
-		//mpHitEffectObject->GetTransform()->SetParent(this);
-		//mpHitEffectObject->GetTransform()->SetPosition(Vector3(0.0f, 0.1f, -3.0f));
-		//mpHitEffectObject->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 1.0f));
+		setScript();
+		setHitCollider();
 	}
 
 	void Monster::Initialize()
@@ -48,76 +45,21 @@ namespace jh
 
 	void Monster::setAnimator()
 	{
-		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ATLAS_KEY);
-		assert(pAtlas != nullptr);
-		const float WIDTH = 110.0f;
-		const float HEIGHT = 42.0f;
-		const float MAG = 130.0f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(0.007f, 0.0f);
-		Animator* pMonsterAnimator = new Animator();
-		pMonsterAnimator->Create(
-			L"MonsterIdle",
-			pAtlas,
-			Vector2::Zero,
-			animSize,
-			offset,
-			15,
-			0.1f,
-			MAG
-		);
-		pMonsterAnimator->Create(
-			L"MonsterMove",
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 1),
-			animSize,
-			offset,
-			12,
-			0.1f,
-			MAG
-		);
-
-		pMonsterAnimator->Create(
-			L"MonsterAttack",
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 2),
-			animSize,
-			offset,
-			16,
-			0.15f,
-			MAG
-		);
-
-		pMonsterAnimator->Create(
-			L"MonsterHitted",
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 3),
-			animSize,
-			offset,
-			2,
-			0.2f,
-			MAG
-		);
-		this->AddComponent(pMonsterAnimator);
-		pMonsterAnimator->PlayAnimation(L"MonsterIdle", true);
+		this->AddComponent(mMonsterInfo.pAnimator);
 	}
 	void Monster::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::MONSTER_MATERIAL_KEY);
-		assert(pMesh != nullptr);
-		assert(pMaterial != nullptr);
-		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
+		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(mMonsterInfo.pMesh, mMonsterInfo.pMaterial);
 		this->AddComponent(pSpriteRenderer);
 
 	}
-	void Monster::setScript(PlayerScript* pPlayerScript)
+	void Monster::setScript()
 	{
-		assert(pPlayerScript);
-		MonsterScript* pScript = new MonsterScript(pPlayerScript);
+		assert(mMonsterInfo.pPlayerScript != nullptr);
+		MonsterScript* pScript = new MonsterScript(mMonsterInfo.pPlayerScript);
 		this->AddScript(pScript);
 	}
-	void Monster::setCollider()
+	void Monster::setHitCollider()
 	{
 		Collider2D* pMonsterCollider = new Collider2D(eColliderLayerType::MONSTER);
 		pMonsterCollider->SetSize(Vector2(0.1f, 0.25f));

@@ -17,9 +17,9 @@ namespace jh
 		void Render() override;
 
 	protected:
-		virtual void setAnimator() = 0;
-		virtual void setRenderer() = 0;
-		virtual void setScript() = 0;
+		virtual void setAnimator();
+		virtual void setRenderer();
+		virtual void setScript();
 
 	private:
 		

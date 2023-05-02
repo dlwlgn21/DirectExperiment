@@ -25,4 +25,16 @@ namespace jh
 		GameObject::Render();
 	}
 
+	void AnimatedGameObject::setAnimator()
+	{
+	}
+
+	void AnimatedGameObject::setRenderer()
+	{
+	}
+
+	void AnimatedGameObject::setScript()
+	{
+	}
+
 }

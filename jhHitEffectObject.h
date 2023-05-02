@@ -16,9 +16,7 @@ namespace jh
 		void SetEffectAnimation(Texture* pAtlas, const float width, const float height, const std::wstring& animKey, const UINT spriteCount, const float duration);
 
 	protected:
-		void setAnimator() override;
 		void setRenderer() override;
-		void setScript() override;
 	};
 }
 

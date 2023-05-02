@@ -235,6 +235,9 @@
     <Filter Include="Component\Script\Effect\Base">
       <UniqueIdentifier>{93f70d83-ae1e-4683-9cda-ead64fc2cd05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MonsterManager">
+      <UniqueIdentifier>{c92c5546-80f5-4b23-bc57-c0488e17e4d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -438,6 +441,9 @@
     <ClInclude Include="jhEffectScript.h">
       <Filter>Component\Script\Effect\Base</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterManager.h">
+      <Filter>MonsterManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -622,6 +628,9 @@
     </ClCompile>
     <ClCompile Include="jhEffectScript.cpp">
       <Filter>Component\Script\Effect\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterManager.cpp">
+      <Filter>MonsterManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

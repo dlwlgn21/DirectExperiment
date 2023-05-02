@@ -5,24 +5,38 @@ namespace jh
 {
 	class PlayerScript;
 	class HitEffectObject;
+	class Mesh;
+	class Material;
+	class Animator;
+	struct MonsterInfo
+	{
+		HitEffectObject*	pHitEffectObject;
+		PlayerScript*		pPlayerScript;
+		Mesh*				pMesh;
+		Material*			pMaterial;
+		Animator*			pAnimator;
+	};
+
 	class Monster : public GameObject
 	{
 	public:
-		Monster(HitEffectObject* pHitEffectObject, PlayerScript* pPlayerScript);
+		Monster(MonsterInfo& monsterInfo);
 		virtual ~Monster() = default;
 
 		void Initialize() override;
 		void Update() override;
 		void FixedUpdate() override;
 		void Render() override;
+
+
 	private:
 		void setAnimator();
 		void setRenderer();
-		void setScript(PlayerScript* pPlayerScript);
-		void setCollider();
+		void setHitCollider();
+		void setScript();
 
 	private:
-		HitEffectObject*		mpHitEffectObject;
+		MonsterInfo				mMonsterInfo;
 	};
 }
 
