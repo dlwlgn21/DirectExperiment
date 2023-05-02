@@ -1,10 +1,15 @@
+#include <random>
 #include "jhCameraScript.h"
 #include "jhGameObject.h"
 #include "jhTransform.h"
 #include "jhInput.h"
 #include "jhTime.h"
+#include "jhPlayerScript.h"
 
 using namespace jh::math;
+
+static constexpr const INT CAM_SHAKE_RANGE = 5;
+static constexpr const float RESTRICTION = 100.0f;
 
 namespace jh
 {
@@ -12,6 +17,7 @@ namespace jh
 		: Script()
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)
+		, mpPlayerScript(nullptr)
 		, mSpeed(50.0f)
 	{
 	}
@@ -27,11 +33,23 @@ namespace jh
 		assert(mpPlayerTransform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
 
-		// Added Part At 2023-04-19 15:49 For Chasing playerTransform
-
+		// Added Part At 2023-04-19 15:49 For Chasing PlayerTransform
 		Vector3 dir = mpPlayerTransform->GetPosition() - mpTranform->GetPosition();
 		dir.Normalize();
 		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), dir.y * mSpeed * Time::DeltaTime(), 0.0f);
+
+		// Added Part AT 2023-05-02 11:57 For CameraShaking
+		const ePlayerState eState = mpPlayerScript->GetPlayerState();
+		if (eState == ePlayerState::HITTED)
+		{
+			static std::random_device rd;
+			static std::mt19937 gen(rd());
+			static std::uniform_int_distribution<> dist(-CAM_SHAKE_RANGE, CAM_SHAKE_RANGE);
+			float xMove = dist(gen) / RESTRICTION;
+			float yMove = dist(gen) / RESTRICTION;
+			pos.x += xMove;
+			pos.y += yMove;
+		}
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)
 		{
@@ -61,12 +79,17 @@ namespace jh
 		mpTranform->SetPosition(pos);
 	}
 
-	void CameraScript::FixedUpdate()
+	void CameraScript::SetPlayerTransform(Transform* pPlayerTransform)
 	{
+		assert(pPlayerTransform != nullptr); 
+		mpPlayerTransform = pPlayerTransform;
+		setPlayerScript();
 	}
 
-	void CameraScript::Render()
+	void CameraScript::setPlayerScript()
 	{
+		assert(mpPlayerTransform != nullptr);
+		mpPlayerScript = static_cast<PlayerScript*>(mpPlayerTransform->GetOwner()->GetScriptOrNull());
+		assert(mpPlayerScript != nullptr);
 	}
-
 }

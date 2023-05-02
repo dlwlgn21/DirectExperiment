@@ -5,6 +5,7 @@
 namespace jh
 {
 	class Transform;
+	class PlayerScript;
 	class CameraScript final : public Script
 	{
 	public:
@@ -13,15 +14,17 @@ namespace jh
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 
-		void SetPlayerTransform(Transform* pPlayerTransform) { assert(pPlayerTransform != nullptr); mpPlayerTransform = pPlayerTransform; }
+		void SetPlayerTransform(Transform* pPlayerTransform);
 
+		
 	private:
-		Transform*	mpTranform;
-		Transform*	mpPlayerTransform;
-		float		mSpeed;
+		void setPlayerScript();
+	private:
+		Transform*			mpTranform;
+		Transform*			mpPlayerTransform;
+		PlayerScript*		mpPlayerScript;
+		float				mSpeed;
 	};
 }
 

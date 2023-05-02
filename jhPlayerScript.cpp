@@ -12,7 +12,7 @@
 #include "jhPlayerDustEffectScript.h"
 
 static constexpr const UINT DASH_MOVING_TIMING_INDEX = 3;
-
+static constexpr const float DASH_AMOUNT = 3.0f;
 using namespace jh::math;
 
 namespace jh
@@ -202,7 +202,6 @@ namespace jh
 			if (mStat.CurrentStamina >= DASH_STAMINA_COST)
 			{
 				setState(ePlayerState::DASH);
-				const float DASH_AMOUNT = 2.0f;
 				if (meLookDir == eObjectLookDirection::LEFT)
 				{
 					pos.x -= (DASH_AMOUNT);
