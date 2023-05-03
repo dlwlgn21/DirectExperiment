@@ -10,6 +10,7 @@ using namespace jh::math;
 
 static constexpr const INT CAM_SHAKE_RANGE = 5;
 static constexpr const float RESTRICTION = 100.0f;
+static constexpr const float Y_CAMERA_POS = -1.0f;
 
 namespace jh
 {
@@ -49,6 +50,8 @@ namespace jh
 			float yMove = dist(gen) / RESTRICTION;
 			pos.x += xMove;
 			pos.y += yMove;
+			mpTranform->SetPosition(pos);
+			return;
 		}
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)
@@ -75,7 +78,7 @@ namespace jh
 		{
 			pos += mSpeed * -mpTranform->GetUp() * Time::DeltaTime();
 		}
-
+		pos.y = Y_CAMERA_POS;
 		mpTranform->SetPosition(pos);
 	}
 
