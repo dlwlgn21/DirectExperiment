@@ -88,6 +88,10 @@ namespace jh
 
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
+		if (meState == eMonsterState::HITTED || meState == eMonsterState::DEAD)
+		{
+			return;
+		}
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			setState(eMonsterState::ATTACKING);
@@ -97,7 +101,7 @@ namespace jh
 	}
 	void MonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
-		if (meState == eMonsterState::HITTED)
+		if (meState == eMonsterState::HITTED || meState == eMonsterState::DEAD)
 		{
 			return;
 		}
