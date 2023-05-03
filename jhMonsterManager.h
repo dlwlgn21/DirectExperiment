@@ -2,7 +2,6 @@
 #include "jhEngine.h"
 #include "jhMath.h"
 
-
 namespace jh
 {
 	enum class eMonsterType
@@ -69,8 +68,6 @@ namespace jh
 		MonstePackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position, const jh::math::Vector3& scale);
 
 
-
-
 	private:
 		 Animator* createAnimatorOrNull();
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
@@ -96,10 +93,6 @@ namespace jh
 
 		static const jh::math::Vector3 CAGED_SHOKER_SCALE_VECTOR;
 		static const jh::math::Vector3 SWEEPER_SCALE_VECTOR;
-
-
-	private:
-
 	};
 }
 

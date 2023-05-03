@@ -16,9 +16,14 @@ static constexpr const float WAIT_FLOATING_DISTANCE = -4.0f;
 // Animator Index
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 = 7;
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_2 = 12;
+static constexpr const UINT CAGED_SHOCKER_ATTACk_DAMAGE = 2;
+
+// Animator Index
+static constexpr const UINT SWEEPER_ATTACK_VAILED_INDEX = 5;
+static constexpr const UINT SWEEPER_ATTACK_DAMAGE = 2;
 
 // DAMAGE
-static constexpr const UINT CAGED_SHOCKER_ATTACk_DAMAGE = 2;
+
 
 namespace jh
 {
@@ -93,6 +98,7 @@ namespace jh
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			const UINT CURR_IDX = mpAnimator->GetCurrentAnimationIndex();
+
 			if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
 			{
 				PlayerScript* pPlayerScript = static_cast<PlayerScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());

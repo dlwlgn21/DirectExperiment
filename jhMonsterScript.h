@@ -43,6 +43,8 @@ namespace jh
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	private:
+		void setInitialStat(const int hp, const float speed)	{ mMaxHP = hp; mCurrHP = hp; mSpeed = speed; }
+		void setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey);
 		void setAnimator();
 		void setPosition();
 		void setLookDir(const jh::math::Vector3& lookDirVector);
@@ -56,6 +58,8 @@ namespace jh
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
 		HitEffectScript*				mpEffectScript;
+		int								mMaxHP;
+		int								mCurrHP;
 		float							mSpeed;
 		float							mHittedPushDistance;
 		std::wstring					mAnimIdleKey;

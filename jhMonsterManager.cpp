@@ -14,13 +14,8 @@
 #include "jhAnimator.h"
 #include "jhAnimation.h"
 
-/*
-				const float WIDTH = 110.0f;
-				const float HEIGHT = 42.0f;
-				const float MAG = 130.0f;
-
-*/
 using namespace jh::math;
+
 static constexpr const float MONSTER_INITIAL_Z_POS = 4.0f;
 
 static constexpr const float CAGED_SHOKER_WIDTH = 110.0f;
@@ -31,8 +26,10 @@ static constexpr const float CAGED_SHOKER_INITIAL_Y_POS = -1.8f;
 
 static constexpr const float SWEEPER_WIDTH = 88.0f;
 static constexpr const float SWEEPER_HEIGHT = 33.0f;
+static constexpr const float SWEEPER_MAG = 100.0f;
 
 static constexpr const float COLLIDER_Z_VALUE = 3.0f;
+
 namespace jh
 {
 	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY = L"CagedIdle";
@@ -50,7 +47,6 @@ namespace jh
 
 	const Vector3 MonsterManager::CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
 	const Vector3 MonsterManager::SWEEPER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
-
 
 
 	MonstePackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position, const Vector3& scale)
@@ -72,8 +68,6 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-
-
 			Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY);
 			assert(pAtlas != nullptr);
 			Vector2 animSize(CAGED_SHOKER_WIDTH, CAGED_SHOKER_HEIGHT);
@@ -148,7 +142,7 @@ namespace jh
 			animInfo.Offset = offset;
 			animInfo.SpriteCount = 6;
 			animInfo.Duration = 0.1f;
-			animInfo.Magnification = 100;
+			animInfo.Magnification = SWEEPER_MAG;
 			createAnimation(pSweeperAnimator, SWEEPER_IDLE_ANIM_KEY, animInfo);
 
 			animInfo.LeftTop = Vector2(0.0f, SWEEPER_HEIGHT * 1);

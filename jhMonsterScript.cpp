@@ -12,6 +12,12 @@ using namespace jh::math;
 static constexpr const float ATTACK_RANGE_DISTANCE = 2.0f;
 static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
+static constexpr const int CAGED_SHOKER_INITIAL_HP = 10;
+static constexpr const float CAGED_SHOKER_INITIAL_SPEED = 1.5f;
+
+static constexpr const int SWEEPER_INITIAL_HP = 5;
+static constexpr const float SWEEPER_INITIAL_SPEED = 2.0;
+
 namespace jh
 {
 	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
@@ -21,7 +27,9 @@ namespace jh
 		, mpAnimator(nullptr)
 		, mpEffectScript(nullptr)
 		, mpPlayerScript(pPlayerScript)
-		, mSpeed(2.0f)
+		, mMaxHP(0)
+		, mCurrHP(0)
+		, mSpeed(0.0f)
 		, mHittedPushDistance(2.0f)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, meState(eMonsterState::TRACING)
@@ -31,18 +39,24 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			mAnimIdleKey = MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY;
-			mAnimMoveKey = MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY;
-			mAnimAttackKey = MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY;
-			mAnimHittedKey = MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY;
+			setAnimKey(
+				MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY, 
+				MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY,
+				MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY,
+				MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY
+			);
+			setInitialStat(CAGED_SHOKER_INITIAL_HP, CAGED_SHOKER_INITIAL_SPEED);
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			mAnimIdleKey = MonsterManager::SWEEPER_IDLE_ANIM_KEY;
-			mAnimMoveKey = MonsterManager::SWEEPER_MOVING_ANIM_KEY;
-			mAnimAttackKey = MonsterManager::SWEEPER_ATTACK_ANIM_KEY;
-			mAnimHittedKey = MonsterManager::SWEEPER_HITTED_ANIM_KEY;
+			setAnimKey(
+				MonsterManager::SWEEPER_IDLE_ANIM_KEY,
+				MonsterManager::SWEEPER_MOVING_ANIM_KEY,
+				MonsterManager::SWEEPER_ATTACK_ANIM_KEY,
+				MonsterManager::SWEEPER_HITTED_ANIM_KEY
+			);
+			setInitialStat(SWEEPER_INITIAL_HP, SWEEPER_INITIAL_SPEED);
 			break;
 		}
 		case eMonsterType::COUNT:
@@ -111,6 +125,14 @@ namespace jh
 	void MonsterScript::AnimationHittedComplete()
 	{
 		setState(eMonsterState::TRACING);
+	}
+
+	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey)
+	{
+		mAnimIdleKey = idleKey;
+		mAnimMoveKey = movingkey;
+		mAnimAttackKey = attackKey;
+		mAnimHittedKey = hittedKey;
 	}
 
 	void MonsterScript::setAnimator()
