@@ -37,6 +37,9 @@ namespace jh
 		void AnimationHittedStart();
 		void AnimationHittedComplete();
 
+		void AnimationDieStart();
+		void AnimationDieComplete();
+
 		eObjectLookDirection GetMonsterLookDirection() const	{ return meLookDir; }
 		eMonsterState		 GetMonsterState() const			{ return meState; }
 		eMonsterType		 GetMonsterType() const				{ return meMonsterType; }
@@ -44,7 +47,7 @@ namespace jh
 
 	private:
 		void setInitialStat(const int hp, const float speed)	{ mMaxHP = hp; mCurrHP = hp; mSpeed = speed; }
-		void setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey);
+		void setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey);
 		void setAnimator();
 		void setPosition();
 		void setLookDir(const jh::math::Vector3& lookDirVector);
@@ -66,6 +69,7 @@ namespace jh
 		std::wstring					mAnimMoveKey;
 		std::wstring					mAnimAttackKey;
 		std::wstring					mAnimHittedKey;
+		std::wstring					mAnimDieKey;
 		eObjectLookDirection			meLookDir;
 		PlayerScript*					mpPlayerScript;
 		eMonsterState					meState;

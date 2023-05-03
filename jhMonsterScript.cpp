@@ -43,7 +43,8 @@ namespace jh
 				MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY, 
 				MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY,
 				MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY,
-				MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY
+				MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY,
+				MonsterManager::CAGED_SHOKER_DIE_ANIM_KEY
 			);
 			setInitialStat(CAGED_SHOKER_INITIAL_HP, CAGED_SHOKER_INITIAL_SPEED);
 			break;
@@ -54,7 +55,8 @@ namespace jh
 				MonsterManager::SWEEPER_IDLE_ANIM_KEY,
 				MonsterManager::SWEEPER_MOVING_ANIM_KEY,
 				MonsterManager::SWEEPER_ATTACK_ANIM_KEY,
-				MonsterManager::SWEEPER_HITTED_ANIM_KEY
+				MonsterManager::SWEEPER_HITTED_ANIM_KEY,
+				MonsterManager::SWEEPER_DIE_ANIM_KEY
 			);
 			setInitialStat(SWEEPER_INITIAL_HP, SWEEPER_INITIAL_SPEED);
 			break;
@@ -106,7 +108,10 @@ namespace jh
 			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX)
 			{
 				decreaseHP(mpPlayerScript->GetPlayerStat().AttackDamage);
-				setState(eMonsterState::HITTED);
+				if (meState != eMonsterState::DEAD)
+				{
+					setState(eMonsterState::HITTED);
+				}
 			}
 		}
 	}
@@ -128,12 +133,22 @@ namespace jh
 		setState(eMonsterState::TRACING);
 	}
 
-	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey)
+	void MonsterScript::AnimationDieStart()
+	{
+	}
+
+	void MonsterScript::AnimationDieComplete()
+	{
+		GetOwner()->SetState(GameObject::eGameObjectState::INACTIVE);
+	}
+
+	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey)
 	{
 		mAnimIdleKey = idleKey;
 		mAnimMoveKey = movingkey;
 		mAnimAttackKey = attackKey;
 		mAnimHittedKey = hittedKey;
+		mAnimDieKey = dieKey;
 	}
 
 	void MonsterScript::setAnimator()
@@ -145,13 +160,16 @@ namespace jh
 
 		mpAnimator->GetStartEvent(mAnimHittedKey) = std::bind(&MonsterScript::AnimationHittedStart, this);
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&MonsterScript::AnimationHittedComplete, this);
+
+		mpAnimator->GetStartEvent(mAnimDieKey) = std::bind(&MonsterScript::AnimationDieStart, this);
+		mpAnimator->GetCompleteEvent(mAnimDieKey) = std::bind(&MonsterScript::AnimationDieComplete, this);
 	}
 
 	void MonsterScript::setPosition()
 	{
 		switch (meState)
 		{
-		case jh::eMonsterState::TRACING:
+		case eMonsterState::TRACING:
 		{
 			assert(mpTranform != nullptr);
 			Vector3 monCurrPos = mpTranform->GetPosition();
@@ -172,9 +190,9 @@ namespace jh
 			break;
 			return;
 		}
-		case jh::eMonsterState::ATTACKING:
+		case eMonsterState::ATTACKING:
 			return;
-		case jh::eMonsterState::HITTED:
+		case eMonsterState::HITTED:
 		{
 			if (mpPlayerScript->GetAttackType() == eAttackType::PUSH)
 			{
@@ -191,7 +209,7 @@ namespace jh
 			return;
 			break;
 		}
-		case jh::eMonsterState::DEAD:
+		case eMonsterState::DEAD:
 			break;
 		default:
 			break;
@@ -254,6 +272,11 @@ namespace jh
 				assert(mpEffectScript != nullptr);
 				mpEffectScript->SetStatePlaying();
 			}
+			break;
+		}
+		case eMonsterState::DEAD:
+		{
+			mpAnimator->PlayAnimation(mAnimDieKey, true);
 			break;
 		}
 		default:

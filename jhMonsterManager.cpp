@@ -17,6 +17,9 @@
 using namespace jh::math;
 
 static constexpr const float MONSTER_INITIAL_Z_POS = 4.0f;
+static constexpr const float MONSTER_HIT_ANIM_DURATION = 0.3f;
+static constexpr const float MONSTER_DIE_ANIM_DURATION = 0.2f;
+
 
 static constexpr const float CAGED_SHOKER_WIDTH = 110.0f;
 static constexpr const float CAGED_SHOKER_HEIGHT = 42.0f;
@@ -32,17 +35,17 @@ static constexpr const float COLLIDER_Z_VALUE = 3.0f;
 
 namespace jh
 {
-	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY = L"CagedIdle";
+	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY	= L"CagedIdle";
 	const std::wstring MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY = L"CagedMoving";
 	const std::wstring MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY = L"CagedAttack";
 	const std::wstring MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY = L"CagedHitted";
-	const std::wstring MonsterManager::CAGED_SHOKER_DIE_ANIM_KEY;
+	const std::wstring MonsterManager::CAGED_SHOKER_DIE_ANIM_KEY	= L"CagedDie";
 
-	const std::wstring MonsterManager::SWEEPER_IDLE_ANIM_KEY = L"SweeperIdle";
-	const std::wstring MonsterManager::SWEEPER_MOVING_ANIM_KEY = L"SweeperMoving";
-	const std::wstring MonsterManager::SWEEPER_ATTACK_ANIM_KEY = L"SweeperAttack";
-	const std::wstring MonsterManager::SWEEPER_HITTED_ANIM_KEY = L"SweeperHitted";
-	const std::wstring MonsterManager::SWEEPER_DIE_ANIM_KEY;
+	const std::wstring MonsterManager::SWEEPER_IDLE_ANIM_KEY	= L"SweeperIdle";
+	const std::wstring MonsterManager::SWEEPER_MOVING_ANIM_KEY	= L"SweeperMoving";
+	const std::wstring MonsterManager::SWEEPER_ATTACK_ANIM_KEY	= L"SweeperAttack";
+	const std::wstring MonsterManager::SWEEPER_HITTED_ANIM_KEY	= L"SweeperHitted";
+	const std::wstring MonsterManager::SWEEPER_DIE_ANIM_KEY		= L"SweeperDie";
 
 
 	const Vector3 MonsterManager::CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
@@ -96,8 +99,14 @@ namespace jh
 
 			animInfo.LeftTop = Vector2(0.0f, CAGED_SHOKER_HEIGHT * 3);
 			animInfo.SpriteCount = 2;
-			animInfo.Duration = 0.2f;
+			animInfo.Duration = MONSTER_HIT_ANIM_DURATION;
 			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_HITTED_ANIM_KEY, animInfo);
+
+			animInfo.LeftTop = Vector2(0.0f, CAGED_SHOKER_HEIGHT * 4);
+			animInfo.SpriteCount = 12;
+			animInfo.Duration = MONSTER_DIE_ANIM_DURATION;
+			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_DIE_ANIM_KEY, animInfo);
+
 			pCagedShokerAnimator->PlayAnimation(CAGED_SHOKER_IDLE_ANIM_KEY, true);
 
 			MonsterInfo monInfo;
@@ -156,8 +165,14 @@ namespace jh
 
 			animInfo.LeftTop = Vector2(0.0f, SWEEPER_HEIGHT * 7);
 			animInfo.SpriteCount = 2;
-			animInfo.Duration = 0.2f;
+			animInfo.Duration = MONSTER_HIT_ANIM_DURATION;
 			createAnimation(pSweeperAnimator, SWEEPER_HITTED_ANIM_KEY, animInfo);
+
+			animInfo.LeftTop = Vector2(0.0f, SWEEPER_HEIGHT * 8);
+			animInfo.SpriteCount = 5;
+			animInfo.Duration = MONSTER_DIE_ANIM_DURATION;
+			createAnimation(pSweeperAnimator, SWEEPER_DIE_ANIM_KEY, animInfo);
+
 			pSweeperAnimator->PlayAnimation(SWEEPER_IDLE_ANIM_KEY, true);
 
 			MonsterInfo monInfo;

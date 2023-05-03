@@ -31,6 +31,7 @@ namespace jh
 		void AddScript(Script* pScript);
 
 		__forceinline eGameObjectState GetState() const					{ return meState; }
+		void SetState(const eGameObjectState eState)					{ meState = eState; }
 
 		Component* GetComponentOrNull(const eComponentType eType);
 		Transform* GetTransform() const									{ return mpTransform; }
