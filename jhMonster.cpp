@@ -10,6 +10,7 @@
 #include "jhHitEffectObject.h"
 #include "jhHitEffectScript.h"
 #include "jhTransform.h"
+#include "jhMonsterAttackColiderObject.h"
 
 using namespace jh::math;
 
@@ -41,6 +42,14 @@ namespace jh
 	void Monster::Render()
 	{
 		GameObject::Render();
+	}
+
+	void Monster::SetInactive()
+	{
+		assert(mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMonsterAttackColiderObject != nullptr);
+		this->SetState(eGameObjectState::INACTIVE);
+		mMonsterInfo.pHitEffectObject->SetState(eGameObjectState::INACTIVE);
+		mMonsterInfo.pMonsterAttackColiderObject->SetState(eGameObjectState::INACTIVE);
 	}
 
 	void Monster::setAnimator()

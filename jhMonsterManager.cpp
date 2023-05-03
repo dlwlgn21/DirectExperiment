@@ -197,7 +197,7 @@ namespace jh
 			pMonsterColiderObject->SetMonsterTransformAndScriptAndAnimator(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), static_cast<Animator*>(pMonster->GetComponentOrNull(eComponentType::ANIMATOR)));
 
 			retMonsterPackage.pMonsterAttackColliderObject = pMonsterColiderObject;
-
+			pMonster->SetMonsterAttackCollider(pMonsterColiderObject);
 			break;
 		}
 		default:

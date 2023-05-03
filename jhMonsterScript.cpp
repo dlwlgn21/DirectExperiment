@@ -1,7 +1,7 @@
 #include "jhMonsterScript.h"
 #include "jhInput.h"
 #include "jhTime.h"
-#include "jhGameObject.h"
+#include "jhMonster.h"
 #include "jhTransform.h"
 #include "jhAnimator.h"
 #include "jhHitEffectScript.h"
@@ -143,7 +143,7 @@ namespace jh
 
 	void MonsterScript::AnimationDieComplete()
 	{
-		GetOwner()->SetState(GameObject::eGameObjectState::INACTIVE);
+		static_cast<Monster*>(GetOwner())->SetInactive();
 	}
 
 	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey)

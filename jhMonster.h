@@ -9,14 +9,16 @@ namespace jh
 	class Mesh;
 	class Material;
 	class Animator;
+	class MonsterAttackColiderObject;
 	struct MonsterInfo
 	{
-		HitEffectObject*	pHitEffectObject;
-		PlayerScript*		pPlayerScript;
-		Mesh*				pMesh;
-		Material*			pMaterial;
-		Animator*			pAnimator;
-		eMonsterType		eMonType;
+		HitEffectObject*			pHitEffectObject;
+		PlayerScript*				pPlayerScript;
+		Mesh*						pMesh;
+		Material*					pMaterial;
+		Animator*					pAnimator;
+		MonsterAttackColiderObject* pMonsterAttackColiderObject;
+		eMonsterType				eMonType;
 	};
 
 	class Monster : public GameObject
@@ -30,7 +32,8 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-
+		void SetInactive();
+		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	private:
 		void setAnimator();
 		void setRenderer();

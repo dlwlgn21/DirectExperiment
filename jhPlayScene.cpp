@@ -122,13 +122,13 @@ namespace jh
 	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
 	{	
 		assert(pPlayerScript);
-		MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
-		addMonster(monPack);
+		//MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		//addMonster(monPack);
 		//MonstePackage monPack2 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(-6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
 		//addMonster(monPack2);
 
-		//MonstePackage monPack3 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
-		//addMonster(monPack3);
+		MonstePackage monPack3 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		addMonster(monPack3);
 	}
 
 	void PlayScene::addMonster(const MonstePackage& monPack)
