@@ -18,7 +18,7 @@ using namespace jh::math;
 
 static constexpr const float MONSTER_INITIAL_Z_POS = 4.0f;
 static constexpr const float MONSTER_HIT_ANIM_DURATION = 0.3f;
-static constexpr const float MONSTER_DIE_ANIM_DURATION = 0.2f;
+static constexpr const float MONSTER_DIE_ANIM_DURATION = 0.3f;
 
 
 static constexpr const float CAGED_SHOKER_WIDTH = 110.0f;
@@ -160,7 +160,7 @@ namespace jh
 
 			animInfo.LeftTop = Vector2(0.0f, SWEEPER_HEIGHT * 4);
 			animInfo.SpriteCount = 10;
-			animInfo.Duration = 0.1f;
+			animInfo.Duration = 0.15f;
 			createAnimation(pSweeperAnimator, SWEEPER_ATTACK_ANIM_KEY, animInfo);
 
 			animInfo.LeftTop = Vector2(0.0f, SWEEPER_HEIGHT * 7);
