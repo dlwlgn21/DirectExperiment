@@ -20,12 +20,9 @@ namespace jh
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 
-		void Start();
-		void Complete();
-		void End();
+
+
 
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;

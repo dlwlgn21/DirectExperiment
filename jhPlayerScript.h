@@ -5,6 +5,7 @@
 
 static constexpr const CHAR		INITIAL_HP = 10;
 static constexpr const CHAR		INITIAL_STAMINA = 5;
+static constexpr const CHAR		INITIAL_ATTACK_DAMAGE = 2;
 
 static constexpr const CHAR		ATTACK_STAMINA_COST = 2;
 static constexpr const CHAR		DASH_STAMINA_COST = 1;
@@ -45,11 +46,13 @@ namespace jh
 			CHAR MaxStamina;
 			CHAR CurrentHP;
 			CHAR CurrentStamina;
+			CHAR AttackDamage;
 			PlayerStat()
 				: MaxHP(INITIAL_HP)
 				, MaxStamina(INITIAL_STAMINA)
 				, CurrentHP(INITIAL_HP)
 				, CurrentStamina(INITIAL_STAMINA)
+				, AttackDamage(INITIAL_ATTACK_DAMAGE)
 			{
 			}
 		};

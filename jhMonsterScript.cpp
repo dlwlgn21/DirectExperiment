@@ -105,6 +105,7 @@ namespace jh
 			assert(pPlayerAnimator != nullptr);
 			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX)
 			{
+				decreaseHP(mpPlayerScript->GetPlayerStat().AttackDamage);
 				setState(eMonsterState::HITTED);
 			}
 		}
@@ -257,6 +258,19 @@ namespace jh
 		}
 		default:
 			break;
+		}
+	}
+	void MonsterScript::decreaseHP(const int amount)
+	{
+		if (meState == eMonsterState::HITTED)
+		{
+			return;
+		}
+		mCurrHP -= std::abs(amount);
+		if (mCurrHP <= 0)
+		{
+			mCurrHP = 0;
+			setState(eMonsterState::DEAD);
 		}
 	}
 }

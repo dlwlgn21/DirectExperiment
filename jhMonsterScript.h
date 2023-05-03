@@ -52,7 +52,7 @@ namespace jh
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
-
+		void decreaseHP(const int amount);
 	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;

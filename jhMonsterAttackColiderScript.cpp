@@ -46,12 +46,7 @@ namespace jh
 	{
 		setPosByMonsterLookDirectionAndMonsterState();
 	}
-	void MonsterAttackColiderScript::FixedUpdate()
-	{
-	}
-	void MonsterAttackColiderScript::Render()
-	{
-	}
+
 	void MonsterAttackColiderScript::setPosByMonsterLookDirectionAndMonsterState()
 	{
 		Vector3 pos = mpTransform->GetPosition();
@@ -78,17 +73,6 @@ namespace jh
 		mpTransform->SetPosition(pos);
 	}
 
-
-
-	void MonsterAttackColiderScript::Start()
-	{
-	}
-	void MonsterAttackColiderScript::Complete()
-	{
-	}
-	void MonsterAttackColiderScript::End()
-	{
-	}
 
 	void MonsterAttackColiderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
