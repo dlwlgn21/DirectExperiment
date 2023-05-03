@@ -1,6 +1,7 @@
 #pragma once
 #include "jhScript.h"
 #include "jhMath.h"
+#include "jhMonsterManager.h"
 
 namespace jh
 {
@@ -32,6 +33,7 @@ namespace jh
 
 	private:
 		void setPosByMonsterLookDirectionAndMonsterState();
+		void damageToPlayer(PlayerScript* pPlayerScript, const UINT damage);
 
 	private:
 		Collider2D*					mpCollider;
@@ -40,6 +42,7 @@ namespace jh
 		MonsterScript*				mpMonsterScript;
 		Animator*					mpAnimator;
 		eObjectLookDirection		meLookDir;
+		eMonsterType				meMonsterType;
 	};
 }
 

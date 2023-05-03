@@ -13,16 +13,13 @@ static constexpr const float ATTACING_FLOATING_DISTANCE = -2.0f;
 static constexpr const float WAIT_FLOATING_DISTANCE = -4.0f;
 
 
-// Animator Index
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 = 7;
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_2 = 12;
 static constexpr const UINT CAGED_SHOCKER_ATTACk_DAMAGE = 2;
 
-// Animator Index
 static constexpr const UINT SWEEPER_ATTACK_VAILED_INDEX = 5;
 static constexpr const UINT SWEEPER_ATTACK_DAMAGE = 2;
 
-// DAMAGE
 
 
 namespace jh
@@ -35,6 +32,7 @@ namespace jh
 		, mpMonsterScript(pMonsterScript)
 		, mpAnimator(pAnimator)
 		, meLookDir(eObjectLookDirection::RIGHT)
+		, meMonsterType(pMonsterScript->GetMonsterType())
 	{
 		assert(mpCollider != nullptr && mpMonsterTransform != nullptr && mpMonsterScript != nullptr && mpAnimator);
 		mpCollider->SetState(eColliderState::ACTIVE);
@@ -80,6 +78,8 @@ namespace jh
 		mpTransform->SetPosition(pos);
 	}
 
+
+
 	void MonsterAttackColiderScript::Start()
 	{
 	}
@@ -98,17 +98,45 @@ namespace jh
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER)
 		{
 			const UINT CURR_IDX = mpAnimator->GetCurrentAnimationIndex();
+			PlayerScript* pPlayerScript = static_cast<PlayerScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());
+			assert(pPlayerScript != nullptr);
 
-			if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+			switch (meMonsterType)
 			{
-				PlayerScript* pPlayerScript = static_cast<PlayerScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());
-				assert(pPlayerScript != nullptr);
-
-				pPlayerScript->EnemyAttackHiited(CAGED_SHOCKER_ATTACk_DAMAGE);
+			case eMonsterType::LV_1_CAGED_SHOKER:
+			{
+				if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+				{
+					damageToPlayer(pPlayerScript, CAGED_SHOCKER_ATTACk_DAMAGE);
+				}
+				break;
 			}
+			case eMonsterType::LV_1_SWEEPER:
+			{
+				if (CURR_IDX == SWEEPER_ATTACK_VAILED_INDEX)
+				{
+					damageToPlayer(pPlayerScript, SWEEPER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::COUNT:
+				assert(false);
+				break;
+			default:
+				assert(false);
+				break;
+			}
+
 		}
 
 	}
+
+	void MonsterAttackColiderScript::damageToPlayer(PlayerScript* pPlayerScript, const UINT damage)
+	{
+		assert(pPlayerScript != nullptr);
+		pPlayerScript->EnemyAttackHiited(damage);
+	}
+
 	void MonsterAttackColiderScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}

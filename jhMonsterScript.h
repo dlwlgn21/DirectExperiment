@@ -39,7 +39,7 @@ namespace jh
 
 		eObjectLookDirection GetMonsterLookDirection() const	{ return meLookDir; }
 		eMonsterState		 GetMonsterState() const			{ return meState; }
-
+		eMonsterType		 GetMonsterType() const				{ return meMonsterType; }
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	private:
