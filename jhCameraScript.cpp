@@ -37,7 +37,7 @@ namespace jh
 		// Added Part At 2023-04-19 15:49 For Chasing PlayerTransform
 		Vector3 dir = mpPlayerTransform->GetPosition() - mpTranform->GetPosition();
 		dir.Normalize();
-		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), dir.y * mSpeed * Time::DeltaTime(), 0.0f);
+		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), dir.y, 0.0f);
 
 		// Added Part AT 2023-05-02 11:57 For CameraShaking
 		const ePlayerState eState = mpPlayerScript->GetPlayerState();
