@@ -76,4 +76,11 @@ namespace jh
 		UI_BAR,
 		COUNT,
 	};
+
+	enum class eMonsterType
+	{
+		LV_1_CAGED_SHOKER,
+		LV_1_SWEEPER,
+		COUNT
+	};
 }

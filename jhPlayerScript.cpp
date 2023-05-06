@@ -114,11 +114,11 @@ namespace jh
 		{
 			return;
 		}
-		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::MONSTER)
-		{
-			setState(ePlayerState::HITTED);
-			decreaseHP(1);
-		}
+		//if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::MONSTER)
+		//{
+		//	setState(ePlayerState::HITTED);
+		//	decreaseHP(1);
+		//}
 	}
 
 	void PlayerScript::OnTriggerStay(Collider2D* pOtherCollider)

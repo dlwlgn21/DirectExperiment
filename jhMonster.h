@@ -1,6 +1,5 @@
 #pragma once
 #include "jhGameObject.h"
-#include "jhMonsterManager.h"
 
 namespace jh
 {
@@ -10,6 +9,7 @@ namespace jh
 	class Material;
 	class Animator;
 	class MonsterAttackColiderObject;
+
 	struct MonsterInfo
 	{
 		HitEffectObject*			pHitEffectObject;

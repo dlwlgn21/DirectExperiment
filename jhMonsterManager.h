@@ -1,23 +1,17 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhMath.h"
+#include "jhMonster.h"
 
 namespace jh
 {
-	enum class eMonsterType
-	{
-		LV_1_CAGED_SHOKER,
-		LV_1_SWEEPER,
-		COUNT
-	};
-
 	class Transform;
 	class Texture;
-	class Monster;
 	class HitEffectObject;
 	class PlayerScript;
 	class Animator;
 	class MonsterAttackColiderObject;
+
 	struct MonstePackage
 	{
 		Monster*							pMonster;
@@ -69,10 +63,14 @@ namespace jh
 
 
 	private:
-		 Animator* createAnimatorOrNull();
+		 void createMonsterInfo(MonsterInfo& monInfo, HitEffectObject* pHitEffectObject, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
+		 void createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const jh::math::Vector2& leftTop, const jh::math::Vector2& seperatingSize, const jh::math::Vector2& offset, const UINT spriteCount, const float duration, const float magnification);
+		 void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
 		 void setTransform(Transform* pMonsterTransform, const jh::math::Vector3& position, const jh::math::Vector3& scale);
-	
+		 void createMonster(MonsterInfo& monInfo, MonstePackage& retMonsterPackage);
+		 void createAttackCollider(MonsterInfo& monInfo, MonstePackage& retMonsterPackage, const float yPos);
+
 	private:
 		MonsterManager() = default;
 		~MonsterManager() = default;
