@@ -124,13 +124,16 @@ namespace jh
 	}
 	void MonsterScript::AnimationAttackStart()
 	{
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void MonsterScript::AnimationAttackComplete()
 	{
 		setState(eMonsterState::TRACING);
 	}
+
 	void MonsterScript::AnimationHittedStart()
 	{
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void MonsterScript::AnimationHittedComplete()
 	{
@@ -139,6 +142,7 @@ namespace jh
 
 	void MonsterScript::AnimationDieStart()
 	{
+		mpAnimator->InitializeCurrAnimation();
 	}
 
 	void MonsterScript::AnimationDieComplete()

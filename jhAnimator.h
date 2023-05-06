@@ -63,6 +63,7 @@ namespace jh
 
 		__forceinline Animation* GetCurrentAnimatingAnimation() const	{ assert(mpCurrAnimatingAnimation != nullptr); return mpCurrAnimatingAnimation; }
 		__forceinline UINT GetCurrentAnimationIndex() const				{ return GetCurrentAnimatingAnimation()->GetCurrentIndex(); }
+		__forceinline void InitializeCurrAnimation()					{ assert(mpCurrAnimatingAnimation != nullptr); mpCurrAnimatingAnimation->Reset(); }
 
 		Animation* FindAnimationOrNull(const std::wstring& key);
 		Events* FindEventsOrNull(const std::wstring& key);
