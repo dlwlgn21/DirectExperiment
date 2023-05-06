@@ -31,14 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 
-    // TODO : MUST CHECK WHY THIS IS HAPPNING
     //_CrtSetBreakAlloc(730);
-    //_CrtSetBreakAlloc(2090);
-    //_CrtSetBreakAlloc(2089);
-    //_CrtSetBreakAlloc(2088);
-    // TODO: 여기에 코드를 입력합니다.
-
-    // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_DIRECTEXPERIMENT, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
@@ -69,6 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     app.Release();
     jh::Editor::GetInstance().Release();
+    UnregisterClassW(szWindowClass, hInstance);
     return (int) msg.wParam;
 }
 
@@ -100,7 +94,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
             {
             case IDM_ABOUT:
@@ -118,7 +111,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
             EndPaint(hWnd, &ps);
         }
         break;

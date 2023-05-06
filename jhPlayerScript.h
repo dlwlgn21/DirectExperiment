@@ -92,9 +92,10 @@ namespace jh
 
 		eObjectLookDirection GetPlayerLookDirection() const			{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
+		const eComboAttackType GetComboAttackType() const			{ return meComboType; }
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
 		eAttackType GetAttackType() const							{ return meAttackType; }
-
+		const bool IsHitPowerAttack() const							{ return mbIsHitPowerAttack; }
 
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
@@ -104,6 +105,7 @@ namespace jh
 
 
 		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
+		void SetIsHitPowerAttack(const bool bIsHit)										{ mbIsHitPowerAttack = bIsHit; }
 	
 	private:
 		void setAnimationEvent();
@@ -139,6 +141,7 @@ namespace jh
 		float							mStaminaTimer;
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 		bool							mbIsContiueAttacking;
+		bool							mbIsHitPowerAttack;
 	};
 }
 

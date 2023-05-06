@@ -1,6 +1,7 @@
 #pragma once
 #include "jhScript.h"
 #include "jhGraphics.h"
+#include "jhMath.h"
 
 namespace jh
 {
@@ -19,12 +20,16 @@ namespace jh
 
 		
 	private:
+		void setCameraAtSpecifiedYPosition(jh::math::Vector3& pos);
 		void setPlayerScript();
+		void cameraShake(jh::math::Vector3& pos);
 	private:
 		Transform*			mpTranform;
 		Transform*			mpPlayerTransform;
 		PlayerScript*		mpPlayerScript;
 		float				mSpeed;
+		float				mPowerAttackCamShakeTimer;
+		float				mPowerAttackCamShakeTime;
 	};
 }
 

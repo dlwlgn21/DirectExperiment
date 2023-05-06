@@ -37,6 +37,7 @@ namespace jh
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 		, mpPlayerDustEffetScript(nullptr)
 		, mbIsContiueAttacking(false)
+		, mbIsHitPowerAttack(false)
 	{
 	}
 

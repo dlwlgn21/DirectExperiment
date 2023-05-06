@@ -112,6 +112,10 @@ namespace jh
 			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX)
 			{
 				decreaseHP(mpPlayerScript->GetPlayerStat().AttackDamage);
+				if (mpPlayerScript->GetComboAttackType() == eComboAttackType::THREE)
+				{
+					mpPlayerScript->SetIsHitPowerAttack(true);
+				}
 				if (meState != eMonsterState::DEAD)
 				{
 					setState(eMonsterState::HITTED);
