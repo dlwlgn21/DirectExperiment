@@ -22,7 +22,9 @@ namespace jh
 		, mSpeed(3.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
-		, mAnimAttackKey(L"PlayerWeaponSwing")
+		, mAnimNormalAttack1Key(L"PlayerNormalAttack1")
+		, mAnimNormalAttack2Key(L"PlayerNormalAttack2")
+		, mAnimNormalAttack3Key(L"PlayerNormalAttack3")
 		, mAnimPushAttackKey(L"PlayerPushAttack")
 		, mAnimDashKey(L"PlayerDash")
 		, mAnimHittedKey(L"PlayerHitted")
@@ -31,8 +33,10 @@ namespace jh
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
 		, meAttackType(eAttackType::NORMAL)
+		, meComboType(eComboAttackType::TWO)
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 		, mpPlayerDustEffetScript(nullptr)
+		, mbIsContiueAttacking(false)
 	{
 	}
 
@@ -46,7 +50,15 @@ namespace jh
 	{
 		assert(mpTranform != nullptr);
 		Vector3 pos = mpTranform->GetPosition();
-		setStateByInput(pos);
+		if (meState == ePlayerState::ATTACKING)
+		{
+			setIsContinueAttacking();
+		}
+		else
+		{
+			setStateByInput(pos);
+		}
+
 		setAnimationFlip();
 		setAnimatorByState();
 		recoverStamina();
@@ -60,27 +72,57 @@ namespace jh
 	{
 	}
 
-	void PlayerScript::Start()
+	void PlayerScript::AttackOneAnimationStart()
 	{
-	}
-
-	void PlayerScript::Complete()
-	{
-	}
-
-	void PlayerScript::End()
-	{
-	}
-
-
-	void PlayerScript::AttackAnimationStart()
-	{
+		mpAnimator->InitializeCurrAnimation();
+		mbIsContiueAttacking = false;
 		decreaseStamina(ATTACK_STAMINA_COST);
 	}
 
-	void PlayerScript::AttackAnimationComplete()
+	void PlayerScript::AttackOneAnimationComplete()
+	{
+		if (mbIsContiueAttacking)
+		{
+			setComboType(eComboAttackType::TWO);
+			setState(ePlayerState::ATTACKING);
+		}
+		else
+		{
+			setComboType(eComboAttackType::ONE);
+			setState(ePlayerState::IDLE);
+		}
+	}
+
+	void PlayerScript::AttackTwoAnimationStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+		mbIsContiueAttacking = false;
+	}
+
+	void PlayerScript::AttackTwoAnimationComplete()
+	{
+		if (mbIsContiueAttacking)
+		{
+			setComboType(eComboAttackType::THREE);
+			setState(ePlayerState::ATTACKING);
+		}
+		else
+		{
+			setComboType(eComboAttackType::ONE);
+			setState(ePlayerState::IDLE);
+		}
+	}
+
+	void PlayerScript::AttackThreeAnimationStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+		mbIsContiueAttacking = false;
+	}
+
+	void PlayerScript::AttackThreeAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
+		setComboType(eComboAttackType::ONE);
 	}
 
 	void PlayerScript::PushAttackAnimationStart()
@@ -133,12 +175,15 @@ namespace jh
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimMoveKey) = std::bind(&PlayerScript::Start, this);
-		mpAnimator->GetCompleteEvent(mAnimMoveKey) = std::bind(&PlayerScript::Complete, this);
-		mpAnimator->GetEndEvent(mAnimMoveKey) = std::bind(&PlayerScript::End, this);
 
-		mpAnimator->GetStartEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationStart, this);
-		mpAnimator->GetCompleteEvent(mAnimAttackKey) = std::bind(&PlayerScript::AttackAnimationComplete, this);
+		mpAnimator->GetStartEvent(mAnimNormalAttack1Key) = std::bind(&PlayerScript::AttackOneAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimNormalAttack1Key) = std::bind(&PlayerScript::AttackOneAnimationComplete, this);
+
+		mpAnimator->GetStartEvent(mAnimNormalAttack2Key) = std::bind(&PlayerScript::AttackTwoAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimNormalAttack2Key) = std::bind(&PlayerScript::AttackTwoAnimationComplete, this);
+
+		mpAnimator->GetStartEvent(mAnimNormalAttack3Key) = std::bind(&PlayerScript::AttackThreeAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimNormalAttack3Key) = std::bind(&PlayerScript::AttackThreeAnimationComplete, this);
 
 
 		mpAnimator->GetStartEvent(mAnimPushAttackKey) = std::bind(&PlayerScript::PushAttackAnimationStart, this);
@@ -160,9 +205,14 @@ namespace jh
 		meAttackType = eType;
 	}
 
+	void PlayerScript::setComboType(const eComboAttackType eType)
+	{
+		meComboType = eType;
+	}
+
 	void PlayerScript::setStateByInput(Vector3& pos)
 	{
-		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)	
+		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)
 			{return;}
 		if (!Input::IsAnyKeyPressed())			
 			{ setState(ePlayerState::IDLE); }
@@ -237,8 +287,24 @@ namespace jh
 			switch (meAttackType)
 			{
 			case eAttackType::NORMAL:
-				mpAnimator->PlayAnimation(mAnimAttackKey, true);
-				break;
+			{
+				switch (meComboType)
+				{
+				case eComboAttackType::ONE:
+					mpAnimator->PlayAnimation(mAnimNormalAttack1Key, true);
+					break;
+				case eComboAttackType::TWO:
+					mpAnimator->PlayAnimation(mAnimNormalAttack2Key, true);
+					break;
+				case eComboAttackType::THREE:
+					mpAnimator->PlayAnimation(mAnimNormalAttack3Key, true);
+					break;
+				default:
+					assert(false);
+					break;
+				}
+			}
+			break;
 			case eAttackType::PUSH:
 				mpAnimator->PlayAnimation(mAnimPushAttackKey, true);
 				break;
@@ -286,6 +352,23 @@ namespace jh
 		if (mStat.CurrentHP <= 0)
 		{
 			mStat.CurrentHP = 0;
+		}
+	}
+
+	bool PlayerScript::checkIsNormalAttackKeyPressed()
+	{
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	void PlayerScript::setIsContinueAttacking()
+	{
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
+		{
+			mbIsContiueAttacking = true;
 		}
 	}
 

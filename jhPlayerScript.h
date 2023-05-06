@@ -5,9 +5,9 @@
 
 static constexpr const CHAR		INITIAL_HP = 10;
 static constexpr const CHAR		INITIAL_STAMINA = 5;
-static constexpr const CHAR		INITIAL_ATTACK_DAMAGE = 2;
+static constexpr const CHAR		INITIAL_ATTACK_DAMAGE = 1;
 
-static constexpr const CHAR		ATTACK_STAMINA_COST = 2;
+static constexpr const CHAR		ATTACK_STAMINA_COST = 1;
 static constexpr const CHAR		DASH_STAMINA_COST = 1;
 
 static constexpr const float 	STAMINA_RECOVER_SECOND = 2.0f;
@@ -30,6 +30,14 @@ namespace jh
 	{
 		NORMAL,
 		PUSH,
+		COUNT
+	};
+
+	enum class eComboAttackType
+	{
+		ONE,
+		TWO,
+		THREE,
 		COUNT
 	};
 
@@ -65,12 +73,15 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-		void Start();
-		void Complete();
-		void End();
+		void AttackOneAnimationStart();
+		void AttackOneAnimationComplete();
+		
+		void AttackTwoAnimationStart();
+		void AttackTwoAnimationComplete();
 
-		void AttackAnimationStart();
-		void AttackAnimationComplete();
+		void AttackThreeAnimationStart();
+		void AttackThreeAnimationComplete();
+
 
 		void PushAttackAnimationStart();
 		void PushAttackAnimationComplete();
@@ -98,12 +109,15 @@ namespace jh
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
 		void setAttackType(const eAttackType eType);
+		void setComboType(const eComboAttackType eType);
 		void setStateByInput(jh::math::Vector3& pos);
 		void setAnimationFlip();
 		void setAnimatorByState();
 		void recoverStamina();
 		void decreaseStamina(CHAR amount);
 		void decreaseHP(CHAR amount);
+		bool checkIsNormalAttackKeyPressed();
+		void setIsContinueAttacking();
 
 	private:
 		Transform*						mpTranform;
@@ -111,16 +125,20 @@ namespace jh
 		float							mSpeed;
 		const std::wstring				mAnimIdleKey;
 		const std::wstring				mAnimMoveKey;
-		const std::wstring				mAnimAttackKey;
+		const std::wstring				mAnimNormalAttack1Key;
+		const std::wstring				mAnimNormalAttack2Key;
+		const std::wstring				mAnimNormalAttack3Key;
 		const std::wstring				mAnimPushAttackKey;
 		const std::wstring				mAnimDashKey;
 		const std::wstring				mAnimHittedKey;
 		eObjectLookDirection			meLookDir;
 		ePlayerState					meState;
 		eAttackType						meAttackType;
+		eComboAttackType				meComboType;
 		PlayerStat						mStat;
 		float							mStaminaTimer;
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
+		bool							mbIsContiueAttacking;
 	};
 }
 

@@ -13,6 +13,7 @@
 
 using namespace jh::math;
 
+static constexpr const float PLAYER_ATTACK_DURAITON = 0.07f;
 
 namespace jh
 {
@@ -86,15 +87,38 @@ namespace jh
 
 
 		pPlayerAnimator->Create(
-			L"PlayerWeaponSwing",
+			L"PlayerNormalAttack1",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 7),
+			animSize,
+			offset,
+			7,
+			PLAYER_ATTACK_DURAITON,
+			MAGNINICATION
+		);
+
+		pPlayerAnimator->Create(
+			L"PlayerNormalAttack2",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 8),
+			animSize,
+			offset,
+			5,
+			PLAYER_ATTACK_DURAITON,
+			MAGNINICATION
+		);
+		pPlayerAnimator->Create(
+			L"PlayerNormalAttack3",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 9),
 			animSize,
 			offset,
 			5,
-			0.15f,
+			PLAYER_ATTACK_DURAITON + 0.03f,
 			MAGNINICATION
 		);
+
+
 
 		pPlayerAnimator->Create(
 			L"PlayerHitted",
