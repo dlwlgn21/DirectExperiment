@@ -10,7 +10,7 @@ using namespace jh::math;
 
 static constexpr const INT CAM_SHAKE_RANGE = 5;
 static constexpr const float RESTRICTION = 100.0f;
-static constexpr const float Y_CAMERA_POS = -1.0f;
+static constexpr const float Y_CAMERA_POS = 0.0f;
 static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.15f;
 
 
@@ -41,7 +41,7 @@ namespace jh
 		// Added Part At 2023-04-19 15:49 For Chasing PlayerTransform
 		Vector3 dir = mpPlayerTransform->GetPosition() - mpTranform->GetPosition();
 		dir.Normalize();
-		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), dir.y, 0.0f);
+		pos += Vector3(dir.x * mSpeed * Time::DeltaTime(), pos.y, 0.0f);
 
 		// Added Part AT 2023-05-02 11:57 For CameraShaking
 		const ePlayerState eState = mpPlayerScript->GetPlayerState();
@@ -117,9 +117,9 @@ namespace jh
 		static std::mt19937 gen(rd());
 		static std::uniform_int_distribution<> dist(-CAM_SHAKE_RANGE, CAM_SHAKE_RANGE);
 		float xMove = dist(gen) / RESTRICTION;
-		float yMove = dist(gen) / RESTRICTION;
+		//float yMove = dist(gen) / RESTRICTION;
 		pos.x += xMove;
-		pos.y += yMove;
+		//pos.y += yMove;
 		mpTranform->SetPosition(pos);
 	}
 }

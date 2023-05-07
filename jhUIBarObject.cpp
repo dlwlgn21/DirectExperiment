@@ -12,8 +12,8 @@ using namespace jh::math;
 
 static constexpr const float BORDER_Z_VALUE = 2.0f;
 static constexpr const float BAR_Z_VALUE = 1.0f;
-static constexpr const float HEALTH_BORDER_Y_VALUE = -2.1f;
-static constexpr const float STAMINA_BORDER_Y_VALUE = -2.5f;
+static constexpr const float HEALTH_BORDER_Y_VALUE = -3.1f;
+static constexpr const float STAMINA_BORDER_Y_VALUE = -3.5f;
 
 namespace jh
 {

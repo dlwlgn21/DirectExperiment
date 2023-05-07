@@ -21,14 +21,15 @@ namespace jh
 		setRenderer();
 		setScript();
 		Vector3 prePos = GetTransform()->GetPosition();
-		GetTransform()->SetPosition(Vector3(prePos.x, 2.0f, prePos.z));
+		GetTransform()->SetPosition(Vector3(prePos.x, 3.0f, prePos.z));
+		GetTransform()->SetScale(Vector3(8.0f, 8.0f, 1.0f));
 	}
 
 	void BGMoonObject::setAnimator()
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY);
 		assert(pAtlas != nullptr);
-		const float WIDTH = 48.0;
+		const float WIDTH = 48.0f;
 		const float HEIGHT = 48.0f;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);

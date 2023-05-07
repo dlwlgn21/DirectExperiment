@@ -122,7 +122,7 @@ namespace jh
 	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
 	{	
 		assert(pPlayerScript);
-		MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
+		MonstePackage monPack = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.7f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
 		addMonster(monPack);
 		//MonstePackage monPack2 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(-6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
 		//addMonster(monPack2);
@@ -142,49 +142,53 @@ namespace jh
 		// BattleBG
 		const float ASPECT_RATIO = 9.24f;
 		const float MAG = 10.0f;
+
+		const Vector3 PARALLAX_SCLAE_VECTOR(16 * MAG, MAG, 1.0f);
+		const Vector3 PARALLAX_ORIGINAL_SCLAE_VECTOR(ASPECT_RATIO * MAG, MAG, 1.0f);
+
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"BGObject");
-			pBGObject->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
+			pBGObject->GetTransform()->SetScale(PARALLAX_ORIGINAL_SCLAE_VECTOR);
+			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -2.6f, 10.0f));
 		}
 
 		{
 			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
 			pParallaxOne->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY);
-			pParallaxOne->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
+			pParallaxOne->GetTransform()->SetScale(Vector3(PARALLAX_ORIGINAL_SCLAE_VECTOR));
+			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 2.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
 			pParallaxTwo->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY);
-			pParallaxTwo->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, PARALLAX_2_DEPTH));
+			pParallaxTwo->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_2_DEPTH));
 
 			ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
 			pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
-			pParallaxThree->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pParallaxThree->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, PARALLAX_3_DEPTH));
+			pParallaxThree->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			pParallaxThree->GetTransform()->SetPosition(Vector3(0.0f, 0.5f, PARALLAX_3_DEPTH));
 
 			ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
 			pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
-			pParallaxFour->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pParallaxFour->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, PARALLAX_4_DEPTH));
+			pParallaxFour->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			pParallaxFour->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_4_DEPTH));
 
-			ParallaxObject* pParallaxFive = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_5_DEPTH);
-			pParallaxFive->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY);
-			pParallaxFive->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pParallaxFive->GetTransform()->SetPosition(Vector3(0.0f, 1.1f, PARALLAX_5_DEPTH));
+			//ParallaxObject* pParallaxFive = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_5_DEPTH);
+			//pParallaxFive->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY);
+			//pParallaxFive->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
+			//pParallaxFive->GetTransform()->SetPosition(Vector3(0.0f, 1.1f, PARALLAX_5_DEPTH));
 
-			ParallaxObject* pParallaxSix = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_6_DEPTH);
-			pParallaxSix->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY);
-			pParallaxSix->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
-			pParallaxSix->GetTransform()->SetPosition(Vector3(0.0f, 0.6f, PARALLAX_6_DEPTH));
+			//ParallaxObject* pParallaxSix = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_6_DEPTH);
+			//pParallaxSix->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY);
+			//pParallaxSix->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
+			//pParallaxSix->GetTransform()->SetPosition(Vector3(0.0f, 0.6f, PARALLAX_6_DEPTH));
 		}
 	}
 
 	void PlayScene::instantiateEnvObject()
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
-		pBGMoon->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 	}
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{
