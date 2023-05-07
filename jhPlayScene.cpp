@@ -157,12 +157,12 @@ namespace jh
 			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
 			pParallaxOne->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY);
 			pParallaxOne->GetTransform()->SetScale(Vector3(PARALLAX_ORIGINAL_SCLAE_VECTOR));
-			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 2.0f, PARALLAX_1_DEPTH));
+			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
 			pParallaxTwo->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY);
 			pParallaxTwo->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
-			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_2_DEPTH));
+			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, -1.5f, PARALLAX_2_DEPTH));
 
 			ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
 			pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
