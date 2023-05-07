@@ -142,6 +142,8 @@ namespace jh
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitPowerAttack;
+		float							mDashIntervalTimer;
+		float							mDashIntervalTime;
 	};
 }
 

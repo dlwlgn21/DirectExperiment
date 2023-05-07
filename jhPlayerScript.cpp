@@ -12,6 +12,8 @@
 #include "jhPlayerDustEffectScript.h"
 
 static constexpr const float DASH_AMOUNT = 3.0f;
+static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
+
 using namespace jh::math;
 
 namespace jh
@@ -33,11 +35,13 @@ namespace jh
 		, mStat(PlayerStat())
 		, meState(ePlayerState::IDLE)
 		, meAttackType(eAttackType::NORMAL)
-		, meComboType(eComboAttackType::TWO)
+		, meComboType(eComboAttackType::ONE)
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 		, mpPlayerDustEffetScript(nullptr)
 		, mbIsContiueAttacking(false)
 		, mbIsHitPowerAttack(false)
+		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
+		, mDashIntervalTime(DASH_INTERVAL_SECOND)
 	{
 	}
 
