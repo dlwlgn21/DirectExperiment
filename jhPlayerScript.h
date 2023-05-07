@@ -120,6 +120,7 @@ namespace jh
 		void decreaseHP(CHAR amount);
 		bool checkIsNormalAttackKeyPressed();
 		void setIsContinueAttacking();
+		void processIfDash();
 
 	private:
 		Transform*						mpTranform;
@@ -142,6 +143,7 @@ namespace jh
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitPowerAttack;
+		bool							mbIsStartCountingDashTimer;
 		float							mDashIntervalTimer;
 		float							mDashIntervalTime;
 	};

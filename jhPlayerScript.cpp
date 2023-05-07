@@ -40,6 +40,7 @@ namespace jh
 		, mpPlayerDustEffetScript(nullptr)
 		, mbIsContiueAttacking(false)
 		, mbIsHitPowerAttack(false)
+		, mbIsStartCountingDashTimer(false)
 		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
 		, mDashIntervalTime(DASH_INTERVAL_SECOND)
 	{
@@ -63,7 +64,7 @@ namespace jh
 		{
 			setStateByInput(pos);
 		}
-
+		processIfDash();
 		setAnimationFlip();
 		setAnimatorByState();
 		recoverStamina();
@@ -253,9 +254,10 @@ namespace jh
 		}
 		else if (Input::GetKeyState(eKeyCode::C) == eKeyState::DOWN)
 		{
-			if (mStat.CurrentStamina >= DASH_STAMINA_COST)
+			if (mStat.CurrentStamina >= DASH_STAMINA_COST && !mbIsStartCountingDashTimer)
 			{
 				setState(ePlayerState::DASH);
+				mbIsStartCountingDashTimer = true;
 				if (meLookDir == eObjectLookDirection::LEFT)
 				{
 					pos.x -= (DASH_AMOUNT);
@@ -376,6 +378,20 @@ namespace jh
 			mbIsContiueAttacking = true;
 		}
 	}
+
+	void PlayerScript::processIfDash()
+	{
+		if (mbIsStartCountingDashTimer)
+		{
+			mDashIntervalTimer -= Time::DeltaTime();
+			if (mDashIntervalTimer < 0.0f)
+			{
+				mDashIntervalTimer = mDashIntervalTime;
+				mbIsStartCountingDashTimer = false;
+			}
+		}
+	}
+
 
 	void PlayerScript::EnemyAttackHiited(UINT damage)
 	{
