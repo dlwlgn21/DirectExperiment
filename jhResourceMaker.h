@@ -49,6 +49,7 @@ namespace jh
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_SWEEPER_ATLAS_KEY;
+		static const std::wstring OBELISK_TEXTURE_ATLAS_KEY;
 		static const std::wstring BATTLE_BG_TEXTURE_KEY;
 		static const std::wstring BATTLE_PARRARELL_BG_TEXTURE_KEY;
 		static const std::wstring PARALLAX_BG_TEXTURE_1_KEY;
@@ -78,7 +79,7 @@ namespace jh
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 		static const std::wstring BG_MOON_MATERIAL_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_MATERIAL_KEY;
-
+		static const std::wstring OBELISK_MATERIAL_KEY;
 
 		static const std::wstring PARALLAX_BG_MATERIAL_1_KEY;
 		static const std::wstring PARALLAX_BG_MATERIAL_2_KEY;

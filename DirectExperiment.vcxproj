@@ -170,6 +170,7 @@
     <ClInclude Include="jhMonsterAttackColiderScript.h" />
     <ClInclude Include="jhMonsterManager.h" />
     <ClInclude Include="jhMonsterScript.h" />
+    <ClInclude Include="jhObeliskObject.h" />
     <ClInclude Include="jhOnceAnimator.h" />
     <ClInclude Include="jhParallaxObject.h" />
     <ClInclude Include="jhParallaxScript.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="jhMonsterAttackColiderScript.cpp" />
     <ClCompile Include="jhMonsterManager.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
+    <ClCompile Include="jhObeliskObject.cpp" />
     <ClCompile Include="jhOnceAnimator.cpp" />
     <ClCompile Include="jhParallaxObject.cpp" />
     <ClCompile Include="jhParallaxScript.cpp" />

@@ -35,6 +35,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
+	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
 
 
 	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
@@ -66,6 +67,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
+	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
@@ -194,6 +196,12 @@ namespace jh
 		pSweeperAtlasTexture->Load(L"Sweeper.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
 
+		Texture* pObeliskAtlasTexture = new Texture();
+		// ObeliskEffects.png
+		// Obelisk.png
+		pObeliskAtlasTexture->Load(L"ObeliskEffects.png");
+		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
+
 
 		Texture* pBattleBGTexture = new Texture();
 		pBattleBGTexture->Load(L"ForeGround23(1).png");
@@ -269,6 +277,11 @@ namespace jh
 
 		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);
+
+		ResourcesManager::Insert<Material>(OBELISK_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_ATLAS_KEY))
+			);
 
 
 		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_BG_TEXTURE_KEY));

@@ -444,6 +444,9 @@
     <ClInclude Include="jhMonsterManager.h">
       <Filter>MonsterManager</Filter>
     </ClInclude>
+    <ClInclude Include="jhObeliskObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -631,6 +634,9 @@
     </ClCompile>
     <ClCompile Include="jhMonsterManager.cpp">
       <Filter>MonsterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhObeliskObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

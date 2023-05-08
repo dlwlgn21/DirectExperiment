@@ -91,13 +91,13 @@ namespace jh
 			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 1), 12);
 			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_MOVING_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 2), 16, 0.15f);
+			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 2), 16, 0.1f);
 			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_ATTACK_ANIM_KEY, animInfo);
 
 			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 3), 2, MONSTER_HIT_ANIM_DURATION);
 			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_HITTED_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 4), 12, MONSTER_DIE_ANIM_DURATION);
+			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 4), 12, MONSTER_DIE_ANIM_DURATION - 0.1f);
 			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_DIE_ANIM_KEY, animInfo);
 
 			pCagedShokerAnimator->PlayAnimation(CAGED_SHOKER_IDLE_ANIM_KEY, true);

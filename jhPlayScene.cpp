@@ -30,6 +30,8 @@
 #include "jhBGMoonObject.h"
 #include "jhPlayerDustEffectObject.h"
 #include "jhTexture.h"
+#include "jhObeliskObject.h"
+
 
 using namespace jh::math;
 
@@ -189,6 +191,7 @@ namespace jh
 	void PlayScene::instantiateEnvObject()
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
+		ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
 	}
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{
