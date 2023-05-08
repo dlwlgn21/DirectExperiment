@@ -20,7 +20,7 @@ namespace jh
 		: GameObject(eLayerType::MONSTER)
 		, mMonsterInfo(monsterInfo)
 	{
-		assert(mMonsterInfo.pAnimator != nullptr && mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMesh != nullptr && mMonsterInfo.pPlayerScript != nullptr);
+		assert(mMonsterInfo.pAnimator != nullptr && mMonsterInfo.pMesh != nullptr && mMonsterInfo.pPlayerScript != nullptr);
 		setRenderer();
 		setAnimator();
 		setScript();
@@ -42,6 +42,12 @@ namespace jh
 	void Monster::Render()
 	{
 		GameObject::Render();
+	}
+
+	void Monster::SetHitEffectObject(HitEffectObject* pHitEffectObject)
+	{
+		assert(pHitEffectObject);
+		mMonsterInfo.pHitEffectObject = pHitEffectObject;
 	}
 
 	void Monster::SetInactive()

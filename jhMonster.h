@@ -32,6 +32,7 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
+		void SetHitEffectObject(HitEffectObject* pHitEffectObject);
 		void SetInactive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	private:

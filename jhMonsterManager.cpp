@@ -64,7 +64,6 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		MonstePackage retMonsterPackage;
 		ZeroMemory(&retMonsterPackage, sizeof(MonstePackage));
-		HitEffectObject* pHitEffectObject = new HitEffectObject();
 
 		switch (eType)
 		{
@@ -103,7 +102,6 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo, 
-				pHitEffectObject, 
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY), 
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY), 
 				pCagedShokerAnimator,
@@ -151,7 +149,6 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				pHitEffectObject,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY),
 				pSweeperAnimator,
@@ -172,10 +169,9 @@ namespace jh
 		return retMonsterPackage;
 	}
 
-	void MonsterManager::createMonsterInfo(MonsterInfo& monInfo, HitEffectObject* pHitEffectObject, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType)
+	void MonsterManager::createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType)
 	{
-		assert(pHitEffectObject != nullptr && pMesh != nullptr && pMaterial != nullptr && pAnimator != nullptr && pPlayerScript != nullptr);
-		monInfo.pHitEffectObject = pHitEffectObject;
+		assert(pMesh != nullptr && pMaterial != nullptr && pAnimator != nullptr && pPlayerScript != nullptr);
 		monInfo.pMesh = pMesh;
 		monInfo.pMaterial = pMaterial;
 		monInfo.pAnimator = pAnimator;
@@ -224,7 +220,8 @@ namespace jh
 	void MonsterManager::createMonster(MonsterInfo& monInfo, MonstePackage& retMonsterPackage)
 	{
 		Monster* pMonster = new Monster(monInfo);
-		monInfo.pHitEffectObject->AddEffectScript(pMonster->GetScriptOrNull(), monInfo.pPlayerScript);
+		monInfo.pHitEffectObject = new HitEffectObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), monInfo.pPlayerScript);
+		pMonster->SetHitEffectObject(monInfo.pHitEffectObject);
 		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(monInfo.pHitEffectObject->GetScriptOrNull()));
 		retMonsterPackage.pMonster = pMonster;
 		retMonsterPackage.pHitEffectObejct = monInfo.pHitEffectObject;

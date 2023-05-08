@@ -10,12 +10,11 @@ namespace jh
 	class HitEffectObject : public AnimatedGameObject
 	{
 	public:
-		HitEffectObject();
+		HitEffectObject(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript);
 		virtual ~HitEffectObject() = default;
 
-		void AddEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript);
-
 	protected:
+		void setScript(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript);
 		void setRenderer() override;
 		void setAnimator() override;
 	};

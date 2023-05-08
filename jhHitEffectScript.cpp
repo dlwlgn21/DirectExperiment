@@ -12,7 +12,7 @@ using namespace jh::math;
 
 namespace jh
 {
-	HitEffectScript::HitEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript)
+	HitEffectScript::HitEffectScript(MonsterScript* pFollwingScript, PlayerScript* pPlayerScript)
 		: EffectScript()
 		, mAnimHit1EffectKey(MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY)
 		, mAnimHit2EffectKey(MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY)

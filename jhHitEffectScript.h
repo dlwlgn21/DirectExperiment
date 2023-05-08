@@ -16,10 +16,11 @@ namespace jh
 	class OnceAnimator;
 	class Script;
 	class PlayerScript;
+	class MonsterScript;
 	class HitEffectScript : public EffectScript
 	{
 	public:
-		HitEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript);
+		HitEffectScript(MonsterScript* pFollwingScript, PlayerScript* pPlayerScript);
 		virtual ~HitEffectScript() = default;
 
 		void Initialize() override;

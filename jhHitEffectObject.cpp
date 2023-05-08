@@ -15,18 +15,20 @@ using namespace jh::math;
 
 namespace jh
 {
-	HitEffectObject::HitEffectObject()
+	HitEffectObject::HitEffectObject(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
 		: AnimatedGameObject()
 	{
+		assert(pMonsterScript != nullptr && pPlayerScript != nullptr);
 		setRenderer();
 		setAnimator();
+		setScript(pMonsterScript, pPlayerScript);
 	}
 
-
-	void HitEffectObject::AddEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript)
+	void HitEffectObject::setScript(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
 	{
-		HitEffectScript* pHitEffectScript = new HitEffectScript(pFollwingScript, pPlayerScript);
-		this->AddScript(pHitEffectScript);
+		assert(pMonsterScript != nullptr && pPlayerScript != nullptr);
+		HitEffectScript* pScript = new HitEffectScript(pMonsterScript, pPlayerScript);
+		this->AddScript(pScript);
 	}
 
 	void HitEffectObject::setRenderer()
@@ -84,4 +86,5 @@ namespace jh
 		this->AddComponent(pAnimator);
 		pAnimator->SetCurrentAnimation(pAnimation);
 	}
+
 }

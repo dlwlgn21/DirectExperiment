@@ -63,7 +63,7 @@ namespace jh
 
 
 	private:
-		 void createMonsterInfo(MonsterInfo& monInfo, HitEffectObject* pHitEffectObject, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
+		 void createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
 		 void createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const jh::math::Vector2& leftTop, const jh::math::Vector2& seperatingSize, const jh::math::Vector2& offset, const UINT spriteCount, const float duration, const float magnification);
 		 void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
