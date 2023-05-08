@@ -6,20 +6,24 @@
 #include "jhOnceAnimator.h"
 #include "jhAnimation.h"
 #include "jhMonsterScript.h"
+#include "jhPlayerScript.h"
 
 using namespace jh::math;
 
 namespace jh
 {
-	HitEffectScript::HitEffectScript(Script* pFollwingScript, const std::wstring& animKey)
+	HitEffectScript::HitEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript)
 		: EffectScript()
-		, mAnimHitEffectKey(animKey)
+		, mAnimHit1EffectKey(MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY)
+		, mAnimHit2EffectKey(MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY)
+		, mAnimHit3EffectKey(MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY)
 		, mpFollwingScript(pFollwingScript)
 		, mpFollwingTransform(nullptr)
+		, mpPlayerScript(pPlayerScript)
 		, meType(eHitObjectType::MONSTER)
 	{
 		mpFollwingTransform = mpFollwingScript->GetOwner()->GetTransform();
-		assert(mpFollwingTransform != nullptr);
+		assert(mpFollwingTransform != nullptr && mpPlayerScript != nullptr);
 	}
 	void HitEffectScript::Initialize()
 	{
@@ -27,7 +31,7 @@ namespace jh
 		mpTransform = GetOwner()->GetTransform();
 		Vector3 pos = mpFollwingTransform->GetPosition();
 		mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
-		mpTransform->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+		mpTransform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		assert(mpTransform != nullptr);
 	}
 	void HitEffectScript::Update()
@@ -48,20 +52,51 @@ namespace jh
 			break;
 		}
 	}
-	void HitEffectScript::FixedUpdate()
-	{
-	}
 
-	void HitEffectScript::Render()
-	{
-	}
 
 	void HitEffectScript::setAnimator()
 	{
 		mpAnimator = static_cast<OnceAnimator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimHitEffectKey) = std::bind(&HitEffectScript::HitStart, this);
-		mpAnimator->GetCompleteEvent(mAnimHitEffectKey) = std::bind(&HitEffectScript::HitComplete, this);
+		mpAnimator->GetStartEvent(mAnimHit1EffectKey) = std::bind(&HitEffectScript::Hit1Start, this);
+		mpAnimator->GetCompleteEvent(mAnimHit1EffectKey) = std::bind(&HitEffectScript::Hit1Complete, this);
+
+		mpAnimator->GetStartEvent(mAnimHit2EffectKey) = std::bind(&HitEffectScript::Hit2Start, this);
+		mpAnimator->GetCompleteEvent(mAnimHit2EffectKey) = std::bind(&HitEffectScript::Hit2Complete, this);
+
+		mpAnimator->GetStartEvent(mAnimHit3EffectKey) = std::bind(&HitEffectScript::Hit3Start, this);
+		mpAnimator->GetCompleteEvent(mAnimHit3EffectKey) = std::bind(&HitEffectScript::Hit3Complete, this);
+	}
+
+	void HitEffectScript::Hit1Start()
+	{
+	}
+
+	void HitEffectScript::Hit1Complete()
+	{
+		mpAnimator->SetComplete();
+		SetState(eEffectState::WAIT);
+	}
+
+	void HitEffectScript::Hit2Start()
+	{
+	}
+
+	void HitEffectScript::Hit2Complete()
+	{
+		mpAnimator->SetComplete();
+		SetState(eEffectState::WAIT);
+	}
+
+	void HitEffectScript::Hit3Start()
+	{
+
+	}
+
+	void HitEffectScript::Hit3Complete()
+	{
+		mpAnimator->SetComplete();
+		SetState(eEffectState::WAIT);
 	}
 
 	void HitEffectScript::PlayAnimation()
@@ -74,8 +109,8 @@ namespace jh
 		case MONSTER:
 		{
 			eLookDir = static_cast<MonsterScript*>(mpFollwingScript)->GetMonsterLookDirection();
-		}
 			break;
+		}
 		case PLAYER:
 			break;
 		case COUNT:
@@ -95,14 +130,27 @@ namespace jh
 		default:
 			break;
 		}
-		mpAnimator->PlayAnimationWithReset(mAnimHitEffectKey, false);
-	}
-	void HitEffectScript::HitStart()
-	{
-	}
-	void HitEffectScript::HitComplete()
-	{
-		mpAnimator->SetComplete();
-		SetState(eEffectState::WAIT);
+
+		switch (mpPlayerScript->GetComboAttackType())
+		{
+		case eComboAttackType::ONE:
+		{
+			mpAnimator->PlayAnimationWithReset(mAnimHit1EffectKey, false);
+			break;
+		}
+		case eComboAttackType::TWO:
+		{
+			mpAnimator->PlayAnimationWithReset(mAnimHit2EffectKey, false);
+			break;
+		}
+		case eComboAttackType::THREE:
+		{
+			mpAnimator->PlayAnimationWithReset(mAnimHit3EffectKey, false);
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
 	}
 }

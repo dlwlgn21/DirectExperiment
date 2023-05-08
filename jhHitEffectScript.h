@@ -4,7 +4,6 @@
 #include "jhMath.h"
 #include "jhWeaponScript.h"
 
-
 namespace jh
 {
 	enum eHitObjectType
@@ -16,30 +15,37 @@ namespace jh
 	class Transform;
 	class OnceAnimator;
 	class Script;
+	class PlayerScript;
 	class HitEffectScript : public EffectScript
 	{
 	public:
-		HitEffectScript(Script* pFollwingScript, const std::wstring& animKey);
+		HitEffectScript(Script* pFollwingScript, PlayerScript* pPlayerScript);
 		virtual ~HitEffectScript() = default;
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 
 		void setAnimator() override;
 
-		void HitStart();
-		void HitComplete();
+		void Hit1Start();
+		void Hit1Complete();
 
+		void Hit2Start();
+		void Hit2Complete();
+
+		void Hit3Start();
+		void Hit3Complete();
 	public:
 		void PlayAnimation();
 
 	private:
-		const std::wstring				mAnimHitEffectKey;
+		const std::wstring				mAnimHit1EffectKey;
+		const std::wstring				mAnimHit2EffectKey;
+		const std::wstring				mAnimHit3EffectKey;
 		Script*							mpFollwingScript;
 		Transform*						mpFollwingTransform;
 		eHitObjectType					meType;
+		PlayerScript*					mpPlayerScript;
 	};
 
 }

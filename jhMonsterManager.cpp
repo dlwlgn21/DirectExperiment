@@ -37,6 +37,11 @@ static constexpr const float COLLIDER_Z_VALUE = 3.0f;
 
 namespace jh
 {
+
+	const std::wstring MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY = L"ElectricHit1Key";
+	const std::wstring MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY = L"ElectricHit2Key";
+	const std::wstring MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY = L"ElectricHit3Key";
+
 	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY	= L"CagedIdle";
 	const std::wstring MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY = L"CagedMoving";
 	const std::wstring MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY = L"CagedAttack";
@@ -60,14 +65,6 @@ namespace jh
 		MonstePackage retMonsterPackage;
 		ZeroMemory(&retMonsterPackage, sizeof(MonstePackage));
 		HitEffectObject* pHitEffectObject = new HitEffectObject();
-		pHitEffectObject->SetEffectAnimation(
-			ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_BLOOD_TEXTURE_KEY),
-			128.0f,
-			128.0f,
-			L"MonsterHitAnim",
-			12,
-			0.05f
-		);
 
 		switch (eType)
 		{
@@ -227,7 +224,7 @@ namespace jh
 	void MonsterManager::createMonster(MonsterInfo& monInfo, MonstePackage& retMonsterPackage)
 	{
 		Monster* pMonster = new Monster(monInfo);
-		monInfo.pHitEffectObject->SetScriptAndAnimKey(pMonster->GetScriptOrNull(), L"MonsterHitAnim");
+		monInfo.pHitEffectObject->AddEffectScript(pMonster->GetScriptOrNull(), monInfo.pPlayerScript);
 		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(monInfo.pHitEffectObject->GetScriptOrNull()));
 		retMonsterPackage.pMonster = pMonster;
 		retMonsterPackage.pHitEffectObejct = monInfo.pHitEffectObject;

@@ -77,6 +77,10 @@ namespace jh
 
 
 	public:
+		static const std::wstring HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY;
+		static const std::wstring HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY;
+		static const std::wstring HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY;
+
 		static const std::wstring CAGED_SHOKER_IDLE_ANIM_KEY;
 		static const std::wstring CAGED_SHOKER_MOVING_ANIM_KEY;
 		static const std::wstring CAGED_SHOKER_ATTACK_ANIM_KEY;

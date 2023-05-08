@@ -50,7 +50,7 @@ namespace jh
 
 
 	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
-	const std::wstring ResourceMaker::EFFECT_BLOOD_TEXTURE_KEY = L"EffectBloodTextureKey";
+	const std::wstring ResourceMaker::HIT_EFFECT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorderKey";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBarKey";
@@ -74,7 +74,7 @@ namespace jh
 	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
 
 
-	const std::wstring ResourceMaker::EFFECT_BLOOD_MATERIAL_KEY = L"EffectBloodMaterialKey";
+	const std::wstring ResourceMaker::HIT_EFFECT_MATERIAL_KEY = L"HitEffectMaterialKey";
 
 
 	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
@@ -217,8 +217,8 @@ namespace jh
 		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
 
 		Texture* pEffectSwordTxtrue = new Texture();
-		pEffectSwordTxtrue->Load(L"BloodEffect.png");
-		ResourcesManager::Insert<Texture>(EFFECT_BLOOD_TEXTURE_KEY, pEffectSwordTxtrue);
+		pEffectSwordTxtrue->Load(L"EffectAtals.png");
+		ResourcesManager::Insert<Texture>(HIT_EFFECT_TEXTURE_ATLAS_KEY, pEffectSwordTxtrue);
 
 		Texture* pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax1.png");
@@ -297,9 +297,9 @@ namespace jh
 				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(EFFECT_BLOOD_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(HIT_EFFECT_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_BLOOD_TEXTURE_KEY))
+				ResourcesManager::Find<Texture>(HIT_EFFECT_TEXTURE_ATLAS_KEY))
 			);
 
 		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_1_KEY,

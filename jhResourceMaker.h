@@ -62,7 +62,7 @@ namespace jh
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
-		static const std::wstring EFFECT_BLOOD_TEXTURE_KEY;
+		static const std::wstring HIT_EFFECT_TEXTURE_ATLAS_KEY;
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_TEXTURE_KEY;
 
@@ -72,7 +72,8 @@ namespace jh
 		static const std::wstring BATTLE_BG_MATERIAL_KEY;
 		static const std::wstring BATTLE_PARRARELL_BG_MATERIAL_KEY;
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
-		static const std::wstring EFFECT_BLOOD_MATERIAL_KEY;
+		static const std::wstring HIT_EFFECT_MATERIAL_KEY;
+
 		static const std::wstring DEBUG_MATERIAL_KEY;
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
