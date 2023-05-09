@@ -136,7 +136,7 @@ namespace jh
 	void PlayScene::addMonster(const MonsterPackage& monPack)
 	{
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::EFFECT);
+		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
 		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
 	}
 	void PlayScene::instantiateParallaxObjects()

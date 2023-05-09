@@ -44,6 +44,7 @@ namespace jh
 		MONSTER,
 		PLAYER,
 		EFFECT,
+		MONSTER_EFFECT,
 		PARTICLE,
 		UI,
 		COUNT = 16,
