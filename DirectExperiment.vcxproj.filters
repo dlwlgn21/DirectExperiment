@@ -238,6 +238,12 @@
     <Filter Include="MonsterManager">
       <UniqueIdentifier>{c92c5546-80f5-4b23-bc57-c0488e17e4d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ObjectPools">
+      <UniqueIdentifier>{2004d403-4703-47c2-8791-8d9a692e312a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectPools\Monster">
+      <UniqueIdentifier>{f41e03a7-bf17-4566-a72e-9b286832f0e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -447,6 +453,9 @@
     <ClInclude Include="jhObeliskObject.h">
       <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterObjectPool.h">
+      <Filter>ObjectPools\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -637,6 +646,9 @@
     </ClCompile>
     <ClCompile Include="jhObeliskObject.cpp">
       <Filter>GameObject\AnimatedGameObject\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterObjectPool.cpp">
+      <Filter>ObjectPools\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

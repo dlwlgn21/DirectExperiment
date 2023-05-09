@@ -169,6 +169,7 @@
     <ClInclude Include="jhMonsterAttackColiderObject.h" />
     <ClInclude Include="jhMonsterAttackColiderScript.h" />
     <ClInclude Include="jhMonsterManager.h" />
+    <ClInclude Include="jhMonsterObjectPool.h" />
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhObeliskObject.h" />
     <ClInclude Include="jhOnceAnimator.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="jhMonsterAttackColiderObject.cpp" />
     <ClCompile Include="jhMonsterAttackColiderScript.cpp" />
     <ClCompile Include="jhMonsterManager.cpp" />
+    <ClCompile Include="jhMonsterObjectPool.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhObeliskObject.cpp" />
     <ClCompile Include="jhOnceAnimator.cpp" />

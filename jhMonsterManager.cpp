@@ -59,11 +59,11 @@ namespace jh
 	const Vector3 MonsterManager::SWEEPER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
 
 
-	MonstePackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position, const Vector3& scale)
+	MonsterPackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position, const Vector3& scale)
 	{
 		assert(pPlayerScript != nullptr);
-		MonstePackage retMonsterPackage;
-		ZeroMemory(&retMonsterPackage, sizeof(MonstePackage));
+		MonsterPackage retMonsterPackage;
+		ZeroMemory(&retMonsterPackage, sizeof(MonsterPackage));
 
 		switch (eType)
 		{
@@ -217,7 +217,7 @@ namespace jh
 		pMonsterTransform->SetScale(scale);
 	}
 
-	void MonsterManager::createMonster(MonsterInfo& monInfo, MonstePackage& retMonsterPackage)
+	void MonsterManager::createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage)
 	{
 		Monster* pMonster = new Monster(monInfo);
 		monInfo.pHitEffectObject = new HitEffectObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), monInfo.pPlayerScript);
@@ -226,7 +226,7 @@ namespace jh
 		retMonsterPackage.pMonster = pMonster;
 		retMonsterPackage.pHitEffectObejct = monInfo.pHitEffectObject;
 	}
-	void MonsterManager::createAttackCollider(MonsterInfo& monInfo, MonstePackage& retMonsterPackage, const float yPos)
+	void MonsterManager::createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos)
 	{
 		Monster* pMonster = retMonsterPackage.pMonster;
 		assert(pMonster != nullptr);

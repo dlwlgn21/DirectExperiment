@@ -12,12 +12,12 @@ namespace jh
 	class Animator;
 	class MonsterAttackColiderObject;
 
-	struct MonstePackage
+	struct MonsterPackage
 	{
 		Monster*							pMonster;
 		HitEffectObject*					pHitEffectObejct;
 		MonsterAttackColiderObject*			pMonsterAttackColliderObject;
-		MonstePackage()
+		MonsterPackage()
 			: pMonster(nullptr)
 			, pHitEffectObejct(nullptr)
 			, pMonsterAttackColliderObject(nullptr)
@@ -59,7 +59,7 @@ namespace jh
 		MonsterManager& operator=(const MonsterManager& other) = delete;
 
 
-		MonstePackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position, const jh::math::Vector3& scale);
+		MonsterPackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position, const jh::math::Vector3& scale);
 
 
 	private:
@@ -68,8 +68,8 @@ namespace jh
 		 void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
 		 void setTransform(Transform* pMonsterTransform, const jh::math::Vector3& position, const jh::math::Vector3& scale);
-		 void createMonster(MonsterInfo& monInfo, MonstePackage& retMonsterPackage);
-		 void createAttackCollider(MonsterInfo& monInfo, MonstePackage& retMonsterPackage, const float yPos);
+		 void createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage);
+		 void createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos);
 
 	private:
 		MonsterManager() = default;
