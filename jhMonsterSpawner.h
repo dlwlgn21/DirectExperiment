@@ -1,7 +1,7 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhMath.h"
-
+#include "jhPortalEffectObject.h"
 
 namespace jh
 {
@@ -28,6 +28,12 @@ namespace jh
 			, mpScene(nullptr)
 			, mpPlayerScript(nullptr)
 		{
+			mPortalEffectObjects.reserve(static_cast<UINT>(eMonsterType::COUNT));
+			mPortalEffectObjects.resize(static_cast<UINT>(eMonsterType::COUNT));
+			for (int i = 0; i < static_cast<UINT>(eMonsterType::COUNT); ++i)
+			{
+				mPortalEffectObjects[i] = new PortalEffectObject();
+			}
 
 		}
 		~MonsterSpawner() = default;
@@ -38,13 +44,15 @@ namespace jh
 		static const jh::math::Vector3 SWEEPER_SPAWN_POSITON;
 
 	private:
+		void setPortalEffectPosition();
+		void playPortalEffectAnimation(const eMonsterType eMonType);
 		void spawnMonster(const eMonsterType eMonType);
 
 	private:
-		PlayScene*			mpScene;
-		PlayerScript*		mpPlayerScript;
-		float				mCagedShokerRespawnTimer;
-		float				mSweeperRespawnTimer;
-
+		PlayScene*							mpScene;
+		PlayerScript*						mpPlayerScript;
+		float								mCagedShokerRespawnTimer;
+		float								mSweeperRespawnTimer;
+		std::vector<PortalEffectObject*>	mPortalEffectObjects;
 	};
 }

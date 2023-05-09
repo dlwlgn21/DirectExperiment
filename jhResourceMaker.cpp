@@ -59,6 +59,7 @@ namespace jh
 	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTextureKey";
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTextureKey";
+	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTextureKey";
 
 #pragma endregion
 
@@ -93,6 +94,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
+	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_MATERIAL_KEY = L"GreenPortalMaterialKey";
 
 #pragma endregion
 
@@ -201,6 +203,10 @@ namespace jh
 		// Obelisk.png
 		pObeliskAtlasTexture->Load(L"ObeliskEffects.png");
 		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
+
+		Texture* pGreenPortalTextureAtlas = new Texture();
+		pGreenPortalTextureAtlas->Load(L"GreenPortalSpriteSheet.png");
+		ResourcesManager::Insert<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY, pGreenPortalTextureAtlas);
 
 
 		Texture* pBattleBGTexture = new Texture();
@@ -352,6 +358,11 @@ namespace jh
 		ResourcesManager::Insert<Material>(PLAYER_DASH_EFFECT_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(GREEN_PORTAL_EFFECT_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY))
 			);
 
 #pragma region DEBUG

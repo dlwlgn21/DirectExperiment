@@ -26,6 +26,7 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 
+
 		void setAnimator() override;
 
 		void Hit1Start();

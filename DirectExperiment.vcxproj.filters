@@ -247,6 +247,12 @@
     <Filter Include="MonsterSpawner">
       <UniqueIdentifier>{f0c283db-9747-4825-aefc-3f8bfbbbf01b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\Portal">
+      <UniqueIdentifier>{e696c02e-37f5-4cf2-b8f0-9931ec7a212c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Effect\Portal">
+      <UniqueIdentifier>{d840cf8f-cd45-4ad6-b440-f7314c3c2206}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -462,6 +468,12 @@
     <ClInclude Include="jhMonsterSpawner.h">
       <Filter>MonsterSpawner</Filter>
     </ClInclude>
+    <ClInclude Include="jhPortalEffectObject.h">
+      <Filter>GameObject\AnimatedGameObject\Effect\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPortalEffectScript.h">
+      <Filter>Component\Script\Effect\Portal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -658,6 +670,12 @@
     </ClCompile>
     <ClCompile Include="jhMonsterSpawner.cpp">
       <Filter>MonsterSpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPortalEffectObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPortalEffectScript.cpp">
+      <Filter>Component\Script\Effect\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
