@@ -48,6 +48,7 @@ namespace jh
 		const float MAGNIFICATION = 100.0f;
 		const float WIDTH = 82.0f;
 		const float HEIGHT = 65.0f;
+		const float BASIC_ANIM_DURATION = 0.05f;
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
@@ -58,7 +59,7 @@ namespace jh
 			animSize,
 			offset,
 			6,
-			0.1f,
+			BASIC_ANIM_DURATION,
 			MAGNIFICATION
 		);
 		pAnimator->Create(
@@ -68,7 +69,7 @@ namespace jh
 			animSize,
 			offset,
 			8,
-			0.1f,
+			BASIC_ANIM_DURATION,
 			MAGNIFICATION
 		);
 
@@ -79,7 +80,7 @@ namespace jh
 			animSize,
 			offset,
 			9,
-			0.1f,
+			BASIC_ANIM_DURATION,
 			MAGNIFICATION
 		);
 

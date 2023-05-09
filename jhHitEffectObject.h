@@ -4,6 +4,14 @@
 
 namespace jh
 {
+	enum class eHitEffectType
+	{
+		ELECTRIC,
+		BLOOD,
+		GAS,
+		COUNT
+	};
+
 	class Texture;
 	class MonsterScript;
 	class PlayerScript;
