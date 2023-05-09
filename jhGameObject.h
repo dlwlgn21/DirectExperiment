@@ -46,7 +46,7 @@ namespace jh
 		std::vector<Script*>							mScripts;
 		Transform*										mpTransform;
 		eGameObjectState								meState;
-		eLayerType								meLayer;
+		eLayerType										meLayer;
 	};
 }
 

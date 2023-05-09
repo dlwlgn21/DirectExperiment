@@ -59,7 +59,7 @@ namespace jh
 	const Vector3 MonsterManager::SWEEPER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
 
 
-	MonsterPackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position, const Vector3& scale)
+	MonsterPackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position)
 	{
 		assert(pPlayerScript != nullptr);
 		MonsterPackage retMonsterPackage;
@@ -111,6 +111,8 @@ namespace jh
 
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, CAGED_SHOKER_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, CAGED_SHOKER_SCALE_VECTOR);
+
 			break;
 		}
 
@@ -157,6 +159,7 @@ namespace jh
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, CAGED_SHOKER_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, SWEEPER_SCALE_VECTOR);
 			break;
 		}
 		default:
@@ -164,7 +167,6 @@ namespace jh
 			break;
 		}
 
-		setTransform(retMonsterPackage.pMonster->GetTransform(), position, scale);
 
 		return retMonsterPackage;
 	}

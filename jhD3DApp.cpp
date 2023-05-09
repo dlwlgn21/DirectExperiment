@@ -5,7 +5,7 @@
 #include "jhResourceMaker.h"
 #include "jhCameraManager.h"
 #include "jhCollisionManager.h"
-
+#include "jhMonsterObjectPool.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -84,6 +84,7 @@ namespace jh
 	void D3DApp::Release()
 	{
 		SceneManager::GetInstance().Release();
+		MonsterObjectPool::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
 	}

@@ -11,6 +11,7 @@
 #include "jhHitEffectScript.h"
 #include "jhTransform.h"
 #include "jhMonsterAttackColiderObject.h"
+#include "jhMonsterObjectPool.h"
 
 using namespace jh::math;
 
@@ -56,6 +57,13 @@ namespace jh
 		this->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pHitEffectObject->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pMonsterAttackColiderObject->SetState(eGameObjectState::INACTIVE);
+		MonsterPackage monPack;
+		ZeroMemory(&monPack, sizeof(MonsterPackage));
+		monPack.pMonster = this;
+		monPack.pHitEffectObejct = mMonsterInfo.pHitEffectObject;
+		monPack.pMonsterAttackColliderObject = mMonsterInfo.pMonsterAttackColiderObject;
+
+		MonsterObjectPool::GetInstance().Return(mMonsterInfo.eMonType, monPack);
 	}
 
 	void Monster::setAnimator()

@@ -59,7 +59,7 @@ namespace jh
 		MonsterManager& operator=(const MonsterManager& other) = delete;
 
 
-		MonsterPackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position, const jh::math::Vector3& scale);
+		MonsterPackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position);
 
 
 	private:
