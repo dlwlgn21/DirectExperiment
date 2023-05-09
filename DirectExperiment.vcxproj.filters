@@ -244,6 +244,9 @@
     <Filter Include="ObjectPools\Monster">
       <UniqueIdentifier>{f41e03a7-bf17-4566-a72e-9b286832f0e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MonsterSpawner">
+      <UniqueIdentifier>{f0c283db-9747-4825-aefc-3f8bfbbbf01b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -456,6 +459,9 @@
     <ClInclude Include="jhMonsterObjectPool.h">
       <Filter>ObjectPools\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterSpawner.h">
+      <Filter>MonsterSpawner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -649,6 +655,9 @@
     </ClCompile>
     <ClCompile Include="jhMonsterObjectPool.cpp">
       <Filter>ObjectPools\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterSpawner.cpp">
+      <Filter>MonsterSpawner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

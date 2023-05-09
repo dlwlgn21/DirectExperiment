@@ -167,6 +167,9 @@ namespace jh
 			break;
 		}
 
+		retMonsterPackage.pMonster->Initialize();
+		retMonsterPackage.pHitEffectObejct->Initialize();
+		retMonsterPackage.pMonsterAttackColliderObject->Initialize();
 
 		return retMonsterPackage;
 	}

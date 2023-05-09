@@ -17,8 +17,7 @@ namespace jh
 		void FixedUpdate() override;
 		void Release() override;
 
-	private:
-		void addMonster(const MonsterPackage& monPack);
+		void AddMonster(const MonsterPackage& monPack);
 
 	private:
 		PlayerScript* instantiateCameraAndPlayer();
