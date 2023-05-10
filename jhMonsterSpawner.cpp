@@ -11,8 +11,8 @@ using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 11.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 31.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 11.0f;
 
 	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, 4.0f);
 	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, 4.0f);

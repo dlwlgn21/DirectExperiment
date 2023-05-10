@@ -173,7 +173,6 @@ namespace jh
 		default:
 			break;
 		}
-		
 		meLookDir = eObjectLookDirection::RIGHT;
 		meState = eMonsterState::TRACING;
 	}
