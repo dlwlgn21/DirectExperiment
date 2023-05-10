@@ -11,11 +11,13 @@ using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 31.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 21.0f;
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 11.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 7.0f;
 
 	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, 4.0f);
 	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, 4.0f);
+	const jh::math::Vector3 MonsterSpawner::WARDEN_SPAWN_POSITON = Vector3(1.0f, -2.0f, 4.0f);
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -42,6 +44,10 @@ namespace jh
 		mSweeperRespawnTimer -= Time::DeltaTime();
 		if (mSweeperRespawnTimer <= 0.0f)
 			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+
+		mWardenRespawnTimer -= Time::DeltaTime();
+		if (mWardenRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_WARDEN);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -64,6 +70,14 @@ namespace jh
 			playPortalEffectAnimation(eMonType);
 			break;
 		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, WARDEN_SPAWN_POSITON);
+			mpScene->AddMonster(monPack);
+			mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
+			playPortalEffectAnimation(eMonType);
+			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -74,6 +88,7 @@ namespace jh
 	{
 		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_CAGED_SHOKER)]->GetTransform()->SetPosition(CAGED_SHOKER_SPAWN_POSITON);
 		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_SWEEPER)]->GetTransform()->SetPosition(SWEEPER_SPAWN_POSITON);
+		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_WARDEN)]->GetTransform()->SetPosition(WARDEN_SPAWN_POSITON);
 	}
 
 	void MonsterSpawner::playPortalEffectAnimation(const eMonsterType eMonType)

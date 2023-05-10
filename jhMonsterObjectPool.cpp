@@ -22,9 +22,10 @@ namespace jh
 	{
 		if (mMonsterVectorQ[static_cast<UINT>(eMonType)]->size() >= mMaxPoolSize)
 		{
-			delete monPackage.pMonster;
-			delete monPackage.pHitEffectObejct;
-			delete monPackage.pMonsterAttackColliderObject;
+			// TODO : 이거 문제 일으킬 수 있지 지후야. 생각해봐. 이걸 지워버리면 당연히 뻑이 나지요.
+			//delete monPackage.pMonster;
+			//delete monPackage.pHitEffectObejct;
+			//delete monPackage.pMonsterAttackColliderObject;
 			return;
 		}
 		mMonsterVectorQ[static_cast<UINT>(eMonType)]->push(monPackage);

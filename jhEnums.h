@@ -82,6 +82,7 @@ namespace jh
 	{
 		LV_1_CAGED_SHOKER,
 		LV_1_SWEEPER,
+		LV_1_WARDEN,
 		COUNT
 	};
 }

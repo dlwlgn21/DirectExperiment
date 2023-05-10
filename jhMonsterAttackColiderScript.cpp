@@ -20,6 +20,9 @@ static constexpr const UINT CAGED_SHOCKER_ATTACk_DAMAGE = 2;
 static constexpr const UINT SWEEPER_ATTACK_VAILED_INDEX = 5;
 static constexpr const UINT SWEEPER_ATTACK_DAMAGE = 2;
 
+static constexpr const UINT WARDEN_ATTACK_VAILED_INDEX = 6;
+static constexpr const UINT WARDEN_ATTACK_DAMAGE = 2;
+
 
 
 namespace jh
@@ -103,16 +106,20 @@ namespace jh
 				}
 				break;
 			}
-			case eMonsterType::COUNT:
-				assert(false);
+			case eMonsterType::LV_1_WARDEN:
+			{
+				if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX)
+				{
+					damageToPlayer(pPlayerScript, WARDEN_ATTACK_DAMAGE);
+				}
 				break;
+			}
 			default:
 				assert(false);
 				break;
 			}
 
 		}
-
 	}
 
 	void MonsterAttackColiderScript::damageToPlayer(PlayerScript* pPlayerScript, const UINT damage)

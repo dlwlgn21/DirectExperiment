@@ -35,6 +35,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
 
 
@@ -68,6 +69,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
 	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
@@ -198,6 +200,11 @@ namespace jh
 		pSweeperAtlasTexture->Load(L"Sweeper.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
 
+		Texture* pWardenAtlasTexture = new Texture();
+		pWardenAtlasTexture->Load(L"TheDarkWarden97x32.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, pWardenAtlasTexture);
+
+
 		Texture* pObeliskAtlasTexture = new Texture();
 		// ObeliskEffects.png
 		// Obelisk.png
@@ -283,6 +290,11 @@ namespace jh
 
 		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);
+
+
+		Material* pWardenMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_WARDEN_MATERIAL_KEY, pWardenMaterial);
+
 
 		ResourcesManager::Insert<Material>(OBELISK_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),

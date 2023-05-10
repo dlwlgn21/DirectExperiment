@@ -18,6 +18,9 @@ static constexpr const float CAGED_SHOKER_INITIAL_SPEED = 1.5f;
 static constexpr const int SWEEPER_INITIAL_HP = 5;
 static constexpr const float SWEEPER_INITIAL_SPEED = 2.0;
 
+static constexpr const int WARDEN_INITIAL_HP = 3;
+static constexpr const float WARDEN_INITIAL_SPEED = 3.0;
+
 namespace jh
 {
 	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
@@ -61,9 +64,18 @@ namespace jh
 			setInitialStat(SWEEPER_INITIAL_HP, SWEEPER_INITIAL_SPEED);
 			break;
 		}
-		case eMonsterType::COUNT:
-			assert(false);
+		case eMonsterType::LV_1_WARDEN:
+		{
+			setAnimKey(
+				MonsterManager::WARDEN_IDLE_ANIM_KEY,
+				MonsterManager::WARDEN_MOVING_ANIM_KEY,
+				MonsterManager::WARDEN_ATTACK_ANIM_KEY,
+				MonsterManager::WARDEN_HITTED_ANIM_KEY,
+				MonsterManager::WARDEN_DIE_ANIM_KEY
+			);
+			setInitialStat(WARDEN_INITIAL_HP, WARDEN_INITIAL_SPEED);
 			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -161,15 +173,19 @@ namespace jh
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
 			setInitialStat(CAGED_SHOKER_INITIAL_HP, CAGED_SHOKER_INITIAL_SPEED);
-			mSpeed = CAGED_SHOKER_INITIAL_SPEED;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
 			setInitialStat(SWEEPER_INITIAL_HP, SWEEPER_INITIAL_SPEED);
-			mSpeed = SWEEPER_INITIAL_SPEED;
 			break;
 		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			setInitialStat(WARDEN_INITIAL_HP, WARDEN_INITIAL_SPEED);
+			break;
+		}
+
 		default:
 			break;
 		}

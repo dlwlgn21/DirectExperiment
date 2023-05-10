@@ -39,21 +39,21 @@ namespace jh
 		}
 		~MonsterObjectPool()
 		{
-			for (int i = 0; i < mMonsterVectorQ.size(); ++i)
-			{
-				if (mMonsterVectorQ[i] != nullptr)
-				{
-					while (!mMonsterVectorQ[i]->empty())
-					{
-						MonsterPackage monPack = mMonsterVectorQ[i]->front();
-						delete monPack.pMonster;
-						delete monPack.pHitEffectObejct;
-						delete monPack.pMonsterAttackColliderObject;
-						mMonsterVectorQ[i]->pop();
-					}
-					delete mMonsterVectorQ[i];
-				}
-			}
+			//for (int i = 0; i < mMonsterVectorQ.size(); ++i)
+			//{
+			//	if (mMonsterVectorQ[i] != nullptr)
+			//	{
+			//		while (!mMonsterVectorQ[i]->empty())
+			//		{
+			//			MonsterPackage monPack = mMonsterVectorQ[i]->front();
+			//			delete monPack.pMonster;
+			//			delete monPack.pHitEffectObejct;
+			//			delete monPack.pMonsterAttackColliderObject;
+			//			mMonsterVectorQ[i]->pop();
+			//		}
+			//		delete mMonsterVectorQ[i];
+			//	}
+			//}
 		}
 	
 	private:

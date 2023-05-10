@@ -19,7 +19,7 @@ namespace jh
 		setAnimator();
 		setRenderer();
 		Vector3 prePos = GetTransform()->GetPosition();
-		GetTransform()->SetPosition(Vector3(-30.0f, 0.45f, 6.0f));
+		GetTransform()->SetPosition(Vector3(-10.0f, 0.45f, 6.0f));
 		GetTransform()->SetScale(Vector3(10.0f, 10.0f, 1.0f));
 	}
 	void ObeliskObject::setAnimator()
