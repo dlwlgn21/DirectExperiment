@@ -66,6 +66,15 @@ namespace jh
 		MonsterObjectPool::GetInstance().Return(mMonsterInfo.eMonType, monPack);
 	}
 
+	void Monster::SetActive()
+	{
+		this->SetState(eGameObjectState::ACTIVE);
+		mMonsterInfo.pHitEffectObject->SetState(eGameObjectState::ACTIVE);
+		mMonsterInfo.pMonsterAttackColiderObject->SetState(eGameObjectState::ACTIVE);
+		static_cast<MonsterScript*>(this->GetScriptOrNull())->SetRespawnState();
+		static_cast<HitEffectScript*>(mMonsterInfo.pHitEffectObject->GetScriptOrNull())->SetRespawnState();
+	}
+
 	void Monster::setAnimator()
 	{
 		this->AddComponent(mMonsterInfo.pAnimator);

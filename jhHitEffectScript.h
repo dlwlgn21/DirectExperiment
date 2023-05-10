@@ -37,6 +37,9 @@ namespace jh
 
 		void Hit3Start();
 		void Hit3Complete();
+
+		void SetRespawnState()		{ meState = eEffectState::WAIT; }
+
 	public:
 		void PlayAnimation();
 

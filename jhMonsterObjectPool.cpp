@@ -1,4 +1,6 @@
 #include "jhMonsterObjectPool.h"
+#include "jhTransform.h"
+#include "jhMonsterScript.h"
 
 using namespace jh::math;
 
@@ -11,6 +13,7 @@ namespace jh
 			return MonsterManager::GetInstance().MakeMonster(eMonType, pPlayerScript, pos);
 		}
 		MonsterPackage retPack = mMonsterVectorQ[static_cast<UINT>(eMonType)]->front();
+		//retPack.pMonster->SetActive();
 		mMonsterVectorQ[static_cast<UINT>(eMonType)]->pop();
 		return retPack;
 	}
@@ -44,5 +47,6 @@ namespace jh
 			}
 		}
 	}
+
 }
 

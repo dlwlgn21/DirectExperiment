@@ -34,6 +34,7 @@ namespace jh
 
 		void SetHitEffectObject(HitEffectObject* pHitEffectObject);
 		void SetInactive();
+		void SetActive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	private:
 		void setAnimator();

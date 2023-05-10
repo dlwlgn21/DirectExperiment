@@ -22,8 +22,10 @@ namespace jh
 
 
 		MonsterPackage Get(const eMonsterType eMonType, PlayerScript* pPlayerScript, const jh::math::Vector3& pos);
-		void Return(const eMonsterType eMonType, MonsterPackage pMonPackage);
+		void Return(const eMonsterType eMonType, MonsterPackage monPackage);
 		void Release();
+
+
 	private:
 		MonsterObjectPool()
 			: mMaxPoolSize(MAX_POOL_SIZE)

@@ -40,6 +40,8 @@ namespace jh
 		void AnimationDieStart();
 		void AnimationDieComplete();
 
+		void SetRespawnState();
+
 		eObjectLookDirection GetMonsterLookDirection() const	{ return meLookDir; }
 		eMonsterState		 GetMonsterState() const			{ return meState; }
 		eMonsterType		 GetMonsterType() const				{ return meMonsterType; }

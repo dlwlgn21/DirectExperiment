@@ -154,6 +154,30 @@ namespace jh
 		static_cast<Monster*>(GetOwner())->SetInactive();
 	}
 
+	void MonsterScript::SetRespawnState()
+	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			setInitialStat(CAGED_SHOKER_INITIAL_HP, CAGED_SHOKER_INITIAL_SPEED);
+			mSpeed = CAGED_SHOKER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			setInitialStat(SWEEPER_INITIAL_HP, SWEEPER_INITIAL_SPEED);
+			mSpeed = SWEEPER_INITIAL_SPEED;
+			break;
+		}
+		default:
+			break;
+		}
+		
+		meLookDir = eObjectLookDirection::RIGHT;
+		meState = eMonsterState::TRACING;
+	}
+
 	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey)
 	{
 		mAnimIdleKey = idleKey;
