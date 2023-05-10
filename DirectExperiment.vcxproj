@@ -180,6 +180,7 @@
     <ClInclude Include="jhHitEffectObject.h" />
     <ClInclude Include="jhPlayerDustEffectObject.h" />
     <ClInclude Include="jhPlayerDustEffectScript.h" />
+    <ClInclude Include="jhPlayerHitEffectScript.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayerWeaponColliderObject.h" />
     <ClInclude Include="jhPlayScene.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="jhHitEffectObject.cpp" />
     <ClCompile Include="jhPlayerDustEffectObject.cpp" />
     <ClCompile Include="jhPlayerDustEffectScript.cpp" />
+    <ClCompile Include="jhPlayerHitEffectScript.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />

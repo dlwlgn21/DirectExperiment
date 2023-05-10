@@ -19,6 +19,9 @@ namespace jh
 	// Added Part At 2023/04/28 15:21
 		void SetEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject);
 
+		static const std::wstring HIT_1_ANIM_KEY;
+		static const std::wstring HIT_2_ANIM_KEY;
+		static const std::wstring HIT_3_ANIM_KEY;
 
 	private:
 		void setAnimator();

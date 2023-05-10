@@ -37,14 +37,14 @@ namespace jh
 			mpTransform->SetPosition(mpPlayerTransform->GetPosition());
 			break;
 		case eEffectState::PLAYING:
-			PlayAnimation();
+			playAnimation();
 			break;
 		default:
 			break;
 		}
 	}
 
-	void PlayerDustEffectScript::PlayAnimation()
+	void PlayerDustEffectScript::playAnimation()
 	{
 		mpAnimator->SetActive(true);
 		mpAnimator->SetPlaying(true);

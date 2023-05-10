@@ -474,6 +474,9 @@
     <ClInclude Include="jhPortalEffectScript.h">
       <Filter>Component\Script\Effect\Portal</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerHitEffectScript.h">
+      <Filter>Component\Script\Effect\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -676,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="jhPortalEffectScript.cpp">
       <Filter>Component\Script\Effect\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerHitEffectScript.cpp">
+      <Filter>Component\Script\Effect\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

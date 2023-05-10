@@ -16,11 +16,12 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 		void setAnimator() override;
-
-		void PlayAnimation();
-
 		void DashStart();
 		void DashComplete();
+
+	private:
+		void playAnimation();
+
 	private:
 		const std::wstring				mAnimDashEffectKey;
 		PlayerScript*					mpPlayerScript;

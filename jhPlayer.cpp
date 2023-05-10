@@ -17,6 +17,11 @@ static constexpr const float PLAYER_ATTACK_DURAITON = 0.07f;
 
 namespace jh
 {
+	const std::wstring Player::HIT_1_ANIM_KEY = L"Hit1AnimKey";
+	const std::wstring Player::HIT_2_ANIM_KEY = L"Hit2AnimKey";
+	const std::wstring Player::HIT_3_ANIM_KEY = L"Hit3AnimKey";
+
+
 	Player::Player()
 		: GameObject(eLayerType::PLAYER)
 	{
