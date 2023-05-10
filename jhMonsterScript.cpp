@@ -279,20 +279,26 @@ namespace jh
 		case eMonsterState::HITTED:
 		{
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
-			if (mpPlayerScript->GetAttackType() == eAttackType::NORMAL)
-			{
-				assert(mpEffectScript != nullptr);
-				mpEffectScript->SetStatePlaying();
-			}
+			playHitEffectAnimation();
 			break;
 		}
 		case eMonsterState::DEAD:
 		{
 			mpAnimator->PlayAnimation(mAnimDieKey, true);
+			playHitEffectAnimation();
 			break;
 		}
 		default:
 			break;
+		}
+	}
+
+	void MonsterScript::playHitEffectAnimation()
+	{
+		if (mpPlayerScript->GetAttackType() == eAttackType::NORMAL)
+		{
+			assert(mpEffectScript != nullptr);
+			mpEffectScript->SetStatePlaying();
 		}
 	}
 	void MonsterScript::decreaseHP(const int amount)

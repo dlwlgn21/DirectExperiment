@@ -17,7 +17,7 @@
 using namespace jh::math;
 
 static constexpr const float MONSTER_INITIAL_Z_POS = 4.0f;
-static constexpr const float MONSTER_HIT_ANIM_DURATION = 0.3f;
+static constexpr const float MONSTER_HIT_ANIM_DURATION = 0.1f;
 static constexpr const float MONSTER_DIE_ANIM_DURATION = 0.3f;
 
 
