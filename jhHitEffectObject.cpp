@@ -11,23 +11,45 @@
 #include "jhAnimation.h"
 #include "jhTransform.h"
 #include "jhMonsterManager.h"
+#include "jhPlayer.h"
+#include "jhPlayerHitEffectScript.h"
+
 using namespace jh::math;
 
 namespace jh
 {
-	HitEffectObject::HitEffectObject(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
+	HitEffectObject::HitEffectObject(const eHitEffectType eEffectType, MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
 		: AnimatedGameObject()
+		, meHitEffectType(eEffectType)
 	{
 		assert(pMonsterScript != nullptr && pPlayerScript != nullptr);
 		setRenderer();
 		setAnimator();
-		setScript(pMonsterScript, pPlayerScript);
+		setMonsterHitScript(pMonsterScript, pPlayerScript);
+
 	}
 
-	void HitEffectObject::setScript(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
+	HitEffectObject::HitEffectObject(const eHitEffectType eEffectType, PlayerScript* pPlayerScript)
+		: AnimatedGameObject()
+		, meHitEffectType(eEffectType)
+	{
+		assert(pPlayerScript != nullptr);
+		setRenderer();
+		setAnimator();
+		setPlayerHitScript(pPlayerScript);
+	}
+
+	void HitEffectObject::setMonsterHitScript(MonsterScript* pMonsterScript, PlayerScript* pPlayerScript)
 	{
 		assert(pMonsterScript != nullptr && pPlayerScript != nullptr);
 		HitEffectScript* pScript = new HitEffectScript(pMonsterScript, pPlayerScript);
+		this->AddScript(pScript);
+	}
+
+	void HitEffectObject::setPlayerHitScript(PlayerScript* pPlayerScript)
+	{
+		assert(pPlayerScript != nullptr);
+		PlayerHitEffectScript* pScript = new PlayerHitEffectScript(pPlayerScript);
 		this->AddScript(pScript);
 	}
 
@@ -52,40 +74,85 @@ namespace jh
 		Vector2 animSize(WIDTH, HEIGHT);
 		Vector2 offset(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
-		Animation* pAnimation = pAnimator->Create(
-			MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY,
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 6),
-			animSize,
-			offset,
-			6,
-			BASIC_ANIM_DURATION,
-			MAGNIFICATION
-		);
-		pAnimator->Create(
-			MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY,
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 7),
-			animSize,
-			offset,
-			8,
-			BASIC_ANIM_DURATION,
-			MAGNIFICATION
-		);
+		Animation* pAnimation = nullptr;
+		switch (meHitEffectType)
+		{
+		case eHitEffectType::ELECTRIC:
+		{
+			pAnimation = pAnimator->Create(
+				MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 6),
+				animSize,
+				offset,
+				6,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
+			pAnimator->Create(
+				MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 7),
+				animSize,
+				offset,
+				8,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
 
-		pAnimator->Create(
-			MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY,
-			pAtlas,
-			Vector2(0.0f, HEIGHT * 9),
-			animSize,
-			offset,
-			9,
-			BASIC_ANIM_DURATION,
-			MAGNIFICATION
-		);
+			pAnimator->Create(
+				MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 9),
+				animSize,
+				offset,
+				9,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
+			pAnimator->SetCurrentAnimation(pAnimation);
+			break;
+		}
+		case eHitEffectType::BLOOD:
+		{
+			pAnimation = pAnimator->Create(
+				Player::HIT_1_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 10),
+				animSize,
+				offset,
+				5,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
+			pAnimator->Create(
+				Player::HIT_2_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 11),
+				animSize,
+				offset,
+				4,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
 
-		this->AddComponent(pAnimator);
+			pAnimator->Create(
+				Player::HIT_3_ANIM_KEY,
+				pAtlas,
+				Vector2(0.0f, HEIGHT * 12),
+				animSize,
+				offset,
+				8,
+				BASIC_ANIM_DURATION,
+				MAGNIFICATION
+			);
+			break;
+		}
+		default:
+			break;
+		}
+		assert(pAnimation != nullptr);
 		pAnimator->SetCurrentAnimation(pAnimation);
+		this->AddComponent(pAnimator);
 	}
-
 }

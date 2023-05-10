@@ -14,7 +14,6 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 
-
 		void Hit1Start();
 		void Hit1Complete();
 

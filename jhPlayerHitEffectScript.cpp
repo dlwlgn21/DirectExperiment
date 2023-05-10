@@ -3,6 +3,9 @@
 #include "jhTransform.h"
 #include "jhPlayerScript.h"
 #include "jhPlayer.h"
+#include "jhDebugHelper.h"
+
+using namespace jh::math;
 
 namespace jh
 {
@@ -20,6 +23,12 @@ namespace jh
 	void PlayerHitEffectScript::Initialize()
 	{
 		setAnimator();
+		mpTransform = GetOwner()->GetTransform();
+		Vector3 pos = mpPlayerTransform->GetPosition();
+		mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
+		mpTransform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		assert(mpTransform != nullptr);
+		//SetState(eEffectState::PLAYING);
 	}
 	void PlayerHitEffectScript::Update()
 	{
@@ -27,11 +36,16 @@ namespace jh
 		switch (meState)
 		{
 		case eEffectState::WAIT:
-			mpTransform->SetPosition(mpPlayerTransform->GetPosition());
+		{
+			Vector3 pos = mpPlayerTransform->GetPosition();
+			mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
 			break;
+		}
 		case eEffectState::PLAYING:
+		{
 			playAnimation();
 			break;
+		}
 		default:
 			break;
 		}
@@ -53,7 +67,7 @@ namespace jh
 		default:
 			break;
 		}
-		mpAnimator->PlayAnimationWithReset(mHit1AnimKey, false);
+		mpAnimator->PlayAnimationWithReset(mHit3AnimKey, false);
 	}
 
 	void PlayerHitEffectScript::Hit1Start()

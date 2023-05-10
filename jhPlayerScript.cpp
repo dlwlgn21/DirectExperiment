@@ -10,6 +10,7 @@
 #include "jhCollider2D.h"
 #include "jhDebugHelper.h"
 #include "jhPlayerDustEffectScript.h"
+#include "jhPlayerHitEffectScript.h"
 
 static constexpr const float DASH_AMOUNT = 3.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
@@ -38,6 +39,7 @@ namespace jh
 		, meComboType(eComboAttackType::ONE)
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 		, mpPlayerDustEffetScript(nullptr)
+		, mpPlayerHitEffectScript(nullptr)
 		, mbIsContiueAttacking(false)
 		, mbIsHitPowerAttack(false)
 		, mbIsStartCountingDashTimer(false)
@@ -328,6 +330,8 @@ namespace jh
 		}
 		case ePlayerState::HITTED:
 			mpAnimator->PlayAnimation(mAnimHittedKey, true);
+			assert(mpPlayerHitEffectScript != nullptr);
+			mpPlayerHitEffectScript->SetStatePlaying();
 			break;
 		case ePlayerState::DEAD:
 			break;

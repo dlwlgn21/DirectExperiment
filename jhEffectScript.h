@@ -20,7 +20,7 @@ namespace jh
 		bool isPlayingAnmation();
 		void SetStatePlaying() { meState = eEffectState::PLAYING; }
 	protected:
-		void SetState(const eEffectState eState) { meState = eState; }
+		virtual void SetState(const eEffectState eState) { meState = eState; }
 		virtual void setAnimator() = 0;
 	protected:
 		eEffectState		meState;

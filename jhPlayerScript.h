@@ -45,6 +45,7 @@ namespace jh
 	class Transform;
 	class Collider2D;
 	class PlayerDustEffectScript;
+	class PlayerHitEffectScript;
 	class PlayerScript final : public Script
 	{
 	public:
@@ -105,6 +106,8 @@ namespace jh
 
 
 		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
+		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }
+		
 		void SetIsHitPowerAttack(const bool bIsHit)										{ mbIsHitPowerAttack = bIsHit; }
 	
 	private:
@@ -141,6 +144,7 @@ namespace jh
 		PlayerStat						mStat;
 		float							mStaminaTimer;
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
+		PlayerHitEffectScript*			mpPlayerHitEffectScript;
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitPowerAttack;
 		bool							mbIsStartCountingDashTimer;

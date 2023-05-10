@@ -33,6 +33,7 @@
 #include "jhObeliskObject.h"
 #include "jhMonsterObjectPool.h"
 #include "jhMonsterSpawner.h"
+#include "jhHitEffectObject.h"
 
 
 using namespace jh::math;
@@ -114,13 +115,16 @@ namespace jh
 		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 3.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
-		pPlayer->SetEffectToPlayerScript(pPlayerDustEffectObject);
+		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, SCENE_COLLIDER_Z_VALUE));
 		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 	
+		HitEffectObject* pHitEffectObejct = new HitEffectObject(eHitEffectType::BLOOD, static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
+		pPlayer->SetHitEffectToPlayerScript(pHitEffectObejct);
+		AddGameObject(pHitEffectObejct, eLayerType::EFFECT);
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
 

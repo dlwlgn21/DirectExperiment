@@ -225,7 +225,7 @@ namespace jh
 	void MonsterManager::createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage)
 	{
 		Monster* pMonster = new Monster(monInfo);
-		monInfo.pHitEffectObject = new HitEffectObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), monInfo.pPlayerScript);
+		monInfo.pHitEffectObject = new HitEffectObject(eHitEffectType::ELECTRIC, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), monInfo.pPlayerScript);
 		pMonster->SetHitEffectObject(monInfo.pHitEffectObject);
 		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(monInfo.pHitEffectObject->GetScriptOrNull()));
 		retMonsterPackage.pMonster = pMonster;

@@ -10,6 +10,8 @@
 #include "jhPlayerDustEffectObject.h"
 #include "jhPlayerDustEffectScript.h"
 #include "jhTransform.h"
+#include "jhHitEffectObject.h"
+#include "jhPlayerHitEffectScript.h"
 
 using namespace jh::math;
 
@@ -46,7 +48,7 @@ namespace jh
 	{
 		GameObject::Render();
 	}
-	void Player::SetEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject)
+	void Player::SetDustEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject)
 	{
 		assert(pPlayerDustEffectObject != nullptr);
 		//pPlayerDustEffectObject->GetTransform()->SetParent(this);
@@ -57,6 +59,12 @@ namespace jh
 		pPlayerDustEffectObject->AddScript(pScript);
 		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerDustEffectScript(pScript);
 	}
+	void Player::SetHitEffectToPlayerScript(HitEffectObject* pHitEffectObject)
+	{
+		assert(pHitEffectObject != nullptr);
+		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerHitEffectScript(static_cast<PlayerHitEffectScript*>(pHitEffectObject->GetScriptOrNull()));
+	}
+
 	void Player::setAnimator()
 	{
 		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY);
