@@ -253,6 +253,15 @@
     <Filter Include="Component\Script\Effect\Portal">
       <UniqueIdentifier>{d840cf8f-cd45-4ad6-b440-f7314c3c2206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Light">
+      <UniqueIdentifier>{f15d8896-16ef-4557-9925-d57117ec5abe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\StructuredBuffer">
+      <UniqueIdentifier>{bbc4362f-faf0-4e0b-a494-c49ebb978861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LightingManager">
+      <UniqueIdentifier>{ea77f0a0-b66f-43de-9d5a-5c1468614a54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -477,6 +486,15 @@
     <ClInclude Include="jhPlayerHitEffectScript.h">
       <Filter>Component\Script\Effect\Player</Filter>
     </ClInclude>
+    <ClInclude Include="jhLight.h">
+      <Filter>Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStructuredBuffer.h">
+      <Filter>Resource\StructuredBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhLightingManager.h">
+      <Filter>LightingManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -682,6 +700,15 @@
     </ClCompile>
     <ClCompile Include="jhPlayerHitEffectScript.cpp">
       <Filter>Component\Script\Effect\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhLight.cpp">
+      <Filter>Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStructuredBuffer.cpp">
+      <Filter>Resource\StructuredBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhLightingManager.cpp">
+      <Filter>LightingManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ namespace jh
 		RENDERER,
 		ANIMATOR,
 		SCRIPT,
+		LIGHT,
 		COUNT
 	};
 
@@ -75,6 +76,7 @@ namespace jh
 		UV_TRANSLATION,
 		COLLIDER_COLOR,
 		UI_BAR,
+		LIGHT,
 		COUNT,
 	};
 
@@ -83,6 +85,14 @@ namespace jh
 		LV_1_CAGED_SHOKER,
 		LV_1_SWEEPER,
 		LV_1_WARDEN,
+		COUNT
+	};
+
+	enum class eLightType
+	{
+		DIRECTIONAL,
+		POINT,
+		SPOT_LIGHT,
 		COUNT
 	};
 }

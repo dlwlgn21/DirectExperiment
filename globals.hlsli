@@ -14,12 +14,12 @@ cbuffer AnimationBuffer : register(b1)
     
     uint AnimationType;
     uint IsAnimFlip;
-}
+};
 
 cbuffer UVTranslationBuffer : register(b2)
 {
     float4 UVTranslationPostion;
-}
+};
 
 //cbuffer ColliderBuffer : register(b3)
 //{
@@ -29,7 +29,9 @@ cbuffer UVTranslationBuffer : register(b2)
 cbuffer UIBarBuffer : register(b3)
 {
     float4 UIuv;
-}
+};
+
+
 
 struct VertexIn
 {
@@ -43,9 +45,13 @@ struct VertexOut
     float2 UV : TEXCOORD0;
 };
 
+
+
 SamplerState PointBorderSampler : register(s0);
 SamplerState PointWrapSampler : register(s1);
 
 
 Texture2D DefaultTexture : register(t0);
 Texture2D AtlasTexture : register(t12);
+
+

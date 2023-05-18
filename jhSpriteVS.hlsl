@@ -1,13 +1,21 @@
 #include "globals.hlsli"
 
-VertexOut main(VertexIn vIn)
+struct SpriteVertexOut
 {
-    VertexOut vOut;
+    float4 Position : SV_POSITION;
+    float3 WorldPos : POSITION;
+    float2 UV       : TEXCOORD0;
+};
+
+SpriteVertexOut main(VertexIn vIn)
+{
+    SpriteVertexOut vOut;
     
     float4 wolrdPos = mul(vIn.Position, WorldMat);
     float4 viewPos = mul(wolrdPos, ViewMat);
     float4 projectionPos = mul(viewPos, ProjectionMat);
     
+    vOut.WorldPos = wolrdPos;
     vOut.Position = projectionPos;
 
     const uint FLIPEED = 1;

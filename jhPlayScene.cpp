@@ -34,6 +34,7 @@
 #include "jhMonsterObjectPool.h"
 #include "jhMonsterSpawner.h"
 #include "jhHitEffectObject.h"
+#include "jhLight.h"
 
 
 using namespace jh::math;
@@ -46,6 +47,12 @@ static constexpr const float PARALLAX_5_DEPTH = 60.0f;
 static constexpr const float PARALLAX_6_DEPTH = 50.0f;
 
 static constexpr const float SCENE_COLLIDER_Z_VALUE = 3.0f;
+
+static constexpr const Vector4 WHITE_COLOR(1.0f, 1.0f, 1.0f, 1.0f);
+static constexpr const Vector4 GRAY_COLOR(0.5f, 0.5f, 0.5f, 1.0f);
+static constexpr const Vector4 RED_COLOR(1.0f, 0.0f, 0.0f, 1.0f);
+static constexpr const Vector4 GREEN_COLOR(0.0f, 1.0f, 0.0f, 1.0f);
+static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
 
 namespace jh
 {
@@ -61,6 +68,7 @@ namespace jh
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
 		MonsterSpawner::GetInstance().Initialize(pPlayerScript);
+		instantiateLight();
 		instantiateParallaxObjects();
 		instantiateEnvObject();
 		instantiateUIObject(pPlayerScript);
@@ -83,6 +91,32 @@ namespace jh
 	void PlayScene::Release()
 	{
 		Scene::Release();
+	}
+
+	void PlayScene::instantiateLight()
+	{
+		// Directional Light
+		{
+			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			LightAttribute lightAttribute;
+			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			lightAttribute.ELightType = eLightType::DIRECTIONAL;
+			lightAttribute.Diffuse = WHITE_COLOR;
+			Light* pDirLightComponent = new Light(lightAttribute);
+			pDirLightObject->AddComponent(pDirLightComponent);
+		}
+		// Point Light
+		{
+			GameObject* pPointLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			LightAttribute lightAttribute;
+			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			lightAttribute.ELightType = eLightType::POINT;
+			lightAttribute.Diffuse = BLUE_COLOR;
+			lightAttribute.Radius = 10.0f;
+			Light* pPointLightComponent = new Light(lightAttribute);
+			pPointLightObject->AddComponent(pPointLightComponent);
+		}
+
 	}
 
 	PlayerScript* PlayScene::instantiateCameraAndPlayer()

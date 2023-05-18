@@ -6,6 +6,7 @@
 #include "jhCameraManager.h"
 #include "jhCollisionManager.h"
 #include "jhMonsterObjectPool.h"
+#include "jhLightingManager.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -22,6 +23,7 @@ namespace jh
 		CollisionManager::GetInstance().Initialize();
 		ResourceMaker::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
+		LightingManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
@@ -77,9 +79,14 @@ namespace jh
 	{
 		Time::Render(mHDC);
 		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
-
+		
+		LightingManager::GetInstance().WriteLightDataAtBuffer();
+		LightingManager::GetInstance().SetPipeline();
+		
 		CameraManager::GetInstance().Render();
 		CollisionManager::GetInstance().Render();
+
+		LightingManager::GetInstance().ClearLightAttribute();
 	}
 	void D3DApp::Release()
 	{

@@ -13,7 +13,7 @@ static constexpr const UINT ANINATION_CB_SLOT_NUMBER = 1;
 static constexpr const UINT BG_UV_TRANSLATION_CB_SLOT_NUMBER = 2;
 static constexpr const UINT COLLIDER_CB_SLOT_NUMBER = 3;
 static constexpr const UINT UI_BAR_CB_SLOT_NUMBER = 3;
-
+static constexpr const UINT LIGHT_CB_SLOT_NUMBER = 4;
 static constexpr const UINT SIMD_ALIGN_SIZE = 16;
 
 namespace jh
@@ -68,6 +68,38 @@ namespace jh
 		float				Radius;
 		float				Duration;
 		float				Time;
+	};
+
+	struct alignas(SIMD_ALIGN_SIZE) NumberOfLight
+	{
+		UINT NumberOfLight;
+	};
+
+	struct alignas(SIMD_ALIGN_SIZE) LightAttribute
+	{
+		jh::math::Vector4 Diffuse;
+		jh::math::Vector4 Specular;
+		jh::math::Vector4 Ambient;
+		jh::math::Vector4 Position;
+		jh::math::Vector4 Direction;
+
+		eLightType	ELightType;
+		float		Radius;
+		float		Angle;
+		int			Padding;
+		LightAttribute()
+			: Diffuse{}
+			, Specular{}
+			, Ambient{}
+			, Position{}
+			, Direction{}
+			, ELightType{}
+			, Radius{}
+			, Angle{}
+			, Padding{}
+		{	
+			assert((sizeof(LightAttribute) % SIMD_ALIGN_SIZE) == 0);
+		}
 	};
 
 

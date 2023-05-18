@@ -161,6 +161,8 @@
     <ClInclude Include="jhHelper.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
+    <ClInclude Include="jhLight.h" />
+    <ClInclude Include="jhLightingManager.h" />
     <ClInclude Include="jhMaterial.h" />
     <ClInclude Include="jhMath.h" />
     <ClInclude Include="jhMesh.h" />
@@ -194,6 +196,7 @@
     <ClInclude Include="jhScript.h" />
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
+    <ClInclude Include="jhStructuredBuffer.h" />
     <ClInclude Include="jhSword.h" />
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
@@ -230,6 +233,8 @@
     <ClCompile Include="jhEnums.h" />
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhLayer.cpp" />
+    <ClCompile Include="jhLight.cpp" />
+    <ClCompile Include="jhLightingManager.cpp" />
     <ClCompile Include="jhMaterial.cpp" />
     <ClCompile Include="jhMath.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />
@@ -261,6 +266,7 @@
     <ClCompile Include="jhSceneManager.cpp" />
     <ClCompile Include="jhScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
+    <ClCompile Include="jhStructuredBuffer.cpp" />
     <ClCompile Include="jhSword.cpp" />
     <ClCompile Include="jhTransform.cpp" />
     <ClCompile Include="jhUIBarObject.cpp" />
@@ -313,12 +319,20 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="jhSpriteVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="jhUserIntefaceStaminaPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

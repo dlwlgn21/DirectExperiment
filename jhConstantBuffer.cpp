@@ -11,8 +11,10 @@ namespace jh
 		switch (eType)
 		{
 		case eConstantBufferType::TRANSFORM:
+		{
 			mBufferDesc.ByteWidth = sizeof(TransformBuffer);
 			break;
+		}
 		case eConstantBufferType::MATERIAL:
 			assert(false);
 			break;
@@ -20,17 +22,28 @@ namespace jh
 			assert(false);
 			break;
 		case eConstantBufferType::ANIMATION:
+		{
 			mBufferDesc.ByteWidth = sizeof(AnimationBuffer);
 			break;
+		}
 		case eConstantBufferType::UV_TRANSLATION:
+		{
 			mBufferDesc.ByteWidth = sizeof(UVTranslatationBuffer);
 			break;
 			//case eConstantBufferType::COLLIDER_COLOR:
 			//	mBufferDesc.ByteWidth = sizeof(ColliderBuffer);
 			//	break;
+		}
 		case eConstantBufferType::UI_BAR:
+		{
 			mBufferDesc.ByteWidth = sizeof(UIBarBuffer);
 			break;
+		}
+		case eConstantBufferType::LIGHT:
+		{
+			mBufferDesc.ByteWidth = sizeof(NumberOfLight);
+			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -55,13 +68,20 @@ namespace jh
 	{
 		graphics::GraphicDeviceDX11::GetInstance().WriteDataAtBuffer(pResource, pData, dataSize);
 	}
+
+	void ConstantBuffer::WirteDataAtBuffer(const void* pData, const size_t dataSize)
+	{
+		graphics::GraphicDeviceDX11::GetInstance().WriteDataAtBuffer(mcpConstantBuffer.Get(), pData, dataSize);
+	}
 	void ConstantBuffer::SetPipeline()
 	{
 		switch (meType)
 		{
 		case eConstantBufferType::TRANSFORM:
+		{
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(TRANSFORM_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
+		}
 		case eConstantBufferType::MATERIAL:
 			assert(false);
 			break;
@@ -69,20 +89,31 @@ namespace jh
 			assert(false);
 			break;
 		case eConstantBufferType::ANIMATION:
+		{
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(ANINATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(ANINATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
+		}
 		case eConstantBufferType::UV_TRANSLATION:
+		{
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 			//case eConstantBufferType::COLLIDER_COLOR:
 			//	graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(COLLIDER_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			//	break;
+		}
 		case eConstantBufferType::UI_BAR:
+		{
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(UI_BAR_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(UI_BAR_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
+		}
+		case eConstantBufferType::LIGHT:
+		{
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(LIGHT_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			break;
+		}
 		default:
 			assert(false);
 			break;
