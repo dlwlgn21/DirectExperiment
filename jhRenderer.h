@@ -1,7 +1,8 @@
 #pragma once
 #include "jhComponent.h"
 #include "jhMesh.h"
-#include "jhMaterial.h"
+#include "jhNormalMapMaterial.h"
+
 namespace jh
 {
 	enum class eComponentRendererType

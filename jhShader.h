@@ -3,17 +3,17 @@
 
 namespace jh
 {
-	class Shader final : public Resource
+	class Shader : public Resource
 	{
 	public:
 		Shader();
 		virtual ~Shader();
 
 		void SetPipeline();
-		void CreateShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
+		virtual void CreateShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
 		void SetPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology) { mPrimitiveTopology = topology; }
 
-	private:
+	protected:
 		void createResource();
 		void createShaders(const std::wstring& VSFileName, const std::wstring& PSFileName);
 		void setShaders();
@@ -27,7 +27,7 @@ namespace jh
 		void createBlendState();
 		void setBlendState();
 
-	private:
+	protected:
 		Microsoft::WRL::ComPtr<ID3DBlob>				mcpVSBlob;
 		Microsoft::WRL::ComPtr<ID3DBlob>				mcpPSBlob;
 		Microsoft::WRL::ComPtr<ID3DBlob>				mcpErrorBlob;

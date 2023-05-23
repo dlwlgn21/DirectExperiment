@@ -36,6 +36,7 @@ namespace jh
 
 	public:
 		static const std::wstring RECT_MESH_KEY;
+		static const std::wstring RECT_NORMAL_MAP_MESH_KEY;
 		static const std::wstring BATTLE_BG_MESH_KEY;
 		static const std::wstring DEBUG_RECT_MESH_KEY;
 
@@ -44,9 +45,10 @@ namespace jh
 		static const std::wstring DEBUG_SHADER_KEY;
 		static const std::wstring UI_HP_SHADER_KEY;
 		static const std::wstring UI_STAMINA_SHADER_KEY;
-
+		static const std::wstring NORMAL_MAP_SPRITE_SHADER_KEY;
 
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
+		static const std::wstring PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_SWEEPER_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_WARDEN_ATLAS_KEY;
@@ -69,9 +71,11 @@ namespace jh
 		static const std::wstring GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY;
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_TEXTURE_KEY;
-
+		static const std::wstring BRIK_DIFFUSE_TEXTURE_KEY;
+		static const std::wstring BRIK_NORMAL_MAP_TEXTURE_KEY;
 
 		static const std::wstring PLAYER_MATERIAL_KEY;
+		static const std::wstring PLAYER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_CAGED_SHOKER_MATERIAL_KEY;
 		static const std::wstring MONSTER_SWEEPER_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_MATERIAL_KEY;
@@ -79,6 +83,8 @@ namespace jh
 		static const std::wstring BATTLE_PARRARELL_BG_MATERIAL_KEY;
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring HIT_EFFECT_MATERIAL_KEY;
+		static const std::wstring BRIK_MATERIAL_KEY;
+
 
 		static const std::wstring DEBUG_MATERIAL_KEY;
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
@@ -110,6 +116,7 @@ namespace jh
 	private:
 		ResourceMaker()
 			: mVertices{}
+			, mNormalMapVertex{}
 			, mcpPointBorderSampler()
 			//, mcpPointWrapSampler()
 			, mspTransformConstantBuffer()
@@ -125,6 +132,8 @@ namespace jh
 
 	private:
 		Vertex											mVertices[RECT_VERTEX_COUNT];
+		NormalMapShaderVertex							mNormalMapVertex[RECT_VERTEX_COUNT];
+
 		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointBorderSampler;
 		//Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointWrapSampler;
 

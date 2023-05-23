@@ -35,7 +35,8 @@
 #include "jhMonsterSpawner.h"
 #include "jhHitEffectObject.h"
 #include "jhLight.h"
-
+#include "jhInput.h"
+#include "jhTime.h"
 
 using namespace jh::math;
 
@@ -54,8 +55,11 @@ static constexpr const Vector4 RED_COLOR(1.0f, 0.0f, 0.0f, 1.0f);
 static constexpr const Vector4 GREEN_COLOR(0.0f, 1.0f, 0.0f, 1.0f);
 static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
 
+
 namespace jh
 {
+	Transform* pExperimentTransform;
+
 	PlayScene::PlayScene()
 		: Scene(eSceneType::PLAY_SCENE)
 	{
@@ -72,13 +76,44 @@ namespace jh
 		instantiateParallaxObjects();
 		instantiateEnvObject();
 		instantiateUIObject(pPlayerScript);
+		instantiateOtherObjects();
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
 	{
-		MonsterSpawner::GetInstance().Update();
+		//MonsterSpawner::GetInstance().Update();
+		assert(pExperimentTransform != nullptr);
+		static const float SPEED = 10.0f;
+		Vector3 pos = pExperimentTransform->GetPosition();
+		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		{
+			pos.x += (SPEED * Time::DeltaTime());
+		}
+		else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		{
+			pos.x -= (SPEED * Time::DeltaTime());
+		}
+		else if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		{
+			pos.y += (SPEED * Time::DeltaTime());
+		}
+		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		{
+			pos.y -= (SPEED * Time::DeltaTime());
+		}
+		else if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
+		{
+			pos.z -= (SPEED * Time::DeltaTime());
+		}
+		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
+		{
+			pos.z += (SPEED * Time::DeltaTime());
+		}
+
+		pExperimentTransform->SetPosition(pos);
+
 		Scene::Update();
 	}
 
@@ -97,21 +132,23 @@ namespace jh
 	{
 		// Directional Light
 		{
-			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			LightAttribute lightAttribute;
-			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			lightAttribute.ELightType = eLightType::DIRECTIONAL;
-			lightAttribute.Diffuse = WHITE_COLOR;
-			Light* pDirLightComponent = new Light(lightAttribute);
-			pDirLightObject->AddComponent(pDirLightComponent);
+			//GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			//pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			//LightAttribute lightAttribute;
+			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			//lightAttribute.ELightType = eLightType::DIRECTIONAL;
+			//lightAttribute.Diffuse = WHITE_COLOR;
+			//Light* pDirLightComponent = new Light(lightAttribute);
+			//pDirLightObject->AddComponent(pDirLightComponent);
 		}
 		// Point Light
 		{
 			GameObject* pPointLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			pPointLightObject->GetTransform()->SetPosition(Vector3(-2.0f, -2.0f, 0.0f));
 			LightAttribute lightAttribute;
 			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
 			lightAttribute.ELightType = eLightType::POINT;
-			lightAttribute.Diffuse = BLUE_COLOR;
+			lightAttribute.Diffuse = WHITE_COLOR;
 			lightAttribute.Radius = 10.0f;
 			Light* pPointLightComponent = new Light(lightAttribute);
 			pPointLightObject->AddComponent(pPointLightComponent);
@@ -252,5 +289,20 @@ namespace jh
 
 	void PlayScene::instantiateOtherObjects()
 	{
+		GameObject* pBrickNormal = Instantiate<GameObject>(eLayerType::PLAYER);
+		NormalMapMaterial* pMat = new NormalMapMaterial(
+			ResourcesManager::Find<Shader>(ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY),
+			ResourcesManager::Find<Texture>(ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY),
+			ResourcesManager::Find<Texture>(ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY)
+		);
+
+		SpriteRenderer* pSpriteRender = new SpriteRenderer(
+			ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+			pMat
+		);
+		pBrickNormal->AddComponent(pSpriteRender);
+		pBrickNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
+		pBrickNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		pExperimentTransform = pBrickNormal->GetTransform();
 	}
 }

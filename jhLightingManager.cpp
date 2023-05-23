@@ -14,10 +14,10 @@ namespace jh
 	void LightingManager::WriteLightDataAtBuffer()
 	{
 		assert(mspLightStructuredBuffer != nullptr && mspLightConstantBuffer != nullptr);
-		mspLightStructuredBuffer->WirteDataAtBuffer(mLights.data(), mLights.size());
+		mspLightStructuredBuffer->WirteDataAtBuffer(mLights.data(), static_cast<UINT>(mLights.size()));
 		NumberOfLight lightNumber;
 		ZeroMemory(&lightNumber, sizeof(NumberOfLight));
-		lightNumber.NumberOfLight = mLights.size();
+		lightNumber.NumberOfLight = static_cast<UINT>(mLights.size());
 		mspLightConstantBuffer->WirteDataAtBuffer(&lightNumber, sizeof(NumberOfLight));
 	}
 	void LightingManager::SetPipeline()

@@ -12,6 +12,7 @@
 #include "jhTransform.h"
 #include "jhHitEffectObject.h"
 #include "jhPlayerHitEffectScript.h"
+#include "jhNormalMapMaterial.h"
 
 using namespace jh::math;
 
@@ -170,8 +171,8 @@ namespace jh
 	}
 	void Player::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::PLAYER_MATERIAL_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);

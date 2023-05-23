@@ -4,21 +4,21 @@
 
 namespace jh
 {
-	class Mesh final : public Resource
+	class Mesh : public Resource
 	{
 	public:
 		Mesh();
 		virtual ~Mesh();
 		bool CreateVertexBuffer(void* pData, UINT size);
-		bool CreateIndexBuffer(void* pData, UINT size);
-		void SetPipeline();
+		bool CreateIndexBuffer(void* pData, UINT indexCount);
+		virtual void SetPipeline();
 		void Render();
 
-	private:
+	protected:
 		void setVertexBuffer();
 		void setIndexBuffer();
 
-	private:
+	protected:
 		Microsoft::WRL::ComPtr<ID3D11Buffer>	mcpVertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>	mcpIndexBuffer;
 		D3D11_BUFFER_DESC						mVertexBufferDesc;

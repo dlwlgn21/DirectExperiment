@@ -1,7 +1,4 @@
 #include "jhMaterial.h"
-#include "jhTexture.h"
-#include "jhShader.h"
-
 
 
 namespace jh
@@ -18,12 +15,15 @@ namespace jh
 		}
 	}
 
-	void Material::SetPipeline(const UINT textureSlotNumber)
+	Material::Material(const eMaterialType eType, Shader* pShader, Texture* pTexture)
+		: Resource(eReousrceType::MATERIAL)
+		, mpShader(pShader)
+		, mpTexture(pTexture)
+		, meType(eType)
 	{
-		setPipeline(textureSlotNumber);
 	}
 
-	void Material::setPipeline(const UINT textureSlotNumber)
+	void Material::SetPipeline(const UINT textureSlotNumber)
 	{
 		assert(mpShader != nullptr);
 		mpShader->SetPipeline();

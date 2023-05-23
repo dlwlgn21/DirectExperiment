@@ -24,6 +24,14 @@ namespace jh
 		jh::math::Vector2 UV;
 	};
 
+	struct NormalMapShaderVertex
+	{
+		jh::math::Vector3 Position;
+		jh::math::Vector2 UV;
+		jh::math::Vector3 Normal;
+		jh::math::Vector3 Tangent;
+	};
+
 	struct alignas(SIMD_ALIGN_SIZE) TransformBuffer
 	{
 		jh::math::Matrix WorldMat;

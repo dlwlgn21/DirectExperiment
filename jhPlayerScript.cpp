@@ -22,7 +22,7 @@ namespace jh
 	PlayerScript::PlayerScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(3.0f)
+		, mSpeed(10.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimNormalAttack1Key(L"PlayerNormalAttack1")

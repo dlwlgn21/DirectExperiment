@@ -15,7 +15,7 @@ SpriteVertexOut main(VertexIn vIn)
     float4 viewPos = mul(wolrdPos, ViewMat);
     float4 projectionPos = mul(viewPos, ProjectionMat);
     
-    vOut.WorldPos = wolrdPos;
+    vOut.WorldPos = wolrdPos.xyz;
     vOut.Position = projectionPos;
 
     const uint FLIPEED = 1;

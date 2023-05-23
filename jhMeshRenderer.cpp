@@ -32,11 +32,6 @@ namespace jh
 		clearPipeline();
 	}
 
-	void MeshRenderer::clearPipeline()
-	{
-		mpMaterial->ClearPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
-	}
-
 	void MeshRenderer::setPipeline()
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
@@ -44,4 +39,10 @@ namespace jh
 		mpMaterial->SetPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
 		mpMesh->SetPipeline();
 	}
+
+	void MeshRenderer::clearPipeline()
+	{
+		mpMaterial->ClearPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
+	}
+
 }

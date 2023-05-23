@@ -262,6 +262,15 @@
     <Filter Include="LightingManager">
       <UniqueIdentifier>{ea77f0a0-b66f-43de-9d5a-5c1468614a54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Material\Base">
+      <UniqueIdentifier>{3f07dfad-b500-4232-b31f-e6775a6877a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\Base">
+      <UniqueIdentifier>{8745a71d-d0d7-47ee-87e8-ba380f673c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh\Base">
+      <UniqueIdentifier>{219916a5-20b5-4512-8efc-17fa48795f75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -294,14 +303,8 @@
     <ClInclude Include="jhGraphics.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="jhMesh.h">
-      <Filter>Resource\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="jhEngine.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="jhShader.h">
-      <Filter>Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="jhComponent.h">
       <Filter>Component\Base</Filter>
@@ -314,9 +317,6 @@
     </ClInclude>
     <ClInclude Include="jhSpriteRenderer.h">
       <Filter>Component\Renderer\SpriteRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMaterial.h">
-      <Filter>Resource\Material</Filter>
     </ClInclude>
     <ClInclude Include="jhResourcesManager.h">
       <Filter>ResourcesManager</Filter>
@@ -495,6 +495,24 @@
     <ClInclude Include="jhLightingManager.h">
       <Filter>LightingManager</Filter>
     </ClInclude>
+    <ClInclude Include="jhMaterial.h">
+      <Filter>Resource\Material\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhNormalMapMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="jhShader.h">
+      <Filter>Resource\Shader\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhNormalMapShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMesh.h">
+      <Filter>Resource\Mesh\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhNormalMapMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -515,12 +533,6 @@
     <ClCompile Include="jhGraphicDeviceDX11.cpp">
       <Filter>GraphicDevice</Filter>
     </ClCompile>
-    <ClCompile Include="jhMesh.cpp">
-      <Filter>Resource\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="jhShader.cpp">
-      <Filter>Resource\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="jhEnums.h">
       <Filter>Common</Filter>
     </ClCompile>
@@ -535,9 +547,6 @@
     </ClCompile>
     <ClCompile Include="jhSpriteRenderer.cpp">
       <Filter>Component\Renderer\SpriteRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMaterial.cpp">
-      <Filter>Resource\Material</Filter>
     </ClCompile>
     <ClCompile Include="jhResourcesManager.cpp">
       <Filter>ResourcesManager</Filter>
@@ -710,6 +719,24 @@
     <ClCompile Include="jhLightingManager.cpp">
       <Filter>LightingManager</Filter>
     </ClCompile>
+    <ClCompile Include="jhMaterial.cpp">
+      <Filter>Resource\Material\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhNormalMapMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="jhShader.cpp">
+      <Filter>Resource\Shader\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhNormalMapShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMesh.cpp">
+      <Filter>Resource\Mesh\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhNormalMapMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -752,6 +779,12 @@
     <FxCompile Include="jhUserIntefaceStaminaPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
+    <FxCompile Include="jhNormalMapSpritePS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhNormalMapSpriteVS.hlsl">
+      <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -759,6 +792,9 @@
       <Filter>Common\Math</Filter>
     </None>
     <None Include="globals.hlsli">
+      <Filter>ShaderResource</Filter>
+    </None>
+    <None Include="Light.hlsli">
       <Filter>ShaderResource</Filter>
     </None>
   </ItemGroup>

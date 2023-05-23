@@ -22,8 +22,7 @@ namespace jh
 
 	bool Mesh::CreateVertexBuffer(void* pData, UINT size)
 	{
-		static const UINT VERTEX_COUNT = 4;
-		mVertexBufferDesc.ByteWidth = sizeof(Vertex) * VERTEX_COUNT;
+		mVertexBufferDesc.ByteWidth = size;
 		mVertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 		mVertexBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
 		mVertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;

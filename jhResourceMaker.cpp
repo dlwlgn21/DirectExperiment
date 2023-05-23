@@ -5,6 +5,9 @@
 #include "jhTexture.h"
 #include "jhMaterial.h"
 #include "jhMath.h"
+#include "jhNormalMapMaterial.h"
+#include "jhNormalMapShader.h"
+#include "jhNormalMapMesh.h"
 
 using namespace jh::math;
 
@@ -15,12 +18,13 @@ namespace jh
 	const std::wstring ResourceMaker::BATTLE_BG_MESH_KEY = L"BattleBGMeshKey";
 	const std::wstring ResourceMaker::DEBUG_RECT_MESH_KEY = L"DebugRectMeshKey";
 
-
-
+	// Added Part FOR NORMAL_MAP At 2023-05-23 16:40
+	const std::wstring ResourceMaker::RECT_NORMAL_MAP_MESH_KEY = L"NormalMapMeshKey";
 #pragma endregion
 
 #pragma region SHADER
 	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
+	const std::wstring ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY = L"NormalMapSpriteShaderKey";
 	const std::wstring ResourceMaker::BATTLE_BG_SHADER_KEY = L"BattleBGShaderKey";
 	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
 	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShaderKey";
@@ -31,6 +35,7 @@ namespace jh
 
 #pragma region TEXTURE
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
+	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY = L"PlayerNormalMapTextureAtlasKey";
 
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
@@ -62,10 +67,14 @@ namespace jh
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTextureKey";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTextureKey";
 
+	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTextureKey";
+	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTextureKey";
+
 #pragma endregion
 
 #pragma region MATERIAL
 	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterialKey";
+	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterialKey";
 
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
@@ -97,6 +106,7 @@ namespace jh
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_MATERIAL_KEY = L"GreenPortalMaterialKey";
+	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
 
 #pragma endregion
 
@@ -114,14 +124,21 @@ namespace jh
 	void ResourceMaker::createMeshs()
 	{
 		std::vector<UINT> rectIndexes;
-		rectIndexes.reserve(32);
+		rectIndexes.reserve(6);
+		//rectIndexes.push_back(0);
+		//rectIndexes.push_back(1);
+		//rectIndexes.push_back(2);
+		//rectIndexes.push_back(0);
+		//rectIndexes.push_back(2);
+		//rectIndexes.push_back(3);
+		//rectIndexes.push_back(0);
+
 		rectIndexes.push_back(0);
 		rectIndexes.push_back(1);
 		rectIndexes.push_back(2);
 		rectIndexes.push_back(0);
-		rectIndexes.push_back(2);
 		rectIndexes.push_back(3);
-		rectIndexes.push_back(0);
+		rectIndexes.push_back(2);
 
 #pragma region SPRITE_RECT_MESH
 		Mesh* pRectMesh = new Mesh();
@@ -130,11 +147,160 @@ namespace jh
 		mVertices[2] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
 		mVertices[3] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
 		pRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
-
-
-
 		pRectMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
 		ResourcesManager::Insert<Mesh>(RECT_MESH_KEY, pRectMesh);
+
+#pragma region TANGENT_SPACE_FOR_NORMAL_MAPPING
+		// FOR TANGENT SPACE Added At 2023-05-23 12:33
+		Mesh* pNormalMesh = new NormalMapMesh();
+
+		mNormalMapVertex[0].Position = Vector3(-0.5f, -0.5f, 0.0f);
+		mNormalMapVertex[1].Position = Vector3(-0.5f,  0.5f, 0.0f);
+		mNormalMapVertex[2].Position = Vector3( 0.5f,  0.5f, 0.0f);
+		mNormalMapVertex[3].Position = Vector3( 0.5f, -0.5f, 0.0f);
+
+		std::vector<XMFLOAT3> tempNormal;
+		UINT indices[6]
+		{
+			0, 1, 2,
+			0, 3, 2
+		};
+
+		mNormalMapVertex[0].UV = Vector2(0.0f, 1.0f);
+		mNormalMapVertex[1].UV = Vector2(0.0f, 0.0f);
+		mNormalMapVertex[2].UV = Vector2(1.0f, 0.0f);
+		mNormalMapVertex[3].UV = Vector2(1.0f, 1.0f);
+
+		//normalized and unnormalized normals
+		XMFLOAT3 unnormalized = XMFLOAT3(0.0f, 0.0f, 0.0f);
+
+		///////////////**************new**************////////////////////
+		//tangent stuff
+		std::vector<XMFLOAT3> tempTangent;
+		XMFLOAT3 tangent = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		float tcU1, tcV1, tcU2, tcV2;
+		///////////////**************new**************////////////////////
+
+		//Used to get vectors (sides) from the position of the verts
+		float vecX, vecY, vecZ;
+
+		//Two edges of our triangle
+		XMVECTOR edge1 = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+		XMVECTOR edge2 = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+
+		//Compute face normals
+		//And Tangents
+		for (int i = 0; i < 2; ++i)
+		{
+			//Get the vector describing one edge of our triangle (edge 0,2)
+			vecX = mNormalMapVertex[indices[(i * 3)]].Position.x - mNormalMapVertex[indices[(i * 3) + 2]].Position.x;
+			vecY = mNormalMapVertex[indices[(i * 3)]].Position.y - mNormalMapVertex[indices[(i * 3) + 2]].Position.y;
+			vecZ = mNormalMapVertex[indices[(i * 3)]].Position.z - mNormalMapVertex[indices[(i * 3) + 2]].Position.z;
+			edge1 = XMVectorSet(vecX, vecY, vecZ, 0.0f);    //Create our first edge
+
+			//Get the vector describing another edge of our triangle (edge 2,1)
+			vecX = mNormalMapVertex[indices[(i * 3) + 2]].Position.x - mNormalMapVertex[indices[(i * 3) + 1]].Position.x;
+			vecY = mNormalMapVertex[indices[(i * 3) + 2]].Position.y - mNormalMapVertex[indices[(i * 3) + 1]].Position.y;
+			vecZ = mNormalMapVertex[indices[(i * 3) + 2]].Position.z - mNormalMapVertex[indices[(i * 3) + 1]].Position.z;
+			edge2 = XMVectorSet(vecX, vecY, vecZ, 0.0f);    //Create our second edge
+
+			//Cross multiply the two edge vectors to get the un-normalized face normal
+			XMStoreFloat3(&unnormalized, XMVector3Cross(edge1, edge2));
+
+			tempNormal.push_back(unnormalized);
+
+			///////////////**************new**************////////////////////
+			//Find first texture coordinate edge 2d vector
+			tcU1 = mNormalMapVertex[indices[(i * 3)]].UV.x - mNormalMapVertex[indices[(i * 3) + 2]].UV.x;
+			tcV1 = mNormalMapVertex[indices[(i * 3)]].UV.y - mNormalMapVertex[indices[(i * 3) + 2]].UV.y;
+
+			//Find second texture coordinate edge 2d vector
+			tcU2 = mNormalMapVertex[indices[(i * 3) + 2]].UV.x - mNormalMapVertex[indices[(i * 3) + 1]].UV.x;
+			tcV2 = mNormalMapVertex[indices[(i * 3) + 2]].UV.y - mNormalMapVertex[indices[(i * 3) + 1]].UV.y;
+
+			//Find tangent using both tex coord edges and position edges
+			tangent.x = (tcV1 * XMVectorGetX(edge1) - tcV2 * XMVectorGetX(edge2)) * (1.0f / (tcU1 * tcV2 - tcU2 * tcV1));
+			tangent.y = (tcV1 * XMVectorGetY(edge1) - tcV2 * XMVectorGetY(edge2)) * (1.0f / (tcU1 * tcV2 - tcU2 * tcV1));
+			tangent.z = (tcV1 * XMVectorGetZ(edge1) - tcV2 * XMVectorGetZ(edge2)) * (1.0f / (tcU1 * tcV2 - tcU2 * tcV1));
+
+			tempTangent.push_back(tangent);
+			///////////////**************new**************////////////////////
+		}
+
+		//Compute vertex normals (normal Averaging)
+		XMVECTOR normalSum = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+		XMVECTOR tangentSum = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+		int facesUsing = 0;
+		float tX, tY, tZ;    //temp axis variables
+
+		//Go through each vertex
+		for (int i = 0; i < RECT_VERTEX_COUNT; ++i)
+		{
+			//Check which triangles use this vertex
+			for (int j = 0; j < 2; ++j)
+			{
+				if (indices[j * 3] == i ||
+					indices[(j * 3) + 1] == i ||
+					indices[(j * 3) + 2] == i)
+				{
+					tX = XMVectorGetX(normalSum) + tempNormal[j].x;
+					tY = XMVectorGetY(normalSum) + tempNormal[j].y;
+					tZ = XMVectorGetZ(normalSum) + tempNormal[j].z;
+
+					normalSum = XMVectorSet(tX, tY, tZ, 0.0f);    //If a face is using the vertex, add the unormalized face normal to the normalSum
+
+					///////////////**************new**************////////////////////        
+					//We can reuse tX, tY, tZ to sum up tangents
+					tX = XMVectorGetX(tangentSum) + tempTangent[j].x;
+					tY = XMVectorGetY(tangentSum) + tempTangent[j].y;
+					tZ = XMVectorGetZ(tangentSum) + tempTangent[j].z;
+
+					tangentSum = XMVectorSet(tX, tY, tZ, 0.0f); //sum up face tangents using this vertex
+					///////////////**************new**************////////////////////
+
+					facesUsing++;
+				}
+			}
+
+			//Get the actual normal by dividing the normalSum by the number of faces sharing the vertex
+			normalSum = normalSum / static_cast<float>(facesUsing);
+			///////////////**************new**************////////////////////
+			tangentSum = tangentSum / static_cast<float>(facesUsing);
+			///////////////**************new**************////////////////////
+
+			//Normalize the normalSum vector and tangent
+			normalSum = XMVector3Normalize(normalSum);
+			///////////////**************new**************////////////////////
+			tangentSum = XMVector3Normalize(tangentSum);
+			///////////////**************new**************////////////////////
+
+			//Store the normal and tangent in our current vertex
+			mNormalMapVertex[i].Normal.x = XMVectorGetX(normalSum);
+			mNormalMapVertex[i].Normal.y = XMVectorGetY(normalSum);
+			mNormalMapVertex[i].Normal.z = XMVectorGetZ(normalSum);
+
+			///////////////**************new**************////////////////////
+			mNormalMapVertex[i].Tangent.x = XMVectorGetX(tangentSum);
+			mNormalMapVertex[i].Tangent.y = XMVectorGetY(tangentSum);
+			mNormalMapVertex[i].Tangent.z = XMVectorGetZ(tangentSum);
+			///////////////**************new**************////////////////////
+
+			//Clear normalSum, tangentSum and facesUsing for next vertex
+			normalSum = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+			///////////////**************new**************////////////////////
+			tangentSum = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+			///////////////**************new**************////////////////////
+			facesUsing = 0;
+
+		}
+
+
+		pNormalMesh->CreateVertexBuffer(mNormalMapVertex, sizeof(NormalMapShaderVertex) * RECT_VERTEX_COUNT);
+		pNormalMesh->CreateIndexBuffer(indices, 6);
+		ResourcesManager::Insert<Mesh>(RECT_NORMAL_MAP_MESH_KEY, pNormalMesh);
+
+#pragma endregion
+
 
 #pragma endregion
 
@@ -167,6 +333,11 @@ namespace jh
 		pSriteShader->CreateShaders(L"jhSpriteVS.hlsl", L"jhSpritePS.hlsl");
 		ResourcesManager::Insert<Shader>(SPRITE_SHADER_KEY, pSriteShader);
 
+		Shader* pNormalMapSpriteShader = new NormalMapShader();
+		pNormalMapSpriteShader->CreateShaders(L"jhNormalMapSpriteVS.hlsl", L"jhNormalMapSpritePS.hlsl");
+		ResourcesManager::Insert<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY, pNormalMapSpriteShader);
+
+
 		Shader* pBattleBGShader = new Shader();
 		pBattleBGShader->CreateShaders(L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
 		ResourcesManager::Insert<Shader>(BATTLE_BG_SHADER_KEY, pBattleBGShader);
@@ -191,6 +362,11 @@ namespace jh
 		Texture* pPlayerAtalsTexture = new Texture();
 		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37(2).png");
 		ResourcesManager::Insert<Texture>(PLAYER_TEXTURE_ATLAS_KEY, pPlayerAtalsTexture);
+
+		Texture* pPlayerNormalMapAtalsTexture = new Texture();
+		pPlayerNormalMapAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37_NM.png");
+		ResourcesManager::Insert<Texture>(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, pPlayerNormalMapAtalsTexture);
+
 
 		Texture* pCagedShokerAtlasTexture = new Texture();
 		pCagedShokerAtlasTexture->Load(L"caged shocker 110x42.png");
@@ -278,12 +454,26 @@ namespace jh
 		Texture* pPlayerDashDustEffectTexture = new Texture();
 		pPlayerDashDustEffectTexture->Load(L"DASHSMOKE2.png");
 		ResourcesManager::Insert<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY, pPlayerDashDustEffectTexture);
+
+		Texture* pBrickDiffuse = new Texture();
+		pBrickDiffuse->Load(L"brickwall.jpg");
+		ResourcesManager::Insert<Texture>(BRIK_DIFFUSE_TEXTURE_KEY, pBrickDiffuse);
+
+		Texture* pBrickNormal = new Texture();
+		pBrickNormal->Load(L"brickwall_normal.jpg");
+		ResourcesManager::Insert<Texture>(BRIK_NORMAL_MAP_TEXTURE_KEY, pBrickNormal);
 	}
 
 	void ResourceMaker::createMaterial()
 	{
 		Material* pPlayerMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(PLAYER_MATERIAL_KEY, pPlayerMaterial);
+
+		Material* pPlayerNormalMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY), ResourcesManager::Find<Texture>(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY));
+		ResourcesManager::Insert<Material>(PLAYER_NORMAL_MAP_MATERIAL_KEY, pPlayerNormalMaterial);
+
+		Material* pBrickNormalTexture = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(BRIK_DIFFUSE_TEXTURE_KEY), ResourcesManager::Find<Texture>(BRIK_NORMAL_MAP_TEXTURE_KEY));
+		ResourcesManager::Insert<Material>(BRIK_MATERIAL_KEY, pBrickNormalTexture);
 
 		Material* pCagedMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pCagedMaterial);
@@ -445,5 +635,4 @@ namespace jh
 		mcpPointBorderSampler.Reset();
 		//mcpPointWrapSampler.Reset();
 	}
-
 }
