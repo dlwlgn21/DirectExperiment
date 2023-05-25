@@ -107,6 +107,8 @@ namespace jh
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_MATERIAL_KEY = L"GreenPortalMaterialKey";
 	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
+	const std::wstring ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY = L"BrickNotNormalMaterialKey";
+
 
 #pragma endregion
 
@@ -275,9 +277,13 @@ namespace jh
 			///////////////**************new**************////////////////////
 
 			//Store the normal and tangent in our current vertex
-			mNormalMapVertex[i].Normal.x = XMVectorGetX(normalSum);
-			mNormalMapVertex[i].Normal.y = XMVectorGetY(normalSum);
-			mNormalMapVertex[i].Normal.z = XMVectorGetZ(normalSum);
+			//mNormalMapVertex[i].Normal.x = XMVectorGetX(normalSum);
+			//mNormalMapVertex[i].Normal.y = XMVectorGetY(normalSum);
+			//mNormalMapVertex[i].Normal.z = XMVectorGetZ(normalSum);
+			
+			mNormalMapVertex[i].Normal.x = 0.0f;
+			mNormalMapVertex[i].Normal.y = 0.0f;
+			mNormalMapVertex[i].Normal.z = -1.0f;
 
 			///////////////**************new**************////////////////////
 			mNormalMapVertex[i].Tangent.x = XMVectorGetX(tangentSum);
@@ -474,6 +480,9 @@ namespace jh
 
 		Material* pBrickNormalTexture = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(BRIK_DIFFUSE_TEXTURE_KEY), ResourcesManager::Find<Texture>(BRIK_NORMAL_MAP_TEXTURE_KEY));
 		ResourcesManager::Insert<Material>(BRIK_MATERIAL_KEY, pBrickNormalTexture);
+
+		Material* pBrickNotNormalMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(BRIK_DIFFUSE_TEXTURE_KEY));
+		ResourcesManager::Insert<Material>(BRIK_NOT_NORMAL_MATERIAL_KEY, pBrickNotNormalMaterial);
 
 		Material* pCagedMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pCagedMaterial);

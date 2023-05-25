@@ -84,35 +84,35 @@ namespace jh
 	void PlayScene::Update()
 	{
 		//MonsterSpawner::GetInstance().Update();
-		assert(pExperimentTransform != nullptr);
-		static const float SPEED = 10.0f;
-		Vector3 pos = pExperimentTransform->GetPosition();
-		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		{
-			pos.x += (SPEED * Time::DeltaTime());
-		}
-		else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		{
-			pos.x -= (SPEED * Time::DeltaTime());
-		}
-		else if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		{
-			pos.y += (SPEED * Time::DeltaTime());
-		}
-		else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		{
-			pos.y -= (SPEED * Time::DeltaTime());
-		}
-		else if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
-		{
-			pos.z -= (SPEED * Time::DeltaTime());
-		}
-		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
-		{
-			pos.z += (SPEED * Time::DeltaTime());
-		}
+		//assert(pExperimentTransform != nullptr);
+		//static const float SPEED = 10.0f;
+		//Vector3 pos = pExperimentTransform->GetPosition();
+		//if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
+		//{
+		//	pos.x += (SPEED * Time::DeltaTime());
+		//}
+		//else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
+		//{
+		//	pos.x -= (SPEED * Time::DeltaTime());
+		//}
+		//else if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
+		//{
+		//	pos.y += (SPEED * Time::DeltaTime());
+		//}
+		//else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
+		//{
+		//	pos.y -= (SPEED * Time::DeltaTime());
+		//}
+		//else if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
+		//{
+		//	pos.z -= (SPEED * Time::DeltaTime());
+		//}
+		//else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
+		//{
+		//	pos.z += (SPEED * Time::DeltaTime());
+		//}
 
-		pExperimentTransform->SetPosition(pos);
+		//pExperimentTransform->SetPosition(pos);
 
 		Scene::Update();
 	}
@@ -132,24 +132,24 @@ namespace jh
 	{
 		// Directional Light
 		{
-			//GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			//pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			//LightAttribute lightAttribute;
-			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			//lightAttribute.ELightType = eLightType::DIRECTIONAL;
-			//lightAttribute.Diffuse = WHITE_COLOR;
-			//Light* pDirLightComponent = new Light(lightAttribute);
-			//pDirLightObject->AddComponent(pDirLightComponent);
+			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
+			LightAttribute lightAttribute;
+			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			lightAttribute.ELightType = eLightType::DIRECTIONAL;
+			lightAttribute.Diffuse = WHITE_COLOR;
+			Light* pDirLightComponent = new Light(lightAttribute);
+			pDirLightObject->AddComponent(pDirLightComponent);
 		}
 		// Point Light
 		{
 			GameObject* pPointLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			pPointLightObject->GetTransform()->SetPosition(Vector3(-2.0f, -2.0f, 0.0f));
+			pPointLightObject->GetTransform()->SetPosition(Vector3(-2.0f, -2.0f, -1.0f));
 			LightAttribute lightAttribute;
 			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
 			lightAttribute.ELightType = eLightType::POINT;
 			lightAttribute.Diffuse = WHITE_COLOR;
-			lightAttribute.Radius = 10.0f;
+			lightAttribute.Radius = 30.0f;
 			Light* pPointLightComponent = new Light(lightAttribute);
 			pPointLightObject->AddComponent(pPointLightComponent);
 		}
@@ -183,7 +183,7 @@ namespace jh
 
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
-		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 3.0f));
+		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 2.0f));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
@@ -289,20 +289,30 @@ namespace jh
 
 	void PlayScene::instantiateOtherObjects()
 	{
-		GameObject* pBrickNormal = Instantiate<GameObject>(eLayerType::PLAYER);
-		NormalMapMaterial* pMat = new NormalMapMaterial(
-			ResourcesManager::Find<Shader>(ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY),
-			ResourcesManager::Find<Texture>(ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY),
-			ResourcesManager::Find<Texture>(ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY)
-		);
+		//GameObject* pBrickNormal = Instantiate<GameObject>(eLayerType::PLAYER);
+		//NormalMapMaterial* pMat = new NormalMapMaterial(
+		//	ResourcesManager::Find<Shader>(ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY),
+		//	ResourcesManager::Find<Texture>(ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY),
+		//	ResourcesManager::Find<Texture>(ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY)
+		//);
 
-		SpriteRenderer* pSpriteRender = new SpriteRenderer(
-			ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-			pMat
-		);
-		pBrickNormal->AddComponent(pSpriteRender);
-		pBrickNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
-		pBrickNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-		pExperimentTransform = pBrickNormal->GetTransform();
+		//SpriteRenderer* pSpriteRender = new SpriteRenderer(
+		//	ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+		//	pMat
+		//);
+		//pBrickNormal->AddComponent(pSpriteRender);
+		//pBrickNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
+		//pBrickNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		//pExperimentTransform = pBrickNormal->GetTransform();
+
+		//GameObject* pBrickNotNormal = Instantiate<GameObject>(eLayerType::PLAYER);
+		//SpriteRenderer* pNotNormalSpriteRender = new SpriteRenderer(
+		//	ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+		//	ResourcesManager::Find<Material>(ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY)
+		//);
+		//pBrickNotNormal->AddComponent(pNotNormalSpriteRender);
+		//pBrickNotNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
+		//pBrickNotNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		//pExperimentTransform = pBrickNormal->GetTransform();
 	}
 }

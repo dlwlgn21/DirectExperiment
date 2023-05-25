@@ -84,7 +84,7 @@ namespace jh
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring HIT_EFFECT_MATERIAL_KEY;
 		static const std::wstring BRIK_MATERIAL_KEY;
-
+		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
 
 		static const std::wstring DEBUG_MATERIAL_KEY;
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;

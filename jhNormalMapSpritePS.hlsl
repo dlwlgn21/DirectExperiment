@@ -14,17 +14,17 @@ void CalculateLightWithNormal(in out Light outLight, inout float3x3 tangentSpace
     const int POINT = 1;
     const int SPOT_LIGHT = 2;
     float3 lightDir = normalize(playerPos.xyz - lightAttributes[idx].Position.xyz);
-    lightDir = mul(lightDir, tangentSpaceMat);
+    //lightDir = mul(lightDir, tangentSpaceMat);
     //float2 lightDir = normalize(playerPos.xy - lightAttributes[idx].Position.xy);
     
-    float3 diffuse = saturate(dot(worldNormal, -lightDir));
+    float3 diffuse = saturate(dot(worldNormal.xyz, -lightDir));
     if (lightAttributes[idx].ELightType == DIRECTIONAL)
     {
         outLight.Diffuse.rgb = lightAttributes[idx].LightElement.Diffuse.rgb * diffuse;
     }
     else if (lightAttributes[idx].ELightType == POINT)
     {
-        float dist = distance(lightAttributes[idx].Position.xy, playerPos.xy);
+        float dist = distance(lightAttributes[idx].Position.xyz, playerPos.xyz);
         
         if (dist < lightAttributes[idx].Radius)
         {
@@ -52,7 +52,7 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
     float3 diffsue;
     float3 tangentNormal;
     float3 worldNormal;
-    
+    float3 normalMapSample;
     const uint SECOND_DIMENTION = 1;
     
     if (AnimationType == SECOND_DIMENTION)
@@ -67,10 +67,12 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
             discard;
         }
         albedo = AtlasTexture.Sample(PointBorderSampler, uv);
+        normalMapSample = NormalMapTexture.Sample(PointBorderSampler, uv).xyz;
     }
     else
     {
         albedo = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
+        normalMapSample = NormalMapTexture.Sample(PointBorderSampler, vIn.UV).xyz;
         //return float4(albedo.rgb, 1.0f);
     }
     if (albedo.w == 0.0f)
@@ -79,10 +81,10 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
     }
     
     
-    float4 normalMapSample = NormalMapTexture.Sample(PointBorderSampler, vIn.UV);
+    
     tangentNormal = DecodeNormalMap(normalMapSample.xyz);
     //worldNormal = mul(tangentNormal, (float3x3) WorldMat);
-    tangentNormal.z = -tangentNormal.z;
+    //tangentNormal.z = tangentNormal.z;
     
     
     //Make sure tangent is completely orthogonal to normal
@@ -108,6 +110,7 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
         CalculateLightWithNormal(light, texSpace, worldNormal, vIn.WorldPos.xyz, i);
     }
     light.Diffuse.rgb *= albedo.rgb;
+    light.Diffuse.rgb += float3(0.05f, 0.05f, 0.05f);
     //return color;
     
     
