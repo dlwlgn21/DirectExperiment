@@ -54,7 +54,8 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
     float3 worldNormal;
     float3 normalMapSample;
     const uint SECOND_DIMENTION = 1;
-    
+    const float AMBIENT_AMOUNT = 0.05;
+    const float3 AMBIENT = float3(AMBIENT_AMOUNT, AMBIENT_AMOUNT, AMBIENT_AMOUNT);
     if (AnimationType == SECOND_DIMENTION)
     {
         float2 diff = (AtlasImageSize - AnimSize) * 0.5f;
@@ -110,9 +111,7 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
         CalculateLightWithNormal(light, texSpace, worldNormal, vIn.WorldPos.xyz, i);
     }
     light.Diffuse.rgb *= albedo.rgb;
-    light.Diffuse.rgb += float3(0.05f, 0.05f, 0.05f);
-    //return color;
-    
+    light.Diffuse.rgb += AMBIENT;
     
     return float4(light.Diffuse.rgb, 1.0f);
 }

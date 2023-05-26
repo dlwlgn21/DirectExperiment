@@ -83,7 +83,7 @@ namespace jh
 
 	void PlayScene::Update()
 	{
-		//MonsterSpawner::GetInstance().Update();
+		MonsterSpawner::GetInstance().Update();
 		//assert(pExperimentTransform != nullptr);
 		//static const float SPEED = 10.0f;
 		//Vector3 pos = pExperimentTransform->GetPosition();
@@ -203,13 +203,13 @@ namespace jh
 	{	
 		assert(pPlayerScript);
 		//MonsterPackage monPack = MonsterManager::GetInstance().MakeMonster();
-		MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.7f, 4.0f));
-		AddMonster(monPack);
+		//MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.7f, 4.0f));
+		//AddMonster(monPack);
 		//MonstePackage monPack2 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(-6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
 		//addMonster(monPack2);
 
-		MonsterPackage monPack3 = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f));
-		AddMonster(monPack3);
+		//MonsterPackage monPack3 = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f));
+		//AddMonster(monPack3);
 	}
 
 	void PlayScene::AddMonster(const MonsterPackage& monPack)
