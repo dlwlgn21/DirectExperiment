@@ -41,7 +41,9 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY = L"SweeperNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
 	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
 
 
@@ -80,7 +82,9 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY = L"CagedNormalMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY = L"SweeperNormalMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterialKey";
 	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
@@ -388,9 +392,18 @@ namespace jh
 		pSweeperAtlasTexture->Load(L"Sweeper.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
 
+		Texture* pSweeperNormalMapTexture = new Texture();
+		pSweeperNormalMapTexture->Load(L"Sweeper_NM.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY, pSweeperNormalMapTexture);
+
+
 		Texture* pWardenAtlasTexture = new Texture();
 		pWardenAtlasTexture->Load(L"TheDarkWarden97x32.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, pWardenAtlasTexture);
+
+		Texture* pWardenNormalMapTexture = new Texture();
+		pWardenNormalMapTexture->Load(L"TheDarkWarden97x32_NM.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, pWardenNormalMapTexture);
 
 
 		Texture* pObeliskAtlasTexture = new Texture();
@@ -499,10 +512,15 @@ namespace jh
 		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);
 
+		Material* pSweeperNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY, pSweeperNormalMapMaterial);
+
 
 		Material* pWardenMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_WARDEN_MATERIAL_KEY, pWardenMaterial);
 
+		Material* pWardenNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, pWardenNormalMapMaterial);
 
 		ResourcesManager::Insert<Material>(OBELISK_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),

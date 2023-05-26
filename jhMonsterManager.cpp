@@ -163,8 +163,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY),
 				pSweeperAnimator,
 				pPlayerScript,
 				eMonsterType::LV_1_SWEEPER
@@ -211,8 +211,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY),
 				pWardenAnimator,
 				pPlayerScript,
 				eMonsterType::LV_1_WARDEN
