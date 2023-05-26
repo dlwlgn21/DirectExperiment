@@ -114,8 +114,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo, 
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY), 
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY), 
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY), 
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY), 
 				pCagedShokerAnimator,
 				pPlayerScript,
 				eMonsterType::LV_1_CAGED_SHOKER

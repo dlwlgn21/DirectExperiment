@@ -11,7 +11,7 @@ using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 21.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 5.0f;
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 11.0f;
 	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 7.0f;
 
@@ -41,13 +41,13 @@ namespace jh
 		if (mCagedShokerRespawnTimer <= 0.0f)
 			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
-		mSweeperRespawnTimer -= Time::DeltaTime();
-		if (mSweeperRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+		//mSweeperRespawnTimer -= Time::DeltaTime();
+		//if (mSweeperRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		mWardenRespawnTimer -= Time::DeltaTime();
-		if (mWardenRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		//mWardenRespawnTimer -= Time::DeltaTime();
+		//if (mWardenRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)

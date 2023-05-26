@@ -39,6 +39,7 @@ namespace jh
 
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
@@ -77,6 +78,7 @@ namespace jh
 	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterialKey";
 
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY = L"CagedNormalMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
 	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
@@ -378,6 +380,10 @@ namespace jh
 		pCagedShokerAtlasTexture->Load(L"caged shocker 110x42.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, pCagedShokerAtlasTexture);
 
+		Texture* pCagedShokerNormalMapTexture = new Texture();
+		pCagedShokerNormalMapTexture->Load(L"caged shocker 110x42_NM.png");
+		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, pCagedShokerNormalMapTexture);
+
 		Texture* pSweeperAtlasTexture = new Texture();
 		pSweeperAtlasTexture->Load(L"Sweeper.png");
 		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
@@ -486,6 +492,9 @@ namespace jh
 
 		Material* pCagedMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pCagedMaterial);
+
+		Material* pCagedNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY));
+		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY, pCagedNormalMapMaterial);
 
 		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);

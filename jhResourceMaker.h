@@ -50,6 +50,7 @@ namespace jh
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY;
+		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_SWEEPER_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_WARDEN_ATLAS_KEY;
 
@@ -77,6 +78,7 @@ namespace jh
 		static const std::wstring PLAYER_MATERIAL_KEY;
 		static const std::wstring PLAYER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_CAGED_SHOKER_MATERIAL_KEY;
+		static const std::wstring MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_SWEEPER_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_MATERIAL_KEY;
 		static const std::wstring BATTLE_BG_MATERIAL_KEY;
@@ -85,6 +87,7 @@ namespace jh
 		static const std::wstring HIT_EFFECT_MATERIAL_KEY;
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
+
 
 		static const std::wstring DEBUG_MATERIAL_KEY;
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
