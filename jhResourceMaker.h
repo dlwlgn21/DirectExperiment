@@ -75,7 +75,15 @@ namespace jh
 		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
 		static const std::wstring HIT_EFFECT_TEXTURE_ATLAS_KEY;
 		static const std::wstring GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY;
+		static const std::wstring GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY;
+		static const std::wstring BG_TREE_1_TEXTURE_KEY;
+		static const std::wstring BG_TREE_1_NORMAL_MAP_TEXTURE_KEY;
+		static const std::wstring BG_TREE_2_TEXTURE_KEY;
+		static const std::wstring BG_TREE_2_NORMAL_MAP_TEXTURE_KEY;
+
+
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
+		static const std::wstring BG_MOON_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_TEXTURE_KEY;
 		static const std::wstring BRIK_DIFFUSE_TEXTURE_KEY;
 		static const std::wstring BRIK_NORMAL_MAP_TEXTURE_KEY;
@@ -102,10 +110,18 @@ namespace jh
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 		static const std::wstring BG_MOON_MATERIAL_KEY;
+		static const std::wstring BG_MOON_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_MATERIAL_KEY;
 		static const std::wstring OBELISK_MATERIAL_KEY;
 		static const std::wstring OBELISK_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring GREEN_PORTAL_EFFECT_MATERIAL_KEY;
+		static const std::wstring GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring BG_TREE_1_MATERIAL_KEY;
+		static const std::wstring BG_TREE_1_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring BG_TREE_2_MATERIAL_KEY;
+		static const std::wstring BG_TREE_2_NORMAL_MAP_MATERIAL_KEY;
+		
+
 
 		static const std::wstring PARALLAX_BG_MATERIAL_1_KEY;
 		static const std::wstring PARALLAX_BG_MATERIAL_2_KEY;

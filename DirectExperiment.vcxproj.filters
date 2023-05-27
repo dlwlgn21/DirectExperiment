@@ -271,6 +271,9 @@
     <Filter Include="Resource\Mesh\Base">
       <UniqueIdentifier>{219916a5-20b5-4512-8efc-17fa48795f75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\BG\Tree">
+      <UniqueIdentifier>{790cd36f-6f20-4ca2-9fb4-4e5d7a86abc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -513,6 +516,9 @@
     <ClInclude Include="jhNormalMapMesh.h">
       <Filter>Resource\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="jhBGTreeObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG\Tree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -736,6 +742,9 @@
     </ClCompile>
     <ClCompile Include="jhNormalMapMesh.cpp">
       <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBGTreeObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

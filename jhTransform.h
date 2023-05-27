@@ -20,6 +20,7 @@ namespace jh
 
 
 		__forceinline void SetPosition(const jh::math::Vector3 pos)			{ mPosition = pos; }
+		__forceinline void SetOnlyXPosition(const float xPos)				{ mPosition.x = xPos; }
 		__forceinline void SetRotation(const jh::math::Vector3 rotation)	{ mRotation = rotation; }
 		__forceinline void SetScale(const jh::math::Vector3 scale)			{ mScale = scale; }
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }

@@ -63,17 +63,23 @@ namespace jh
 	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 	const std::wstring ResourceMaker::HIT_EFFECT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
 
-	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorderKey";
-	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBarKey";
-	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBarKey";
+	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
+	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
+	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 
-	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTextureKey";
+	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTexture";
+	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_TEXTURE_KEY = L"BGMoonNormalTexture";
+	const std::wstring ResourceMaker::BG_TREE_1_TEXTURE_KEY = L"BGTree1Texture";
+	const std::wstring ResourceMaker::BG_TREE_1_NORMAL_MAP_TEXTURE_KEY = L"BGTree1NormalTexture";
+	const std::wstring ResourceMaker::BG_TREE_2_TEXTURE_KEY = L"BGTree2TextureKey";
+	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_TEXTURE_KEY = L"BGTree2NormalTexture";
 
-	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTextureKey";
-	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTextureKey";
+	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTexture";
+	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
+	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
 
-	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTextureKey";
-	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTextureKey";
+	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTexture";
+	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTexture";
 
 #pragma endregion
 
@@ -101,13 +107,18 @@ namespace jh
 
 	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
 
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY = L"ParallaxMaterial1Key";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY = L"ParallaxMaterial2Key";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY = L"ParallaxMaterial3Key";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4Key";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5Key";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6Key";
-	const std::wstring ResourceMaker::BG_MOON_MATERIAL_KEY = L"BGMoonMaterialKey";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY = L"ParallaxMaterial1";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY = L"ParallaxMaterial2";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY = L"ParallaxMaterial3";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5";
+	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6";
+	const std::wstring ResourceMaker::BG_MOON_MATERIAL_KEY = L"BGMoonMaterial";
+	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_MATERIAL_KEY = L"BGMoonNormalMaterial";
+	const std::wstring ResourceMaker::BG_TREE_1_MATERIAL_KEY = L"BGTree1Material";
+	const std::wstring ResourceMaker::BG_TREE_1_NORMAL_MAP_MATERIAL_KEY = L"BGTree1NormalMaterial";
+	const std::wstring ResourceMaker::BG_TREE_2_MATERIAL_KEY = L"BGTree2Material";
+	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_MATERIAL_KEY = L"BGTree2NormalMaterial";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
@@ -116,6 +127,8 @@ namespace jh
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_MATERIAL_KEY = L"GreenPortalMaterialKey";
+	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
+
 	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
 	const std::wstring ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY = L"BrickNotNormalMaterialKey";
 
@@ -424,13 +437,18 @@ namespace jh
 		pGreenPortalTextureAtlas->Load(L"GreenPortalSpriteSheet.png");
 		ResourcesManager::Insert<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY, pGreenPortalTextureAtlas);
 
+		Texture* pGreenPortalNormalMapTextureAtlas = new Texture();
+		pGreenPortalNormalMapTextureAtlas->Load(L"GreenPortalSpriteSheet_NM.png");
+		ResourcesManager::Insert<Texture>(GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY, pGreenPortalNormalMapTextureAtlas);
+
+
 
 		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"ForeGround23(1).png");
+		pBattleBGTexture->Load(L"ForeGround.png");
 		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY, pBattleBGTexture);
 		
 		Texture* pBattleForegroundNormalMapTexture = new Texture();
-		pBattleForegroundNormalMapTexture->Load(L"ForeGround23(1)_NM.png");
+		pBattleForegroundNormalMapTexture->Load(L"ForeGround_NM.png");
 		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, pBattleForegroundNormalMapTexture);
 
 
@@ -476,6 +494,26 @@ namespace jh
 		pBGMoonTexture->Load(L"MoonSprite.png");
 		ResourcesManager::Insert<Texture>(BG_MOON_ATLAS_TEXTURE_KEY, pBGMoonTexture);
 
+		Texture* pBGMoonNormalMapTexture = new Texture();
+		pBGMoonNormalMapTexture->Load(L"MoonSprite_NM.png");
+		ResourcesManager::Insert<Texture>(BG_MOON_NORMAL_MAP_TEXTURE_KEY, pBGMoonNormalMapTexture);
+
+		Texture* pTree1Texture = new Texture();
+		pTree1Texture->Load(L"Tree 1 Sprite Sheet 112x128.png");
+		ResourcesManager::Insert<Texture>(BG_TREE_1_TEXTURE_KEY, pTree1Texture);
+
+		Texture* pTree1NormalTexture = new Texture();
+		pTree1NormalTexture->Load(L"Tree 1 Sprite Sheet 112x128_NM.png");
+		ResourcesManager::Insert<Texture>(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, pTree1NormalTexture);
+
+		
+		Texture* pTree2Texture = new Texture();
+		pTree2Texture->Load(L"Tree 2 Sprite Sheet 128x96.png");
+		ResourcesManager::Insert<Texture>(BG_TREE_2_TEXTURE_KEY, pTree2Texture);
+
+		Texture* pTree2NormalTexture = new Texture();
+		pTree2NormalTexture->Load(L"Tree 2 Sprite Sheet 128x96_NM.png");
+		ResourcesManager::Insert<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, pTree2NormalTexture);
 
 		Texture* pUITextrue = new Texture();
 		pUITextrue->Load(L"HpBarBorder.png");
@@ -557,6 +595,31 @@ namespace jh
 				ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY))
 			);
 
+
+		ResourcesManager::Insert<Material>(BG_TREE_1_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_TREE_1_TEXTURE_KEY))
+			);
+		
+		ResourcesManager::Insert<Material>(BG_TREE_1_NORMAL_MAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_TREE_1_TEXTURE_KEY), 
+				ResourcesManager::Find<Texture>(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY))
+			);
+
+
+		ResourcesManager::Insert<Material>(BG_TREE_2_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_TREE_2_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_TREE_2_NORMAL_MAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_TREE_2_TEXTURE_KEY),
+				ResourcesManager::Find<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY))
+			);
+
+
 		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
 				ResourcesManager::Find<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY))
@@ -617,6 +680,11 @@ namespace jh
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY))
 			);
+		ResourcesManager::Insert<Material>(BG_MOON_NORMAL_MAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY),
+				ResourcesManager::Find<Texture>(BG_MOON_NORMAL_MAP_TEXTURE_KEY))
+			);
 
 
 		ResourcesManager::Insert<Material>(PLAYER_DASH_EFFECT_MATERIAL_KEY,
@@ -627,6 +695,12 @@ namespace jh
 		ResourcesManager::Insert<Material>(GREEN_PORTAL_EFFECT_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY),
+				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY))
 			);
 
 #pragma region DEBUG

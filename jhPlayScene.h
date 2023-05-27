@@ -1,6 +1,7 @@
 #pragma once
 #include "jhScene.h"
 #include "jhMonsterManager.h"
+#include "jhBGTreeObject.h"
 
 namespace jh
 {
@@ -27,6 +28,7 @@ namespace jh
 		void instantiateEnvObject();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();
+		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);
 
 	};
 }

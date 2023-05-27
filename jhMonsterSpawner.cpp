@@ -12,8 +12,8 @@ using namespace jh::math;
 namespace jh
 {
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 5.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 5.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 3.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 7.0f;
 
 	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, 4.0f);
 	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, 4.0f);
@@ -37,17 +37,17 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 
-		//mCagedShokerRespawnTimer -= Time::DeltaTime();
-		//if (mCagedShokerRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+		mCagedShokerRespawnTimer -= Time::DeltaTime();
+		if (mCagedShokerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
-		//mSweeperRespawnTimer -= Time::DeltaTime();
-		//if (mSweeperRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+		mSweeperRespawnTimer -= Time::DeltaTime();
+		if (mSweeperRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		//mWardenRespawnTimer -= Time::DeltaTime();
-		//if (mWardenRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		mWardenRespawnTimer -= Time::DeltaTime();
+		if (mWardenRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_WARDEN);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)

@@ -133,14 +133,14 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		// Directional Light
 		{
-			//GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			//pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
-			//LightAttribute lightAttribute;
-			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			//lightAttribute.ELightType = eLightType::DIRECTIONAL;
-			//lightAttribute.Diffuse = WHITE_COLOR;
-			//Light* pDirLightComponent = new Light(lightAttribute);
-			//pDirLightObject->AddComponent(pDirLightComponent);
+			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
+			LightAttribute lightAttribute;
+			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			lightAttribute.ELightType = eLightType::DIRECTIONAL;
+			lightAttribute.Diffuse = WHITE_COLOR;
+			Light* pDirLightComponent = new Light(lightAttribute);
+			pDirLightObject->AddComponent(pDirLightComponent);
 		}
 		// Point Light
 		{
@@ -230,12 +230,13 @@ namespace jh
 	}
 	void PlayScene::instantiateParallaxObjects()
 	{
-		// BattleBG
-		const float ASPECT_RATIO = 9.24f;
+		// ForeGround
+		const float ASPECT_RATIO = 18.0f;
 		const float MAG = 10.0f;
+		const float FORE_GOROUND_MAG = 8.0f;
 
 		const Vector3 PARALLAX_SCLAE_VECTOR(16 * MAG, MAG, 1.0f);
-		const Vector3 PARALLAX_ORIGINAL_SCLAE_VECTOR(ASPECT_RATIO * MAG, MAG, 1.0f);
+		const Vector3 FORE_GROUND_SCLAE_VECTOR(ASPECT_RATIO * FORE_GOROUND_MAG, FORE_GOROUND_MAG, 1.0f);
 
 
 		const float PARALLAX_ASPECT_RATIO = 2.1f;
@@ -243,9 +244,9 @@ namespace jh
 
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
-			pBGObject->SetName(L"BGObject");
-			pBGObject->GetTransform()->SetScale(PARALLAX_ORIGINAL_SCLAE_VECTOR);
-			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -2.6f, 10.0f));
+			pBGObject->SetName(L"ForeGround");
+			pBGObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
+			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, 10.0f));
 		}
 
 		{
@@ -285,7 +286,27 @@ namespace jh
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
 		ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
+
+		const float X_DIFF_POS = 7.0f;
+		instantiateEnvTreeObject(1.0f, eTreeShapeType::HIGH, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(X_DIFF_POS, eTreeShapeType::HIGH, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(X_DIFF_POS * 3, eTreeShapeType::HIGH, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(X_DIFF_POS * 4, eTreeShapeType::HIGH, eTreeAnimType::OVER_GROWN);
+
+
+		instantiateEnvTreeObject(-1.0f, eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 1), eTreeShapeType::WIDE, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 3), eTreeShapeType::WIDE, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 5), eTreeShapeType::WIDE, eTreeAnimType::OVER_GROWN);
 	}
+
+	void PlayScene::instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType)
+	{
+		BGTreeObject* pBGTreeObject = new BGTreeObject(eTreeType, eAnimType);
+		pBGTreeObject->GetTransform()->SetOnlyXPosition(xPos);
+		this->AddGameObject(pBGTreeObject, eLayerType::BACKGROUND);
+	}
+
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{
 		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);
