@@ -32,9 +32,9 @@ namespace jh
 	}
 	void BattleBGImageObject::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::BATTLE_BG_MESH_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
 		assert(pMesh != nullptr);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BATTLE_BG_MATERIAL_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
 		this->AddComponent(pSpriteRenderer);

@@ -54,7 +54,7 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
     float3 worldNormal;
     float3 normalMapSample;
     const uint SECOND_DIMENTION = 1;
-    const float AMBIENT_AMOUNT = 0.05;
+    const float AMBIENT_AMOUNT = 0.05f;
     const float3 AMBIENT = float3(AMBIENT_AMOUNT, AMBIENT_AMOUNT, AMBIENT_AMOUNT);
     if (AnimationType == SECOND_DIMENTION)
     {

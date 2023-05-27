@@ -72,7 +72,7 @@ namespace jh
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
 		MonsterSpawner::GetInstance().Initialize(pPlayerScript);
-		instantiateLight();
+		instantiateLight(pPlayerScript);
 		instantiateParallaxObjects();
 		instantiateEnvObject();
 		instantiateUIObject(pPlayerScript);
@@ -128,23 +128,24 @@ namespace jh
 		Scene::Release();
 	}
 
-	void PlayScene::instantiateLight()
+	void PlayScene::instantiateLight(PlayerScript* pPlayerScript)
 	{
+		assert(pPlayerScript != nullptr);
 		// Directional Light
 		{
-			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
-			LightAttribute lightAttribute;
-			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			lightAttribute.ELightType = eLightType::DIRECTIONAL;
-			lightAttribute.Diffuse = WHITE_COLOR;
-			Light* pDirLightComponent = new Light(lightAttribute);
-			pDirLightObject->AddComponent(pDirLightComponent);
+			//GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
+			//pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
+			//LightAttribute lightAttribute;
+			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			//lightAttribute.ELightType = eLightType::DIRECTIONAL;
+			//lightAttribute.Diffuse = WHITE_COLOR;
+			//Light* pDirLightComponent = new Light(lightAttribute);
+			//pDirLightObject->AddComponent(pDirLightComponent);
 		}
 		// Point Light
 		{
 			GameObject* pPointLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			pPointLightObject->GetTransform()->SetPosition(Vector3(-2.0f, -2.0f, -1.0f));
+			pPointLightObject->GetTransform()->SetPosition(Vector3(-10.0f, -2.0f, -1.0f));
 			LightAttribute lightAttribute;
 			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
 			lightAttribute.ELightType = eLightType::POINT;
@@ -152,6 +153,7 @@ namespace jh
 			lightAttribute.Radius = 30.0f;
 			Light* pPointLightComponent = new Light(lightAttribute);
 			pPointLightObject->AddComponent(pPointLightComponent);
+			pPointLightObject->GetTransform()->SetParent(pPlayerScript->GetOwner());
 		}
 
 	}
@@ -188,6 +190,14 @@ namespace jh
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
+
+		//LightAttribute lightAttribute;
+		//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+		//lightAttribute.ELightType = eLightType::POINT;
+		//lightAttribute.Diffuse = WHITE_COLOR;
+		//lightAttribute.Radius = 20.0f;
+		//Light* pPointLightComponent = new Light(lightAttribute);
+		//pPlayer->AddComponent(pPointLightComponent);
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, SCENE_COLLIDER_Z_VALUE));
@@ -227,6 +237,10 @@ namespace jh
 		const Vector3 PARALLAX_SCLAE_VECTOR(16 * MAG, MAG, 1.0f);
 		const Vector3 PARALLAX_ORIGINAL_SCLAE_VECTOR(ASPECT_RATIO * MAG, MAG, 1.0f);
 
+
+		const float PARALLAX_ASPECT_RATIO = 2.1f;
+		const Vector3 PARALLAX_BG_SCLAE_VECTOR(PARALLAX_ASPECT_RATIO * MAG, MAG, 1.0f);
+
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"BGObject");
@@ -237,23 +251,23 @@ namespace jh
 		{
 			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
 			pParallaxOne->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY);
-			pParallaxOne->GetTransform()->SetScale(Vector3(PARALLAX_ORIGINAL_SCLAE_VECTOR));
+			pParallaxOne->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
 			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
 			pParallaxTwo->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY);
-			pParallaxTwo->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			pParallaxTwo->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
 			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, -0.4f, PARALLAX_2_DEPTH));
 
-			ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
-			pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
-			pParallaxThree->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
-			pParallaxThree->GetTransform()->SetPosition(Vector3(0.0f, 0.5f, PARALLAX_3_DEPTH));
+			//ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
+			//pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
+			//pParallaxThree->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			//pParallaxThree->GetTransform()->SetPosition(Vector3(0.0f, 0.5f, PARALLAX_3_DEPTH));
 
-			ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
-			pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
-			pParallaxFour->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
-			pParallaxFour->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_4_DEPTH));
+			//ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
+			//pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
+			//pParallaxFour->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
+			//pParallaxFour->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_4_DEPTH));
 
 			//ParallaxObject* pParallaxFive = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_5_DEPTH);
 			//pParallaxFive->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY);

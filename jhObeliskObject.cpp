@@ -19,7 +19,7 @@ namespace jh
 		setAnimator();
 		setRenderer();
 		Vector3 prePos = GetTransform()->GetPosition();
-		GetTransform()->SetPosition(Vector3(-10.0f, 0.45f, 6.0f));
+		GetTransform()->SetPosition(Vector3(-10.0f, 0.45f, 4.0f));
 		GetTransform()->SetScale(Vector3(10.0f, 10.0f, 1.0f));
 	}
 	void ObeliskObject::setAnimator()
@@ -52,8 +52,8 @@ namespace jh
 	}
 	void ObeliskObject::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::OBELISK_MATERIAL_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::OBELISK_NORMAL_MAP_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);

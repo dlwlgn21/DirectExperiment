@@ -45,9 +45,11 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
 	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
+	const std::wstring ResourceMaker::OBELISK_TEXTURE_NORMAL_MAP_KEY = L"ObeliskNoramlTextureKey";
 
 
-	const std::wstring ResourceMaker::BATTLE_BG_TEXTURE_KEY = L"BattleBGTextureKey";
+	const std::wstring ResourceMaker::BATTLE_FOREGROUND_TEXTURE_KEY = L"BattleBGTextureKey";
+	const std::wstring ResourceMaker::BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY = L"BattleForegroundNomal";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
 
 	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_1_KEY = L"Parallax1TextureKey";
@@ -86,8 +88,10 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterialKey";
 	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
+	const std::wstring ResourceMaker::OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
 
 	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
+	const std::wstring ResourceMaker::BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY = L"BatteForegroundNoramlMapKey";
 	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
 	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
 
@@ -411,6 +415,10 @@ namespace jh
 		// Obelisk.png
 		pObeliskAtlasTexture->Load(L"ObeliskEffects.png");
 		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
+		Texture* pObeliskNormalMapTexture = new Texture();
+		pObeliskNormalMapTexture->Load(L"ObeliskEffects_NM.png");
+		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_NORMAL_MAP_KEY, pObeliskNormalMapTexture);
+
 
 		Texture* pGreenPortalTextureAtlas = new Texture();
 		pGreenPortalTextureAtlas->Load(L"GreenPortalSpriteSheet.png");
@@ -419,7 +427,13 @@ namespace jh
 
 		Texture* pBattleBGTexture = new Texture();
 		pBattleBGTexture->Load(L"ForeGround23(1).png");
-		ResourcesManager::Insert<Texture>(BATTLE_BG_TEXTURE_KEY, pBattleBGTexture);
+		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY, pBattleBGTexture);
+		
+		Texture* pBattleForegroundNormalMapTexture = new Texture();
+		pBattleForegroundNormalMapTexture->Load(L"ForeGround23(1)_NM.png");
+		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, pBattleForegroundNormalMapTexture);
+
+
 
 		Texture* pBattleParrarellBGTxtrue = new Texture();
 		pBattleParrarellBGTxtrue->Load(L"SkyMerge.png");
@@ -442,21 +456,21 @@ namespace jh
 		pParralaxTxtrue->Load(L"parallax2.png");
 		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_2_KEY, pParralaxTxtrue);
 
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax3.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
+		//pParralaxTxtrue = new Texture();
+		//pParralaxTxtrue->Load(L"parallax3.png");
+		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
 
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax4.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
+		//pParralaxTxtrue = new Texture();
+		//pParralaxTxtrue->Load(L"parallax4.png");
+		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
 
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax5.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_5_KEY, pParralaxTxtrue);
+		//pParralaxTxtrue = new Texture();
+		//pParralaxTxtrue->Load(L"parallax5.png");
+		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_5_KEY, pParralaxTxtrue);
 
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax6.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
+		//pParralaxTxtrue = new Texture();
+		//pParralaxTxtrue->Load(L"parallax6.png");
+		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
 
 		Texture* pBGMoonTexture = new Texture();
 		pBGMoonTexture->Load(L"MoonSprite.png");
@@ -527,9 +541,21 @@ namespace jh
 				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_ATLAS_KEY))
 			);
 
+		ResourcesManager::Insert<Material>(OBELISK_NORMAL_MAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_ATLAS_KEY),
+				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_NORMAL_MAP_KEY))
+			);
 
-		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_BG_TEXTURE_KEY));
+
+		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY));
 		ResourcesManager::Insert<Material>(BATTLE_BG_MATERIAL_KEY, pBattleBGMaterial);
+
+		ResourcesManager::Insert<Material>(BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY,
+			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY),
+				ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY))
+			);
 
 		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),

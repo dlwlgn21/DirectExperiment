@@ -20,7 +20,7 @@ namespace jh
 		void AddMonster(const MonsterPackage& monPack);
 
 	private:
-		void instantiateLight();
+		void instantiateLight(PlayerScript* pPlayerScript);
 		PlayerScript* instantiateCameraAndPlayer();
 		void instantiateMonsters(PlayerScript* pPlayerScript);
 		void instantiateParallaxObjects();

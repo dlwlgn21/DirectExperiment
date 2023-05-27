@@ -58,7 +58,10 @@ namespace jh
 
 
 		static const std::wstring OBELISK_TEXTURE_ATLAS_KEY;
-		static const std::wstring BATTLE_BG_TEXTURE_KEY;
+		static const std::wstring OBELISK_TEXTURE_NORMAL_MAP_KEY;
+		static const std::wstring BATTLE_FOREGROUND_TEXTURE_KEY;
+		static const std::wstring BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY;
+
 		static const std::wstring BATTLE_PARRARELL_BG_TEXTURE_KEY;
 		static const std::wstring PARALLAX_BG_TEXTURE_1_KEY;
 		static const std::wstring PARALLAX_BG_TEXTURE_2_KEY;
@@ -91,6 +94,7 @@ namespace jh
 		static const std::wstring HIT_EFFECT_MATERIAL_KEY;
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
+		static const std::wstring BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY;
 
 
 		static const std::wstring DEBUG_MATERIAL_KEY;
@@ -100,6 +104,7 @@ namespace jh
 		static const std::wstring BG_MOON_MATERIAL_KEY;
 		static const std::wstring PLAYER_DASH_EFFECT_MATERIAL_KEY;
 		static const std::wstring OBELISK_MATERIAL_KEY;
+		static const std::wstring OBELISK_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring GREEN_PORTAL_EFFECT_MATERIAL_KEY;
 
 		static const std::wstring PARALLAX_BG_MATERIAL_1_KEY;
