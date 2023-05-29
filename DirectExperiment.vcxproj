@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhBGGroundGrass.h" />
+    <ClInclude Include="jhBGLightningObject.h" />
     <ClInclude Include="jhBGMushRoomSatueObject.h" />
     <ClInclude Include="jhAnimatedGameObject.h" />
     <ClInclude Include="jhAnimation.h" />
@@ -218,6 +220,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhBGGroundGrass.cpp" />
+    <ClCompile Include="jhBGLightningObject.cpp" />
     <ClCompile Include="jhBGMushRoomSatueObject.cpp" />
     <ClCompile Include="jhAnimatedGameObject.cpp" />
     <ClCompile Include="jhAnimation.cpp" />

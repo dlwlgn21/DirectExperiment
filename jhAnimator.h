@@ -55,6 +55,17 @@ namespace jh
 			const float duration,
 			const float magnification
 		);
+
+		Animation* CreateVertical(
+			const std::wstring& animKey,
+			Texture* pAtalsImage,
+			const jh::math::Vector2 leftTop,
+			const jh::math::Vector2 seperatingSize,
+			const jh::math::Vector2 offset,
+			const UINT spriteCount,
+			const float duration,
+			const float magnification
+		);
 		void SetCurrentAnimation(Animation* pAnimation) { assert(pAnimation != nullptr); mpCurrAnimatingAnimation = pAnimation; }
 		void PlayAnimation(const std::wstring& key, bool bIsLooping);
 		void PlayAnimationWithReset(const std::wstring& key, bool bIsLooping);

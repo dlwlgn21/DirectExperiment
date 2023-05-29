@@ -12,7 +12,7 @@ namespace jh
 		: GameObject(eLayerType::BACKGROUND)
 	{
 		setRenderer();
-		setScript();
+		//setScript();
 	}
 	void BattleBGImageObject::Initialize()
 	{

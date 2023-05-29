@@ -5,6 +5,13 @@ static constexpr const float BG_TREE_Z_VALUE = 7.0f;
 static constexpr const float BG_FLOWER_Z_VALUE = 6.5f;
 static constexpr const float BG_TORCH_Z_VALUE = 6.3f;
 static constexpr const float BG_MUSHROOM_STATUE_Z_VALUE = 6.2f;
+static constexpr const float BG_LARGE_LIGHTNING__Z_VALUE = 6.2f;
+
+
+// SPECIAL FOR FOREGROUND
+static constexpr const float BG_FOREGROUND_GRASS_Z_VALUE = 1.0f;
+static constexpr const float BG_FOREGROUND_Z_VALUE = 1.5f;
+
 #pragma endregion
 
 #pragma region MONSTER

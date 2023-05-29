@@ -38,9 +38,12 @@
 #include "jhBGFlowerObject.h"
 #include "jhBGTorchObject.h"
 #include "jhBGMushRoomSatueObject.h"
+#include "jhBGLightningObject.h"
 #include "jhLight.h"
 #include "jhInput.h"
 #include "jhTime.h"
+#include "jhLayerZValue.h"
+//#include "jhBGGroundGrass.h"
 
 using namespace jh::math;
 
@@ -122,37 +125,7 @@ namespace jh
 
 	void PlayScene::Update()
 	{
-		MonsterSpawner::GetInstance().Update();
-		//assert(pExperimentTransform != nullptr);
-		//static const float SPEED = 10.0f;
-		//Vector3 pos = pExperimentTransform->GetPosition();
-		//if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
-		//{
-		//	pos.x += (SPEED * Time::DeltaTime());
-		//}
-		//else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
-		//{
-		//	pos.x -= (SPEED * Time::DeltaTime());
-		//}
-		//else if (Input::GetKeyState(eKeyCode::UP) == eKeyState::PRESSED)
-		//{
-		//	pos.y += (SPEED * Time::DeltaTime());
-		//}
-		//else if (Input::GetKeyState(eKeyCode::DOWN) == eKeyState::PRESSED)
-		//{
-		//	pos.y -= (SPEED * Time::DeltaTime());
-		//}
-		//else if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
-		//{
-		//	pos.z -= (SPEED * Time::DeltaTime());
-		//}
-		//else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
-		//{
-		//	pos.z += (SPEED * Time::DeltaTime());
-		//}
-
-		//pExperimentTransform->SetPosition(pos);
-
+		//MonsterSpawner::GetInstance().Update();
 		Scene::Update();
 	}
 
@@ -286,7 +259,7 @@ namespace jh
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"ForeGround");
 			pBGObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
-			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, 10.0f));
+			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, BG_FOREGROUND_Z_VALUE));
 		}
 
 		{
@@ -326,9 +299,11 @@ namespace jh
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
 		//ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
-		BGMushRoomStatueObject* pBGMush = Instantiate<BGMushRoomStatueObject>(eLayerType::BACKGROUND);
-		pBGMush->SetPosition(-50.0f);
+		BGMushRoomStatueObject* pBGMushroomStatue = Instantiate<BGMushRoomStatueObject>(eLayerType::BACKGROUND);
+		pBGMushroomStatue->SetPosition(-45.0f);
 
+
+		instatiateLightningObejct();
 		instatiateFlowerObejct();
 		instatiateTreeObejct();
 	}
@@ -341,6 +316,27 @@ namespace jh
 		BGTorchObject* pBGTorch = Instantiate<BGTorchObject>(eLayerType::BACKGROUND);
 		pBGTorch->SetPosition(xPos);
 	}
+
+	void PlayScene::instatiateLightningObejct()
+	{
+		BGLightningObject* pBGLargeLightning = new BGLightningObject(eBGLightningType::LARGE);
+		pBGLargeLightning->SetPosition(15.7f);
+		this->AddGameObject(pBGLargeLightning, eLayerType::BACKGROUND);
+
+		pBGLargeLightning = new BGLightningObject(eBGLightningType::LARGE);
+		pBGLargeLightning->SetPosition(-56.1f);
+		this->AddGameObject(pBGLargeLightning, eLayerType::BACKGROUND);
+
+
+		BGLightningObject* pBGSmallLightning = new BGLightningObject(eBGLightningType::SMALL);
+		pBGSmallLightning->SetPosition(34.0f);
+		this->AddGameObject(pBGSmallLightning, eLayerType::BACKGROUND);
+
+		pBGSmallLightning = new BGLightningObject(eBGLightningType::SMALL);
+		pBGSmallLightning->SetPosition(-15.0f);
+		this->AddGameObject(pBGSmallLightning, eLayerType::BACKGROUND);
+	}
+
 
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
 	{

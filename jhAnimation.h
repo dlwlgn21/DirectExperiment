@@ -45,6 +45,17 @@ namespace jh
 			const float magnification
 		);
 
+		void CreateVerticalAnimation(
+			const std::wstring& animKey,
+			Texture* pAtalsImage,
+			const jh::math::Vector2 leftTop,
+			const jh::math::Vector2 seperatingSize,
+			const jh::math::Vector2 offset,
+			const UINT spriteCount,
+			const float duration,
+			const float magnification
+		);
+
 		void SetPipeline();
 		void ClearPipeline();
 		void Reset();

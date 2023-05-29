@@ -69,8 +69,29 @@ namespace jh
 			sprite.AtlasImageSize = Vector2(magnification / width, magnification / height);					// PixelShader에서 아틀라스의 크기를 알게 하기 위해서 넣어주는 값
 			mSpriteSheets.push_back(sprite);
 		}
-
 	}
+
+	void Animation::CreateVerticalAnimation(const std::wstring& animKey, Texture* pAtalsImage, const Vector2 leftTop, const Vector2 seperatingSize, const Vector2 offset, const UINT spriteCount, const float duration, const float magnification)
+	{
+		assert(pAtalsImage != nullptr);
+		mpAtlasImage = pAtalsImage;
+		mAnimKey = animKey;
+		float width = static_cast<float>(pAtalsImage->GetWidth());
+		float height = static_cast<float>(pAtalsImage->GetHeight());
+
+		for (UINT i = 0; i < spriteCount; ++i)
+		{
+			Sprite sprite;
+			// // 텍스처 좌표는 정규화된 좌표니까 0~1사이의 값으로 바꾸어 주어야 함
+			sprite.LeftTop = Vector2(leftTop.x / width, (leftTop.y + (seperatingSize.y * i)) / height);
+			sprite.Size = Vector2(seperatingSize.x / width, seperatingSize.y / height);
+			sprite.Offset = offset;
+			sprite.Duration = duration;
+			sprite.AtlasImageSize = Vector2(magnification / width, magnification / height);					// PixelShader에서 아틀라스의 크기를 알게 하기 위해서 넣어주는 값
+			mSpriteSheets.push_back(sprite);
+		}
+	}
+
 	void Animation::SetPipeline()
 	{
 		assert(mpAtlasImage != nullptr);

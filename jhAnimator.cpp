@@ -86,6 +86,21 @@ namespace jh
 		return pAnimation;
 	}
 
+	Animation* Animator::CreateVertical(const std::wstring& animKey, Texture* pAtalsImage, const jh::math::Vector2 leftTop, const jh::math::Vector2 seperatingSize, const jh::math::Vector2 offset, const UINT spriteCount, const float duration, const float magnification)
+	{
+		if (pAtalsImage == nullptr) { assert(false); }
+
+		Animation* pAnimation = FindAnimationOrNull(animKey);
+		if (pAnimation != nullptr) { assert(false); }
+
+		pAnimation = new Animation();
+		pAnimation->CreateVerticalAnimation(animKey, pAtalsImage, leftTop, seperatingSize, offset, spriteCount, duration, magnification);
+		mAnimationMap.insert(std::make_pair(animKey, pAnimation));
+		Events* pEvents = new Events();
+		mEventsMap.insert(std::make_pair(animKey, pEvents));
+		return pAnimation;
+	}
+
 	void Animator::PlayAnimation(const std::wstring& key, bool bIsLooping)
 	{
 		Animation* pPrevAnim = mpCurrAnimatingAnimation;

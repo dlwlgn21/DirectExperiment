@@ -27,6 +27,7 @@ namespace jh
 		void instantiateParallaxObjects();
 		void instantiateEnvObject();
 		void instatiateTreeObejct();
+		void instatiateLightningObejct();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();
 		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);

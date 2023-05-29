@@ -76,6 +76,9 @@ namespace jh
 	const std::wstring ResourceMaker::BG_FLOWER_TEXTURE_KEY = L"BGFlowerTexture";
 	const std::wstring ResourceMaker::BG_TORCH_TEXTURE_KEY = L"BGTorchTexture";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_TEXTURE_KEY = L"BGMushStatueTexture";
+	const std::wstring ResourceMaker::BG_FOREGROUND_GRASS_TEXTURE_KEY = L"BGForeGrassTexture";
+	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_TEXTURE_KEY = L"BGLargeLightningTexture";
+	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_TEXTURE_KEY = L"BGSmallLightningTexture";
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTexture";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
@@ -125,6 +128,9 @@ namespace jh
 	const std::wstring ResourceMaker::BG_FLOWER_MATERIAL_KEY = L"BGFlowerMaterial";
 	const std::wstring ResourceMaker::BG_TORCH_MATERIAL_KEY = L"BGTorchMaterial";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_MATERIAL_KEY = L"BGMushStatueMaterial";
+	const std::wstring ResourceMaker::BG_FOREGROUND_GRASS_MATERIAL_KEY = L"BGForeGrassMaterial";
+	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_MATERIAL_KEY = L"BGLargeLightningMaterial";
+	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_MATERIAL_KEY = L"BGSmallLightningMaterial";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
@@ -533,6 +539,18 @@ namespace jh
 		pBGMushRoomTexture->Load(L"BG_MushRoomStatue_192x192.png");
 		ResourcesManager::Insert<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY, pBGMushRoomTexture);
 
+		Texture* pBGForegrondGrass = new Texture();
+		pBGForegrondGrass->Load(L"BG_FOREGROUND_Grass_212x11.png");
+		ResourcesManager::Insert<Texture>(BG_FOREGROUND_GRASS_TEXTURE_KEY, pBGForegrondGrass);
+
+		Texture* pBGLargeLightning = new Texture();
+		pBGLargeLightning->Load(L"BG_Large_Lightning_64x48.png");
+		ResourcesManager::Insert<Texture>(BG_LARGE_LIGHTNING_TEXTURE_KEY, pBGLargeLightning);
+
+		Texture* pBGSmallLightning = new Texture();
+		pBGSmallLightning->Load(L"BG_SmallLightning_32x32.png");
+		ResourcesManager::Insert<Texture>(BG_SMALL_LIGHTNING_TEXTURE_KEY, pBGSmallLightning);
+
 
 		Texture* pUITextrue = new Texture();
 		pUITextrue->Load(L"HpBarBorder.png");
@@ -653,6 +671,20 @@ namespace jh
 				ResourcesManager::Find<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY))
 			);
 
+		ResourcesManager::Insert<Material>(BG_FOREGROUND_GRASS_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_FOREGROUND_GRASS_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_LARGE_LIGHTNING_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_LARGE_LIGHTNING_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_SMALL_LIGHTNING_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_SMALL_LIGHTNING_TEXTURE_KEY))
+			);
 
 		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
