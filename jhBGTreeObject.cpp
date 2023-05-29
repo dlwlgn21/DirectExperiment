@@ -8,6 +8,7 @@
 #include "jhMesh.h"
 #include "jhMaterial.h"
 #include "jhSpriteRenderer.h"
+#include "jhLayerZValue.h"
 
 using namespace jh::math;
 
@@ -18,26 +19,26 @@ namespace jh
 		, meTreeShapeType(eShapeType)
 		, meTreeAnimType(eAnimType)
 	{
+		const float SCALE_VALUE = 10.0f;
 		setAnimator();
 		setRenderer();
-		Vector3 prePos = GetTransform()->GetPosition();
 		switch (meTreeShapeType)
 		{
 		case eTreeShapeType::HIGH:
 		{
-			GetTransform()->SetPosition(Vector3(-5.0f, 0.45f, 5.0f));
+			GetTransform()->SetPosition(Vector3(-5.0f, 0.45f, BG_TREE_Z_VALUE));
 			break;
 		}
 		case eTreeShapeType::WIDE:
 		{
-			GetTransform()->SetPosition(Vector3(-5.0f, -0.35f, 5.0f));
+			GetTransform()->SetPosition(Vector3(-5.0f, -0.35f, BG_TREE_Z_VALUE));
 			break;
 		}
 		default:
 			assert(false);
 			break;
 		}
-		GetTransform()->SetScale(Vector3(10.0f, 10.0f, 1.0f));
+		GetTransform()->SetOnlyXYScale(SCALE_VALUE, SCALE_VALUE);
 	}
 	void BGTreeObject::setAnimator()
 	{

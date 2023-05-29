@@ -111,7 +111,7 @@ namespace jh::graphics
 	}
 	void GraphicDeviceDX11::ClearRenderTargetAndDepthStencilView()
 	{
-		static float CLEAR_COLOR[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+		static float CLEAR_COLOR[4] = { 0.258f, 0.256f, 0.266f, 1.0f };
 		mcpDeviceContext->ClearRenderTargetView(
 			mcpRenderTargetView.Get(),
 			CLEAR_COLOR

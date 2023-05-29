@@ -19,10 +19,15 @@ namespace jh
 		void SetPipeline();
 
 
-		__forceinline void SetPosition(const jh::math::Vector3 pos)			{ mPosition = pos; }
-		__forceinline void SetOnlyXPosition(const float xPos)				{ mPosition.x = xPos; }
-		__forceinline void SetRotation(const jh::math::Vector3 rotation)	{ mRotation = rotation; }
-		__forceinline void SetScale(const jh::math::Vector3 scale)			{ mScale = scale; }
+		__forceinline void SetPosition(const jh::math::Vector3 pos)					{ mPosition = pos; }
+		__forceinline void SetOnlyXPosition(const float xPos)						{ mPosition.x = xPos; }
+		__forceinline void SetOnlyYPosition(const float yPos)						{ mPosition.y = yPos; }
+		__forceinline void SetOnlyXYPosition(const float xPos, const float yPos)	{ mPosition.x = xPos; mPosition.y = yPos; }
+		__forceinline void SetRotation(const jh::math::Vector3 rotation)			{ mRotation = rotation; }
+
+		__forceinline void SetOnlyXYScale(const float xScale, const float yScale)	{ mScale.x = xScale; mScale.y = yScale; }
+		__forceinline void SetOnlyXYScale(const float xAndyScale)	{ mScale.x = xAndyScale; mScale.y = xAndyScale; }
+		__forceinline void SetScale(const jh::math::Vector3 scale)					{ mScale = scale; }
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 
 		__forceinline jh::math::Vector3 GetPosition() const { return mPosition; }

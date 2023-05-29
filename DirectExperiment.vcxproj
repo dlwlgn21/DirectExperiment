@@ -131,13 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhBGMushRoomSatueObject.h" />
     <ClInclude Include="jhAnimatedGameObject.h" />
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
     <ClInclude Include="jhBattleBGImageObject.h" />
     <ClInclude Include="jhBattleBGScript.h" />
     <ClInclude Include="jhBattleParrarellImageObject.h" />
+    <ClInclude Include="jhBGFlowerObject.h" />
     <ClInclude Include="jhBGMoonObject.h" />
+    <ClInclude Include="jhBGTorchObject.h" />
     <ClInclude Include="jhBGTreeObject.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraManager.h" />
@@ -162,6 +165,7 @@
     <ClInclude Include="jhHelper.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
+    <ClInclude Include="jhLayerZValue.h" />
     <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhLightingManager.h" />
     <ClInclude Include="jhMaterial.h" />
@@ -214,13 +218,16 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhBGMushRoomSatueObject.cpp" />
     <ClCompile Include="jhAnimatedGameObject.cpp" />
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
     <ClCompile Include="jhBattleBGImageObject.cpp" />
     <ClCompile Include="jhBattleBGScript.cpp" />
     <ClCompile Include="jhBattleParrarellImageObject.cpp" />
+    <ClCompile Include="jhBGFlowerObject.cpp" />
     <ClCompile Include="jhBGMoonObject.cpp" />
+    <ClCompile Include="jhBGTorchObject.cpp" />
     <ClCompile Include="jhBGTreeObject.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraManager.cpp" />

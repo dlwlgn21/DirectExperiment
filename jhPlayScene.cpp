@@ -1,3 +1,4 @@
+#include <random>
 #include "jhPlayScene.h"
 #include "jhResourcesManager.h"
 #include "jhResourceMaker.h"
@@ -34,6 +35,9 @@
 #include "jhMonsterObjectPool.h"
 #include "jhMonsterSpawner.h"
 #include "jhHitEffectObject.h"
+#include "jhBGFlowerObject.h"
+#include "jhBGTorchObject.h"
+#include "jhBGMushRoomSatueObject.h"
 #include "jhLight.h"
 #include "jhInput.h"
 #include "jhTime.h"
@@ -59,6 +63,41 @@ static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
 namespace jh
 {
 	Transform* pExperimentTransform;
+
+
+	void instatiateFlowerObejct()
+	{
+		BGFlowerObject* pBGFlower = nullptr;
+		const float INIT_FLOWER_X_POS = -75.0f;
+		const int FLOWER_COUNT = 10;
+		const int MAX_X_FOREGROUND_DISTANCE = 70;
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(-MAX_X_FOREGROUND_DISTANCE, MAX_X_FOREGROUND_DISTANCE);
+
+		for (int i = 1; i <= FLOWER_COUNT; ++i)
+		{
+			pBGFlower = Instantiate<BGFlowerObject>(eLayerType::BACKGROUND);
+			pBGFlower->SetPosition(static_cast<float>(dist(gen)));
+		}
+	}
+
+	void PlayScene::instatiateTreeObejct()
+	{
+		const float X_DIFF_POS = 7.0f;
+		instantiateEnvTreeObject(3.0f, eTreeShapeType::HIGH, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(X_DIFF_POS, eTreeShapeType::WIDE, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(X_DIFF_POS * 3, eTreeShapeType::HIGH, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(X_DIFF_POS * 4, eTreeShapeType::WIDE, eTreeAnimType::OVER_GROWN);
+
+
+		instantiateEnvTreeObject(-5.0f, eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(-X_DIFF_POS - 3.0f, eTreeShapeType::HIGH, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 3), eTreeShapeType::WIDE, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 4), eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 5), eTreeShapeType::HIGH, eTreeAnimType::OVER_GROWN);
+	}
+
 
 	PlayScene::PlayScene()
 		: Scene(eSceneType::PLAY_SCENE)
@@ -239,8 +278,9 @@ namespace jh
 		const Vector3 FORE_GROUND_SCLAE_VECTOR(ASPECT_RATIO * FORE_GOROUND_MAG, FORE_GOROUND_MAG, 1.0f);
 
 
-		const float PARALLAX_ASPECT_RATIO = 2.1f;
-		const Vector3 PARALLAX_BG_SCLAE_VECTOR(PARALLAX_ASPECT_RATIO * MAG, MAG, 1.0f);
+		const float PARALLAX_MAG = 6.0f;
+		const float PARALLAX_ASPECT_RATIO = 12.8f;
+		const Vector3 PARALLAX_BG_SCLAE_VECTOR(PARALLAX_ASPECT_RATIO * PARALLAX_MAG, PARALLAX_MAG, 1.0f);
 
 		{
 			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
@@ -252,23 +292,23 @@ namespace jh
 		{
 			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
 			pParallaxOne->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY);
-			pParallaxOne->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
-			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
+			pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
+			//pParallaxOne->GetTransform()->SetOnlyXYPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
 			pParallaxTwo->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY);
 			pParallaxTwo->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
-			pParallaxTwo->GetTransform()->SetPosition(Vector3(0.0f, -0.4f, PARALLAX_2_DEPTH));
+			pParallaxTwo->GetTransform()->SetOnlyYPosition(-3.3f);
 
-			//ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
-			//pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
-			//pParallaxThree->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
-			//pParallaxThree->GetTransform()->SetPosition(Vector3(0.0f, 0.5f, PARALLAX_3_DEPTH));
+			ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
+			pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
+			pParallaxThree->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
+			pParallaxThree->GetTransform()->SetOnlyYPosition(-2.5f);
 
-			//ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
-			//pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
-			//pParallaxFour->GetTransform()->SetScale(PARALLAX_SCLAE_VECTOR);
-			//pParallaxFour->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_4_DEPTH));
+			ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
+			pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
+			pParallaxFour->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
+			pParallaxFour->GetTransform()->SetOnlyYPosition(-2.0f);
 
 			//ParallaxObject* pParallaxFive = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_5_DEPTH);
 			//pParallaxFive->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY);
@@ -285,19 +325,12 @@ namespace jh
 	void PlayScene::instantiateEnvObject()
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
-		ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
+		//ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
+		BGMushRoomStatueObject* pBGMush = Instantiate<BGMushRoomStatueObject>(eLayerType::BACKGROUND);
+		pBGMush->SetPosition(-50.0f);
 
-		const float X_DIFF_POS = 7.0f;
-		instantiateEnvTreeObject(1.0f, eTreeShapeType::HIGH, eTreeAnimType::BLOOD);
-		instantiateEnvTreeObject(X_DIFF_POS, eTreeShapeType::HIGH, eTreeAnimType::MARKINGS);
-		instantiateEnvTreeObject(X_DIFF_POS * 3, eTreeShapeType::HIGH, eTreeAnimType::BLINK);
-		instantiateEnvTreeObject(X_DIFF_POS * 4, eTreeShapeType::HIGH, eTreeAnimType::OVER_GROWN);
-
-
-		instantiateEnvTreeObject(-1.0f, eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 1), eTreeShapeType::WIDE, eTreeAnimType::MARKINGS);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 3), eTreeShapeType::WIDE, eTreeAnimType::BLINK);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 5), eTreeShapeType::WIDE, eTreeAnimType::OVER_GROWN);
+		instatiateFlowerObejct();
+		instatiateTreeObejct();
 	}
 
 	void PlayScene::instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType)
@@ -305,6 +338,8 @@ namespace jh
 		BGTreeObject* pBGTreeObject = new BGTreeObject(eTreeType, eAnimType);
 		pBGTreeObject->GetTransform()->SetOnlyXPosition(xPos);
 		this->AddGameObject(pBGTreeObject, eLayerType::BACKGROUND);
+		BGTorchObject* pBGTorch = Instantiate<BGTorchObject>(eLayerType::BACKGROUND);
+		pBGTorch->SetPosition(xPos);
 	}
 
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)

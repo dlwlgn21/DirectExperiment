@@ -73,6 +73,9 @@ namespace jh
 	const std::wstring ResourceMaker::BG_TREE_1_NORMAL_MAP_TEXTURE_KEY = L"BGTree1NormalTexture";
 	const std::wstring ResourceMaker::BG_TREE_2_TEXTURE_KEY = L"BGTree2TextureKey";
 	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_TEXTURE_KEY = L"BGTree2NormalTexture";
+	const std::wstring ResourceMaker::BG_FLOWER_TEXTURE_KEY = L"BGFlowerTexture";
+	const std::wstring ResourceMaker::BG_TORCH_TEXTURE_KEY = L"BGTorchTexture";
+	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_TEXTURE_KEY = L"BGMushStatueTexture";
 
 	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTexture";
 	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
@@ -119,6 +122,9 @@ namespace jh
 	const std::wstring ResourceMaker::BG_TREE_1_NORMAL_MAP_MATERIAL_KEY = L"BGTree1NormalMaterial";
 	const std::wstring ResourceMaker::BG_TREE_2_MATERIAL_KEY = L"BGTree2Material";
 	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_MATERIAL_KEY = L"BGTree2NormalMaterial";
+	const std::wstring ResourceMaker::BG_FLOWER_MATERIAL_KEY = L"BGFlowerMaterial";
+	const std::wstring ResourceMaker::BG_TORCH_MATERIAL_KEY = L"BGTorchMaterial";
+	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_MATERIAL_KEY = L"BGMushStatueMaterial";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
@@ -474,13 +480,13 @@ namespace jh
 		pParralaxTxtrue->Load(L"parallax2.png");
 		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_2_KEY, pParralaxTxtrue);
 
-		//pParralaxTxtrue = new Texture();
-		//pParralaxTxtrue->Load(L"parallax3.png");
-		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax3.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
 
-		//pParralaxTxtrue = new Texture();
-		//pParralaxTxtrue->Load(L"parallax4.png");
-		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
+		pParralaxTxtrue = new Texture();
+		pParralaxTxtrue->Load(L"parallax4.png");
+		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
 
 		//pParralaxTxtrue = new Texture();
 		//pParralaxTxtrue->Load(L"parallax5.png");
@@ -514,6 +520,19 @@ namespace jh
 		Texture* pTree2NormalTexture = new Texture();
 		pTree2NormalTexture->Load(L"Tree 2 Sprite Sheet 128x96_NM.png");
 		ResourcesManager::Insert<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, pTree2NormalTexture);
+
+		Texture* pBGFlowerTexture = new Texture();
+		pBGFlowerTexture->Load(L"BG_Flower_16x16.png");
+		ResourcesManager::Insert<Texture>(BG_FLOWER_TEXTURE_KEY, pBGFlowerTexture);
+
+		Texture* pBGTorchTexture = new Texture();
+		pBGTorchTexture->Load(L"BG_Torch_16x16.png");
+		ResourcesManager::Insert<Texture>(BG_TORCH_TEXTURE_KEY, pBGTorchTexture);
+
+		Texture* pBGMushRoomTexture = new Texture();
+		pBGMushRoomTexture->Load(L"BG_MushRoomStatue_192x192.png");
+		ResourcesManager::Insert<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY, pBGMushRoomTexture);
+
 
 		Texture* pUITextrue = new Texture();
 		pUITextrue->Load(L"HpBarBorder.png");
@@ -617,6 +636,21 @@ namespace jh
 			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(BG_TREE_2_TEXTURE_KEY),
 				ResourcesManager::Find<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_FLOWER_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_FLOWER_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_TORCH_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_TORCH_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(BG_MUSHROOM_STATUE_MATERIAL_KEY,
+			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY))
 			);
 
 

@@ -26,6 +26,7 @@ namespace jh
 		void instantiateMonsters(PlayerScript* pPlayerScript);
 		void instantiateParallaxObjects();
 		void instantiateEnvObject();
+		void instatiateTreeObejct();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateOtherObjects();
 		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);

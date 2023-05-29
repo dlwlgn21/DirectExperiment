@@ -80,6 +80,9 @@ namespace jh
 		static const std::wstring BG_TREE_1_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_TREE_2_TEXTURE_KEY;
 		static const std::wstring BG_TREE_2_NORMAL_MAP_TEXTURE_KEY;
+		static const std::wstring BG_FLOWER_TEXTURE_KEY;
+		static const std::wstring BG_TORCH_TEXTURE_KEY;
+		static const std::wstring BG_MUSHROOM_STATUE_TEXTURE_KEY;
 
 
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
@@ -120,6 +123,9 @@ namespace jh
 		static const std::wstring BG_TREE_1_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_TREE_2_MATERIAL_KEY;
 		static const std::wstring BG_TREE_2_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring BG_FLOWER_MATERIAL_KEY;
+		static const std::wstring BG_TORCH_MATERIAL_KEY;
+		static const std::wstring BG_MUSHROOM_STATUE_MATERIAL_KEY;
 		
 
 

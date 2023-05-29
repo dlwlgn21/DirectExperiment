@@ -39,7 +39,7 @@ namespace jh
 	}
 	void ParallaxObject::SetRenderer(const std::wstring& materialKey)
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::BATTLE_BG_MESH_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
 		assert(pMesh != nullptr);
 		Material* pMaterial = ResourcesManager::Find<Material>(materialKey);
 		assert(pMaterial != nullptr);
