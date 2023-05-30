@@ -56,7 +56,7 @@ namespace jh
 	void HitEffectObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::HIT_EFFECT_MATERIAL_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::EFFECT_HIT_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
@@ -65,14 +65,14 @@ namespace jh
 
 	void HitEffectObject::setAnimator()
 	{
-		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::HIT_EFFECT_TEXTURE_ATLAS_KEY);
+		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_HIT_TEXTURE_ATLAS_KEY);
 		assert(pAtlas != nullptr);
 		const float MAGNIFICATION = 100.0f;
 		const float WIDTH = 82.0f;
 		const float HEIGHT = 65.0f;
 		const float BASIC_ANIM_DURATION = 0.05f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(Vector2::Zero);
+		const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+		const Vector2 OFFSET(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
 		Animation* pAnimation = nullptr;
 		switch (meHitEffectType)
@@ -83,8 +83,8 @@ namespace jh
 				MonsterManager::HIT_COMBO_1_ELECTRIC_EFFECT_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 6),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				6,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION
@@ -93,8 +93,8 @@ namespace jh
 				MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 7),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				8,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION
@@ -104,8 +104,8 @@ namespace jh
 				MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 9),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				9,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION
@@ -119,8 +119,8 @@ namespace jh
 				Player::HIT_1_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 10),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				5,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION
@@ -129,8 +129,8 @@ namespace jh
 				Player::HIT_2_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 11),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				4,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION
@@ -140,8 +140,8 @@ namespace jh
 				Player::HIT_3_ANIM_KEY,
 				pAtlas,
 				Vector2(0.0f, HEIGHT * 12),
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				8,
 				BASIC_ANIM_DURATION,
 				MAGNIFICATION

@@ -35,7 +35,6 @@ float4 main(SpriteVertexOut vIn) : SV_TARGET
     {
         CalculateLight(light, vIn.WorldPos.xyz, i);
     }
-    //return float4(color.x + 0.5f, color.y + 0.5f, color.z + 0.5f, color.w);
     color *= light.Diffuse;
     return color;
 }

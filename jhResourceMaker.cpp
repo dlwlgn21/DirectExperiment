@@ -25,18 +25,15 @@ namespace jh
 #pragma region SHADER
 	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
 	const std::wstring ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY = L"NormalMapSpriteShaderKey";
-	const std::wstring ResourceMaker::BATTLE_BG_SHADER_KEY = L"BattleBGShaderKey";
+	const std::wstring ResourceMaker::BG_NO_LIGHTING_SHADER_KEY = L"BattleBGShaderKey";
 	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
 	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShaderKey";
 	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShaderKey";
-
-
 #pragma endregion
 
 #pragma region TEXTURE
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
 	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY = L"PlayerNormalMapTextureAtlasKey";
-
 
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTextureKey";
@@ -44,29 +41,23 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY = L"SweeperNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
-	const std::wstring ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
-	const std::wstring ResourceMaker::OBELISK_TEXTURE_NORMAL_MAP_KEY = L"ObeliskNoramlTextureKey";
 
-
-	const std::wstring ResourceMaker::BATTLE_FOREGROUND_TEXTURE_KEY = L"BattleBGTextureKey";
-	const std::wstring ResourceMaker::BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY = L"BattleForegroundNomal";
-	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_TEXTURE_KEY = L"BattleParrarellBGTextureKey";
-
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_1_KEY = L"Parallax1TextureKey";
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_2_KEY = L"Parallax2TextureKey";
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_3_KEY = L"Parallax3TextureKey";
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_4_KEY = L"Parallax4TextureKey";
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_5_KEY = L"Parallax5TextureKey";
-	const std::wstring ResourceMaker::PARALLAX_BG_TEXTURE_6_KEY = L"Parallax6TextureKey";
-
-
-	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
-	const std::wstring ResourceMaker::HIT_EFFECT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 
+
+	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
+	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_NORMAL_MAP_KEY = L"ObeliskNoramlTextureKey";
+	const std::wstring ResourceMaker::BG_FOREGROUND_TEXTURE_KEY = L"BattleBGTextureKey";
+	const std::wstring ResourceMaker::BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY = L"BattleForegroundNomal";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_1_KEY = L"Parallax1TextureKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_2_KEY = L"Parallax2TextureKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_3_KEY = L"Parallax3TextureKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_4_KEY = L"Parallax4TextureKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_5_KEY = L"Parallax5TextureKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_6_KEY = L"Parallax6TextureKey";
 	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTexture";
 	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_TEXTURE_KEY = L"BGMoonNormalTexture";
 	const std::wstring ResourceMaker::BG_TREE_1_TEXTURE_KEY = L"BGTree1Texture";
@@ -80,16 +71,19 @@ namespace jh
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_TEXTURE_KEY = L"BGLargeLightningTexture";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_TEXTURE_KEY = L"BGSmallLightningTexture";
 
-	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_TEXTURE_KEY = L"PlayerDashEffectTexture";
-	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
-	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
+	const std::wstring ResourceMaker::EFFECT_HIT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
+	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_TEXTURE_KEY = L"PlayerDashEffectTexture";
+	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
+	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
 
 	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTexture";
 	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTexture";
-
+	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 #pragma endregion
 
 #pragma region MATERIAL
+	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
+
 	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterialKey";
 	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterialKey";
 
@@ -99,26 +93,21 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY = L"SweeperNormalMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterialKey";
-	const std::wstring ResourceMaker::OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
-	const std::wstring ResourceMaker::OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
 
-	const std::wstring ResourceMaker::BATTLE_BG_MATERIAL_KEY = L"BattleBGMaterialKey";
-	const std::wstring ResourceMaker::BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY = L"BatteForegroundNoramlMapKey";
-	const std::wstring ResourceMaker::BATTLE_PARRARELL_BG_MATERIAL_KEY = L"BattleParralrellBGMaterialKey";
-	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
+	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
+	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterialKey";
+	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
 
-
-	const std::wstring ResourceMaker::HIT_EFFECT_MATERIAL_KEY = L"HitEffectMaterialKey";
-
-
-	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
-
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY = L"ParallaxMaterial1";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY = L"ParallaxMaterial2";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY = L"ParallaxMaterial3";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY = L"ParallaxMaterial4";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY = L"ParallaxMaterial5";
-	const std::wstring ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY = L"ParallaxMaterial6";
+	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
+	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
+	const std::wstring ResourceMaker::BG_FOREGROUND_MATERIAL_KEY = L"BattleBGMaterialKey";
+	const std::wstring ResourceMaker::BG_FOREGROUND_NORMALMAP_MATERIAL_KEY = L"BatteForegroundNoramlMapKey";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY = L"ParallaxMaterial1";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_2_KEY = L"ParallaxMaterial2";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_3_KEY = L"ParallaxMaterial3";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_4_KEY = L"ParallaxMaterial4";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_5_KEY = L"ParallaxMaterial5";
+	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_6_KEY = L"ParallaxMaterial6";
 	const std::wstring ResourceMaker::BG_MOON_MATERIAL_KEY = L"BGMoonMaterial";
 	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_MATERIAL_KEY = L"BGMoonNormalMaterial";
 	const std::wstring ResourceMaker::BG_TREE_1_MATERIAL_KEY = L"BGTree1Material";
@@ -132,19 +121,14 @@ namespace jh
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_MATERIAL_KEY = L"BGLargeLightningMaterial";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_MATERIAL_KEY = L"BGSmallLightningMaterial";
 
-
-	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
-	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterialKey";
-	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
-
-	const std::wstring ResourceMaker::PLAYER_DASH_EFFECT_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
-	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_MATERIAL_KEY = L"GreenPortalMaterialKey";
-	const std::wstring ResourceMaker::GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
+	const std::wstring ResourceMaker::EFFECT_HIT_MATERIAL_KEY = L"HitEffectMaterialKey";
+	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
+	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_MATERIAL_KEY = L"GreenPortalMaterialKey";
+	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
 
 	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
 	const std::wstring ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY = L"BrickNotNormalMaterialKey";
-
-
+	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
 #pragma endregion
 
 	void ResourceMaker::Initialize()
@@ -162,13 +146,6 @@ namespace jh
 	{
 		std::vector<UINT> rectIndexes;
 		rectIndexes.reserve(6);
-		//rectIndexes.push_back(0);
-		//rectIndexes.push_back(1);
-		//rectIndexes.push_back(2);
-		//rectIndexes.push_back(0);
-		//rectIndexes.push_back(2);
-		//rectIndexes.push_back(3);
-		//rectIndexes.push_back(0);
 
 		rectIndexes.push_back(0);
 		rectIndexes.push_back(1);
@@ -381,7 +358,7 @@ namespace jh
 
 		Shader* pBattleBGShader = new Shader();
 		pBattleBGShader->CreateShaders(L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
-		ResourcesManager::Insert<Shader>(BATTLE_BG_SHADER_KEY, pBattleBGShader);
+		ResourcesManager::Insert<Shader>(BG_NO_LIGHTING_SHADER_KEY, pBattleBGShader);
 
 		Shader* pDebugShader = new Shader();
 		pDebugShader->CreateShaders(L"DebugVS.hlsl", L"DebugPS.hlsl");
@@ -439,35 +416,29 @@ namespace jh
 		// ObeliskEffects.png
 		// Obelisk.png
 		pObeliskAtlasTexture->Load(L"ObeliskEffects.png");
-		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
+		ResourcesManager::Insert<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
 		Texture* pObeliskNormalMapTexture = new Texture();
 		pObeliskNormalMapTexture->Load(L"ObeliskEffects_NM.png");
-		ResourcesManager::Insert<Texture>(OBELISK_TEXTURE_NORMAL_MAP_KEY, pObeliskNormalMapTexture);
+		ResourcesManager::Insert<Texture>(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, pObeliskNormalMapTexture);
 
 
 		Texture* pGreenPortalTextureAtlas = new Texture();
 		pGreenPortalTextureAtlas->Load(L"GreenPortalSpriteSheet.png");
-		ResourcesManager::Insert<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY, pGreenPortalTextureAtlas);
+		ResourcesManager::Insert<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, pGreenPortalTextureAtlas);
 
 		Texture* pGreenPortalNormalMapTextureAtlas = new Texture();
 		pGreenPortalNormalMapTextureAtlas->Load(L"GreenPortalSpriteSheet_NM.png");
-		ResourcesManager::Insert<Texture>(GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY, pGreenPortalNormalMapTextureAtlas);
+		ResourcesManager::Insert<Texture>(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, pGreenPortalNormalMapTextureAtlas);
 
 
 
 		Texture* pBattleBGTexture = new Texture();
 		pBattleBGTexture->Load(L"ForeGround.png");
-		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY, pBattleBGTexture);
+		ResourcesManager::Insert<Texture>(BG_FOREGROUND_TEXTURE_KEY, pBattleBGTexture);
 		
 		Texture* pBattleForegroundNormalMapTexture = new Texture();
 		pBattleForegroundNormalMapTexture->Load(L"ForeGround_NM.png");
-		ResourcesManager::Insert<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, pBattleForegroundNormalMapTexture);
-
-
-
-		Texture* pBattleParrarellBGTxtrue = new Texture();
-		pBattleParrarellBGTxtrue->Load(L"SkyMerge.png");
-		ResourcesManager::Insert<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY, pBattleParrarellBGTxtrue);
+		ResourcesManager::Insert<Texture>(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, pBattleForegroundNormalMapTexture);
 
 
 		Texture* pWeaponSwordTxtrue = new Texture();
@@ -476,31 +447,31 @@ namespace jh
 
 		Texture* pEffectSwordTxtrue = new Texture();
 		pEffectSwordTxtrue->Load(L"EffectAtals.png");
-		ResourcesManager::Insert<Texture>(HIT_EFFECT_TEXTURE_ATLAS_KEY, pEffectSwordTxtrue);
+		ResourcesManager::Insert<Texture>(EFFECT_HIT_TEXTURE_ATLAS_KEY, pEffectSwordTxtrue);
 
 		Texture* pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax1.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_1_KEY, pParralaxTxtrue);
+		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_1_KEY, pParralaxTxtrue);
 
 		pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax2.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_2_KEY, pParralaxTxtrue);
+		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_2_KEY, pParralaxTxtrue);
 
 		pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax3.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_3_KEY, pParralaxTxtrue);
+		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_3_KEY, pParralaxTxtrue);
 
 		pParralaxTxtrue = new Texture();
 		pParralaxTxtrue->Load(L"parallax4.png");
-		ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_4_KEY, pParralaxTxtrue);
+		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_4_KEY, pParralaxTxtrue);
 
 		//pParralaxTxtrue = new Texture();
 		//pParralaxTxtrue->Load(L"parallax5.png");
-		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_5_KEY, pParralaxTxtrue);
+		//ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_5_KEY, pParralaxTxtrue);
 
 		//pParralaxTxtrue = new Texture();
 		//pParralaxTxtrue->Load(L"parallax6.png");
-		//ResourcesManager::Insert<Texture>(PARALLAX_BG_TEXTURE_6_KEY, pParralaxTxtrue);
+		//ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_6_KEY, pParralaxTxtrue);
 
 		Texture* pBGMoonTexture = new Texture();
 		pBGMoonTexture->Load(L"MoonSprite.png");
@@ -567,7 +538,7 @@ namespace jh
 
 		Texture* pPlayerDashDustEffectTexture = new Texture();
 		pPlayerDashDustEffectTexture->Load(L"DASHSMOKE2.png");
-		ResourcesManager::Insert<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY, pPlayerDashDustEffectTexture);
+		ResourcesManager::Insert<Texture>(EFFECT_PLAYER_DASH_TEXTURE_KEY, pPlayerDashDustEffectTexture);
 
 		Texture* pBrickDiffuse = new Texture();
 		pBrickDiffuse->Load(L"brickwall.jpg");
@@ -611,25 +582,25 @@ namespace jh
 		Material* pWardenNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY));
 		ResourcesManager::Insert<Material>(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, pWardenNormalMapMaterial);
 
-		ResourcesManager::Insert<Material>(OBELISK_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(BG_OBELISK_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_ATLAS_KEY))
+				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(OBELISK_NORMAL_MAP_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY,
 			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_ATLAS_KEY),
-				ResourcesManager::Find<Texture>(OBELISK_TEXTURE_NORMAL_MAP_KEY))
+				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY),
+				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY))
 			);
 
 
-		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY), ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY));
-		ResourcesManager::Insert<Material>(BATTLE_BG_MATERIAL_KEY, pBattleBGMaterial);
+		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY), ResourcesManager::Find<Texture>(BG_FOREGROUND_TEXTURE_KEY));
+		ResourcesManager::Insert<Material>(BG_FOREGROUND_MATERIAL_KEY, pBattleBGMaterial);
 
-		ResourcesManager::Insert<Material>(BATTLE_FOREGROUND_NORMALMAP_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(BG_FOREGROUND_NORMALMAP_MATERIAL_KEY,
 			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_TEXTURE_KEY),
-				ResourcesManager::Find<Texture>(BATTLE_FOREGROUND_NORMAL_MAP_TEXTURE_KEY))
+				ResourcesManager::Find<Texture>(BG_FOREGROUND_TEXTURE_KEY),
+				ResourcesManager::Find<Texture>(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY))
 			);
 
 
@@ -686,49 +657,45 @@ namespace jh
 				ResourcesManager::Find<Texture>(BG_SMALL_LIGHTNING_TEXTURE_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(BATTLE_PARRARELL_BG_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BATTLE_PARRARELL_BG_TEXTURE_KEY))
-			);
 
 		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
 				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(HIT_EFFECT_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(EFFECT_HIT_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(HIT_EFFECT_TEXTURE_ATLAS_KEY))
+				ResourcesManager::Find<Texture>(EFFECT_HIT_TEXTURE_ATLAS_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_1_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_1_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_1_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_1_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_2_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_2_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_2_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_2_KEY))
 			);
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_3_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_3_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_3_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_3_KEY))
 			);
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_4_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_4_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_4_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_4_KEY))
 			);
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_5_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_5_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_5_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_5_KEY))
 			);
-		ResourcesManager::Insert<Material>(PARALLAX_BG_MATERIAL_6_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PARALLAX_BG_TEXTURE_6_KEY))
+		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_6_KEY,
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
+				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_6_KEY))
 			);
 
 		ResourcesManager::Insert<Material>(UI_HP_BORDER_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(BATTLE_BG_SHADER_KEY),
+			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_HP_BORDER_TEXTURE_KEY))
 			);
 
@@ -753,20 +720,20 @@ namespace jh
 			);
 
 
-		ResourcesManager::Insert<Material>(PLAYER_DASH_EFFECT_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(EFFECT_PLAYER_DASH_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(PLAYER_DASH_EFFECT_TEXTURE_KEY))
+				ResourcesManager::Find<Texture>(EFFECT_PLAYER_DASH_TEXTURE_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(GREEN_PORTAL_EFFECT_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(EFFECT_GREEN_PORTAL_MATERIAL_KEY,
 			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY))
+				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY))
 			);
 
-		ResourcesManager::Insert<Material>(GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY,
+		ResourcesManager::Insert<Material>(EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY,
 			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY),
-				ResourcesManager::Find<Texture>(GREEN_PORTAL_EFFECT_NORMAL_MAP_TEXTURE_KEY))
+				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY),
+				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY))
 			);
 
 #pragma region DEBUG

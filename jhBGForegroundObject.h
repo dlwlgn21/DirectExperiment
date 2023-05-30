@@ -3,11 +3,11 @@
 
 namespace jh
 {
-	class BattleBGImageObject final : public GameObject
+	class BGForegroundObject final : public GameObject
 	{
 	public:
-		BattleBGImageObject();
-		virtual ~BattleBGImageObject() = default;
+		BGForegroundObject();
+		virtual ~BGForegroundObject() = default;
 
 		void Initialize() override;
 		void Update() override;
@@ -16,7 +16,6 @@ namespace jh
 
 	private:
 		void setRenderer();
-		void setScript();
 	};
 }
 

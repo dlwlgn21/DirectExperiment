@@ -1,47 +1,40 @@
-#include "jhBattleBGImageObject.h"
+#include "jhBGForegroundObject.h"
 #include "jhSpriteRenderer.h"
 #include "jhResourceMaker.h"
 #include "jhResourcesManager.h"
 #include "jhMaterial.h"
 #include "jhMesh.h"
-#include "jhBattleBGScript.h"
 
 namespace jh
 {
-	BattleBGImageObject::BattleBGImageObject()
+	BGForegroundObject::BGForegroundObject()
 		: GameObject(eLayerType::BACKGROUND)
 	{
 		setRenderer();
-		//setScript();
 	}
-	void BattleBGImageObject::Initialize()
+	void BGForegroundObject::Initialize()
 	{
 		GameObject::Initialize();
 	}
-	void BattleBGImageObject::Update()
+	void BGForegroundObject::Update()
 	{
 		GameObject::Update();
 	}
-	void BattleBGImageObject::FixedUpdate()
+	void BGForegroundObject::FixedUpdate()
 	{
 		GameObject::FixedUpdate();
 	}
-	void BattleBGImageObject::Render()
+	void BGForegroundObject::Render()
 	{
 		GameObject::Render();
 	}
-	void BattleBGImageObject::setRenderer()
+	void BGForegroundObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
 		assert(pMesh != nullptr);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BATTLE_BG_MATERIAL_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_FOREGROUND_MATERIAL_KEY);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
 		this->AddComponent(pSpriteRenderer);
-	}
-	void BattleBGImageObject::setScript()
-	{
-		BattleBGScript* pScript = new BattleBGScript(eBGType::NORMAL);
-		this->AddScript(pScript);
 	}
 }

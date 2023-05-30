@@ -16,17 +16,16 @@ namespace jh
 	PortalEffectObject::PortalEffectObject()
 		: AnimatedGameObject()
 	{
+		const float PORTACL_SCALE_VALUE = 8.0f;
 		setAnimator();
 		setRenderer();
 		setScript();
-		Vector3 prePos = GetTransform()->GetPosition();
-		//GetTransform()->SetPosition(Vector3(prePos.x, 3.0f, 4.0f));
-		GetTransform()->SetScale(Vector3(8.0f, 8.0f, 1.0f));
+		GetTransform()->SetOnlyXYScale(PORTACL_SCALE_VALUE);
 	}
 
 	void PortalEffectObject::setAnimator()
 	{
-		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::GREEN_PORTAL_EFFECT_TEXTURE_ATLAS_KEY);
+		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY);
 		assert(pAtlas != nullptr);
 		const float WIDTH = 64.0f;
 		const float HEIGHT = 64.0f;
@@ -76,7 +75,7 @@ namespace jh
 	void PortalEffectObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::GREEN_PORTAL_EFFECT_NORMAL_MAP_MATERIAL_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);

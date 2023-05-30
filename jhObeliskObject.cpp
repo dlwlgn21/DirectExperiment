@@ -24,7 +24,7 @@ namespace jh
 	}
 	void ObeliskObject::setAnimator()
 	{
-		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::OBELISK_TEXTURE_ATLAS_KEY);
+		Texture* pAtlas = ResourcesManager::Find<Texture>(ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY);
 		assert(pAtlas != nullptr);
 		// FLYING
 		const float WIDTH = 190.0f;
@@ -53,7 +53,7 @@ namespace jh
 	void ObeliskObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::OBELISK_NORMAL_MAP_MATERIAL_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);

@@ -137,9 +137,7 @@
     <ClInclude Include="jhAnimatedGameObject.h" />
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
-    <ClInclude Include="jhBattleBGImageObject.h" />
-    <ClInclude Include="jhBattleBGScript.h" />
-    <ClInclude Include="jhBattleParrarellImageObject.h" />
+    <ClInclude Include="jhBGForegroundObject.h" />
     <ClInclude Include="jhBGFlowerObject.h" />
     <ClInclude Include="jhBGMoonObject.h" />
     <ClInclude Include="jhBGTorchObject.h" />
@@ -226,9 +224,7 @@
     <ClCompile Include="jhAnimatedGameObject.cpp" />
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
-    <ClCompile Include="jhBattleBGImageObject.cpp" />
-    <ClCompile Include="jhBattleBGScript.cpp" />
-    <ClCompile Include="jhBattleParrarellImageObject.cpp" />
+    <ClCompile Include="jhBGForegroundObject.cpp" />
     <ClCompile Include="jhBGFlowerObject.cpp" />
     <ClCompile Include="jhBGMoonObject.cpp" />
     <ClCompile Include="jhBGTorchObject.cpp" />

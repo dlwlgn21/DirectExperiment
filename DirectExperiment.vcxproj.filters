@@ -148,9 +148,6 @@
     <Filter Include="Component\Script\Weapon">
       <UniqueIdentifier>{d672c597-e3b2-4f05-a3f7-fd799ed97da8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\Script\BackGround">
-      <UniqueIdentifier>{cd5dbae0-afae-4dba-b85a-461940cb1ea1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Animator\Base">
       <UniqueIdentifier>{f46c0ea1-b0e2-4865-88ec-ab5156d8b486}</UniqueIdentifier>
     </Filter>
@@ -390,9 +387,6 @@
     <ClInclude Include="jhSword.h">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="jhBattleBGScript.h">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayerScript.h">
       <Filter>Component\Script\Player</Filter>
     </ClInclude>
@@ -447,10 +441,7 @@
     <ClInclude Include="jhPlayer.h">
       <Filter>GameObject\Content\Player</Filter>
     </ClInclude>
-    <ClInclude Include="jhBattleBGImageObject.h">
-      <Filter>GameObject\Content\BG</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBattleParrarellImageObject.h">
+    <ClInclude Include="jhBGForegroundObject.h">
       <Filter>GameObject\Content\BG</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerWeaponColliderObject.h">
@@ -638,9 +629,6 @@
     <ClCompile Include="jhSword.cpp">
       <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="jhBattleBGScript.cpp">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\Player</Filter>
     </ClCompile>
@@ -692,10 +680,7 @@
     <ClCompile Include="jhPlayer.cpp">
       <Filter>GameObject\Content\Player</Filter>
     </ClCompile>
-    <ClCompile Include="jhBattleBGImageObject.cpp">
-      <Filter>GameObject\Content\BG</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBattleParrarellImageObject.cpp">
+    <ClCompile Include="jhBGForegroundObject.cpp">
       <Filter>GameObject\Content\BG</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp">

@@ -13,8 +13,6 @@
 #include "jhTransform.h"
 #include "jhPlayer.h"
 #include "jhMonster.h"
-#include "jhBattleBGImageObject.h"
-#include "jhBattleParrarellImageObject.h"
 #include "jhSword.h"
 #include "jhCollider2D.h"
 #include "jhCollisionManager.h"
@@ -35,6 +33,7 @@
 #include "jhMonsterObjectPool.h"
 #include "jhMonsterSpawner.h"
 #include "jhHitEffectObject.h"
+#include "jhBGForegroundObject.h"
 #include "jhBGFlowerObject.h"
 #include "jhBGTorchObject.h"
 #include "jhBGMushRoomSatueObject.h"
@@ -125,7 +124,7 @@ namespace jh
 
 	void PlayScene::Update()
 	{
-		//MonsterSpawner::GetInstance().Update();
+		MonsterSpawner::GetInstance().Update();
 		Scene::Update();
 	}
 
@@ -246,7 +245,7 @@ namespace jh
 		const Vector3 PARALLAX_BG_SCLAE_VECTOR(PARALLAX_ASPECT_RATIO * PARALLAX_MAG, PARALLAX_MAG, 1.0f);
 
 		{
-			BattleBGImageObject* pBGObject = Instantiate<BattleBGImageObject>(eLayerType::BACKGROUND);
+			BGForegroundObject* pBGObject = Instantiate<BGForegroundObject>(eLayerType::BACKGROUND);
 			pBGObject->SetName(L"ForeGround");
 			pBGObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
 			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, BG_FOREGROUND_Z_VALUE));
@@ -254,32 +253,32 @@ namespace jh
 
 		{
 			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
-			pParallaxOne->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_1_KEY);
+			pParallaxOne->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY);
 			pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
 			//pParallaxOne->GetTransform()->SetOnlyXYPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
-			pParallaxTwo->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_2_KEY);
+			pParallaxTwo->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_2_KEY);
 			pParallaxTwo->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
 			pParallaxTwo->GetTransform()->SetOnlyYPosition(-3.3f);
 
 			ParallaxObject* pParallaxThree = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_3_DEPTH);
-			pParallaxThree->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_3_KEY);
+			pParallaxThree->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_3_KEY);
 			pParallaxThree->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
 			pParallaxThree->GetTransform()->SetOnlyYPosition(-2.5f);
 
 			ParallaxObject* pParallaxFour = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_4_DEPTH);
-			pParallaxFour->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_4_KEY);
+			pParallaxFour->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_4_KEY);
 			pParallaxFour->GetTransform()->SetScale(PARALLAX_BG_SCLAE_VECTOR);
 			pParallaxFour->GetTransform()->SetOnlyYPosition(-2.0f);
 
 			//ParallaxObject* pParallaxFive = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_5_DEPTH);
-			//pParallaxFive->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_5_KEY);
+			//pParallaxFive->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_5_KEY);
 			//pParallaxFive->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
 			//pParallaxFive->GetTransform()->SetPosition(Vector3(0.0f, 1.1f, PARALLAX_5_DEPTH));
 
 			//ParallaxObject* pParallaxSix = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_6_DEPTH);
-			//pParallaxSix->SetRenderer(ResourceMaker::PARALLAX_BG_MATERIAL_6_KEY);
+			//pParallaxSix->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_6_KEY);
 			//pParallaxSix->GetTransform()->SetScale(Vector3(ASPECT_RATIO * MAG, MAG, 1.0f));
 			//pParallaxSix->GetTransform()->SetPosition(Vector3(0.0f, 0.6f, PARALLAX_6_DEPTH));
 		}
