@@ -39,11 +39,5 @@ namespace jh
 		mTravelVector = cameraPos - mStartPos;
 		mpTransform->SetPosition(Vector3(mTravelVector.x * mParallaxFactor, mpTransform->GetPosition().y, mOriginZ));
 	}
-	void ParallaxScript::FixedUpdate()
-	{
-	}
-	void ParallaxScript::Render()
-	{
-	}
 
 }

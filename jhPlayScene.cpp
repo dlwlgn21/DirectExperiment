@@ -29,7 +29,7 @@
 #include "jhBGMoonObject.h"
 #include "jhPlayerDustEffectObject.h"
 #include "jhTexture.h"
-#include "jhObeliskObject.h"
+#include "jhBGObeliskObject.h"
 #include "jhMonsterObjectPool.h"
 #include "jhMonsterSpawner.h"
 #include "jhHitEffectObject.h"

@@ -33,16 +33,16 @@ namespace jh
 		const float WIDTH = 212.0f;
 		const float HEIGHT = 11.0f;
 		const float MAG = 400.0f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(Vector2::Zero);
+		const Vector2 ANIN_SIZE(WIDTH, HEIGHT);
+		const Vector2 OFFSET(Vector2::Zero);
 		const UINT SPLIT_ANIM_COUNT = static_cast<UINT>(pAtlas->GetWidth() / WIDTH);
 		Animator* pAnimator = new Animator();
 		pAnimator->Create(
 			L"GrassAnimKey",
 			pAtlas,
 			Vector2::Zero,
-			animSize,
-			offset,
+			ANIN_SIZE,
+			OFFSET,
 			SPLIT_ANIM_COUNT,
 			0.1f,
 			MAG

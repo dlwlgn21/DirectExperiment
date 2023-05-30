@@ -286,6 +286,12 @@
     <Filter Include="GameObject\AnimatedGameObject\BG\Lightning">
       <UniqueIdentifier>{401c1859-e809-44fa-8336-23c082746b78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\BG\Obelisk">
+      <UniqueIdentifier>{08181c4a-bc4d-47ca-8331-7b08bc65b51f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\BG\Moon">
+      <UniqueIdentifier>{2b7a567c-7462-46e2-9658-dd24a0814ea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -459,9 +465,6 @@
     <ClInclude Include="jhMonsterAttackColiderScript.h">
       <Filter>Component\Script\Weapon\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="jhBGMoonObject.h">
-      <Filter>GameObject\AnimatedGameObject\BG</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayerDustEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
     </ClInclude>
@@ -476,9 +479,6 @@
     </ClInclude>
     <ClInclude Include="jhMonsterManager.h">
       <Filter>MonsterManager</Filter>
-    </ClInclude>
-    <ClInclude Include="jhObeliskObject.h">
-      <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClInclude>
     <ClInclude Include="jhMonsterObjectPool.h">
       <Filter>ObjectPools\Monster</Filter>
@@ -542,6 +542,12 @@
     </ClInclude>
     <ClInclude Include="jhBGLightningObject.h">
       <Filter>GameObject\AnimatedGameObject\BG\Lightning</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBGObeliskObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG\Obelisk</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBGMoonObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -698,9 +704,6 @@
     <ClCompile Include="jhMonsterAttackColiderScript.cpp">
       <Filter>Component\Script\Weapon\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="jhBGMoonObject.cpp">
-      <Filter>GameObject\AnimatedGameObject\BG</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayerDustEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
     </ClCompile>
@@ -715,9 +718,6 @@
     </ClCompile>
     <ClCompile Include="jhMonsterManager.cpp">
       <Filter>MonsterManager</Filter>
-    </ClCompile>
-    <ClCompile Include="jhObeliskObject.cpp">
-      <Filter>GameObject\AnimatedGameObject\BG</Filter>
     </ClCompile>
     <ClCompile Include="jhMonsterObjectPool.cpp">
       <Filter>ObjectPools\Monster</Filter>
@@ -778,6 +778,12 @@
     </ClCompile>
     <ClCompile Include="jhBGLightningObject.cpp">
       <Filter>GameObject\AnimatedGameObject\BG\Lightning</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBGObeliskObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG\Obelisk</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBGMoonObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

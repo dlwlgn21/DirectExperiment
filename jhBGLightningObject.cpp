@@ -58,15 +58,15 @@ namespace jh
 			const float WIDTH = 64.0f;
 			const float HEIGHT = 48.0f;
 			const float MAG = 200.0f;
-			Vector2 animSize(WIDTH, HEIGHT);
-			Vector2 offset(Vector2::Zero);
+			const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+			const Vector2 OFFSET(Vector2::Zero);
 			const UINT SPLIT_ANIM_COUNT = static_cast<UINT>(pAtlas->GetHeight() / HEIGHT);
 			pAnimator->CreateVertical(
 				L"LightningAnimKey",
 				pAtlas,
 				Vector2::Zero,
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				SPLIT_ANIM_COUNT,
 				0.1f,
 				MAG
@@ -80,15 +80,15 @@ namespace jh
 			const float WIDTH = 32.0f;
 			const float HEIGHT = 32.0f;
 			const float MAG = 200.0f;
-			Vector2 animSize(WIDTH, HEIGHT);
-			Vector2 offset(Vector2::Zero);
+			const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+			const Vector2 OFFSET(Vector2::Zero);
 			const UINT SPLIT_ANIM_COUNT = static_cast<UINT>(pAtlas->GetHeight() / HEIGHT);
 			pAnimator->CreateVertical(
 				L"LightningAnimKey",
 				pAtlas,
 				Vector2::Zero,
-				animSize,
-				offset,
+				ANIM_SIZE,
+				OFFSET,
 				SPLIT_ANIM_COUNT,
 				0.1f,
 				MAG

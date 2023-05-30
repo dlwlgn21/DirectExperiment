@@ -182,7 +182,7 @@
     <ClInclude Include="jhNormalMapMaterial.h" />
     <ClInclude Include="jhNormalMapMesh.h" />
     <ClInclude Include="jhNormalMapShader.h" />
-    <ClInclude Include="jhObeliskObject.h" />
+    <ClInclude Include="jhBGObeliskObject.h" />
     <ClInclude Include="jhOnceAnimator.h" />
     <ClInclude Include="jhParallaxObject.h" />
     <ClInclude Include="jhParallaxScript.h" />
@@ -260,7 +260,7 @@
     <ClCompile Include="jhNormalMapMaterial.cpp" />
     <ClCompile Include="jhNormalMapMesh.cpp" />
     <ClCompile Include="jhNormalMapShader.cpp" />
-    <ClCompile Include="jhObeliskObject.cpp" />
+    <ClCompile Include="jhBGObeliskObject.cpp" />
     <ClCompile Include="jhOnceAnimator.cpp" />
     <ClCompile Include="jhParallaxObject.cpp" />
     <ClCompile Include="jhParallaxScript.cpp" />

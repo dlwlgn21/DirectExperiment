@@ -3,11 +3,11 @@
 
 namespace jh
 {
-	class ObeliskObject final : public AnimatedGameObject
+	class BGObeliskObject final : public AnimatedGameObject
 	{
 	public:
-		ObeliskObject();
-		virtual ~ObeliskObject() = default;
+		BGObeliskObject();
+		virtual ~BGObeliskObject() = default;
 
 	protected:
 		void setAnimator() override;

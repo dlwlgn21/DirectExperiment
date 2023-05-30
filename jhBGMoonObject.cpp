@@ -17,12 +17,13 @@ namespace jh
 	BGMoonObject::BGMoonObject()
 		: AnimatedGameObject()
 	{
+		const float MOON_SCALE_VALUE = 8.0f;
 		setAnimator();
 		setRenderer();
 		setScript();
 		Vector3 prePos = GetTransform()->GetPosition();
 		GetTransform()->SetPosition(Vector3(prePos.x, 3.0f, prePos.z));
-		GetTransform()->SetScale(Vector3(8.0f, 8.0f, 1.0f));
+		GetTransform()->SetOnlyXYScale(MOON_SCALE_VALUE);
 	}
 
 	void BGMoonObject::setAnimator()
@@ -31,15 +32,15 @@ namespace jh
 		assert(pAtlas != nullptr);
 		const float WIDTH = 48.0f;
 		const float HEIGHT = 48.0f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(Vector2::Zero);
+		const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+		const Vector2 OFFSET(Vector2::Zero);
 		Animator* pAnimator = new Animator();
 		pAnimator->Create(
 			L"MoonSpinAnimKey",
 			pAtlas,
 			Vector2::Zero,
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			60,
 			0.2f,
 			120

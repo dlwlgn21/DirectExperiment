@@ -4,7 +4,6 @@
 
 namespace jh
 {
-
 	class Transform;
 	class ParallaxScript final : public Script
 	{
@@ -14,8 +13,6 @@ namespace jh
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 	private:
 		Transform*				mpTransform;
 		Transform*				mpCameraTransform;

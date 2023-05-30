@@ -31,15 +31,15 @@ namespace jh
 		const float HEIGHT = 64.0f;
 		const float BASIC_DURATION = 0.1f;
 		const float MAG = 120.0f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(Vector2::Zero);
+		const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+		const Vector2 OFFSET(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();
 		pAnimator->Create(
 			L"GreenPortalStayKey",
 			pAtlas,
 			Vector2::Zero,
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			8,
 			BASIC_DURATION,
 			MAG
@@ -49,8 +49,8 @@ namespace jh
 			L"GreenPortalOpenKey",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 1),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			8,
 			BASIC_DURATION,
 			MAG
@@ -60,8 +60,8 @@ namespace jh
 			L"GreenPortalCloseKey",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 2),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			7,
 			BASIC_DURATION,
 			MAG
