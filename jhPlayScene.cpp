@@ -197,19 +197,11 @@ namespace jh
 
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
-		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, 2.0f));
+		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, PLAYER_Z_VALUE));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
-
-		//LightAttribute lightAttribute;
-		//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-		//lightAttribute.ELightType = eLightType::POINT;
-		//lightAttribute.Diffuse = WHITE_COLOR;
-		//lightAttribute.Radius = 20.0f;
-		//Light* pPointLightComponent = new Light(lightAttribute);
-		//pPlayer->AddComponent(pPointLightComponent);
 
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, SCENE_COLLIDER_Z_VALUE));
@@ -246,8 +238,6 @@ namespace jh
 		const float ASPECT_RATIO = 18.0f;
 		const float MAG = 10.0f;
 		const float FORE_GOROUND_MAG = 8.0f;
-
-		const Vector3 PARALLAX_SCLAE_VECTOR(16 * MAG, MAG, 1.0f);
 		const Vector3 FORE_GROUND_SCLAE_VECTOR(ASPECT_RATIO * FORE_GOROUND_MAG, FORE_GOROUND_MAG, 1.0f);
 
 
