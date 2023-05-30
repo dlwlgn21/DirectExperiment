@@ -85,6 +85,11 @@ namespace jh
 		mpAnimator->GetCompleteEvent(mCloseAnimKey) = std::bind(&PortalEffectScript::PortalCloseAnimComplete, this);
 	}
 
+	void PortalEffectScript::SetAnimationFlip(const bool bIsFlip)
+	{
+		mpAnimator->SetCurrAnimationHorizontalFlip(bIsFlip);
+	}
+
 	void PortalEffectScript::playAnimation()
 	{
 		mpAnimator->SetActive(true);

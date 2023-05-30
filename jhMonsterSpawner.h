@@ -7,6 +7,7 @@ namespace jh
 {
 	class PlayScene;
 	class PlayerScript;
+	class MonsterScript;
 	class MonsterSpawner final
 	{
 	public:
@@ -48,7 +49,8 @@ namespace jh
 
 	private:
 		void setPortalEffectPosition();
-		void playPortalEffectAnimation(const eMonsterType eMonType);
+		void setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos);
+		void playPortalEffectAnimation(const eMonsterType eMonType, const MonsterScript* pMonsterScript);
 		void spawnMonster(const eMonsterType eMonType);
 
 	private:

@@ -5,7 +5,8 @@
 #include "jhMonsterObjectPool.h"
 #include "jhTransform.h"
 #include "jhPortalEffectScript.h"
-
+#include "jhMonsterScript.h"
+#include "jhLayerZValue.h"
 
 using namespace jh::math;
 
@@ -15,9 +16,9 @@ namespace jh
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 3.0f;
 	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 7.0f;
 
-	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, 4.0f);
-	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, 4.0f);
-	const jh::math::Vector3 MonsterSpawner::WARDEN_SPAWN_POSITON = Vector3(1.0f, -2.0f, 4.0f);
+	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, MONSTER_Z_VALUE);
+	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, MONSTER_Z_VALUE);
+	const jh::math::Vector3 MonsterSpawner::WARDEN_SPAWN_POSITON = Vector3(1.0f, -2.0f, MONSTER_Z_VALUE);
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -59,7 +60,8 @@ namespace jh
 			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, CAGED_SHOKER_SPAWN_POSITON);
 			mpScene->AddMonster(monPack);
 			mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
-			playPortalEffectAnimation(eMonType);
+			setPortalEffectPosition(eMonType, CAGED_SHOKER_SPAWN_POSITON);
+			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
@@ -67,7 +69,8 @@ namespace jh
 			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, SWEEPER_SPAWN_POSITON);
 			mpScene->AddMonster(monPack);
 			mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
-			playPortalEffectAnimation(eMonType);
+			setPortalEffectPosition(eMonType, SWEEPER_SPAWN_POSITON);
+			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
@@ -75,7 +78,8 @@ namespace jh
 			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, WARDEN_SPAWN_POSITON);
 			mpScene->AddMonster(monPack);
 			mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
-			playPortalEffectAnimation(eMonType);
+			setPortalEffectPosition(eMonType, WARDEN_SPAWN_POSITON);
+			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		default:
@@ -86,15 +90,35 @@ namespace jh
 
 	void MonsterSpawner::setPortalEffectPosition()
 	{
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_CAGED_SHOKER)]->GetTransform()->SetPosition(CAGED_SHOKER_SPAWN_POSITON);
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_SWEEPER)]->GetTransform()->SetPosition(SWEEPER_SPAWN_POSITON);
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_WARDEN)]->GetTransform()->SetPosition(WARDEN_SPAWN_POSITON);
+		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_CAGED_SHOKER)]->GetTransform()->SetPosition(Vector3(CAGED_SHOKER_SPAWN_POSITON.x, CAGED_SHOKER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
+		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_SWEEPER)]->GetTransform()->SetPosition(Vector3(SWEEPER_SPAWN_POSITON.x, SWEEPER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
+		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_WARDEN)]->GetTransform()->SetPosition(Vector3(WARDEN_SPAWN_POSITON.x, WARDEN_SPAWN_POSITON.x, BG_PORTAL_Z_VALUE));
 	}
-
-	void MonsterSpawner::playPortalEffectAnimation(const eMonsterType eMonType)
+	void MonsterSpawner::setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos)
+	{
+		mPortalEffectObjects[static_cast<UINT>(eMonType)]->GetTransform()->SetPosition(Vector3(pos.x, pos.y, BG_PORTAL_Z_VALUE));
+	}
+	void MonsterSpawner::playPortalEffectAnimation(const eMonsterType eMonType, const MonsterScript* pMonsterScript)
 	{
 		PortalEffectScript* pPortalScript = static_cast<PortalEffectScript*>(mPortalEffectObjects[static_cast<UINT>(eMonType)]->GetScriptOrNull());
 		assert(pPortalScript != nullptr);
+		const eObjectLookDirection eLookDir = pMonsterScript->GetMonsterLookDirection();
+		switch (eLookDir)
+		{
+		case eObjectLookDirection::LEFT:
+		{
+			pPortalScript->SetAnimationFlip(false);
+			break;
+		}
+		case eObjectLookDirection::RIGHT:
+		{
+			pPortalScript->SetAnimationFlip(true);
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
 		pPortalScript->SetStatePlaying();
 	}
 }

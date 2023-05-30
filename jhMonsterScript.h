@@ -8,6 +8,7 @@ namespace jh
 {
 	enum class eMonsterState
 	{
+		SPAWNING,
 		TRACING,
 		ATTACKING,
 		HITTED,
@@ -48,17 +49,19 @@ namespace jh
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	private:
+		void moveOrChangeState();
+		void calculateDistanceFromPlayerToSetLookDirection();
 		void setInitialStat(const int hp, const float speed)	{ mMaxHP = hp; mCurrHP = hp; mSpeed = speed; }
 		void setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey);
 		void setAnimator();
 		void setPosition();
 		void setLookDir(const jh::math::Vector3& lookDirVector);
-		bool isDistanceCloseToPlayer(const jh::math::Vector3& lookDirVector);
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
 		void playHitEffectAnimation();
 		void decreaseHP(const int amount);
+		bool isDistanceCloseToPlayer(const jh::math::Vector3& lookDirVector);
 	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
@@ -68,6 +71,7 @@ namespace jh
 		int								mCurrHP;
 		float							mSpeed;
 		float							mHittedPushDistance;
+		float							mSpawningTimer;
 		std::wstring					mAnimIdleKey;
 		std::wstring					mAnimMoveKey;
 		std::wstring					mAnimAttackKey;

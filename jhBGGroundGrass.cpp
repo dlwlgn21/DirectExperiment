@@ -62,6 +62,6 @@ namespace jh
 
 	void BGGroundGrassObject::SetPosition(const float xPos)
 	{
-		GetTransform()->SetPosition(Vector3(xPos, BG_FOREGROUND_GRASS_Y_VALUE, BG_FOREGROUND_GRASS_Z_VALUE));
+		GetTransform()->SetPosition(Vector3(xPos, BG_FOREGROUND_GRASS_Y_VALUE, 1.0f));
 	}
 }

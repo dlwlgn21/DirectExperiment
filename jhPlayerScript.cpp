@@ -80,6 +80,11 @@ namespace jh
 	{
 	}
 
+	void PlayerScript::IdleAnimStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+	}
+
 	void PlayerScript::AttackOneAnimationStart()
 	{
 		mpAnimator->InitializeCurrAnimation();
@@ -183,6 +188,8 @@ namespace jh
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
+
+		mpAnimator->GetStartEvent(mAnimIdleKey) = std::bind(&PlayerScript::IdleAnimStart, this);
 
 		mpAnimator->GetStartEvent(mAnimNormalAttack1Key) = std::bind(&PlayerScript::AttackOneAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimNormalAttack1Key) = std::bind(&PlayerScript::AttackOneAnimationComplete, this);

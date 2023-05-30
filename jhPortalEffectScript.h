@@ -32,6 +32,7 @@ namespace jh
 		void PortalCloseAnimStart();
 		void PortalCloseAnimComplete();
 
+		void SetAnimationFlip(const bool bIsFlip);
 
 	private:
 		void setAnimator() override;

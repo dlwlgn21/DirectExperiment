@@ -4,7 +4,6 @@
 #include "jhResourcesManager.h"
 #include "jhMaterial.h"
 #include "jhMesh.h"
-#include "jhBattleBGScript.h"
 #include "jhParallaxScript.h"
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;

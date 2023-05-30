@@ -21,6 +21,8 @@ static constexpr const float SWEEPER_INITIAL_SPEED = 2.0;
 static constexpr const int WARDEN_INITIAL_HP = 3;
 static constexpr const float WARDEN_INITIAL_SPEED = 3.0;
 
+static constexpr const float SPAWNING_TIME = 3.0f;
+
 namespace jh
 {
 	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
@@ -33,10 +35,12 @@ namespace jh
 		, mMaxHP(0)
 		, mCurrHP(0)
 		, mSpeed(0.0f)
+		, mSpawningTimer(SPAWNING_TIME)
 		, mHittedPushDistance(2.0f)
-		, meLookDir(eObjectLookDirection::RIGHT)
-		, meState(eMonsterState::TRACING)
+		, meLookDir(eObjectLookDirection::LEFT)
+		, meState(eMonsterState::SPAWNING)
 		, meMonsterType(eMonsterType)
+		
 	{
 		switch (meMonsterType)
 		{
@@ -89,10 +93,22 @@ namespace jh
 		assert(mpTranform != nullptr);
 		assert(mpPlayerScript != nullptr);
 		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
+		calculateDistanceFromPlayerToSetLookDirection();
 	}
 
 	void MonsterScript::Update()
 	{
+		if (meState == eMonsterState::SPAWNING)
+		{
+			setAnimationFlip();
+			playAnimation();
+			mSpawningTimer -= Time::DeltaTime();
+			if (mSpawningTimer <= 0.0f)
+			{
+				setState(eMonsterState::TRACING);
+			}
+			return;
+		}
 		setPosition();
 		setAnimationFlip();
 		playAnimation();
@@ -189,8 +205,9 @@ namespace jh
 		default:
 			break;
 		}
-		meLookDir = eObjectLookDirection::RIGHT;
-		meState = eMonsterState::TRACING;
+		calculateDistanceFromPlayerToSetLookDirection();
+		setState(eMonsterState::SPAWNING);
+		mSpawningTimer = SPAWNING_TIME;
 	}
 
 	void MonsterScript::setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey)
@@ -222,23 +239,7 @@ namespace jh
 		{
 		case eMonsterState::TRACING:
 		{
-			assert(mpTranform != nullptr);
-			Vector3 monCurrPos = mpTranform->GetPosition();
-			Vector3 dir = mpPlayerTransform->GetPosition() - monCurrPos;
-			Vector3 lookDirVector(dir);
-			if (isDistanceCloseToPlayer(lookDirVector))
-			{
-				setState(eMonsterState::ATTACKING);
-				return;
-			}
-
-			dir.Normalize();
-			Vector3 moveVector = monCurrPos;
-			moveVector += dir * mSpeed * Time::DeltaTime();
-			mpTranform->SetPosition(Vector3(moveVector.x, monCurrPos.y, monCurrPos.z));
-			setLookDir(lookDirVector);
-			
-			break;
+			moveOrChangeState();
 			return;
 		}
 		case eMonsterState::ATTACKING:
@@ -265,6 +266,28 @@ namespace jh
 		default:
 			break;
 		}
+	}
+
+
+	void MonsterScript::moveOrChangeState()
+	{
+		assert(mpTranform != nullptr);
+		Vector3 monCurrPos = mpTranform->GetPosition();
+		Vector3 dir = mpPlayerTransform->GetPosition() - monCurrPos;
+		Vector3 lookDirVector(dir);
+		setLookDir(lookDirVector);
+
+		if (isDistanceCloseToPlayer(lookDirVector))
+		{
+			setState(eMonsterState::ATTACKING);
+			return;
+		}
+
+
+		dir.Normalize();
+		Vector3 moveVector = monCurrPos;
+		moveVector += dir * mSpeed * Time::DeltaTime();
+		mpTranform->SetPosition(Vector3(moveVector.x, monCurrPos.y, monCurrPos.z));
 	}
 
 	void MonsterScript::setLookDir(const jh::math::Vector3& lookDirVector)
@@ -305,6 +328,11 @@ namespace jh
 	{
 		switch (meState)
 		{
+		case eMonsterState::SPAWNING:
+		{
+			mpAnimator->PlayAnimation(mAnimIdleKey, true);
+			break;
+		}
 		case eMonsterState::TRACING:
 		{
 			mpAnimator->PlayAnimation(mAnimMoveKey, true);
@@ -339,6 +367,14 @@ namespace jh
 			assert(mpEffectScript != nullptr);
 			mpEffectScript->SetStatePlaying();
 		}
+	}
+
+	void MonsterScript::calculateDistanceFromPlayerToSetLookDirection()
+	{
+		Vector3 monCurrPos = mpTranform->GetPosition();
+		Vector3 dir = mpPlayerTransform->GetPosition() - monCurrPos;
+		Vector3 lookDirVector(dir);
+		setLookDir(lookDirVector);
 	}
 	void MonsterScript::decreaseHP(const int amount)
 	{

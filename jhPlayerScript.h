@@ -74,6 +74,8 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
+		void IdleAnimStart();
+
 		void AttackOneAnimationStart();
 		void AttackOneAnimationComplete();
 		

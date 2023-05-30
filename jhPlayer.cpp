@@ -73,17 +73,17 @@ namespace jh
 		const float WIDTH = 90.0f;
 		const float HEIGHT = 37.0f;
 		const float MAGNINICATION = 120.0f;
-		Vector2 animSize(WIDTH, HEIGHT);
-		Vector2 offset(0.02f, 0.0f);
+		const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
+		const Vector2 OFFSET(0.02f, 0.0f);
 		Animator* pPlayerAnimator = new Animator();
 		pPlayerAnimator->Create(
 			L"PlayerIdle",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 1),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			9,
-			0.15f,
+			0.1f,
 			MAGNINICATION
 		);
 
@@ -92,8 +92,8 @@ namespace jh
 			L"PlayerMove",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 4),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			8,
 			0.1f,
 			MAGNINICATION
@@ -104,8 +104,8 @@ namespace jh
 			L"PlayerNormalAttack1",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 7),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			7,
 			PLAYER_ATTACK_DURAITON,
 			MAGNINICATION
@@ -115,8 +115,8 @@ namespace jh
 			L"PlayerNormalAttack2",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 8),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			5,
 			PLAYER_ATTACK_DURAITON,
 			MAGNINICATION
@@ -125,8 +125,8 @@ namespace jh
 			L"PlayerNormalAttack3",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 9),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			5,
 			PLAYER_ATTACK_DURAITON + 0.03f,
 			MAGNINICATION
@@ -138,8 +138,8 @@ namespace jh
 			L"PlayerHitted",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 25),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			2,
 			0.1f,
 			MAGNINICATION
@@ -149,8 +149,8 @@ namespace jh
 			L"PlayerDash",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 12),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			6,
 			0.075f,
 			MAGNINICATION
@@ -159,8 +159,8 @@ namespace jh
 			L"PlayerPushAttack",
 			pAtlas,
 			Vector2(0.0f, HEIGHT * 10),
-			animSize,
-			offset,
+			ANIM_SIZE,
+			OFFSET,
 			6,
 			0.1f,
 			MAGNINICATION
