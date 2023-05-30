@@ -6,9 +6,10 @@ constexpr const UINT RECT_VERTEX_COUNT = 4;
 constexpr const UINT POINT_BORDER_SAMPLER_SLOT_NUMBER = 0;
 constexpr const UINT POINT_WRAP_SAMPLER_SLOT_NUMBER = 1;
 
+
 namespace jh
 {
-
+	class Texture;
 	class ResourceMaker final
 	{
 	public:
@@ -153,8 +154,6 @@ namespace jh
 		static const std::wstring BG_PARALLAX_MATERIAL_6_KEY;
 #pragma endregion
 
-
-
 	private:
 		void createMeshs();
 		void createShaders();
@@ -165,6 +164,10 @@ namespace jh
 
 		void setSamplerState();
 
+		void loadAndInsertShader(const std::wstring& key, const std::wstring& VSFileName, const std::wstring& PSFileName);
+		void loadAndInsertTexture(const std::wstring& key, const std::wstring& fileName);
+		void insertMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey);
+		void insertNormalMapMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey, const std::wstring& normalMapKey);
 	private:
 		ResourceMaker()
 			: mVertices{}

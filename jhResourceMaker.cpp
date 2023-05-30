@@ -144,6 +144,7 @@ namespace jh
 
 	void ResourceMaker::createMeshs()
 	{
+#pragma region INDEX
 		std::vector<UINT> rectIndexes;
 		rectIndexes.reserve(6);
 
@@ -153,6 +154,7 @@ namespace jh
 		rectIndexes.push_back(0);
 		rectIndexes.push_back(3);
 		rectIndexes.push_back(2);
+#pragma endregion
 
 #pragma region SPRITE_RECT_MESH
 		Mesh* pRectMesh = new Mesh();
@@ -322,7 +324,7 @@ namespace jh
 
 #pragma endregion
 
-#pragma region BATTLE_BG_MESH
+#pragma region BG_MESH
 		const UINT MAGNIFICATION_VALUE = 8;
 		Mesh* pBattleBGMesh = new Mesh();
 		pBattleBGMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
@@ -347,400 +349,138 @@ namespace jh
 
 	void ResourceMaker::createShaders()
 	{
-		Shader* pSriteShader = new Shader();
-		pSriteShader->CreateShaders(L"jhSpriteVS.hlsl", L"jhSpritePS.hlsl");
-		ResourcesManager::Insert<Shader>(SPRITE_SHADER_KEY, pSriteShader);
+
+		loadAndInsertShader(SPRITE_SHADER_KEY, L"jhSpriteVS.hlsl", L"jhSpritePS.hlsl");
+		loadAndInsertShader(BG_NO_LIGHTING_SHADER_KEY, L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
+		loadAndInsertShader(UI_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
+		loadAndInsertShader(UI_STAMINA_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
+
 
 		Shader* pNormalMapSpriteShader = new NormalMapShader();
 		pNormalMapSpriteShader->CreateShaders(L"jhNormalMapSpriteVS.hlsl", L"jhNormalMapSpritePS.hlsl");
 		ResourcesManager::Insert<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY, pNormalMapSpriteShader);
 
-
-		Shader* pBattleBGShader = new Shader();
-		pBattleBGShader->CreateShaders(L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
-		ResourcesManager::Insert<Shader>(BG_NO_LIGHTING_SHADER_KEY, pBattleBGShader);
-
 		Shader* pDebugShader = new Shader();
 		pDebugShader->CreateShaders(L"DebugVS.hlsl", L"DebugPS.hlsl");
 		pDebugShader->SetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 		ResourcesManager::Insert<Shader>(DEBUG_SHADER_KEY, pDebugShader);
-
-
-		Shader* pUIHPShader = new Shader();
-		pUIHPShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
-		ResourcesManager::Insert<Shader>(UI_HP_SHADER_KEY, pUIHPShader);
-
-		Shader* pUIStaminaShader = new Shader();
-		pUIStaminaShader->CreateShaders(L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
-		ResourcesManager::Insert<Shader>(UI_STAMINA_SHADER_KEY, pUIStaminaShader);
 	}
 
 	void ResourceMaker::createTextures()
 	{
-		Texture* pPlayerAtalsTexture = new Texture();
-		pPlayerAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37(2).png");
-		ResourcesManager::Insert<Texture>(PLAYER_TEXTURE_ATLAS_KEY, pPlayerAtalsTexture);
 
-		Texture* pPlayerNormalMapAtalsTexture = new Texture();
-		pPlayerNormalMapAtalsTexture->Load(L"Sword Master Sprite Sheet 90x37_NM.png");
-		ResourcesManager::Insert<Texture>(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, pPlayerNormalMapAtalsTexture);
+		loadAndInsertTexture(PLAYER_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37(2).png");
+		loadAndInsertTexture(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, L"caged shocker 110x42.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, L"caged shocker 110x42_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, L"Sweeper.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY, L"Sweeper_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, L"TheDarkWarden97x32.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, L"TheDarkWarden97x32_NM.png");
 
+		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
+		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
+		loadAndInsertTexture(EFFECT_HIT_TEXTURE_ATLAS_KEY, L"EffectAtals.png");
+		loadAndInsertTexture(EFFECT_PLAYER_DASH_TEXTURE_KEY, L"DASHSMOKE2.png");
 
-		Texture* pCagedShokerAtlasTexture = new Texture();
-		pCagedShokerAtlasTexture->Load(L"caged shocker 110x42.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, pCagedShokerAtlasTexture);
+		loadAndInsertTexture(BG_OBELISK_TEXTURE_ATLAS_KEY, L"ObeliskEffects.png");
+		loadAndInsertTexture(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, L"ObeliskEffects_NM.png");
+		loadAndInsertTexture(BG_FOREGROUND_TEXTURE_KEY, L"ForeGround.png");
+		loadAndInsertTexture(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, L"ForeGround_NM.png");
+		loadAndInsertTexture(BG_PARALLAX_TEXTURE_1_KEY, L"parallax1.png");
+		loadAndInsertTexture(BG_PARALLAX_TEXTURE_2_KEY, L"parallax2.png");
+		loadAndInsertTexture(BG_PARALLAX_TEXTURE_3_KEY, L"parallax3.png");
+		loadAndInsertTexture(BG_PARALLAX_TEXTURE_4_KEY, L"parallax4.png");
+		//loadAndInsertTexture(BG_PARALLAX_TEXTURE_5_KEY, L"parallax5.png");
+		//loadAndInsertTexture(BG_PARALLAX_TEXTURE_6_KEY, L"parallax6.png");
+		loadAndInsertTexture(BG_MOON_ATLAS_TEXTURE_KEY, L"MoonSprite.png");
+		loadAndInsertTexture(BG_MOON_NORMAL_MAP_TEXTURE_KEY, L"MoonSprite_NM.png");
+		loadAndInsertTexture(BG_TREE_1_TEXTURE_KEY, L"Tree 1 Sprite Sheet 112x128.png");
+		loadAndInsertTexture(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, L"Tree 1 Sprite Sheet 112x128_NM.png");
 
-		Texture* pCagedShokerNormalMapTexture = new Texture();
-		pCagedShokerNormalMapTexture->Load(L"caged shocker 110x42_NM.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, pCagedShokerNormalMapTexture);
+		loadAndInsertTexture(BG_TREE_2_TEXTURE_KEY, L"Tree 2 Sprite Sheet 128x96.png");
+		loadAndInsertTexture(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, L"Tree 2 Sprite Sheet 128x96_NM.png");
+		loadAndInsertTexture(BG_FLOWER_TEXTURE_KEY, L"BG_Flower_16x16.png");
+		loadAndInsertTexture(BG_TORCH_TEXTURE_KEY, L"BG_Torch_16x16.png");
+		loadAndInsertTexture(BG_MUSHROOM_STATUE_TEXTURE_KEY, L"BG_MushRoomStatue_192x192.png");
 
-		Texture* pSweeperAtlasTexture = new Texture();
-		pSweeperAtlasTexture->Load(L"Sweeper.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, pSweeperAtlasTexture);
+		loadAndInsertTexture(BG_FOREGROUND_GRASS_TEXTURE_KEY, L"BG_FOREGROUND_Grass_212x11.png");
+		loadAndInsertTexture(BG_LARGE_LIGHTNING_TEXTURE_KEY, L"BG_Large_Lightning_64x48.png");
+		loadAndInsertTexture(BG_SMALL_LIGHTNING_TEXTURE_KEY, L"BG_SmallLightning_32x32.png");
 
-		Texture* pSweeperNormalMapTexture = new Texture();
-		pSweeperNormalMapTexture->Load(L"Sweeper_NM.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY, pSweeperNormalMapTexture);
+		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"HpBarBorder.png");
+		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"HPBar.png");
+		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"StaminarBar.png");
 
-
-		Texture* pWardenAtlasTexture = new Texture();
-		pWardenAtlasTexture->Load(L"TheDarkWarden97x32.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, pWardenAtlasTexture);
-
-		Texture* pWardenNormalMapTexture = new Texture();
-		pWardenNormalMapTexture->Load(L"TheDarkWarden97x32_NM.png");
-		ResourcesManager::Insert<Texture>(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, pWardenNormalMapTexture);
-
-
-		Texture* pObeliskAtlasTexture = new Texture();
-		// ObeliskEffects.png
-		// Obelisk.png
-		pObeliskAtlasTexture->Load(L"ObeliskEffects.png");
-		ResourcesManager::Insert<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY, pObeliskAtlasTexture);
-		Texture* pObeliskNormalMapTexture = new Texture();
-		pObeliskNormalMapTexture->Load(L"ObeliskEffects_NM.png");
-		ResourcesManager::Insert<Texture>(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, pObeliskNormalMapTexture);
-
-
-		Texture* pGreenPortalTextureAtlas = new Texture();
-		pGreenPortalTextureAtlas->Load(L"GreenPortalSpriteSheet.png");
-		ResourcesManager::Insert<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, pGreenPortalTextureAtlas);
-
-		Texture* pGreenPortalNormalMapTextureAtlas = new Texture();
-		pGreenPortalNormalMapTextureAtlas->Load(L"GreenPortalSpriteSheet_NM.png");
-		ResourcesManager::Insert<Texture>(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, pGreenPortalNormalMapTextureAtlas);
-
-
-
-		Texture* pBattleBGTexture = new Texture();
-		pBattleBGTexture->Load(L"ForeGround.png");
-		ResourcesManager::Insert<Texture>(BG_FOREGROUND_TEXTURE_KEY, pBattleBGTexture);
-		
-		Texture* pBattleForegroundNormalMapTexture = new Texture();
-		pBattleForegroundNormalMapTexture->Load(L"ForeGround_NM.png");
-		ResourcesManager::Insert<Texture>(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, pBattleForegroundNormalMapTexture);
-
-
-		Texture* pWeaponSwordTxtrue = new Texture();
-		pWeaponSwordTxtrue->Load(L"SwordSwingTopDown.png");
-		ResourcesManager::Insert<Texture>(WEAPON_SWORD_TEXTURE_KEY, pWeaponSwordTxtrue);
-
-		Texture* pEffectSwordTxtrue = new Texture();
-		pEffectSwordTxtrue->Load(L"EffectAtals.png");
-		ResourcesManager::Insert<Texture>(EFFECT_HIT_TEXTURE_ATLAS_KEY, pEffectSwordTxtrue);
-
-		Texture* pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax1.png");
-		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_1_KEY, pParralaxTxtrue);
-
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax2.png");
-		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_2_KEY, pParralaxTxtrue);
-
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax3.png");
-		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_3_KEY, pParralaxTxtrue);
-
-		pParralaxTxtrue = new Texture();
-		pParralaxTxtrue->Load(L"parallax4.png");
-		ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_4_KEY, pParralaxTxtrue);
-
-		//pParralaxTxtrue = new Texture();
-		//pParralaxTxtrue->Load(L"parallax5.png");
-		//ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_5_KEY, pParralaxTxtrue);
-
-		//pParralaxTxtrue = new Texture();
-		//pParralaxTxtrue->Load(L"parallax6.png");
-		//ResourcesManager::Insert<Texture>(BG_PARALLAX_TEXTURE_6_KEY, pParralaxTxtrue);
-
-		Texture* pBGMoonTexture = new Texture();
-		pBGMoonTexture->Load(L"MoonSprite.png");
-		ResourcesManager::Insert<Texture>(BG_MOON_ATLAS_TEXTURE_KEY, pBGMoonTexture);
-
-		Texture* pBGMoonNormalMapTexture = new Texture();
-		pBGMoonNormalMapTexture->Load(L"MoonSprite_NM.png");
-		ResourcesManager::Insert<Texture>(BG_MOON_NORMAL_MAP_TEXTURE_KEY, pBGMoonNormalMapTexture);
-
-		Texture* pTree1Texture = new Texture();
-		pTree1Texture->Load(L"Tree 1 Sprite Sheet 112x128.png");
-		ResourcesManager::Insert<Texture>(BG_TREE_1_TEXTURE_KEY, pTree1Texture);
-
-		Texture* pTree1NormalTexture = new Texture();
-		pTree1NormalTexture->Load(L"Tree 1 Sprite Sheet 112x128_NM.png");
-		ResourcesManager::Insert<Texture>(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, pTree1NormalTexture);
-
-		
-		Texture* pTree2Texture = new Texture();
-		pTree2Texture->Load(L"Tree 2 Sprite Sheet 128x96.png");
-		ResourcesManager::Insert<Texture>(BG_TREE_2_TEXTURE_KEY, pTree2Texture);
-
-		Texture* pTree2NormalTexture = new Texture();
-		pTree2NormalTexture->Load(L"Tree 2 Sprite Sheet 128x96_NM.png");
-		ResourcesManager::Insert<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, pTree2NormalTexture);
-
-		Texture* pBGFlowerTexture = new Texture();
-		pBGFlowerTexture->Load(L"BG_Flower_16x16.png");
-		ResourcesManager::Insert<Texture>(BG_FLOWER_TEXTURE_KEY, pBGFlowerTexture);
-
-		Texture* pBGTorchTexture = new Texture();
-		pBGTorchTexture->Load(L"BG_Torch_16x16.png");
-		ResourcesManager::Insert<Texture>(BG_TORCH_TEXTURE_KEY, pBGTorchTexture);
-
-		Texture* pBGMushRoomTexture = new Texture();
-		pBGMushRoomTexture->Load(L"BG_MushRoomStatue_192x192.png");
-		ResourcesManager::Insert<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY, pBGMushRoomTexture);
-
-		Texture* pBGForegrondGrass = new Texture();
-		pBGForegrondGrass->Load(L"BG_FOREGROUND_Grass_212x11.png");
-		ResourcesManager::Insert<Texture>(BG_FOREGROUND_GRASS_TEXTURE_KEY, pBGForegrondGrass);
-
-		Texture* pBGLargeLightning = new Texture();
-		pBGLargeLightning->Load(L"BG_Large_Lightning_64x48.png");
-		ResourcesManager::Insert<Texture>(BG_LARGE_LIGHTNING_TEXTURE_KEY, pBGLargeLightning);
-
-		Texture* pBGSmallLightning = new Texture();
-		pBGSmallLightning->Load(L"BG_SmallLightning_32x32.png");
-		ResourcesManager::Insert<Texture>(BG_SMALL_LIGHTNING_TEXTURE_KEY, pBGSmallLightning);
-
-
-		Texture* pUITextrue = new Texture();
-		pUITextrue->Load(L"HpBarBorder.png");
-		ResourcesManager::Insert<Texture>(UI_HP_BORDER_TEXTURE_KEY, pUITextrue);
-
-		Texture* pUIHPBarTextrue = new Texture();
-		pUIHPBarTextrue->Load(L"HPBar.png");
-		ResourcesManager::Insert<Texture>(UI_HP_BAR_TEXTURE_KEY, pUIHPBarTextrue);
-
-
-		Texture* pStaminaBarTextrue = new Texture();
-		pStaminaBarTextrue->Load(L"StaminarBar.png");
-		ResourcesManager::Insert<Texture>(UI_STAMINA_BAR_TEXTURE_KEY, pStaminaBarTextrue);
-
-		Texture* pPlayerDashDustEffectTexture = new Texture();
-		pPlayerDashDustEffectTexture->Load(L"DASHSMOKE2.png");
-		ResourcesManager::Insert<Texture>(EFFECT_PLAYER_DASH_TEXTURE_KEY, pPlayerDashDustEffectTexture);
-
-		Texture* pBrickDiffuse = new Texture();
-		pBrickDiffuse->Load(L"brickwall.jpg");
-		ResourcesManager::Insert<Texture>(BRIK_DIFFUSE_TEXTURE_KEY, pBrickDiffuse);
-
-		Texture* pBrickNormal = new Texture();
-		pBrickNormal->Load(L"brickwall_normal.jpg");
-		ResourcesManager::Insert<Texture>(BRIK_NORMAL_MAP_TEXTURE_KEY, pBrickNormal);
+		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
+		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
+		loadAndInsertTexture(WEAPON_SWORD_TEXTURE_KEY, L"SwordSwingTopDown.png");
 	}
 
 	void ResourceMaker::createMaterial()
 	{
-		Material* pPlayerMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(PLAYER_MATERIAL_KEY, pPlayerMaterial);
-
-		Material* pPlayerNormalMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(PLAYER_TEXTURE_ATLAS_KEY), ResourcesManager::Find<Texture>(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(PLAYER_NORMAL_MAP_MATERIAL_KEY, pPlayerNormalMaterial);
-
-		Material* pBrickNormalTexture = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(BRIK_DIFFUSE_TEXTURE_KEY), ResourcesManager::Find<Texture>(BRIK_NORMAL_MAP_TEXTURE_KEY));
-		ResourcesManager::Insert<Material>(BRIK_MATERIAL_KEY, pBrickNormalTexture);
-
-		Material* pBrickNotNormalMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(BRIK_DIFFUSE_TEXTURE_KEY));
-		ResourcesManager::Insert<Material>(BRIK_NOT_NORMAL_MATERIAL_KEY, pBrickNotNormalMaterial);
-
-		Material* pCagedMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_MATERIAL_KEY, pCagedMaterial);
-
-		Material* pCagedNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY, pCagedNormalMapMaterial);
-
-		Material* pSweeperMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_MATERIAL_KEY, pSweeperMaterial);
-
-		Material* pSweeperNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY, pSweeperNormalMapMaterial);
+		insertMaterial(PLAYER_MATERIAL_KEY, SPRITE_SHADER_KEY, PLAYER_TEXTURE_ATLAS_KEY);
+		insertNormalMapMaterial(PLAYER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, PLAYER_TEXTURE_ATLAS_KEY, PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY);
 
 
-		Material* pWardenMaterial = new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_WARDEN_MATERIAL_KEY, pWardenMaterial);
+		insertMaterial(MONSTER_CAGED_SHOKER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY);
+		insertNormalMapMaterial(MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY);
 
-		Material* pWardenNormalMapMaterial = new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_ATLAS_KEY), ResourcesManager::Find<Texture>(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY));
-		ResourcesManager::Insert<Material>(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, pWardenNormalMapMaterial);
+		insertMaterial(MONSTER_SWEEPER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_SWEEPER_ATLAS_KEY);
+		insertNormalMapMaterial(MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY);
 
-		ResourcesManager::Insert<Material>(BG_OBELISK_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY))
-			);
+		insertMaterial(MONSTER_WARDEN_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_WARDEN_ATLAS_KEY);
+		insertNormalMapMaterial(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_WARDEN_ATLAS_KEY, MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY);
 
-		ResourcesManager::Insert<Material>(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_ATLAS_KEY),
-				ResourcesManager::Find<Texture>(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY))
-			);
+		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
+		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 
 
-		Material* pBattleBGMaterial = new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY), ResourcesManager::Find<Texture>(BG_FOREGROUND_TEXTURE_KEY));
-		ResourcesManager::Insert<Material>(BG_FOREGROUND_MATERIAL_KEY, pBattleBGMaterial);
+		insertMaterial(BG_FOREGROUND_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_FOREGROUND_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_FOREGROUND_NORMALMAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_FOREGROUND_TEXTURE_KEY, BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY);
 
-		ResourcesManager::Insert<Material>(BG_FOREGROUND_NORMALMAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_FOREGROUND_TEXTURE_KEY),
-				ResourcesManager::Find<Texture>(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY))
-			);
+		insertMaterial(BG_TREE_1_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TREE_1_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_TREE_1_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_TREE_1_TEXTURE_KEY, BG_TREE_1_NORMAL_MAP_TEXTURE_KEY);
 
+		insertMaterial(BG_TREE_2_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TREE_2_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_TREE_2_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_TREE_2_TEXTURE_KEY, BG_TREE_2_NORMAL_MAP_TEXTURE_KEY);
 
-		ResourcesManager::Insert<Material>(BG_TREE_1_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_TREE_1_TEXTURE_KEY))
-			);
-		
-		ResourcesManager::Insert<Material>(BG_TREE_1_NORMAL_MAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_TREE_1_TEXTURE_KEY), 
-				ResourcesManager::Find<Texture>(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY))
-			);
+		insertMaterial(BG_FLOWER_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_FLOWER_TEXTURE_KEY);
+		insertMaterial(BG_TORCH_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TORCH_TEXTURE_KEY);
+		insertMaterial(BG_MUSHROOM_STATUE_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MUSHROOM_STATUE_TEXTURE_KEY);
+		insertMaterial(BG_FOREGROUND_GRASS_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_FOREGROUND_GRASS_TEXTURE_KEY);
+		insertMaterial(BG_LARGE_LIGHTNING_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_LARGE_LIGHTNING_TEXTURE_KEY);
+		insertMaterial(BG_SMALL_LIGHTNING_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_SMALL_LIGHTNING_TEXTURE_KEY);
+		insertMaterial(BG_MOON_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_MOON_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY, BG_MOON_NORMAL_MAP_TEXTURE_KEY);
 
 
-		ResourcesManager::Insert<Material>(BG_TREE_2_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_TREE_2_TEXTURE_KEY))
-			);
+		insertMaterial(EFFECT_HIT_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_HIT_TEXTURE_ATLAS_KEY);
+		insertMaterial(EFFECT_PLAYER_DASH_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_PLAYER_DASH_TEXTURE_KEY);
+		insertMaterial(EFFECT_GREEN_PORTAL_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY);
+		insertNormalMapMaterial(EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY);
 
-		ResourcesManager::Insert<Material>(BG_TREE_2_NORMAL_MAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_TREE_2_TEXTURE_KEY),
-				ResourcesManager::Find<Texture>(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_FLOWER_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_FLOWER_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_TORCH_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_TORCH_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_MUSHROOM_STATUE_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_MUSHROOM_STATUE_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_FOREGROUND_GRASS_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_FOREGROUND_GRASS_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_LARGE_LIGHTNING_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_LARGE_LIGHTNING_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_SMALL_LIGHTNING_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_SMALL_LIGHTNING_TEXTURE_KEY))
-			);
+		insertMaterial(BG_PARALLAX_MATERIAL_1_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_1_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_2_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_2_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_3_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_3_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_4_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_4_KEY);
+		//insertMaterial(BG_PARALLAX_MATERIAL_5_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_5_KEY);
+		//insertMaterial(BG_PARALLAX_MATERIAL_6_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_6_KEY);
 
 
-		ResourcesManager::Insert<Material>(WEAPON_SWORD_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(WEAPON_SWORD_TEXTURE_KEY))
-			);
+		insertMaterial(UI_HP_BORDER_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, UI_HP_BORDER_TEXTURE_KEY);
+		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
+		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
 
-		ResourcesManager::Insert<Material>(EFFECT_HIT_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_HIT_TEXTURE_ATLAS_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_1_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_1_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_2_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_2_KEY))
-			);
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_3_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_3_KEY))
-			);
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_4_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_4_KEY))
-			);
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_5_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_5_KEY))
-			);
-		ResourcesManager::Insert<Material>(BG_PARALLAX_MATERIAL_6_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_PARALLAX_TEXTURE_6_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(UI_HP_BORDER_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(BG_NO_LIGHTING_SHADER_KEY),
-				ResourcesManager::Find<Texture>(UI_HP_BORDER_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(UI_HP_BAR_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(UI_HP_SHADER_KEY),
-				ResourcesManager::Find<Texture>(UI_HP_BAR_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(UI_STAMINA_BAR_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(UI_STAMINA_SHADER_KEY),
-				ResourcesManager::Find<Texture>(UI_STAMINA_BAR_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(BG_MOON_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY))
-			);
-		ResourcesManager::Insert<Material>(BG_MOON_NORMAL_MAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(BG_MOON_ATLAS_TEXTURE_KEY),
-				ResourcesManager::Find<Texture>(BG_MOON_NORMAL_MAP_TEXTURE_KEY))
-			);
-
-
-		ResourcesManager::Insert<Material>(EFFECT_PLAYER_DASH_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_PLAYER_DASH_TEXTURE_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(EFFECT_GREEN_PORTAL_MATERIAL_KEY,
-			new Material(ResourcesManager::Find<Shader>(SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY))
-			);
-
-		ResourcesManager::Insert<Material>(EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY,
-			new NormalMapMaterial(ResourcesManager::Find<Shader>(NORMAL_MAP_SPRITE_SHADER_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY),
-				ResourcesManager::Find<Texture>(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY))
-			);
 
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);
-
 #pragma endregion
+
+		insertMaterial(BRIK_NOT_NORMAL_MATERIAL_KEY, SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY);
+		insertNormalMapMaterial(BRIK_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY, BRIK_NORMAL_MAP_TEXTURE_KEY);
+		insertMaterial(WEAPON_SWORD_MATERIAL_KEY, SPRITE_SHADER_KEY, WEAPON_SWORD_TEXTURE_KEY);
 
 	}
 
@@ -793,6 +533,43 @@ namespace jh
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
 	}
+
+	void ResourceMaker::loadAndInsertShader(const std::wstring& key, const std::wstring& VSFileName, const std::wstring& PSFileName)
+	{
+		Shader* pShader = new Shader();
+		assert(pShader != nullptr);
+		pShader->CreateShaders(VSFileName, PSFileName);
+		ResourcesManager::Insert<Shader>(key, pShader);
+	}
+
+	void ResourceMaker::loadAndInsertTexture(const std::wstring& key, const std::wstring& fileName)
+	{
+		Texture* pTexture = new Texture();
+		assert(pTexture != nullptr);
+		pTexture->Load(fileName);
+		ResourcesManager::Insert<Texture>(key, pTexture);
+	}
+
+	void ResourceMaker::insertMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey)
+	{
+		ResourcesManager::Insert<Material>(
+			key,
+			new Material(
+				ResourcesManager::Find<Shader>(shaderKey),
+				ResourcesManager::Find<Texture>(textureKey))
+			);
+	}
+	void ResourceMaker::insertNormalMapMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey, const std::wstring& normalMapKey)
+	{
+		ResourcesManager::Insert<Material>(
+			key,
+			new NormalMapMaterial(
+				ResourcesManager::Find<Shader>(shaderKey),
+				ResourcesManager::Find<Texture>(textureKey),
+				ResourcesManager::Find<Texture>(normalMapKey))
+			);
+	}
+
 
 	void ResourceMaker::Release()
 	{
