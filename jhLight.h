@@ -11,9 +11,9 @@ namespace jh
 		virtual ~Light() = default;
 
 		void Initialize() override;
-		void Update() override;
 		void FixedUpdate() override;
-		void Render() override;
+
+		void SetFollowingTransform(Transform* pTransform) { assert(pTransform != nullptr && mpFollowingTransform == nullptr); mpFollowingTransform = pTransform; }
 
 		jh::math::Vector4 GetDiffuse() const	{ mLightAttirbute.Diffuse; }
 		eLightType GetType() const				{ return (eLightType)mLightAttirbute.ELightType; }
@@ -23,5 +23,6 @@ namespace jh
 	private:
 		LightAttribute	mLightAttirbute;
 		Transform*		mpTransform;
+		Transform*		mpFollowingTransform;
 	};
 }

@@ -12,6 +12,7 @@ static constexpr const float BG_PORTAL_Z_VALUE = 4.0f;
 // SPECIAL FOR FOREGROUND
 static constexpr const float BG_FOREGROUND_Z_VALUE = 5.0f;
 
+static constexpr const float BG_LIGHT_Z_VALUE = -1.0f;
 #pragma endregion
 
 #pragma region MONSTER

@@ -26,6 +26,8 @@ namespace jh
 		void WriteLightDataAtBuffer();
 		void SetPipeline();
 
+		static LightAttribute makeLightAttribute(const eLightType eType, const jh::math::Vector4& diffuse, const float radius);
+
 	private:
 		LightingManager() = default;
 		~LightingManager()

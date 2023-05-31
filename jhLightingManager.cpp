@@ -1,6 +1,6 @@
 #include "jhLightingManager.h"
 
-static const constexpr UINT INIT_LIGHT_COUNT = 16;
+static const constexpr UINT INIT_LIGHT_COUNT = 64;
 
 namespace jh
 {
@@ -27,4 +27,16 @@ namespace jh
 		mspLightConstantBuffer->SetPipeline();
 	}
 
+	LightAttribute LightingManager::makeLightAttribute(const eLightType eType, const jh::math::Vector4& diffuse, const float radius)
+	{
+		LightAttribute lightAttribute;
+		ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+		lightAttribute.ELightType = eType;
+		lightAttribute.Diffuse = diffuse;
+		if (eType == eLightType::POINT)
+		{
+			lightAttribute.Radius = radius;
+		}
+		return lightAttribute;
+	}
 }

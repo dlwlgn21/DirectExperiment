@@ -42,6 +42,8 @@
 #include "jhInput.h"
 #include "jhTime.h"
 #include "jhLayerZValue.h"
+#include "jhLightingManager.h"
+
 //#include "jhBGGroundGrass.h"
 
 using namespace jh::math;
@@ -60,6 +62,7 @@ static constexpr const Vector4 GRAY_COLOR(0.5f, 0.5f, 0.5f, 1.0f);
 static constexpr const Vector4 RED_COLOR(1.0f, 0.0f, 0.0f, 1.0f);
 static constexpr const Vector4 GREEN_COLOR(0.0f, 1.0f, 0.0f, 1.0f);
 static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
+static constexpr const Vector4 AMBIENT(0.1f, 0.1f, 0.1f, 1.0f);
 
 
 namespace jh
@@ -144,27 +147,16 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		// Directional Light
 		{
-			GameObject* pDirLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			pDirLightObject->GetTransform()->SetPosition(Vector3(0.0f, -5.0f, -10.0f));
-			LightAttribute lightAttribute;
-			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			lightAttribute.ELightType = eLightType::DIRECTIONAL;
-			lightAttribute.Diffuse = WHITE_COLOR;
-			Light* pDirLightComponent = new Light(lightAttribute);
-			pDirLightObject->AddComponent(pDirLightComponent);
+			//instantiateLightObject(LightingManager::makeLightAttribute(eLightType::DIRECTIONAL, WHITE_COLOR, 0.0f), Vector2(0.0f, -5.0f));
 		}
 		// Point Light
 		{
-			GameObject* pPointLightObject = Instantiate<GameObject>(eLayerType::PLAYER);
-			pPointLightObject->GetTransform()->SetPosition(Vector3(-10.0f, -2.0f, -1.0f));
-			LightAttribute lightAttribute;
-			ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			lightAttribute.ELightType = eLightType::POINT;
-			lightAttribute.Diffuse = WHITE_COLOR;
-			lightAttribute.Radius = 30.0f;
-			Light* pPointLightComponent = new Light(lightAttribute);
-			pPointLightObject->AddComponent(pPointLightComponent);
-			pPointLightObject->GetTransform()->SetParent(pPlayerScript->GetOwner());
+			//LightAttribute lightAttribute;
+			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			//lightAttribute.ELightType = eLightType::POINT;
+			//lightAttribute.Diffuse = WHITE_COLOR;
+			//lightAttribute.Radius = 15.0f;
+			//instantiateLightObject(lightAttribute, Vector2(0.0f, 0.0f));
 		}
 
 	}
@@ -209,6 +201,9 @@ namespace jh
 		HitEffectObject* pHitEffectObejct = new HitEffectObject(eHitEffectType::BLOOD, static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 		pPlayer->SetHitEffectToPlayerScript(pHitEffectObejct);
 		AddGameObject(pHitEffectObejct, eLayerType::EFFECT);
+
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(2.0f, 2.0f, 2.0f, 1.0f), 15.0f), pPlayer->GetTransform());
+
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
 
@@ -370,4 +365,31 @@ namespace jh
 		//pBrickNotNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		//pExperimentTransform = pBrickNormal->GetTransform();
 	}
+
+
+
+	void PlayScene::instantiateLightObject(const LightAttribute& lightAttribute, const jh::math::Vector2& pos)
+	{
+		GameObject* pLightObject = Instantiate<GameObject>(eLayerType::PARTICLE);
+		if (lightAttribute.ELightType == eLightType::DIRECTIONAL)
+		{
+			pLightObject->GetTransform()->SetPosition(Vector3(pos.x, pos.y, -10.0f));
+		}
+		else
+		{
+			pLightObject->GetTransform()->SetPosition(Vector3(pos.x, pos.y, BG_LIGHT_Z_VALUE));
+		}
+		Light* pLightComponent = new Light(lightAttribute);
+		pLightObject->AddComponent(pLightComponent);
+	}
+	void PlayScene::instantiateLightObject(const LightAttribute& lightAttribute, Transform* pTransform)
+	{
+		assert(pTransform != nullptr);
+		GameObject* pLightObject = Instantiate<GameObject>(eLayerType::PARTICLE);
+		pLightObject->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, BG_LIGHT_Z_VALUE));
+		Light* pLightComponent = new Light(lightAttribute);
+		pLightObject->AddComponent(pLightComponent);
+		pLightComponent->SetFollowingTransform(pTransform);
+	}
+
 }

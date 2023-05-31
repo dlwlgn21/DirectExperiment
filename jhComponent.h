@@ -9,10 +9,10 @@ namespace jh
 		Component(eComponentType eType);
 		virtual ~Component();
 
-		virtual void Initialize() = 0;
-		virtual void Update() = 0;
-		virtual void FixedUpdate() = 0;
-		virtual void Render() = 0;
+		virtual void Initialize();
+		virtual void Update();
+		virtual void FixedUpdate();
+		virtual void Render();
 
 		eComponentType GetType() const { return meType; }
 		void SetOwner(GameObject* pOwner) { assert(pOwner != nullptr); mpOwner = pOwner; }

@@ -17,7 +17,7 @@ void CalculateLightWithNormal(in out Light outLight, inout float3x3 tangentSpace
     //lightDir = mul(lightDir, tangentSpaceMat);
     //float2 lightDir = normalize(playerPos.xy - lightAttributes[idx].Position.xy);
     
-    float3 diffuse = saturate(dot(worldNormal.xyz, -lightDir));
+    float3 diffuse = saturate(dot(worldNormal.xyz, -lightDir.xyz));
     if (lightAttributes[idx].ELightType == DIRECTIONAL)
     {
         outLight.Diffuse.rgb = lightAttributes[idx].LightElement.Diffuse.rgb * diffuse;
