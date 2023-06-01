@@ -4,6 +4,7 @@
 #include "jhPlayerScript.h"
 #include "jhPlayer.h"
 #include "jhDebugHelper.h"
+#include "jhLayerZValue.h"
 
 using namespace jh::math;
 
@@ -23,10 +24,11 @@ namespace jh
 	void PlayerHitEffectScript::Initialize()
 	{
 		setAnimator();
+		const float EFFECT_SCALE_VALUE = 6.0f;
 		mpTransform = GetOwner()->GetTransform();
 		Vector3 pos = mpPlayerTransform->GetPosition();
-		mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
-		mpTransform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		mpTransform->SetPosition(Vector3(pos.x, pos.y, PLAYER_EFFECT_Z_VALUE));
+		mpTransform->SetOnlyXYScale(EFFECT_SCALE_VALUE);
 		assert(mpTransform != nullptr);
 		//SetState(eEffectState::PLAYING);
 	}
@@ -38,7 +40,7 @@ namespace jh
 		case eEffectState::WAIT:
 		{
 			Vector3 pos = mpPlayerTransform->GetPosition();
-			mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
+			mpTransform->SetOnlyXYPosition(pos.x, pos.y);
 			break;
 		}
 		case eEffectState::PLAYING:

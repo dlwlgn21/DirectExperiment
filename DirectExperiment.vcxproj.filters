@@ -136,9 +136,6 @@
     <Filter Include="GameObject\AnimatedGameObject">
       <UniqueIdentifier>{1b4ef4f6-b53d-4964-822a-fc9c7dfbc017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\AnimatedGameObject\Weapons">
-      <UniqueIdentifier>{c7bfdb07-c4af-4f26-912e-ea6342500c8f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Script\Player">
       <UniqueIdentifier>{bc0cbd53-47f2-4cf1-8187-bc5c4c83aaf2}</UniqueIdentifier>
     </Filter>
@@ -213,9 +210,6 @@
     </Filter>
     <Filter Include="Component\Script\Weapon\Player">
       <UniqueIdentifier>{ec8149f3-8dae-4f6c-b2a6-8c1ca350d653}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component\Script\Weapon\Monster">
-      <UniqueIdentifier>{11270529-fd8c-409f-8438-1941a0e34ba4}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\AnimatedGameObject\BG">
       <UniqueIdentifier>{d9aef993-1526-4b41-84c5-4f4898eb31b4}</UniqueIdentifier>
@@ -390,9 +384,6 @@
     <ClInclude Include="jhCameraManager.h">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClInclude>
-    <ClInclude Include="jhSword.h">
-      <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayerScript.h">
       <Filter>Component\Script\Player</Filter>
     </ClInclude>
@@ -458,12 +449,6 @@
     </ClInclude>
     <ClInclude Include="jhWeaponColliderScript.h">
       <Filter>Component\Script\Weapon\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="jhWeaponScript.h">
-      <Filter>Component\Script\Weapon\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMonsterAttackColiderScript.h">
-      <Filter>Component\Script\Weapon\Monster</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerDustEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
@@ -549,6 +534,9 @@
     <ClInclude Include="jhBGMoonObject.h">
       <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterAttackColiderScript.h">
+      <Filter>Component\Script\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -632,9 +620,6 @@
     <ClCompile Include="jhCameraManager.cpp">
       <Filter>Component\Camera\CameraManager</Filter>
     </ClCompile>
-    <ClCompile Include="jhSword.cpp">
-      <Filter>GameObject\AnimatedGameObject\Weapons</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\Player</Filter>
     </ClCompile>
@@ -697,12 +682,6 @@
     </ClCompile>
     <ClCompile Include="jhWeaponColliderScript.cpp">
       <Filter>Component\Script\Weapon\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="jhWeaponScript.cpp">
-      <Filter>Component\Script\Weapon\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMonsterAttackColiderScript.cpp">
-      <Filter>Component\Script\Weapon\Monster</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerDustEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect\Player</Filter>
@@ -784,6 +763,9 @@
     </ClCompile>
     <ClCompile Include="jhBGMoonObject.cpp">
       <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterAttackColiderScript.cpp">
+      <Filter>Component\Script\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

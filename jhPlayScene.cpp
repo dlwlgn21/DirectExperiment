@@ -13,7 +13,6 @@
 #include "jhTransform.h"
 #include "jhPlayer.h"
 #include "jhMonster.h"
-#include "jhSword.h"
 #include "jhCollider2D.h"
 #include "jhCollisionManager.h"
 #include "jhPlayerWeaponColliderObject.h"
@@ -202,7 +201,8 @@ namespace jh
 		pPlayer->SetHitEffectToPlayerScript(pHitEffectObejct);
 		AddGameObject(pHitEffectObejct, eLayerType::EFFECT);
 
-		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(2.0f, 2.0f, 2.0f, 1.0f), 15.0f), pPlayer->GetTransform());
+		const float INDENCITY_VALUE = 3.0f;
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(INDENCITY_VALUE, INDENCITY_VALUE, INDENCITY_VALUE, 1.0f), 15.0f), pPlayer->GetTransform());
 
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
@@ -247,9 +247,9 @@ namespace jh
 		}
 
 		{
-			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
-			pParallaxOne->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY);
-			pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
+			//ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
+			//pParallaxOne->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY);
+			//pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
 			//pParallaxOne->GetTransform()->SetOnlyXYPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
@@ -303,22 +303,29 @@ namespace jh
 
 	void PlayScene::instatiateLightningObejct()
 	{
+		const Vector4 DIFFUSE(1.0f, 1.0f, 1.0f, 1.0f);
+		const float RADIUS = 5.0f;
 		BGLightningObject* pBGLargeLightning = new BGLightningObject(eBGLightningType::LARGE);
 		pBGLargeLightning->SetPosition(15.7f);
 		this->AddGameObject(pBGLargeLightning, eLayerType::BACKGROUND);
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, DIFFUSE, RADIUS), pBGLargeLightning->GetTransform());
 
 		pBGLargeLightning = new BGLightningObject(eBGLightningType::LARGE);
 		pBGLargeLightning->SetPosition(-56.1f);
 		this->AddGameObject(pBGLargeLightning, eLayerType::BACKGROUND);
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, DIFFUSE, RADIUS), pBGLargeLightning->GetTransform());
 
 
 		BGLightningObject* pBGSmallLightning = new BGLightningObject(eBGLightningType::SMALL);
 		pBGSmallLightning->SetPosition(34.0f);
 		this->AddGameObject(pBGSmallLightning, eLayerType::BACKGROUND);
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, DIFFUSE, RADIUS), pBGSmallLightning->GetTransform());
 
 		pBGSmallLightning = new BGLightningObject(eBGLightningType::SMALL);
 		pBGSmallLightning->SetPosition(-15.0f);
 		this->AddGameObject(pBGSmallLightning, eLayerType::BACKGROUND);
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, DIFFUSE, RADIUS), pBGSmallLightning->GetTransform());
+
 	}
 
 

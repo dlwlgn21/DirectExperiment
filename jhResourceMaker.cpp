@@ -41,6 +41,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY = L"SweeperNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_KEY = L"ZombieTextureKey";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
@@ -67,9 +68,12 @@ namespace jh
 	const std::wstring ResourceMaker::BG_FLOWER_TEXTURE_KEY = L"BGFlowerTexture";
 	const std::wstring ResourceMaker::BG_TORCH_TEXTURE_KEY = L"BGTorchTexture";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_TEXTURE_KEY = L"BGMushStatueTexture";
+	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY = L"BGMushStatueNormalTexture";
 	const std::wstring ResourceMaker::BG_FOREGROUND_GRASS_TEXTURE_KEY = L"BGForeGrassTexture";
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_TEXTURE_KEY = L"BGLargeLightningTexture";
+	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY = L"BGLargeLightningNormalTexture";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_TEXTURE_KEY = L"BGSmallLightningTexture";
+	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY = L"BGSmallLightningNormalTexture";
 
 	const std::wstring ResourceMaker::EFFECT_HIT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_TEXTURE_KEY = L"PlayerDashEffectTexture";
@@ -84,19 +88,20 @@ namespace jh
 #pragma region MATERIAL
 	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
 
-	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterialKey";
-	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterialKey";
+	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterial";
+	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterial";
 
-	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY = L"CagedNormalMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY = L"SweeperNormalMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterialKey";
-	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterialKey";
+	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterial";
+	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY = L"CagedNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterial";
+	const std::wstring ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY = L"SweeperNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterial";
+	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY = L"ZombieMaterial";
 
-	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterialKey";
-	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterialKey";
-	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterialKey";
+	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
+	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
+	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
 
 	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
@@ -117,9 +122,12 @@ namespace jh
 	const std::wstring ResourceMaker::BG_FLOWER_MATERIAL_KEY = L"BGFlowerMaterial";
 	const std::wstring ResourceMaker::BG_TORCH_MATERIAL_KEY = L"BGTorchMaterial";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_MATERIAL_KEY = L"BGMushStatueMaterial";
+	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY = L"BGMushStatueNormalMaterial";
 	const std::wstring ResourceMaker::BG_FOREGROUND_GRASS_MATERIAL_KEY = L"BGForeGrassMaterial";
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_MATERIAL_KEY = L"BGLargeLightningMaterial";
+	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY = L"BGLargeLightningNormalMaterial";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_MATERIAL_KEY = L"BGSmallLightningMaterial";
+	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY = L"BGSmallLightningNormalMaterial";
 
 	const std::wstring ResourceMaker::EFFECT_HIT_MATERIAL_KEY = L"HitEffectMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
@@ -371,12 +379,13 @@ namespace jh
 
 		loadAndInsertTexture(PLAYER_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37(2).png");
 		loadAndInsertTexture(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37_NM.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, L"caged shocker 110x42.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, L"caged shocker 110x42_NM.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, L"Sweeper.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY, L"Sweeper_NM.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, L"TheDarkWarden97x32.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, L"TheDarkWarden97x32_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, L"MON_CagedShocker_110x42.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, L"MON_CagedShocker_110x42_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, L"MON_Sweeper_88x30.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY, L"MON_Sweeper_88x30_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, L"MON_Warden_97x32.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, L"MON_Warden_97x32_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_ZOMBIE_KEY, L"MON_Zombie_130x70.png");
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
@@ -395,18 +404,21 @@ namespace jh
 		//loadAndInsertTexture(BG_PARALLAX_TEXTURE_6_KEY, L"parallax6.png");
 		loadAndInsertTexture(BG_MOON_ATLAS_TEXTURE_KEY, L"MoonSprite.png");
 		loadAndInsertTexture(BG_MOON_NORMAL_MAP_TEXTURE_KEY, L"MoonSprite_NM.png");
-		loadAndInsertTexture(BG_TREE_1_TEXTURE_KEY, L"Tree 1 Sprite Sheet 112x128.png");
-		loadAndInsertTexture(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, L"Tree 1 Sprite Sheet 112x128_NM.png");
+		loadAndInsertTexture(BG_TREE_1_TEXTURE_KEY, L"BG_Tree_1_112x128.png");
+		loadAndInsertTexture(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, L"BG_Tree_1_112x128_NM.png");
 
-		loadAndInsertTexture(BG_TREE_2_TEXTURE_KEY, L"Tree 2 Sprite Sheet 128x96.png");
-		loadAndInsertTexture(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, L"Tree 2 Sprite Sheet 128x96_NM.png");
+		loadAndInsertTexture(BG_TREE_2_TEXTURE_KEY, L"BG_Tree_2_128x96.png");
+		loadAndInsertTexture(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, L"BG_Tree_2_128x96_NM.png");
 		loadAndInsertTexture(BG_FLOWER_TEXTURE_KEY, L"BG_Flower_16x16.png");
 		loadAndInsertTexture(BG_TORCH_TEXTURE_KEY, L"BG_Torch_16x16.png");
 		loadAndInsertTexture(BG_MUSHROOM_STATUE_TEXTURE_KEY, L"BG_MushRoomStatue_192x192.png");
+		loadAndInsertTexture(BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY, L"BG_MushRoomStatue_192x192_NM.png");
 
 		loadAndInsertTexture(BG_FOREGROUND_GRASS_TEXTURE_KEY, L"BG_FOREGROUND_Grass_212x11.png");
 		loadAndInsertTexture(BG_LARGE_LIGHTNING_TEXTURE_KEY, L"BG_Large_Lightning_64x48.png");
+		loadAndInsertTexture(BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY, L"BG_Large_Lightning_64x48_NM.png");
 		loadAndInsertTexture(BG_SMALL_LIGHTNING_TEXTURE_KEY, L"BG_SmallLightning_32x32.png");
+		loadAndInsertTexture(BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY, L"BG_SmallLightning_32x32_NM.png");
 
 		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"HpBarBorder.png");
 		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"HPBar.png");
@@ -432,6 +444,8 @@ namespace jh
 		insertMaterial(MONSTER_WARDEN_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_WARDEN_ATLAS_KEY);
 		insertNormalMapMaterial(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_WARDEN_ATLAS_KEY, MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY);
 
+		insertMaterial(MONSTER_ZOMBIE_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ZOMBIE_KEY);
+
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 
@@ -448,9 +462,12 @@ namespace jh
 		insertMaterial(BG_FLOWER_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_FLOWER_TEXTURE_KEY);
 		insertMaterial(BG_TORCH_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TORCH_TEXTURE_KEY);
 		insertMaterial(BG_MUSHROOM_STATUE_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MUSHROOM_STATUE_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_MUSHROOM_STATUE_TEXTURE_KEY, BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY);
 		insertMaterial(BG_FOREGROUND_GRASS_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_FOREGROUND_GRASS_TEXTURE_KEY);
 		insertMaterial(BG_LARGE_LIGHTNING_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_LARGE_LIGHTNING_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_LARGE_LIGHTNING_TEXTURE_KEY, BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY);
 		insertMaterial(BG_SMALL_LIGHTNING_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_SMALL_LIGHTNING_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_SMALL_LIGHTNING_TEXTURE_KEY, BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY);
 		insertMaterial(BG_MOON_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY);
 		insertNormalMapMaterial(BG_MOON_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY, BG_MOON_NORMAL_MAP_TEXTURE_KEY);
 

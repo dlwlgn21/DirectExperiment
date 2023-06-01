@@ -21,6 +21,9 @@ static constexpr const float SWEEPER_INITIAL_SPEED = 2.0;
 static constexpr const int WARDEN_INITIAL_HP = 3;
 static constexpr const float WARDEN_INITIAL_SPEED = 3.0;
 
+static constexpr const int ZOMBIE_INITIAL_HP = 7;
+static constexpr const float ZOMBIE_INITIAL_SPEED = 1.0;
+
 static constexpr const float SPAWNING_TIME = 3.0f;
 
 namespace jh
@@ -78,6 +81,18 @@ namespace jh
 				MonsterManager::WARDEN_DIE_ANIM_KEY
 			);
 			setInitialStat(WARDEN_INITIAL_HP, WARDEN_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			setAnimKey(
+				MonsterManager::ZOMBIE_IDLE_ANIM_KEY,
+				MonsterManager::ZOMBIE_MOVING_ANIM_KEY,
+				MonsterManager::ZOMBIE_ATTACK_ANIM_KEY,
+				MonsterManager::ZOMBIE_HITTED_ANIM_KEY,
+				MonsterManager::ZOMBIE_DIE_ANIM_KEY
+			);
+			setInitialStat(ZOMBIE_INITIAL_HP, ZOMBIE_INITIAL_SPEED);
 			break;
 		}
 		default:
@@ -201,8 +216,13 @@ namespace jh
 			setInitialStat(WARDEN_INITIAL_HP, WARDEN_INITIAL_SPEED);
 			break;
 		}
-
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			setInitialStat(ZOMBIE_INITIAL_HP, ZOMBIE_INITIAL_SPEED);
+			break;
+		}
 		default:
+			assert(false);
 			break;
 		}
 		calculateDistanceFromPlayerToSetLookDirection();

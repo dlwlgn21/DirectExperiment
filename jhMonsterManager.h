@@ -98,9 +98,16 @@ namespace jh
 		static const std::wstring WARDEN_ATTACK_ANIM_KEY;
 		static const std::wstring WARDEN_HITTED_ANIM_KEY;
 		static const std::wstring WARDEN_DIE_ANIM_KEY;
+		
+		static const std::wstring ZOMBIE_IDLE_ANIM_KEY;
+		static const std::wstring ZOMBIE_MOVING_ANIM_KEY;
+		static const std::wstring ZOMBIE_ATTACK_ANIM_KEY;
+		static const std::wstring ZOMBIE_HITTED_ANIM_KEY;
+		static const std::wstring ZOMBIE_DIE_ANIM_KEY;
 
 		static const jh::math::Vector3 CAGED_SHOKER_SCALE_VECTOR;
 		static const jh::math::Vector3 SWEEPER_SCALE_VECTOR;
+		static const jh::math::Vector3 ZOMBIE_SCALE_VECTOR;
 	};
 }
 

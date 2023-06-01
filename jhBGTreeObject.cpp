@@ -126,18 +126,18 @@ namespace jh
 	}
 	void BGTreeObject::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
 		Material* pMaterial = nullptr;
 		switch (meTreeShapeType)
 		{
 		case eTreeShapeType::HIGH:
 		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_TREE_1_MATERIAL_KEY);
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_TREE_1_NORMAL_MAP_MATERIAL_KEY);
 			break;
 		}
 		case eTreeShapeType::WIDE:
 		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_TREE_2_MATERIAL_KEY);
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_TREE_2_NORMAL_MAP_MATERIAL_KEY);
 			break;
 		}
 		default:

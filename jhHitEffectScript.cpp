@@ -7,6 +7,7 @@
 #include "jhAnimation.h"
 #include "jhMonsterScript.h"
 #include "jhPlayerScript.h"
+#include "jhLayerZValue.h"
 
 using namespace jh::math;
 
@@ -28,10 +29,11 @@ namespace jh
 	void HitEffectScript::Initialize()
 	{
 		setAnimator();
+		const float EFFECT_SCALUE_VALUE = 6.0f;
 		mpTransform = GetOwner()->GetTransform();
 		Vector3 pos = mpFollwingTransform->GetPosition();
-		mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
-		mpTransform->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		mpTransform->SetPosition(Vector3(pos.x, pos.y, MONSTER_EFFECT_Z_VALUE));
+		mpTransform->SetOnlyXYScale(EFFECT_SCALUE_VALUE);
 		assert(mpTransform != nullptr);
 	}
 	void HitEffectScript::Update()
@@ -42,7 +44,7 @@ namespace jh
 		case eEffectState::WAIT:
 		{
 			Vector3 pos = mpFollwingTransform->GetPosition();
-			mpTransform->SetPosition(Vector3(pos.x, pos.y, pos.z - 1.0f));
+			mpTransform->SetOnlyXYPosition(pos.x, pos.y);
 			break;
 		}
 		case eEffectState::PLAYING:

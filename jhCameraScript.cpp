@@ -11,7 +11,7 @@ using namespace jh::math;
 static constexpr const INT CAM_SHAKE_RANGE = 5;
 static constexpr const float RESTRICTION = 100.0f;
 static constexpr const float Y_CAMERA_POS = 0.0f;
-static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.15f;
+static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.45f;
 
 
 namespace jh

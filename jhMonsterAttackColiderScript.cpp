@@ -8,7 +8,7 @@
 
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
-static constexpr const float LEFT_RIGHT_DISTANCE = 1.5f;
+static constexpr const float DISTANCE = 1.5f;
 static constexpr const float ATTACING_FLOATING_DISTANCE = -2.0f;
 static constexpr const float WAIT_FLOATING_DISTANCE = -4.0f;
 
@@ -23,7 +23,8 @@ static constexpr const UINT SWEEPER_ATTACK_DAMAGE = 2;
 static constexpr const UINT WARDEN_ATTACK_VAILED_INDEX = 6;
 static constexpr const UINT WARDEN_ATTACK_DAMAGE = 2;
 
-
+static constexpr const UINT ZOMBIE_ATTACK_VAILED_INDEX = 6;
+static constexpr const UINT ZOMBIE_ATTACK_DAMAGE = 2;
 
 namespace jh
 {
@@ -36,9 +37,33 @@ namespace jh
 		, mpAnimator(pAnimator)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, meMonsterType(pMonsterScript->GetMonsterType())
+		, mDistance(DISTANCE)
 	{
 		assert(mpCollider != nullptr && mpMonsterTransform != nullptr && mpMonsterScript != nullptr && mpAnimator);
 		mpCollider->SetState(eColliderState::ACTIVE);
+		switch (meMonsterType)
+		{
+		case jh::eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_SWEEPER:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_WARDEN:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_ZOMBIE:
+		{
+			mDistance = 0.5f;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
 	}
 	void MonsterAttackColiderScript::Initialize()
 	{
@@ -57,10 +82,10 @@ namespace jh
 		switch (eMonsterLookDir)
 		{
 		case eObjectLookDirection::LEFT:
-			pos.x = mpMonsterTransform->GetPosition().x - LEFT_RIGHT_DISTANCE;
+			pos.x = mpMonsterTransform->GetPosition().x - mDistance;
 			break;
 		case eObjectLookDirection::RIGHT:
-			pos.x = mpMonsterTransform->GetPosition().x + LEFT_RIGHT_DISTANCE;
+			pos.x = mpMonsterTransform->GetPosition().x + mDistance;
 			break;
 		default:
 			break;
@@ -111,6 +136,14 @@ namespace jh
 				if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX)
 				{
 					damageToPlayer(pPlayerScript, WARDEN_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ZOMBIE:
+			{
+				if (CURR_IDX == ZOMBIE_ATTACK_VAILED_INDEX)
+				{
+					damageToPlayer(pPlayerScript, ZOMBIE_ATTACK_DAMAGE);
 				}
 				break;
 			}

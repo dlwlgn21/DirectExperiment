@@ -2,7 +2,6 @@
 #include "jhEffectScript.h"
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
-#include "jhWeaponScript.h"
 
 namespace jh
 {

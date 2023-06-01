@@ -40,6 +40,7 @@ namespace jh
 		Animator*					mpAnimator;
 		eObjectLookDirection		meLookDir;
 		eMonsterType				meMonsterType;
+		float						mDistance;
 	};
 }
 

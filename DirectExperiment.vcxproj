@@ -205,14 +205,12 @@
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructuredBuffer.h" />
-    <ClInclude Include="jhSword.h" />
     <ClInclude Include="jhTexture.h" />
     <ClInclude Include="jhTime.h" />
     <ClInclude Include="jhTransform.h" />
     <ClInclude Include="jhUIBarObject.h" />
     <ClInclude Include="jhUIBarScript.h" />
     <ClInclude Include="jhWeaponColliderScript.h" />
-    <ClInclude Include="jhWeaponScript.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
@@ -282,12 +280,10 @@
     <ClCompile Include="jhScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructuredBuffer.cpp" />
-    <ClCompile Include="jhSword.cpp" />
     <ClCompile Include="jhTransform.cpp" />
     <ClCompile Include="jhUIBarObject.cpp" />
     <ClCompile Include="jhUIBarScript.cpp" />
     <ClCompile Include="jhWeaponColliderScript.cpp" />
-    <ClCompile Include="jhWeaponScript.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
     <ClCompile Include="jhInput.cpp" />

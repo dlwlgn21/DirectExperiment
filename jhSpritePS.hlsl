@@ -30,11 +30,11 @@ float4 main(SpriteVertexOut vIn) : SV_TARGET
         color = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
     }
 
-    Light light = (Light) 0.0f;
-    for (uint i = 0; i < NumberOfLighting; i++)
-    {
-        CalculateLight(light, vIn.WorldPos.xyz, i);
-    }
-    color *= light.Diffuse;
-    return color;
+    //Light light = (Light) 0.0f;
+    //for (uint i = 0; i < NumberOfLighting; i++)
+    //{
+    //    CalculateLight(light, vIn.WorldPos.xyz, i);
+    //}
+    //color *= light.Diffuse;
+    return float4(color.rgb, 1.0f);
 }

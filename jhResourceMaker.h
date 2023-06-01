@@ -61,6 +61,7 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_WARDEN_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY;
+		static const std::wstring MONSTER_TEXTURE_ZOMBIE_KEY;
 
 
 		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
@@ -92,9 +93,12 @@ namespace jh
 		static const std::wstring BG_FLOWER_TEXTURE_KEY;
 		static const std::wstring BG_TORCH_TEXTURE_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_TEXTURE_KEY;
+		static const std::wstring BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_FOREGROUND_GRASS_TEXTURE_KEY;
 		static const std::wstring BG_LARGE_LIGHTNING_TEXTURE_KEY;
+		static const std::wstring BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_TEXTURE_KEY;
+		static const std::wstring BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY;
 
 
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
@@ -112,6 +116,7 @@ namespace jh
 		static const std::wstring MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring MONSTER_ZOMBIE_MATERIAL_KEY;
 
 		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring BRIK_MATERIAL_KEY;
@@ -139,9 +144,12 @@ namespace jh
 		static const std::wstring BG_FLOWER_MATERIAL_KEY;
 		static const std::wstring BG_TORCH_MATERIAL_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_MATERIAL_KEY;
+		static const std::wstring BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_FOREGROUND_GRASS_MATERIAL_KEY;
 		static const std::wstring BG_LARGE_LIGHTNING_MATERIAL_KEY;
+		static const std::wstring BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_MATERIAL_KEY;
+		static const std::wstring BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_FOREGROUND_MATERIAL_KEY;
 		static const std::wstring BG_FOREGROUND_NORMALMAP_MATERIAL_KEY;
 
