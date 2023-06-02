@@ -18,10 +18,10 @@ namespace jh
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 15.0f;
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 20.0f;
 
-	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, MONSTER_Z_VALUE);
-	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, MONSTER_Z_VALUE);
-	const jh::math::Vector3 MonsterSpawner::WARDEN_SPAWN_POSITON = Vector3(1.0f, -2.0f, MONSTER_Z_VALUE);
-	const jh::math::Vector3 MonsterSpawner::ZOMBIE_SPAWN_POSITION = Vector3(1.0f, -1.9f, MONSTER_Z_VALUE);
+	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
+	static constexpr const float SWEEPER_Y_POS = -1.8f;
+	static constexpr const float WARDEN_Y_POS = -2.0f;
+	static constexpr const float ZOMBIE_Y_POS = -1.9f;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -36,7 +36,6 @@ namespace jh
 			mpScene->AddGameObject(static_cast<GameObject*>(mPortalEffectObjects[i]), eLayerType::EFFECT);
 			mPortalEffectObjects[i]->Initialize();
 		}
-		setPortalEffectPosition();
 	}
 
 	void MonsterSpawner::Update()
@@ -71,48 +70,43 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			Vector3 spawnPos(spawnXPos, CAGED_SHOKER_SPAWN_POSITON.y, MONSTER_Z_VALUE);
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
-			mpScene->AddMonster(monPack);
-			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, spawnPos);
-			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
+			Vector3 spawnPos(spawnXPos, CAGED_SHOKER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			Vector3 spawnPos(spawnXPos, SWEEPER_SPAWN_POSITON.y, MONSTER_Z_VALUE);
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
-			mpScene->AddMonster(monPack);
-			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, spawnPos);
-			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
+			Vector3 spawnPos(spawnXPos, SWEEPER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
-			Vector3 spawnPos(spawnXPos, WARDEN_SPAWN_POSITON.y, MONSTER_Z_VALUE);
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
-			mpScene->AddMonster(monPack);
-			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, spawnPos);
-			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
+			Vector3 spawnPos(spawnXPos, WARDEN_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
 
 		case eMonsterType::LV_1_ZOMBIE:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_SPAWN_POSITION.y, MONSTER_Z_VALUE));
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_Y_POS, MONSTER_Z_VALUE));
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
-			//setPortalEffectPosition(eMonType, WARDEN_SPAWN_POSITON);
-			//playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		default:
 			assert(false);
 			break;
 		}
+	}
+
+	void MonsterSpawner::addMonsterAtScene(const eMonsterType eMonType, const jh::math::Vector3& spawnPos)
+	{
+		MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
+		mpScene->AddMonster(monPack);
+		setPortalEffectPosition(eMonType, spawnPos);
+		playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
+		resetTimer(eMonType);
 	}
 
 	void MonsterSpawner::resetTimer(const eMonsterType eMonType)
@@ -150,13 +144,6 @@ namespace jh
 		}
 	}
 
-	void MonsterSpawner::setPortalEffectPosition()
-	{
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_CAGED_SHOKER)]->GetTransform()->SetPosition(Vector3(CAGED_SHOKER_SPAWN_POSITON.x, CAGED_SHOKER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_SWEEPER)]->GetTransform()->SetPosition(Vector3(SWEEPER_SPAWN_POSITON.x, SWEEPER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_WARDEN)]->GetTransform()->SetPosition(Vector3(WARDEN_SPAWN_POSITON.x, WARDEN_SPAWN_POSITON.x, BG_PORTAL_Z_VALUE));
-		//mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_ZOMBIE)]->GetTransform()->SetPosition(Vector3(ZOMBIE_SPAWN_POSITION.x, ZOMBIE_SPAWN_POSITION.x, BG_PORTAL_Z_VALUE));
-	}
 	void MonsterSpawner::setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos)
 	{
 		mPortalEffectObjects[static_cast<UINT>(eMonType)]->GetTransform()->SetPosition(Vector3(pos.x, pos.y, BG_PORTAL_Z_VALUE));

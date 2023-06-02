@@ -30,6 +30,7 @@ namespace jh
 			, mZombieRespawnTimer(ZOMBIE_RESPAWN_TIME)
 			, mpScene(nullptr)
 			, mpPlayerScript(nullptr)
+			, mPlayerPos(jh::math::Vector3::Zero)
 		{
 			mPortalEffectObjects.reserve(static_cast<UINT>(eMonsterType::COUNT));
 			mPortalEffectObjects.resize(static_cast<UINT>(eMonsterType::COUNT));
@@ -48,17 +49,12 @@ namespace jh
 		static const float WARDEN_RESPAWN_TIME;
 		static const float ZOMBIE_RESPAWN_TIME;
 
-		static const jh::math::Vector3 CAGED_SHOKER_SPAWN_POSITON;
-		static const jh::math::Vector3 SWEEPER_SPAWN_POSITON;
-		static const jh::math::Vector3 WARDEN_SPAWN_POSITON;
-		static const jh::math::Vector3 ZOMBIE_SPAWN_POSITION;
-
 	private:
 		void resetTimer(const eMonsterType eMonType);
-		void setPortalEffectPosition();
 		void setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos);
 		void playPortalEffectAnimation(const eMonsterType eMonType, const MonsterScript* pMonsterScript);
 		void spawnMonster(const eMonsterType eMonType);
+		void addMonsterAtScene(const eMonsterType eMonType, const jh::math::Vector3& spawnPos);
 
 	private:
 		PlayScene*							mpScene;
@@ -68,5 +64,6 @@ namespace jh
 		float								mWardenRespawnTimer;
 		float								mZombieRespawnTimer;
 		std::vector<PortalEffectObject*>	mPortalEffectObjects;
+		jh::math::Vector3					mPlayerPos;
 	};
 }

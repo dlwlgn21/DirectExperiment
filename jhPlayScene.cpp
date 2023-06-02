@@ -304,7 +304,7 @@ namespace jh
 	void PlayScene::instatiateLightningObejct()
 	{
 		const Vector4 DIFFUSE(1.0f, 1.0f, 1.0f, 1.0f);
-		const float RADIUS = 5.0f;
+		const float RADIUS = 2.0f;
 		BGLightningObject* pBGLargeLightning = new BGLightningObject(eBGLightningType::LARGE);
 		pBGLargeLightning->SetPosition(15.7f);
 		this->AddGameObject(pBGLargeLightning, eLayerType::BACKGROUND);
@@ -397,10 +397,6 @@ namespace jh
 		Light* pLightComponent = new Light(lightAttribute);
 		pLightObject->AddComponent(pLightComponent);
 		pLightComponent->SetFollowingTransform(pTransform);
-		Collider2D* pCollider = new Collider2D(eColliderLayerType::PLAYER);
-		pCollider->SetSize(Vector2(lightAttribute.Radius, lightAttribute.Radius));
-		pLightObject->AddComponent(pCollider);
-
 	}
 
 }
