@@ -42,6 +42,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_KEY = L"ZombieTextureKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY = L"ZombieNormalTextureKey";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
@@ -66,6 +67,7 @@ namespace jh
 	const std::wstring ResourceMaker::BG_TREE_2_TEXTURE_KEY = L"BGTree2TextureKey";
 	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_TEXTURE_KEY = L"BGTree2NormalTexture";
 	const std::wstring ResourceMaker::BG_FLOWER_TEXTURE_KEY = L"BGFlowerTexture";
+	const std::wstring ResourceMaker::BG_FLOWER_NORMAL_MAP_TEXTURE_KEY = L"BGFlowerNormalTexture";
 	const std::wstring ResourceMaker::BG_TORCH_TEXTURE_KEY = L"BGTorchTexture";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_TEXTURE_KEY = L"BGMushStatueTexture";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY = L"BGMushStatueNormalTexture";
@@ -82,7 +84,6 @@ namespace jh
 
 	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTexture";
 	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTexture";
-	const std::wstring ResourceMaker::WEAPON_SWORD_TEXTURE_KEY = L"WeaponSwordTextureKey";
 #pragma endregion
 
 #pragma region MATERIAL
@@ -98,6 +99,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY = L"WardenMaterial";
 	const std::wstring ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY = L"WardenNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY = L"ZombieMaterial";
+	const std::wstring ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY = L"ZombieNormalMaterial";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
@@ -120,6 +122,7 @@ namespace jh
 	const std::wstring ResourceMaker::BG_TREE_2_MATERIAL_KEY = L"BGTree2Material";
 	const std::wstring ResourceMaker::BG_TREE_2_NORMAL_MAP_MATERIAL_KEY = L"BGTree2NormalMaterial";
 	const std::wstring ResourceMaker::BG_FLOWER_MATERIAL_KEY = L"BGFlowerMaterial";
+	const std::wstring ResourceMaker::BG_FLOWER_NORMAL_MAP_MATERIAL_KEY = L"BGFlowerNormalMaterial";
 	const std::wstring ResourceMaker::BG_TORCH_MATERIAL_KEY = L"BGTorchMaterial";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_MATERIAL_KEY = L"BGMushStatueMaterial";
 	const std::wstring ResourceMaker::BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY = L"BGMushStatueNormalMaterial";
@@ -136,7 +139,6 @@ namespace jh
 
 	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
 	const std::wstring ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY = L"BrickNotNormalMaterialKey";
-	const std::wstring ResourceMaker::WEAPON_SWORD_MATERIAL_KEY = L"WeaponSwordMaterialKey";
 #pragma endregion
 
 	void ResourceMaker::Initialize()
@@ -377,8 +379,8 @@ namespace jh
 	void ResourceMaker::createTextures()
 	{
 
-		loadAndInsertTexture(PLAYER_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37(2).png");
-		loadAndInsertTexture(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, L"Sword Master Sprite Sheet 90x37_NM.png");
+		loadAndInsertTexture(PLAYER_TEXTURE_ATLAS_KEY, L"PLAYER_SpriteSheet_90x37.png");
+		loadAndInsertTexture(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, L"PLAYER_SpriteSheet_90x37_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, L"MON_CagedShocker_110x42.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, L"MON_CagedShocker_110x42_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, L"MON_Sweeper_88x30.png");
@@ -386,6 +388,7 @@ namespace jh
 		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_ATLAS_KEY, L"MON_Warden_97x32.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, L"MON_Warden_97x32_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_ZOMBIE_KEY, L"MON_Zombie_130x70.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY, L"MON_Zombie_130x70_NM.png");
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
@@ -410,6 +413,7 @@ namespace jh
 		loadAndInsertTexture(BG_TREE_2_TEXTURE_KEY, L"BG_Tree_2_128x96.png");
 		loadAndInsertTexture(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, L"BG_Tree_2_128x96_NM.png");
 		loadAndInsertTexture(BG_FLOWER_TEXTURE_KEY, L"BG_Flower_16x16.png");
+		loadAndInsertTexture(BG_FLOWER_NORMAL_MAP_TEXTURE_KEY, L"BG_Flower_16x16_NM.png");
 		loadAndInsertTexture(BG_TORCH_TEXTURE_KEY, L"BG_Torch_16x16.png");
 		loadAndInsertTexture(BG_MUSHROOM_STATUE_TEXTURE_KEY, L"BG_MushRoomStatue_192x192.png");
 		loadAndInsertTexture(BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY, L"BG_MushRoomStatue_192x192_NM.png");
@@ -426,7 +430,6 @@ namespace jh
 
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
-		loadAndInsertTexture(WEAPON_SWORD_TEXTURE_KEY, L"SwordSwingTopDown.png");
 	}
 
 	void ResourceMaker::createMaterial()
@@ -445,6 +448,7 @@ namespace jh
 		insertNormalMapMaterial(MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_WARDEN_ATLAS_KEY, MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY);
 
 		insertMaterial(MONSTER_ZOMBIE_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ZOMBIE_KEY);
+		insertNormalMapMaterial(MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_ZOMBIE_KEY, MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY);
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
@@ -460,6 +464,8 @@ namespace jh
 		insertNormalMapMaterial(BG_TREE_2_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_TREE_2_TEXTURE_KEY, BG_TREE_2_NORMAL_MAP_TEXTURE_KEY);
 
 		insertMaterial(BG_FLOWER_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_FLOWER_TEXTURE_KEY);
+		insertNormalMapMaterial(BG_FLOWER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_FLOWER_TEXTURE_KEY, BG_FLOWER_NORMAL_MAP_TEXTURE_KEY);
+
 		insertMaterial(BG_TORCH_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TORCH_TEXTURE_KEY);
 		insertMaterial(BG_MUSHROOM_STATUE_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MUSHROOM_STATUE_TEXTURE_KEY);
 		insertNormalMapMaterial(BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_MUSHROOM_STATUE_TEXTURE_KEY, BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY);
@@ -497,8 +503,6 @@ namespace jh
 
 		insertMaterial(BRIK_NOT_NORMAL_MATERIAL_KEY, SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY);
 		insertNormalMapMaterial(BRIK_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY, BRIK_NORMAL_MAP_TEXTURE_KEY);
-		insertMaterial(WEAPON_SWORD_MATERIAL_KEY, SPRITE_SHADER_KEY, WEAPON_SWORD_TEXTURE_KEY);
-
 	}
 
 	void ResourceMaker::createSamplerState()

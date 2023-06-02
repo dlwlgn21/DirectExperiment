@@ -62,6 +62,7 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_WARDEN_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_ZOMBIE_KEY;
+		static const std::wstring MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY;
 
 
 		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
@@ -79,7 +80,6 @@ namespace jh
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 
-		static const std::wstring WEAPON_SWORD_TEXTURE_KEY;
 		static const std::wstring EFFECT_HIT_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY;
@@ -91,6 +91,7 @@ namespace jh
 		static const std::wstring BG_TREE_2_TEXTURE_KEY;
 		static const std::wstring BG_TREE_2_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_FLOWER_TEXTURE_KEY;
+		static const std::wstring BG_FLOWER_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_TORCH_TEXTURE_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_TEXTURE_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY;
@@ -117,8 +118,8 @@ namespace jh
 		static const std::wstring MONSTER_WARDEN_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_ZOMBIE_MATERIAL_KEY;
+		static const std::wstring MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY;
 
-		static const std::wstring WEAPON_SWORD_MATERIAL_KEY;
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
 
@@ -142,6 +143,7 @@ namespace jh
 		static const std::wstring BG_TREE_2_MATERIAL_KEY;
 		static const std::wstring BG_TREE_2_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_FLOWER_MATERIAL_KEY;
+		static const std::wstring BG_FLOWER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_TORCH_MATERIAL_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_MATERIAL_KEY;
 		static const std::wstring BG_MUSHROOM_STATUE_NORMAL_MAP_MATERIAL_KEY;

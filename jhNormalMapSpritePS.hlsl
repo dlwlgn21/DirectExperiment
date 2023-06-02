@@ -46,6 +46,8 @@ struct NormalMapVertexOut
 
 float4 main(NormalMapVertexOut vIn) : SV_TARGET
 {
+    const uint FLIPEED = 1;
+    const uint NO_FLIPEED = 0;
     const float ADD = 0.1f;
     float4 albedo = (float) 0.0f;
     float3 lightDir;
@@ -69,12 +71,13 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
         }
         albedo = AtlasTexture.Sample(PointBorderSampler, uv);
         normalMapSample = NormalMapTexture.Sample(PointBorderSampler, uv).xyz;
+
+   
     }
     else
     {
         albedo = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
         normalMapSample = NormalMapTexture.Sample(PointBorderSampler, vIn.UV).xyz;
-        //return float4(albedo.rgb, 1.0f);
     }
     if (albedo.w == 0.0f)
     {
@@ -85,6 +88,12 @@ float4 main(NormalMapVertexOut vIn) : SV_TARGET
     
     tangentNormal = DecodeNormalMap(normalMapSample.xyz);
     //worldNormal = mul(tangentNormal, (float3x3) WorldMat);
+    
+    
+    if (IsAnimFlip == FLIPEED)
+    {
+        tangentNormal.y = -tangentNormal.y;
+    }
     //tangentNormal.z = tangentNormal.z;
     
     

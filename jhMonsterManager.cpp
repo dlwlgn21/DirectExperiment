@@ -269,8 +269,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY),
 				pZombieAnimator,
 				pPlayerScript,
 				eMonsterType::LV_1_ZOMBIE

@@ -286,6 +286,9 @@
     <Filter Include="GameObject\AnimatedGameObject\BG\Moon">
       <UniqueIdentifier>{2b7a567c-7462-46e2-9658-dd24a0814ea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\Hit">
+      <UniqueIdentifier>{fd817718-8e4b-4da3-902a-2d36755eb566}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -398,9 +401,6 @@
     </ClInclude>
     <ClInclude Include="jhAnimatedGameObject.h">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="jhHitEffectObject.h">
-      <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClInclude>
     <ClInclude Include="jhCollisionManager.h">
       <Filter>Collision</Filter>
@@ -537,6 +537,9 @@
     <ClInclude Include="jhMonsterAttackColiderScript.h">
       <Filter>Component\Script\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="jhHitEffectObject.h">
+      <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -634,9 +637,6 @@
     </ClCompile>
     <ClCompile Include="jhAnimatedGameObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="jhHitEffectObject.cpp">
-      <Filter>GameObject\AnimatedGameObject\Effect</Filter>
     </ClCompile>
     <ClCompile Include="jhCollisionManager.cpp">
       <Filter>Collision</Filter>
@@ -766,6 +766,9 @@
     </ClCompile>
     <ClCompile Include="jhMonsterAttackColiderScript.cpp">
       <Filter>Component\Script\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhHitEffectObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

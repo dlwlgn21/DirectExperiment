@@ -74,8 +74,8 @@ namespace jh
 
 	void PortalEffectObject::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::EFFECT_GREEN_PORTAL_MATERIAL_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY);
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);

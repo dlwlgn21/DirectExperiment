@@ -84,7 +84,7 @@ namespace jh
 		LightingManager::GetInstance().SetPipeline();
 		
 		CameraManager::GetInstance().Render();
-		CollisionManager::GetInstance().Render();
+		//CollisionManager::GetInstance().Render();
 
 		LightingManager::GetInstance().ClearLightAttribute();
 	}

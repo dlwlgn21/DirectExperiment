@@ -201,8 +201,9 @@ namespace jh
 		pPlayer->SetHitEffectToPlayerScript(pHitEffectObejct);
 		AddGameObject(pHitEffectObejct, eLayerType::EFFECT);
 
-		const float INDENCITY_VALUE = 3.0f;
-		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(INDENCITY_VALUE, INDENCITY_VALUE, INDENCITY_VALUE, 1.0f), 15.0f), pPlayer->GetTransform());
+		const float INDENCITY_VALUE = 4.0f;
+		const float RADIUS = 10.0f;
+		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(INDENCITY_VALUE, INDENCITY_VALUE, INDENCITY_VALUE, 1.0f), RADIUS), pPlayer->GetTransform());
 
 		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
 	}
@@ -241,7 +242,6 @@ namespace jh
 
 		{
 			BGForegroundObject* pBGObject = Instantiate<BGForegroundObject>(eLayerType::BACKGROUND);
-			pBGObject->SetName(L"ForeGround");
 			pBGObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
 			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, BG_FOREGROUND_Z_VALUE));
 		}
@@ -397,6 +397,10 @@ namespace jh
 		Light* pLightComponent = new Light(lightAttribute);
 		pLightObject->AddComponent(pLightComponent);
 		pLightComponent->SetFollowingTransform(pTransform);
+		Collider2D* pCollider = new Collider2D(eColliderLayerType::PLAYER);
+		pCollider->SetSize(Vector2(lightAttribute.Radius, lightAttribute.Radius));
+		pLightObject->AddComponent(pCollider);
+
 	}
 
 }

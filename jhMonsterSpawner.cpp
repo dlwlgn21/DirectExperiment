@@ -12,15 +12,15 @@ using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 4.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 3.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 7.0f;
-	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 4.0f;
+	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 10.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 15.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 20.0f;
 
 	const jh::math::Vector3 MonsterSpawner::CAGED_SHOKER_SPAWN_POSITON = Vector3(6.0f, -1.7f, MONSTER_Z_VALUE);
 	const jh::math::Vector3 MonsterSpawner::SWEEPER_SPAWN_POSITON = Vector3(3.0f, -1.8f, MONSTER_Z_VALUE);
 	const jh::math::Vector3 MonsterSpawner::WARDEN_SPAWN_POSITON = Vector3(1.0f, -2.0f, MONSTER_Z_VALUE);
-	const jh::math::Vector3 MonsterSpawner::ZOMBIE_SPAWN_POSITION = Vector3(1.0f, -2.0f, MONSTER_Z_VALUE);
+	const jh::math::Vector3 MonsterSpawner::ZOMBIE_SPAWN_POSITION = Vector3(1.0f, -1.9f, MONSTER_Z_VALUE);
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -108,26 +108,31 @@ namespace jh
 
 	void MonsterSpawner::resetTimer(const eMonsterType eMonType)
 	{
+		static const float WAIT_TIME_FOR_DEBUGING = 1000.0f;
 		switch (eMonType)
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
+			//mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
+			mCagedShokerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
+			//mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
+			mSweeperRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
-			mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
+			//mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
+			mWardenRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
-			mZombieRespawnTimer = ZOMBIE_RESPAWN_TIME;
+			//mZombieRespawnTimer = ZOMBIE_RESPAWN_TIME;
+			mZombieRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		default:
@@ -141,7 +146,7 @@ namespace jh
 		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_CAGED_SHOKER)]->GetTransform()->SetPosition(Vector3(CAGED_SHOKER_SPAWN_POSITON.x, CAGED_SHOKER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
 		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_SWEEPER)]->GetTransform()->SetPosition(Vector3(SWEEPER_SPAWN_POSITON.x, SWEEPER_SPAWN_POSITON.y, BG_PORTAL_Z_VALUE));
 		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_WARDEN)]->GetTransform()->SetPosition(Vector3(WARDEN_SPAWN_POSITON.x, WARDEN_SPAWN_POSITON.x, BG_PORTAL_Z_VALUE));
-		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_ZOMBIE)]->GetTransform()->SetPosition(Vector3(ZOMBIE_SPAWN_POSITION.x, ZOMBIE_SPAWN_POSITION.x, BG_PORTAL_Z_VALUE));
+		//mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_ZOMBIE)]->GetTransform()->SetPosition(Vector3(ZOMBIE_SPAWN_POSITION.x, ZOMBIE_SPAWN_POSITION.x, BG_PORTAL_Z_VALUE));
 	}
 	void MonsterSpawner::setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos)
 	{
