@@ -7,6 +7,7 @@
 #include "jhPortalEffectScript.h"
 #include "jhMonsterScript.h"
 #include "jhLayerZValue.h"
+#include "jhPlayerScript.h"
 
 using namespace jh::math;
 
@@ -61,39 +62,47 @@ namespace jh
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
 	{
+		assert(mpPlayerScript != nullptr);
+		static const float DISTANCE_TO_PLAYER_X_POS = 3.5f;
+		Vector3 playerPos = mpPlayerScript->GetOwner()->GetTransform()->GetPosition();
+		float spawnXPos = playerPos.x + DISTANCE_TO_PLAYER_X_POS;
+
 		switch (eMonType)
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, CAGED_SHOKER_SPAWN_POSITON);
+			Vector3 spawnPos(spawnXPos, CAGED_SHOKER_SPAWN_POSITON.y, MONSTER_Z_VALUE);
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, CAGED_SHOKER_SPAWN_POSITON);
+			setPortalEffectPosition(eMonType, spawnPos);
 			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, SWEEPER_SPAWN_POSITON);
+			Vector3 spawnPos(spawnXPos, SWEEPER_SPAWN_POSITON.y, MONSTER_Z_VALUE);
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, SWEEPER_SPAWN_POSITON);
+			setPortalEffectPosition(eMonType, spawnPos);
 			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, WARDEN_SPAWN_POSITON);
+			Vector3 spawnPos(spawnXPos, WARDEN_SPAWN_POSITON.y, MONSTER_Z_VALUE);
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
-			setPortalEffectPosition(eMonType, WARDEN_SPAWN_POSITON);
+			setPortalEffectPosition(eMonType, spawnPos);
 			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			break;
 		}
 
 		case eMonsterType::LV_1_ZOMBIE:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, ZOMBIE_SPAWN_POSITION);
+			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_SPAWN_POSITION.y, MONSTER_Z_VALUE));
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
 			//setPortalEffectPosition(eMonType, WARDEN_SPAWN_POSITON);
