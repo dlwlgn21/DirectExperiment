@@ -24,6 +24,9 @@ static constexpr const float WARDEN_INITIAL_SPEED = 3.0;
 static constexpr const int ZOMBIE_INITIAL_HP = 7;
 static constexpr const float ZOMBIE_INITIAL_SPEED = 1.0;
 
+static constexpr const int HEABY_SLICER_INITIAL_HP = 12;
+static constexpr const float HEABY_SLICER_INITIAL_SPEED = 1.5;
+
 static constexpr const float SPAWNING_TIME = 3.0f;
 
 namespace jh
@@ -93,6 +96,18 @@ namespace jh
 				MonsterManager::ZOMBIE_DIE_ANIM_KEY
 			);
 			setInitialStat(ZOMBIE_INITIAL_HP, ZOMBIE_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			setAnimKey(
+				MonsterManager::HEABY_SLICER_IDLE_ANIM_KEY,
+				MonsterManager::HEABY_SLICER_MOVING_ANIM_KEY,
+				MonsterManager::HEABY_SLICER_ATTACK_ANIM_KEY,
+				MonsterManager::HEABY_SLICER_HITTED_ANIM_KEY,
+				MonsterManager::HEABY_SLICER_DIE_ANIM_KEY
+			);
+			setInitialStat(HEABY_SLICER_INITIAL_HP, HEABY_SLICER_INITIAL_SPEED);
 			break;
 		}
 		default:
@@ -219,6 +234,11 @@ namespace jh
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			setInitialStat(ZOMBIE_INITIAL_HP, ZOMBIE_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			setInitialStat(HEABY_SLICER_INITIAL_HP, HEABY_SLICER_INITIAL_SPEED);
 			break;
 		}
 		default:

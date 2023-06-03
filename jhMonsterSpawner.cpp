@@ -17,11 +17,13 @@ namespace jh
 	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 10.0f;
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 15.0f;
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 20.0f;
+	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 4.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
 	static constexpr const float WARDEN_Y_POS = -2.0f;
 	static constexpr const float ZOMBIE_Y_POS = -1.9f;
+	static constexpr const float HEABY_SLICER_Y_POS = -1.0f;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -42,21 +44,25 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 
-		mCagedShokerRespawnTimer -= Time::DeltaTime();
-		if (mCagedShokerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+		//mCagedShokerRespawnTimer -= Time::DeltaTime();
+		//if (mCagedShokerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
-		mSweeperRespawnTimer -= Time::DeltaTime();
-		if (mSweeperRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+		//mSweeperRespawnTimer -= Time::DeltaTime();
+		//if (mSweeperRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		mWardenRespawnTimer -= Time::DeltaTime();
-		if (mWardenRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		//mWardenRespawnTimer -= Time::DeltaTime();
+		//if (mWardenRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
 
-		mZombieRespawnTimer -= Time::DeltaTime();
-		if (mZombieRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+		//mZombieRespawnTimer -= Time::DeltaTime();
+		//if (mZombieRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+
+		mHeabySlicerRespawnTimer -= Time::DeltaTime();
+		if (mHeabySlicerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -86,12 +92,17 @@ namespace jh
 			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
-
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_Y_POS, MONSTER_Z_VALUE));
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			Vector3 spawnPos(spawnXPos, HEABY_SLICER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
 		default:
@@ -138,6 +149,12 @@ namespace jh
 			mZombieRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			//mHeabySlicerRespawnTimer = HEABY_SLICER_RESPAWN_TIME;
+			mHeabySlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -146,10 +163,12 @@ namespace jh
 
 	void MonsterSpawner::setPortalEffectPosition(const eMonsterType eMonType, const jh::math::Vector3& pos)
 	{
+		assert(eMonType != eMonsterType::LV_1_ZOMBIE);
 		mPortalEffectObjects[static_cast<UINT>(eMonType)]->GetTransform()->SetPosition(Vector3(pos.x, pos.y, BG_PORTAL_Z_VALUE));
 	}
 	void MonsterSpawner::playPortalEffectAnimation(const eMonsterType eMonType, const MonsterScript* pMonsterScript)
 	{
+		assert(eMonType != eMonsterType::LV_1_ZOMBIE);
 		PortalEffectScript* pPortalScript = static_cast<PortalEffectScript*>(mPortalEffectObjects[static_cast<UINT>(eMonType)]->GetScriptOrNull());
 		assert(pPortalScript != nullptr);
 		const eObjectLookDirection eLookDir = pMonsterScript->GetMonsterLookDirection();

@@ -26,6 +26,10 @@ static constexpr const UINT WARDEN_ATTACK_DAMAGE = 2;
 static constexpr const UINT ZOMBIE_ATTACK_VAILED_INDEX = 6;
 static constexpr const UINT ZOMBIE_ATTACK_DAMAGE = 2;
 
+static constexpr const UINT HEABY_SLICER_ATTACK_VAILED_INDEX_1 = 5;
+static constexpr const UINT HEABY_SLICER_ATTACK_VAILED_INDEX_2 = 9;
+static constexpr const UINT HEABY_SLICER_ATTACK_DAMAGE = 4;
+
 namespace jh
 {
 	MonsterAttackColiderScript::MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator)
@@ -41,29 +45,7 @@ namespace jh
 	{
 		assert(mpCollider != nullptr && mpMonsterTransform != nullptr && mpMonsterScript != nullptr && mpAnimator);
 		mpCollider->SetState(eColliderState::ACTIVE);
-		switch (meMonsterType)
-		{
-		case jh::eMonsterType::LV_1_CAGED_SHOKER:
-		{
-			break;
-		}
-		case jh::eMonsterType::LV_1_SWEEPER:
-		{
-			break;
-		}
-		case jh::eMonsterType::LV_1_WARDEN:
-		{
-			break;
-		}
-		case jh::eMonsterType::LV_1_ZOMBIE:
-		{
-			mDistance = 0.5f;
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
+		adjustColliderDistance();
 	}
 	void MonsterAttackColiderScript::Initialize()
 	{
@@ -147,6 +129,14 @@ namespace jh
 				}
 				break;
 			}
+			case eMonsterType::LV_1_HEABY_SLICER:
+			{
+				if (CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_2)
+				{
+					damageToPlayer(pPlayerScript, HEABY_SLICER_ATTACK_DAMAGE);
+				}
+				break;
+			}
 			default:
 				assert(false);
 				break;
@@ -159,6 +149,37 @@ namespace jh
 	{
 		assert(pPlayerScript != nullptr);
 		pPlayerScript->EnemyAttackHiited(damage);
+	}
+
+	void MonsterAttackColiderScript::adjustColliderDistance()
+	{
+		switch (meMonsterType)
+		{
+		case jh::eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_SWEEPER:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_WARDEN:
+		{
+			break;
+		}
+		case jh::eMonsterType::LV_1_ZOMBIE:
+		{
+			mDistance = 0.5f;
+			break;
+		}
+		case jh::eMonsterType::LV_1_HEABY_SLICER:
+		{
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
 	}
 
 	void MonsterAttackColiderScript::OnTriggerExit(Collider2D* pOtherCollider)
