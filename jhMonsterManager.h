@@ -12,6 +12,16 @@ namespace jh
 	class Animator;
 	class MonsterAttackColiderObject;
 
+	enum class eAnimationIndexSequence
+	{
+		IDLE,
+		MOVING,
+		ATTACK,
+		HIT,
+		DIE,
+		COUNT
+	};
+
 	struct MonsterPackage
 	{
 		Monster*							pMonster;
@@ -64,6 +74,7 @@ namespace jh
 
 	private:
 		 void createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
+		 Animator* createAllAnimtaion(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[]);
 		 void createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const jh::math::Vector2& leftTop, const jh::math::Vector2& seperatingSize, const jh::math::Vector2& offset, const UINT spriteCount, const float duration, const float magnification);
 		 void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
 		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
@@ -71,7 +82,10 @@ namespace jh
 		 void createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage);
 		 void createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos);
 		 void resizeColliderSize(const eMonsterType eMonType, MonsterAttackColiderObject* pColliderObject);
-
+		 void fillLeftTopsArray(jh::math::Vector2 leftTopArray[], const jh::math::Vector2 movingLeftTop, const jh::math::Vector2 attackLeftTop, const jh::math::Vector2 hitLeftTop, const jh::math::Vector2 dieLeftTop);
+		 void fillSpriteCountArray(UINT spriteCountArray[], const UINT movingCount, const UINT attackCount, const UINT hitCount, const UINT dieCount);
+		 void fillAnimationDurationArray(float animDurationArray[], const float movingDuration, const float attackDuration, const float hitDuration, const float dieDuration);
+	
 	private:
 		MonsterManager() = default;
 		~MonsterManager() = default;

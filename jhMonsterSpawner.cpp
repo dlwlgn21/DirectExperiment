@@ -13,11 +13,11 @@ using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 5.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 10.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 15.0f;
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 20.0f;
-	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 4.0f;
+	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 2.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 4.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 6.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 8.0f;
+	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 10.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
@@ -44,21 +44,21 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 
-		//mCagedShokerRespawnTimer -= Time::DeltaTime();
-		//if (mCagedShokerRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+		mCagedShokerRespawnTimer -= Time::DeltaTime();
+		if (mCagedShokerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
-		//mSweeperRespawnTimer -= Time::DeltaTime();
-		//if (mSweeperRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+		mSweeperRespawnTimer -= Time::DeltaTime();
+		if (mSweeperRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		//mWardenRespawnTimer -= Time::DeltaTime();
-		//if (mWardenRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		mWardenRespawnTimer -= Time::DeltaTime();
+		if (mWardenRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_WARDEN);}
 
-		//mZombieRespawnTimer -= Time::DeltaTime();
-		//if (mZombieRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+		mZombieRespawnTimer -= Time::DeltaTime();
+		if (mZombieRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
 
 		mHeabySlicerRespawnTimer -= Time::DeltaTime();
 		if (mHeabySlicerRespawnTimer <= 0.0f)

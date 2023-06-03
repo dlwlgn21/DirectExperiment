@@ -81,7 +81,9 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		MonsterPackage retMonsterPackage;
 		ZeroMemory(&retMonsterPackage, sizeof(MonsterPackage));
-
+		Vector2 leftTops[static_cast<UINT>(eAnimationIndexSequence::COUNT)];
+		UINT spriteCounts[static_cast<UINT>(eAnimationIndexSequence::COUNT)];
+		float animDurations[static_cast<UINT>(eAnimationIndexSequence::COUNT)];
 		switch (eType)
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
@@ -89,7 +91,6 @@ namespace jh
 			static constexpr const float CAGED_SHOKER_WIDTH = 110.0f;
 			static constexpr const float CAGED_SHOKER_HEIGHT = 42.0f;
 			static constexpr const float CAGED_SHOKER_MAG = 130.0f;
-			Animator* pCagedShokerAnimator = new Animator();
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
 			createIntialAnimationInfo(
@@ -102,21 +103,41 @@ namespace jh
 				DEFAULT_ANIM_DURATION,
 				CAGED_SHOKER_MAG
 			);
-			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_IDLE_ANIM_KEY, animInfo);
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(0.0f, CAGED_SHOKER_HEIGHT * 1),
+				Vector2(0.0f, CAGED_SHOKER_HEIGHT * 2),
+				Vector2(0.0f, CAGED_SHOKER_HEIGHT * 3),
+				Vector2(0.0f, CAGED_SHOKER_HEIGHT * 4)
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 1), 12);
-			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_MOVING_ANIM_KEY, animInfo);
+			fillSpriteCountArray(
+				spriteCounts,
+				12,
+				16,
+				2,
+				12
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				MONSTER_DIE_ANIM_DURATION - 0.1f
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 2), 16, 0.1f);
-			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 3), 2, MONSTER_HIT_ANIM_DURATION);
-			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_HITTED_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, CAGED_SHOKER_HEIGHT * 4), 12, MONSTER_DIE_ANIM_DURATION - 0.1f);
-			createAnimation(pCagedShokerAnimator, CAGED_SHOKER_DIE_ANIM_KEY, animInfo);
-
-			pCagedShokerAnimator->PlayAnimation(CAGED_SHOKER_IDLE_ANIM_KEY, true);
+			Animator* pCagedShokerAnimator = createAllAnimtaion(
+				new Animator(),
+				CAGED_SHOKER_IDLE_ANIM_KEY,
+				CAGED_SHOKER_MOVING_ANIM_KEY,
+				CAGED_SHOKER_ATTACK_ANIM_KEY,
+				CAGED_SHOKER_HITTED_ANIM_KEY,
+				CAGED_SHOKER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
 
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
@@ -141,7 +162,6 @@ namespace jh
 			static constexpr const float SWEEPER_WIDTH = 88.0f;
 			static constexpr const float SWEEPER_HEIGHT = 33.0f;
 			static constexpr const float SWEEPER_MAG = 100.0f;
-			Animator* pSweeperAnimator = new Animator();
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
 			createIntialAnimationInfo(
@@ -154,21 +174,42 @@ namespace jh
 				DEFAULT_ANIM_DURATION,
 				SWEEPER_MAG
 			);
-			createAnimation(pSweeperAnimator, SWEEPER_IDLE_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, SWEEPER_HEIGHT * 1), 8);
-			createAnimation(pSweeperAnimator, SWEEPER_MOVING_ANIM_KEY, animInfo);
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(0.0f, SWEEPER_HEIGHT * 1),
+				Vector2(0.0f, SWEEPER_HEIGHT * 4),
+				Vector2(0.0f, SWEEPER_HEIGHT * 7),
+				Vector2(0.0f, SWEEPER_HEIGHT * 8)
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, SWEEPER_HEIGHT * 4), 10, 0.15f);
-			createAnimation(pSweeperAnimator, SWEEPER_ATTACK_ANIM_KEY, animInfo);
+			fillSpriteCountArray(
+				spriteCounts,
+				8,
+				10,
+				2,
+				5
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				0.15f,
+				DEFAULT_ANIM_DURATION,
+				MONSTER_DIE_ANIM_DURATION
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, SWEEPER_HEIGHT * 7), 2, MONSTER_HIT_ANIM_DURATION);
-			createAnimation(pSweeperAnimator, SWEEPER_HITTED_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, SWEEPER_HEIGHT * 8), 5, MONSTER_DIE_ANIM_DURATION);
-			createAnimation(pSweeperAnimator, SWEEPER_DIE_ANIM_KEY, animInfo);
-
-			pSweeperAnimator->PlayAnimation(SWEEPER_IDLE_ANIM_KEY, true);
+			Animator* pSweeperAnimator = createAllAnimtaion(
+				new Animator(),
+				SWEEPER_IDLE_ANIM_KEY,
+				SWEEPER_MOVING_ANIM_KEY,
+				SWEEPER_ATTACK_ANIM_KEY,
+				SWEEPER_HITTED_ANIM_KEY,
+				SWEEPER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
 
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
@@ -192,35 +233,55 @@ namespace jh
 			static constexpr const float WARDEN_HEIGHT = 32.0f;
 			static constexpr const float WARDEN_MAG = 150.0f;
 			static constexpr const float WARDEN_DIE_ANIM_DURATION = 0.1f;
-			Animator* pWardenAnimator = new Animator();
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
-			Vector2 animOffset = Vector2(0.014f, 0.0f);
+			const Vector2 ANIM_OFFSET = Vector2(0.014f, 0.0f);
 			createIntialAnimationInfo(
 				animInfo,
 				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY),
 				Vector2(Vector2::Zero),
 				Vector2(WARDEN_WIDTH, WARDEN_HEIGHT),
-				animOffset,
+				ANIM_OFFSET,
 				12,
 				DEFAULT_ANIM_DURATION,
 				WARDEN_MAG
 			);
-			createAnimation(pWardenAnimator, WARDEN_IDLE_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, WARDEN_HEIGHT * 1), 12);
-			createAnimation(pWardenAnimator, WARDEN_MOVING_ANIM_KEY, animInfo);
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(0.0f, WARDEN_HEIGHT * 1),
+				Vector2(0.0f, WARDEN_HEIGHT * 2),
+				Vector2(0.0f, WARDEN_HEIGHT * 3),
+				Vector2(0.0f, WARDEN_HEIGHT * 3)
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, WARDEN_HEIGHT * 2), 16, DEFAULT_ANIM_DURATION);
-			createAnimation(pWardenAnimator, WARDEN_ATTACK_ANIM_KEY, animInfo);
+			fillSpriteCountArray(
+				spriteCounts,
+				12,
+				16,
+				2,
+				11
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				WARDEN_DIE_ANIM_DURATION
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, WARDEN_HEIGHT * 3), 2, MONSTER_HIT_ANIM_DURATION);
-			createAnimation(pWardenAnimator, WARDEN_HITTED_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, WARDEN_HEIGHT * 3), 11, WARDEN_DIE_ANIM_DURATION);
-			createAnimation(pWardenAnimator, WARDEN_DIE_ANIM_KEY, animInfo);
-
-			pWardenAnimator->PlayAnimation(WARDEN_IDLE_ANIM_KEY, true);
+			Animator* pWardenAnimator = createAllAnimtaion(
+				new Animator(),
+				WARDEN_IDLE_ANIM_KEY,
+				WARDEN_MOVING_ANIM_KEY,
+				WARDEN_ATTACK_ANIM_KEY,
+				WARDEN_HITTED_ANIM_KEY,
+				WARDEN_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
 
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
@@ -237,15 +298,13 @@ namespace jh
 			setTransform(retMonsterPackage.pMonster->GetTransform(), position, SWEEPER_SCALE_VECTOR);
 			break;
 		}
-
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			static constexpr const float ZOMBIE_WIDTH = 130.0f;
 			static constexpr const float ZOMBIE_HEIGHT = 70.0f;
 			static constexpr const float ZOMBIE_MAG = 130.0f;
 			const UINT ZOMBIE_SPRITE_MAX_COUNT = 24;
-			const float ZOMBIE_BASIC_ANIM_DURATION = 0.2f;
-			Animator* pZombieAnimator = new Animator();
+			const float ZOMBIE_IDLE_MOVING_ANIM_DURATION = 0.2f;
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
 			const Vector2 ANIM_OFFSET = Vector2(0.0013f, 0.0f);
@@ -256,24 +315,44 @@ namespace jh
 				Vector2(ZOMBIE_WIDTH, ZOMBIE_HEIGHT),
 				ANIM_OFFSET,
 				ZOMBIE_SPRITE_MAX_COUNT,
-				ZOMBIE_BASIC_ANIM_DURATION,
+				ZOMBIE_IDLE_MOVING_ANIM_DURATION,
 				ZOMBIE_MAG
 			);
-			createAnimation(pZombieAnimator, ZOMBIE_IDLE_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ZOMBIE_HEIGHT * 1), ZOMBIE_SPRITE_MAX_COUNT - 5);
-			createAnimation(pZombieAnimator, ZOMBIE_MOVING_ANIM_KEY, animInfo);
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(0.0f, ZOMBIE_HEIGHT * 1),
+				Vector2(ZOMBIE_WIDTH * 5, ZOMBIE_HEIGHT * 2),
+				Vector2(0.0f, ZOMBIE_HEIGHT * 3),
+				Vector2(0.0f, ZOMBIE_HEIGHT * 4)
+			);
+			fillSpriteCountArray(
+				spriteCounts,
+				ZOMBIE_SPRITE_MAX_COUNT - 5,
+				ZOMBIE_SPRITE_MAX_COUNT - 5,
+				3,
+				ZOMBIE_SPRITE_MAX_COUNT / 2
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				ZOMBIE_IDLE_MOVING_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(ZOMBIE_WIDTH * 5, ZOMBIE_HEIGHT * 2), ZOMBIE_SPRITE_MAX_COUNT - 5, DEFAULT_ANIM_DURATION);
-			createAnimation(pZombieAnimator, ZOMBIE_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ZOMBIE_HEIGHT * 3), 3, MONSTER_HIT_ANIM_DURATION);
-			createAnimation(pZombieAnimator, ZOMBIE_HITTED_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ZOMBIE_HEIGHT * 4), ZOMBIE_SPRITE_MAX_COUNT / 2, DEFAULT_ANIM_DURATION);
-			createAnimation(pZombieAnimator, ZOMBIE_DIE_ANIM_KEY, animInfo);
-
-			pZombieAnimator->PlayAnimation(ZOMBIE_IDLE_ANIM_KEY, true);
+			Animator* pZombieAnimator = createAllAnimtaion(
+				new Animator(),
+				ZOMBIE_IDLE_ANIM_KEY,
+				ZOMBIE_MOVING_ANIM_KEY,
+				ZOMBIE_ATTACK_ANIM_KEY,
+				ZOMBIE_HITTED_ANIM_KEY,
+				ZOMBIE_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
 
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
@@ -296,7 +375,6 @@ namespace jh
 			static constexpr const float HEABY_SLICER_HEIGHT = 70.0f;
 			static constexpr const float HEABY_SLICER_MAG = 100.0f;
 			static constexpr const float HEABY_SLICER_DIE_ANIM_DURATION = 0.1f;
-			Animator* pHeabySlicerAnimator = new Animator();
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
 			Vector2 animOffset = Vector2(0.011f, 0.0f);
@@ -310,21 +388,41 @@ namespace jh
 				DEFAULT_ANIM_DURATION,
 				HEABY_SLICER_MAG
 			);
-			createAnimation(pHeabySlicerAnimator, HEABY_SLICER_IDLE_ANIM_KEY, animInfo);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, HEABY_SLICER_HEIGHT * 1), 8);
-			createAnimation(pHeabySlicerAnimator, HEABY_SLICER_MOVING_ANIM_KEY, animInfo);
+			fillLeftTopsArray(
+				leftTops, 
+				Vector2(0.0f, HEABY_SLICER_HEIGHT * 1),
+				Vector2(0.0f, HEABY_SLICER_HEIGHT * 2),
+				Vector2(0.0f, HEABY_SLICER_HEIGHT * 3),
+				Vector2(0.0f, HEABY_SLICER_HEIGHT * 4)
+			);
+			fillSpriteCountArray(
+				spriteCounts, 
+				8, 
+				14, 
+				2, 
+				15
+			);
+			fillAnimationDurationArray(
+				animDurations, 
+				DEFAULT_ANIM_DURATION, 
+				DEFAULT_ANIM_DURATION, 
+				DEFAULT_ANIM_DURATION, 
+				DEFAULT_ANIM_DURATION
+			);
 
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, HEABY_SLICER_HEIGHT * 2), 14, DEFAULT_ANIM_DURATION);
-			createAnimation(pHeabySlicerAnimator, HEABY_SLICER_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, HEABY_SLICER_HEIGHT * 3), 2, MONSTER_HIT_ANIM_DURATION);
-			createAnimation(pHeabySlicerAnimator, HEABY_SLICER_HITTED_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, HEABY_SLICER_HEIGHT * 4), 15, HEABY_SLICER_DIE_ANIM_DURATION);
-			createAnimation(pHeabySlicerAnimator, HEABY_SLICER_DIE_ANIM_KEY, animInfo);
-
-			pHeabySlicerAnimator->PlayAnimation(HEABY_SLICER_IDLE_ANIM_KEY, true);
+			Animator* pHeabySlicerAnimator = createAllAnimtaion(
+				new Animator(), 
+				HEABY_SLICER_IDLE_ANIM_KEY,
+				HEABY_SLICER_MOVING_ANIM_KEY,
+				HEABY_SLICER_ATTACK_ANIM_KEY,
+				HEABY_SLICER_HITTED_ANIM_KEY,
+				HEABY_SLICER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
 
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
@@ -361,6 +459,27 @@ namespace jh
 		monInfo.pAnimator = pAnimator;
 		monInfo.pPlayerScript = pPlayerScript;
 		monInfo.eMonType = eMonType;
+	}
+
+	Animator* MonsterManager::createAllAnimtaion(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[])
+	{
+		assert(pAnimator != nullptr);
+		createAnimation(pAnimator, idleKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::MOVING)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::MOVING)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::MOVING)]);
+		createAnimation(pAnimator, movingKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::ATTACK)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::ATTACK)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::ATTACK)]);
+		createAnimation(pAnimator, attackKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::HIT)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::HIT)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::HIT)]);
+		createAnimation(pAnimator, hitKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::DIE)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::DIE)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::DIE)]);
+		createAnimation(pAnimator, dieKey, animInfo);
+
+		pAnimator->PlayAnimation(idleKey, true);
+		return pAnimator;
 	}
 
 	void MonsterManager::createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const Vector2& leftTop, const Vector2& seperatingSize, const Vector2& offset, const UINT spriteCount, const float duration, const float magnification)
@@ -449,5 +568,26 @@ namespace jh
 			assert(false);
 			break;
 		}
+	}
+	void MonsterManager::fillLeftTopsArray(jh::math::Vector2 leftTopArray[], const jh::math::Vector2 movingLeftTop, const jh::math::Vector2 attackLeftTop, const jh::math::Vector2 hitLeftTop, const jh::math::Vector2 dieLeftTop)
+	{
+		leftTopArray[static_cast<UINT>(eAnimationIndexSequence::MOVING)] = movingLeftTop;
+		leftTopArray[static_cast<UINT>(eAnimationIndexSequence::ATTACK)] = attackLeftTop;
+		leftTopArray[static_cast<UINT>(eAnimationIndexSequence::HIT)] = hitLeftTop;
+		leftTopArray[static_cast<UINT>(eAnimationIndexSequence::DIE)] = dieLeftTop;
+	}
+	void MonsterManager::fillSpriteCountArray(UINT spriteCountArray[], const UINT movingCount, const UINT attackCount, const UINT hitCount, const UINT dieCount)
+	{
+		spriteCountArray[static_cast<UINT>(eAnimationIndexSequence::MOVING)] = movingCount;
+		spriteCountArray[static_cast<UINT>(eAnimationIndexSequence::ATTACK)] = attackCount;
+		spriteCountArray[static_cast<UINT>(eAnimationIndexSequence::HIT)] = hitCount;
+		spriteCountArray[static_cast<UINT>(eAnimationIndexSequence::DIE)] = dieCount;
+	}
+	void MonsterManager::fillAnimationDurationArray(float animDurationArray[], const float movingDuration, const float attackDuration, const float hitDuration, const float dieDuration)
+	{
+		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::MOVING)] = movingDuration;
+		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::ATTACK)] = attackDuration;
+		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::HIT)] = hitDuration;
+		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::DIE)] = dieDuration;
 	}
 }
