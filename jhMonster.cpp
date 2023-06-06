@@ -1,11 +1,11 @@
 #include "jhMonster.h"
 #include "jhSpriteRenderer.h"
+#include "jhMath.h"
 #include "jhResourcesManager.h"
 #include "jhMonsterScript.h"
 #include "jhAnimator.h"
 #include "jhTexture.h"
 #include "jhResourceMaker.h"
-#include "jhMath.h"
 #include "jhCollider2D.h"
 #include "jhHitEffectObject.h"
 #include "jhHitEffectScript.h"
@@ -106,16 +106,19 @@ namespace jh
 		case eMonsterType::LV_1_SWEEPER:
 		{
 			pMonsterCollider->SetSize(Vector2(DEFAULT_X_LENGTH, DEFAULT_Y_LENGTH));
+			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
 			pMonsterCollider->SetSize(Vector2(DEFAULT_X_LENGTH, DEFAULT_Y_LENGTH));
+			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			pMonsterCollider->SetSize(Vector2(DEFAULT_X_LENGTH, DEFAULT_Y_LENGTH));
+			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
@@ -132,10 +135,34 @@ namespace jh
 			pMonsterCollider->SetCenter(Vector2(CENTER_POS.x + 0.1f, CENTER_POS.y - 1.0f));
 			break;
 		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			pMonsterCollider->SetSize(Vector2(DEFAULT_X_LENGTH, DEFAULT_Y_LENGTH));
+			setHitColliderCenterPos(pMonsterCollider);
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			pMonsterCollider->SetSize(Vector2(0.05f, 0.1f));
+			setHitColliderCenterPos(pMonsterCollider);
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			pMonsterCollider->SetSize(Vector2(0.05f, 0.1f));
+			setHitColliderCenterPos(pMonsterCollider);
+			break;
+		}
 		default:
 			assert(false);
 			break;
 		}
 		this->AddComponent(pMonsterCollider);
+	}
+	
+	void Monster::setHitColliderCenterPos(Collider2D* pCollider, const float xAdjustPos, const float yAdjustPos)
+	{
+		const Vector3 CENTER_POS = GetTransform()->GetPosition();
+		pCollider->SetCenter(Vector2(CENTER_POS.x + xAdjustPos, CENTER_POS.y - yAdjustPos));
 	}
 }

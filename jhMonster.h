@@ -9,6 +9,7 @@ namespace jh
 	class Material;
 	class Animator;
 	class MonsterAttackColiderObject;
+	class Collider2D;
 
 	struct MonsterInfo
 	{
@@ -39,8 +40,11 @@ namespace jh
 	private:
 		void setAnimator();
 		void setRenderer();
+		void setHitColliderCenterPos(Collider2D* pCollider, const float xAdjustPos = 0.0f, const float yAdjustPos = 0.0f);
 		void setHitCollider();
+		
 		void setScript();
+
 
 	private:
 		MonsterInfo				mMonsterInfo;

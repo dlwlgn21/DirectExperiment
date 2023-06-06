@@ -32,6 +32,9 @@ static constexpr const float ZOMBIE_SCALE_VALUE = 3.5f;
 
 static constexpr const float HEABY_SLICER_SCALE_VALUE = 6.0f;
 static constexpr const float LIGHT_SLICER_SCALE_VALUE = 6.0f;
+static constexpr const float DAGGER_SCALE_VALUE = 12.0f;
+static constexpr const float ARCHER_SCALE_VALUE = 10.0f;
+static constexpr const float BLASTER_SCALE_VALUE = 10.0f;
 
 
 static constexpr const jh::math::Vector3 CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
@@ -39,6 +42,9 @@ static constexpr const jh::math::Vector3 SWEEPER_SCALE_VECTOR = Vector3(CAGED_SH
 static constexpr const jh::math::Vector3 ZOMBIE_SCALE_VECTOR = Vector3(ZOMBIE_SCALE_VALUE, ZOMBIE_SCALE_VALUE, 1.0f);
 static constexpr const jh::math::Vector3 HEABY_SLICER_SCALE_VECTOR(HEABY_SLICER_SCALE_VALUE, HEABY_SLICER_SCALE_VALUE, 1.0f);
 static constexpr const jh::math::Vector3 LIGHT_SLICER_SCALE_VECTOR(LIGHT_SLICER_SCALE_VALUE, LIGHT_SLICER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 DAGGER_SCALE_VECTOR(DAGGER_SCALE_VALUE, DAGGER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 ARCHER_SCALE_VECTOR(ARCHER_SCALE_VALUE, ARCHER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 BLASTER_SCALE_VECTOR(BLASTER_SCALE_VALUE, BLASTER_SCALE_VALUE, 1.0f);
 
 namespace jh
 {
@@ -47,41 +53,59 @@ namespace jh
 	const std::wstring MonsterManager::HIT_COMBO_2_ELECTRIC_EFFECT_ANIM_KEY = L"ElectricHit2Key";
 	const std::wstring MonsterManager::HIT_COMBO_3_ELECTRIC_EFFECT_ANIM_KEY = L"ElectricHit3Key";
 
-	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY	= L"CagedIdle";
+	const std::wstring MonsterManager::CAGED_SHOKER_IDLE_ANIM_KEY = L"CagedIdle";
 	const std::wstring MonsterManager::CAGED_SHOKER_MOVING_ANIM_KEY = L"CagedMoving";
 	const std::wstring MonsterManager::CAGED_SHOKER_ATTACK_ANIM_KEY = L"CagedAttack";
 	const std::wstring MonsterManager::CAGED_SHOKER_HITTED_ANIM_KEY = L"CagedHitted";
-	const std::wstring MonsterManager::CAGED_SHOKER_DIE_ANIM_KEY	= L"CagedDie";
+	const std::wstring MonsterManager::CAGED_SHOKER_DIE_ANIM_KEY = L"CagedDie";
 
-	const std::wstring MonsterManager::SWEEPER_IDLE_ANIM_KEY	= L"SweeperIdle";
-	const std::wstring MonsterManager::SWEEPER_MOVING_ANIM_KEY	= L"SweeperMoving";
-	const std::wstring MonsterManager::SWEEPER_ATTACK_ANIM_KEY	= L"SweeperAttack";
-	const std::wstring MonsterManager::SWEEPER_HITTED_ANIM_KEY	= L"SweeperHitted";
-	const std::wstring MonsterManager::SWEEPER_DIE_ANIM_KEY		= L"SweeperDie";
+	const std::wstring MonsterManager::SWEEPER_IDLE_ANIM_KEY = L"SweeperIdle";
+	const std::wstring MonsterManager::SWEEPER_MOVING_ANIM_KEY = L"SweeperMoving";
+	const std::wstring MonsterManager::SWEEPER_ATTACK_ANIM_KEY = L"SweeperAttack";
+	const std::wstring MonsterManager::SWEEPER_HITTED_ANIM_KEY = L"SweeperHitted";
+	const std::wstring MonsterManager::SWEEPER_DIE_ANIM_KEY = L"SweeperDie";
 
-	const std::wstring MonsterManager::WARDEN_IDLE_ANIM_KEY		= L"WardenIdle";
-	const std::wstring MonsterManager::WARDEN_MOVING_ANIM_KEY	= L"WardenMoving";
-	const std::wstring MonsterManager::WARDEN_ATTACK_ANIM_KEY	= L"WardenAttack";
-	const std::wstring MonsterManager::WARDEN_HITTED_ANIM_KEY	= L"WardenHitted";
-	const std::wstring MonsterManager::WARDEN_DIE_ANIM_KEY		= L"WardenDie";
+	const std::wstring MonsterManager::WARDEN_IDLE_ANIM_KEY = L"WardenIdle";
+	const std::wstring MonsterManager::WARDEN_MOVING_ANIM_KEY = L"WardenMoving";
+	const std::wstring MonsterManager::WARDEN_ATTACK_ANIM_KEY = L"WardenAttack";
+	const std::wstring MonsterManager::WARDEN_HITTED_ANIM_KEY = L"WardenHitted";
+	const std::wstring MonsterManager::WARDEN_DIE_ANIM_KEY = L"WardenDie";
 
-	const std::wstring MonsterManager::ZOMBIE_IDLE_ANIM_KEY		= L"ZombieIdle";
-	const std::wstring MonsterManager::ZOMBIE_MOVING_ANIM_KEY	= L"ZombieMoving";
-	const std::wstring MonsterManager::ZOMBIE_ATTACK_ANIM_KEY	= L"ZombieAttack";
-	const std::wstring MonsterManager::ZOMBIE_HITTED_ANIM_KEY	= L"ZombieHitted";
-	const std::wstring MonsterManager::ZOMBIE_DIE_ANIM_KEY		= L"ZombieDie";
+	const std::wstring MonsterManager::ZOMBIE_IDLE_ANIM_KEY = L"ZombieIdle";
+	const std::wstring MonsterManager::ZOMBIE_MOVING_ANIM_KEY = L"ZombieMoving";
+	const std::wstring MonsterManager::ZOMBIE_ATTACK_ANIM_KEY = L"ZombieAttack";
+	const std::wstring MonsterManager::ZOMBIE_HITTED_ANIM_KEY = L"ZombieHitted";
+	const std::wstring MonsterManager::ZOMBIE_DIE_ANIM_KEY = L"ZombieDie";
 
-	const std::wstring MonsterManager::HEABY_SLICER_IDLE_ANIM_KEY	= L"HeabySlicerIdle";
+	const std::wstring MonsterManager::HEABY_SLICER_IDLE_ANIM_KEY = L"HeabySlicerIdle";
 	const std::wstring MonsterManager::HEABY_SLICER_MOVING_ANIM_KEY = L"HeabySlicerMoving";
 	const std::wstring MonsterManager::HEABY_SLICER_ATTACK_ANIM_KEY = L"HeabySlicerAttack";
 	const std::wstring MonsterManager::HEABY_SLICER_HITTED_ANIM_KEY = L"HeabySlicerHitted";
-	const std::wstring MonsterManager::HEABY_SLICER_DIE_ANIM_KEY	= L"HeabySlicerDie";
+	const std::wstring MonsterManager::HEABY_SLICER_DIE_ANIM_KEY = L"HeabySlicerDie";
 
-	const std::wstring MonsterManager::LIGHT_SLICER_IDLE_ANIM_KEY	= L"LightSlicerIdle";
+	const std::wstring MonsterManager::LIGHT_SLICER_IDLE_ANIM_KEY = L"LightSlicerIdle";
 	const std::wstring MonsterManager::LIGHT_SLICER_MOVING_ANIM_KEY = L"LightSlicerMoving";
 	const std::wstring MonsterManager::LIGHT_SLICER_ATTACK_ANIM_KEY = L"LightSlicerAttack";
 	const std::wstring MonsterManager::LIGHT_SLICER_HITTED_ANIM_KEY = L"LightSlicerHitted";
-	const std::wstring MonsterManager::LIGHT_SLICER_DIE_ANIM_KEY	= L"LightSlicerDie";
+	const std::wstring MonsterManager::LIGHT_SLICER_DIE_ANIM_KEY = L"LightSlicerDie";
+
+	const std::wstring MonsterManager::DAGGER_IDLE_ANIM_KEY = L"DaggerSlicerIdle";
+	const std::wstring MonsterManager::DAGGER_MOVING_ANIM_KEY = L"DaggerSlicerMoving";
+	const std::wstring MonsterManager::DAGGER_ATTACK_ANIM_KEY = L"DaggerSlicerAttack";
+	const std::wstring MonsterManager::DAGGER_HITTED_ANIM_KEY = L"DaggerSlicerHitted";
+	const std::wstring MonsterManager::DAGGER_DIE_ANIM_KEY = L"DaggerSlicerDie";
+
+	const std::wstring MonsterManager::ARCHER_IDLE_ANIM_KEY		= L"ArcherIdle";
+	const std::wstring MonsterManager::ARCHER_MOVING_ANIM_KEY = L"ArcherMoving";
+	const std::wstring MonsterManager::ARCHER_ATTACK_ANIM_KEY = L"ArcherAttack";
+	const std::wstring MonsterManager::ARCHER_HITTED_ANIM_KEY = L"ArcherHitted";
+	const std::wstring MonsterManager::ARCHER_DIE_ANIM_KEY		= L"ArcherDie";
+
+	const std::wstring MonsterManager::BLASTER_IDLE_ANIM_KEY	= L"BlasterIdle";
+	const std::wstring MonsterManager::BLASTER_MOVING_ANIM_KEY	= L"BlasterMoving";
+	const std::wstring MonsterManager::BLASTER_ATTACK_ANIM_KEY	= L"BlasterAttack";
+	const std::wstring MonsterManager::BLASTER_HITTED_ANIM_KEY	= L"BlasterHitted";
+	const std::wstring MonsterManager::BLASTER_DIE_ANIM_KEY		= L"BlasterDie";
 
 	MonsterPackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position)
 	{
@@ -101,7 +125,7 @@ namespace jh
 			AnimationInfo animInfo;
 			ZeroMemory(&animInfo, sizeof(AnimationInfo));
 			createIntialAnimationInfo(
-				animInfo, 
+				animInfo,
 				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY),
 				Vector2(Vector2::Zero),
 				Vector2(CAGED_SHOKER_WIDTH, CAGED_SHOKER_HEIGHT),
@@ -149,12 +173,12 @@ namespace jh
 			MonsterInfo monInfo;
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
-				monInfo, 
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY), 
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY), 
+				monInfo,
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY),
 				pCagedShokerAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_CAGED_SHOKER
+				eType
 			);
 
 			createMonster(monInfo, retMonsterPackage);
@@ -226,7 +250,7 @@ namespace jh
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY),
 				pSweeperAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_SWEEPER
+				eType
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
@@ -298,7 +322,7 @@ namespace jh
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY),
 				pWardenAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_WARDEN
+				eType
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
@@ -369,7 +393,7 @@ namespace jh
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY),
 				pZombieAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_ZOMBIE
+				eType
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
@@ -397,29 +421,29 @@ namespace jh
 			);
 
 			fillLeftTopsArray(
-				leftTops, 
+				leftTops,
 				Vector2(0.0f, HEABY_SLICER_HEIGHT * 1),
 				Vector2(0.0f, HEABY_SLICER_HEIGHT * 2),
 				Vector2(0.0f, HEABY_SLICER_HEIGHT * 3),
 				Vector2(0.0f, HEABY_SLICER_HEIGHT * 4)
 			);
 			fillSpriteCountArray(
-				spriteCounts, 
-				8, 
-				14, 
-				2, 
+				spriteCounts,
+				8,
+				14,
+				2,
 				15
 			);
 			fillAnimationDurationArray(
-				animDurations, 
-				DEFAULT_ANIM_DURATION, 
-				DEFAULT_ANIM_DURATION, 
-				DEFAULT_ANIM_DURATION, 
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
 				DEFAULT_ANIM_DURATION
 			);
 
 			Animator* pHeabySlicerAnimator = createAllAnimtaion(
-				new Animator(), 
+				new Animator(),
 				HEABY_SLICER_IDLE_ANIM_KEY,
 				HEABY_SLICER_MOVING_ANIM_KEY,
 				HEABY_SLICER_ATTACK_ANIM_KEY,
@@ -439,14 +463,13 @@ namespace jh
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY),
 				pHeabySlicerAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_HEABY_SLICER
+				eType
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
 			setTransform(retMonsterPackage.pMonster->GetTransform(), position, HEABY_SLICER_SCALE_VECTOR);
 			break;
 		}
-
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			static constexpr const float LIGHT_SLICER_WIDTH = 192.0f;
@@ -510,11 +533,223 @@ namespace jh
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY),
 				pLightSlicerAnimator,
 				pPlayerScript,
-				eMonsterType::LV_1_LIGHT_SLICER
+				eType
 			);
 			createMonster(monInfo, retMonsterPackage);
 			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
 			setTransform(retMonsterPackage.pMonster->GetTransform(), position, LIGHT_SLICER_SCALE_VECTOR);
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			static constexpr const float DAGGER_WIDTH = 144.0f;
+			static constexpr const float DAGGER_HEIGHT = 80.0f;
+			static constexpr const float DAGGER_MAG = 200.0f;
+			static constexpr const float DAGGER_DIE_ANIM_DURATION = 0.1f;
+			AnimationInfo animInfo;
+			ZeroMemory(&animInfo, sizeof(AnimationInfo));
+			const Vector2 ANIM_OFFSET = Vector2(0.075f, -0.025f);
+			createIntialAnimationInfo(
+				animInfo,
+				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_DAGGER_KEY),
+				Vector2(Vector2::Zero),
+				Vector2(DAGGER_WIDTH, DAGGER_HEIGHT),
+				ANIM_OFFSET,
+				5,
+				DEFAULT_ANIM_DURATION,
+				DAGGER_MAG
+			);
+
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(DAGGER_WIDTH * 1, 0.0f),
+				Vector2(DAGGER_WIDTH * 2, 0.0f),
+				Vector2(DAGGER_WIDTH * 3, 0.0f),
+				Vector2(DAGGER_WIDTH * 4, 0.0f)
+			);
+			fillSpriteCountArray(
+				spriteCounts,
+				8,
+				10,
+				2,
+				12
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION
+			);
+
+			Animator* pDaggerAnimator = createAllVerticalAnimation(
+				new Animator(),
+				DAGGER_IDLE_ANIM_KEY,
+				DAGGER_MOVING_ANIM_KEY,
+				DAGGER_ATTACK_ANIM_KEY,
+				DAGGER_HITTED_ANIM_KEY,
+				DAGGER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
+
+			MonsterInfo monInfo;
+			ZeroMemory(&monInfo, sizeof(MonsterInfo));
+			createMonsterInfo(
+				monInfo,
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY),
+				pDaggerAnimator,
+				pPlayerScript,
+				eType
+			);
+			createMonster(monInfo, retMonsterPackage);
+			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, DAGGER_SCALE_VECTOR);
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			static constexpr const float ARCHER_WIDTH = 174.0f;
+			static constexpr const float ARCHER_HEIGHT = 25.0f;
+			static constexpr const float ARCHER_MAG = 220.0f;
+			static constexpr const float ARCHER_DIE_ANIM_DURATION = 0.1f;
+			AnimationInfo animInfo;
+			ZeroMemory(&animInfo, sizeof(AnimationInfo));
+			const Vector2 ANIM_OFFSET = Vector2(0.01f, 0.0f);
+			createIntialAnimationInfo(
+				animInfo,
+				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ARCHER_KEY),
+				Vector2(Vector2::Zero),
+				Vector2(ARCHER_WIDTH, ARCHER_HEIGHT),
+				ANIM_OFFSET,
+				20,
+				DEFAULT_ANIM_DURATION,
+				ARCHER_MAG
+			);
+
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(ARCHER_WIDTH * 1, 0.0f),
+				Vector2(ARCHER_WIDTH * 2, 0.0f),
+				Vector2(ARCHER_WIDTH * 4, 0.0f),
+				Vector2(ARCHER_WIDTH * 5, 0.0f)
+			);
+			fillSpriteCountArray(
+				spriteCounts,
+				8,
+				14,
+				2,
+				6
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				0.2f,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION
+			);
+
+			Animator* pArcherAnimator = createAllVerticalAnimation(
+				new Animator(),
+				ARCHER_IDLE_ANIM_KEY,
+				ARCHER_MOVING_ANIM_KEY,
+				ARCHER_ATTACK_ANIM_KEY,
+				ARCHER_HITTED_ANIM_KEY,
+				ARCHER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
+
+			MonsterInfo monInfo;
+			ZeroMemory(&monInfo, sizeof(MonsterInfo));
+			createMonsterInfo(
+				monInfo,
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ARCHER_MATERIAL_KEY),
+				pArcherAnimator,
+				pPlayerScript,
+				eType
+			);
+			createMonster(monInfo, retMonsterPackage);
+			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, ARCHER_SCALE_VECTOR);
+			break;
+		}
+
+
+		case eMonsterType::LV_1_BLASTER:
+		{
+			static constexpr const float BLASTER_WIDTH = 119.0f;
+			static constexpr const float BLASTER_HEIGHT = 34.0f;
+			static constexpr const float BLASTER_MAG = 220.0f;
+			static constexpr const float BLASTER_DIE_ANIM_DURATION = 0.1f;
+			AnimationInfo animInfo;
+			ZeroMemory(&animInfo, sizeof(AnimationInfo));
+			const Vector2 ANIM_OFFSET = Vector2(0.06f, 0.0f);
+			createIntialAnimationInfo(
+				animInfo,
+				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_BLASTER_KEY),
+				Vector2(Vector2::Zero),
+				Vector2(BLASTER_WIDTH, BLASTER_HEIGHT),
+				ANIM_OFFSET,
+				3,
+				DEFAULT_ANIM_DURATION,
+				BLASTER_MAG
+			);
+
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(BLASTER_WIDTH * 1, 0.0f),
+				Vector2(BLASTER_WIDTH * 2, 0.0f),
+				Vector2(BLASTER_WIDTH * 3, 0.0f),
+				Vector2(BLASTER_WIDTH * 4, 0.0f)
+			);
+			fillSpriteCountArray(
+				spriteCounts,
+				8,
+				16,
+				3,
+				7
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				0.2f,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION
+			);
+
+			Animator* pBlasterAnimator = createAllVerticalAnimation(
+				new Animator(),
+				BLASTER_IDLE_ANIM_KEY,
+				BLASTER_MOVING_ANIM_KEY,
+				BLASTER_ATTACK_ANIM_KEY,
+				BLASTER_HITTED_ANIM_KEY,
+				BLASTER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
+
+			MonsterInfo monInfo;
+			ZeroMemory(&monInfo, sizeof(MonsterInfo));
+			createMonsterInfo(
+				monInfo,
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_BLASTER_MATERIAL_KEY),
+				pBlasterAnimator,
+				pPlayerScript,
+				eType
+			);
+			createMonster(monInfo, retMonsterPackage);
+			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, BLASTER_SCALE_VECTOR);
 			break;
 		}
 		default:
@@ -560,6 +795,27 @@ namespace jh
 		return pAnimator;
 	}
 
+	Animator* MonsterManager::createAllVerticalAnimation(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[])
+	{
+		assert(pAnimator != nullptr);
+		createVerticalAnimation(pAnimator, idleKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::MOVING)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::MOVING)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::MOVING)]);
+		createVerticalAnimation(pAnimator, movingKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::ATTACK)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::ATTACK)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::ATTACK)]);
+		createVerticalAnimation(pAnimator, attackKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::HIT)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::HIT)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::HIT)]);
+		createVerticalAnimation(pAnimator, hitKey, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, allSpriteLeftTopCoords[static_cast<UINT>(eAnimationIndexSequence::DIE)], allSpriteCounts[static_cast<UINT>(eAnimationIndexSequence::DIE)], allAnimDurationCounts[static_cast<UINT>(eAnimationIndexSequence::DIE)]);
+		createVerticalAnimation(pAnimator, dieKey, animInfo);
+
+		pAnimator->PlayAnimation(idleKey, true);
+		return pAnimator;
+	}
+
 	void MonsterManager::createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const Vector2& leftTop, const Vector2& seperatingSize, const Vector2& offset, const UINT spriteCount, const float duration, const float magnification)
 	{
 		assert(pAtalsImage != nullptr);
@@ -591,6 +847,20 @@ namespace jh
 			animInfo.Magnification
 		);
 	}
+	void MonsterManager::createVerticalAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo)
+	{
+		pAnimator->CreateVertical(
+			animKey,
+			animInfo.pAtalsImage,
+			animInfo.LeftTop,
+			animInfo.SeperatingSize,
+			animInfo.Offset,
+			animInfo.SpriteCount,
+			animInfo.Duration,
+			animInfo.Magnification
+		);
+	}
+
 	void MonsterManager::setTransform(Transform* pMonsterTransform, const Vector3& position, const Vector3& scale)
 	{
 		assert(pMonsterTransform != nullptr);
@@ -611,19 +881,17 @@ namespace jh
 	{
 		Monster* pMonster = retMonsterPackage.pMonster;
 		assert(pMonster != nullptr);
-		MonsterAttackColiderObject* pMonsterColiderObject = new MonsterAttackColiderObject();
+		MonsterAttackColiderObject* pAttackColiderObject = new MonsterAttackColiderObject();
 		Transform* pMonsterTransform = pMonster->GetTransform();
 		Vector3 monsterPos = pMonsterTransform->GetPosition();
-		pMonsterColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, yPos, COLLIDER_Z_VALUE));
-		pMonsterColiderObject->SetMonsterTransformAndScriptAndAnimator(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), static_cast<Animator*>(pMonster->GetComponentOrNull(eComponentType::ANIMATOR)));
+		pAttackColiderObject->GetTransform()->SetPosition(Vector3(monsterPos.x, yPos, COLLIDER_Z_VALUE));
+		pAttackColiderObject->SetMonsterTransformAndScriptAndAnimator(pMonster->GetTransform(), static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), static_cast<Animator*>(pMonster->GetComponentOrNull(eComponentType::ANIMATOR)));
+		resizeAttackColliderSize(monInfo.eMonType, pAttackColiderObject);
 
-		if (monInfo.eMonType == eMonsterType::LV_1_ZOMBIE)
-			{resizeColliderSize(monInfo.eMonType, pMonsterColiderObject);}
-
-		retMonsterPackage.pMonsterAttackColliderObject = pMonsterColiderObject;
-		pMonster->SetMonsterAttackCollider(pMonsterColiderObject);
+		retMonsterPackage.pMonsterAttackColliderObject = pAttackColiderObject;
+		pMonster->SetMonsterAttackCollider(pAttackColiderObject);
 	}
-	void MonsterManager::resizeColliderSize(const eMonsterType eMonType, MonsterAttackColiderObject* pColliderObject)
+	void MonsterManager::resizeAttackColliderSize(const eMonsterType eMonType, MonsterAttackColiderObject* pColliderObject)
 	{
 		assert(pColliderObject != nullptr);
 		switch (eMonType)
@@ -643,6 +911,14 @@ namespace jh
 		case eMonsterType::LV_1_HEABY_SLICER:
 			break;
 		case eMonsterType::LV_1_LIGHT_SLICER:
+			break;
+		case eMonsterType::LV_1_DAGGER:
+			break;
+		case eMonsterType::LV_1_ARCHER:
+			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(3.8f, 0.5f));
+			break;
+		case eMonsterType::LV_1_BLASTER:
+			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(3.8f, 0.5f));
 			break;
 		default:
 			assert(false);

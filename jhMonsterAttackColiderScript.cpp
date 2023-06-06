@@ -35,6 +35,17 @@ static constexpr const UINT LIGHT_SLICER_ATTACK_VAILED_INDEX_2 = 10;
 static constexpr const UINT LIGHT_SLICER_ATTACK_VAILED_INDEX_3 = 14;
 static constexpr const UINT LIGHT_SLICER_ATTACK_DAMAGE = 2;
 
+static constexpr const UINT DAGGER_ATTACK_VAILED_INDEX_1 = 2;
+static constexpr const UINT DAGGER_ATTACK_VAILED_INDEX_2 = 6;
+static constexpr const UINT DAGGER_ATTACK_DAMAGE = 2;
+
+
+static constexpr const UINT ARCHER_ATTACK_VAILED_INDEX = 6;
+static constexpr const UINT ARCHER_ATTACK_DAMAGE = 4;
+
+static constexpr const UINT BLASTER_ATTACK_VAILED_INDEX = 8;
+static constexpr const UINT BLASTER_ATTACK_DAMAGE = 3;
+
 namespace jh
 {
 	MonsterAttackColiderScript::MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator)
@@ -150,6 +161,30 @@ namespace jh
 				}
 				break;
 			}
+			case eMonsterType::LV_1_DAGGER:
+			{
+				if (CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_1 || CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_2)
+				{
+					damageToPlayer(pPlayerScript, DAGGER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ARCHER:
+			{
+				if (CURR_IDX == ARCHER_ATTACK_VAILED_INDEX)
+				{
+					damageToPlayer(pPlayerScript, ARCHER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_BLASTER:
+			{
+				if (CURR_IDX == BLASTER_ATTACK_VAILED_INDEX)
+				{
+					damageToPlayer(pPlayerScript, BLASTER_ATTACK_DAMAGE);
+				}
+				break;
+			}
 			default:
 				assert(false);
 				break;
@@ -191,6 +226,20 @@ namespace jh
 		}
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			mDistance = 2.5f;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			mDistance = 2.5f;
 			break;
 		}
 		default:

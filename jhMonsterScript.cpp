@@ -30,6 +30,15 @@ static constexpr const float HEABY_SLICER_INITIAL_SPEED = 1.5f;
 static constexpr const int LIGHT_SLICER_INITIAL_HP = 6;
 static constexpr const float LIGHT_SLICER_INITIAL_SPEED = 2.0f;
 
+static constexpr const int DAGGER_SLICER_INITIAL_HP = 6;
+static constexpr const float DAGGER_SLICER_INITIAL_SPEED = 1.8f;
+
+static constexpr const int ARCHER_INITIAL_HP = 3;
+static constexpr const float ARCHER_INITIAL_SPEED = 1.0f;
+
+static constexpr const int BLASTER_INITIAL_HP = 5;
+static constexpr const float BLASTER_INITIAL_SPEED = 1.3f;
+
 static constexpr const float SPAWNING_TIME = 3.0f;
 
 namespace jh
@@ -125,6 +134,43 @@ namespace jh
 			setInitialStat(LIGHT_SLICER_INITIAL_HP, LIGHT_SLICER_INITIAL_SPEED);
 			break;
 		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			setAnimKey(
+				MonsterManager::DAGGER_IDLE_ANIM_KEY,
+				MonsterManager::DAGGER_MOVING_ANIM_KEY,
+				MonsterManager::DAGGER_ATTACK_ANIM_KEY,
+				MonsterManager::DAGGER_HITTED_ANIM_KEY,
+				MonsterManager::DAGGER_DIE_ANIM_KEY
+			);
+			setInitialStat(DAGGER_SLICER_INITIAL_HP, DAGGER_SLICER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			setAnimKey(
+				MonsterManager::ARCHER_IDLE_ANIM_KEY,
+				MonsterManager::ARCHER_MOVING_ANIM_KEY,
+				MonsterManager::ARCHER_ATTACK_ANIM_KEY,
+				MonsterManager::ARCHER_HITTED_ANIM_KEY,
+				MonsterManager::ARCHER_DIE_ANIM_KEY
+			);
+			setInitialStat(ARCHER_INITIAL_HP, ARCHER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			setAnimKey(
+				MonsterManager::BLASTER_IDLE_ANIM_KEY,
+				MonsterManager::BLASTER_MOVING_ANIM_KEY,
+				MonsterManager::BLASTER_ATTACK_ANIM_KEY,
+				MonsterManager::BLASTER_HITTED_ANIM_KEY,
+				MonsterManager::BLASTER_DIE_ANIM_KEY
+			);
+			setInitialStat(BLASTER_INITIAL_HP, BLASTER_INITIAL_SPEED);
+			break;
+		}
+
 		default:
 			assert(false);
 			break;
@@ -259,6 +305,21 @@ namespace jh
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			setInitialStat(LIGHT_SLICER_INITIAL_HP, LIGHT_SLICER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			setInitialStat(DAGGER_SLICER_INITIAL_HP, DAGGER_SLICER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			setInitialStat(ARCHER_INITIAL_HP, ARCHER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			setInitialStat(BLASTER_INITIAL_HP, BLASTER_INITIAL_SPEED);
 			break;
 		}
 		default:

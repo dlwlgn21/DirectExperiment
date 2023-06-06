@@ -19,6 +19,9 @@ namespace jh
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 8.0f;
 	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 10.0f;
 	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 3.0f;
+	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 3.0f;
+	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 3.0f;
+	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 3.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
@@ -26,6 +29,9 @@ namespace jh
 	static constexpr const float ZOMBIE_Y_POS = -1.9f;
 	static constexpr const float HEABY_SLICER_Y_POS = -1.0f;
 	static constexpr const float LIGHT_SLICER_Y_POS = -1.0f;
+	static constexpr const float DAGGER_Y_POS = -1.8f;
+	static constexpr const float ARCHER_Y_POS = -2.3f;
+	static constexpr const float BLASTER_Y_POS = -2.0f;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -46,29 +52,41 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 
-		mCagedShokerRespawnTimer -= Time::DeltaTime();
-		if (mCagedShokerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+		//mCagedShokerRespawnTimer -= Time::DeltaTime();
+		//if (mCagedShokerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
-		mSweeperRespawnTimer -= Time::DeltaTime();
-		if (mSweeperRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+		//mSweeperRespawnTimer -= Time::DeltaTime();
+		//if (mSweeperRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		mWardenRespawnTimer -= Time::DeltaTime();
-		if (mWardenRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		//mWardenRespawnTimer -= Time::DeltaTime();
+		//if (mWardenRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
 
-		mZombieRespawnTimer -= Time::DeltaTime();
-		if (mZombieRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+		//mZombieRespawnTimer -= Time::DeltaTime();
+		//if (mZombieRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
 
-		mHeabySlicerRespawnTimer -= Time::DeltaTime();
-		if (mHeabySlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
+		//mHeabySlicerRespawnTimer -= Time::DeltaTime();
+		//if (mHeabySlicerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
 
-		mLightSlicerRespawnTimer -= Time::DeltaTime();
-		if (mLightSlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
+		//mLightSlicerRespawnTimer -= Time::DeltaTime();
+		//if (mLightSlicerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
+
+		//mDaggerRespawnTimer -= Time::DeltaTime();
+		//if (mDaggerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_DAGGER);}
+
+		//mArcherRespawnTimer -= Time::DeltaTime();
+		//if (mArcherRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ARCHER);}
+
+		mBlasterRespawnTimer -= Time::DeltaTime();
+		if (mBlasterRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_BLASTER);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -114,6 +132,24 @@ namespace jh
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			Vector3 spawnPos(spawnXPos, LIGHT_SLICER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			Vector3 spawnPos(spawnXPos, DAGGER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			Vector3 spawnPos(spawnXPos, ARCHER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			Vector3 spawnPos(spawnXPos, BLASTER_Y_POS, MONSTER_Z_VALUE);
 			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
@@ -171,6 +207,24 @@ namespace jh
 		{
 			//mLightSlicerRespawnTimer = LIGHT_SLICER_RESPAWN_TIME;
 			mLightSlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			//mDaggerRespawnTimer = DAGGER_RESPAWN_TIME;
+			mDaggerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			//mArcherRespawnTimer = ARCHER_RESPAWN_TIME;
+			mArcherRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			//mBlasterRespawnTimer = BLASTER_RESPAWN_TIME;
+			mBlasterRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		default:

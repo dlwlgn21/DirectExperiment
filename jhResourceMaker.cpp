@@ -47,7 +47,11 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY = L"HeabySlicerNormalTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_LIGHT_SLICER_KEY = L"LightSlicerTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY = L"LightSlicerNormalTexture";
-
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_DAGGER_KEY = L"DaggerTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_DAGGER_NORMAL_MAP_KEY = L"DaggerNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ARCHER_KEY = L"ArcherTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY = L"ArcherNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_BLASTER_KEY = L"BlasterTexture";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
@@ -107,6 +111,10 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY = L"HeabySlicerNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_LIGHT_SLICER_MATERIAL_KEY = L"LightSlicerMaterial";
 	const std::wstring ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY = L"LightSlicerNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY = L"DaggerNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_ARCHER_MATERIAL_KEY = L"ArcherMaterial";
+	const std::wstring ResourceMaker::MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY = L"ArcherNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_BLASTER_MATERIAL_KEY = L"BlasterMaterial";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
@@ -400,6 +408,11 @@ namespace jh
 		loadAndInsertTexture(MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY, L"MON_HeabySlicer_192x70_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_LIGHT_SLICER_KEY, L"MON_LightSlicer_192x32.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY, L"MON_LightSlicer_192x32_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_DAGGER_KEY, L"MON_Dagger_144x80.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_DAGGER_NORMAL_MAP_KEY, L"MON_Dagger_144x80_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_ARCHER_KEY, L"MON_Archer_174x25.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY, L"MON_Archer_174x25_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_BLASTER_KEY, L"MON_Blaster_119x34.png");
 
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
@@ -461,6 +474,11 @@ namespace jh
 		insertNormalMapMaterial(MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_HEABY_SLICER_KEY, MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY);
 		insertMaterial(MONSTER_LIGHT_SLICER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_KEY);
 		insertNormalMapMaterial(MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY);
+		insertNormalMapMaterial(MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_DAGGER_KEY, MONSTER_TEXTURE_DAGGER_NORMAL_MAP_KEY);
+		insertMaterial(MONSTER_ARCHER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ARCHER_KEY);
+		insertNormalMapMaterial(MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_ARCHER_KEY, MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY);
+		insertMaterial(MONSTER_BLASTER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_BLASTER_KEY);
+
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);

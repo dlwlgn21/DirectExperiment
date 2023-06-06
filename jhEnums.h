@@ -88,6 +88,9 @@ namespace jh
 		LV_1_ZOMBIE,
 		LV_1_HEABY_SLICER,
 		LV_1_LIGHT_SLICER,
+		LV_1_DAGGER,
+		LV_1_ARCHER,
+		LV_1_BLASTER,
 		COUNT
 	};
 
