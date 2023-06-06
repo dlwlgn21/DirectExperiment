@@ -30,6 +30,11 @@ static constexpr const UINT HEABY_SLICER_ATTACK_VAILED_INDEX_1 = 5;
 static constexpr const UINT HEABY_SLICER_ATTACK_VAILED_INDEX_2 = 9;
 static constexpr const UINT HEABY_SLICER_ATTACK_DAMAGE = 4;
 
+static constexpr const UINT LIGHT_SLICER_ATTACK_VAILED_INDEX_1 = 6;
+static constexpr const UINT LIGHT_SLICER_ATTACK_VAILED_INDEX_2 = 10;
+static constexpr const UINT LIGHT_SLICER_ATTACK_VAILED_INDEX_3 = 14;
+static constexpr const UINT LIGHT_SLICER_ATTACK_DAMAGE = 2;
+
 namespace jh
 {
 	MonsterAttackColiderScript::MonsterAttackColiderScript(Collider2D* pCollider, Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator)
@@ -137,6 +142,14 @@ namespace jh
 				}
 				break;
 			}
+			case eMonsterType::LV_1_LIGHT_SLICER:
+			{
+				if (CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_2 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_3)
+				{
+					damageToPlayer(pPlayerScript, LIGHT_SLICER_ATTACK_DAMAGE);
+				}
+				break;
+			}
 			default:
 				assert(false);
 				break;
@@ -155,24 +168,28 @@ namespace jh
 	{
 		switch (meMonsterType)
 		{
-		case jh::eMonsterType::LV_1_CAGED_SHOKER:
+		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
 			break;
 		}
-		case jh::eMonsterType::LV_1_SWEEPER:
+		case eMonsterType::LV_1_SWEEPER:
 		{
 			break;
 		}
-		case jh::eMonsterType::LV_1_WARDEN:
+		case eMonsterType::LV_1_WARDEN:
 		{
 			break;
 		}
-		case jh::eMonsterType::LV_1_ZOMBIE:
+		case eMonsterType::LV_1_ZOMBIE:
 		{
 			mDistance = 0.5f;
 			break;
 		}
-		case jh::eMonsterType::LV_1_HEABY_SLICER:
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			break;
 		}

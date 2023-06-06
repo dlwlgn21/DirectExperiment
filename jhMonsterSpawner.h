@@ -29,6 +29,7 @@ namespace jh
 			, mWardenRespawnTimer(WARDEN_RESPAWN_TIME)
 			, mZombieRespawnTimer(ZOMBIE_RESPAWN_TIME)
 			, mHeabySlicerRespawnTimer(HEABY_SLICER_RESPAWN_TIME)
+			, mLightSlicerRespawnTimer(LIGHT_SLICER_RESPAWN_TIME)
 			, mpScene(nullptr)
 			, mpPlayerScript(nullptr)
 			, mPlayerPos(jh::math::Vector3::Zero)
@@ -50,6 +51,7 @@ namespace jh
 		static const float WARDEN_RESPAWN_TIME;
 		static const float ZOMBIE_RESPAWN_TIME;
 		static const float HEABY_SLICER_RESPAWN_TIME;
+		static const float LIGHT_SLICER_RESPAWN_TIME;
 
 	private:
 		void resetTimer(const eMonsterType eMonType);
@@ -66,6 +68,7 @@ namespace jh
 		float								mWardenRespawnTimer;
 		float								mZombieRespawnTimer;
 		float								mHeabySlicerRespawnTimer;
+		float								mLightSlicerRespawnTimer;
 		std::vector<PortalEffectObject*>	mPortalEffectObjects;
 		jh::math::Vector3					mPlayerPos;
 	};

@@ -65,7 +65,8 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_HEABY_SLICER_KEY;
 		static const std::wstring MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY;
-
+		static const std::wstring MONSTER_TEXTURE_LIGHT_SLICER_KEY;
+		static const std::wstring MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY;
 
 		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
 		static const std::wstring BG_OBELISK_TEXTURE_NORMAL_MAP_KEY;
@@ -122,6 +123,8 @@ namespace jh
 		static const std::wstring MONSTER_ZOMBIE_MATERIAL_KEY;
 		static const std::wstring MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring MONSTER_LIGHT_SLICER_MATERIAL_KEY;
+		static const std::wstring MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY;
 
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;

@@ -18,12 +18,14 @@ namespace jh
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 6.0f;
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 8.0f;
 	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 10.0f;
+	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 3.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
 	static constexpr const float WARDEN_Y_POS = -2.0f;
 	static constexpr const float ZOMBIE_Y_POS = -1.9f;
 	static constexpr const float HEABY_SLICER_Y_POS = -1.0f;
+	static constexpr const float LIGHT_SLICER_Y_POS = -1.0f;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -63,6 +65,10 @@ namespace jh
 		mHeabySlicerRespawnTimer -= Time::DeltaTime();
 		if (mHeabySlicerRespawnTimer <= 0.0f)
 			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
+
+		mLightSlicerRespawnTimer -= Time::DeltaTime();
+		if (mLightSlicerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -102,6 +108,12 @@ namespace jh
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
 			Vector3 spawnPos(spawnXPos, HEABY_SLICER_Y_POS, MONSTER_Z_VALUE);
+			addMonsterAtScene(eMonType, spawnPos);
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			Vector3 spawnPos(spawnXPos, LIGHT_SLICER_Y_POS, MONSTER_Z_VALUE);
 			addMonsterAtScene(eMonType, spawnPos);
 			break;
 		}
@@ -153,6 +165,12 @@ namespace jh
 		{
 			//mHeabySlicerRespawnTimer = HEABY_SLICER_RESPAWN_TIME;
 			mHeabySlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			//mLightSlicerRespawnTimer = LIGHT_SLICER_RESPAWN_TIME;
+			mLightSlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		default:

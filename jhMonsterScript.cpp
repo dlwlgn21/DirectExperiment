@@ -16,16 +16,19 @@ static constexpr const int CAGED_SHOKER_INITIAL_HP = 10;
 static constexpr const float CAGED_SHOKER_INITIAL_SPEED = 1.5f;
 
 static constexpr const int SWEEPER_INITIAL_HP = 5;
-static constexpr const float SWEEPER_INITIAL_SPEED = 2.0;
+static constexpr const float SWEEPER_INITIAL_SPEED = 2.0f;
 
 static constexpr const int WARDEN_INITIAL_HP = 3;
-static constexpr const float WARDEN_INITIAL_SPEED = 3.0;
+static constexpr const float WARDEN_INITIAL_SPEED = 3.0f;
 
 static constexpr const int ZOMBIE_INITIAL_HP = 7;
-static constexpr const float ZOMBIE_INITIAL_SPEED = 1.0;
+static constexpr const float ZOMBIE_INITIAL_SPEED = 1.0f;
 
 static constexpr const int HEABY_SLICER_INITIAL_HP = 12;
-static constexpr const float HEABY_SLICER_INITIAL_SPEED = 1.5;
+static constexpr const float HEABY_SLICER_INITIAL_SPEED = 1.5f;
+
+static constexpr const int LIGHT_SLICER_INITIAL_HP = 6;
+static constexpr const float LIGHT_SLICER_INITIAL_SPEED = 2.0f;
 
 static constexpr const float SPAWNING_TIME = 3.0f;
 
@@ -108,6 +111,18 @@ namespace jh
 				MonsterManager::HEABY_SLICER_DIE_ANIM_KEY
 			);
 			setInitialStat(HEABY_SLICER_INITIAL_HP, HEABY_SLICER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			setAnimKey(
+				MonsterManager::LIGHT_SLICER_IDLE_ANIM_KEY,
+				MonsterManager::LIGHT_SLICER_MOVING_ANIM_KEY,
+				MonsterManager::LIGHT_SLICER_ATTACK_ANIM_KEY,
+				MonsterManager::LIGHT_SLICER_HITTED_ANIM_KEY,
+				MonsterManager::LIGHT_SLICER_DIE_ANIM_KEY
+			);
+			setInitialStat(LIGHT_SLICER_INITIAL_HP, LIGHT_SLICER_INITIAL_SPEED);
 			break;
 		}
 		default:
@@ -239,6 +254,11 @@ namespace jh
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
 			setInitialStat(HEABY_SLICER_INITIAL_HP, HEABY_SLICER_INITIAL_SPEED);
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			setInitialStat(LIGHT_SLICER_INITIAL_HP, LIGHT_SLICER_INITIAL_SPEED);
 			break;
 		}
 		default:

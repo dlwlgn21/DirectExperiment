@@ -32,19 +32,21 @@ namespace jh
 #pragma endregion
 
 #pragma region TEXTURE
-	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlasKey";
-	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY = L"PlayerNormalMapTextureAtlasKey";
+	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlas";
+	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY = L"PlayerNormalMapTextureAtlas";
 
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtalsKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtalsKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY = L"SweeperNormalTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtalsKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_KEY = L"ZombieTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY = L"ZombieNormalTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_HEABY_SLICER_KEY = L"HeabySlicerTextureKey";
-	const std::wstring ResourceMaker::MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY = L"HeabySlicerNormalTextureKey";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtals";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtals";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_NORMAL_MAP_KEY = L"SweeperNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_ATLAS_KEY = L"WardenTextureAtals";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY = L"WardenNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_KEY = L"ZombieTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY = L"ZombieNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_HEABY_SLICER_KEY = L"HeabySlicerTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY = L"HeabySlicerNormalTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_LIGHT_SLICER_KEY = L"LightSlicerTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY = L"LightSlicerNormalTexture";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
@@ -103,6 +105,8 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY = L"ZombieMaterial";
 	const std::wstring ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY = L"ZombieNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY = L"HeabySlicerNormalMaterial";
+	const std::wstring ResourceMaker::MONSTER_LIGHT_SLICER_MATERIAL_KEY = L"LightSlicerMaterial";
+	const std::wstring ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY = L"LightSlicerNormalMaterial";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
@@ -392,8 +396,11 @@ namespace jh
 		loadAndInsertTexture(MONSTER_TEXTURE_WARDEN_NORMAL_MAP_KEY, L"MON_Warden_97x32_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_ZOMBIE_KEY, L"MON_Zombie_130x70.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY, L"MON_Zombie_130x70_NM.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_HEABY_SLICER_KEY, L"MON_HeabySlicer_192x70l.png");
-		loadAndInsertTexture(MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY, L"MON_HeabySlicer_192x70l_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_HEABY_SLICER_KEY, L"MON_HeabySlicer_192x70.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY, L"MON_HeabySlicer_192x70_NM.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_LIGHT_SLICER_KEY, L"MON_LightSlicer_192x32.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY, L"MON_LightSlicer_192x32_NM.png");
+
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
@@ -452,6 +459,8 @@ namespace jh
 		insertMaterial(MONSTER_ZOMBIE_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ZOMBIE_KEY);
 		insertNormalMapMaterial(MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_ZOMBIE_KEY, MONSTER_TEXTURE_ZOMBIE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_HEABY_SLICER_KEY, MONSTER_TEXTURE_HEABY_SLICER_NORMAL_MAP_KEY);
+		insertMaterial(MONSTER_LIGHT_SLICER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_KEY);
+		insertNormalMapMaterial(MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_KEY, MONSTER_TEXTURE_LIGHT_SLICER_NORMAL_MAP_KEY);
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);

@@ -31,8 +31,14 @@ static constexpr const float COLLIDER_Z_VALUE = 1.1f;
 static constexpr const float ZOMBIE_SCALE_VALUE = 3.5f;
 
 static constexpr const float HEABY_SLICER_SCALE_VALUE = 6.0f;
+static constexpr const float LIGHT_SLICER_SCALE_VALUE = 6.0f;
 
+
+static constexpr const jh::math::Vector3 CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 SWEEPER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 ZOMBIE_SCALE_VECTOR = Vector3(ZOMBIE_SCALE_VALUE, ZOMBIE_SCALE_VALUE, 1.0f);
 static constexpr const jh::math::Vector3 HEABY_SLICER_SCALE_VECTOR(HEABY_SLICER_SCALE_VALUE, HEABY_SLICER_SCALE_VALUE, 1.0f);
+static constexpr const jh::math::Vector3 LIGHT_SLICER_SCALE_VECTOR(LIGHT_SLICER_SCALE_VALUE, LIGHT_SLICER_SCALE_VALUE, 1.0f);
 
 namespace jh
 {
@@ -71,10 +77,11 @@ namespace jh
 	const std::wstring MonsterManager::HEABY_SLICER_HITTED_ANIM_KEY = L"HeabySlicerHitted";
 	const std::wstring MonsterManager::HEABY_SLICER_DIE_ANIM_KEY	= L"HeabySlicerDie";
 
-	const Vector3 MonsterManager::CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
-	const Vector3 MonsterManager::SWEEPER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
-	const Vector3 MonsterManager::ZOMBIE_SCALE_VECTOR = Vector3(ZOMBIE_SCALE_VALUE, ZOMBIE_SCALE_VALUE, 1.0f);
-
+	const std::wstring MonsterManager::LIGHT_SLICER_IDLE_ANIM_KEY	= L"LightSlicerIdle";
+	const std::wstring MonsterManager::LIGHT_SLICER_MOVING_ANIM_KEY = L"LightSlicerMoving";
+	const std::wstring MonsterManager::LIGHT_SLICER_ATTACK_ANIM_KEY = L"LightSlicerAttack";
+	const std::wstring MonsterManager::LIGHT_SLICER_HITTED_ANIM_KEY = L"LightSlicerHitted";
+	const std::wstring MonsterManager::LIGHT_SLICER_DIE_ANIM_KEY	= L"LightSlicerDie";
 
 	MonsterPackage MonsterManager::MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const Vector3& position)
 	{
@@ -439,6 +446,77 @@ namespace jh
 			setTransform(retMonsterPackage.pMonster->GetTransform(), position, HEABY_SLICER_SCALE_VECTOR);
 			break;
 		}
+
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			static constexpr const float LIGHT_SLICER_WIDTH = 192.0f;
+			static constexpr const float LIGHT_SLICER_HEIGHT = 32.0f;
+			static constexpr const float LIGHT_SLICER_MAG = 100.0f;
+			static constexpr const float LIGHT_SLICER_DIE_ANIM_DURATION = 0.1f;
+			AnimationInfo animInfo;
+			ZeroMemory(&animInfo, sizeof(AnimationInfo));
+			const Vector2 ANIM_OFFSET = Vector2(0.016f, 0.1f);
+			createIntialAnimationInfo(
+				animInfo,
+				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_LIGHT_SLICER_KEY),
+				Vector2(Vector2::Zero),
+				Vector2(LIGHT_SLICER_WIDTH, LIGHT_SLICER_HEIGHT),
+				ANIM_OFFSET,
+				9,
+				DEFAULT_ANIM_DURATION,
+				LIGHT_SLICER_MAG
+			);
+
+			fillLeftTopsArray(
+				leftTops,
+				Vector2(0.0f, LIGHT_SLICER_HEIGHT * 1),
+				Vector2(0.0f, LIGHT_SLICER_HEIGHT * 2),
+				Vector2(0.0f, LIGHT_SLICER_HEIGHT * 3),
+				Vector2(0.0f, LIGHT_SLICER_HEIGHT * 4)
+			);
+			fillSpriteCountArray(
+				spriteCounts,
+				8,
+				17,
+				2,
+				6
+			);
+			fillAnimationDurationArray(
+				animDurations,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION
+			);
+
+			Animator* pLightSlicerAnimator = createAllAnimtaion(
+				new Animator(),
+				LIGHT_SLICER_IDLE_ANIM_KEY,
+				LIGHT_SLICER_MOVING_ANIM_KEY,
+				LIGHT_SLICER_ATTACK_ANIM_KEY,
+				LIGHT_SLICER_HITTED_ANIM_KEY,
+				LIGHT_SLICER_DIE_ANIM_KEY,
+				animInfo,
+				leftTops,
+				spriteCounts,
+				animDurations
+			);
+
+			MonsterInfo monInfo;
+			ZeroMemory(&monInfo, sizeof(MonsterInfo));
+			createMonsterInfo(
+				monInfo,
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY),
+				pLightSlicerAnimator,
+				pPlayerScript,
+				eMonsterType::LV_1_LIGHT_SLICER
+			);
+			createMonster(monInfo, retMonsterPackage);
+			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
+			setTransform(retMonsterPackage.pMonster->GetTransform(), position, LIGHT_SLICER_SCALE_VECTOR);
+			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -563,6 +641,8 @@ namespace jh
 			break;
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
+			break;
+		case eMonsterType::LV_1_LIGHT_SLICER:
 			break;
 		default:
 			assert(false);

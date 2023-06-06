@@ -125,6 +125,13 @@ namespace jh
 			pMonsterCollider->SetCenter(Vector2(CENTER_POS.x + 0.1f, CENTER_POS.y - 1.0f));
 			break;
 		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			pMonsterCollider->SetSize(Vector2(DEFAULT_X_LENGTH, DEFAULT_Y_LENGTH + 0.1f));
+			const Vector3 CENTER_POS = GetTransform()->GetPosition();
+			pMonsterCollider->SetCenter(Vector2(CENTER_POS.x + 0.1f, CENTER_POS.y - 1.0f));
+			break;
+		}
 		default:
 			assert(false);
 			break;

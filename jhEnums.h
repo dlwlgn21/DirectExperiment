@@ -87,6 +87,7 @@ namespace jh
 		LV_1_WARDEN,
 		LV_1_ZOMBIE,
 		LV_1_HEABY_SLICER,
+		LV_1_LIGHT_SLICER,
 		COUNT
 	};
 
