@@ -52,9 +52,9 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 
-		mCagedShokerRespawnTimer -= Time::DeltaTime();
-		if (mCagedShokerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+		//mCagedShokerRespawnTimer -= Time::DeltaTime();
+		//if (mCagedShokerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
 
 		//mSweeperRespawnTimer -= Time::DeltaTime();
 		//if (mSweeperRespawnTimer <= 0.0f)

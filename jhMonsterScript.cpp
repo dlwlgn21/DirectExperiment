@@ -7,6 +7,7 @@
 #include "jhHitEffectScript.h"
 #include "jhCollider2D.h"
 #include "jhPlayerScript.h"
+#include "jhMonsterAnimIndexInformation.h"
 
 using namespace jh::math;
 
@@ -19,12 +20,12 @@ static constexpr const float ATTACKING_AWARENESS_DEFAULT_RANGE = 2.0f;
 static constexpr const float CAGED_SHOCKER_AWARENESS_RANGE	= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.5f;
 static constexpr const float SWEEPER_AWARENESS_RANGE		= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.0f;
 static constexpr const float WARDEN_AWARENESS_RANGE			= ATTACKING_AWARENESS_DEFAULT_RANGE + 0.5f;
-static constexpr const float HEABY_SLICER_AWARENESS_RANGE	= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.5f;
+static constexpr const float HEABY_SLICER_AWARENESS_RANGE	= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.0f;
 static constexpr const float LIGHT_SLICER_AWARENESS_RANGE	= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.0f;
-static constexpr const float ZOMBIE_AWARENESS_RANGE			= ATTACKING_AWARENESS_DEFAULT_RANGE - 1.0f;
+static constexpr const float ZOMBIE_AWARENESS_RANGE			= ATTACKING_AWARENESS_DEFAULT_RANGE - 0.5f;
 static constexpr const float ARCHER_AWARENESS_RANGE			= ATTACKING_AWARENESS_DEFAULT_RANGE + 2.0f;
 static constexpr const float DAGGER_AWARENESS_RANGE			= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.0f;
-static constexpr const float BLASTER_AWARENESS_RANGE		= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.0f;
+static constexpr const float BLASTER_AWARENESS_RANGE		= ATTACKING_AWARENESS_DEFAULT_RANGE + 1.5f;
 #pragma endregion
 
 #pragma region MONSTERS_HP_SPEED_STAT
@@ -56,6 +57,21 @@ static constexpr const int BLASTER_INITIAL_HP = 5;
 static constexpr const float BLASTER_INITIAL_SPEED = 1.3f;
 #pragma endregion
 
+#pragma region ATTACKING_MOVMENT_DISTANCE
+static constexpr const float DEFULAT_ATTACKING_MOVEMENT_DISTANCE = 2.0f;
+
+static constexpr const float CAGED_SHOCKER_ATTACKING_MOVEMENT_DISTANCE	= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 1.5f;
+static constexpr const float SWEEPER_ATTACKING_MOVEMENT_DISTANCE		= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 1.0f;
+static constexpr const float WARDEN_ATTACKING_MOVEMENT_DISTANCE			= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 0.5f;
+static constexpr const float HEABY_SLICER_ATTACKING_MOVEMENT_DISTANCE	= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 2.0f;
+static constexpr const float LIGHT_SLICER_ATTACKING_MOVEMENT_DISTANCE	= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 1.0f;
+static constexpr const float ZOMBIE_ATTACKING_MOVEMENT_DISTANCE			= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 4.0f;
+static constexpr const float ARCHER_ATTACKING_MOVEMENT_DISTANCE			= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 2.0f;
+static constexpr const float DAGGER_ATTACKING_MOVEMENT_DISTANCE			= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 5.0f;
+static constexpr const float BLASTER_ATTACKING_MOVEMENT_DISTANCE		= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 3.0f;
+#pragma endregion
+
+
 namespace jh
 {
 	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
@@ -69,6 +85,7 @@ namespace jh
 		, mCurrHP(0)
 		, mSpeed(0.0f)
 		, mAttackingAwarenessRange(ATTACKING_AWARENESS_DEFAULT_RANGE)
+		, mAttackingMovementDistance(0.0f)
 		, mSpawningTimer(SPAWNING_TIME)
 		, mHittedPushDistance(4.0f)
 		, meLookDir(eObjectLookDirection::LEFT)
@@ -79,6 +96,7 @@ namespace jh
 		setAwarenessRange();
 		setAnimKey();
 		setInitialStat();
+		setAttackingMovementDistance();
 	}
 
 	void MonsterScript::Initialize()
@@ -149,6 +167,7 @@ namespace jh
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}
+
 	void MonsterScript::AnimationAttackStart()
 	{
 		mpAnimator->InitializeCurrAnimation();
@@ -171,11 +190,11 @@ namespace jh
 	{
 		mpAnimator->InitializeCurrAnimation();
 	}
-
 	void MonsterScript::AnimationDieComplete()
 	{
 		static_cast<Monster*>(GetOwner())->SetInactive();
 	}
+
 
 	void MonsterScript::SetRespawnState()
 	{
@@ -300,7 +319,102 @@ namespace jh
 			return;
 		}
 		case eMonsterState::ATTACKING:
+		{
+			float currXPos = mpTranform->GetOnlyXPosition();
+			float movementXDistance = 0.0f;
+			switch (meMonsterType)
+			{
+			case eMonsterType::LV_1_CAGED_SHOKER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				else if (mpAnimator->GetCurrentAnimationIndex() == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos((mAttackingMovementDistance + 1.0f) * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_SWEEPER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == SWEEPER_ATTACK_VAILED_INDEX)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_WARDEN:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == WARDEN_ATTACK_VAILED_INDEX)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ZOMBIE:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == ZOMBIE_ATTACK_VAILED_INDEX)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_HEABY_SLICER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == HEABY_SLICER_ATTACK_VAILED_INDEX_1)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				else if (mpAnimator->GetCurrentAnimationIndex() == HEABY_SLICER_ATTACK_VAILED_INDEX_2)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_LIGHT_SLICER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == LIGHT_SLICER_ATTACK_VAILED_INDEX_1 || mpAnimator->GetCurrentAnimationIndex() == LIGHT_SLICER_ATTACK_VAILED_INDEX_2)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				else if (mpAnimator->GetCurrentAnimationIndex() == LIGHT_SLICER_ATTACK_VAILED_INDEX_3)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos((mAttackingMovementDistance + 5.0f) * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_DAGGER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == DAGGER_ATTACK_VAILED_INDEX_1)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				else if (mpAnimator->GetCurrentAnimationIndex() == DAGGER_ATTACK_VAILED_INDEX_2)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos((mAttackingMovementDistance - 2.0f) * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ARCHER:
+			{
+				break;
+			}
+			case eMonsterType::LV_1_BLASTER:
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == BLASTER_ATTACK_VAILED_INDEX)
+				{
+					mpTranform->SetOnlyXPosition(getMovementAttackingPos(mAttackingMovementDistance * Time::DeltaTime(), currXPos));
+				}
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
+
 			return;
+		}
 		case eMonsterState::HITTED:
 		{
 			if (mpPlayerScript->GetAttackType() == eAttackType::PUSH)
@@ -325,7 +439,17 @@ namespace jh
 		}
 	}
 
-
+	float MonsterScript::getMovementAttackingPos(float movementXAmount, float currXPos)
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			return currXPos -= movementXAmount;
+		}
+		else
+		{
+			return currXPos += movementXAmount;
+		}
+	}
 	void MonsterScript::moveOrChangeAttackingState()
 	{
 		assert(mpTranform != nullptr);
@@ -557,6 +681,60 @@ namespace jh
 		{
 
 			mAttackingAwarenessRange = BLASTER_AWARENESS_RANGE;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+	void MonsterScript::setAttackingMovementDistance()
+	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			mAttackingMovementDistance = CAGED_SHOCKER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			mAttackingMovementDistance = SWEEPER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			mAttackingMovementDistance = WARDEN_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			mAttackingMovementDistance = ZOMBIE_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			mAttackingMovementDistance = HEABY_SLICER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			mAttackingMovementDistance = LIGHT_SLICER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			mAttackingMovementDistance = DAGGER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			mAttackingMovementDistance = ARCHER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			mAttackingMovementDistance = BLASTER_ATTACKING_MOVEMENT_DISTANCE;
 			break;
 		}
 		default:

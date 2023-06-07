@@ -719,7 +719,7 @@ namespace jh
 			fillAnimationDurationArray(
 				animDurations,
 				DEFAULT_ANIM_DURATION,
-				0.2f,
+				DEFAULT_ANIM_DURATION,
 				DEFAULT_ANIM_DURATION,
 				DEFAULT_ANIM_DURATION
 			);
@@ -916,6 +916,7 @@ namespace jh
 		case eMonsterType::LV_1_LIGHT_SLICER:
 			break;
 		case eMonsterType::LV_1_DAGGER:
+			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(2.5f, 0.5f));
 			break;
 		case eMonsterType::LV_1_ARCHER:
 		{

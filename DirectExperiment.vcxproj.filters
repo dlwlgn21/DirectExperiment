@@ -540,6 +540,9 @@
     <ClInclude Include="jhHitEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterAnimIndexInformation.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

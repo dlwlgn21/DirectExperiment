@@ -175,6 +175,7 @@
     <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMonsterAttackColiderObject.h" />
     <ClInclude Include="jhMonsterAttackColiderScript.h" />
+    <ClInclude Include="jhMonsterAnimIndexInformation.h" />
     <ClInclude Include="jhMonsterManager.h" />
     <ClInclude Include="jhMonsterObjectPool.h" />
     <ClInclude Include="jhMonsterScript.h" />

@@ -146,7 +146,7 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		// Directional Light
 		{
-			//instantiateLightObject(LightingManager::makeLightAttribute(eLightType::DIRECTIONAL, WHITE_COLOR, 0.0f), Vector2(0.0f, -5.0f));
+			//instantiateLightObject(LightingManager::makeLightAttribute(eLightType::DIRECTIONAL, Vector4(4.0f, 4.0f, 4.0f, 1.0f), 0.0f), Vector2(0.0f, -5.0f));
 		}
 		// Point Light
 		{

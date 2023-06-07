@@ -34,10 +34,8 @@ namespace jh
 
 		void AnimationAttackStart();
 		void AnimationAttackComplete();
-
 		void AnimationHittedStart();
 		void AnimationHittedComplete();
-
 		void AnimationDieStart();
 		void AnimationDieComplete();
 
@@ -50,9 +48,11 @@ namespace jh
 
 	private:
 		float calculateDistanceFromPlayerToSetLookDirection();
+		float getMovementAttackingPos(float movementXAmount, float currXPos);
 		void moveOrChangeAttackingState();
 		void setInitialStat();
 		void setAwarenessRange();
+		void setAttackingMovementDistance();
 		void setAnimKey();
 		void setAnimator();
 		void setPosition();
@@ -73,6 +73,7 @@ namespace jh
 		int								mCurrHP;
 		float							mSpeed;
 		float							mAttackingAwarenessRange;
+		float							mAttackingMovementDistance;
 		float							mHittedPushDistance;
 		float							mSpawningTimer;
 		std::wstring					mAnimIdleKey;
