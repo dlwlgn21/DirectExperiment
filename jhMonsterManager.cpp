@@ -898,7 +898,10 @@ namespace jh
 		{
 			// AttackCollider 조정 할지도 모르기때문에 추가해놓음.
 		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(3.0f, 0.5f));
 			break;
+		}
 		case eMonsterType::LV_1_SWEEPER:
 			break;
 		case eMonsterType::LV_1_WARDEN:
@@ -915,11 +918,15 @@ namespace jh
 		case eMonsterType::LV_1_DAGGER:
 			break;
 		case eMonsterType::LV_1_ARCHER:
+		{
 			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(3.8f, 0.5f));
 			break;
+		}
 		case eMonsterType::LV_1_BLASTER:
+		{
 			static_cast<Collider2D*>(pColliderObject->GetComponentOrNull(eComponentType::COLLIDER))->SetSize(Vector2(3.8f, 0.5f));
 			break;
+		}
 		default:
 			assert(false);
 			break;

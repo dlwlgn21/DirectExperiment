@@ -4,6 +4,8 @@
 #include "jhCollider2D.h"
 #include "jhMonsterAttackColiderScript.h"
 
+static const jh::math::Vector2 DEFULAT_SIZE(2.0f, 1.0f);
+
 namespace jh
 {
 	MonsterAttackColiderObject::MonsterAttackColiderObject()
@@ -11,7 +13,7 @@ namespace jh
 	{
 		Collider2D* pCollider = new Collider2D(eColliderLayerType::MONSTER_WEAPON);
 		AddComponent(pCollider);
-		pCollider->SetSize({ 2.0f, 1.0f });
+		pCollider->SetSize(DEFULAT_SIZE);
 	}
 
 	void MonsterAttackColiderObject::SetMonsterTransformAndScriptAndAnimator(Transform* pMonsterTransform, MonsterScript* pMonsterScript, Animator* pAnimator)

@@ -49,19 +49,21 @@ namespace jh
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	private:
-		void moveOrChangeState();
-		void calculateDistanceFromPlayerToSetLookDirection();
-		void setInitialStat(const int hp, const float speed)	{ mMaxHP = hp; mCurrHP = hp; mSpeed = speed; }
-		void setAnimKey(const std::wstring& idleKey, const std::wstring& movingkey, const std::wstring& attackKey, const std::wstring& hittedKey, const std::wstring& dieKey);
+		float calculateDistanceFromPlayerToSetLookDirection();
+		void moveOrChangeAttackingState();
+		void setInitialStat();
+		void setAwarenessRange();
+		void setAnimKey();
 		void setAnimator();
 		void setPosition();
-		void setLookDir(const jh::math::Vector3& lookDirVector);
+		void setLookDir(const float xPos);
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
 		void playHitEffectAnimation();
 		void decreaseHP(const int amount);
-		bool isDistanceCloseToPlayer(const jh::math::Vector3& lookDirVector);
+		bool isCloseEnoughFromPlayerToChangeAttackingState(const float xPos);
+
 	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
@@ -70,6 +72,7 @@ namespace jh
 		int								mMaxHP;
 		int								mCurrHP;
 		float							mSpeed;
+		float							mAttackingAwarenessRange;
 		float							mHittedPushDistance;
 		float							mSpawningTimer;
 		std::wstring					mAnimIdleKey;

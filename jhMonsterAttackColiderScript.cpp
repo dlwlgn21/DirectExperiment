@@ -9,9 +9,8 @@
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
 static constexpr const float DISTANCE = 1.5f;
-static constexpr const float ATTACING_FLOATING_DISTANCE = -2.0f;
-static constexpr const float WAIT_FLOATING_DISTANCE = -4.0f;
-
+static constexpr const float ATTACKING_STATE_COLLIDER_BOX_Y_POSITION = -2.0f;
+static constexpr const float WAIT_STATE_COLLIDER_BOX_Y_POSITION = -4.0f;
 
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 = 7;
 static constexpr const UINT CAGED_SHOCKER_ATTACk_VAILED_INDEX_2 = 12;
@@ -88,12 +87,12 @@ namespace jh
 		default:
 			break;
 		}
-		pos.y = WAIT_FLOATING_DISTANCE;
+		pos.y = WAIT_STATE_COLLIDER_BOX_Y_POSITION;
 
 		const eMonsterState eState = mpMonsterScript->GetMonsterState();
 		if (eState == eMonsterState::ATTACKING)
 		{
-			pos.y = ATTACING_FLOATING_DISTANCE;
+			pos.y = ATTACKING_STATE_COLLIDER_BOX_Y_POSITION;
 		}
 
 		mpTransform->SetPosition(pos);
@@ -205,6 +204,7 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
+			mDistance = 2.0f;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:

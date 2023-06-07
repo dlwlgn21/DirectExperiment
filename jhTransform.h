@@ -31,6 +31,7 @@ namespace jh
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 
 		__forceinline jh::math::Vector3 GetPosition() const { return mPosition; }
+		__forceinline float GetOnlyXPosition()		  const { return mPosition.x; }
 		__forceinline jh::math::Vector3 GetRotation() const { return mRotation; }
 		__forceinline jh::math::Vector3 GetScale()	  const	{ return mScale; }
 
