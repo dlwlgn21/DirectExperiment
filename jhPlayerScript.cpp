@@ -12,14 +12,17 @@
 #include "jhPlayerDustEffectScript.h"
 #include "jhPlayerHitEffectScript.h"
 
-static constexpr const float DASH_AMOUNT = 3.0f;
+static constexpr const float DASH_AMOUNT = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
 
-static constexpr const float ATTACK_1_MOVEMENT_DISTANCE = 1.0f;
-static constexpr const float ATTACK_2_MOVEMENT_DISTANCE = 2.0f;
-static constexpr const float ATTACK_3_MOVEMENT_DISTANCE = 5.0f;
+static constexpr const float DEFAULT_MOVEMENT_DISTNANCE		= 5.0f;
+static constexpr const float ATTACK_1_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE;
+static constexpr const float ATTACK_2_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE * 2;
+static constexpr const float ATTACK_3_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE * 3;
+static constexpr const float PUSH_ATTACK_MOVEMENT_DISTANCE	= DEFAULT_MOVEMENT_DISTNANCE;
 
 static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
+static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
 
 using namespace jh::math;
 
@@ -63,21 +66,21 @@ namespace jh
 	void PlayerScript::Update()
 	{
 		assert(mpTranform != nullptr);
-		Vector3 pos = mpTranform->GetPosition();
+		float xPos = mpTranform->GetOnlyXPosition();
 		if (meState == ePlayerState::ATTACKING)
 		{
 			setIsContinueAttacking();
-			setXPosByComboAttackType(pos);
+			setXPosByComboAttackType(xPos);
 		}
 		else
 		{
-			setStateByInput(pos);
+			setStateByInput(xPos);
 		}
-		processIfDash();
+		processIfDash(xPos);
 		setAnimationFlip();
 		setAnimatorByState();
 		recoverStamina();
-		mpTranform->SetPosition(pos);
+		mpTranform->SetOnlyXPosition(xPos);
 	}
 
 	void PlayerScript::FixedUpdate()
@@ -222,7 +225,7 @@ namespace jh
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
 	}
 
-	void PlayerScript::setStateByInput(Vector3& pos)
+	void PlayerScript::setStateByInput(float& xPos)
 	{
 		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)
 		{
@@ -235,13 +238,13 @@ namespace jh
 
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
-			pos.x += (mSpeed * Time::DeltaTime());
+			xPos += (mSpeed * Time::DeltaTime());
 			setState(ePlayerState::MOVING);
 			meLookDir = eObjectLookDirection::RIGHT;
 		}
 		else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
-			pos.x -= (mSpeed * Time::DeltaTime());
+			xPos -= (mSpeed * Time::DeltaTime());
 			setState(ePlayerState::MOVING);
 			meLookDir = eObjectLookDirection::LEFT;
 		}
@@ -268,14 +271,6 @@ namespace jh
 			{
 				setState(ePlayerState::DASH);
 				mbIsStartCountingDashTimer = true;
-				if (meLookDir == eObjectLookDirection::LEFT)
-				{
-					pos.x -= (DASH_AMOUNT);
-				}
-				else
-				{
-					pos.x += (DASH_AMOUNT);
-				}
 			}
 		}
 	}
@@ -377,7 +372,7 @@ namespace jh
 		}
 	}
 
-	void PlayerScript::setXPosByComboAttackType(Vector3& pos)
+	void PlayerScript::setXPosByComboAttackType(float& xPos)
 	{
 		switch (meComboType)
 		{
@@ -385,7 +380,7 @@ namespace jh
 		{
 			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
 			{
-				setPosByLookDirection(pos, ATTACK_1_MOVEMENT_DISTANCE);
+				setPosByLookDirection(xPos, ATTACK_1_MOVEMENT_DISTANCE);
 			}
 			break;
 		}
@@ -393,7 +388,7 @@ namespace jh
 		{
 			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
 			{
-				setPosByLookDirection(pos, ATTACK_2_MOVEMENT_DISTANCE);
+				setPosByLookDirection(xPos, ATTACK_2_MOVEMENT_DISTANCE);
 			}
 			break;
 		}
@@ -401,7 +396,7 @@ namespace jh
 		{
 			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
 			{
-				setPosByLookDirection(pos, ATTACK_3_MOVEMENT_DISTANCE);
+				setPosByLookDirection(xPos, ATTACK_3_MOVEMENT_DISTANCE);
 			}
 			break;
 		}
@@ -409,24 +404,30 @@ namespace jh
 			assert(false);
 			break;
 		}
+
+		if (meAttackType == eAttackType::PUSH)
+		{
+			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
+			{
+				setPosByLookDirection(xPos, PUSH_ATTACK_MOVEMENT_DISTANCE);
+			}
+		}
+
 	}
-	void PlayerScript::setPosByLookDirection(jh::math::Vector3& pos, const float xDistance)
+	
+	void PlayerScript::setPosByLookDirection(float& xPos, const float xDistance)
 	{
 		if (meLookDir == eObjectLookDirection::LEFT)
 		{
-			pos.x -= xDistance * Time::DeltaTime();
+			xPos -= xDistance * Time::DeltaTime();
 		}
 		else
 		{
-			pos.x += xDistance * Time::DeltaTime();
+			xPos += xDistance * Time::DeltaTime();
 		}
 	}
 
 #pragma endregion
-
-
-
-
 
 	void PlayerScript::recoverStamina()
 	{
@@ -462,11 +463,25 @@ namespace jh
 		return false;
 	}
 
-	void PlayerScript::processIfDash()
+	void PlayerScript::processIfDash(float& xPos)
 	{
 		if (mbIsStartCountingDashTimer)
 		{
 			mDashIntervalTimer -= Time::DeltaTime();
+			if (meState == ePlayerState::DASH)
+			{
+				if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_DASH_INDEX)
+				{
+					if (meLookDir == eObjectLookDirection::LEFT)
+					{
+						xPos -= DASH_AMOUNT * Time::DeltaTime();
+					}
+					else
+					{
+						xPos += DASH_AMOUNT * Time::DeltaTime();
+					}
+				}
+			}
 			if (mDashIntervalTimer < 0.0f)
 			{
 				mDashIntervalTimer = mDashIntervalTime;

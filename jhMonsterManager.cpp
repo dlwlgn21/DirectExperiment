@@ -176,6 +176,8 @@ namespace jh
 				monInfo,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY),
 				pCagedShokerAnimator,
 				pPlayerScript,
 				eType
@@ -248,6 +250,8 @@ namespace jh
 				monInfo,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY),
 				pSweeperAnimator,
 				pPlayerScript,
 				eType
@@ -320,6 +324,8 @@ namespace jh
 				monInfo,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY),
 				pWardenAnimator,
 				pPlayerScript,
 				eType
@@ -391,6 +397,8 @@ namespace jh
 				monInfo,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY),
 				pZombieAnimator,
 				pPlayerScript,
 				eType
@@ -601,6 +609,8 @@ namespace jh
 				monInfo,
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY),
 				pDaggerAnimator,
 				pPlayerScript,
 				eType

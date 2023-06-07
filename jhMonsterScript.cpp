@@ -13,6 +13,7 @@ using namespace jh::math;
 
 static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 static constexpr const float SPAWNING_TIME = 3.0f;
+static constexpr const float HIT_PUSH_ATTACK_DISTANCE = 15.0f;
 
 #pragma region MONSTERS_AWARENESS_RANGE
 static constexpr const float ATTACKING_AWARENESS_DEFAULT_RANGE = 2.0f;
@@ -87,7 +88,7 @@ namespace jh
 		, mAttackingAwarenessRange(ATTACKING_AWARENESS_DEFAULT_RANGE)
 		, mAttackingMovementDistance(0.0f)
 		, mSpawningTimer(SPAWNING_TIME)
-		, mHittedPushDistance(4.0f)
+		, mHittedPushDistance(HIT_PUSH_ATTACK_DISTANCE)
 		, meLookDir(eObjectLookDirection::LEFT)
 		, meState(eMonsterState::SPAWNING)
 		, meMonsterType(eMonsterType)

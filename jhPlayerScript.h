@@ -113,13 +113,14 @@ namespace jh
 		void SetIsHitPowerAttack(const bool bIsHit)										{ mbIsHitPowerAttack = bIsHit; }
 	
 	private:
-		void setXPosByComboAttackType(jh::math::Vector3& pos);
-		void setPosByLookDirection(jh::math::Vector3& pos, const float xDistance);
+		void setXPosByComboAttackType(float& xPos);
+		void setPosByLookDirection(float& xPos, const float xDistance);
+		void processIfDash(float& xPos);
+		void setStateByInput(float& xPos);
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
 		void setAttackType(const eAttackType eType);
 		void setComboType(const eComboAttackType eType);
-		void setStateByInput(jh::math::Vector3& pos);
 		void setAnimationFlip();
 		void setAnimatorByState();
 		void recoverStamina();
@@ -127,7 +128,6 @@ namespace jh
 		void decreaseHP(CHAR amount);
 		bool checkIsNormalAttackKeyPressed();
 		void setIsContinueAttacking();
-		void processIfDash();
 
 	private:
 		Transform*						mpTranform;
