@@ -113,6 +113,8 @@ namespace jh
 		void SetIsHitPowerAttack(const bool bIsHit)										{ mbIsHitPowerAttack = bIsHit; }
 	
 	private:
+		void setXPosByComboAttackType(jh::math::Vector3& pos);
+		void setPosByLookDirection(jh::math::Vector3& pos, const float xDistance);
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
 		void setAttackType(const eAttackType eType);

@@ -15,6 +15,12 @@
 static constexpr const float DASH_AMOUNT = 3.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
 
+static constexpr const float ATTACK_1_MOVEMENT_DISTANCE = 1.0f;
+static constexpr const float ATTACK_2_MOVEMENT_DISTANCE = 2.0f;
+static constexpr const float ATTACK_3_MOVEMENT_DISTANCE = 5.0f;
+
+static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
+
 using namespace jh::math;
 
 namespace jh
@@ -61,6 +67,7 @@ namespace jh
 		if (meState == ePlayerState::ATTACKING)
 		{
 			setIsContinueAttacking();
+			setXPosByComboAttackType(pos);
 		}
 		else
 		{
@@ -80,6 +87,8 @@ namespace jh
 	{
 	}
 
+
+#pragma region ANIMATION_EVENT
 	void PlayerScript::IdleAnimStart()
 	{
 		mpAnimator->InitializeCurrAnimation();
@@ -126,6 +135,7 @@ namespace jh
 		}
 	}
 
+
 	void PlayerScript::AttackThreeAnimationStart()
 	{
 		mpAnimator->InitializeCurrAnimation();
@@ -162,7 +172,9 @@ namespace jh
 	{
 		setState(ePlayerState::IDLE);
 	}
+#pragma endregion
 
+#pragma region COLLISION_TRIGGER
 	void PlayerScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
 		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::MONSTER_WEAPON)
@@ -175,7 +187,6 @@ namespace jh
 		//	decreaseHP(1);
 		//}
 	}
-
 	void PlayerScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
 	}
@@ -183,7 +194,9 @@ namespace jh
 	void PlayerScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}
+#pragma endregion
 
+#pragma region SETTER
 	void PlayerScript::setAnimationEvent()
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
@@ -209,28 +222,16 @@ namespace jh
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
 	}
 
-	void PlayerScript::setState(const ePlayerState eState)
-	{
-		assert(eState != ePlayerState::COUNT);
-		meState = eState;
-	}
-
-	void PlayerScript::setAttackType(const eAttackType eType)
-	{
-		meAttackType = eType;
-	}
-
-	void PlayerScript::setComboType(const eComboAttackType eType)
-	{
-		meComboType = eType;
-	}
-
 	void PlayerScript::setStateByInput(Vector3& pos)
 	{
 		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)
-			{return;}
-		if (!Input::IsAnyKeyPressed())			
-			{ setState(ePlayerState::IDLE); }
+		{
+			return;
+		}
+		if (!Input::IsAnyKeyPressed())
+		{
+			setState(ePlayerState::IDLE);
+		}
 
 		if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
 		{
@@ -279,13 +280,33 @@ namespace jh
 		}
 	}
 
+	void PlayerScript::setState(const ePlayerState eState)
+	{
+		assert(eState != ePlayerState::COUNT);
+		meState = eState;
+	}
+
+	void PlayerScript::setAttackType(const eAttackType eType)
+	{
+		meAttackType = eType;
+	}
+
+	void PlayerScript::setComboType(const eComboAttackType eType)
+	{
+		meComboType = eType;
+	}
+
 	void PlayerScript::setAnimationFlip()
 	{
 		assert(mpAnimator != nullptr);
 		if (meLookDir == eObjectLookDirection::RIGHT)
-			{mpAnimator->SetCurrAnimationHorizontalFlip(false);}
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
 		else
-			{mpAnimator->SetCurrAnimationHorizontalFlip(true);}
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
 
 	}
 
@@ -348,6 +369,65 @@ namespace jh
 		}
 	}
 
+	void PlayerScript::setIsContinueAttacking()
+	{
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
+		{
+			mbIsContiueAttacking = true;
+		}
+	}
+
+	void PlayerScript::setXPosByComboAttackType(Vector3& pos)
+	{
+		switch (meComboType)
+		{
+		case eComboAttackType::ONE:
+		{
+			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
+			{
+				setPosByLookDirection(pos, ATTACK_1_MOVEMENT_DISTANCE);
+			}
+			break;
+		}
+		case eComboAttackType::TWO:
+		{
+			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
+			{
+				setPosByLookDirection(pos, ATTACK_2_MOVEMENT_DISTANCE);
+			}
+			break;
+		}
+		case eComboAttackType::THREE:
+		{
+			if (mpAnimator->GetCurrentAnimationIndex() == PLAYER_VALIED_ATTACK_INDEX)
+			{
+				setPosByLookDirection(pos, ATTACK_3_MOVEMENT_DISTANCE);
+			}
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+	void PlayerScript::setPosByLookDirection(jh::math::Vector3& pos, const float xDistance)
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			pos.x -= xDistance * Time::DeltaTime();
+		}
+		else
+		{
+			pos.x += xDistance * Time::DeltaTime();
+		}
+	}
+
+#pragma endregion
+
+
+
+
+
 	void PlayerScript::recoverStamina()
 	{
 		mStaminaTimer -= Time::DeltaTime();
@@ -380,14 +460,6 @@ namespace jh
 			return true;
 		}
 		return false;
-	}
-
-	void PlayerScript::setIsContinueAttacking()
-	{
-		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
-		{
-			mbIsContiueAttacking = true;
-		}
 	}
 
 	void PlayerScript::processIfDash()
