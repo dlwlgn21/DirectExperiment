@@ -29,6 +29,11 @@ namespace jh
 		setHitCollider();
 	}
 
+	Monster::Monster()
+		: GameObject(eLayerType::MONSTER)
+	{
+		setHitCollider();
+	}
 	void Monster::Initialize()
 	{
 		GameObject::Initialize();
@@ -89,16 +94,8 @@ namespace jh
 	void Monster::setScript()
 	{
 		assert(mMonsterInfo.pPlayerScript != nullptr);
-		if (mMonsterInfo.eMonType == eMonsterType::LV_1_ACIENT_BOSS)
-		{
-			AcientBossMonsterScript* pScript = new AcientBossMonsterScript(mMonsterInfo.pPlayerScript);
-			this->AddScript(pScript);
-		}
-		else
-		{
-			MonsterScript* pScript = new MonsterScript(mMonsterInfo.eMonType, mMonsterInfo.pPlayerScript);
-			this->AddScript(pScript);
-		}
+		MonsterScript* pScript = new MonsterScript(mMonsterInfo.eMonType, mMonsterInfo.pPlayerScript);
+		this->AddScript(pScript);
 	}
 	void Monster::setHitCollider()
 	{

@@ -10,6 +10,7 @@ namespace jh
 	class Animator;
 	class MonsterAttackColiderObject;
 	class Collider2D;
+	class AcientBossMonsterAttackColiderObject;
 
 	struct MonsterInfo
 	{
@@ -26,6 +27,7 @@ namespace jh
 	{
 	public:
 		Monster(MonsterInfo& monsterInfo);
+		Monster();
 		virtual ~Monster() = default;
 
 		void Initialize() override;
@@ -35,14 +37,14 @@ namespace jh
 
 		void SetHitEffectObject(HitEffectObject* pHitEffectObject);
 
-		void SetInactive();
+		virtual void SetInactive();
 		void SetActive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	
 	protected:
-		void setAnimator();
 		void setRenderer();
 		void setHitColliderCenterPos(Collider2D* pCollider, const float xAdjustPos = 0.0f, const float yAdjustPos = 0.0f);
+		void setAnimator();
 		void setHitCollider();
 		void setScript();
 

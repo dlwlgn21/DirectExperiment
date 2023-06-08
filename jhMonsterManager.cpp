@@ -1,5 +1,6 @@
 #include "jhMonsterManager.h"
 #include "jhMonster.h"
+#include "jhBossMonster.h"
 #include "jhResourcesManager.h"
 #include "jhResourceMaker.h"
 #include "jhTransform.h"
@@ -15,6 +16,9 @@
 #include "jhAnimation.h"
 #include "jhCollider2D.h"
 #include "jhAcientBossMonsterScript.h"
+#include "jhAcientBossMonsterAttackColiderObject.h"
+#include "jhAcientBossMonsterAttackColiderScript.h"
+
 
 using namespace jh::math;
 
@@ -765,76 +769,6 @@ namespace jh
 			setTransform(retMonsterPackage.pMonster->GetTransform(), position, BLASTER_SCALE_VECTOR);
 			break;
 		}
-
-		case eMonsterType::LV_1_ACIENT_BOSS:
-		{
-			static constexpr const float ACIENT_BOSS_WIDTH = 201.0f;
-			static constexpr const float ACIENT_BOSS_HEIGHT = 94.0f;
-			static constexpr const float ACIENT_BOSS_MAG = 100.0f;
-			static constexpr const float ACIENT_BOSS_DIE_ANIM_DURATION = 0.1f;
-			AnimationInfo animInfo;
-			ZeroMemory(&animInfo, sizeof(AnimationInfo));
-			Animator* pBossAnimator = new Animator();
-			const Vector2 ANIM_OFFSET = Vector2(0.006f, 0.0f);
-			createIntialAnimationInfo(
-				animInfo,
-				ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ACIENT_BOSS_KEY),
-				Vector2(Vector2::Zero),
-				Vector2(ACIENT_BOSS_WIDTH, ACIENT_BOSS_HEIGHT),
-				ANIM_OFFSET,
-				12,
-				DEFAULT_ANIM_DURATION,
-				ACIENT_BOSS_MAG
-			);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_IDLE_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 1), 23);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 2), 8);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_LEFT_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 3), 7);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_RIGHT_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 4), 23);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 5), 7);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 6), 3);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_END_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 7), 21);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 8), 13);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_BUFF_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 9), 18);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY, animInfo);
-
-			modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 10), 21);
-			createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_DIE_ANIM_KEY, animInfo);
-
-			pBossAnimator->PlayAnimation(AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, true);
-
-			MonsterInfo monInfo;
-			ZeroMemory(&monInfo, sizeof(MonsterInfo));
-			createMonsterInfo(
-				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY),
-				pBossAnimator,
-				pPlayerScript,
-				eType
-			);
-			createMonster(monInfo, retMonsterPackage);
-			createAttackCollider(monInfo, retMonsterPackage, MONSTER_ATTACK_COLLIDER_Y_POS);
-			setTransform(retMonsterPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);
-			break;
-		}
 		default:
 			assert(false);
 			break;
@@ -846,6 +780,101 @@ namespace jh
 
 		return retMonsterPackage;
 	}
+
+
+	AcientBossMonsterPackage MonsterManager::MakeAcientBossMonster(PlayerScript* pPlayerScript, const jh::math::Vector3& position)
+	{
+		static constexpr const float ACIENT_BOSS_WIDTH = 201.0f;
+		static constexpr const float ACIENT_BOSS_HEIGHT = 94.0f;
+		static constexpr const float ACIENT_BOSS_MAG = 100.0f;
+		static constexpr const float ACIENT_BOSS_DIE_ANIM_DURATION = 0.1f;
+		AnimationInfo animInfo;
+		ZeroMemory(&animInfo, sizeof(AnimationInfo));
+		Animator* pBossAnimator = new Animator();
+		const Vector2 ANIM_OFFSET = Vector2(0.006f, 0.0f);
+		createIntialAnimationInfo(
+			animInfo,
+			ResourcesManager::Find<Texture>(ResourceMaker::MONSTER_TEXTURE_ACIENT_BOSS_KEY),
+			Vector2(Vector2::Zero),
+			Vector2(ACIENT_BOSS_WIDTH, ACIENT_BOSS_HEIGHT),
+			ANIM_OFFSET,
+			12,
+			DEFAULT_ANIM_DURATION,
+			ACIENT_BOSS_MAG
+		);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_IDLE_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 1), 23);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 2), 8);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_LEFT_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 3), 7);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_RIGHT_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 4), 23);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 5), 7);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 6), 3);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_END_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 7), 21);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 8), 13);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_BUFF_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 9), 18);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY, animInfo);
+
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 10), 21);
+		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_DIE_ANIM_KEY, animInfo);
+
+		pBossAnimator->PlayAnimation(AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, true);
+
+		AcientBossMonsterInfo info;
+		ZeroMemory(&info, sizeof(AcientBossMonsterInfo));
+		info.pPlayerScript = pPlayerScript;
+		info.pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
+		info.pMaterial = ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY);
+		info.pAnimator = pBossAnimator;
+		info.eMonType = eMonsterType::LV_1_ACIENT_BOSS;
+		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::MELEE_ATTACK);
+		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::SPIN_ATTACK);
+		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::RANGE_ATTACK);
+		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::SUPER_ATTACK);
+
+
+		Monster* pMonster = new BossMonster(info);
+		info.pHitEffectObject = new HitEffectObject(eHitEffectType::ELECTRIC, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), info.pPlayerScript);
+		pMonster->SetHitEffectObject(info.pHitEffectObject);
+		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(info.pHitEffectObject->GetScriptOrNull()));
+
+		AcientBossMonsterPackage retPackage;
+		ZeroMemory(&retPackage, sizeof(AcientBossMonsterPackage));
+		retPackage.pMonster = pMonster;
+		retPackage.pHitEffectObejct = info.pHitEffectObject;
+		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)];
+		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)];
+		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)];
+		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)];
+		
+		setTransform(retPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);
+
+		retPackage.pMonster->Initialize();
+		retPackage.pHitEffectObejct->Initialize();
+
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			retPackage.pColliderObject[i]->Initialize();
+		}
+		return retPackage;
+	}
+
 
 	void MonsterManager::createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType)
 	{

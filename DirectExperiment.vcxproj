@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jhAcientBossMonsterAttackColiderObject.h" />
+    <ClInclude Include="jhAcientBossMonsterAttackColiderScript.h" />
     <ClInclude Include="jhBGGroundGrass.h" />
     <ClInclude Include="jhBGLightningObject.h" />
     <ClInclude Include="jhBGMushRoomSatueObject.h" />
@@ -219,6 +221,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhAcientBossMonsterAttackColiderObject.cpp" />
+    <ClCompile Include="jhAcientBossMonsterAttackColiderScript.cpp" />
     <ClCompile Include="jhBGGroundGrass.cpp" />
     <ClCompile Include="jhBGLightningObject.cpp" />
     <ClCompile Include="jhBGMushRoomSatueObject.cpp" />

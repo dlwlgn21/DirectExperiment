@@ -8,7 +8,6 @@
 #include "jhMonsterScript.h"
 #include "jhLayerZValue.h"
 #include "jhPlayerScript.h"
-#include "jhAcientBossMonsterScript.h"
 
 using namespace jh::math;
 
@@ -164,8 +163,8 @@ namespace jh
 		case eMonsterType::LV_1_ACIENT_BOSS:
 		{
 			Vector3 spawnPos(spawnXPos, ACIENT_BOSS_Y_POS, MONSTER_Z_VALUE);
-			MonsterPackage monPack = MonsterManager::GetInstance().MakeMonster(eMonType, mpPlayerScript, spawnPos);
-			mpScene->AddMonster(monPack);
+			AcientBossMonsterPackage monPack = MonsterManager::GetInstance().MakeAcientBossMonster(mpPlayerScript, spawnPos);
+			mpScene->AddBossMonster(monPack);
 			//setPortalEffectPosition(eMonType, spawnPos);
 			//playPortalEffectAnimation(eMonType, static_cast<AcientBossMonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			resetTimer(eMonType);

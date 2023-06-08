@@ -42,7 +42,8 @@
 #include "jhTime.h"
 #include "jhLayerZValue.h"
 #include "jhLightingManager.h"
-
+#include "jhAcientBossMonsterAttackColiderObject.h"
+#include "jhAcientBossMonsterAttackColiderScript.h"
 //#include "jhBGGroundGrass.h"
 
 using namespace jh::math;
@@ -223,10 +224,27 @@ namespace jh
 
 	void PlayScene::AddMonster(const MonsterPackage& monPack)
 	{
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr);
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
 		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
 	}
+
+	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)
+	{
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			assert(monPack.pColliderObject[i] != nullptr);
+		}
+		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			this->AddGameObject(monPack.pColliderObject[i], eLayerType::MONSTER);
+		}
+	}
+
 	void PlayScene::instantiateParallaxObjects()
 	{
 		// ForeGround

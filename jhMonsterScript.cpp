@@ -100,6 +100,26 @@ namespace jh
 		setAttackingMovementDistance();
 	}
 
+	MonsterScript::MonsterScript()
+		: Script()
+		, mpTranform(nullptr)
+		, mpPlayerTransform(nullptr)
+		, mpAnimator(nullptr)
+		, mpEffectScript(nullptr)
+		, mpPlayerScript(nullptr)
+		, mMaxHP(0)
+		, mCurrHP(0)
+		, mSpeed(0.0f)
+		, mAttackingAwarenessRange(0)
+		, mAttackingMovementDistance(0.0f)
+		, mSpawningTimer(SPAWNING_TIME)
+		, mHittedPushDistance(HIT_PUSH_ATTACK_DISTANCE)
+		, meLookDir(eObjectLookDirection::LEFT)
+		, meState(eMonsterState::SPAWNING)
+		, meMonsterType(eMonsterType::LV_1_ACIENT_BOSS)
+	{
+	}
+
 	void MonsterScript::Initialize()
 	{
 		setAnimationEvent();

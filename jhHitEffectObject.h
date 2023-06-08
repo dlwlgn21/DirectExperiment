@@ -1,7 +1,6 @@
 #pragma once
 #include "jhAnimatedGameObject.h"
 
-
 namespace jh
 {
 	enum class eHitEffectType

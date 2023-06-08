@@ -19,18 +19,19 @@ namespace jh
 	class Transform;
 	class HitEffectScript;
 	class PlayerScript;
-	class MonsterScript final : public Script
+	class MonsterScript : public Script
 	{
 	public:
 		MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript);
+		MonsterScript();
 		virtual ~MonsterScript() = default;
 
-		void Initialize() override;
-		void Update() override;
+		virtual void Initialize() override;
+		virtual void Update() override;
 
-		void OnTriggerEnter(Collider2D* pOtherCollider) override;
-		void OnTriggerStay(Collider2D* pOtherCollider) override;
-		void OnTriggerExit(Collider2D* pOtherCollider) override;
+		virtual void OnTriggerEnter(Collider2D* pOtherCollider) override;
+		virtual void OnTriggerStay(Collider2D* pOtherCollider) override;
+		virtual void OnTriggerExit(Collider2D* pOtherCollider) override;
 
 		void AnimationAttackStart();
 		void AnimationAttackComplete();

@@ -298,6 +298,9 @@
     <Filter Include="GameObject\Content\Monster\Boss">
       <UniqueIdentifier>{a93cb1b6-c017-4b32-9545-511065726c19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Content\Colider\Monster\Boss">
+      <UniqueIdentifier>{0abe0990-9741-461e-a026-149bcae39fb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -558,6 +561,12 @@
     <ClInclude Include="jhBossMonster.h">
       <Filter>GameObject\Content\Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="jhAcientBossMonsterAttackColiderObject.h">
+      <Filter>GameObject\Content\Colider\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAcientBossMonsterAttackColiderScript.h">
+      <Filter>Component\Script\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -793,6 +802,12 @@
     </ClCompile>
     <ClCompile Include="jhBossMonster.cpp">
       <Filter>GameObject\Content\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAcientBossMonsterAttackColiderObject.cpp">
+      <Filter>GameObject\Content\Colider\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAcientBossMonsterAttackColiderScript.cpp">
+      <Filter>Component\Script\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

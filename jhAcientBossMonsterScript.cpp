@@ -27,7 +27,7 @@ namespace jh
 
 
 	AcientBossMonsterScript::AcientBossMonsterScript(PlayerScript* pPlayerScript)
-		: Script()
+		: MonsterScript()
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)
 		, mpAnimator(nullptr)
@@ -40,6 +40,7 @@ namespace jh
 		, mpPlayerScript(pPlayerScript)
 		, meMonsterType(eMonsterType::LV_1_ACIENT_BOSS)
 		, meState(eBossMonsterState::TRACING)
+		, mePhase(eBossMonsterPhase::LV_1_PHASE)
 	{
 		assert(mpPlayerScript != nullptr);
 	}
@@ -55,6 +56,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::Update()
 	{
+		assert(mpTranform != nullptr);
 		float currPos = mpTranform->GetOnlyXPosition();
 		float distanceFromPlayer = currPos - mpPlayerTransform->GetOnlyXPosition();
 		float moveXPos = 0.0f;

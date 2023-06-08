@@ -21,7 +21,7 @@ namespace jh
 		void Release() override;
 
 		void AddMonster(const MonsterPackage& monPack);
-
+		void AddBossMonster(AcientBossMonsterPackage& monPack);
 	private:
 		void instantiateLight(PlayerScript* pPlayerScript);
 		PlayerScript* instantiateCameraAndPlayer();

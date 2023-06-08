@@ -26,7 +26,6 @@ namespace jh
 		setRenderer();
 		setAnimator();
 		setMonsterHitScript(pMonsterScript, pPlayerScript);
-
 	}
 
 	HitEffectObject::HitEffectObject(const eHitEffectType eEffectType, PlayerScript* pPlayerScript)

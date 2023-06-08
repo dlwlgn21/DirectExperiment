@@ -19,7 +19,14 @@ namespace jh
 		COUNT
 	};
 
-	class AcientBossMonsterScript final : public Script
+	enum class eBossMonsterPhase
+	{
+		LV_1_PHASE,
+		LV_2_PHASE,
+		LV_3_PHASE,
+		COUNT
+	};
+	class AcientBossMonsterScript final : public MonsterScript
 	{
 	public:
 		AcientBossMonsterScript(PlayerScript* pPlayerScript);
@@ -32,6 +39,11 @@ namespace jh
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
+		const eObjectLookDirection GetLookDirection()	const { return meLookDir; }
+		const eBossMonsterState	   GetState()			const { return meState; }
+
+
+	public:
 		static const std::wstring ACIENT_BOSS_IDLE_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_MOVING_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_TURN_LEFT_ANIM_KEY;
@@ -102,6 +114,7 @@ namespace jh
 		PlayerScript*					mpPlayerScript;
 		eMonsterType					meMonsterType;
 		eBossMonsterState				meState;
+		eBossMonsterPhase				mePhase;
 	};
 
 }

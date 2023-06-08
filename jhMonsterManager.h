@@ -11,7 +11,8 @@ namespace jh
 	class PlayerScript;
 	class Animator;
 	class MonsterAttackColiderObject;
-
+	class AcientBossMonsterAttackColiderObject;
+	class BossMonster;
 	enum class eAnimationIndexSequence
 	{
 		IDLE,
@@ -24,9 +25,9 @@ namespace jh
 
 	struct MonsterPackage
 	{
-		Monster*							pMonster;
-		HitEffectObject*					pHitEffectObejct;
-		MonsterAttackColiderObject*			pMonsterAttackColliderObject;
+		Monster* pMonster;
+		HitEffectObject* pHitEffectObejct;
+		MonsterAttackColiderObject* pMonsterAttackColliderObject;
 		MonsterPackage()
 			: pMonster(nullptr)
 			, pHitEffectObejct(nullptr)
@@ -35,14 +36,22 @@ namespace jh
 
 		}
 	};
+
+	struct AcientBossMonsterPackage
+	{
+		Monster* pMonster;
+		HitEffectObject* pHitEffectObejct;
+		AcientBossMonsterAttackColiderObject* pColliderObject[4];
+	};
+
 	struct AnimationInfo
 	{
-		Texture*					pAtalsImage;
-		jh::math::Vector2			LeftTop; 
+		Texture* pAtalsImage;
+		jh::math::Vector2			LeftTop;
 		jh::math::Vector2			SeperatingSize;
-		jh::math::Vector2			Offset; 
-		UINT						SpriteCount; 
-		float						Duration; 
+		jh::math::Vector2			Offset;
+		UINT						SpriteCount;
+		float						Duration;
 		float						Magnification;
 		AnimationInfo()
 			: pAtalsImage(nullptr)
@@ -70,24 +79,24 @@ namespace jh
 
 
 		MonsterPackage MakeMonster(const eMonsterType eType, PlayerScript* pPlayerScript, const jh::math::Vector3& position);
-
+		AcientBossMonsterPackage MakeAcientBossMonster(PlayerScript* pPlayerScript, const jh::math::Vector3& position);
 
 	private:
-		 void createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
-		 Animator* createAllAnimtaion(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[]);
-		 Animator* createAllVerticalAnimation(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[]);
-		 void createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const jh::math::Vector2& leftTop, const jh::math::Vector2& seperatingSize, const jh::math::Vector2& offset, const UINT spriteCount, const float duration, const float magnification);
-		 void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
-		 void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
-		 void createVerticalAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
-		 void setTransform(Transform* pMonsterTransform, const jh::math::Vector3& position, const jh::math::Vector3& scale);
-		 void createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage);
-		 void createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos);
-		 void resizeAttackColliderSize(const eMonsterType eMonType, MonsterAttackColiderObject* pColliderObject);
-		 void fillLeftTopsArray(jh::math::Vector2 leftTopArray[], const jh::math::Vector2 movingLeftTop, const jh::math::Vector2 attackLeftTop, const jh::math::Vector2 hitLeftTop, const jh::math::Vector2 dieLeftTop);
-		 void fillSpriteCountArray(UINT spriteCountArray[], const UINT movingCount, const UINT attackCount, const UINT hitCount, const UINT dieCount);
-		 void fillAnimationDurationArray(float animDurationArray[], const float movingDuration, const float attackDuration, const float hitDuration, const float dieDuration);
-	
+		void createMonsterInfo(MonsterInfo& monInfo, Mesh* pMesh, Material* pMaterial, Animator* pAnimator, PlayerScript* pPlayerScript, const eMonsterType eMonType);
+		Animator* createAllAnimtaion(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[]);
+		Animator* createAllVerticalAnimation(Animator* pAnimator, const std::wstring& idleKey, const std::wstring& movingKey, const std::wstring& attackKey, const std::wstring& hitKey, const std::wstring& dieKey, AnimationInfo& animInfo, const jh::math::Vector2 allSpriteLeftTopCoords[], UINT allSpriteCounts[], float allAnimDurationCounts[]);
+		void createIntialAnimationInfo(AnimationInfo& animInfo, Texture* pAtalsImage, const jh::math::Vector2& leftTop, const jh::math::Vector2& seperatingSize, const jh::math::Vector2& offset, const UINT spriteCount, const float duration, const float magnification);
+		void modifyAnimationInfoForNewAnimation(AnimationInfo& animInfo, const jh::math::Vector2& leftTop, const UINT spriteCount, const float duration = 0.1f);
+		void createAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
+		void createVerticalAnimation(Animator* pAnimator, const std::wstring& animKey, AnimationInfo& animInfo);
+		void setTransform(Transform* pMonsterTransform, const jh::math::Vector3& position, const jh::math::Vector3& scale);
+		void createMonster(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage);
+		void createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos);
+		void resizeAttackColliderSize(const eMonsterType eMonType, MonsterAttackColiderObject* pColliderObject);
+		void fillLeftTopsArray(jh::math::Vector2 leftTopArray[], const jh::math::Vector2 movingLeftTop, const jh::math::Vector2 attackLeftTop, const jh::math::Vector2 hitLeftTop, const jh::math::Vector2 dieLeftTop);
+		void fillSpriteCountArray(UINT spriteCountArray[], const UINT movingCount, const UINT attackCount, const UINT hitCount, const UINT dieCount);
+		void fillAnimationDurationArray(float animDurationArray[], const float movingDuration, const float attackDuration, const float hitDuration, const float dieDuration);
+
 	private:
 		MonsterManager() = default;
 		~MonsterManager() = default;
@@ -160,4 +169,3 @@ namespace jh
 #pragma endregion
 	};
 }
-
