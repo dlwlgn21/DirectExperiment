@@ -32,7 +32,12 @@ namespace jh
 			mMonsterVectorQ.resize(static_cast<UINT>(eMonsterType::COUNT));
 			for (int i = 0; i < static_cast<UINT>(eMonsterType::COUNT); ++i)
 			{
+				if (i == static_cast<int>(eMonsterType::LV_1_ACIENT_BOSS))
+				{
+					continue;
+				}
 				mMonsterVectorQ[i] = new std::queue<MonsterPackage>;
+
 			}
 		}
 		~MonsterObjectPool()

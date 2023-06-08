@@ -292,6 +292,12 @@
     <Filter Include="Component\Script\Monster\Boss">
       <UniqueIdentifier>{e8b299ce-61b8-4a1d-9dcf-1852220c5b98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Content\Monster\Base">
+      <UniqueIdentifier>{8d1053df-d0ec-433f-94b3-c7d54e8911de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Content\Monster\Boss">
+      <UniqueIdentifier>{a93cb1b6-c017-4b32-9545-511065726c19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -435,9 +441,6 @@
     <ClInclude Include="jhUIBarScript.h">
       <Filter>Component\Script\UI</Filter>
     </ClInclude>
-    <ClInclude Include="jhMonster.h">
-      <Filter>GameObject\Content\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayer.h">
       <Filter>GameObject\Content\Player</Filter>
     </ClInclude>
@@ -546,8 +549,14 @@
     <ClInclude Include="jhMonsterAnimIndexInformation.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="jhBossMonsterScript.h">
+    <ClInclude Include="jhAcientBossMonsterScript.h">
       <Filter>Component\Script\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonster.h">
+      <Filter>GameObject\Content\Monster\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBossMonster.h">
+      <Filter>GameObject\Content\Monster\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -674,9 +683,6 @@
     <ClCompile Include="jhUIBarScript.cpp">
       <Filter>Component\Script\UI</Filter>
     </ClCompile>
-    <ClCompile Include="jhMonster.cpp">
-      <Filter>GameObject\Content\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayer.cpp">
       <Filter>GameObject\Content\Player</Filter>
     </ClCompile>
@@ -779,8 +785,14 @@
     <ClCompile Include="jhHitEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
     </ClCompile>
-    <ClCompile Include="jhBossMonsterScript.cpp">
+    <ClCompile Include="jhAcientBossMonsterScript.cpp">
       <Filter>Component\Script\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonster.cpp">
+      <Filter>GameObject\Content\Monster\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBossMonster.cpp">
+      <Filter>GameObject\Content\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

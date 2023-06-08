@@ -12,6 +12,7 @@
 #include "jhTransform.h"
 #include "jhMonsterAttackColiderObject.h"
 #include "jhMonsterObjectPool.h"
+#include "jhAcientBossMonsterScript.h"
 
 using namespace jh::math;
 
@@ -88,8 +89,16 @@ namespace jh
 	void Monster::setScript()
 	{
 		assert(mMonsterInfo.pPlayerScript != nullptr);
-		MonsterScript* pScript = new MonsterScript(mMonsterInfo.eMonType, mMonsterInfo.pPlayerScript);
-		this->AddScript(pScript);
+		if (mMonsterInfo.eMonType == eMonsterType::LV_1_ACIENT_BOSS)
+		{
+			AcientBossMonsterScript* pScript = new AcientBossMonsterScript(mMonsterInfo.pPlayerScript);
+			this->AddScript(pScript);
+		}
+		else
+		{
+			MonsterScript* pScript = new MonsterScript(mMonsterInfo.eMonType, mMonsterInfo.pPlayerScript);
+			this->AddScript(pScript);
+		}
 	}
 	void Monster::setHitCollider()
 	{
@@ -155,7 +164,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_ACIENT_BOSS:
 		{
-			pMonsterCollider->SetSize(Vector2(1.0f, 1.0f));
+			pMonsterCollider->SetSize(Vector2(0.3f, 0.3f));
 			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}

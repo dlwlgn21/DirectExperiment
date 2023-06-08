@@ -102,7 +102,7 @@ namespace jh
 
 	void MonsterScript::Initialize()
 	{
-		setAnimator();
+		setAnimationEvent();
 		mpTranform = GetOwner()->GetTransform();
 		assert(mpTranform != nullptr);
 		assert(mpPlayerScript != nullptr);
@@ -128,6 +128,36 @@ namespace jh
 		playAnimation();
 	}
 
+#pragma region ANIMATION_EVENT
+	void MonsterScript::AnimationAttackStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+	}
+	void MonsterScript::AnimationAttackComplete()
+	{
+		setState(eMonsterState::TRACING);
+	}
+
+	void MonsterScript::AnimationHittedStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+	}
+	void MonsterScript::AnimationHittedComplete()
+	{
+		setState(eMonsterState::TRACING);
+	}
+
+	void MonsterScript::AnimationDieStart()
+	{
+		mpAnimator->InitializeCurrAnimation();
+	}
+	void MonsterScript::AnimationDieComplete()
+	{
+		static_cast<Monster*>(GetOwner())->SetInactive();
+	}
+#pragma endregion
+
+#pragma region COLLIDER_TRIGGER
 	void MonsterScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
 		if (meState == eMonsterState::HITTED || meState == eMonsterState::DEAD)
@@ -168,43 +198,9 @@ namespace jh
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
 	}
+#pragma endregion
 
-	void MonsterScript::AnimationAttackStart()
-	{
-		mpAnimator->InitializeCurrAnimation();
-	}
-	void MonsterScript::AnimationAttackComplete()
-	{
-		setState(eMonsterState::TRACING);
-	}
-
-	void MonsterScript::AnimationHittedStart()
-	{
-		mpAnimator->InitializeCurrAnimation();
-	}
-	void MonsterScript::AnimationHittedComplete()
-	{
-		setState(eMonsterState::TRACING);
-	}
-
-	void MonsterScript::AnimationDieStart()
-	{
-		mpAnimator->InitializeCurrAnimation();
-	}
-	void MonsterScript::AnimationDieComplete()
-	{
-		static_cast<Monster*>(GetOwner())->SetInactive();
-	}
-
-
-	void MonsterScript::SetRespawnState()
-	{
-		setInitialStat();
-		calculateDistanceFromPlayerToSetLookDirection();
-		setState(eMonsterState::SPAWNING);
-		mSpawningTimer = SPAWNING_TIME;
-	}
-
+#pragma region INITIALIZE
 	void MonsterScript::setAnimKey()
 	{
 		switch (meMonsterType)
@@ -295,8 +291,7 @@ namespace jh
 			break;
 		}
 	}
-
-	void MonsterScript::setAnimator()
+	void MonsterScript::setAnimationEvent()
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
@@ -308,6 +303,188 @@ namespace jh
 
 		mpAnimator->GetStartEvent(mAnimDieKey) = std::bind(&MonsterScript::AnimationDieStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDieKey) = std::bind(&MonsterScript::AnimationDieComplete, this);
+	}
+	void MonsterScript::setInitialStat()
+	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			mMaxHP = CAGED_SHOKER_INITIAL_HP;
+			mSpeed = CAGED_SHOKER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			mMaxHP = SWEEPER_INITIAL_HP;
+			mSpeed = SWEEPER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			mMaxHP = WARDEN_INITIAL_HP;
+			mSpeed = WARDEN_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			mMaxHP = ZOMBIE_INITIAL_HP;
+			mSpeed = ZOMBIE_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			mMaxHP = HEABY_SLICER_INITIAL_HP;
+			mSpeed = HEABY_SLICER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			mMaxHP = LIGHT_SLICER_INITIAL_HP;
+			mSpeed = LIGHT_SLICER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			mMaxHP = DAGGER_INITIAL_HP;
+			mSpeed = DAGGER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			mMaxHP = ARCHER_INITIAL_HP;
+			mSpeed = ARCHER_INITIAL_SPEED;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			mMaxHP = BLASTER_INITIAL_HP;
+			mSpeed = BLASTER_INITIAL_SPEED;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+		mCurrHP = mMaxHP;
+	}
+	void MonsterScript::setAwarenessRange()
+	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			mAttackingAwarenessRange = CAGED_SHOCKER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			mAttackingAwarenessRange = SWEEPER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			mAttackingAwarenessRange = WARDEN_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			mAttackingAwarenessRange = ZOMBIE_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			mAttackingAwarenessRange = HEABY_SLICER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			mAttackingAwarenessRange = LIGHT_SLICER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			mAttackingAwarenessRange = DAGGER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			mAttackingAwarenessRange = ARCHER_AWARENESS_RANGE;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+
+			mAttackingAwarenessRange = BLASTER_AWARENESS_RANGE;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+	void MonsterScript::setAttackingMovementDistance()
+	{
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			mAttackingMovementDistance = CAGED_SHOCKER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			mAttackingMovementDistance = SWEEPER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			mAttackingMovementDistance = WARDEN_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			mAttackingMovementDistance = ZOMBIE_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			mAttackingMovementDistance = HEABY_SLICER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			mAttackingMovementDistance = LIGHT_SLICER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			mAttackingMovementDistance = DAGGER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			mAttackingMovementDistance = ARCHER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			mAttackingMovementDistance = BLASTER_ATTACKING_MOVEMENT_DISTANCE;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+#pragma endregion
+
+	void MonsterScript::SetRespawnState()
+	{
+		setInitialStat();
+		calculateDistanceFromPlayerToSetLookDirection();
+		setState(eMonsterState::SPAWNING);
+		mSpawningTimer = SPAWNING_TIME;
 	}
 
 	void MonsterScript::setPosition()
@@ -570,177 +747,5 @@ namespace jh
 		}
 	}
 
-	void MonsterScript::setInitialStat() 
-	{ 
-		switch (meMonsterType)
-		{
-		case eMonsterType::LV_1_CAGED_SHOKER:
-		{
-			mMaxHP = CAGED_SHOKER_INITIAL_HP; 
-			mSpeed = CAGED_SHOKER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_SWEEPER:
-		{
-			mMaxHP = SWEEPER_INITIAL_HP;
-			mSpeed = SWEEPER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_WARDEN:
-		{
-			mMaxHP = WARDEN_INITIAL_HP;
-			mSpeed = WARDEN_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_ZOMBIE:
-		{
-			mMaxHP = ZOMBIE_INITIAL_HP;
-			mSpeed = ZOMBIE_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_HEABY_SLICER:
-		{
-			mMaxHP = HEABY_SLICER_INITIAL_HP;
-			mSpeed = HEABY_SLICER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_LIGHT_SLICER:
-		{
-			mMaxHP = LIGHT_SLICER_INITIAL_HP;
-			mSpeed = LIGHT_SLICER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_DAGGER:
-		{
-			mMaxHP = DAGGER_INITIAL_HP;
-			mSpeed = DAGGER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_ARCHER:
-		{
-			mMaxHP = ARCHER_INITIAL_HP;
-			mSpeed = ARCHER_INITIAL_SPEED;
-			break;
-		}
-		case eMonsterType::LV_1_BLASTER:
-		{
-			mMaxHP = BLASTER_INITIAL_HP;
-			mSpeed = BLASTER_INITIAL_SPEED;
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
-		mCurrHP = mMaxHP;
-	}
-	void MonsterScript::setAwarenessRange()
-	{
-		switch (meMonsterType)
-		{
-		case eMonsterType::LV_1_CAGED_SHOKER:
-		{
-			mAttackingAwarenessRange = CAGED_SHOCKER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_SWEEPER:
-		{
-			mAttackingAwarenessRange = SWEEPER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_WARDEN:
-		{
-			mAttackingAwarenessRange = WARDEN_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_ZOMBIE:
-		{
-			mAttackingAwarenessRange = ZOMBIE_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_HEABY_SLICER:
-		{
-			mAttackingAwarenessRange = HEABY_SLICER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_LIGHT_SLICER:
-		{
-			mAttackingAwarenessRange = LIGHT_SLICER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_DAGGER:
-		{
-			mAttackingAwarenessRange = DAGGER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_ARCHER:
-		{
-			mAttackingAwarenessRange = ARCHER_AWARENESS_RANGE;
-			break;
-		}
-		case eMonsterType::LV_1_BLASTER:
-		{
 
-			mAttackingAwarenessRange = BLASTER_AWARENESS_RANGE;
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
-	}
-	void MonsterScript::setAttackingMovementDistance()
-	{
-		switch (meMonsterType)
-		{
-		case eMonsterType::LV_1_CAGED_SHOKER:
-		{
-			mAttackingMovementDistance = CAGED_SHOCKER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_SWEEPER:
-		{
-			mAttackingMovementDistance = SWEEPER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_WARDEN:
-		{
-			mAttackingMovementDistance = WARDEN_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_ZOMBIE:
-		{
-			mAttackingMovementDistance = ZOMBIE_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_HEABY_SLICER:
-		{
-			mAttackingMovementDistance = HEABY_SLICER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_LIGHT_SLICER:
-		{
-			mAttackingMovementDistance = LIGHT_SLICER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_DAGGER:
-		{
-			mAttackingMovementDistance = DAGGER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_ARCHER:
-		{
-			mAttackingMovementDistance = ARCHER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		case eMonsterType::LV_1_BLASTER:
-		{
-			mAttackingMovementDistance = BLASTER_ATTACKING_MOVEMENT_DISTANCE;
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
-	}
 }

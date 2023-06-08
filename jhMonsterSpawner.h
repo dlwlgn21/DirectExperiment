@@ -33,6 +33,7 @@ namespace jh
 			, mDaggerRespawnTimer(DAGGER_RESPAWN_TIME)
 			, mArcherRespawnTimer(ARCHER_RESPAWN_TIME)
 			, mBlasterRespawnTimer(BLASTER_RESPAWN_TIME)
+			, mAcientBossRespawnTimer(ACIENT_BOSS_RESPAWN_TIME)
 			, mpScene(nullptr)
 			, mpPlayerScript(nullptr)
 			, mPlayerPos(jh::math::Vector3::Zero)
@@ -58,6 +59,7 @@ namespace jh
 		static const float DAGGER_RESPAWN_TIME;
 		static const float ARCHER_RESPAWN_TIME;
 		static const float BLASTER_RESPAWN_TIME;
+		static const float ACIENT_BOSS_RESPAWN_TIME;
 
 	private:
 		void resetTimer(const eMonsterType eMonType);
@@ -78,6 +80,7 @@ namespace jh
 		float								mDaggerRespawnTimer;
 		float								mArcherRespawnTimer;
 		float								mBlasterRespawnTimer;
+		float								mAcientBossRespawnTimer;
 		std::vector<PortalEffectObject*>	mPortalEffectObjects;
 		jh::math::Vector3					mPlayerPos;
 	};

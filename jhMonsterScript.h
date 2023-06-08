@@ -54,7 +54,7 @@ namespace jh
 		void setAwarenessRange();
 		void setAttackingMovementDistance();
 		void setAnimKey();
-		void setAnimator();
+		void setAnimationEvent();
 		void setPosition();
 		void setLookDir(const float xPos);
 		void setAnimationFlip();

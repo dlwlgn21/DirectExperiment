@@ -19,11 +19,11 @@ namespace jh
 		COUNT
 	};
 
-	class AcientBossScript final : public Script
+	class AcientBossMonsterScript final : public Script
 	{
 	public:
-		AcientBossScript(PlayerScript* pPlayerScript);
-		virtual ~AcientBossScript() = default;
+		AcientBossMonsterScript(PlayerScript* pPlayerScript);
+		virtual ~AcientBossMonsterScript() = default;
 
 		void Initialize() override;
 		void Update() override;
@@ -46,9 +46,43 @@ namespace jh
 		static const std::wstring ACIENT_BOSS_DIE_ANIM_KEY;
 
 
+#pragma region ANIMATION_EVENT
+		void AnimationMovingStart();
+		void AnimationMovingComplete();
+
+		void AnimationTurnLeftStart();
+		void AnimationTurnLeftComplete();
+
+		void AnimationTurnRightStart();
+		void AnimationTurnRightComplete();
+
+		void AnimationMelleAttackStart();
+		void AnimationMelleAttackComplete();
+
+		void AnimationSpinAttackStart();
+		void AnimationSpinAttackComplete();
+
+		void AnimationSpinEndStart();
+		void AnimationSpinEndComplete();
+
+		void AnimationRangeAttackStart();
+		void AnimationRangeAttackComplete();
+
+		void AnimationBuffStart();
+		void AnimationBuffComplete();
+
+		void AnimationSuperAttackStart();
+		void AnimationSuperAttackComplete();
+
+		void AnimationDieStart();
+		void AnimationDieComplete();
+#pragma endregion
+
+
+
 
 	private:
-		void setAnimKey();
+		void setAnimationEvent();
 	private:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;

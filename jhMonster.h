@@ -34,19 +34,19 @@ namespace jh
 		void Render() override;
 
 		void SetHitEffectObject(HitEffectObject* pHitEffectObject);
+
 		void SetInactive();
 		void SetActive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
-	private:
+	
+	protected:
 		void setAnimator();
 		void setRenderer();
 		void setHitColliderCenterPos(Collider2D* pCollider, const float xAdjustPos = 0.0f, const float yAdjustPos = 0.0f);
 		void setHitCollider();
-		
 		void setScript();
 
-
-	private:
+	protected:
 		MonsterInfo				mMonsterInfo;
 	};
 }

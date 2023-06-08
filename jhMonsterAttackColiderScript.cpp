@@ -229,6 +229,11 @@ namespace jh
 			mDistance = 2.5f;
 			break;
 		}
+		case eMonsterType::LV_1_ACIENT_BOSS:
+		{
+			mDistance = 2.5f;
+			break;
+		}
 		default:
 			assert(false);
 			break;
