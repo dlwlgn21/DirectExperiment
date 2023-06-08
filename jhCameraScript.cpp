@@ -11,7 +11,7 @@ using namespace jh::math;
 static constexpr const INT CAM_SHAKE_RANGE = 5;
 static constexpr const float RESTRICTION = 100.0f;
 static constexpr const float Y_CAMERA_POS = 0.0f;
-static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.45f;
+static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.2f;
 
 
 namespace jh
@@ -21,7 +21,7 @@ namespace jh
 		, mpTranform(nullptr)
 		, mpPlayerTransform(nullptr)
 		, mpPlayerScript(nullptr)
-		, mSpeed(50.0f)
+		, mSpeed(100.0f)
 		, mPowerAttackCamShakeTimer(PLAYER_POWER_ATTACK_CAM_SHAKE_TIME)
 		, mPowerAttackCamShakeTime(PLAYER_POWER_ATTACK_CAM_SHAKE_TIME)
 	{
@@ -51,13 +51,13 @@ namespace jh
 			return;
 		}
 
-		if (mpPlayerScript->IsHitPowerAttack())
+		if (mpPlayerScript->IsHitAttack())
 		{
 			mPowerAttackCamShakeTimer -= Time::DeltaTime();
 			if (mPowerAttackCamShakeTimer < 0.0f)
 			{
 				mPowerAttackCamShakeTimer = mPowerAttackCamShakeTime;
-				mpPlayerScript->SetIsHitPowerAttack(false);
+				mpPlayerScript->SetIsHitAttack(false);
 				setCameraAtSpecifiedYPosition(pos);
 				return;
 			}

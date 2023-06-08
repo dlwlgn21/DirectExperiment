@@ -7,11 +7,8 @@ namespace jh
 	{
 		IDLE,
 		TRACING,
-		TURNING_TO_LEFT,
-		TURNING_TO_RIGHT,
 		MELLE_ATTACKING,
 		SPIN_ATTACKING,
-		SPIN_END,
 		RANGE_ATTACKING,
 		BUFF,
 		SUPER_ATTACKING,
@@ -39,22 +36,15 @@ namespace jh
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
 
-		const eObjectLookDirection GetLookDirection()	const { return meLookDir; }
 		const eBossMonsterState	   GetState()			const { return meState; }
-
-
 	public:
 		static const std::wstring ACIENT_BOSS_IDLE_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_MOVING_ANIM_KEY;
-		static const std::wstring ACIENT_BOSS_TURN_LEFT_ANIM_KEY;
-		static const std::wstring ACIENT_BOSS_TURN_RIGHT_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY;
-		static const std::wstring ACIENT_BOSS_SPIN_END_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_BUFF_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY;
-		static const std::wstring ACIENT_BOSS_HITTED_ANIM_KEY;
 		static const std::wstring ACIENT_BOSS_DIE_ANIM_KEY;
 
 
@@ -62,20 +52,12 @@ namespace jh
 		void AnimationMovingStart();
 		void AnimationMovingComplete();
 
-		void AnimationTurnLeftStart();
-		void AnimationTurnLeftComplete();
-
-		void AnimationTurnRightStart();
-		void AnimationTurnRightComplete();
 
 		void AnimationMelleAttackStart();
 		void AnimationMelleAttackComplete();
 
 		void AnimationSpinAttackStart();
 		void AnimationSpinAttackComplete();
-
-		void AnimationSpinEndStart();
-		void AnimationSpinEndComplete();
 
 		void AnimationRangeAttackStart();
 		void AnimationRangeAttackComplete();
@@ -90,31 +72,20 @@ namespace jh
 		void AnimationDieComplete();
 #pragma endregion
 
-
-	
-
 	private:
 		void setState(const eBossMonsterState eState) { meState = eState; }
 		void setAnimationEvent();
 		void setAnimaionFlip();
 
 		void playAnimation();
-
+		void flipLookDirection();
 
 	private:
-		Transform*						mpTranform;
-		Transform*						mpPlayerTransform;
-		Animator*						mpAnimator;
-		HitEffectScript*				mpEffectScript;
-		int								mMaxHP;
-		int								mCurrHP;
-		float							mSpeed;
-		float							mSpawningTimer;
-		eObjectLookDirection			meLookDir;
-		PlayerScript*					mpPlayerScript;
-		eMonsterType					meMonsterType;
 		eBossMonsterState				meState;
 		eBossMonsterPhase				mePhase;
+		float							mInvincibilityTimer;
+		bool							mbIsCountingInvincibilityTime;
+		bool							mbIsHittted;
 	};
 
 }

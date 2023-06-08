@@ -161,7 +161,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_ACIENT_BOSS:
 		{
-			pMonsterCollider->SetSize(Vector2(0.3f, 0.3f));
+			pMonsterCollider->SetSize(Vector2(0.3f, 1.0f));
 			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}

@@ -33,7 +33,7 @@ namespace jh
 	static constexpr const float DAGGER_Y_POS = -1.8f;
 	static constexpr const float ARCHER_Y_POS = -2.3f;
 	static constexpr const float BLASTER_Y_POS = -2.0f;
-	static constexpr const float ACIENT_BOSS_Y_POS = 0.0f;
+	static constexpr const float ACIENT_BOSS_Y_POS = -1.0f;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{

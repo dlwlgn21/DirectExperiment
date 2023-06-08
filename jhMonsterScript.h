@@ -47,6 +47,11 @@ namespace jh
 		eMonsterType		 GetMonsterType() const				{ return meMonsterType; }
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
+	protected:
+		void decreaseHP(const int amount);
+		void playHitEffectAnimation();
+
+
 	private:
 		float calculateDistanceFromPlayerToSetLookDirection();
 		float getMovementAttackingPos(float movementXAmount, float currXPos);
@@ -61,31 +66,32 @@ namespace jh
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
-		void playHitEffectAnimation();
-		void decreaseHP(const int amount);
 		bool isCloseEnoughFromPlayerToChangeAttackingState(const float xPos);
 
-	private:
+	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;
 		HitEffectScript*				mpEffectScript;
+		PlayerScript*					mpPlayerScript;
 		int								mMaxHP;
 		int								mCurrHP;
 		float							mSpeed;
+		float							mSpawningTimer;
 		float							mAttackingAwarenessRange;
+		eObjectLookDirection			meLookDir;
+		eMonsterType					meMonsterType;
+
+	private:
 		float							mAttackingMovementDistance;
 		float							mHittedPushDistance;
-		float							mSpawningTimer;
 		std::wstring					mAnimIdleKey;
 		std::wstring					mAnimMoveKey;
 		std::wstring					mAnimAttackKey;
 		std::wstring					mAnimHittedKey;
 		std::wstring					mAnimDieKey;
-		eObjectLookDirection			meLookDir;
-		PlayerScript*					mpPlayerScript;
 		eMonsterState					meState;
-		eMonsterType					meMonsterType;
+
 	};
 }
 

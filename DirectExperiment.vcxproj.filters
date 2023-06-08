@@ -301,6 +301,18 @@
     <Filter Include="GameObject\Content\Colider\Monster\Boss">
       <UniqueIdentifier>{0abe0990-9741-461e-a026-149bcae39fb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\Monster\Boss\AttackCollider">
+      <UniqueIdentifier>{88df5f38-0a7b-4708-88af-13f088724699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Monster\Boss\Monster">
+      <UniqueIdentifier>{3e103a08-c2f7-4f1c-a682-d08310748bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Monster\Monster">
+      <UniqueIdentifier>{3f865284-b191-45f2-a852-14308b21cf7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Monster\Monster\AttackCollider">
+      <UniqueIdentifier>{60723c91-bbc9-4a3b-a5ca-69a36a8085c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -401,9 +413,6 @@
     </ClInclude>
     <ClInclude Include="jhPlayerScript.h">
       <Filter>Component\Script\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMonsterScript.h">
-      <Filter>Component\Script\Monster</Filter>
     </ClInclude>
     <ClInclude Include="jhAnimator.h">
       <Filter>Component\Animator\Base</Filter>
@@ -543,17 +552,11 @@
     <ClInclude Include="jhBGMoonObject.h">
       <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
     </ClInclude>
-    <ClInclude Include="jhMonsterAttackColiderScript.h">
-      <Filter>Component\Script\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jhHitEffectObject.h">
       <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
     </ClInclude>
     <ClInclude Include="jhMonsterAnimIndexInformation.h">
       <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="jhAcientBossMonsterScript.h">
-      <Filter>Component\Script\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="jhMonster.h">
       <Filter>GameObject\Content\Monster\Base</Filter>
@@ -565,7 +568,16 @@
       <Filter>GameObject\Content\Colider\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="jhAcientBossMonsterAttackColiderScript.h">
-      <Filter>Component\Script\Monster\Boss</Filter>
+      <Filter>Component\Script\Monster\Boss\AttackCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterAttackColiderScript.h">
+      <Filter>Component\Script\Monster\Monster\AttackCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAcientBossMonsterScript.h">
+      <Filter>Component\Script\Monster\Boss\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterScript.h">
+      <Filter>Component\Script\Monster\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -652,9 +664,6 @@
     </ClCompile>
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMonsterScript.cpp">
-      <Filter>Component\Script\Monster</Filter>
     </ClCompile>
     <ClCompile Include="jhAnimator.cpp">
       <Filter>Component\Animator\Base</Filter>
@@ -788,14 +797,8 @@
     <ClCompile Include="jhBGMoonObject.cpp">
       <Filter>GameObject\AnimatedGameObject\BG\Moon</Filter>
     </ClCompile>
-    <ClCompile Include="jhMonsterAttackColiderScript.cpp">
-      <Filter>Component\Script\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="jhHitEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
-    </ClCompile>
-    <ClCompile Include="jhAcientBossMonsterScript.cpp">
-      <Filter>Component\Script\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="jhMonster.cpp">
       <Filter>GameObject\Content\Monster\Base</Filter>
@@ -807,7 +810,16 @@
       <Filter>GameObject\Content\Colider\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="jhAcientBossMonsterAttackColiderScript.cpp">
-      <Filter>Component\Script\Monster\Boss</Filter>
+      <Filter>Component\Script\Monster\Boss\AttackCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterAttackColiderScript.cpp">
+      <Filter>Component\Script\Monster\Monster\AttackCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAcientBossMonsterScript.cpp">
+      <Filter>Component\Script\Monster\Boss\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterScript.cpp">
+      <Filter>Component\Script\Monster\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,45 +3,38 @@
 #include "jhTransform.h"
 #include "jhPlayerScript.h"
 #include "jhTime.h"
+#include "jhCollider2D.h"
+#include <random>
+static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
-static constexpr UINT ACIENT_BOSS_INITIAL_HP = 30;
-static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
-static constexpr const float SPAWNING_TIME = 3.0f;
+static constexpr const float INVINCIBILITY_TIME = 0.5f;
 static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 2.0f;
+static constexpr const UINT MELEE_ATTACK_NUMBER = 0;
+static constexpr const UINT SPIN_ATTACK_NUMBER = 1;
 
 
 namespace jh
 {
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_IDLE_ANIM_KEY				= L"Idle";
-	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY			= L"Moving";
-	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_TURN_LEFT_ANIM_KEY			= L"TurnLeft";
-	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_TURN_RIGHT_ANIM_KEY		= L"TurnRight";
+	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY				= L"Moving";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY		= L"MelleAttack";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY		= L"SpinAttack";
-	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_SPIN_END_ANIM_KEY			= L"SpinEnd";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY		= L"RangeAttack";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_BUFF_ANIM_KEY				= L"Buff";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY		= L"SuperAttack";
-	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_HITTED_ANIM_KEY			= L"Hitted";
 	const std::wstring AcientBossMonsterScript::ACIENT_BOSS_DIE_ANIM_KEY				= L"Die";
 
 
 	AcientBossMonsterScript::AcientBossMonsterScript(PlayerScript* pPlayerScript)
 		: MonsterScript()
-		, mpTranform(nullptr)
-		, mpPlayerTransform(nullptr)
-		, mpAnimator(nullptr)
-		, mpEffectScript(nullptr)
-		, mMaxHP(ACIENT_BOSS_INITIAL_HP)
-		, mCurrHP(ACIENT_BOSS_INITIAL_HP)
-		, mSpeed(ACIENT_BOSS_INITIAL_SPEED)
-		, mSpawningTimer(SPAWNING_TIME)
-		, meLookDir(eObjectLookDirection::LEFT)
-		, mpPlayerScript(pPlayerScript)
-		, meMonsterType(eMonsterType::LV_1_ACIENT_BOSS)
 		, meState(eBossMonsterState::TRACING)
 		, mePhase(eBossMonsterPhase::LV_1_PHASE)
+		, mInvincibilityTimer(INVINCIBILITY_TIME)
+		, mbIsCountingInvincibilityTime(false)
+		, mbIsHittted(false)
 	{
+		mAttackingAwarenessRange = MELEE_ATTACK_AWARENESS_RANGE;
+		mpPlayerScript = pPlayerScript;
 		assert(mpPlayerScript != nullptr);
 	}
 
@@ -57,24 +50,66 @@ namespace jh
 	void AcientBossMonsterScript::Update()
 	{
 		assert(mpTranform != nullptr);
+
 		float currPos = mpTranform->GetOnlyXPosition();
 		float distanceFromPlayer = currPos - mpPlayerTransform->GetOnlyXPosition();
 		float moveXPos = 0.0f;
 
-		if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE && meState != eBossMonsterState::MELLE_ATTACKING)
+		if (mbIsCountingInvincibilityTime)
 		{
-			setState(eBossMonsterState::MELLE_ATTACKING);
-			if (meLookDir == eObjectLookDirection::LEFT)
+			mInvincibilityTimer -= Time::DeltaTime();
+			if (mbIsHittted)
 			{
-				meLookDir = eObjectLookDirection::RIGHT;
+				playHitEffectAnimation();
 			}
-			else
+			if (mInvincibilityTimer < 0.0f)
 			{
-				meLookDir = eObjectLookDirection::LEFT;
+				mInvincibilityTimer = INVINCIBILITY_TIME;
+				mbIsCountingInvincibilityTime = false;
+				mbIsHittted = false;
 			}
-			return;
 		}
 
+
+		switch (mePhase)
+		{
+		case eBossMonsterPhase::LV_1_PHASE:
+		{
+			static std::random_device sRd;
+			static std::mt19937 sGen(sRd());
+			static std::uniform_int_distribution<> sDist(MELEE_ATTACK_NUMBER, SPIN_ATTACK_NUMBER);
+			if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE &&
+				meState != eBossMonsterState::MELLE_ATTACKING &&
+				meState != eBossMonsterState::SPIN_ATTACKING)
+			{
+				if (sDist(sGen) == MELEE_ATTACK_NUMBER)
+				{
+					setState(eBossMonsterState::MELLE_ATTACKING);
+					flipLookDirection();
+				}
+				else
+				{
+					setState(eBossMonsterState::SPIN_ATTACKING);
+				}
+				return;
+			}
+
+			break;
+		}
+		case eBossMonsterPhase::LV_2_PHASE:
+		{
+
+			break;
+		}
+		case eBossMonsterPhase::LV_3_PHASE:
+		{
+
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
 #pragma region TRACING
 		if (meState == eBossMonsterState::TRACING)
 		{
@@ -91,7 +126,6 @@ namespace jh
 			mpTranform->SetOnlyXPosition(currPos + moveXPos);
 		}
 #pragma endregion
-
 
 		setAnimaionFlip();
 		playAnimation();
@@ -111,16 +145,6 @@ namespace jh
 			mpAnimator->PlayAnimation(ACIENT_BOSS_MOVING_ANIM_KEY, true);
 			break;
 		}
-		case eBossMonsterState::TURNING_TO_LEFT:
-		{
-			mpAnimator->PlayAnimation(ACIENT_BOSS_TURN_LEFT_ANIM_KEY, true);
-			break;
-		}
-		case eBossMonsterState::TURNING_TO_RIGHT:
-		{
-			mpAnimator->PlayAnimation(ACIENT_BOSS_TURN_RIGHT_ANIM_KEY, true);
-			break;
-		}
 		case eBossMonsterState::MELLE_ATTACKING:
 		{
 			mpAnimator->PlayAnimation(ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, true);
@@ -129,11 +153,6 @@ namespace jh
 		case eBossMonsterState::SPIN_ATTACKING:
 		{
 			mpAnimator->PlayAnimation(ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY, true);
-			break;
-		}
-		case eBossMonsterState::SPIN_END:
-		{
-			mpAnimator->PlayAnimation(ACIENT_BOSS_SPIN_END_ANIM_KEY, true);
 			break;
 		}
 		case eBossMonsterState::RANGE_ATTACKING:
@@ -162,6 +181,19 @@ namespace jh
 		}
 	}
 
+	void AcientBossMonsterScript::flipLookDirection()
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			meLookDir = eObjectLookDirection::RIGHT;
+		}
+		else
+		{
+			meLookDir = eObjectLookDirection::LEFT;
+		}
+
+	}
+
 
 	void AcientBossMonsterScript::setAnimaionFlip()
 	{
@@ -184,28 +216,15 @@ namespace jh
 	{
 
 	}
-	void AcientBossMonsterScript::AnimationTurnLeftStart()
-	{
 
-	}
-	void AcientBossMonsterScript::AnimationTurnLeftComplete()
-	{
 
-	}
-	void AcientBossMonsterScript::AnimationTurnRightStart()
-	{
-
-	}
-	void AcientBossMonsterScript::AnimationTurnRightComplete()
-	{
-
-	}
 	void AcientBossMonsterScript::AnimationMelleAttackStart()
 	{
 
 	}
 	void AcientBossMonsterScript::AnimationMelleAttackComplete()
 	{
+		flipLookDirection();
 		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackStart()
@@ -214,15 +233,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackComplete()
 	{
-
-	}
-	void AcientBossMonsterScript::AnimationSpinEndStart()
-	{
-
-	}
-	void AcientBossMonsterScript::AnimationSpinEndComplete()
-	{
-
+		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationRangeAttackStart()
 	{
@@ -264,6 +275,25 @@ namespace jh
 	}
 	void AcientBossMonsterScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_WEAPON)
+		{
+			Animator* pPlayerAnimator = static_cast<Animator*>(mpPlayerScript->GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+			assert(pPlayerAnimator != nullptr);
+			const ePlayerState eState = mpPlayerScript->GetPlayerState();
+
+			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX && eState == ePlayerState::ATTACKING)
+			{
+				if (mbIsCountingInvincibilityTime)
+				{
+					return;
+				}
+				mbIsHittted = true;
+				mbIsCountingInvincibilityTime = true;
+				decreaseHP(mpPlayerScript->GetPlayerStat().AttackDamage);
+				mpPlayerScript->SetIsHitAttack(true);
+			}
+		}
+
 	}
 	void AcientBossMonsterScript::OnTriggerExit(Collider2D* pOtherCollider)
 	{
@@ -280,11 +310,6 @@ namespace jh
 		mpAnimator->GetStartEvent(ACIENT_BOSS_MOVING_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMovingStart, this);
 		mpAnimator->GetCompleteEvent(ACIENT_BOSS_MOVING_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMovingComplete, this);
 
-		mpAnimator->GetStartEvent(ACIENT_BOSS_TURN_LEFT_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationTurnLeftStart, this);
-		mpAnimator->GetCompleteEvent(ACIENT_BOSS_TURN_LEFT_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationTurnLeftComplete, this);
-
-		mpAnimator->GetStartEvent(ACIENT_BOSS_TURN_RIGHT_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationTurnRightStart, this);
-		mpAnimator->GetCompleteEvent(ACIENT_BOSS_TURN_RIGHT_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationTurnRightComplete, this);
 
 		mpAnimator->GetStartEvent(ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMelleAttackStart, this);
 		mpAnimator->GetCompleteEvent(ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMelleAttackComplete, this);
@@ -292,9 +317,7 @@ namespace jh
 		mpAnimator->GetStartEvent(ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationSpinAttackStart, this);
 		mpAnimator->GetCompleteEvent(ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationSpinAttackComplete, this);
 
-		mpAnimator->GetStartEvent(ACIENT_BOSS_SPIN_END_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationSpinEndStart, this);
-		mpAnimator->GetCompleteEvent(ACIENT_BOSS_SPIN_END_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationSpinEndComplete, this);
-
+	
 		mpAnimator->GetStartEvent(ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationRangeAttackStart, this);
 		mpAnimator->GetCompleteEvent(ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationRangeAttackComplete, this);
 

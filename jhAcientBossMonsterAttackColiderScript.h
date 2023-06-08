@@ -47,6 +47,7 @@ namespace jh
 		Animator*					mpAnimator;
 		eObjectLookDirection		meLookDir;
 		float						mDistanceFormHitCollider;
+		float						mTracingStateColliderYPos;
 		eBossMonsterColliderType	meAttackType;
 	};
 }

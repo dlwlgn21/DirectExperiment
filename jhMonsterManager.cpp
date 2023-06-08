@@ -784,10 +784,11 @@ namespace jh
 
 	AcientBossMonsterPackage MonsterManager::MakeAcientBossMonster(PlayerScript* pPlayerScript, const jh::math::Vector3& position)
 	{
-		static constexpr const float ACIENT_BOSS_WIDTH = 201.0f;
-		static constexpr const float ACIENT_BOSS_HEIGHT = 94.0f;
-		static constexpr const float ACIENT_BOSS_MAG = 100.0f;
-		static constexpr const float ACIENT_BOSS_DIE_ANIM_DURATION = 0.1f;
+		const float ACIENT_BOSS_WIDTH = 201.0f;
+		const float ACIENT_BOSS_HEIGHT = 94.0f;
+		const float ACIENT_BOSS_MAG = 100.0f;
+		const float ACIENT_BOSS_DIE_ANIM_DURATION = 0.1f;
+		const UINT MAX_SPRITE_COUNT = 23;
 		AnimationInfo animInfo;
 		ZeroMemory(&animInfo, sizeof(AnimationInfo));
 		Animator* pBossAnimator = new Animator();
@@ -804,34 +805,27 @@ namespace jh
 		);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_IDLE_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 1), 23);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 1), MAX_SPRITE_COUNT);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 2), 8);
-		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_LEFT_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 3), 7);
-		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_TURN_RIGHT_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 4), 23);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 2), MAX_SPRITE_COUNT);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 5), 7);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 3), MAX_SPRITE_COUNT);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 6), 3);
-		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SPIN_END_ANIM_KEY, animInfo);
-
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 7), 21);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 4), MAX_SPRITE_COUNT - 2);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 8), 13);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 5), 13);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_BUFF_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 9), 18);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 6), 18);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY, animInfo);
 
-		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 10), 21);
+		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 7), MAX_SPRITE_COUNT - 2);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_DIE_ANIM_KEY, animInfo);
 
 		pBossAnimator->PlayAnimation(AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, true);
@@ -843,10 +837,10 @@ namespace jh
 		info.pMaterial = ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY);
 		info.pAnimator = pBossAnimator;
 		info.eMonType = eMonsterType::LV_1_ACIENT_BOSS;
-		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::MELEE_ATTACK);
-		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::SPIN_ATTACK);
-		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::RANGE_ATTACK);
-		info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)] = new AcientBossMonsterAttackColiderObject(eBossMonsterColliderType::SUPER_ATTACK);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			info.pMonsterAttackColiderObject[i] = new AcientBossMonsterAttackColiderObject(static_cast<eBossMonsterColliderType>(i));
+		}
 
 
 		Monster* pMonster = new BossMonster(info);
@@ -858,11 +852,13 @@ namespace jh
 		ZeroMemory(&retPackage, sizeof(AcientBossMonsterPackage));
 		retPackage.pMonster = pMonster;
 		retPackage.pHitEffectObejct = info.pHitEffectObject;
-		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::MELEE_ATTACK)];
-		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SPIN_ATTACK)];
-		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::RANGE_ATTACK)];
-		retPackage.pColliderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)] = info.pMonsterAttackColiderObject[static_cast<UINT>(eBossMonsterColliderType::SUPER_ATTACK)];
-		
+
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			retPackage.pColliderObject[i] = info.pMonsterAttackColiderObject[i];
+			retPackage.pColliderObject[i]->GetTransform()->SetPosition(Vector3(position.x, position.y + i, COLLIDER_Z_VALUE));
+		}
+
 		setTransform(retPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);
 
 		retPackage.pMonster->Initialize();
