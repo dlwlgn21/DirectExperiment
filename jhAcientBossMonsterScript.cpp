@@ -2,10 +2,13 @@
 #include "jhAnimator.h"
 #include "jhTransform.h"
 #include "jhPlayerScript.h"
+#include "jhTime.h"
 
 static constexpr UINT ACIENT_BOSS_INITIAL_HP = 30;
 static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
 static constexpr const float SPAWNING_TIME = 3.0f;
+static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 2.0f;
+
 
 namespace jh
 {
@@ -36,6 +39,7 @@ namespace jh
 		, meLookDir(eObjectLookDirection::LEFT)
 		, mpPlayerScript(pPlayerScript)
 		, meMonsterType(eMonsterType::LV_1_ACIENT_BOSS)
+		, meState(eBossMonsterState::TRACING)
 	{
 		assert(mpPlayerScript != nullptr);
 	}
@@ -51,9 +55,123 @@ namespace jh
 	}
 	void AcientBossMonsterScript::Update()
 	{
+		float currPos = mpTranform->GetOnlyXPosition();
+		float distanceFromPlayer = currPos - mpPlayerTransform->GetOnlyXPosition();
+		float moveXPos = 0.0f;
 
+		if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE && meState != eBossMonsterState::MELLE_ATTACKING)
+		{
+			setState(eBossMonsterState::MELLE_ATTACKING);
+			if (meLookDir == eObjectLookDirection::LEFT)
+			{
+				meLookDir = eObjectLookDirection::RIGHT;
+			}
+			else
+			{
+				meLookDir = eObjectLookDirection::LEFT;
+			}
+			return;
+		}
+
+#pragma region TRACING
+		if (meState == eBossMonsterState::TRACING)
+		{
+			if (distanceFromPlayer < 0.0f)
+			{
+				meLookDir = eObjectLookDirection::LEFT;
+				moveXPos = mSpeed * Time::DeltaTime();
+			}
+			else
+			{
+				meLookDir = eObjectLookDirection::RIGHT;
+				moveXPos = -(mSpeed * Time::DeltaTime());
+			}
+			mpTranform->SetOnlyXPosition(currPos + moveXPos);
+		}
+#pragma endregion
+
+
+		setAnimaionFlip();
+		playAnimation();
 	}
 
+	void AcientBossMonsterScript::playAnimation()
+	{
+		assert(mpAnimator != nullptr);
+		switch (meState)
+		{
+		case eBossMonsterState::IDLE:
+		{
+			break;
+		}
+		case eBossMonsterState::TRACING:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_MOVING_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::TURNING_TO_LEFT:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_TURN_LEFT_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::TURNING_TO_RIGHT:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_TURN_RIGHT_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::MELLE_ATTACKING:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::SPIN_ATTACKING:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_SPIN_ATTACK_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::SPIN_END:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_SPIN_END_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::RANGE_ATTACKING:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_RANGE_ATTACK_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::BUFF:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_BUFF_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::SUPER_ATTACKING:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_SUPER_ATTACK_ANIM_KEY, true);
+			break;
+		}
+		case eBossMonsterState::DEATH:
+		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_DIE_ANIM_KEY, true);
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+
+
+	void AcientBossMonsterScript::setAnimaionFlip()
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
+		else
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
+	}
 
 #pragma region ANIMATION_EVENT
 	void AcientBossMonsterScript::AnimationMovingStart()
@@ -86,7 +204,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationMelleAttackComplete()
 	{
-
+		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackStart()
 	{

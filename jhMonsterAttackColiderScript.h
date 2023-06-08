@@ -22,8 +22,6 @@ namespace jh
 		void Update() override;
 
 
-
-
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;

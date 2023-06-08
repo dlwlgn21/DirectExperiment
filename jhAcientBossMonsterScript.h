@@ -6,7 +6,7 @@ namespace jh
 	enum class eBossMonsterState
 	{
 		IDLE,
-		MOVING,
+		TRACING,
 		TURNING_TO_LEFT,
 		TURNING_TO_RIGHT,
 		MELLE_ATTACKING,
@@ -79,10 +79,16 @@ namespace jh
 #pragma endregion
 
 
-
+	
 
 	private:
+		void setState(const eBossMonsterState eState) { meState = eState; }
 		void setAnimationEvent();
+		void setAnimaionFlip();
+
+		void playAnimation();
+
+
 	private:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
@@ -95,6 +101,7 @@ namespace jh
 		eObjectLookDirection			meLookDir;
 		PlayerScript*					mpPlayerScript;
 		eMonsterType					meMonsterType;
+		eBossMonsterState				meState;
 	};
 
 }
