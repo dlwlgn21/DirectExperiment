@@ -22,32 +22,10 @@ namespace jh
 	{
 		if (mMonsterVectorQ[static_cast<UINT>(eMonType)]->size() >= mMaxPoolSize)
 		{
-			// TODO : 이거 문제 일으킬 수 있지 지후야. 생각해봐. 이걸 지워버리면 당연히 뻑이 나지요.
-			//delete monPackage.pMonster;
-			//delete monPackage.pHitEffectObejct;
-			//delete monPackage.pMonsterAttackColliderObject;
+			assert(false);
 			return;
 		}
 		mMonsterVectorQ[static_cast<UINT>(eMonType)]->push(monPackage);
 	}
-	void MonsterObjectPool::Release()
-	{
-		for (int i = 0; i < mMonsterVectorQ.size(); ++i)
-		{
-			if (mMonsterVectorQ[i] != nullptr)
-			{
-				while (!mMonsterVectorQ[i]->empty())
-				{
-					MonsterPackage monPack = mMonsterVectorQ[i]->front();
-					delete monPack.pMonster;
-					delete monPack.pHitEffectObejct;
-					delete monPack.pMonsterAttackColliderObject;
-					mMonsterVectorQ[i]->pop();
-				}
-				delete mMonsterVectorQ[i];
-			}
-		}
-	}
-
 }
 

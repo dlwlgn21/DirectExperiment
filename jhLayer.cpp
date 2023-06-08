@@ -15,10 +15,6 @@ namespace jh
 		{
 			for (auto* pGameObject : mGameObjects)
 			{
-				if (pGameObject->GetLayer() == eLayerType::MONSTER || pGameObject->GetLayer() == eLayerType::MONSTER_EFFECT)
-				{
-					continue;
-				}
 				if (pGameObject != nullptr)
 				{
 					delete pGameObject;

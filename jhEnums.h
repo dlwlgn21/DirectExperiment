@@ -91,6 +91,7 @@ namespace jh
 		LV_1_DAGGER,
 		LV_1_ARCHER,
 		LV_1_BLASTER,
+		LV_1_ACIENT_BOSS,
 		COUNT
 	};
 

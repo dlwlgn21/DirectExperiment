@@ -91,7 +91,6 @@ namespace jh
 	void D3DApp::Release()
 	{
 		SceneManager::GetInstance().Release();
-		MonsterObjectPool::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
 	}

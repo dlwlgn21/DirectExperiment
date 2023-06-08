@@ -142,6 +142,7 @@
     <ClInclude Include="jhBGMoonObject.h" />
     <ClInclude Include="jhBGTorchObject.h" />
     <ClInclude Include="jhBGTreeObject.h" />
+    <ClInclude Include="jhBossMonsterScript.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraManager.h" />
     <ClInclude Include="jhCameraScript.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="jhBGMoonObject.cpp" />
     <ClCompile Include="jhBGTorchObject.cpp" />
     <ClCompile Include="jhBGTreeObject.cpp" />
+    <ClCompile Include="jhBossMonsterScript.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraManager.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />

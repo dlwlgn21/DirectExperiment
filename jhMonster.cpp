@@ -153,6 +153,12 @@ namespace jh
 			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}
+		case eMonsterType::LV_1_ACIENT_BOSS:
+		{
+			pMonsterCollider->SetSize(Vector2(1.0f, 1.0f));
+			setHitColliderCenterPos(pMonsterCollider);
+			break;
+		}
 		default:
 			assert(false);
 			break;

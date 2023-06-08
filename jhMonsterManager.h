@@ -153,6 +153,10 @@ namespace jh
 		static const std::wstring BLASTER_HITTED_ANIM_KEY;
 		static const std::wstring BLASTER_DIE_ANIM_KEY;
 
+
+
+
+
 #pragma endregion
 	};
 }

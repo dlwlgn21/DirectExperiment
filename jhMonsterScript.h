@@ -64,7 +64,7 @@ namespace jh
 		void decreaseHP(const int amount);
 		bool isCloseEnoughFromPlayerToChangeAttackingState(const float xPos);
 
-	protected:
+	private:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
 		Animator*						mpAnimator;

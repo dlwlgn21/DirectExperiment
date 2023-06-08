@@ -289,6 +289,9 @@
     <Filter Include="GameObject\AnimatedGameObject\Effect\Hit">
       <UniqueIdentifier>{fd817718-8e4b-4da3-902a-2d36755eb566}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\Monster\Boss">
+      <UniqueIdentifier>{e8b299ce-61b8-4a1d-9dcf-1852220c5b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -543,6 +546,9 @@
     <ClInclude Include="jhMonsterAnimIndexInformation.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="jhBossMonsterScript.h">
+      <Filter>Component\Script\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -772,6 +778,9 @@
     </ClCompile>
     <ClCompile Include="jhHitEffectObject.cpp">
       <Filter>GameObject\AnimatedGameObject\Effect\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBossMonsterScript.cpp">
+      <Filter>Component\Script\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

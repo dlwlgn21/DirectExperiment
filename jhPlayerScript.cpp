@@ -12,8 +12,12 @@
 #include "jhPlayerDustEffectScript.h"
 #include "jhPlayerHitEffectScript.h"
 
-static constexpr const float DASH_AMOUNT = 45.0f;
+static constexpr const float DASH_DISTANCE = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
+
+static constexpr const float ROLLING_DISTANCE = 8.0f;
+static constexpr const float ROLLING_INTERVAL_SECOND = 1.0f;
+static constexpr const UINT ROLLING_STAMINA_COST = 1;
 
 static constexpr const float DEFAULT_MOVEMENT_DISTNANCE		= 5.0f;
 static constexpr const float ATTACK_1_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE;
@@ -31,7 +35,7 @@ namespace jh
 	PlayerScript::PlayerScript()
 		: Script()
 		, mpTranform(nullptr)
-		, mSpeed(10.0f)
+		, mSpeed(5.0f)
 		, mAnimIdleKey(L"PlayerIdle")
 		, mAnimMoveKey(L"PlayerMove")
 		, mAnimNormalAttack1Key(L"PlayerNormalAttack1")
@@ -40,6 +44,7 @@ namespace jh
 		, mAnimPushAttackKey(L"PlayerPushAttack")
 		, mAnimDashKey(L"PlayerDash")
 		, mAnimHittedKey(L"PlayerHitted")
+		, mAnimRollingKey(L"PlayerRolling")
 		, mpAnimator(nullptr)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
@@ -52,8 +57,11 @@ namespace jh
 		, mbIsContiueAttacking(false)
 		, mbIsHitPowerAttack(false)
 		, mbIsStartCountingDashTimer(false)
+		, mbIsStartCountingRollingTimer(false)
 		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
 		, mDashIntervalTime(DASH_INTERVAL_SECOND)
+		, mRollingIntervalTimer(ROLLING_INTERVAL_SECOND)
+		, mRollingIntervalTime(ROLLING_INTERVAL_SECOND)
 	{
 	}
 
@@ -77,6 +85,7 @@ namespace jh
 			setStateByInput(xPos);
 		}
 		processIfDash(xPos);
+		processIfRolling(xPos);
 		setAnimationFlip();
 		setAnimatorByState();
 		recoverStamina();
@@ -175,6 +184,15 @@ namespace jh
 	{
 		setState(ePlayerState::IDLE);
 	}
+
+	void PlayerScript::RollingAnimationStart()
+	{
+	}
+
+	void PlayerScript::RollingAnimationComplete()
+	{
+		setState(ePlayerState::IDLE);
+	}
 #pragma endregion
 
 #pragma region COLLISION_TRIGGER
@@ -222,12 +240,16 @@ namespace jh
 		
 		mpAnimator->GetStartEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
+
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
+
+		mpAnimator->GetStartEvent(mAnimRollingKey) = std::bind(&PlayerScript::RollingAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimRollingKey) = std::bind(&PlayerScript::RollingAnimationComplete, this);
 	}
 
 	void PlayerScript::setStateByInput(float& xPos)
 	{
-		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH)
+		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH || meState == ePlayerState::ROLLING)
 		{
 			return;
 		}
@@ -271,6 +293,14 @@ namespace jh
 			{
 				setState(ePlayerState::DASH);
 				mbIsStartCountingDashTimer = true;
+			}
+		}
+		else if (Input::GetKeyState(eKeyCode::V) == eKeyState::DOWN)
+		{
+			if (mStat.CurrentStamina >= ROLLING_STAMINA_COST && !mbIsStartCountingRollingTimer)
+			{
+				setState(ePlayerState::ROLLING);
+				mbIsStartCountingRollingTimer = true;
 			}
 		}
 	}
@@ -349,6 +379,11 @@ namespace jh
 			mpAnimator->PlayAnimation(mAnimDashKey, true);
 			assert(mpPlayerDustEffetScript != nullptr);
 			mpPlayerDustEffetScript->SetStatePlaying();
+			break;
+		}
+		case ePlayerState::ROLLING:
+		{
+			mpAnimator->PlayAnimation(mAnimRollingKey, true);
 			break;
 		}
 		case ePlayerState::HITTED:
@@ -474,11 +509,11 @@ namespace jh
 				{
 					if (meLookDir == eObjectLookDirection::LEFT)
 					{
-						xPos -= DASH_AMOUNT * Time::DeltaTime();
+						xPos -= DASH_DISTANCE * Time::DeltaTime();
 					}
 					else
 					{
-						xPos += DASH_AMOUNT * Time::DeltaTime();
+						xPos += DASH_DISTANCE * Time::DeltaTime();
 					}
 				}
 			}
@@ -490,6 +525,29 @@ namespace jh
 		}
 	}
 
+	void PlayerScript::processIfRolling(float& xPos)
+	{
+		if (mbIsStartCountingRollingTimer)
+		{
+			mRollingIntervalTimer -= Time::DeltaTime();
+			if (meState == ePlayerState::ROLLING)
+			{
+				if (meLookDir == eObjectLookDirection::LEFT)
+				{
+					xPos -= ROLLING_DISTANCE * Time::DeltaTime();
+				}
+				else
+				{
+					xPos += ROLLING_DISTANCE * Time::DeltaTime();
+				}
+			}
+			if (mRollingIntervalTimer < 0.0f)
+			{
+				mRollingIntervalTimer = mRollingIntervalTime;
+				mbIsStartCountingRollingTimer = false;
+			}
+		}
+	}
 
 	void PlayerScript::EnemyAttackHiited(UINT damage)
 	{

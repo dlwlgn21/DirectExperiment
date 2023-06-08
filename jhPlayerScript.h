@@ -20,6 +20,7 @@ namespace jh
 		IDLE,
 		MOVING,
 		ATTACKING,
+		ROLLING,
 		DASH,
 		HITTED,
 		DEAD,
@@ -85,13 +86,18 @@ namespace jh
 		void AttackThreeAnimationStart();
 		void AttackThreeAnimationComplete();
 
-
 		void PushAttackAnimationStart();
 		void PushAttackAnimationComplete();
 
 		void DashAnimationStart();
 		void DashAnimationComplete();
+
+		void RollingAnimationStart();
+		void RollingAnimationComplete();
+
+
 		void HitAnimationComplete();
+
 
 		eObjectLookDirection GetPlayerLookDirection() const			{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
@@ -116,6 +122,8 @@ namespace jh
 		void setXPosByComboAttackType(float& xPos);
 		void setPosByLookDirection(float& xPos, const float xDistance);
 		void processIfDash(float& xPos);
+		void processIfRolling(float& xPos);
+
 		void setStateByInput(float& xPos);
 		void setAnimationEvent();
 		void setState(const ePlayerState eState);
@@ -141,6 +149,7 @@ namespace jh
 		const std::wstring				mAnimPushAttackKey;
 		const std::wstring				mAnimDashKey;
 		const std::wstring				mAnimHittedKey;
+		const std::wstring				mAnimRollingKey;
 		eObjectLookDirection			meLookDir;
 		ePlayerState					meState;
 		eAttackType						meAttackType;
@@ -152,8 +161,13 @@ namespace jh
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitPowerAttack;
 		bool							mbIsStartCountingDashTimer;
+		bool							mbIsStartCountingRollingTimer;
+
 		float							mDashIntervalTimer;
 		float							mDashIntervalTime;
+
+		float							mRollingIntervalTimer;
+		float							mRollingIntervalTime;
 	};
 }
 

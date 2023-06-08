@@ -52,6 +52,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ARCHER_KEY = L"ArcherTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY = L"ArcherNormalTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_BLASTER_KEY = L"BlasterTexture";
+	const std::wstring ResourceMaker::MONSTER_TEXTURE_ACIENT_BOSS_KEY = L"AcientBossTexture";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
@@ -115,6 +116,7 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_ARCHER_MATERIAL_KEY = L"ArcherMaterial";
 	const std::wstring ResourceMaker::MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY = L"ArcherNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_BLASTER_MATERIAL_KEY = L"BlasterMaterial";
+	const std::wstring ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY = L"AcientBossMaterial";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
@@ -413,6 +415,7 @@ namespace jh
 		loadAndInsertTexture(MONSTER_TEXTURE_ARCHER_KEY, L"MON_Archer_174x25.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY, L"MON_Archer_174x25_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_BLASTER_KEY, L"MON_Blaster_119x34.png");
+		loadAndInsertTexture(MONSTER_TEXTURE_ACIENT_BOSS_KEY, L"MON_AcientBoss_201x94.png");
 
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
@@ -478,6 +481,7 @@ namespace jh
 		insertMaterial(MONSTER_ARCHER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ARCHER_KEY);
 		insertNormalMapMaterial(MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_ARCHER_KEY, MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY);
 		insertMaterial(MONSTER_BLASTER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_BLASTER_KEY);
+		insertMaterial(MONSTER_ACIENT_BOSS_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ACIENT_BOSS_KEY);
 
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);

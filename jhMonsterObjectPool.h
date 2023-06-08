@@ -23,8 +23,6 @@ namespace jh
 
 		MonsterPackage Get(const eMonsterType eMonType, PlayerScript* pPlayerScript, const jh::math::Vector3& pos);
 		void Return(const eMonsterType eMonType, MonsterPackage monPackage);
-		void Release();
-
 
 	private:
 		MonsterObjectPool()
@@ -39,21 +37,13 @@ namespace jh
 		}
 		~MonsterObjectPool()
 		{
-			//for (int i = 0; i < mMonsterVectorQ.size(); ++i)
-			//{
-			//	if (mMonsterVectorQ[i] != nullptr)
-			//	{
-			//		while (!mMonsterVectorQ[i]->empty())
-			//		{
-			//			MonsterPackage monPack = mMonsterVectorQ[i]->front();
-			//			delete monPack.pMonster;
-			//			delete monPack.pHitEffectObejct;
-			//			delete monPack.pMonsterAttackColliderObject;
-			//			mMonsterVectorQ[i]->pop();
-			//		}
-			//		delete mMonsterVectorQ[i];
-			//	}
-			//}
+			for (int i = 0; i < mMonsterVectorQ.size(); ++i)
+			{
+				if (mMonsterVectorQ[i] != nullptr)
+				{
+					delete mMonsterVectorQ[i];
+				}
+			}
 		}
 	
 	private:

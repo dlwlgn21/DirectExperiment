@@ -165,6 +165,16 @@ namespace jh
 			0.1f,
 			MAGNINICATION
 		);
+		pPlayerAnimator->Create(
+			L"PlayerRolling",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 5),
+			ANIM_SIZE,
+			OFFSET,
+			8,
+			0.075f,
+			MAGNINICATION
+		);
 
 		this->AddComponent(pPlayerAnimator);
 		pPlayerAnimator->PlayAnimation(L"PlayerIdle", true);
