@@ -57,8 +57,7 @@ static constexpr const float ARCHER_INITIAL_SPEED = 1.0f;
 static constexpr const int BLASTER_INITIAL_HP = 5;
 static constexpr const float BLASTER_INITIAL_SPEED = 1.3f;
 
-static constexpr UINT ACIENT_BOSS_INITIAL_HP = 30;
-static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
+
 #pragma endregion
 
 #pragma region ATTACKING_MOVMENT_DISTANCE
@@ -110,9 +109,9 @@ namespace jh
 		, mpAnimator(nullptr)
 		, mpEffectScript(nullptr)
 		, mpPlayerScript(nullptr)
-		, mMaxHP(ACIENT_BOSS_INITIAL_HP)
-		, mCurrHP(ACIENT_BOSS_INITIAL_HP)
-		, mSpeed(ACIENT_BOSS_INITIAL_SPEED)
+		, mMaxHP(0)
+		, mCurrHP(0)
+		, mSpeed(0.0f)
 		, mAttackingAwarenessRange(0)
 		, mAttackingMovementDistance(0.0f)
 		, mSpawningTimer(SPAWNING_TIME)

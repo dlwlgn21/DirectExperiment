@@ -65,5 +65,6 @@ namespace jh
 				monsterInfo.pAnimator,
 				eBossMonsterColliderType::SUPER_ATTACK)
 		);
+
 	}
 }

@@ -11,6 +11,12 @@ static constexpr const float INVINCIBILITY_TIME = 0.5f;
 static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 2.0f;
 static constexpr const UINT MELEE_ATTACK_NUMBER = 0;
 static constexpr const UINT SPIN_ATTACK_NUMBER = 1;
+static constexpr const UINT RANGE_ATTACK_NUMBER = 2;
+
+static constexpr UINT ACIENT_BOSS_INITIAL_HP = 30;
+static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
+
+static constexpr const UINT PHASE_2_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.5f);
 
 
 namespace jh
@@ -36,6 +42,9 @@ namespace jh
 		mAttackingAwarenessRange = MELEE_ATTACK_AWARENESS_RANGE;
 		mpPlayerScript = pPlayerScript;
 		assert(mpPlayerScript != nullptr);
+		mMaxHP = ACIENT_BOSS_INITIAL_HP;
+		mCurrHP = mMaxHP;
+		mSpeed = ACIENT_BOSS_INITIAL_SPEED;
 	}
 
 	void AcientBossMonsterScript::Initialize()
@@ -98,7 +107,24 @@ namespace jh
 		}
 		case eBossMonsterPhase::LV_2_PHASE:
 		{
-
+			static std::random_device sRd;
+			static std::mt19937 sGen(sRd());
+			static std::uniform_int_distribution<> sDist(SPIN_ATTACK_NUMBER, RANGE_ATTACK_NUMBER);
+			if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE &&
+				meState != eBossMonsterState::SPIN_ATTACKING &&
+				meState != eBossMonsterState::RANGE_ATTACKING)
+			{
+				if (sDist(sGen) == SPIN_ATTACK_NUMBER)
+				{
+					setState(eBossMonsterState::SPIN_ATTACKING);
+					flipLookDirection();
+				}
+				else
+				{
+					setState(eBossMonsterState::RANGE_ATTACKING);
+				}
+				return;
+			}
 			break;
 		}
 		case eBossMonsterPhase::LV_3_PHASE:
@@ -194,6 +220,24 @@ namespace jh
 
 	}
 
+	void AcientBossMonsterScript::decreaseHP(const int amount)
+	{
+		mCurrHP -= std::abs(amount);
+		
+		if (mCurrHP <= PHASE_2_HP)
+		{
+			setPhaseState(eBossMonsterPhase::LV_2_PHASE);
+		}
+
+
+		if (mCurrHP <= 0)
+		{
+			mCurrHP = 0;
+			setState(eBossMonsterState::DEATH);
+		}
+
+	}
+
 
 	void AcientBossMonsterScript::setAnimaionFlip()
 	{
@@ -241,7 +285,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationRangeAttackComplete()
 	{
-
+		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationBuffStart()
 	{
@@ -257,7 +301,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationSuperAttackComplete()
 	{
-
+		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationDieStart()
 	{
@@ -299,8 +343,6 @@ namespace jh
 	{
 	}
 #pragma endregion
-
-
 
 #pragma region INITIALIZE
 	void AcientBossMonsterScript::setAnimationEvent()

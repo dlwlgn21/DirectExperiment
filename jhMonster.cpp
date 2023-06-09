@@ -32,7 +32,10 @@ namespace jh
 	Monster::Monster()
 		: GameObject(eLayerType::MONSTER)
 	{
-		setHitCollider();
+		Collider2D* pMonsterCollider = new Collider2D(eColliderLayerType::MONSTER);
+		pMonsterCollider->SetSize(jh::math::Vector2(0.05f, 0.1f));
+		setHitColliderCenterPos(pMonsterCollider);
+		this->AddComponent(pMonsterCollider);
 	}
 	void Monster::Initialize()
 	{
@@ -156,12 +159,6 @@ namespace jh
 		case eMonsterType::LV_1_BLASTER:
 		{
 			pMonsterCollider->SetSize(Vector2(0.05f, 0.1f));
-			setHitColliderCenterPos(pMonsterCollider);
-			break;
-		}
-		case eMonsterType::LV_1_ACIENT_BOSS:
-		{
-			pMonsterCollider->SetSize(Vector2(0.3f, 1.0f));
 			setHitColliderCenterPos(pMonsterCollider);
 			break;
 		}

@@ -19,7 +19,6 @@ namespace jh
 	public:
 		BossMonster(AcientBossMonsterInfo& monsterInfo);
 		virtual ~BossMonster() = default;
-
 	private:
 		AcientBossMonsterInfo mBossMonsterInfo;
 	};

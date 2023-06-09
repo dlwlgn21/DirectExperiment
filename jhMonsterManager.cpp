@@ -40,7 +40,7 @@ static constexpr const float LIGHT_SLICER_SCALE_VALUE = 6.0f;
 static constexpr const float DAGGER_SCALE_VALUE = 12.0f;
 static constexpr const float ARCHER_SCALE_VALUE = 10.0f;
 static constexpr const float BLASTER_SCALE_VALUE = 10.0f;
-static constexpr const float ACIENT_BOSS_SCALE_VALUE = 7.0f;
+static constexpr const float ACIENT_BOSS_SCALE_VALUE = 20.0f;
 
 
 static constexpr const jh::math::Vector3 CAGED_SHOKER_SCALE_VECTOR = Vector3(CAGED_SHOKER_SCALE_VALUE, CAGED_SHOKER_SCALE_VALUE, 1.0f);
@@ -786,7 +786,7 @@ namespace jh
 	{
 		const float ACIENT_BOSS_WIDTH = 201.0f;
 		const float ACIENT_BOSS_HEIGHT = 94.0f;
-		const float ACIENT_BOSS_MAG = 100.0f;
+		const float ACIENT_BOSS_MAG = 300.0f;
 		const float ACIENT_BOSS_DIE_ANIM_DURATION = 0.1f;
 		const UINT MAX_SPRITE_COUNT = 23;
 		AnimationInfo animInfo;

@@ -48,7 +48,7 @@ namespace jh
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
 
 	protected:
-		void decreaseHP(const int amount);
+		virtual void decreaseHP(const int amount);
 		void playHitEffectAnimation();
 
 

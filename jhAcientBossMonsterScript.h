@@ -74,11 +74,15 @@ namespace jh
 
 	private:
 		void setState(const eBossMonsterState eState) { meState = eState; }
+		void setPhaseState(const eBossMonsterPhase ePhase) { mePhase = ePhase; }
 		void setAnimationEvent();
 		void setAnimaionFlip();
 
 		void playAnimation();
 		void flipLookDirection();
+	private:
+		void decreaseHP(const int amount) override;
+
 
 	private:
 		eBossMonsterState				meState;
