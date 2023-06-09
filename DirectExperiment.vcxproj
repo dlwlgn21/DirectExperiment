@@ -184,6 +184,7 @@
     <ClInclude Include="jhMonsterObjectPool.h" />
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhMonsterSpawner.h" />
+    <ClInclude Include="jhMonsterUIScript.h" />
     <ClInclude Include="jhNormalMapMaterial.h" />
     <ClInclude Include="jhNormalMapMesh.h" />
     <ClInclude Include="jhNormalMapShader.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="jhMonsterObjectPool.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhMonsterSpawner.cpp" />
+    <ClCompile Include="jhMonsterUIScript.cpp" />
     <ClCompile Include="jhNormalMapMaterial.cpp" />
     <ClCompile Include="jhNormalMapMesh.cpp" />
     <ClCompile Include="jhNormalMapShader.cpp" />
@@ -377,6 +379,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="jhUserInterfaceHealthPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceMonsterHealthPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>

@@ -49,6 +49,7 @@ namespace jh
 		static const std::wstring DEBUG_SHADER_KEY;
 		static const std::wstring UI_HP_SHADER_KEY;
 		static const std::wstring UI_STAMINA_SHADER_KEY;
+		static const std::wstring UI_MONSTER_HP_SHADER_KEY;
 		static const std::wstring NORMAL_MAP_SPRITE_SHADER_KEY;
 #pragma endregion
 
@@ -88,6 +89,7 @@ namespace jh
 		static const std::wstring UI_HP_BORDER_TEXTURE_KEY;
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
+		static const std::wstring UI_MONSTER_HP_BAR_TEXTURE_KEY;
 
 		static const std::wstring EFFECT_HIT_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY;
@@ -145,6 +147,7 @@ namespace jh
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
+		static const std::wstring UI_MONSTER_HP_BAR_MATERIAL_KEY;
 
 		static const std::wstring EFFECT_HIT_MATERIAL_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_MATERIAL_KEY;

@@ -23,12 +23,13 @@ namespace jh
 #pragma endregion
 
 #pragma region SHADER
-	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShaderKey";
-	const std::wstring ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY = L"NormalMapSpriteShaderKey";
-	const std::wstring ResourceMaker::BG_NO_LIGHTING_SHADER_KEY = L"BattleBGShaderKey";
-	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShaderKey";
-	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShaderKey";
-	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShaderKey";
+	const std::wstring ResourceMaker::SPRITE_SHADER_KEY = L"SpriteShader";
+	const std::wstring ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY = L"NormalMapSpriteShader";
+	const std::wstring ResourceMaker::BG_NO_LIGHTING_SHADER_KEY = L"BattleBGShader";
+	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShader";
+	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShader";
+	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShader";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_SHADER_KEY = L"UIMonsterShader";
 #pragma endregion
 
 #pragma region TEXTURE
@@ -57,6 +58,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
 
 
 	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
@@ -121,6 +123,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
 
 	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
@@ -381,6 +384,7 @@ namespace jh
 		loadAndInsertShader(BG_NO_LIGHTING_SHADER_KEY, L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
 		loadAndInsertShader(UI_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
 		loadAndInsertShader(UI_STAMINA_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
+		loadAndInsertShader(UI_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceMonsterHealthPS.hlsl");
 
 
 		Shader* pNormalMapSpriteShader = new NormalMapShader();
@@ -452,9 +456,10 @@ namespace jh
 		loadAndInsertTexture(BG_SMALL_LIGHTNING_TEXTURE_KEY, L"BG_SmallLightning_32x32.png");
 		loadAndInsertTexture(BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY, L"BG_SmallLightning_32x32_NM.png");
 
-		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"HpBarBorder.png");
-		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"HPBar.png");
-		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"StaminarBar.png");
+		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"UI_Border.png");
+		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"UI_Player_HpBar.png");
+		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"UI_Player_StaminarBar.png");
+		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
 
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
@@ -522,6 +527,7 @@ namespace jh
 		insertMaterial(UI_HP_BORDER_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, UI_HP_BORDER_TEXTURE_KEY);
 		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
+		insertMaterial(UI_MONSTER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BAR_TEXTURE_KEY);
 
 
 #pragma region DEBUG

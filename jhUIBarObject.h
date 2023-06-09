@@ -9,20 +9,18 @@ namespace jh
 		STAMINAR_BORDER,
 		HEALTH_BAR,
 		STAMINA_BAR,
+		MONSTER_HP_BAR,
 		COUNT
 	};
 	class PlayerScript;
 	class UIBarScript;
+	class MonsterScript;
 	class UIBarObject : public GameObject
 	{
 	public:
 		UIBarObject(const eUIBarType eType, PlayerScript* pPlayerScript);
+		UIBarObject(MonsterScript* pMonsterScript);
 		virtual ~UIBarObject() = default;
-
-		void Initialize() override;
-		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 
 	private:
 		void setRenderer();

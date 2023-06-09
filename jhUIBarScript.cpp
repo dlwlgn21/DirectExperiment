@@ -16,10 +16,7 @@ namespace jh
 	{
 	}
 
-	void UIBarScript::Initialize()
-	{
-		Script::Initialize();
-	}
+
 	void UIBarScript::Update()
 	{
 		const PlayerScript::PlayerStat& playerStat = mpPlayerScript->GetPlayerStat();
@@ -33,12 +30,5 @@ namespace jh
 		pCB->WirteDataAtBuffer(&buffer, sizeof(UIBarBuffer));
 		pCB->SetPipeline();
 	}
-	void UIBarScript::FixedUpdate()
-	{
-		Script::FixedUpdate();
-	}
-	void UIBarScript::Render()
-	{
-		Script::Render();
-	}
+
 }

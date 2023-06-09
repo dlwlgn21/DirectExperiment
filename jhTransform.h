@@ -10,8 +10,6 @@ namespace jh
 		Transform();
 		virtual ~Transform() = default;
 
-		void Initialize() override;
-		void Update() override;
 		void FixedUpdate() override;
 		void Render() override;
 
@@ -23,6 +21,7 @@ namespace jh
 		__forceinline void SetOnlyXPosition(const float xPos)						{ mPosition.x = xPos; }
 		__forceinline void SetOnlyYPosition(const float yPos)						{ mPosition.y = yPos; }
 		__forceinline void SetOnlyXYPosition(const float xPos, const float yPos)	{ mPosition.x = xPos; mPosition.y = yPos; }
+		__forceinline void SetOnlyXYPosition(const jh::math::Vector2 pos)	{ mPosition.x = pos.x; mPosition.y = pos.y; }
 		__forceinline void SetRotation(const jh::math::Vector3 rotation)			{ mRotation = rotation; }
 
 		__forceinline void SetOnlyXYScale(const float xScale, const float yScale)	{ mScale.x = xScale; mScale.y = yScale; }
@@ -30,14 +29,15 @@ namespace jh
 		__forceinline void SetScale(const jh::math::Vector3 scale)					{ mScale = scale; }
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 
-		__forceinline jh::math::Vector3 GetPosition() const { return mPosition; }
-		__forceinline float GetOnlyXPosition()		  const { return mPosition.x; }
-		__forceinline jh::math::Vector3 GetRotation() const { return mRotation; }
-		__forceinline jh::math::Vector3 GetScale()	  const	{ return mScale; }
+		__forceinline jh::math::Vector3 GetPosition() const			{ return mPosition; }
+		__forceinline float GetOnlyXPosition()		  const			{ return mPosition.x; }
+		__forceinline jh::math::Vector2 GetOnlyXYPosition() const	{ return jh::math::Vector2(mPosition.x, mPosition.y); }
+		__forceinline jh::math::Vector3 GetRotation() const			{ return mRotation; }
+		__forceinline jh::math::Vector3 GetScale()	  const			{ return mScale; }
 
-		__forceinline jh::math::Vector3 GetForward() const	{ return mForwardVector; }
-		__forceinline jh::math::Vector3 GetRight()   const	{ return mRightVector; }
-		__forceinline jh::math::Vector3 GetUp()	     const	{ return mUpVector; }
+		__forceinline jh::math::Vector3 GetForward() const			{ return mForwardVector; }
+		__forceinline jh::math::Vector3 GetRight()   const			{ return mRightVector; }
+		__forceinline jh::math::Vector3 GetUp()	     const			{ return mUpVector; }
 
 
 		const jh::math::Matrix& GetWorldMatrix() { return mWolrdMat; }

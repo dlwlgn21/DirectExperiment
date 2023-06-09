@@ -14,7 +14,17 @@ namespace jh
 		HITTED,
 		DEAD
 	};
-
+	struct MonsterHPstatus
+	{
+		int MaxHP;
+		int CurrHP;
+		MonsterHPstatus(const int maxHP, const int currHP)
+			: MaxHP(maxHP)
+			, CurrHP(currHP)
+		{
+			assert(MaxHP >= 0);
+		}
+	};
 	class Animator;
 	class Transform;
 	class HitEffectScript;
@@ -46,7 +56,8 @@ namespace jh
 		eMonsterState		 GetMonsterState() const			{ return meState; }
 		eMonsterType		 GetMonsterType() const				{ return meMonsterType; }
 		void SetHitEffectScript(HitEffectScript* pHitEffectScript) { assert(pHitEffectScript != nullptr);  mpEffectScript = pHitEffectScript; }
-
+		MonsterHPstatus	     GetCurrentHPStatus() const				{ return MonsterHPstatus(mMaxHP, mCurrHP); }
+	
 	protected:
 		virtual void decreaseHP(const int amount);
 		void playHitEffectAnimation();

@@ -313,6 +313,9 @@
     <Filter Include="Component\Script\Monster\Monster\AttackCollider">
       <UniqueIdentifier>{60723c91-bbc9-4a3b-a5ca-69a36a8085c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\UI\Monster">
+      <UniqueIdentifier>{342fe33c-1e3f-4c5c-b5aa-bbc1f17911aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -579,6 +582,9 @@
     <ClInclude Include="jhMonsterScript.h">
       <Filter>Component\Script\Monster\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterUIScript.h">
+      <Filter>Component\Script\UI\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -821,6 +827,9 @@
     <ClCompile Include="jhMonsterScript.cpp">
       <Filter>Component\Script\Monster\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="jhMonsterUIScript.cpp">
+      <Filter>Component\Script\UI\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -868,6 +877,9 @@
     </FxCompile>
     <FxCompile Include="jhNormalMapSpriteVS.hlsl">
       <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceMonsterHealthPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

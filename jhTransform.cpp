@@ -21,12 +21,7 @@ namespace jh
 	{
 	
 	}
-	void Transform::Initialize()
-	{
-	}
-	void Transform::Update()
-	{
-	}
+
 	void Transform::FixedUpdate()
 	{
 		// Update Transform data for Rendering object

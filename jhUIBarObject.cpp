@@ -7,6 +7,8 @@
 #include "jhTransform.h"
 #include "jhPlayerScript.h"
 #include "jhUIBarScript.h"
+#include "jhMonsterUIScript.h"
+#include "jhMonsterScript.h"
 
 using namespace jh::math;
 
@@ -25,19 +27,27 @@ namespace jh
 		switch (meType)
 		{
 		case eUIBarType::HEALTH_BORDER:
+		{
 			GetTransform()->SetPosition(Vector3(0.0f, HEALTH_BORDER_Y_VALUE, BORDER_Z_VALUE));
 			break;
+		}
 		case eUIBarType::STAMINAR_BORDER:
+		{
 			GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE, BAR_Z_VALUE));
 			break;
+		}
 		case eUIBarType::HEALTH_BAR:
+		{
 			GetTransform()->SetPosition(Vector3(0.0f, HEALTH_BORDER_Y_VALUE, BORDER_Z_VALUE));
 			setScript(pPlayerScript);
 			break;
+		}
 		case eUIBarType::STAMINA_BAR:
+		{
 			GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE, BAR_Z_VALUE));
 			setScript(pPlayerScript);
 			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -46,22 +56,17 @@ namespace jh
 		setRenderer();
 	}
 
-	void UIBarObject::Initialize()
+	UIBarObject::UIBarObject(MonsterScript* pMonsterScript)
+		: GameObject(eLayerType::UI)
+		, meType(eUIBarType::MONSTER_HP_BAR)
 	{
-		GameObject::Initialize();
+		assert(pMonsterScript != nullptr);
+		setRenderer();
+		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
+		this->AddScript(pScript);
 	}
-	void UIBarObject::Update()
-	{
-		GameObject::Update();
-	}
-	void UIBarObject::FixedUpdate()
-	{
-		GameObject::FixedUpdate();
-	}
-	void UIBarObject::Render()
-	{
-		GameObject::Render();
-	}
+
+
 	void UIBarObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
