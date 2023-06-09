@@ -56,7 +56,7 @@ namespace jh
 
 	void Monster::SetHitEffectObject(HitEffectObject* pHitEffectObject)
 	{
-		assert(pHitEffectObject);
+		assert(pHitEffectObject != nullptr);
 		mMonsterInfo.pHitEffectObject = pHitEffectObject;
 	}
 

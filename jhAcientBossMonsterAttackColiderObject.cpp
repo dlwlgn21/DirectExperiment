@@ -7,7 +7,7 @@
 static const jh::math::Vector2 MELLE_ATTACK_SIZE(1.0f, 0.3f);
 static const jh::math::Vector2 SPIN_ATTACK_SIZE(4.0f, 0.5f);
 static const jh::math::Vector2 RANGE_ATTACK_SIZE(3.0f, 0.3f);
-static const jh::math::Vector2 SUPER_ATTACK_SIZE(3.0f, 1.0f);
+static const jh::math::Vector2 SUPER_ATTACK_SIZE(3.5f, 1.0f);
 
 namespace jh
 {

@@ -67,4 +67,18 @@ namespace jh
 		);
 
 	}
+	void BossMonster::SetHitEffectObject(HitEffectObject* pHitEffectObject)
+	{
+		mBossMonsterInfo.pHitEffectObject = pHitEffectObject;
+	}
+	void BossMonster::SetInactive()
+	{
+		assert(mBossMonsterInfo.pHitEffectObject != nullptr);
+		this->SetState(eGameObjectState::INACTIVE);
+		mBossMonsterInfo.pHitEffectObject->SetState(eGameObjectState::INACTIVE);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			mBossMonsterInfo.pMonsterAttackColiderObject[i]->SetState(eGameObjectState::INACTIVE);
+		}
+	}
 }

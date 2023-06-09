@@ -14,24 +14,24 @@ static constexpr const float ATTACKING_STATE_COLLIDER_BOX_Y_POSITION	= -2.0f;
 static constexpr const float MELLE_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 1.0f;
 static constexpr const float SPIN_TRACING_STATE_COLLIDER_BOX_Y_POSITION			= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 2.0f;
 static constexpr const float RANGE_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 1.0f;
-static constexpr const float SUPER_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 4.0f;
+static constexpr const float SUPER_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= RANGE_TRACING_STATE_COLLIDER_BOX_Y_POSITION;
 
 static constexpr const float MELEE_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= 2.0f;
 static constexpr const float SPIN_ATTACK_DISTANCE_FROM_HIT_COLLIDER		= 0.0f;
 static constexpr const float RANGE_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= -4.5f;
-static constexpr const float SUPER_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= 4.0f;
+static constexpr const float SUPER_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= RANGE_ATTACK_DISTANCE_FROM_HIT_COLLIDER;
 
 
-static constexpr const UINT MELLE_ATTACK_VAILED_INDEX	= 13;
+static constexpr const UINT MELLE_ATTACK_VAILED_INDEX	= 12;
 static constexpr const UINT SPIN_ATTACK_VAILED_INDEX_1	= 9;
 static constexpr const UINT SPIN_ATTACK_VAILED_INDEX_2	= 16;
 static constexpr const UINT RANGE_ATTACK_VAILED_INDEX	= 10;
-static constexpr const UINT SUPER_ATTACK_VAILED_INDEX	= 9;
+static constexpr const UINT SUPER_ATTACK_VAILED_INDEX	= 12;
 
-static constexpr const UINT MELLE_ATTACK_DAMAGE			= 7;
+static constexpr const UINT MELLE_ATTACK_DAMAGE			= 3;
 static constexpr const UINT SPIN_ATTACK_DAMAGE			= 2;
 static constexpr const UINT RANGE_ATTACK_DAMAGE			= 5;
-static constexpr const UINT SUPER_ATTACK_DAMAGE			= 9;
+static constexpr const UINT SUPER_ATTACK_DAMAGE			= 7;
 
 namespace jh
 {
@@ -110,7 +110,10 @@ namespace jh
 		pos.y = mTracingStateColliderYPos;
 
 		const eBossMonsterState eState = mpMonsterScript->GetState();
-		if (eState == eBossMonsterState::MELLE_ATTACKING || eState == eBossMonsterState::SPIN_ATTACKING || eState == eBossMonsterState::RANGE_ATTACKING)
+		if (eState == eBossMonsterState::MELLE_ATTACKING || 
+			eState == eBossMonsterState::SPIN_ATTACKING	 || 
+			eState == eBossMonsterState::RANGE_ATTACKING || 
+			eState == eBossMonsterState::SUPER_ATTACKING)
 		{
 			pos.y = ATTACKING_STATE_COLLIDER_BOX_Y_POSITION;
 		}

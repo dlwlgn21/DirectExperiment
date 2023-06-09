@@ -19,6 +19,10 @@ namespace jh
 	public:
 		BossMonster(AcientBossMonsterInfo& monsterInfo);
 		virtual ~BossMonster() = default;
+
+		void SetInactive() override;
+		void SetHitEffectObject(HitEffectObject* pHitEffectObject) override;
+
 	private:
 		AcientBossMonsterInfo mBossMonsterInfo;
 	};

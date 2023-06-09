@@ -4,11 +4,13 @@
 #include "jhPlayerScript.h"
 #include "jhTime.h"
 #include "jhCollider2D.h"
+#include "jhBossMonster.h"
+
 #include <random>
 static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
 static constexpr const float INVINCIBILITY_TIME = 0.5f;
-static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 2.0f;
+static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 3.5f;
 static constexpr const float SPIN_ATTACK_AWARENESS_RANGE = 2.5f;
 static constexpr const float RANGE_ATTACK_AWARENESS_RANGE = 4.5f;
 
@@ -19,7 +21,8 @@ static constexpr const UINT RANGE_ATTACK_NUMBER = 2;
 static constexpr UINT ACIENT_BOSS_INITIAL_HP = 30;
 static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
 
-static constexpr const UINT PHASE_2_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.5f);
+static constexpr const UINT PHASE_2_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.7f);
+static constexpr const UINT PHASE_3_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.5f);
 
 
 namespace jh
@@ -37,7 +40,7 @@ namespace jh
 	AcientBossMonsterScript::AcientBossMonsterScript(PlayerScript* pPlayerScript)
 		: MonsterScript()
 		, meState(eBossMonsterState::TRACING)
-		, mePhase(eBossMonsterPhase::LV_2_PHASE)
+		, mePhase(eBossMonsterPhase::LV_1_PHASE)
 		, mInvincibilityTimer(INVINCIBILITY_TIME)
 		, mbIsCountingInvincibilityTime(false)
 		, mbIsHittted(false)
@@ -65,8 +68,8 @@ namespace jh
 
 		float currPos = mpTranform->GetOnlyXPosition();
 		float distanceFromPlayer = currPos - mpPlayerTransform->GetOnlyXPosition();
+		float absDisatanceFromPlayer = std::abs(distanceFromPlayer);
 		float moveXPos = 0.0f;
-
 		if (mbIsCountingInvincibilityTime)
 		{
 			mInvincibilityTimer -= Time::DeltaTime();
@@ -90,14 +93,15 @@ namespace jh
 			static std::random_device sRd;
 			static std::mt19937 sGen(sRd());
 			static std::uniform_int_distribution<> sDist(MELEE_ATTACK_NUMBER, SPIN_ATTACK_NUMBER);
-			if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE &&
+			if (absDisatanceFromPlayer < MELEE_ATTACK_AWARENESS_RANGE &&
 				meState != eBossMonsterState::MELLE_ATTACKING &&
 				meState != eBossMonsterState::SPIN_ATTACKING)
 			{
 				if (sDist(sGen) == MELEE_ATTACK_NUMBER)
 				{
-					setState(eBossMonsterState::MELLE_ATTACKING);
+					setLookDir(distanceFromPlayer);
 					flipLookDirection();
+					setState(eBossMonsterState::MELLE_ATTACKING);
 				}
 				else
 				{
@@ -110,11 +114,7 @@ namespace jh
 		}
 		case eBossMonsterPhase::LV_2_PHASE:
 		{
-			//static std::random_device sRd;
-			//static std::mt19937 sGen(sRd());
-			//static std::uniform_int_distribution<> sDist(SPIN_ATTACK_NUMBER, RANGE_ATTACK_NUMBER);
-
-			if (std::abs(distanceFromPlayer) < SPIN_ATTACK_AWARENESS_RANGE &&
+			if (absDisatanceFromPlayer < SPIN_ATTACK_AWARENESS_RANGE &&
 				meState != eBossMonsterState::SPIN_ATTACKING &&
 				meState != eBossMonsterState::RANGE_ATTACKING)
 			{
@@ -122,7 +122,7 @@ namespace jh
 				return;
 			}
 
-			if (std::abs(distanceFromPlayer) < RANGE_ATTACK_AWARENESS_RANGE &&
+			if (absDisatanceFromPlayer < RANGE_ATTACK_AWARENESS_RANGE &&
 				meState != eBossMonsterState::SPIN_ATTACKING &&
 				meState != eBossMonsterState::RANGE_ATTACKING)
 			{
@@ -134,7 +134,38 @@ namespace jh
 		}
 		case eBossMonsterPhase::LV_3_PHASE:
 		{
+			if (meState == eBossMonsterState::BUFF || meState == eBossMonsterState::DEATH)
+			{
+				break;
+			}
 
+			if (absDisatanceFromPlayer < MELEE_ATTACK_AWARENESS_RANGE && absDisatanceFromPlayer > SPIN_ATTACK_AWARENESS_RANGE &&
+					 meState != eBossMonsterState::SPIN_ATTACKING &&
+					 meState != eBossMonsterState::SUPER_ATTACKING &&
+					 meState != eBossMonsterState::MELLE_ATTACKING)
+			{
+				setLookDir(distanceFromPlayer);
+				flipLookDirection();
+				setState(eBossMonsterState::MELLE_ATTACKING);
+				return;
+			}
+			if (absDisatanceFromPlayer < SPIN_ATTACK_AWARENESS_RANGE &&
+					 meState != eBossMonsterState::SPIN_ATTACKING &&
+					 meState != eBossMonsterState::SUPER_ATTACKING &&
+					 meState != eBossMonsterState::MELLE_ATTACKING)
+			{
+				setState(eBossMonsterState::SPIN_ATTACKING);
+				return;
+			}
+			if (absDisatanceFromPlayer < RANGE_ATTACK_AWARENESS_RANGE &&
+				meState != eBossMonsterState::SPIN_ATTACKING &&
+				meState != eBossMonsterState::SUPER_ATTACKING &&
+				meState != eBossMonsterState::MELLE_ATTACKING)
+			{
+				setLookDir(distanceFromPlayer);
+				setState(eBossMonsterState::SUPER_ATTACKING);
+				return;
+			}
 			break;
 		}
 		default:
@@ -157,7 +188,6 @@ namespace jh
 			mpTranform->SetOnlyXPosition(currPos + moveXPos);
 		}
 #pragma endregion
-
 		setAnimaionFlip();
 		playAnimation();
 	}
@@ -169,12 +199,23 @@ namespace jh
 	void AcientBossMonsterScript::decreaseHP(const int amount)
 	{
 		mCurrHP -= std::abs(amount);
+		
+		if (mePhase == eBossMonsterPhase::LV_1_PHASE && mCurrHP <= PHASE_2_HP)
+		{
+			if (mePhase != eBossMonsterPhase::LV_2_PHASE)
+			{
+				setPhaseState(eBossMonsterPhase::LV_2_PHASE);
+			}
+		}
 
-		//if (mCurrHP <= PHASE_2_HP)
-		//{
-		//	setPhaseState(eBossMonsterPhase::LV_2_PHASE);
-		//}
-
+		if (mePhase == eBossMonsterPhase::LV_2_PHASE && mCurrHP <= PHASE_3_HP)
+		{
+			if (mePhase != eBossMonsterPhase::LV_3_PHASE)
+			{
+				setPhaseState(eBossMonsterPhase::LV_3_PHASE);
+				setState(eBossMonsterState::BUFF);
+			}
+		}
 
 		if (mCurrHP <= 0)
 		{
@@ -215,6 +256,7 @@ namespace jh
 		{
 		case eBossMonsterState::IDLE:
 		{
+			mpAnimator->PlayAnimation(ACIENT_BOSS_IDLE_ANIM_KEY, true);
 			break;
 		}
 		case eBossMonsterState::TRACING:
@@ -274,7 +316,7 @@ namespace jh
 
 	void AcientBossMonsterScript::AnimationMelleAttackStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationMelleAttackComplete()
 	{
@@ -283,7 +325,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackComplete()
 	{
@@ -291,7 +333,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationRangeAttackStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationRangeAttackComplete()
 	{
@@ -299,15 +341,16 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationBuffStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
+		mbIsCountingInvincibilityTime = true;
 	}
 	void AcientBossMonsterScript::AnimationBuffComplete()
 	{
-
+		setState(eBossMonsterState::TRACING);
 	}
 	void AcientBossMonsterScript::AnimationSuperAttackStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationSuperAttackComplete()
 	{
@@ -315,11 +358,11 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationDieStart()
 	{
-
+		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationDieComplete()
 	{
-
+		static_cast<BossMonster*>(GetOwner())->SetInactive();
 	}
 #pragma endregion
 

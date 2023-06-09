@@ -1,5 +1,4 @@
 #include "jhMonsterManager.h"
-#include "jhMonster.h"
 #include "jhBossMonster.h"
 #include "jhResourcesManager.h"
 #include "jhResourceMaker.h"
