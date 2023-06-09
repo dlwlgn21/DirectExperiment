@@ -25,5 +25,3 @@ static constexpr const float MONSTER_EFFECT_Z_VALUE = 1.25f;
 static constexpr const float PLAYER_Z_VALUE = 1.6f;
 static constexpr const float PLAYER_EFFECT_Z_VALUE = 1.2f;
 #pragma endregion
-
-

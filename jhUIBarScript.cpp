@@ -3,6 +3,7 @@
 #include "jhDebugHelper.h"
 #include "jhResourceMaker.h"
 #include "jhMath.h"
+#include "jhTime.h"
 
 using namespace jh::math;
 
@@ -29,7 +30,7 @@ namespace jh
 
 		ConstantBuffer* pCB = ResourceMaker::GetInstance().GetUIBarCBOrNull();
 		assert(pCB != nullptr);
-		pCB->WirteDataAtBuffer(pCB->GetBuffer(), &buffer, sizeof(UIBarBuffer));
+		pCB->WirteDataAtBuffer(&buffer, sizeof(UIBarBuffer));
 		pCB->SetPipeline();
 	}
 	void UIBarScript::FixedUpdate()
