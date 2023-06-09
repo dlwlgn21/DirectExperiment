@@ -50,6 +50,7 @@ namespace jh
 	protected:
 		virtual void decreaseHP(const int amount);
 		void playHitEffectAnimation();
+		void setLookDir(const float xPos);
 
 
 	private:
@@ -62,7 +63,6 @@ namespace jh
 		void setAnimKey();
 		void setAnimationEvent();
 		void setPosition();
-		void setLookDir(const float xPos);
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();

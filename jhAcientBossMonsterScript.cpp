@@ -9,6 +9,9 @@ static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
 static constexpr const float INVINCIBILITY_TIME = 0.5f;
 static constexpr const float MELEE_ATTACK_AWARENESS_RANGE = 2.0f;
+static constexpr const float SPIN_ATTACK_AWARENESS_RANGE = 2.5f;
+static constexpr const float RANGE_ATTACK_AWARENESS_RANGE = 4.5f;
+
 static constexpr const UINT MELEE_ATTACK_NUMBER = 0;
 static constexpr const UINT SPIN_ATTACK_NUMBER = 1;
 static constexpr const UINT RANGE_ATTACK_NUMBER = 2;
@@ -34,7 +37,7 @@ namespace jh
 	AcientBossMonsterScript::AcientBossMonsterScript(PlayerScript* pPlayerScript)
 		: MonsterScript()
 		, meState(eBossMonsterState::TRACING)
-		, mePhase(eBossMonsterPhase::LV_1_PHASE)
+		, mePhase(eBossMonsterPhase::LV_2_PHASE)
 		, mInvincibilityTimer(INVINCIBILITY_TIME)
 		, mbIsCountingInvincibilityTime(false)
 		, mbIsHittted(false)
@@ -107,22 +110,24 @@ namespace jh
 		}
 		case eBossMonsterPhase::LV_2_PHASE:
 		{
-			static std::random_device sRd;
-			static std::mt19937 sGen(sRd());
-			static std::uniform_int_distribution<> sDist(SPIN_ATTACK_NUMBER, RANGE_ATTACK_NUMBER);
-			if (std::abs(distanceFromPlayer) < MELEE_ATTACK_AWARENESS_RANGE &&
+			//static std::random_device sRd;
+			//static std::mt19937 sGen(sRd());
+			//static std::uniform_int_distribution<> sDist(SPIN_ATTACK_NUMBER, RANGE_ATTACK_NUMBER);
+
+			if (std::abs(distanceFromPlayer) < SPIN_ATTACK_AWARENESS_RANGE &&
 				meState != eBossMonsterState::SPIN_ATTACKING &&
 				meState != eBossMonsterState::RANGE_ATTACKING)
 			{
-				if (sDist(sGen) == SPIN_ATTACK_NUMBER)
-				{
-					setState(eBossMonsterState::SPIN_ATTACKING);
-					flipLookDirection();
-				}
-				else
-				{
-					setState(eBossMonsterState::RANGE_ATTACKING);
-				}
+				setState(eBossMonsterState::SPIN_ATTACKING);
+				return;
+			}
+
+			if (std::abs(distanceFromPlayer) < RANGE_ATTACK_AWARENESS_RANGE &&
+				meState != eBossMonsterState::SPIN_ATTACKING &&
+				meState != eBossMonsterState::RANGE_ATTACKING)
+			{
+				setLookDir(distanceFromPlayer);
+				setState(eBossMonsterState::RANGE_ATTACKING);
 				return;
 			}
 			break;
@@ -155,6 +160,52 @@ namespace jh
 
 		setAnimaionFlip();
 		playAnimation();
+	}
+
+
+
+#pragma region UTILL
+
+	void AcientBossMonsterScript::decreaseHP(const int amount)
+	{
+		mCurrHP -= std::abs(amount);
+
+		//if (mCurrHP <= PHASE_2_HP)
+		//{
+		//	setPhaseState(eBossMonsterPhase::LV_2_PHASE);
+		//}
+
+
+		if (mCurrHP <= 0)
+		{
+			mCurrHP = 0;
+			setState(eBossMonsterState::DEATH);
+		}
+
+	}
+
+	void AcientBossMonsterScript::flipLookDirection()
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			meLookDir = eObjectLookDirection::RIGHT;
+		}
+		else
+		{
+			meLookDir = eObjectLookDirection::LEFT;
+		}
+	}
+
+	void AcientBossMonsterScript::setAnimaionFlip()
+	{
+		if (meLookDir == eObjectLookDirection::LEFT)
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(false);
+		}
+		else
+		{
+			mpAnimator->SetCurrAnimationHorizontalFlip(true);
+		}
 	}
 
 	void AcientBossMonsterScript::playAnimation()
@@ -206,50 +257,9 @@ namespace jh
 			break;
 		}
 	}
-
-	void AcientBossMonsterScript::flipLookDirection()
-	{
-		if (meLookDir == eObjectLookDirection::LEFT)
-		{
-			meLookDir = eObjectLookDirection::RIGHT;
-		}
-		else
-		{
-			meLookDir = eObjectLookDirection::LEFT;
-		}
-
-	}
-
-	void AcientBossMonsterScript::decreaseHP(const int amount)
-	{
-		mCurrHP -= std::abs(amount);
-		
-		if (mCurrHP <= PHASE_2_HP)
-		{
-			setPhaseState(eBossMonsterPhase::LV_2_PHASE);
-		}
+#pragma endregion
 
 
-		if (mCurrHP <= 0)
-		{
-			mCurrHP = 0;
-			setState(eBossMonsterState::DEATH);
-		}
-
-	}
-
-
-	void AcientBossMonsterScript::setAnimaionFlip()
-	{
-		if (meLookDir == eObjectLookDirection::LEFT)
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(false);
-		}
-		else
-		{
-			mpAnimator->SetCurrAnimationHorizontalFlip(true);
-		}
-	}
 
 #pragma region ANIMATION_EVENT
 	void AcientBossMonsterScript::AnimationMovingStart()

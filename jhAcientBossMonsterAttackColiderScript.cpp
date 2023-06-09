@@ -13,12 +13,12 @@ using namespace jh::math;
 static constexpr const float ATTACKING_STATE_COLLIDER_BOX_Y_POSITION	= -2.0f;
 static constexpr const float MELLE_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 1.0f;
 static constexpr const float SPIN_TRACING_STATE_COLLIDER_BOX_Y_POSITION			= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 2.0f;
-static constexpr const float RANGE_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 3.0f;
+static constexpr const float RANGE_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 1.0f;
 static constexpr const float SUPER_TRACING_STATE_COLLIDER_BOX_Y_POSITION		= ATTACKING_STATE_COLLIDER_BOX_Y_POSITION - 4.0f;
 
 static constexpr const float MELEE_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= 2.0f;
 static constexpr const float SPIN_ATTACK_DISTANCE_FROM_HIT_COLLIDER		= 0.0f;
-static constexpr const float RANGE_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= 3.0f;
+static constexpr const float RANGE_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= -4.5f;
 static constexpr const float SUPER_ATTACK_DISTANCE_FROM_HIT_COLLIDER	= 4.0f;
 
 
@@ -110,7 +110,7 @@ namespace jh
 		pos.y = mTracingStateColliderYPos;
 
 		const eBossMonsterState eState = mpMonsterScript->GetState();
-		if (eState == eBossMonsterState::MELLE_ATTACKING || eState == eBossMonsterState::SPIN_ATTACKING)
+		if (eState == eBossMonsterState::MELLE_ATTACKING || eState == eBossMonsterState::SPIN_ATTACKING || eState == eBossMonsterState::RANGE_ATTACKING)
 		{
 			pos.y = ATTACKING_STATE_COLLIDER_BOX_Y_POSITION;
 		}
