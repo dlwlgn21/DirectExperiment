@@ -62,6 +62,8 @@ namespace jh
 	{
 		assert(pMonsterScript != nullptr);
 		setRenderer();
+		GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE + 4.0f, BAR_Z_VALUE));
+		GetTransform()->SetScale(Vector3(2.0f, 1.0f, 1.0f));
 		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
 		this->AddScript(pScript);
 	}
@@ -74,17 +76,30 @@ namespace jh
 		switch (meType)
 		{
 		case eUIBarType::HEALTH_BORDER:
+		{
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_HP_BORDER_MATERIAL_KEY);
 			break;
+		}
 		case eUIBarType::STAMINAR_BORDER:
+		{
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_HP_BORDER_MATERIAL_KEY);
 			break;
+		}
 		case eUIBarType::HEALTH_BAR:
+		{
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_HP_BAR_MATERIAL_KEY);
 			break;
+		}
 		case eUIBarType::STAMINA_BAR:
+		{
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY);
 			break;
+		}
+		case eUIBarType::MONSTER_HP_BAR:
+		{
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
+			break;
+		}
 		default:
 			assert(false);
 			break;

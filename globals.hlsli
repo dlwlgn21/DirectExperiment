@@ -30,7 +30,10 @@ cbuffer UIBarBuffer : register(b3)
 {
     float4 UIuv;
 };
-
+cbuffer MonsterUIBuffer : register(b5)
+{
+    float4 MonUIuv;
+}
 
 
 struct VertexIn

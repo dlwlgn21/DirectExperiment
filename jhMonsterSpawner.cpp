@@ -62,37 +62,37 @@ namespace jh
 		if (mSweeperRespawnTimer <= 0.0f)
 			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		mWardenRespawnTimer -= Time::DeltaTime();
-		if (mWardenRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		//mWardenRespawnTimer -= Time::DeltaTime();
+		//if (mWardenRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
 
-		mZombieRespawnTimer -= Time::DeltaTime();
-		if (mZombieRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+		//mZombieRespawnTimer -= Time::DeltaTime();
+		//if (mZombieRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
 
-		mHeabySlicerRespawnTimer -= Time::DeltaTime();
-		if (mHeabySlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
+		//mHeabySlicerRespawnTimer -= Time::DeltaTime();
+		//if (mHeabySlicerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
 
-		mLightSlicerRespawnTimer -= Time::DeltaTime();
-		if (mLightSlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
+		//mLightSlicerRespawnTimer -= Time::DeltaTime();
+		//if (mLightSlicerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
 
-		mDaggerRespawnTimer -= Time::DeltaTime();
-		if (mDaggerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_DAGGER);}
+		//mDaggerRespawnTimer -= Time::DeltaTime();
+		//if (mDaggerRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_DAGGER);}
 
-		mArcherRespawnTimer -= Time::DeltaTime();
-		if (mArcherRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ARCHER);}
+		//mArcherRespawnTimer -= Time::DeltaTime();
+		//if (mArcherRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ARCHER);}
 
-		mBlasterRespawnTimer -= Time::DeltaTime();
-		if (mBlasterRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_BLASTER);}
+		//mBlasterRespawnTimer -= Time::DeltaTime();
+		//if (mBlasterRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_BLASTER);}
 
-		mAcientBossRespawnTimer -= Time::DeltaTime();
-		if (mAcientBossRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);}
+		//mAcientBossRespawnTimer -= Time::DeltaTime();
+		//if (mAcientBossRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)

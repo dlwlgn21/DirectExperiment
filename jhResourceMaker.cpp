@@ -587,6 +587,7 @@ namespace jh
 		mspUVTranslationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UV_TRANSLATION);
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
+		mspMonsterUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::MONSTER_UI_BAR);
 	}
 
 	void ResourceMaker::loadAndInsertShader(const std::wstring& key, const std::wstring& VSFileName, const std::wstring& PSFileName)
@@ -633,6 +634,7 @@ namespace jh
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
 		mspUIBarConstantBuffer.reset();
+		mspMonsterUIBarConstantBuffer.reset();
 		mcpPointBorderSampler.Reset();
 		//mcpPointWrapSampler.Reset();
 	}

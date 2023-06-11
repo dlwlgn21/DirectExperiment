@@ -17,7 +17,7 @@
 #include "jhAcientBossMonsterScript.h"
 #include "jhAcientBossMonsterAttackColiderObject.h"
 #include "jhAcientBossMonsterAttackColiderScript.h"
-
+#include "jhUIBarObject.h"
 
 using namespace jh::math;
 
@@ -776,7 +776,7 @@ namespace jh
 		retMonsterPackage.pMonster->Initialize();
 		retMonsterPackage.pHitEffectObejct->Initialize();
 		retMonsterPackage.pMonsterAttackColliderObject->Initialize();
-
+		retMonsterPackage.pUIBarObject->Initialize();
 		return retMonsterPackage;
 	}
 
@@ -983,6 +983,10 @@ namespace jh
 		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(monInfo.pHitEffectObject->GetScriptOrNull()));
 		retMonsterPackage.pMonster = pMonster;
 		retMonsterPackage.pHitEffectObejct = monInfo.pHitEffectObject;
+		UIBarObject* pUIBarObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		retMonsterPackage.pUIBarObject = pUIBarObject;
+		pMonster->SetUIBarObject(pUIBarObject);
+
 	}
 	void MonsterManager::createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos)
 	{
@@ -1045,6 +1049,7 @@ namespace jh
 			break;
 		}
 	}
+
 	void MonsterManager::fillLeftTopsArray(jh::math::Vector2 leftTopArray[], const jh::math::Vector2 movingLeftTop, const jh::math::Vector2 attackLeftTop, const jh::math::Vector2 hitLeftTop, const jh::math::Vector2 dieLeftTop)
 	{
 		leftTopArray[static_cast<UINT>(eAnimationIndexSequence::MOVING)] = movingLeftTop;
@@ -1066,4 +1071,6 @@ namespace jh
 		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::HIT)] = hitDuration;
 		animDurationArray[static_cast<UINT>(eAnimationIndexSequence::DIE)] = dieDuration;
 	}
+
+
 }

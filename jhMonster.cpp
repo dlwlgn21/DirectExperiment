@@ -13,6 +13,7 @@
 #include "jhMonsterAttackColiderObject.h"
 #include "jhMonsterObjectPool.h"
 #include "jhAcientBossMonsterScript.h"
+#include "jhUIBarObject.h"
 
 using namespace jh::math;
 
@@ -37,22 +38,7 @@ namespace jh
 		setHitColliderCenterPos(pMonsterCollider);
 		this->AddComponent(pMonsterCollider);
 	}
-	void Monster::Initialize()
-	{
-		GameObject::Initialize();
-	}
-	void Monster::Update()
-	{
-		GameObject::Update();
-	}
-	void Monster::FixedUpdate()
-	{
-		GameObject::FixedUpdate();
-	}
-	void Monster::Render()
-	{
-		GameObject::Render();
-	}
+
 
 	void Monster::SetHitEffectObject(HitEffectObject* pHitEffectObject)
 	{
@@ -62,16 +48,17 @@ namespace jh
 
 	void Monster::SetInactive()
 	{
-		assert(mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMonsterAttackColiderObject != nullptr);
+		assert(mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMonsterAttackColiderObject != nullptr && mMonsterInfo.pUIBarObject != nullptr && mMonsterInfo.pHitEffectObject != nullptr);
 		this->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pHitEffectObject->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pMonsterAttackColiderObject->SetState(eGameObjectState::INACTIVE);
+		mMonsterInfo.pUIBarObject->SetState(eGameObjectState::INACTIVE);
 		MonsterPackage monPack;
 		ZeroMemory(&monPack, sizeof(MonsterPackage));
 		monPack.pMonster = this;
 		monPack.pHitEffectObejct = mMonsterInfo.pHitEffectObject;
 		monPack.pMonsterAttackColliderObject = mMonsterInfo.pMonsterAttackColiderObject;
-
+		monPack.pUIBarObject = mMonsterInfo.pUIBarObject;
 		MonsterObjectPool::GetInstance().Return(mMonsterInfo.eMonType, monPack);
 	}
 

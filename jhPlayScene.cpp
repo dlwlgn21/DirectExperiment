@@ -224,10 +224,12 @@ namespace jh
 
 	void PlayScene::AddMonster(const MonsterPackage& monPack)
 	{
-		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr);
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIBarObject != nullptr);
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
 		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pUIBarObject, eLayerType::MONSTER);
+
 	}
 
 	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)

@@ -11,7 +11,7 @@ namespace jh
 	class MonsterAttackColiderObject;
 	class Collider2D;
 	class AcientBossMonsterAttackColiderObject;
-
+	class UIBarObject;
 	struct MonsterInfo
 	{
 		HitEffectObject*			pHitEffectObject;
@@ -20,6 +20,7 @@ namespace jh
 		Material*					pMaterial;
 		Animator*					pAnimator;
 		MonsterAttackColiderObject* pMonsterAttackColiderObject;
+		UIBarObject*				pUIBarObject;
 		eMonsterType				eMonType;
 	};
 
@@ -30,14 +31,9 @@ namespace jh
 		Monster();
 		virtual ~Monster() = default;
 
-		void Initialize() override;
-		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
-
 		virtual void SetHitEffectObject(HitEffectObject* pHitEffectObject);
 		virtual void SetInactive();
-
+		void SetUIBarObject(UIBarObject* pUIBarObjecat) { assert(pUIBarObjecat != nullptr && mMonsterInfo.pUIBarObject == nullptr); mMonsterInfo.pUIBarObject = pUIBarObjecat; }
 		void SetActive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	

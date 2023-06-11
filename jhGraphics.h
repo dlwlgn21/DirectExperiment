@@ -14,6 +14,7 @@ static constexpr const UINT BG_UV_TRANSLATION_CB_SLOT_NUMBER = 2;
 static constexpr const UINT COLLIDER_CB_SLOT_NUMBER = 3;
 static constexpr const UINT UI_BAR_CB_SLOT_NUMBER = 3;
 static constexpr const UINT LIGHT_CB_SLOT_NUMBER = 4;
+static constexpr const UINT MONSTER_UI_CB_SLOT_NUMBER = 5;
 static constexpr const UINT SIMD_ALIGN_SIZE = 16;
 
 namespace jh
@@ -66,6 +67,10 @@ namespace jh
 		jh::math::Vector4			    UV;
 	};
 
+	struct alignas(SIMD_ALIGN_SIZE) MonsterUIBarBuffer
+	{
+		jh::math::Vector4			    UV;
+	};
 
 	struct alignas(SIMD_ALIGN_SIZE) DebugMesh
 	{

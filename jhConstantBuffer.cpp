@@ -44,6 +44,11 @@ namespace jh
 			mBufferDesc.ByteWidth = sizeof(NumberOfLight);
 			break;
 		}
+		case eConstantBufferType::MONSTER_UI_BAR:
+		{
+			mBufferDesc.ByteWidth = sizeof(MonsterUIBarBuffer);
+			break;
+		}
 		default:
 			assert(false);
 			break;
@@ -112,6 +117,12 @@ namespace jh
 		case eConstantBufferType::LIGHT:
 		{
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(LIGHT_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			break;
+		}
+		case eConstantBufferType::MONSTER_UI_BAR:
+		{
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(MONSTER_UI_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(MONSTER_UI_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 		}
 		default:
