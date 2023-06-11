@@ -61,11 +61,15 @@ namespace jh
 		, meType(eUIBarType::MONSTER_HP_BAR)
 	{
 		assert(pMonsterScript != nullptr);
-		setRenderer();
-		GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE + 4.0f, BAR_Z_VALUE));
-		GetTransform()->SetScale(Vector3(2.0f, 1.0f, 1.0f));
-		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
-		this->AddScript(pScript);
+		setMonsterUI(pMonsterScript);
+
+	}
+
+	UIBarObject::UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript)
+		: GameObject(eLayerType::UI)
+		, meType(eType)
+	{
+		setMonsterUI(pMonsterScript);
 	}
 
 
@@ -100,6 +104,12 @@ namespace jh
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
 			break;
 		}
+		case eUIBarType::MONSTER_HP_BORDER:
+		{
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY);
+			break;
+		}
+
 		default:
 			assert(false);
 			break;
@@ -115,5 +125,16 @@ namespace jh
 		assert(pPlayerScript != nullptr);
 		UIBarScript* pScript = new UIBarScript(meType, pPlayerScript);
 		this->AddScript(pScript);
+	}
+
+	void UIBarObject::setMonsterUI(MonsterScript* pMonsterScript)
+	{
+		assert(pMonsterScript != nullptr);
+		setRenderer();
+		//GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE + 4.0f, BAR_Z_VALUE));
+		//GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
+		this->AddScript(pScript);
+		pScript->SetMounsterUIType(meType);
 	}
 }

@@ -20,7 +20,8 @@ namespace jh
 		Material*					pMaterial;
 		Animator*					pAnimator;
 		MonsterAttackColiderObject* pMonsterAttackColiderObject;
-		UIBarObject*				pUIBarObject;
+		UIBarObject*				pUIHpBarObject;
+		UIBarObject*				pUIBorderBarObject;
 		eMonsterType				eMonType;
 	};
 
@@ -33,7 +34,8 @@ namespace jh
 
 		virtual void SetHitEffectObject(HitEffectObject* pHitEffectObject);
 		virtual void SetInactive();
-		void SetUIBarObject(UIBarObject* pUIBarObjecat) { assert(pUIBarObjecat != nullptr && mMonsterInfo.pUIBarObject == nullptr); mMonsterInfo.pUIBarObject = pUIBarObjecat; }
+		void SetUIHpBarObject(UIBarObject* pUIBarObjecat) { assert(pUIBarObjecat != nullptr && mMonsterInfo.pUIHpBarObject == nullptr); mMonsterInfo.pUIHpBarObject = pUIBarObjecat; }
+		void SetUIBorderBarObject(UIBarObject* pUIBarObjecat) { assert(pUIBarObjecat != nullptr && mMonsterInfo.pUIBorderBarObject == nullptr); mMonsterInfo.pUIBorderBarObject = pUIBarObjecat; }
 		void SetActive();
 		void SetMonsterAttackCollider(MonsterAttackColiderObject* pAttackColider) { assert(pAttackColider != nullptr); mMonsterInfo.pMonsterAttackColiderObject = pAttackColider; };
 	

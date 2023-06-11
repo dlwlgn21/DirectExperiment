@@ -10,6 +10,7 @@ namespace jh
 		HEALTH_BAR,
 		STAMINA_BAR,
 		MONSTER_HP_BAR,
+		MONSTER_HP_BORDER,
 		COUNT
 	};
 	class PlayerScript;
@@ -20,11 +21,15 @@ namespace jh
 	public:
 		UIBarObject(const eUIBarType eType, PlayerScript* pPlayerScript);
 		UIBarObject(MonsterScript* pMonsterScript);
+		UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript);
 		virtual ~UIBarObject() = default;
+
+		const eUIBarType GetUIType() const { return meType; }
 
 	private:
 		void setRenderer();
 		void setScript(PlayerScript* pPlayerScript);
+		void setMonsterUI(MonsterScript* pMonsterScript);
 	private:
 		const eUIBarType meType;
 	};

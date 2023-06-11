@@ -24,6 +24,7 @@ namespace jh
 		__forceinline void SetOnlyXYPosition(const jh::math::Vector2 pos)	{ mPosition.x = pos.x; mPosition.y = pos.y; }
 		__forceinline void SetRotation(const jh::math::Vector3 rotation)			{ mRotation = rotation; }
 
+		__forceinline void SetOnlyXScale(const float xSclae)						{ mScale.x = xSclae; }
 		__forceinline void SetOnlyXYScale(const float xScale, const float yScale)	{ mScale.x = xScale; mScale.y = yScale; }
 		__forceinline void SetOnlyXYScale(const float xAndyScale)	{ mScale.x = xAndyScale; mScale.y = xAndyScale; }
 		__forceinline void SetScale(const jh::math::Vector3 scale)					{ mScale = scale; }

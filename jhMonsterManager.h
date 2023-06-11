@@ -29,12 +29,14 @@ namespace jh
 		Monster*					pMonster;
 		HitEffectObject*			pHitEffectObejct;
 		MonsterAttackColiderObject* pMonsterAttackColliderObject;
-		UIBarObject*				pUIBarObject;
+		UIBarObject*				pUIHpBarObject;
+		UIBarObject*				pUIBorderBarObject;
 		MonsterPackage()
 			: pMonster(nullptr)
 			, pHitEffectObejct(nullptr)
 			, pMonsterAttackColliderObject(nullptr)
-			, pUIBarObject(nullptr)
+			, pUIHpBarObject(nullptr)
+			, pUIBorderBarObject(nullptr)
 		{
 
 		}

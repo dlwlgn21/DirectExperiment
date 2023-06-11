@@ -776,7 +776,8 @@ namespace jh
 		retMonsterPackage.pMonster->Initialize();
 		retMonsterPackage.pHitEffectObejct->Initialize();
 		retMonsterPackage.pMonsterAttackColliderObject->Initialize();
-		retMonsterPackage.pUIBarObject->Initialize();
+		retMonsterPackage.pUIHpBarObject->Initialize();
+		retMonsterPackage.pUIBorderBarObject->Initialize();
 		return retMonsterPackage;
 	}
 
@@ -983,9 +984,13 @@ namespace jh
 		static_cast<MonsterScript*>(pMonster->GetScriptOrNull())->SetHitEffectScript(static_cast<HitEffectScript*>(monInfo.pHitEffectObject->GetScriptOrNull()));
 		retMonsterPackage.pMonster = pMonster;
 		retMonsterPackage.pHitEffectObejct = monInfo.pHitEffectObject;
-		UIBarObject* pUIBarObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
-		retMonsterPackage.pUIBarObject = pUIBarObject;
-		pMonster->SetUIBarObject(pUIBarObject);
+		UIBarObject* pUIHpBarObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		retMonsterPackage.pUIHpBarObject = pUIHpBarObject;
+		pMonster->SetUIHpBarObject(pUIHpBarObject);
+	
+		UIBarObject* pUIBorderBarObject = new UIBarObject(eUIBarType::MONSTER_HP_BORDER, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		retMonsterPackage.pUIBorderBarObject = pUIBorderBarObject;
+		pMonster->SetUIBorderBarObject(pUIBorderBarObject);
 
 	}
 	void MonsterManager::createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos)

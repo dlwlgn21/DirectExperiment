@@ -1,7 +1,7 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhGraphics.h"
-#include "jhStructuredBuffer.h"
+#include "jhLightStructuredBuffer.h"
 #include "jhConstantBuffer.h"
 
 namespace jh
@@ -36,8 +36,8 @@ namespace jh
 			mspLightStructuredBuffer.reset();
 		}
 	private:
-		std::vector<LightAttribute>			mLights;
-		std::unique_ptr<StructuredBuffer>	mspLightStructuredBuffer;
-		std::unique_ptr<ConstantBuffer>		mspLightConstantBuffer;
+		std::vector<LightAttribute>				mLights;
+		std::unique_ptr<LightStructuredBuffer>	mspLightStructuredBuffer;
+		std::unique_ptr<ConstantBuffer>			mspLightConstantBuffer;
 	};
 }

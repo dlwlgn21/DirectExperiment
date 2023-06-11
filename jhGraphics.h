@@ -67,9 +67,14 @@ namespace jh
 		jh::math::Vector4			    UV;
 	};
 
-	struct alignas(SIMD_ALIGN_SIZE) MonsterUIBarBuffer
+	struct alignas(SIMD_ALIGN_SIZE) MonsterUIBuffer
 	{
-		jh::math::Vector4			    UV;
+		UINT					CountOfMonsterInScene;
+		MonsterUIBuffer()
+			: CountOfMonsterInScene(0)
+		{
+			static_assert(sizeof(MonsterUIBuffer) == SIMD_ALIGN_SIZE);
+		}
 	};
 
 	struct alignas(SIMD_ALIGN_SIZE) DebugMesh
@@ -85,7 +90,12 @@ namespace jh
 
 	struct alignas(SIMD_ALIGN_SIZE) NumberOfLight
 	{
-		UINT NumberOfLight;
+		UINT CountOfLight;
+		NumberOfLight()
+			: CountOfLight(0)
+		{
+			static_assert(sizeof(NumberOfLight) == SIMD_ALIGN_SIZE);
+		}
 	};
 
 	struct alignas(SIMD_ALIGN_SIZE) LightAttribute
@@ -113,6 +123,11 @@ namespace jh
 		{	
 			assert((sizeof(LightAttribute) % SIMD_ALIGN_SIZE) == 0);
 		}
+	};
+	
+	struct alignas(SIMD_ALIGN_SIZE) MonsterUIAttribute
+	{
+		jh::math::Vector4 MonsterHPRatio;
 	};
 
 

@@ -23,7 +23,6 @@ namespace jh
 	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 3.0f;
 	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 2.0f;
 	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 2.0f;
-
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
 	static constexpr const float WARDEN_Y_POS = -2.0f;

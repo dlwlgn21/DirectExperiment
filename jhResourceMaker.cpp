@@ -59,6 +59,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY = L"UIMonsterBorderBar";
 
 
 	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
@@ -124,6 +125,7 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
+	const std::wstring ResourceMaker::UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY = L"UIBorderMonsterMaterial";
 
 	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
@@ -460,6 +462,7 @@ namespace jh
 		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"UI_Player_HpBar.png");
 		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"UI_Player_StaminarBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
+		loadAndInsertTexture(UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY, L"UI_MON_Border_HpBar.png");
 
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
@@ -528,6 +531,7 @@ namespace jh
 		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MONSTER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BAR_TEXTURE_KEY);
+		insertMaterial(UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY);
 
 
 #pragma region DEBUG
@@ -587,7 +591,6 @@ namespace jh
 		mspUVTranslationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UV_TRANSLATION);
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
-		mspMonsterUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::MONSTER_UI_BAR);
 	}
 
 	void ResourceMaker::loadAndInsertShader(const std::wstring& key, const std::wstring& VSFileName, const std::wstring& PSFileName)
@@ -634,7 +637,6 @@ namespace jh
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
 		mspUIBarConstantBuffer.reset();
-		mspMonsterUIBarConstantBuffer.reset();
 		mcpPointBorderSampler.Reset();
 		//mcpPointWrapSampler.Reset();
 	}

@@ -15,9 +15,12 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 
+		void SetMounsterUIType(const eUIBarType eUIType) { meType = eUIType; }
+
 	private:
 		MonsterScript*		mpMonsterScript;
 		Transform*			mpTransform;
 		Transform*			mpMonsterTransform;
+		eUIBarType			meType;
 	};
 }

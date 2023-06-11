@@ -1,6 +1,5 @@
 #include "jhStructuredBuffer.h"
 
-static const constexpr UINT STRUCTURED_BUFFER_SLOT_NUMBER = 13;
 
 namespace jh
 {
@@ -78,10 +77,5 @@ namespace jh
 			graphics::GraphicDeviceDX11::GetInstance().WriteDataAtBuffer(mcpStructuredBuffer.Get(), pData, static_cast<size_t>(mSize * bufferCount));
 		}
 	}
-	void StructuredBuffer::SetPipeline()
-	{
-		assert(mcpStructuredBuffer != nullptr && mcpSRV != nullptr);
-		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetShaderResources();
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetShaderResources(STRUCTURED_BUFFER_SLOT_NUMBER, 1, mcpSRV.GetAddressOf());
-	}
+
 }

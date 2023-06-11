@@ -316,6 +316,18 @@
     <Filter Include="Component\Script\UI\Monster">
       <UniqueIdentifier>{342fe33c-1e3f-4c5c-b5aa-bbc1f17911aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\StructuredBuffer\Base">
+      <UniqueIdentifier>{9a16c095-e6da-4aba-af98-071448bcd00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\StructuredBuffer\Light">
+      <UniqueIdentifier>{ca4c4d29-09ea-430b-9b0d-bfa55aa5931a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\StructuredBuffer\MonsterHPUI">
+      <UniqueIdentifier>{bd94f8a1-67b9-4f04-8fe4-4c4e355662e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MonsterUIManager">
+      <UniqueIdentifier>{1ec3fd9a-1244-427e-9ba2-4c6f5e32e517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -504,9 +516,6 @@
     <ClInclude Include="jhLight.h">
       <Filter>Component\Light</Filter>
     </ClInclude>
-    <ClInclude Include="jhStructuredBuffer.h">
-      <Filter>Resource\StructuredBuffer</Filter>
-    </ClInclude>
     <ClInclude Include="jhLightingManager.h">
       <Filter>LightingManager</Filter>
     </ClInclude>
@@ -584,6 +593,18 @@
     </ClInclude>
     <ClInclude Include="jhMonsterUIScript.h">
       <Filter>Component\Script\UI\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStructuredBuffer.h">
+      <Filter>Resource\StructuredBuffer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhLightStructuredBuffer.h">
+      <Filter>Resource\StructuredBuffer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterUIStructuredBuffer.h">
+      <Filter>Resource\StructuredBuffer\MonsterHPUI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterUIManager.h">
+      <Filter>MonsterUIManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -755,9 +776,6 @@
     <ClCompile Include="jhLight.cpp">
       <Filter>Component\Light</Filter>
     </ClCompile>
-    <ClCompile Include="jhStructuredBuffer.cpp">
-      <Filter>Resource\StructuredBuffer</Filter>
-    </ClCompile>
     <ClCompile Include="jhLightingManager.cpp">
       <Filter>LightingManager</Filter>
     </ClCompile>
@@ -829,6 +847,18 @@
     </ClCompile>
     <ClCompile Include="jhMonsterUIScript.cpp">
       <Filter>Component\Script\UI\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStructuredBuffer.cpp">
+      <Filter>Resource\StructuredBuffer\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhLightStructuredBuffer.cpp">
+      <Filter>Resource\StructuredBuffer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterUIStructuredBuffer.cpp">
+      <Filter>Resource\StructuredBuffer\MonsterHPUI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterUIManager.cpp">
+      <Filter>MonsterUIManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

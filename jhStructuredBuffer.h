@@ -4,7 +4,7 @@
 
 namespace jh
 {
-	class StructuredBuffer final
+	class StructuredBuffer
 	{
 	public:
 		StructuredBuffer();
@@ -14,9 +14,9 @@ namespace jh
 
 		ID3D11Buffer* GetBuffer() const { return mcpStructuredBuffer.Get(); }
 		void WirteDataAtBuffer(void* pData, const UINT bufferCount);
-		void SetPipeline();
+		virtual void SetPipeline() = 0;
 
-	private:
+	protected:
 		Microsoft::WRL::ComPtr<ID3D11Buffer>				mcpStructuredBuffer;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>	mcpSRV;
 		D3D11_BUFFER_DESC									mBufferDesc;

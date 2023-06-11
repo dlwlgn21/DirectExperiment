@@ -77,7 +77,7 @@ namespace jh
 		COLLIDER_COLOR,
 		UI_BAR,
 		LIGHT,
-		MONSTER_UI_BAR,
+		MONSTER_UI,
 		COUNT,
 	};
 
