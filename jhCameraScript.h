@@ -22,14 +22,16 @@ namespace jh
 	private:
 		void setCameraAtSpecifiedYPosition(jh::math::Vector3& pos);
 		void setPlayerScript();
-		void cameraShake(jh::math::Vector3& pos);
+		void monsterAttackCamShake(jh::math::Vector3& pos);
+		void skillAttackCamShake(jh::math::Vector3& pos);
+		void powerAttackCamShake(jh::math::Vector3& pos);
 	private:
 		Transform*			mpTranform;
 		Transform*			mpPlayerTransform;
 		PlayerScript*		mpPlayerScript;
 		float				mSpeed;
 		float				mPowerAttackCamShakeTimer;
-		float				mPowerAttackCamShakeTime;
+		float				mSkillAttackCamShakeTimer;
 	};
 }
 

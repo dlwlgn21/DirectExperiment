@@ -42,6 +42,7 @@ namespace jh
 			if (mTimer < 0.0f)
 			{
 				resetCoolTimer();
+				setAnimationFlip();
 				SetState(eSKillState::PLAYING);
 			}
 			break;

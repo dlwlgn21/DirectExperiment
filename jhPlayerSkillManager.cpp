@@ -5,6 +5,8 @@
 
 using namespace jh::math;
 
+static constexpr const float DEFAULT_SKILL_ANIM_DURATION = 0.1f;
+
 namespace jh
 {
 	void PlayerSkillManager::Update()
@@ -21,7 +23,7 @@ namespace jh
 		{
 		case ePlayerSkillType::ELETRIC_BEAM:
 		{
-			fillAnimInfo(animInfo, 375.0f, 64.0f, 500.0f, 9, 0.2f, L"ElectricBeamKey");
+			fillAnimInfo(animInfo, 375.0f, 64.0f, 500.0f, 9, DEFAULT_SKILL_ANIM_DURATION, L"ElectricBeamKey");
 			pSkillObejct = new PlayerSkillObject(
 				eSkillType, 
 				mpPlayerScript, 
@@ -33,7 +35,7 @@ namespace jh
 		}
 		case ePlayerSkillType::ELETRIC_STRIKE:
 		{
-			fillAnimInfo(animInfo, 80.0f, 176.0f, 500.0f, 10, 0.2f, L"ElectricStrikeKey");
+			fillAnimInfo(animInfo, 80.0f, 176.0f, 600.0f, 10, DEFAULT_SKILL_ANIM_DURATION -0.025f, L"ElectricStrikeKey");
 			pSkillObejct = new PlayerSkillObject(
 				eSkillType,
 				mpPlayerScript,
@@ -45,7 +47,7 @@ namespace jh
 		}
 		case ePlayerSkillType::TORNADO:
 		{
-			fillAnimInfo(animInfo, 64.0f, 64.0f, 300.0f, 18, 0.1f, L"ElectricTornadoKey");
+			fillAnimInfo(animInfo, 64.0f, 64.0f, 300.0f, 18, DEFAULT_SKILL_ANIM_DURATION, L"ElectricTornadoKey");
 			pSkillObejct = new PlayerSkillObject(
 				eSkillType,
 				mpPlayerScript,

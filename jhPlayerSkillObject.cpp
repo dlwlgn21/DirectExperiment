@@ -19,7 +19,7 @@ using namespace jh::math;
 
 static constexpr const float ELECTRIC_BEAM_XY_SCALE_VALUE = 12.0f;
 static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
-static constexpr const float ELECTRIC_STRIKE_XY_SCALE_VALUE = 15.0f;
+static constexpr const float ELECTRIC_STRIKE_XY_SCALE_VALUE = 20.0f;
 static constexpr const float ELECTRIC_TORNADO_XY_SCALE_VALUE = 12.0f;
 
 
@@ -144,7 +144,7 @@ namespace jh
 		}
 		case ePlayerSkillType::ELETRIC_STRIKE:
 		{
-			pCollider->SetSize(Vector2(0.075f, 0.3f));
+			pCollider->SetSize(Vector2(0.025f, 0.3f));
 			break;
 		}
 		case ePlayerSkillType::TORNADO:

@@ -1,3 +1,4 @@
+#include <random>
 #include "jhPlayerSkillElectricStrikeScript.h"
 #include "jhMath.h"
 #include "jhAnimator.h"
@@ -7,15 +8,16 @@
 #include "jhMonsterScript.h"
 #include "jhTime.h"
 #include "jhCollider2D.h"
-
 using namespace jh::math;
 
-static constexpr const float DISTANCE_FROM_PLAYER_X_DISTANCE = 4.0f;
+static constexpr const float DISTANCE_FROM_PLAYER_X_DISTANCE = 2.0f;
+static constexpr const int   X_DISTNACE_RANDOM_RANGE = 2;
 static constexpr const float DISTANCE_FROM_PLAYER_Y_DISTANCE = 10.0f;
-static constexpr const float ELECTRIC_STRIKE_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
+static constexpr const float ELECTRIC_STRIKE_Y_POS_DISTANCE_FROM_PLAYER = 1.5f;
 static constexpr const UINT ELECTRIC_STRIKE_ANIMATION_DAMGAE_VAILED_INDEX = 3;
 static constexpr const UINT ELECTRIC_STRIKE_DAMAGE = 6;
-static constexpr const float ELECTRIC_STRIKE_COOL_TIME = 5.0f;
+static constexpr const float ELECTRIC_STRIKE_COOL_TIME = 1.0f;
+static constexpr const float ELECTRIC_STRIKE_PUSH_DISTANCE = 0.0f;
 
 namespace jh
 {
@@ -65,16 +67,22 @@ namespace jh
 	{
 		const Vector2 playerPos = mpPlayerTransform->GetOnlyXYPosition();
 		const float yPos = playerPos.y + DISTANCE_FROM_PLAYER_Y_DISTANCE;
+
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<> dist(-X_DISTNACE_RANDOM_RANGE, X_DISTNACE_RANDOM_RANGE);
+		float xRandomMove = static_cast<float>(dist(gen));
+
 		switch (mePlayerLookDirection)
 		{
 		case eObjectLookDirection::LEFT:
 		{
-			mpTransform->SetOnlyXYPosition(playerPos.x - DISTANCE_FROM_PLAYER_X_DISTANCE, yPos);
+			mpTransform->SetOnlyXYPosition((playerPos.x - DISTANCE_FROM_PLAYER_X_DISTANCE) + xRandomMove, yPos);
 			break;
 		}
 		case eObjectLookDirection::RIGHT:
 		{
-			mpTransform->SetOnlyXYPosition(playerPos.x + DISTANCE_FROM_PLAYER_X_DISTANCE, yPos);
+			mpTransform->SetOnlyXYPosition((playerPos.x + DISTANCE_FROM_PLAYER_X_DISTANCE) + xRandomMove, yPos);
 			break;
 		}
 		default:
@@ -87,6 +95,7 @@ namespace jh
 		mSkillStat.Damage = ELECTRIC_STRIKE_DAMAGE;
 		mSkillStat.CoolTime = ELECTRIC_STRIKE_COOL_TIME;
 		mSkillStat.VailedAttackIndex = ELECTRIC_STRIKE_ANIMATION_DAMGAE_VAILED_INDEX;
+		mSkillStat.PushDistance = ELECTRIC_STRIKE_PUSH_DISTANCE;
 		mTimer = mSkillStat.CoolTime;
 	}
 

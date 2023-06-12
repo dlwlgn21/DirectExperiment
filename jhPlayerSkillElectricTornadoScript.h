@@ -9,6 +9,8 @@ namespace jh
 		PlayerSkillElectricTornadoScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator);
 		virtual ~PlayerSkillElectricTornadoScript() = default;
 
+		void Update() override;
+
 		void AnimationSkillStart();
 		void AnimationSkillComplete();
 
@@ -18,7 +20,9 @@ namespace jh
 		void setOnlyYPositoin() override;
 		void setWatingPosition() override;
 		void initSkillStat() override;
+
+		void moveXPosition();
 	private:
-		const std::wstring mAnimKey;
+		const std::wstring		mAnimKey;
 	};
 }

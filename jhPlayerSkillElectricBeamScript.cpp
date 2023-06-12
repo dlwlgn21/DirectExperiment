@@ -13,9 +13,10 @@ using namespace jh::math;
 static constexpr const float DISTANCE_FROM_PLAYER_X_DISTANCE = 4.0f;
 static constexpr const float DISTANCE_FROM_PLAYER_Y_DISTANCE = 10.0f;
 static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
-static constexpr const UINT ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX = 8;
+static constexpr const UINT ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX = 3;
 static constexpr const UINT ELECTRIC_BEAM_DAMAGE = 3;
 static constexpr const float ELECTRIC_BEAM_COOL_TIME = 3.0f;
+static constexpr const float ELECTRIC_BEAM_PUSH_DISTANCE = 2.0f;
 
 
 namespace jh
@@ -88,6 +89,7 @@ namespace jh
 		mSkillStat.Damage = ELECTRIC_BEAM_DAMAGE;
 		mSkillStat.CoolTime = ELECTRIC_BEAM_COOL_TIME;
 		mSkillStat.VailedAttackIndex = ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX;
+		mSkillStat.PushDistance = ELECTRIC_BEAM_PUSH_DISTANCE;
 		mTimer = mSkillStat.CoolTime;
 	}
 

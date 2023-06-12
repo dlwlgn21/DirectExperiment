@@ -8,11 +8,13 @@
 
 using namespace jh::math;
 
-static constexpr const INT CAM_SHAKE_RANGE = 5;
+static constexpr const INT PLAYER_HITTED_CAM_SHAKE_RANGE = 7;
+static constexpr const INT SKILL_ATTACK_CAM_SHAKE_RANGE = 15;
+static constexpr const INT POWER_ATTACK_CAM_SHAKE_RANGE = 10;
 static constexpr const float RESTRICTION = 100.0f;
 static constexpr const float Y_CAMERA_POS = 0.0f;
 static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.2f;
-
+static constexpr const float PLAYER_SKILL_ATTACK_CAM_SHAKE_TIME = 0.4f;
 
 namespace jh
 {
@@ -23,7 +25,7 @@ namespace jh
 		, mpPlayerScript(nullptr)
 		, mSpeed(100.0f)
 		, mPowerAttackCamShakeTimer(PLAYER_POWER_ATTACK_CAM_SHAKE_TIME)
-		, mPowerAttackCamShakeTime(PLAYER_POWER_ATTACK_CAM_SHAKE_TIME)
+		, mSkillAttackCamShakeTimer(PLAYER_SKILL_ATTACK_CAM_SHAKE_TIME)
 	{
 	}
 
@@ -47,7 +49,21 @@ namespace jh
 		const ePlayerState eState = mpPlayerScript->GetPlayerState();
 		if (eState == ePlayerState::HITTED)
 		{
-			cameraShake(pos);
+			monsterAttackCamShake(pos);
+			return;
+		}
+
+		if (mpPlayerScript->IsHitSkillAtack())
+		{
+			mSkillAttackCamShakeTimer -= Time::DeltaTime();
+			if (mSkillAttackCamShakeTimer < 0.0f)
+			{
+				mSkillAttackCamShakeTimer = PLAYER_SKILL_ATTACK_CAM_SHAKE_TIME;
+				mpPlayerScript->SetIsHitSkillAttack(false);
+				setCameraAtSpecifiedYPosition(pos);
+				return;
+			}
+			skillAttackCamShake(pos);
 			return;
 		}
 
@@ -56,14 +72,16 @@ namespace jh
 			mPowerAttackCamShakeTimer -= Time::DeltaTime();
 			if (mPowerAttackCamShakeTimer < 0.0f)
 			{
-				mPowerAttackCamShakeTimer = mPowerAttackCamShakeTime;
+				mPowerAttackCamShakeTimer = PLAYER_POWER_ATTACK_CAM_SHAKE_TIME;
 				mpPlayerScript->SetIsHitAttack(false);
 				setCameraAtSpecifiedYPosition(pos);
 				return;
 			}
-			cameraShake(pos);
+			powerAttackCamShake(pos);
 			return;
 		}
+
+
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)
 		{
@@ -111,11 +129,36 @@ namespace jh
 		mpPlayerScript = static_cast<PlayerScript*>(mpPlayerTransform->GetOwner()->GetScriptOrNull());
 		assert(mpPlayerScript != nullptr);
 	}
-	void CameraScript::cameraShake(Vector3& pos)
+
+
+	void CameraScript::skillAttackCamShake(jh::math::Vector3& pos)
 	{
 		static std::random_device rd;
 		static std::mt19937 gen(rd());
-		static std::uniform_int_distribution<> dist(-CAM_SHAKE_RANGE, CAM_SHAKE_RANGE);
+		static std::uniform_int_distribution<> dist(-SKILL_ATTACK_CAM_SHAKE_RANGE, SKILL_ATTACK_CAM_SHAKE_RANGE);
+		float xMove = dist(gen) / RESTRICTION;
+		//float yMove = dist(gen) / RESTRICTION;
+		pos.x += xMove;
+		//pos.y += yMove;
+		mpTranform->SetPosition(pos);
+	}
+
+	void CameraScript::monsterAttackCamShake(jh::math::Vector3& pos)
+	{
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<> dist(-PLAYER_HITTED_CAM_SHAKE_RANGE, PLAYER_HITTED_CAM_SHAKE_RANGE);
+		float xMove = dist(gen) / RESTRICTION;
+		//float yMove = dist(gen) / RESTRICTION;
+		pos.x += xMove;
+		//pos.y += yMove;
+		mpTranform->SetPosition(pos);
+	}
+	void CameraScript::powerAttackCamShake(jh::math::Vector3& pos)
+	{
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<> dist(-POWER_ATTACK_CAM_SHAKE_RANGE, POWER_ATTACK_CAM_SHAKE_RANGE);
 		float xMove = dist(gen) / RESTRICTION;
 		//float yMove = dist(gen) / RESTRICTION;
 		pos.x += xMove;

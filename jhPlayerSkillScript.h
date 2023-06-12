@@ -14,6 +14,7 @@ namespace jh
 	{
 		UINT Damage;
 		float CoolTime;
+		float PushDistance;
 		UINT VailedAttackIndex;
 	};
 
@@ -27,8 +28,9 @@ namespace jh
 		virtual ~PlayerSkillScript() = default;
 	
 		void Initialize() override;
-		void Update() override;
+		virtual void Update() override;
 
+		const ePlayerSkillType GetSkillType() const { return meSkillType; }
 		void SetState(const eSKillState eState);
 		const SkillStat& GetStat() const		{ return mSkillStat; }
 

@@ -16,6 +16,8 @@ static constexpr const float ELECTRIC_TORNADO_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
 static constexpr const UINT  ELECTRIC_TORNADO_ANIMATION_DAMGAE_VAILED_INDEX = 3;
 static constexpr const UINT  ELECTRIC_TORNADO_DAMAGE = 1;
 static constexpr const float ELECTRIC_TORNADO_COOL_TIME = 2.0f;
+static constexpr const float ELECTRIC_TORNADO_SPEED = 3.0f;
+static constexpr const float ELECTRIC_TORNADO_PUSH_DISTANCE = 1.0f;
 
 namespace jh
 {
@@ -32,6 +34,39 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimKey) = std::bind(&PlayerSkillElectricTornadoScript::AnimationSkillStart, this);
 		mpAnimator->GetCompleteEvent(mAnimKey) = std::bind(&PlayerSkillElectricTornadoScript::AnimationSkillComplete, this);
 	}
+
+
+	void PlayerSkillElectricTornadoScript::Update()
+	{
+		mePlayerLookDirection = mpPlayerScript->GetPlayerLookDirection();
+
+		switch (meState)
+		{
+		case eSKillState::WAIT:
+		{
+			setWatingPosition();
+			mTimer -= Time::DeltaTime();
+			if (mTimer < 0.0f)
+			{
+				resetCoolTimer();
+				SetState(eSKillState::PLAYING);
+			}
+			break;
+		}
+		case eSKillState::PLAYING:
+		{
+			setAnimationFlip();
+			setOnlyYPositoin();
+			moveXPosition();
+			playAnimation();
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+
 
 	void PlayerSkillElectricTornadoScript::playAnimation()
 	{
@@ -60,6 +95,12 @@ namespace jh
 		}
 	}
 
+	void PlayerSkillElectricTornadoScript::moveXPosition()
+	{
+		const float currXPos = mpTransform->GetOnlyXPosition();
+		mpTransform->SetOnlyXPosition(currXPos + (ELECTRIC_TORNADO_SPEED * Time::DeltaTime()));
+	}
+
 	void PlayerSkillElectricTornadoScript::setWatingPosition()
 	{
 		const Vector2 playerPos = mpPlayerTransform->GetOnlyXYPosition();
@@ -68,12 +109,12 @@ namespace jh
 		{
 		case eObjectLookDirection::LEFT:
 		{
-			mpTransform->SetOnlyXYPosition(playerPos.x - DISTANCE_FROM_PLAYER_X_DISTANCE, yPos);
+			mpTransform->SetOnlyXYPosition(playerPos.x, yPos);
 			break;
 		}
 		case eObjectLookDirection::RIGHT:
 		{
-			mpTransform->SetOnlyXYPosition(playerPos.x + DISTANCE_FROM_PLAYER_X_DISTANCE, yPos);
+			mpTransform->SetOnlyXYPosition(playerPos.x, yPos);
 			break;
 		}
 		default:
@@ -86,6 +127,7 @@ namespace jh
 		mSkillStat.Damage =	ELECTRIC_TORNADO_DAMAGE;
 		mSkillStat.CoolTime = ELECTRIC_TORNADO_COOL_TIME;
 		mSkillStat.VailedAttackIndex = 0;
+		mSkillStat.PushDistance = ELECTRIC_TORNADO_PUSH_DISTANCE;
 		mTimer = mSkillStat.CoolTime;
 	}
 

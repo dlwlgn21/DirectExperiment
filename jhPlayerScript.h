@@ -104,8 +104,8 @@ namespace jh
 		const eComboAttackType GetComboAttackType() const			{ return meComboType; }
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
 		eAttackType GetAttackType() const							{ return meAttackType; }
-		const bool IsHitAttack() const							{ return mbIsHitAttack; }
-
+		const bool IsHitAttack() const								{ return mbIsHitAttack; }
+		const bool IsHitSkillAtack() const							{ return mbIsHitSkillAtack; }
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
 		void OnTriggerStay(Collider2D* pOtherCollider) override;
 		void OnTriggerExit(Collider2D* pOtherCollider) override;
@@ -117,7 +117,7 @@ namespace jh
 		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }
 		
 		void SetIsHitAttack(const bool bIsHit)										{ mbIsHitAttack = bIsHit; }
-	
+		void SetIsHitSkillAttack(const bool bIsHit)									{ mbIsHitSkillAtack = bIsHit; }
 	private:
 		void setXPosByComboAttackType(float& xPos);
 		void setPosByLookDirection(float& xPos, const float xDistance);
@@ -160,6 +160,7 @@ namespace jh
 		PlayerHitEffectScript*			mpPlayerHitEffectScript;
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitAttack;
+		bool							mbIsHitSkillAtack;
 		bool							mbIsStartCountingDashTimer;
 		bool							mbIsStartCountingRollingTimer;
 

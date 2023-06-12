@@ -222,15 +222,42 @@ namespace jh
 			PlayerSkillScript* pScript = static_cast<PlayerSkillScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());
 			const SkillStat& skillStat = pScript->GetStat();
 			assert(pScript != nullptr);
-			if (pPlayerSkillAnimator->GetCurrentAnimationIndex() == skillStat.VailedAttackIndex)
+			switch (pScript->GetSkillType())
 			{
-				decreaseHP(skillStat.Damage);
-				mpPlayerScript->SetIsHitAttack(true);
-				if (meState != eMonsterState::DEAD)
+			case ePlayerSkillType::ELETRIC_BEAM:
+			/* INTENTIONAL FALL THROUGH */
+			case ePlayerSkillType::ELETRIC_STRIKE:
+			{
+				if (pPlayerSkillAnimator->GetCurrentAnimationIndex() == skillStat.VailedAttackIndex)
 				{
-					setState(eMonsterState::HITTED);
+					decreaseHP(skillStat.Damage);
+					mpPlayerScript->SetIsHitSkillAttack(true);
+					if (meState != eMonsterState::DEAD)
+					{
+						setState(eMonsterState::HITTED);
+					}
 				}
+				break;
 			}
+			case ePlayerSkillType::TORNADO:
+			{
+				float currXPos = mpTranform->GetOnlyXPosition();
+				if (meLookDir == eObjectLookDirection::LEFT)
+				{
+					mpTranform->SetOnlyXPosition(currXPos + (skillStat.PushDistance * Time::DeltaTime()));
+				}
+				else
+				{
+					mpTranform->SetOnlyXPosition(currXPos - (skillStat.PushDistance * Time::DeltaTime()));
+				}
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
+
+
 		}
 	}
 	void MonsterScript::OnTriggerExit(Collider2D* pOtherCollider)

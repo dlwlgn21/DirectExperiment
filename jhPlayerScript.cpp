@@ -56,6 +56,7 @@ namespace jh
 		, mpPlayerHitEffectScript(nullptr)
 		, mbIsContiueAttacking(false)
 		, mbIsHitAttack(false)
+		, mbIsHitSkillAtack(false)
 		, mbIsStartCountingDashTimer(false)
 		, mbIsStartCountingRollingTimer(false)
 		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
