@@ -1,4 +1,4 @@
-#include "jhPlayerSkillElectricBeamScript.h"
+#include "jhPlayerSkillElectricStrikeScript.h"
 #include "jhMath.h"
 #include "jhAnimator.h"
 #include "jhPlayerSkillObject.h"
@@ -12,38 +12,37 @@ using namespace jh::math;
 
 static constexpr const float DISTANCE_FROM_PLAYER_X_DISTANCE = 4.0f;
 static constexpr const float DISTANCE_FROM_PLAYER_Y_DISTANCE = 10.0f;
-static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
-static constexpr const UINT ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX = 8;
-static constexpr const UINT ELECTRIC_BEAM_DAMAGE = 3;
-static constexpr const float ELECTRIC_BEAM_COOL_TIME = 3.0f;
-
+static constexpr const float ELECTRIC_STRIKE_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
+static constexpr const UINT ELECTRIC_STRIKE_ANIMATION_DAMGAE_VAILED_INDEX = 3;
+static constexpr const UINT ELECTRIC_STRIKE_DAMAGE = 6;
+static constexpr const float ELECTRIC_STRIKE_COOL_TIME = 5.0f;
 
 namespace jh
 {
-	PlayerSkillElectricBeamScript::PlayerSkillElectricBeamScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator)
+	PlayerSkillElectricStrikeScript::PlayerSkillElectricStrikeScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator)
 		: PlayerSkillScript(eSkillType, pPlayerScript, pAnimator)
-		, mAnimKey(L"ElectricBeamKey")
+		, mAnimKey(L"ElectricStrikeKey")
 	{
 		initSkillStat();
 	}
-	void PlayerSkillElectricBeamScript::setAnimationEvent()
+	void PlayerSkillElectricStrikeScript::setAnimationEvent()
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimKey) = std::bind(&PlayerSkillElectricBeamScript::AnimationSkillStart, this);
-		mpAnimator->GetCompleteEvent(mAnimKey) = std::bind(&PlayerSkillElectricBeamScript::AnimationSkillComplete, this);
+		mpAnimator->GetStartEvent(mAnimKey) = std::bind(&PlayerSkillElectricStrikeScript::AnimationSkillStart, this);
+		mpAnimator->GetCompleteEvent(mAnimKey) = std::bind(&PlayerSkillElectricStrikeScript::AnimationSkillComplete, this);
 
 	}
 
-	void PlayerSkillElectricBeamScript::playAnimation()
+	void PlayerSkillElectricStrikeScript::playAnimation()
 	{
 		assert(mpAnimator != nullptr);
 		mpAnimator->PlayAnimation(mAnimKey, false);
 	}
 
-	void PlayerSkillElectricBeamScript::setOnlyYPositoin()
+	void PlayerSkillElectricStrikeScript::setOnlyYPositoin()
 	{
-		const float yPos = mpPlayerTransform->GetOnlyYPosition() + ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER;
+		const float yPos = mpPlayerTransform->GetOnlyYPosition() + ELECTRIC_STRIKE_Y_POS_DISTANCE_FROM_PLAYER;
 		switch (mePlayerLookDirection)
 		{
 		case eObjectLookDirection::LEFT:
@@ -62,7 +61,7 @@ namespace jh
 		}
 	}
 
-	void PlayerSkillElectricBeamScript::setWatingPosition()
+	void PlayerSkillElectricStrikeScript::setWatingPosition()
 	{
 		const Vector2 playerPos = mpPlayerTransform->GetOnlyXYPosition();
 		const float yPos = playerPos.y + DISTANCE_FROM_PLAYER_Y_DISTANCE;
@@ -83,20 +82,20 @@ namespace jh
 		}
 	}
 
-	void PlayerSkillElectricBeamScript::initSkillStat()
+	void PlayerSkillElectricStrikeScript::initSkillStat()
 	{
-		mSkillStat.Damage = ELECTRIC_BEAM_DAMAGE;
-		mSkillStat.CoolTime = ELECTRIC_BEAM_COOL_TIME;
-		mSkillStat.VailedAttackIndex = ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX;
+		mSkillStat.Damage = ELECTRIC_STRIKE_DAMAGE;
+		mSkillStat.CoolTime = ELECTRIC_STRIKE_COOL_TIME;
+		mSkillStat.VailedAttackIndex = ELECTRIC_STRIKE_ANIMATION_DAMGAE_VAILED_INDEX;
 		mTimer = mSkillStat.CoolTime;
 	}
 
-	void PlayerSkillElectricBeamScript::AnimationSkillStart()
+	void PlayerSkillElectricStrikeScript::AnimationSkillStart()
 	{
 		// TODO : BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FUCKDFSAFKSDAFKDSLAFKLSA
 		mpAnimator->InitializeCurrAnimation();
 	}
-	void PlayerSkillElectricBeamScript::AnimationSkillComplete()
+	void PlayerSkillElectricStrikeScript::AnimationSkillComplete()
 	{
 		SetState(eSKillState::WAIT);
 		//mpAnimator->InitializeCurrAnimation();

@@ -57,6 +57,8 @@ namespace jh
 	
 	
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_BEAM_KEY = L"SkillElectricBeamTexture";
+	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeTexture";
+	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoTexture";
 
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
@@ -126,6 +128,8 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY = L"AcientBossMaterial";
 	
 	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY = L"SkillElectricBeamMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoMaterial";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
@@ -431,6 +435,8 @@ namespace jh
 
 
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_BEAM_KEY, L"SKILL_ElectricBeam_375x64.png");
+		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_STRIKE_KEY, L"SKILL_ElectricStrike_80x176.png");
+		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_TORNADO_KEY, L"SKILL_ElectricTornado_64x64.png");
 
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
@@ -500,6 +506,8 @@ namespace jh
 		insertMaterial(MONSTER_ACIENT_BOSS_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ACIENT_BOSS_KEY);
 
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_BEAM_KEY);
+		insertMaterial(SKILL_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_STRIKE_KEY);
+		insertMaterial(SKILL_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_TORNADO_KEY);
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);

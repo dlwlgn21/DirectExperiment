@@ -114,7 +114,9 @@ namespace jh
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
 		PlayerSkillManager::GetInstance().SetPlayerScript(pPlayerScript);
-		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_BEAM)), eLayerType::EFFECT);
+		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_BEAM)), eLayerType::PLAYER_SKILL);
+		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_STRIKE)), eLayerType::PLAYER_SKILL);
+		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::TORNADO)), eLayerType::PLAYER_SKILL);
 		MonsterSpawner::GetInstance().Initialize(pPlayerScript);
 		instantiateLight(pPlayerScript);
 		instantiateParallaxObjects();
@@ -122,6 +124,7 @@ namespace jh
 		instantiateUIObject(pPlayerScript);
 		instantiateOtherObjects();
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
+		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
 		Scene::Initialize();
 	}
 

@@ -75,8 +75,9 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_BLASTER_KEY;
 		static const std::wstring MONSTER_TEXTURE_ACIENT_BOSS_KEY;
 		
-		
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_BEAM_KEY;
+		static const std::wstring SKILL_TEXTURE_ELECTRIC_STRIKE_KEY;
+		static const std::wstring SKILL_TEXTURE_ELECTRIC_TORNADO_KEY;
 
 		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
 		static const std::wstring BG_OBELISK_TEXTURE_NORMAL_MAP_KEY;
@@ -144,6 +145,8 @@ namespace jh
 		static const std::wstring MONSTER_ACIENT_BOSS_MATERIAL_KEY;
 
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_BEAM_KEY;
+		static const std::wstring SKILL_MATERIAL_ELECTRIC_STRIKE_KEY;
+		static const std::wstring SKILL_MATERIAL_ELECTRIC_TORNADO_KEY;
 
 
 		static const std::wstring BRIK_MATERIAL_KEY;

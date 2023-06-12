@@ -1,4 +1,4 @@
-#include "jhPlayerSkillElectricBeamScript.h"
+#include "jhPlayerSkillElectricTornadoScript.h"
 #include "jhMath.h"
 #include "jhAnimator.h"
 #include "jhPlayerSkillObject.h"
@@ -12,38 +12,36 @@ using namespace jh::math;
 
 static constexpr const float DISTANCE_FROM_PLAYER_X_DISTANCE = 4.0f;
 static constexpr const float DISTANCE_FROM_PLAYER_Y_DISTANCE = 10.0f;
-static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
-static constexpr const UINT ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX = 8;
-static constexpr const UINT ELECTRIC_BEAM_DAMAGE = 3;
-static constexpr const float ELECTRIC_BEAM_COOL_TIME = 3.0f;
-
+static constexpr const float ELECTRIC_TORNADO_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
+static constexpr const UINT  ELECTRIC_TORNADO_ANIMATION_DAMGAE_VAILED_INDEX = 3;
+static constexpr const UINT  ELECTRIC_TORNADO_DAMAGE = 1;
+static constexpr const float ELECTRIC_TORNADO_COOL_TIME = 2.0f;
 
 namespace jh
 {
-	PlayerSkillElectricBeamScript::PlayerSkillElectricBeamScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator)
+	PlayerSkillElectricTornadoScript::PlayerSkillElectricTornadoScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator)
 		: PlayerSkillScript(eSkillType, pPlayerScript, pAnimator)
-		, mAnimKey(L"ElectricBeamKey")
+		, mAnimKey(L"ElectricTornadoKey")
 	{
 		initSkillStat();
 	}
-	void PlayerSkillElectricBeamScript::setAnimationEvent()
+	void PlayerSkillElectricTornadoScript::setAnimationEvent()
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
-		mpAnimator->GetStartEvent(mAnimKey) = std::bind(&PlayerSkillElectricBeamScript::AnimationSkillStart, this);
-		mpAnimator->GetCompleteEvent(mAnimKey) = std::bind(&PlayerSkillElectricBeamScript::AnimationSkillComplete, this);
-
+		mpAnimator->GetStartEvent(mAnimKey) = std::bind(&PlayerSkillElectricTornadoScript::AnimationSkillStart, this);
+		mpAnimator->GetCompleteEvent(mAnimKey) = std::bind(&PlayerSkillElectricTornadoScript::AnimationSkillComplete, this);
 	}
 
-	void PlayerSkillElectricBeamScript::playAnimation()
+	void PlayerSkillElectricTornadoScript::playAnimation()
 	{
 		assert(mpAnimator != nullptr);
 		mpAnimator->PlayAnimation(mAnimKey, false);
 	}
 
-	void PlayerSkillElectricBeamScript::setOnlyYPositoin()
+	void PlayerSkillElectricTornadoScript::setOnlyYPositoin()
 	{
-		const float yPos = mpPlayerTransform->GetOnlyYPosition() + ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER;
+		const float yPos = mpPlayerTransform->GetOnlyYPosition() + ELECTRIC_TORNADO_Y_POS_DISTANCE_FROM_PLAYER;
 		switch (mePlayerLookDirection)
 		{
 		case eObjectLookDirection::LEFT:
@@ -62,7 +60,7 @@ namespace jh
 		}
 	}
 
-	void PlayerSkillElectricBeamScript::setWatingPosition()
+	void PlayerSkillElectricTornadoScript::setWatingPosition()
 	{
 		const Vector2 playerPos = mpPlayerTransform->GetOnlyXYPosition();
 		const float yPos = playerPos.y + DISTANCE_FROM_PLAYER_Y_DISTANCE;
@@ -83,20 +81,20 @@ namespace jh
 		}
 	}
 
-	void PlayerSkillElectricBeamScript::initSkillStat()
+	void PlayerSkillElectricTornadoScript::initSkillStat()
 	{
-		mSkillStat.Damage = ELECTRIC_BEAM_DAMAGE;
-		mSkillStat.CoolTime = ELECTRIC_BEAM_COOL_TIME;
-		mSkillStat.VailedAttackIndex = ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX;
+		mSkillStat.Damage =	ELECTRIC_TORNADO_DAMAGE;
+		mSkillStat.CoolTime = ELECTRIC_TORNADO_COOL_TIME;
+		mSkillStat.VailedAttackIndex = 0;
 		mTimer = mSkillStat.CoolTime;
 	}
 
-	void PlayerSkillElectricBeamScript::AnimationSkillStart()
+	void PlayerSkillElectricTornadoScript::AnimationSkillStart()
 	{
 		// TODO : BUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FUCKDFSAFKSDAFKDSLAFKLSA
 		mpAnimator->InitializeCurrAnimation();
 	}
-	void PlayerSkillElectricBeamScript::AnimationSkillComplete()
+	void PlayerSkillElectricTornadoScript::AnimationSkillComplete()
 	{
 		SetState(eSKillState::WAIT);
 		//mpAnimator->InitializeCurrAnimation();

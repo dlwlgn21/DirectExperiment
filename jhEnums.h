@@ -45,6 +45,7 @@ namespace jh
 		MONSTER,
 		PLAYER,
 		EFFECT,
+		PLAYER_SKILL,
 		MONSTER_EFFECT,
 		PARTICLE,
 		UI,
@@ -56,6 +57,7 @@ namespace jh
 		MONSTER,
 		PLAYER,
 		PLAYER_WEAPON,
+		PLAYER_SKILL,
 		MONSTER_WEAPON,
 		COUNT
 	};

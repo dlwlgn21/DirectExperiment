@@ -346,6 +346,12 @@
     <Filter Include="GameObject\AnimatedGameObject\Effect\Skill\Base">
       <UniqueIdentifier>{ab895dc1-1586-42d0-a604-2144df803497}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\Skill\Tornado">
+      <UniqueIdentifier>{ce32fc14-bc96-4151-bcb0-c134ed82686d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Skill\Strike">
+      <UniqueIdentifier>{03ba87bf-ea09-403a-94f5-c0f363e42234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -636,6 +642,12 @@
     <ClInclude Include="jhPlayerSkillManager.h">
       <Filter>PlayerSkillManager</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerSkillElectricStrikeScript.h">
+      <Filter>Component\Script\Skill\Strike</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerSkillElectricTornadoScript.h">
+      <Filter>Component\Script\Skill\Tornado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -901,6 +913,12 @@
     </ClCompile>
     <ClCompile Include="jhPlayerSkillManager.cpp">
       <Filter>PlayerSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillElectricStrikeScript.cpp">
+      <Filter>Component\Script\Skill\Strike</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillElectricTornadoScript.cpp">
+      <Filter>Component\Script\Skill\Tornado</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

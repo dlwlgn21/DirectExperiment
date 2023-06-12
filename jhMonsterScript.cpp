@@ -8,6 +8,7 @@
 #include "jhCollider2D.h"
 #include "jhPlayerScript.h"
 #include "jhMonsterAnimIndexInformation.h"
+#include "jhPlayerSkillElectricBeamScript.h"
 
 using namespace jh::math;
 
@@ -206,6 +207,24 @@ namespace jh
 			if (pPlayerAnimator->GetCurrentAnimationIndex() == PLAYER_VAILED_ATTACK_ANIMATION_INDEX)
 			{
 				decreaseHP(mpPlayerScript->GetPlayerStat().AttackDamage);
+				mpPlayerScript->SetIsHitAttack(true);
+				if (meState != eMonsterState::DEAD)
+				{
+					setState(eMonsterState::HITTED);
+				}
+			}
+		}
+
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PLAYER_SKILL)
+		{
+			Animator* pPlayerSkillAnimator = static_cast<Animator*>(pOtherCollider->GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
+			assert(pPlayerSkillAnimator != nullptr);
+			PlayerSkillScript* pScript = static_cast<PlayerSkillScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());
+			const SkillStat& skillStat = pScript->GetStat();
+			assert(pScript != nullptr);
+			if (pPlayerSkillAnimator->GetCurrentAnimationIndex() == skillStat.VailedAttackIndex)
+			{
+				decreaseHP(skillStat.Damage);
 				mpPlayerScript->SetIsHitAttack(true);
 				if (meState != eMonsterState::DEAD)
 				{

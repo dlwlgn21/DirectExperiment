@@ -10,6 +10,13 @@ namespace jh
 		COUNT
 	};
 
+	struct SkillStat
+	{
+		UINT Damage;
+		float CoolTime;
+		UINT VailedAttackIndex;
+	};
+
 	class Transform;
 	class PlayerScript;
 	class Animator;
@@ -20,14 +27,19 @@ namespace jh
 		virtual ~PlayerSkillScript() = default;
 	
 		void Initialize() override;
-		void SetState(const eSKillState eState) { meState = eState; }
+		void Update() override;
 
+		void SetState(const eSKillState eState);
+		const SkillStat& GetStat() const		{ return mSkillStat; }
 
 	protected:
 		virtual void setAnimationEvent() = 0;
 		virtual void playAnimation() = 0;
+		virtual void setOnlyYPositoin() = 0;
+		virtual void setWatingPosition() = 0;
+		virtual void initSkillStat() = 0;
 		void setAnimationFlip();
-		void setOnlyXPositoin();
+		void resetCoolTimer();
 
 
 	protected:
@@ -38,5 +50,7 @@ namespace jh
 		ePlayerSkillType		meSkillType;
 		eSKillState				meState;
 		eObjectLookDirection	mePlayerLookDirection;
+		SkillStat				mSkillStat;
+		float					mTimer;
 	};
 }

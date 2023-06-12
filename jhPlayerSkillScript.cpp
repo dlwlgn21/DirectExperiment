@@ -2,6 +2,7 @@
 #include "jhPlayerScript.h"
 #include "jhTransform.h"
 #include "jhAnimator.h"
+#include "jhTime.h"
 
 using namespace jh::math;
 
@@ -14,8 +15,10 @@ namespace jh
 		, mpPlayerTransform(pPlayerScript->GetOwner()->GetTransform())
 		, mpAnimator(pAnimator)
 		, meSkillType(eSkillType)
-		, meState(eSKillState::PLAYING)
+		, meState(eSKillState::WAIT)
 		, mePlayerLookDirection()
+		, mSkillStat({ 0, 0.0f, 0 })
+		, mTimer(0.0f)
 	{
 		assert(mpPlayerTransform != nullptr && mpAnimator != nullptr);
 	}
@@ -27,8 +30,41 @@ namespace jh
 		setAnimationEvent();
 	}
 
+	void PlayerSkillScript::Update()
+	{
+		mePlayerLookDirection = mpPlayerScript->GetPlayerLookDirection();
+		switch (meState)
+		{
+		case eSKillState::WAIT:
+		{
+			setWatingPosition();
+			mTimer -= Time::DeltaTime();
+			if (mTimer < 0.0f)
+			{
+				resetCoolTimer();
+				SetState(eSKillState::PLAYING);
+			}
+			break;
+		}
+		case eSKillState::PLAYING:
+		{
+			setAnimationFlip();
+			setOnlyYPositoin();
+			playAnimation();
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+
 	void PlayerSkillScript::setAnimationFlip()
 	{
+		if (meState == eSKillState::PLAYING)
+		{
+			return;
+		}
 		mePlayerLookDirection = mpPlayerScript->GetPlayerLookDirection();
 		switch (mePlayerLookDirection)
 		{
@@ -42,9 +78,18 @@ namespace jh
 			break;
 		}
 	}
-	void PlayerSkillScript::setOnlyXPositoin()
+
+	void PlayerSkillScript::resetCoolTimer()
 	{
-		mpTransform->SetOnlyXPosition(mpPlayerTransform->GetOnlyXPosition());
+		mTimer = mSkillStat.CoolTime;
 	}
 
+	void PlayerSkillScript::SetState(const eSKillState eState)
+	{
+		meState = eState;
+		if (meState == eSKillState::PLAYING)
+		{
+			mpAnimator->InitializeCurrAnimation();
+		}
+	}
 }

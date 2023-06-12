@@ -202,6 +202,8 @@
     <ClInclude Include="jhPlayerHitEffectScript.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayerSkillElectricBeamScript.h" />
+    <ClInclude Include="jhPlayerSkillElectricStrikeScript.h" />
+    <ClInclude Include="jhPlayerSkillElectricTornadoScript.h" />
     <ClInclude Include="jhPlayerSkillManager.h" />
     <ClInclude Include="jhPlayerWeaponColliderObject.h" />
     <ClInclude Include="jhPlayScene.h" />
@@ -290,6 +292,8 @@
     <ClCompile Include="jhPlayerHitEffectScript.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayerSkillElectricBeamScript.cpp" />
+    <ClCompile Include="jhPlayerSkillElectricStrikeScript.cpp" />
+    <ClCompile Include="jhPlayerSkillElectricTornadoScript.cpp" />
     <ClCompile Include="jhPlayerSkillManager.cpp" />
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />

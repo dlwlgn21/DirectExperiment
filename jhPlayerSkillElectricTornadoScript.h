@@ -3,11 +3,11 @@
 
 namespace jh
 {
-	class PlayerSkillElectricBeamScript final : public PlayerSkillScript
+	class PlayerSkillElectricTornadoScript final : public PlayerSkillScript
 	{
 	public:
-		PlayerSkillElectricBeamScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator);
-		virtual ~PlayerSkillElectricBeamScript() = default;
+		PlayerSkillElectricTornadoScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator);
+		virtual ~PlayerSkillElectricTornadoScript() = default;
 
 		void AnimationSkillStart();
 		void AnimationSkillComplete();
@@ -22,5 +22,3 @@ namespace jh
 		const std::wstring mAnimKey;
 	};
 }
-
-

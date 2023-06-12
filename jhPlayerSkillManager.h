@@ -24,7 +24,7 @@ namespace jh
 		PlayerSkillObject* MakePlayerSkilObjectOrNull(const ePlayerSkillType eSkillType);
 
 	private:
-		void fillAnimInfo(SkillAnimationInfo& animInfo, const float width, const float height, const float mag, const UINT spriteCount, const float animDuration);
+		void fillAnimInfo(SkillAnimationInfo& animInfo, const float width, const float height, const float mag, const UINT spriteCount, const float animDuration, const std::wstring& animKey);
 	
 	private:
 		PlayerSkillManager()

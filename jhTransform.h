@@ -35,6 +35,7 @@ namespace jh
 
 		__forceinline jh::math::Vector3 GetPosition() const			{ return mPosition; }
 		__forceinline float GetOnlyXPosition()		  const			{ return mPosition.x; }
+		__forceinline float GetOnlyYPosition()		  const			{ return mPosition.y; }
 		__forceinline jh::math::Vector2 GetOnlyXYPosition() const	{ return jh::math::Vector2(mPosition.x, mPosition.y); }
 		__forceinline jh::math::Vector3 GetRotation() const			{ return mRotation; }
 		__forceinline jh::math::Vector3 GetScale()	  const			{ return mScale; }
