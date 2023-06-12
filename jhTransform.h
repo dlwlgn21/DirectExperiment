@@ -20,6 +20,9 @@ namespace jh
 		__forceinline void SetPosition(const jh::math::Vector3 pos)					{ mPosition = pos; }
 		__forceinline void SetOnlyXPosition(const float xPos)						{ mPosition.x = xPos; }
 		__forceinline void SetOnlyYPosition(const float yPos)						{ mPosition.y = yPos; }
+		__forceinline void SetOnlyYZPosition(const float yPos, const float zPos)	{ mPosition.y = yPos;  mPosition.z = zPos; }
+		
+		
 		__forceinline void SetOnlyXYPosition(const float xPos, const float yPos)	{ mPosition.x = xPos; mPosition.y = yPos; }
 		__forceinline void SetOnlyXYPosition(const jh::math::Vector2 pos)	{ mPosition.x = pos.x; mPosition.y = pos.y; }
 		__forceinline void SetRotation(const jh::math::Vector3 rotation)			{ mRotation = rotation; }

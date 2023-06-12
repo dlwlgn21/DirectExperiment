@@ -103,4 +103,12 @@ namespace jh
 		SPOT_LIGHT,
 		COUNT
 	};
+
+	enum class ePlayerSkillType
+	{
+		ELETRIC_BEAM,
+		ELETRIC_STRIKE,
+		TORNADO,
+		COUNT
+	};
 }

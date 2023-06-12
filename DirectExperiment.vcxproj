@@ -201,6 +201,8 @@
     <ClInclude Include="jhPlayerDustEffectScript.h" />
     <ClInclude Include="jhPlayerHitEffectScript.h" />
     <ClInclude Include="jhPlayerScript.h" />
+    <ClInclude Include="jhPlayerSkillElectricBeamScript.h" />
+    <ClInclude Include="jhPlayerSkillManager.h" />
     <ClInclude Include="jhPlayerWeaponColliderObject.h" />
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPortalEffectObject.h" />
@@ -212,6 +214,8 @@
     <ClInclude Include="jhSceneManager.h" />
     <ClInclude Include="jhScript.h" />
     <ClInclude Include="jhShader.h" />
+    <ClInclude Include="jhPlayerSkillObject.h" />
+    <ClInclude Include="jhPlayerSkillScript.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructuredBuffer.h" />
     <ClInclude Include="jhTexture.h" />
@@ -285,6 +289,8 @@
     <ClCompile Include="jhPlayerDustEffectScript.cpp" />
     <ClCompile Include="jhPlayerHitEffectScript.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
+    <ClCompile Include="jhPlayerSkillElectricBeamScript.cpp" />
+    <ClCompile Include="jhPlayerSkillManager.cpp" />
     <ClCompile Include="jhPlayerWeaponColliderObject.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPortalEffectObject.cpp" />
@@ -295,6 +301,8 @@
     <ClCompile Include="jhResourcesManager.cpp" />
     <ClCompile Include="jhSceneManager.cpp" />
     <ClCompile Include="jhScript.cpp" />
+    <ClCompile Include="jhPlayerSkillObject.cpp" />
+    <ClCompile Include="jhPlayerSkillScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructuredBuffer.cpp" />
     <ClCompile Include="jhTransform.cpp" />

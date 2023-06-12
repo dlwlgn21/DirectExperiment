@@ -44,8 +44,8 @@
 #include "jhLightingManager.h"
 #include "jhAcientBossMonsterAttackColiderObject.h"
 #include "jhAcientBossMonsterAttackColiderScript.h"
-//#include "jhBGGroundGrass.h"
-
+#include "jhPlayerSkillManager.h"
+#include "jhPlayerSkillObject.h"
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;
@@ -68,8 +68,6 @@ static constexpr const Vector4 AMBIENT(0.1f, 0.1f, 0.1f, 1.0f);
 namespace jh
 {
 	Transform* pExperimentTransform;
-
-
 	void instatiateFlowerObejct()
 	{
 		BGFlowerObject* pBGFlower = nullptr;
@@ -115,6 +113,8 @@ namespace jh
 	{
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
+		PlayerSkillManager::GetInstance().SetPlayerScript(pPlayerScript);
+		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_BEAM)), eLayerType::EFFECT);
 		MonsterSpawner::GetInstance().Initialize(pPlayerScript);
 		instantiateLight(pPlayerScript);
 		instantiateParallaxObjects();

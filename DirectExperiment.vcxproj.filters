@@ -328,6 +328,24 @@
     <Filter Include="MonsterUIManager">
       <UniqueIdentifier>{1ec3fd9a-1244-427e-9ba2-4c6f5e32e517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\Skill">
+      <UniqueIdentifier>{5dd216eb-53f3-42be-8764-a9a8b1c3f03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Skill">
+      <UniqueIdentifier>{6e741ef2-1942-4dda-9bb7-6492053da859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Skill\Beam">
+      <UniqueIdentifier>{ca3c45f7-38b7-4363-ba7c-1d8c1604a1ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Skill\Base">
+      <UniqueIdentifier>{16dc2477-20ad-40f4-a22a-a525f5b41491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerSkillManager">
+      <UniqueIdentifier>{f86ca785-1797-40ff-9c9d-e686fd58008d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\Skill\Base">
+      <UniqueIdentifier>{ab895dc1-1586-42d0-a604-2144df803497}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -606,6 +624,18 @@
     <ClInclude Include="jhMonsterUIManager.h">
       <Filter>MonsterUIManager</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerSkillObject.h">
+      <Filter>GameObject\AnimatedGameObject\Effect\Skill\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerSkillElectricBeamScript.h">
+      <Filter>Component\Script\Skill\Beam</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerSkillScript.h">
+      <Filter>Component\Script\Skill\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerSkillManager.h">
+      <Filter>PlayerSkillManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -859,6 +889,18 @@
     </ClCompile>
     <ClCompile Include="jhMonsterUIManager.cpp">
       <Filter>MonsterUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect\Skill\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillScript.cpp">
+      <Filter>Component\Script\Skill\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillElectricBeamScript.cpp">
+      <Filter>Component\Script\Skill\Beam</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerSkillManager.cpp">
+      <Filter>PlayerSkillManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
