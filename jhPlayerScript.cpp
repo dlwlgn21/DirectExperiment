@@ -11,6 +11,8 @@
 #include "jhDebugHelper.h"
 #include "jhPlayerDustEffectScript.h"
 #include "jhPlayerHitEffectScript.h"
+#include "jhPlayerLevelManager.h"
+
 
 static constexpr const float DASH_DISTANCE = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
@@ -27,6 +29,9 @@ static constexpr const float PUSH_ATTACK_MOVEMENT_DISTANCE	= DEFAULT_MOVEMENT_DI
 
 static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
 static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
+
+static constexpr const UINT LEVEL_1_INIT_MAXIMUM_EXP = 10;
+static constexpr const float PER_LEVEL_UP_COEFFICEINT_VALUE = 1.1f;
 
 using namespace jh::math;
 
@@ -63,6 +68,7 @@ namespace jh
 		, mDashIntervalTime(DASH_INTERVAL_SECOND)
 		, mRollingIntervalTimer(ROLLING_INTERVAL_SECOND)
 		, mRollingIntervalTime(ROLLING_INTERVAL_SECOND)
+		, mCurrentLevelExpToLevelUP(LEVEL_1_INIT_MAXIMUM_EXP)
 	{
 	}
 
@@ -92,14 +98,6 @@ namespace jh
 		recoverStamina();
 		mpTranform->SetOnlyXPosition(xPos);
 	}
-
-	void PlayerScript::FixedUpdate()
-	{
-	}
-	void PlayerScript::Render()
-	{
-	}
-
 
 #pragma region ANIMATION_EVENT
 	void PlayerScript::IdleAnimStart()
@@ -465,13 +463,26 @@ namespace jh
 
 #pragma endregion
 
+#pragma region STAT
+	void PlayerScript::IncreaseEXP(const UINT exp)
+	{
+		mStat.CurrEXP += exp;
+		if (mStat.CurrEXP >= mCurrentLevelExpToLevelUP)
+		{
+			++mStat.CurrLevel;
+			mCurrentLevelExpToLevelUP = static_cast<UINT>(std::ceil(mCurrentLevelExpToLevelUP * PER_LEVEL_UP_COEFFICEINT_VALUE));
+			mStat.CurrEXP = 0;
+			PlayerLevelManager::GetInstance().OnPlayerLevelUP();
+		}
+	}
+
 	void PlayerScript::recoverStamina()
 	{
 		mStaminaTimer -= Time::DeltaTime();
 		if (mStaminaTimer <= 0.0f)
 		{
 			mStaminaTimer = STAMINA_RECOVER_SECOND;
-			if (mStat.CurrentStamina >= mStat.MaxStamina)	{return;}
+			if (mStat.CurrentStamina >= mStat.MaxStamina) { return; }
 			mStat.CurrentStamina += STAMINA_RECOVER_AMOUNT;
 		}
 	}
@@ -490,15 +501,18 @@ namespace jh
 		}
 	}
 
-	bool PlayerScript::checkIsNormalAttackKeyPressed()
+	void PlayerScript::EnemyAttackHiited(UINT damage)
 	{
-		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
+		if (meState == ePlayerState::HITTED)
 		{
-			return true;
+			return;
 		}
-		return false;
+		setState(ePlayerState::HITTED);
+		decreaseHP(damage);
 	}
+#pragma endregion
 
+#pragma region PROCESSING_MOVING_SKILLS
 	void PlayerScript::processIfDash(float& xPos)
 	{
 		if (mbIsStartCountingDashTimer)
@@ -549,14 +563,14 @@ namespace jh
 			}
 		}
 	}
+#pragma endregion
 
-	void PlayerScript::EnemyAttackHiited(UINT damage)
+	bool PlayerScript::checkIsNormalAttackKeyPressed()
 	{
-		if (meState == ePlayerState::HITTED)
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)
 		{
-			return;
+			return true;
 		}
-		setState(ePlayerState::HITTED);
-		decreaseHP(damage);
+		return false;
 	}
 }

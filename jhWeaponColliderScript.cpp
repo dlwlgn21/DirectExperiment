@@ -84,7 +84,6 @@ namespace jh
 
 	void WeaponColliderScript::OnTriggerEnter(Collider2D* pOtherCollider)
 	{
-		int a = 0;
 	}
 	void WeaponColliderScript::OnTriggerStay(Collider2D* pOtherCollider)
 	{

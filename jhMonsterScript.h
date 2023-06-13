@@ -87,6 +87,7 @@ namespace jh
 		PlayerScript*					mpPlayerScript;
 		int								mMaxHP;
 		int								mCurrHP;
+		UINT							mExp;
 		float							mSpeed;
 		float							mSpawningTimer;
 		float							mAttackingAwarenessRange;

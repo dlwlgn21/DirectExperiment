@@ -352,6 +352,9 @@
     <Filter Include="Component\Script\Skill\Strike">
       <UniqueIdentifier>{03ba87bf-ea09-403a-94f5-c0f363e42234}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayerLevelManager">
+      <UniqueIdentifier>{0fdbeb58-d3f6-437b-bd41-f0c759234242}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -648,6 +651,9 @@
     <ClInclude Include="jhPlayerSkillElectricTornadoScript.h">
       <Filter>Component\Script\Skill\Tornado</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerLevelManager.h">
+      <Filter>PlayerLevelManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -919,6 +925,9 @@
     </ClCompile>
     <ClCompile Include="jhPlayerSkillElectricTornadoScript.cpp">
       <Filter>Component\Script\Skill\Tornado</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerLevelManager.cpp">
+      <Filter>PlayerLevelManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -200,6 +200,7 @@
     <ClInclude Include="jhPlayerDustEffectObject.h" />
     <ClInclude Include="jhPlayerDustEffectScript.h" />
     <ClInclude Include="jhPlayerHitEffectScript.h" />
+    <ClInclude Include="jhPlayerLevelManager.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayerSkillElectricBeamScript.h" />
     <ClInclude Include="jhPlayerSkillElectricStrikeScript.h" />
@@ -290,6 +291,7 @@
     <ClCompile Include="jhPlayerDustEffectObject.cpp" />
     <ClCompile Include="jhPlayerDustEffectScript.cpp" />
     <ClCompile Include="jhPlayerHitEffectScript.cpp" />
+    <ClCompile Include="jhPlayerLevelManager.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayerSkillElectricBeamScript.cpp" />
     <ClCompile Include="jhPlayerSkillElectricStrikeScript.cpp" />

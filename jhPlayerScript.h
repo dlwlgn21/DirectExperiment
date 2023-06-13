@@ -3,15 +3,15 @@
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
 
-static constexpr const CHAR		INITIAL_HP = 10;
-static constexpr const CHAR		INITIAL_STAMINA = 5;
-static constexpr const CHAR		INITIAL_ATTACK_DAMAGE = 3;
+static constexpr const int		INITIAL_HP = 10;
+static constexpr const int		INITIAL_STAMINA = 5;
+static constexpr const int		INITIAL_ATTACK_DAMAGE = 3;
 
-static constexpr const CHAR		ATTACK_STAMINA_COST = 1;
-static constexpr const CHAR		DASH_STAMINA_COST = 1;
+static constexpr const int		ATTACK_STAMINA_COST = 1;
+static constexpr const int		DASH_STAMINA_COST = 1;
 
+static constexpr const int 		STAMINA_RECOVER_AMOUNT = 1;
 static constexpr const float 	STAMINA_RECOVER_SECOND = 2.0f;
-static constexpr const CHAR 	STAMINA_RECOVER_AMOUNT = 1;
 
 namespace jh
 {
@@ -52,34 +52,37 @@ namespace jh
 	public:
 		struct PlayerStat
 		{
-			CHAR MaxHP;
-			CHAR MaxStamina;
-			CHAR CurrentHP;
-			CHAR CurrentStamina;
-			CHAR AttackDamage;
+			int MaxHP;
+			int MaxStamina;
+			int CurrentHP;
+			int CurrentStamina;
+			UINT CurrEXP;
+			UINT CurrLevel;
+			int AttackDamage;
 			PlayerStat()
 				: MaxHP(INITIAL_HP)
 				, MaxStamina(INITIAL_STAMINA)
 				, CurrentHP(INITIAL_HP)
 				, CurrentStamina(INITIAL_STAMINA)
 				, AttackDamage(INITIAL_ATTACK_DAMAGE)
+				, CurrEXP(0)
+			    , CurrLevel(1)
 			{
 			}
 		};
 
 		PlayerScript();
-		virtual ~PlayerScript() = default;
+		~PlayerScript() = default;
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Render() override;
 
+#pragma region ANIMATION_EVENT
 		void IdleAnimStart();
 
 		void AttackOneAnimationStart();
 		void AttackOneAnimationComplete();
-		
+
 		void AttackTwoAnimationStart();
 		void AttackTwoAnimationComplete();
 
@@ -95,9 +98,13 @@ namespace jh
 		void RollingAnimationStart();
 		void RollingAnimationComplete();
 
-
 		void HitAnimationComplete();
-
+#pragma endregion
+#pragma region COLLISION_TRIGGER
+		void OnTriggerEnter(Collider2D* pOtherCollider) override;
+		void OnTriggerStay(Collider2D* pOtherCollider) override;
+		void OnTriggerExit(Collider2D* pOtherCollider) override;
+#pragma endregion
 
 		eObjectLookDirection GetPlayerLookDirection() const			{ return meLookDir; }
 		const ePlayerState GetPlayerState() const					{ return meState; }
@@ -106,18 +113,14 @@ namespace jh
 		eAttackType GetAttackType() const							{ return meAttackType; }
 		const bool IsHitAttack() const								{ return mbIsHitAttack; }
 		const bool IsHitSkillAtack() const							{ return mbIsHitSkillAtack; }
-		void OnTriggerEnter(Collider2D* pOtherCollider) override;
-		void OnTriggerStay(Collider2D* pOtherCollider) override;
-		void OnTriggerExit(Collider2D* pOtherCollider) override;
-
+		
+		void IncreaseEXP(const UINT exp);
 		void EnemyAttackHiited(UINT damage);
-
-
 		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
 		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }
-		
 		void SetIsHitAttack(const bool bIsHit)										{ mbIsHitAttack = bIsHit; }
 		void SetIsHitSkillAttack(const bool bIsHit)									{ mbIsHitSkillAtack = bIsHit; }
+	
 	private:
 		void setXPosByComboAttackType(float& xPos);
 		void setPosByLookDirection(float& xPos, const float xDistance);
@@ -169,6 +172,8 @@ namespace jh
 
 		float							mRollingIntervalTimer;
 		float							mRollingIntervalTime;
+
+		UINT							mCurrentLevelExpToLevelUP;
 	};
 }
 

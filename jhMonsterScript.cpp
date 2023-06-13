@@ -75,6 +75,17 @@ static constexpr const float DAGGER_ATTACKING_MOVEMENT_DISTANCE			= DEFULAT_ATTA
 static constexpr const float BLASTER_ATTACKING_MOVEMENT_DISTANCE		= DEFULAT_ATTACKING_MOVEMENT_DISTANCE + 3.0f;
 #pragma endregion
 
+#pragma region MONSTER_EXP
+static constexpr const UINT CAGED_SHOCKER_EXP	= 4;
+static constexpr const UINT SWEEPER_EXP			= 3;
+static constexpr const UINT WARDEN_EXP			= 1;
+static constexpr const UINT HEABY_SLICER_EXP	= 4;
+static constexpr const UINT LIGHT_SLICER_EXP	= 3;
+static constexpr const UINT ZOMBIE_EXP			= 1;
+static constexpr const UINT ARCHER_EXP			= 2;
+static constexpr const UINT DAGGER_EXP			= 3;
+static constexpr const UINT BLASTER_EXP			= 3;
+#pragma endregion
 
 namespace jh
 {
@@ -87,6 +98,7 @@ namespace jh
 		, mpPlayerScript(pPlayerScript)
 		, mMaxHP(0)
 		, mCurrHP(0)
+		, mExp()
 		, mSpeed(0.0f)
 		, mAttackingAwarenessRange(ATTACKING_AWARENESS_DEFAULT_RANGE)
 		, mAttackingMovementDistance(0.0f)
@@ -112,6 +124,7 @@ namespace jh
 		, mpPlayerScript(nullptr)
 		, mMaxHP(0)
 		, mCurrHP(0)
+		, mExp(0)
 		, mSpeed(0.0f)
 		, mAttackingAwarenessRange(0)
 		, mAttackingMovementDistance(0.0f)
@@ -377,54 +390,63 @@ namespace jh
 		{
 			mMaxHP = CAGED_SHOKER_INITIAL_HP;
 			mSpeed = CAGED_SHOKER_INITIAL_SPEED;
+			mExp = CAGED_SHOCKER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
 			mMaxHP = SWEEPER_INITIAL_HP;
 			mSpeed = SWEEPER_INITIAL_SPEED;
+			mExp = SWEEPER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
 			mMaxHP = WARDEN_INITIAL_HP;
 			mSpeed = WARDEN_INITIAL_SPEED;
+			mExp = WARDEN_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			mMaxHP = ZOMBIE_INITIAL_HP;
 			mSpeed = ZOMBIE_INITIAL_SPEED;
+			mExp = ZOMBIE_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
 			mMaxHP = HEABY_SLICER_INITIAL_HP;
 			mSpeed = HEABY_SLICER_INITIAL_SPEED;
+			mExp = HEABY_SLICER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			mMaxHP = LIGHT_SLICER_INITIAL_HP;
 			mSpeed = LIGHT_SLICER_INITIAL_SPEED;
+			mExp = LIGHT_SLICER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_DAGGER:
 		{
 			mMaxHP = DAGGER_INITIAL_HP;
 			mSpeed = DAGGER_INITIAL_SPEED;
+			mExp = DAGGER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_ARCHER:
 		{
 			mMaxHP = ARCHER_INITIAL_HP;
 			mSpeed = ARCHER_INITIAL_SPEED;
+			mExp = ARCHER_EXP;
 			break;
 		}
 		case eMonsterType::LV_1_BLASTER:
 		{
 			mMaxHP = BLASTER_INITIAL_HP;
 			mSpeed = BLASTER_INITIAL_SPEED;
+			mExp = BLASTER_EXP;
 			break;
 		}
 		default:
@@ -800,6 +822,7 @@ namespace jh
 	}
 	void MonsterScript::decreaseHP(const int amount)
 	{
+		assert(mpPlayerScript != nullptr);
 		if (meState == eMonsterState::HITTED)
 		{
 			return;
@@ -808,6 +831,7 @@ namespace jh
 		if (mCurrHP <= 0)
 		{
 			mCurrHP = 0;
+			mpPlayerScript->IncreaseEXP(mExp);
 			setState(eMonsterState::DEAD);
 		}
 	}
