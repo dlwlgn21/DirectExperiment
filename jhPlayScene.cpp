@@ -46,6 +46,9 @@
 #include "jhAcientBossMonsterAttackColiderScript.h"
 #include "jhPlayerSkillManager.h"
 #include "jhPlayerSkillObject.h"
+#include "jhPlayerLevelManager.h"
+#include "jhUILevelUPBorderObject.h"
+
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;
@@ -125,6 +128,13 @@ namespace jh
 		instantiateOtherObjects();
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
+		this->AddGameObject(PlayerLevelManager::GetInstance().GetUIBorder(), eLayerType::LEVEL_UP_UI);
+		auto& skillIcons = PlayerLevelManager::GetInstance().GetUISkillIcons();
+		for (UINT i = 0; i < static_cast<UINT>(eSkillIconType::COUNT); ++i)
+		{
+			this->AddGameObject(skillIcons[i], eLayerType::LEVEL_UP_UI);
+		}
+
 		Scene::Initialize();
 	}
 
@@ -176,6 +186,8 @@ namespace jh
 		CameraManager::GetInstance().SetCamera(pCameraComponent);
 		CameraScript* pCameraScript = new CameraScript();
 		pCameraObject->AddComponent(pCameraScript);
+
+		PlayerLevelManager::GetInstance().SetCameraTransform(pCameraObject->GetTransform());
 
 		// UICamera
 		GameObject* pUICameraObject = Instantiate<GameObject>(eLayerType::CAMERA);

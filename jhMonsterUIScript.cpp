@@ -9,8 +9,8 @@
 
 using namespace jh::math;
 
-static constexpr float HP_BAR_Z_VALUE = 1.0f;
-static constexpr float HP_BORDER_BAR_Z_VALUE = 1.1f;
+static constexpr float HP_BAR_Z_VALUE = 1.1f;
+static constexpr float HP_BORDER_BAR_Z_VALUE = 1.2f;
 static constexpr float HP_BAR_Y_DISTANCE_FROM_MONSTER = 1.5f;
 
 namespace jh

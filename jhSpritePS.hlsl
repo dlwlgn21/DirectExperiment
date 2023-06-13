@@ -28,6 +28,10 @@ float4 main(SpriteVertexOut vIn) : SV_TARGET
     else
     {
         color = DefaultTexture.Sample(PointBorderSampler, vIn.UV);
+        if (color.w == 0.0f)
+        {
+            discard;
+        }
     }
 
     //Light light = (Light) 0.0f;

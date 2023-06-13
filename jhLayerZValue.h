@@ -23,6 +23,12 @@ static constexpr const float MONSTER_EFFECT_Z_VALUE = 1.25f;
 
 #pragma region PLAYER
 static constexpr const float PLAYER_Z_VALUE = 1.6f;
-static constexpr const float PLAYER_EFFECT_Z_VALUE = 1.2f;
-static constexpr const float PLAYER_SKILL_EFFECT_Z_VALUE = 1.1f;
+static constexpr const float PLAYER_EFFECT_Z_VALUE = 1.23f;
+static constexpr const float PLAYER_SKILL_EFFECT_Z_VALUE = 1.2f;
 #pragma endregion
+
+#pragma region LEVEL_UP
+static constexpr const float LEVEL_UP_UI_Z_VALUE = 1.1f;
+static constexpr const float LEVEL_UP_UI_SKILL_IOCN_Z_VALUE = 1.0f;
+#pragma endregion
+

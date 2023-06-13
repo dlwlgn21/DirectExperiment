@@ -355,6 +355,30 @@
     <Filter Include="PlayerLevelManager">
       <UniqueIdentifier>{0fdbeb58-d3f6-437b-bd41-f0c759234242}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\UI\LevelUP">
+      <UniqueIdentifier>{146b5a12-e676-4330-890c-04d5f89d541c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\Player">
+      <UniqueIdentifier>{15d8a294-ed49-4e62-9d42-af8f8377d9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\SkillIcon">
+      <UniqueIdentifier>{45b38ce1-3843-4552-9b40-97c630c3778b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\Border">
+      <UniqueIdentifier>{a96fc220-dffb-4b9c-b19f-a51e575a8518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\LevelUP">
+      <UniqueIdentifier>{a0b5d29d-bc13-4b2a-8abd-eae4817db425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\LevelUP\SkillIcon">
+      <UniqueIdentifier>{06aed315-9893-4627-92c3-5bb29c3d2dfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\LevelUP\Border">
+      <UniqueIdentifier>{cb244502-44e2-4c8f-9312-fcabcb123f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\Base">
+      <UniqueIdentifier>{6f57c767-1986-40af-897b-7a7a3f4097ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -491,9 +515,6 @@
     </ClInclude>
     <ClInclude Include="jhUIBarObject.h">
       <Filter>GameObject\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="jhUIBarScript.h">
-      <Filter>Component\Script\UI</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayer.h">
       <Filter>GameObject\Content\Player</Filter>
@@ -654,6 +675,24 @@
     <ClInclude Include="jhPlayerLevelManager.h">
       <Filter>PlayerLevelManager</Filter>
     </ClInclude>
+    <ClInclude Include="jhUIBarScript.h">
+      <Filter>Component\Script\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUILevelUpBorderScript.h">
+      <Filter>Component\Script\UI\LevelUP\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUILevelUPBorderObject.h">
+      <Filter>GameObject\UI\LevelUP\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillIconObject.h">
+      <Filter>GameObject\UI\LevelUP\SkillIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillIconScript.h">
+      <Filter>Component\Script\UI\LevelUP\SkillIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUILevelUpScript.h">
+      <Filter>Component\Script\UI\LevelUP\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -772,9 +811,6 @@
     </ClCompile>
     <ClCompile Include="jhUIBarObject.cpp">
       <Filter>GameObject\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="jhUIBarScript.cpp">
-      <Filter>Component\Script\UI</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayer.cpp">
       <Filter>GameObject\Content\Player</Filter>
@@ -929,6 +965,24 @@
     <ClCompile Include="jhPlayerLevelManager.cpp">
       <Filter>PlayerLevelManager</Filter>
     </ClCompile>
+    <ClCompile Include="jhUIBarScript.cpp">
+      <Filter>Component\Script\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUILevelUpBorderScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUILevelUPBorderObject.cpp">
+      <Filter>GameObject\UI\LevelUP\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillIconObject.cpp">
+      <Filter>GameObject\UI\LevelUP\SkillIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillIconScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\SkillIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUILevelUpScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -978,6 +1032,12 @@
       <Filter>ShaderResource\VS</Filter>
     </FxCompile>
     <FxCompile Include="jhUserInterfaceMonsterHealthPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhLevelUpVS.hlsl">
+      <Filter>ShaderResource\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhLevelUpPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>

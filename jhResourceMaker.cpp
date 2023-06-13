@@ -20,6 +20,8 @@ namespace jh
 
 	// Added Part FOR NORMAL_MAP At 2023-05-23 16:40
 	const std::wstring ResourceMaker::RECT_NORMAL_MAP_MESH_KEY = L"NormalMapMeshKey";
+
+	const std::wstring ResourceMaker::UI_LEVEL_UP_MESH_KEY = L"UILevelUPMeshKey";
 #pragma endregion
 
 #pragma region SHADER
@@ -30,6 +32,8 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShader";
 	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShader";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_SHADER_KEY = L"UIMonsterShader";
+	const std::wstring ResourceMaker::UI_LEVEL_UP_SHADER_KEY = L"UILevelUPShader";
+
 #pragma endregion
 
 #pragma region TEXTURE
@@ -59,13 +63,19 @@ namespace jh
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_BEAM_KEY = L"SkillElectricBeamTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoTexture";
-
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY		= L"SkillIconElectricBeamTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY	= L"SkillIconElectricStrikeTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY	= L"SkillIconElectricTornadoTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY	= L"SkillIconMelleAttackTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_SPEED_KEY	= L"SkillIconaSpeedTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_HEALTH_KEY	= L"SkillIconaHealthTexture";
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY = L"UIMonsterBorderBar";
+	const std::wstring ResourceMaker::UI_TEXTURE_LEVEL_UP_BORDER_KEY = L"UILevelUPBorder";
 
 
 	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
@@ -127,15 +137,23 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_BLASTER_MATERIAL_KEY = L"BlasterMaterial";
 	const std::wstring ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY = L"AcientBossMaterial";
 	
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY = L"SkillElectricBeamMaterial";
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeMaterial";
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY			= L"SkillElectricBeamMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY		= L"SkillElectricStrikeMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY		= L"SkillElectricTornadoMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY		= L"SkillIconElectricBeamMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY	= L"SkillIconElectricStrikeMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY	= L"SkillIconElectricTornadoMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY		= L"SkillIconMelleAttackMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_SPEED_KEY				= L"SkillIconSpeedMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_HEALTH_KEY			= L"SkillIconHealthMaterial";
+
 
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY = L"UIBorderMonsterMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_LEVEL_UP_BORDER_KEY = L"UILevelUPMaterial";
 
 	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
 	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
@@ -387,6 +405,18 @@ namespace jh
 		ResourcesManager::Insert<Mesh>(DEBUG_RECT_MESH_KEY, pDebugRectMesh);
 #pragma endregion
 
+#pragma region UI_LEVEL_UP
+		//Mesh* pUILevelUpMesh = new Mesh();
+		//mVertices[0] = { {-0.5f,		0.5f,		0.0f},	{0.0f, 0.0f} };
+		//mVertices[1] = { {0.5f,			0.5f,		0.0f},	{1.0f, 0.0f} };
+		//mVertices[2] = { {0.5f,			-0.5f,		0.0f},	{1.0f, 1.0f} };
+		//mVertices[3] = { {-0.5f,		-0.5f,		0.0f},	{0.0f, 1.0f} };
+		//pRectMesh->CreateVertexBuffer(mVertices, sizeof(Vertex) * RECT_VERTEX_COUNT);
+		//pRectMesh->CreateIndexBuffer(rectIndexes.data(), static_cast<UINT>(rectIndexes.size()));
+		//ResourcesManager::Insert<Mesh>(UI_LEVEL_UP_MESH_KEY, pUILevelUpMesh);
+
+#pragma endregion
+
 	}
 
 	void ResourceMaker::createShaders()
@@ -397,6 +427,7 @@ namespace jh
 		loadAndInsertShader(UI_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
 		loadAndInsertShader(UI_STAMINA_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
 		loadAndInsertShader(UI_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceMonsterHealthPS.hlsl");
+		loadAndInsertShader(UI_LEVEL_UP_SHADER_KEY, L"jhLevelUpVS.hlsl", L"jhLevelUpPS.hlsl");
 
 
 		Shader* pNormalMapSpriteShader = new NormalMapShader();
@@ -438,6 +469,13 @@ namespace jh
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_STRIKE_KEY, L"SKILL_ElectricStrike_80x176.png");
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_TORNADO_KEY, L"SKILL_ElectricTornado_64x64.png");
 
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY,		L"SKILL_ICON_Beam.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY,	L"SKILL_ICON_Strike.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY,	L"SKILL_ICON_Tornado.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY,		L"SKILL_ICON_MelleAttack.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_SPEED_KEY,				L"SKILL_ICON_Speed.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_HEALTH_KEY,				L"SKILL_ICON_Health.png");
+
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
 		loadAndInsertTexture(EFFECT_HIT_TEXTURE_ATLAS_KEY, L"EffectAtals.png");
@@ -477,6 +515,7 @@ namespace jh
 		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"UI_Player_StaminarBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY, L"UI_MON_Border_HpBar.png");
+		loadAndInsertTexture(UI_TEXTURE_LEVEL_UP_BORDER_KEY, L"UI_Level_UP_Border_256x256.png");
 
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
@@ -508,6 +547,14 @@ namespace jh
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_BEAM_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_STRIKE_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_TORNADO_KEY);
+
+		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY,	SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY,	SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY, SPRITE_SHADER_KEY,		SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_SPEED_KEY, SPRITE_SHADER_KEY,			SKILL_ICON_TEXTURE_SPEED_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_HEALTH_KEY, SPRITE_SHADER_KEY,			SKILL_ICON_TEXTURE_HEALTH_KEY);
+
 
 		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
@@ -549,6 +596,7 @@ namespace jh
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MONSTER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY);
+		insertMaterial(UI_MATERIAL_LEVEL_UP_BORDER_KEY, SPRITE_SHADER_KEY, UI_TEXTURE_LEVEL_UP_BORDER_KEY);
 
 
 #pragma region DEBUG

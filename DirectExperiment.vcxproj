@@ -219,6 +219,8 @@
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhPlayerSkillObject.h" />
     <ClInclude Include="jhPlayerSkillScript.h" />
+    <ClInclude Include="jhUILevelUpScript.h" />
+    <ClInclude Include="jhUISkillIconObject.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructuredBuffer.h" />
     <ClInclude Include="jhTexture.h" />
@@ -226,10 +228,13 @@
     <ClInclude Include="jhTransform.h" />
     <ClInclude Include="jhUIBarObject.h" />
     <ClInclude Include="jhUIBarScript.h" />
+    <ClInclude Include="jhUILevelUpBorderScript.h" />
+    <ClInclude Include="jhUISkillIconScript.h" />
     <ClInclude Include="jhWeaponColliderScript.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="jhUILevelUPBorderObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jhAcientBossMonsterAttackColiderObject.cpp" />
@@ -314,6 +319,11 @@
     <ClCompile Include="jhTransform.cpp" />
     <ClCompile Include="jhUIBarObject.cpp" />
     <ClCompile Include="jhUIBarScript.cpp" />
+    <ClCompile Include="jhUILevelUPBorderObject.cpp" />
+    <ClCompile Include="jhUILevelUpBorderScript.cpp" />
+    <ClCompile Include="jhUILevelUpScript.cpp" />
+    <ClCompile Include="jhUISkillIconObject.cpp" />
+    <ClCompile Include="jhUISkillIconScript.cpp" />
     <ClCompile Include="jhWeaponColliderScript.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="jhGraphicDeviceDX11.cpp" />
@@ -355,6 +365,22 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhLevelUpPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhLevelUpVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="jhNormalMapSpritePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

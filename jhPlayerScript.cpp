@@ -30,7 +30,7 @@ static constexpr const float PUSH_ATTACK_MOVEMENT_DISTANCE	= DEFAULT_MOVEMENT_DI
 static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
 static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
 
-static constexpr const UINT LEVEL_1_INIT_MAXIMUM_EXP = 10;
+static constexpr const UINT LEVEL_1_INIT_MAXIMUM_EXP = 5;
 static constexpr const float PER_LEVEL_UP_COEFFICEINT_VALUE = 1.1f;
 
 using namespace jh::math;

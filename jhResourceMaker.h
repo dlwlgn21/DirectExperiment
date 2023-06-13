@@ -41,6 +41,7 @@ namespace jh
 		static const std::wstring RECT_NORMAL_MAP_MESH_KEY;
 		static const std::wstring BATTLE_BG_MESH_KEY;
 		static const std::wstring DEBUG_RECT_MESH_KEY;
+		static const std::wstring UI_LEVEL_UP_MESH_KEY;
 #pragma endregion
 		
 #pragma region SHADER
@@ -51,6 +52,7 @@ namespace jh
 		static const std::wstring UI_STAMINA_SHADER_KEY;
 		static const std::wstring UI_MONSTER_HP_SHADER_KEY;
 		static const std::wstring NORMAL_MAP_SPRITE_SHADER_KEY;
+		static const std::wstring UI_LEVEL_UP_SHADER_KEY;
 #pragma endregion
 
 #pragma region TEXTURE
@@ -78,6 +80,12 @@ namespace jh
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_STRIKE_KEY;
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_TORNADO_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_SPEED_KEY;
+		static const std::wstring SKILL_ICON_TEXTURE_HEALTH_KEY;
 
 		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
 		static const std::wstring BG_OBELISK_TEXTURE_NORMAL_MAP_KEY;
@@ -95,6 +103,7 @@ namespace jh
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY;
+		static const std::wstring UI_TEXTURE_LEVEL_UP_BORDER_KEY;
 
 		static const std::wstring EFFECT_HIT_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY;
@@ -147,7 +156,12 @@ namespace jh
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_STRIKE_KEY;
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_TORNADO_KEY;
-
+		static const std::wstring SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY;
+		static const std::wstring SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY;
+		static const std::wstring SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY;
+		static const std::wstring SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY;
+		static const std::wstring SKILL_ICON_MATERIAL_SPEED_KEY;
+		static const std::wstring SKILL_ICON_MATERIAL_HEALTH_KEY;
 
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
@@ -159,6 +173,10 @@ namespace jh
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_MATERIAL_LEVEL_UP_BORDER_KEY;
+
+
 
 		static const std::wstring EFFECT_HIT_MATERIAL_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_MATERIAL_KEY;

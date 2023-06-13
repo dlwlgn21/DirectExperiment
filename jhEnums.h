@@ -48,6 +48,7 @@ namespace jh
 		PLAYER_SKILL,
 		MONSTER_EFFECT,
 		PARTICLE,
+		LEVEL_UP_UI,
 		UI,
 		COUNT = 16,
 	};

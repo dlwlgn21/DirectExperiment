@@ -8,6 +8,7 @@
 #include "jhMonsterObjectPool.h"
 #include "jhLightingManager.h"
 #include "jhMonsterUIManager.h"
+#include "jhPlayerLevelManager.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -23,6 +24,7 @@ namespace jh
 		graphics::GraphicDeviceDX11::GetInstance().InitializeDevice(mScreenWidth, mScreenHeight, mHwnd);
 		CollisionManager::GetInstance().Initialize();
 		ResourceMaker::GetInstance().Initialize();
+		PlayerLevelManager::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
 		LightingManager::GetInstance().Initialize();
 		//MonsterUIManager::GetInstance().Initialize();
