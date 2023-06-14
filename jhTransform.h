@@ -29,7 +29,8 @@ namespace jh
 
 		__forceinline void SetOnlyXScale(const float xSclae)						{ mScale.x = xSclae; }
 		__forceinline void SetOnlyXYScale(const float xScale, const float yScale)	{ mScale.x = xScale; mScale.y = yScale; }
-		__forceinline void SetOnlyXYScale(const float xAndyScale)	{ mScale.x = xAndyScale; mScale.y = xAndyScale; }
+		__forceinline void SetOnlyXYScale(const float xAndyScale)					{ mScale.x = xAndyScale; mScale.y = xAndyScale; }
+		__forceinline void SetOnlyXYScale(const jh::math::Vector2 xyScale)			{ mScale.x = xyScale.x; mScale.y = xyScale.y; }
 		__forceinline void SetScale(const jh::math::Vector3 scale)					{ mScale = scale; }
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 

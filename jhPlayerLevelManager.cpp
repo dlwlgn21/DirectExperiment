@@ -18,6 +18,14 @@ namespace jh
 			mpSkillIconObjects[i]->Initialize();
 			mpSkillIconObjects[i]->SetState(GameObject::eGameObjectState::INACTIVE);
 		}
+
+		for (UINT i = 0; i < static_cast<UINT>(eSkillTextType::COUNT); ++i)
+		{
+			mpSkillTextObjects[i] = new UISKillTextObject(static_cast<eSkillTextType>(i));
+			assert(mpSkillTextObjects[i] != nullptr);
+			mpSkillTextObjects[i]->Initialize();
+			mpSkillTextObjects[i]->SetState(GameObject::eGameObjectState::INACTIVE);
+		}
 	}
 
 	void PlayerLevelManager::SetCameraTransform(Transform* pCameraTransform)
@@ -28,6 +36,11 @@ namespace jh
 		{
 			assert(mpSkillIconObjects[i] != nullptr);
 			static_cast<UILevelUpScript*>(mpSkillIconObjects[i]->GetScriptOrNull())->SetCameraTransform(pCameraTransform);
+		}
+		for (UINT i = 0; i < static_cast<UINT>(eSkillTextType::COUNT); ++i)
+		{
+			assert(mpSkillTextObjects[i] != nullptr);
+			static_cast<UILevelUpScript*>(mpSkillTextObjects[i]->GetScriptOrNull())->SetCameraTransform(pCameraTransform);
 		}
 	}
 
@@ -40,6 +53,13 @@ namespace jh
 			assert(mpSkillIconObjects[i] != nullptr);
 			mpSkillIconObjects[i]->SetState(GameObject::eGameObjectState::ACTIVE);
 			static_cast<UILevelUpScript*>(mpSkillIconObjects[i]->GetScriptOrNull())->SetState(eUILevelUpState::ENTERING);
+		}
+
+		for (UINT i = 0; i < static_cast<UINT>(eSkillTextType::COUNT); ++i)
+		{
+			assert(mpSkillTextObjects[i] != nullptr);
+			mpSkillTextObjects[i]->SetState(GameObject::eGameObjectState::ACTIVE);
+			static_cast<UILevelUpScript*>(mpSkillTextObjects[i]->GetScriptOrNull())->SetState(eUILevelUpState::ENTERING);
 		}
 	}
 }

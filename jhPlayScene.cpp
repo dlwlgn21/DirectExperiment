@@ -130,9 +130,15 @@ namespace jh
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
 		this->AddGameObject(PlayerLevelManager::GetInstance().GetUIBorder(), eLayerType::LEVEL_UP_UI);
 		auto& skillIcons = PlayerLevelManager::GetInstance().GetUISkillIcons();
+		auto& skillTexts = PlayerLevelManager::GetInstance().GetUISkillTexts();
 		for (UINT i = 0; i < static_cast<UINT>(eSkillIconType::COUNT); ++i)
 		{
 			this->AddGameObject(skillIcons[i], eLayerType::LEVEL_UP_UI);
+		}
+
+		for (UINT i = 0; i < static_cast<UINT>(eSkillTextType::COUNT); ++i)
+		{
+			this->AddGameObject(skillTexts[i], eLayerType::LEVEL_UP_UI);
 		}
 
 		Scene::Initialize();

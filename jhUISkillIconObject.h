@@ -1,31 +1,19 @@
 #pragma once
-#include "jhGameObject.h"
+#include "jhUISkillObject.h"
 
 namespace jh
 {
-	enum class eSkillIconType
-	{
-		ELECTRIC_BEAM,
-		ELECTRIC_STRIKE,
-		ELECTRIC_TORNADO,
-		MELLE_ATTACK_DAMAGE,
-		SPEED,
-		HEALTH,
-		COUNT
-	};
-
-	class UISkillIconObject : public GameObject
+	class UISkillIconObject : public UISkillObject
 	{
 	public:
 		UISkillIconObject(const eSkillIconType eIconType);
 		virtual ~UISkillIconObject() = default;
 
 	private:
-		void setRenderer();
-		void setScript();
-		void setTransform();
-		void setAnimator();
-
+		void setRenderer() override;
+		void setScript() override;
+		void setTransform() override;
+		void setAnimator() override;
 	private:
 		eSkillIconType meSkillIconType;
 	};

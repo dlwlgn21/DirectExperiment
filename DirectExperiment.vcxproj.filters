@@ -379,6 +379,15 @@
     <Filter Include="Component\Script\UI\LevelUP\Base">
       <UniqueIdentifier>{6f57c767-1986-40af-897b-7a7a3f4097ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\LevelUP\SkillText">
+      <UniqueIdentifier>{d2b98cab-4ea8-4f2a-87e9-07e69459b647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\LevelUP\SkillBase">
+      <UniqueIdentifier>{0f5d96a9-ee7d-4c70-bd74-091475d57cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\SkillText">
+      <UniqueIdentifier>{be3d0bfd-7479-4f6a-933e-f264fa3811d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -678,9 +687,6 @@
     <ClInclude Include="jhUIBarScript.h">
       <Filter>Component\Script\UI\Player</Filter>
     </ClInclude>
-    <ClInclude Include="jhUILevelUpBorderScript.h">
-      <Filter>Component\Script\UI\LevelUP\Border</Filter>
-    </ClInclude>
     <ClInclude Include="jhUILevelUPBorderObject.h">
       <Filter>GameObject\UI\LevelUP\Border</Filter>
     </ClInclude>
@@ -692,6 +698,21 @@
     </ClInclude>
     <ClInclude Include="jhUILevelUpScript.h">
       <Filter>Component\Script\UI\LevelUP\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillTextObject.h">
+      <Filter>GameObject\UI\LevelUP\SkillText</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillObject.h">
+      <Filter>GameObject\UI\LevelUP\SkillBase</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSpriteRendererIncludeFiles.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUILevelUpBorderScript.h">
+      <Filter>Component\Script\UI\LevelUP\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillTextScript.h">
+      <Filter>Component\Script\UI\LevelUP\SkillText</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -982,6 +1003,15 @@
     </ClCompile>
     <ClCompile Include="jhUILevelUpScript.cpp">
       <Filter>Component\Script\UI\LevelUP\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillTextObject.cpp">
+      <Filter>GameObject\UI\LevelUP\SkillText</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillObject.cpp">
+      <Filter>GameObject\UI\LevelUP\SkillBase</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillTextScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\SkillText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

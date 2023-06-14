@@ -1,11 +1,11 @@
 #pragma once
 #include "jhEngine.h"
 #include "jhUISkillIconObject.h"
+#include "jhUISkillTextObject.h"
 
 namespace jh
 {
 	class UILevelUpBorderObject;
-	class UISkillIconObject;
 	class Transform;
 	class PlayerLevelManager final
 	{
@@ -25,6 +25,7 @@ namespace jh
 
 		UILevelUpBorderObject* GetUIBorder() { assert(mpUIBorder != nullptr); return mpUIBorder; }
 		std::vector<UISkillIconObject*>& GetUISkillIcons() { return mpSkillIconObjects; }
+		std::vector<UISKillTextObject*>& GetUISkillTexts() { return mpSkillTextObjects; }
 
 	private:
 		PlayerLevelManager()
@@ -33,12 +34,15 @@ namespace jh
 		{
 			mpSkillIconObjects.reserve(static_cast<UINT>(eSkillIconType::COUNT));
 			mpSkillIconObjects.resize(static_cast<UINT>(eSkillIconType::COUNT));
+			mpSkillTextObjects.reserve(static_cast<UINT>(eSkillTextType::COUNT));
+			mpSkillTextObjects.resize(static_cast<UINT>(eSkillTextType::COUNT));
 		}
 		~PlayerLevelManager() = default;
 
 	private:
 		UILevelUpBorderObject* mpUIBorder;
 		std::vector<UISkillIconObject*> mpSkillIconObjects;
+		std::vector<UISKillTextObject*> mpSkillTextObjects;
 	};
 }
 

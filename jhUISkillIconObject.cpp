@@ -22,9 +22,7 @@ static constexpr const float HEALTH_SCALUE_VALUE = 8.0f;
 namespace jh
 {
 	UISkillIconObject::UISkillIconObject(const eSkillIconType eIconType)
-		: GameObject()
-		, meSkillIconType(eIconType)
-		
+		: UISkillObject()
 	{
 		setRenderer();
 		setScript();

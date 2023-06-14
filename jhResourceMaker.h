@@ -56,8 +56,12 @@ namespace jh
 #pragma endregion
 
 #pragma region TEXTURE
+#pragma region PLAYER_TEXTURE
 		static const std::wstring PLAYER_TEXTURE_ATLAS_KEY;
 		static const std::wstring PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY;
+#pragma endregion
+
+#pragma region MONSTER_TEXTURE
 		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY;
 		static const std::wstring MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_SWEEPER_ATLAS_KEY;
@@ -76,7 +80,9 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY;
 		static const std::wstring MONSTER_TEXTURE_BLASTER_KEY;
 		static const std::wstring MONSTER_TEXTURE_ACIENT_BOSS_KEY;
-		
+#pragma endregion
+
+#pragma region SKILL_ICON_TEXTURE
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_STRIKE_KEY;
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_TORNADO_KEY;
@@ -86,9 +92,21 @@ namespace jh
 		static const std::wstring SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY;
 		static const std::wstring SKILL_ICON_TEXTURE_SPEED_KEY;
 		static const std::wstring SKILL_ICON_TEXTURE_HEALTH_KEY;
+#pragma endregion
 
-		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
-		static const std::wstring BG_OBELISK_TEXTURE_NORMAL_MAP_KEY;
+#pragma region SKILL_TEXT_TEXTURE
+		static const std::wstring SKILL_TEXT_TEXTURE_ELECTRIC_BEAM_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_ELECTRIC_STRIKE_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_ELECTRIC_TORANDO_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_ELECTRIC_DAMAGE_INCREASE_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_ELECTRIC_SPAWN_SPEED_KEY;
+
+		static const std::wstring SKILL_TEXT_TEXTURE_SWORD_DAMAGE_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_MOVEMENT_SPEED_KEY;
+		static const std::wstring SKILL_TEXT_TEXTURE_RECOVER_HEALTH_KEY;
+#pragma endregion
+
+#pragma region BG_FG_PARRALAX_TEXTURE
 		static const std::wstring BG_FOREGROUND_TEXTURE_KEY;
 		static const std::wstring BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_PARALLAX_TEXTURE_1_KEY;
@@ -97,20 +115,27 @@ namespace jh
 		static const std::wstring BG_PARALLAX_TEXTURE_4_KEY;
 		static const std::wstring BG_PARALLAX_TEXTURE_5_KEY;
 		static const std::wstring BG_PARALLAX_TEXTURE_6_KEY;
+#pragma endregion
 
+#pragma region UI_TEXTURE
 		static const std::wstring UI_HP_BORDER_TEXTURE_KEY;
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY;
 		static const std::wstring UI_TEXTURE_LEVEL_UP_BORDER_KEY;
+#pragma endregion
 
+#pragma region EFFECT_TEXTRUE
 		static const std::wstring EFFECT_HIT_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring EFFECT_PLAYER_DASH_TEXTURE_KEY;
+#pragma endregion
 
-
+#pragma region BG_ANIMATED_OBJECT_TEXTURE
+		static const std::wstring BG_OBELISK_TEXTURE_ATLAS_KEY;
+		static const std::wstring BG_OBELISK_TEXTURE_NORMAL_MAP_KEY;
 		static const std::wstring BG_TREE_1_TEXTURE_KEY;
 		static const std::wstring BG_TREE_1_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_TREE_2_TEXTURE_KEY;
@@ -125,17 +150,23 @@ namespace jh
 		static const std::wstring BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_TEXTURE_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY;
+#pragma endregion
 
-
+#pragma region OTHER
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
 		static const std::wstring BG_MOON_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring BRIK_DIFFUSE_TEXTURE_KEY;
 		static const std::wstring BRIK_NORMAL_MAP_TEXTURE_KEY;
 #pragma endregion
+#pragma endregion
 
 #pragma region MATERIAL
+#pragma region PLAYER_MATERIAL
 		static const std::wstring PLAYER_MATERIAL_KEY;
 		static const std::wstring PLAYER_NORMAL_MAP_MATERIAL_KEY;
+#pragma endregion
+
+#pragma region MONSTER_MATERIAL
 		static const std::wstring MONSTER_CAGED_SHOKER_MATERIAL_KEY;
 		static const std::wstring MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_SWEEPER_MATERIAL_KEY;
@@ -152,7 +183,9 @@ namespace jh
 		static const std::wstring MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring MONSTER_BLASTER_MATERIAL_KEY;
 		static const std::wstring MONSTER_ACIENT_BOSS_MATERIAL_KEY;
+#pragma endregion
 
+#pragma region SKILL_ICON_MATERIAL
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_STRIKE_KEY;
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_TORNADO_KEY;
@@ -162,12 +195,21 @@ namespace jh
 		static const std::wstring SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY;
 		static const std::wstring SKILL_ICON_MATERIAL_SPEED_KEY;
 		static const std::wstring SKILL_ICON_MATERIAL_HEALTH_KEY;
+#pragma endregion
 
-		static const std::wstring BRIK_MATERIAL_KEY;
-		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
+#pragma region SKILL_TEXT_MATERIAL
+		static const std::wstring SKILL_TEXT_MATERIAL_ELECTRIC_BEAM_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_ELECTRIC_STRIKE_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_ELECTRIC_TORANDO_LV_1_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_ELECTRIC_DAMAGE_INCREASE_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_ELECTRIC_SPAWN_SPEED_KEY;
 
+		static const std::wstring SKILL_TEXT_MATERIAL_SWORD_DAMAGE_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_MOVEMENT_SPEED_KEY;
+		static const std::wstring SKILL_TEXT_MATERIAL_RECOVER_HEALTH_KEY;
+#pragma endregion
 
-		static const std::wstring DEBUG_MATERIAL_KEY;
+#pragma region UI_MATERIAL
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
@@ -175,14 +217,16 @@ namespace jh
 		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MATERIAL_LEVEL_UP_BORDER_KEY;
+#pragma endregion
 
-
-
+#pragma region EFFECT_MATERIAL
 		static const std::wstring EFFECT_HIT_MATERIAL_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_MATERIAL_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring EFFECT_PLAYER_DASH_MATERIAL_KEY;
+#pragma endregion
 
+#pragma region BG_ANIMATED_OBJECTS_MATERIAL
 		static const std::wstring BG_MOON_MATERIAL_KEY;
 		static const std::wstring BG_MOON_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_OBELISK_MATERIAL_KEY;
@@ -201,16 +245,29 @@ namespace jh
 		static const std::wstring BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_MATERIAL_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY;
+
+#pragma endregion
+
+#pragma region BG_PARALLAX_MATERIAL
 		static const std::wstring BG_FOREGROUND_MATERIAL_KEY;
 		static const std::wstring BG_FOREGROUND_NORMALMAP_MATERIAL_KEY;
-
-
 		static const std::wstring BG_PARALLAX_MATERIAL_1_KEY;
 		static const std::wstring BG_PARALLAX_MATERIAL_2_KEY;
 		static const std::wstring BG_PARALLAX_MATERIAL_3_KEY;
 		static const std::wstring BG_PARALLAX_MATERIAL_4_KEY;
 		static const std::wstring BG_PARALLAX_MATERIAL_5_KEY;
 		static const std::wstring BG_PARALLAX_MATERIAL_6_KEY;
+#pragma endregion
+
+
+
+#pragma region OTHER
+		static const std::wstring BRIK_MATERIAL_KEY;
+		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
+		static const std::wstring DEBUG_MATERIAL_KEY;
+#pragma endregion
+
+
 #pragma endregion
 
 	private:

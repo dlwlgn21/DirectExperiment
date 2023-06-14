@@ -13,6 +13,7 @@ using namespace jh::math;
 
 namespace jh
 {
+#pragma region KEYS
 #pragma region MESH
 	const std::wstring ResourceMaker::RECT_MESH_KEY = L"RectMeshKey";
 	const std::wstring ResourceMaker::BATTLE_BG_MESH_KEY = L"BattleBGMeshKey";
@@ -33,13 +34,15 @@ namespace jh
 	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShader";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_SHADER_KEY = L"UIMonsterShader";
 	const std::wstring ResourceMaker::UI_LEVEL_UP_SHADER_KEY = L"UILevelUPShader";
-
 #pragma endregion
 
 #pragma region TEXTURE
+#pragma region PLAYER_TEXTURE
 	const std::wstring ResourceMaker::PLAYER_TEXTURE_ATLAS_KEY = L"PlayerTextureAtlas";
 	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY = L"PlayerNormalMapTextureAtlas";
+#pragma endregion
 
+#pragma region MONSTER_TEXTURE
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY = L"CagedTextureAtals";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY = L"CagedNormalTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_SWEEPER_ATLAS_KEY = L"SweeperTextureAtals";
@@ -58,28 +61,44 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY = L"ArcherNormalTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_BLASTER_KEY = L"BlasterTexture";
 	const std::wstring ResourceMaker::MONSTER_TEXTURE_ACIENT_BOSS_KEY = L"AcientBossTexture";
-	
-	
+#pragma endregion
+
+#pragma region SKILL_TEXTURE
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_BEAM_KEY = L"SkillElectricBeamTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY		= L"SkillIconElectricBeamTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY	= L"SkillIconElectricStrikeTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY	= L"SkillIconElectricTornadoTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY	= L"SkillIconMelleAttackTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_SPEED_KEY	= L"SkillIconaSpeedTexture";
-	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_HEALTH_KEY	= L"SkillIconaHealthTexture";
+#pragma endregion
 
+#pragma region SKILL_ICON_TEXTURE
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY = L"SkillIconElectricBeamTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY = L"SkillIconElectricStrikeTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY = L"SkillIconElectricTornadoTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY = L"SkillIconMelleAttackTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_SPEED_KEY = L"SkillIconaSpeedTexture";
+	const std::wstring ResourceMaker::SKILL_ICON_TEXTURE_HEALTH_KEY = L"SkillIconaHealthTexture";
+#pragma endregion
+
+#pragma region SKILL_TEXT_TEXTURE
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_ELECTRIC_BEAM_LV_1_KEY = L"SkillTextBeamLv1";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_ELECTRIC_STRIKE_LV_1_KEY = L"SkillTextStrikeLv1";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_ELECTRIC_TORANDO_LV_1_KEY = L"SkillTextTornadoLv1";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_ELECTRIC_DAMAGE_INCREASE_KEY = L"SkillTextElectricDamage";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_ELECTRIC_SPAWN_SPEED_KEY = L"SkillTextElectricSpawnSpeed";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_SWORD_DAMAGE_KEY = L"SkillTextSwordDamage";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_MOVEMENT_SPEED_KEY = L"SkillTextMovementSpeed";
+	const std::wstring ResourceMaker::SKILL_TEXT_TEXTURE_RECOVER_HEALTH_KEY = L"SkillTextRecoverHealth";
+#pragma endregion
+
+#pragma region UI_TEXTURE
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY = L"UIMonsterBorderBar";
 	const std::wstring ResourceMaker::UI_TEXTURE_LEVEL_UP_BORDER_KEY = L"UILevelUPBorder";
+#pragma endregion
 
-
-	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
-	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_NORMAL_MAP_KEY = L"ObeliskNoramlTextureKey";
+#pragma region BG_FG_PARRALAX_TEXTURE
 	const std::wstring ResourceMaker::BG_FOREGROUND_TEXTURE_KEY = L"BattleBGTextureKey";
 	const std::wstring ResourceMaker::BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY = L"BattleForegroundNomal";
 	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_1_KEY = L"Parallax1Texture";
@@ -88,6 +107,11 @@ namespace jh
 	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_4_KEY = L"Parallax4Texture";
 	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_5_KEY = L"Parallax5Texture";
 	const std::wstring ResourceMaker::BG_PARALLAX_TEXTURE_6_KEY = L"Parallax6Texture";
+#pragma endregion
+
+#pragma region BG_ANIMATED_OBJECTS_TEXTURE
+	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_ATLAS_KEY = L"ObeliskTextureAtalsKey";
+	const std::wstring ResourceMaker::BG_OBELISK_TEXTURE_NORMAL_MAP_KEY = L"ObeliskNoramlTextureKey";
 	const std::wstring ResourceMaker::BG_MOON_ATLAS_TEXTURE_KEY = L"BGMoonTexture";
 	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_TEXTURE_KEY = L"BGMoonNormalTexture";
 	const std::wstring ResourceMaker::BG_TREE_1_TEXTURE_KEY = L"BGTree1Texture";
@@ -104,22 +128,30 @@ namespace jh
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY = L"BGLargeLightningNormalTexture";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_TEXTURE_KEY = L"BGSmallLightningTexture";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY = L"BGSmallLightningNormalTexture";
+#pragma endregion
 
+#pragma region EFFECT_TEXTURE
 	const std::wstring ResourceMaker::EFFECT_HIT_TEXTURE_ATLAS_KEY = L"HitEffectAtlasTextureKey";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_TEXTURE_KEY = L"PlayerDashEffectTexture";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
+#pragma endregion
 
+
+#pragma region OTHER
 	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTexture";
 	const std::wstring ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY = L"BrickNormalTexture";
 #pragma endregion
 
-#pragma region MATERIAL
-	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
+#pragma endregion
 
+#pragma region MATERIAL
+#pragma region PLAYER_MATERIAL
 	const std::wstring ResourceMaker::PLAYER_MATERIAL_KEY = L"PlayerMaterial";
 	const std::wstring ResourceMaker::PLAYER_NORMAL_MAP_MATERIAL_KEY = L"PlayerNormalMapMaterial";
+#pragma endregion
 
+#pragma region MONSTER_MATERIAL
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY = L"CagedShokerMaterial";
 	const std::wstring ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY = L"CagedNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY = L"SweeperMaterial";
@@ -136,27 +168,44 @@ namespace jh
 	const std::wstring ResourceMaker::MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY = L"ArcherNormalMaterial";
 	const std::wstring ResourceMaker::MONSTER_BLASTER_MATERIAL_KEY = L"BlasterMaterial";
 	const std::wstring ResourceMaker::MONSTER_ACIENT_BOSS_MATERIAL_KEY = L"AcientBossMaterial";
-	
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY			= L"SkillElectricBeamMaterial";
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY		= L"SkillElectricStrikeMaterial";
-	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY		= L"SkillElectricTornadoMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY		= L"SkillIconElectricBeamMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY	= L"SkillIconElectricStrikeMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY	= L"SkillIconElectricTornadoMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY		= L"SkillIconMelleAttackMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_SPEED_KEY				= L"SkillIconSpeedMaterial";
-	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_HEALTH_KEY			= L"SkillIconHealthMaterial";
+#pragma endregion
 
+#pragma region SKILL_MATERIAL
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY = L"SkillElectricBeamMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeMaterial";
+	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoMaterial";
+#pragma endregion
 
+#pragma region SKILL_ICON_MATERIAL
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY = L"SkillIconElectricBeamMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY = L"SkillIconElectricStrikeMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY = L"SkillIconElectricTornadoMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY = L"SkillIconMelleAttackMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_SPEED_KEY = L"SkillIconSpeedMaterial";
+	const std::wstring ResourceMaker::SKILL_ICON_MATERIAL_HEALTH_KEY = L"SkillIconHealthMaterial";
+#pragma endregion
+
+#pragma region SKILL_TEXT_MATERIAL
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_ELECTRIC_BEAM_LV_1_KEY = L"SkillTextBeamLv1Mat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_ELECTRIC_STRIKE_LV_1_KEY = L"SkillTextStrikeLv1Mat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_ELECTRIC_TORANDO_LV_1_KEY = L"SkillTextTornadoLv1Mat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_ELECTRIC_DAMAGE_INCREASE_KEY = L"SkillTextElectricDamageMat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_ELECTRIC_SPAWN_SPEED_KEY = L"SkillTextElectricSpawnSpeedMat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_SWORD_DAMAGE_KEY = L"SkillTextSwordDamageMat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_MOVEMENT_SPEED_KEY = L"SkillTextMovementSpeedMat";
+	const std::wstring ResourceMaker::SKILL_TEXT_MATERIAL_RECOVER_HEALTH_KEY = L"SkillTextRecoverHealthMat";
+#pragma endregion
+
+#pragma region UI_MATERIAL
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY = L"UIBorderMonsterMaterial";
 	const std::wstring ResourceMaker::UI_MATERIAL_LEVEL_UP_BORDER_KEY = L"UILevelUPMaterial";
+#pragma endregion
 
-	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
-	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
+#pragma region BG_FG_PARRALAX_MATERIAL
 	const std::wstring ResourceMaker::BG_FOREGROUND_MATERIAL_KEY = L"BattleBGMaterialKey";
 	const std::wstring ResourceMaker::BG_FOREGROUND_NORMALMAP_MATERIAL_KEY = L"BatteForegroundNoramlMapKey";
 	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY = L"ParallaxMaterial1";
@@ -165,6 +214,11 @@ namespace jh
 	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_4_KEY = L"ParallaxMaterial4";
 	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_5_KEY = L"ParallaxMaterial5";
 	const std::wstring ResourceMaker::BG_PARALLAX_MATERIAL_6_KEY = L"ParallaxMaterial6";
+#pragma endregion
+
+#pragma region BG_ANIMATED_OBJECT_MATERIAL
+	const std::wstring ResourceMaker::BG_OBELISK_MATERIAL_KEY = L"ObeliskMaterialKey";
+	const std::wstring ResourceMaker::BG_OBELISK_NORMAL_MAP_MATERIAL_KEY = L"ObeliskNormalMaterialKey";
 	const std::wstring ResourceMaker::BG_MOON_MATERIAL_KEY = L"BGMoonMaterial";
 	const std::wstring ResourceMaker::BG_MOON_NORMAL_MAP_MATERIAL_KEY = L"BGMoonNormalMaterial";
 	const std::wstring ResourceMaker::BG_TREE_1_MATERIAL_KEY = L"BGTree1Material";
@@ -181,14 +235,23 @@ namespace jh
 	const std::wstring ResourceMaker::BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY = L"BGLargeLightningNormalMaterial";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_MATERIAL_KEY = L"BGSmallLightningMaterial";
 	const std::wstring ResourceMaker::BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY = L"BGSmallLightningNormalMaterial";
+#pragma endregion
 
+#pragma region EFFECT_MATERIAL
 	const std::wstring ResourceMaker::EFFECT_HIT_MATERIAL_KEY = L"HitEffectMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_MATERIAL_KEY = L"GreenPortalMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
+#pragma endregion
 
+#pragma region OTHER
+	const std::wstring ResourceMaker::DEBUG_MATERIAL_KEY = L"DebugMaterialKey";
 	const std::wstring ResourceMaker::BRIK_MATERIAL_KEY = L"BrickMaterialKey";
 	const std::wstring ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY = L"BrickNotNormalMaterialKey";
+#pragma endregion
+
+
+#pragma endregion
 #pragma endregion
 
 	void ResourceMaker::Initialize()
@@ -201,7 +264,7 @@ namespace jh
 		setSamplerState();
 		createConstantBuffer();
 	}
-
+#pragma region CREATE
 	void ResourceMaker::createMeshs()
 	{
 #pragma region INDEX
@@ -231,9 +294,9 @@ namespace jh
 		Mesh* pNormalMesh = new NormalMapMesh();
 
 		mNormalMapVertex[0].Position = Vector3(-0.5f, -0.5f, 0.0f);
-		mNormalMapVertex[1].Position = Vector3(-0.5f,  0.5f, 0.0f);
-		mNormalMapVertex[2].Position = Vector3( 0.5f,  0.5f, 0.0f);
-		mNormalMapVertex[3].Position = Vector3( 0.5f, -0.5f, 0.0f);
+		mNormalMapVertex[1].Position = Vector3(-0.5f, 0.5f, 0.0f);
+		mNormalMapVertex[2].Position = Vector3(0.5f, 0.5f, 0.0f);
+		mNormalMapVertex[3].Position = Vector3(0.5f, -0.5f, 0.0f);
 
 		std::vector<XMFLOAT3> tempNormal;
 		UINT indices[6]
@@ -354,7 +417,7 @@ namespace jh
 			//mNormalMapVertex[i].Normal.x = XMVectorGetX(normalSum);
 			//mNormalMapVertex[i].Normal.y = XMVectorGetY(normalSum);
 			//mNormalMapVertex[i].Normal.z = XMVectorGetZ(normalSum);
-			
+
 			mNormalMapVertex[i].Normal.x = 0.0f;
 			mNormalMapVertex[i].Normal.y = 0.0f;
 			mNormalMapVertex[i].Normal.z = -1.0f;
@@ -442,9 +505,13 @@ namespace jh
 
 	void ResourceMaker::createTextures()
 	{
-
+#pragma region TEXTURE
+#pragma region PLAYER
 		loadAndInsertTexture(PLAYER_TEXTURE_ATLAS_KEY, L"PLAYER_SpriteSheet_90x37.png");
 		loadAndInsertTexture(PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY, L"PLAYER_SpriteSheet_90x37_NM.png");
+#pragma endregion
+
+#pragma region MONSTER
 		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, L"MON_CagedShocker_110x42.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY, L"MON_CagedShocker_110x42_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_SWEEPER_ATLAS_KEY, L"MON_Sweeper_88x30.png");
@@ -463,26 +530,43 @@ namespace jh
 		loadAndInsertTexture(MONSTER_TEXTURE_ARCHER_NORMAL_MAP_KEY, L"MON_Archer_174x25_NM.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_BLASTER_KEY, L"MON_Blaster_119x34.png");
 		loadAndInsertTexture(MONSTER_TEXTURE_ACIENT_BOSS_KEY, L"MON_AcientBoss_201x94.png");
+#pragma endregion
 
-
+#pragma region SKILL
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_BEAM_KEY, L"SKILL_ElectricBeam_375x64.png");
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_STRIKE_KEY, L"SKILL_ElectricStrike_80x176.png");
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_TORNADO_KEY, L"SKILL_ElectricTornado_64x64.png");
+#pragma endregion
 
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY,		L"SKILL_ICON_Beam.png");
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY,	L"SKILL_ICON_Strike.png");
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY,	L"SKILL_ICON_Tornado.png");
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY,		L"SKILL_ICON_MelleAttack.png");
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_SPEED_KEY,				L"SKILL_ICON_Speed.png");
-		loadAndInsertTexture(SKILL_ICON_TEXTURE_HEALTH_KEY,				L"SKILL_ICON_Health.png");
+#pragma region SKILL_ICON
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY, L"SKILL_ICON_Beam.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY, L"SKILL_ICON_Strike.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY, L"SKILL_ICON_Tornado.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY, L"SKILL_ICON_MelleAttack.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_SPEED_KEY, L"SKILL_ICON_Speed.png");
+		loadAndInsertTexture(SKILL_ICON_TEXTURE_HEALTH_KEY, L"SKILL_ICON_Health.png");
+#pragma endregion
 
+#pragma region SKILL_TEXT
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_ELECTRIC_BEAM_LV_1_KEY, L"SKILL_MESSAGE_ElectricBeam_LV1.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_ELECTRIC_STRIKE_LV_1_KEY, L"SKILL_MESSAGE_ElectricStrike_LV1.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_ELECTRIC_TORANDO_LV_1_KEY, L"SKILL_MESSAGE_ElectricTornado_LV1.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_ELECTRIC_DAMAGE_INCREASE_KEY, L"SKILL_MESSAGE_ElectricDamage.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_ELECTRIC_SPAWN_SPEED_KEY, L"SKILL_MESSAGE_ElectricSpawnSpeed.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_SWORD_DAMAGE_KEY, L"SKILL_MESSAGE_SwordAttack.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_MOVEMENT_SPEED_KEY, L"SKILL_MESSAGE_MovementSpeed.png");
+		loadAndInsertTexture(SKILL_TEXT_TEXTURE_RECOVER_HEALTH_KEY, L"SKILL_MESSAGE_RecoverHelath.png");
+
+#pragma endregion
+
+#pragma region EFFECT
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, L"GreenPortalSpriteSheet.png");
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
 		loadAndInsertTexture(EFFECT_HIT_TEXTURE_ATLAS_KEY, L"EffectAtals.png");
 		loadAndInsertTexture(EFFECT_PLAYER_DASH_TEXTURE_KEY, L"DASHSMOKE2.png");
+#pragma endregion
 
-		loadAndInsertTexture(BG_OBELISK_TEXTURE_ATLAS_KEY, L"ObeliskEffects.png");
-		loadAndInsertTexture(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, L"ObeliskEffects_NM.png");
+#pragma region BG_FG_PARRLAX
 		loadAndInsertTexture(BG_FOREGROUND_TEXTURE_KEY, L"ForeGround.png");
 		loadAndInsertTexture(BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY, L"ForeGround_NM.png");
 		loadAndInsertTexture(BG_PARALLAX_TEXTURE_1_KEY, L"parallax1.png");
@@ -491,11 +575,15 @@ namespace jh
 		loadAndInsertTexture(BG_PARALLAX_TEXTURE_4_KEY, L"parallax4.png");
 		//loadAndInsertTexture(BG_PARALLAX_TEXTURE_5_KEY, L"parallax5.png");
 		//loadAndInsertTexture(BG_PARALLAX_TEXTURE_6_KEY, L"parallax6.png");
+#pragma endregion
+
+#pragma region BG_ANIMATED_OBJECT
+		loadAndInsertTexture(BG_OBELISK_TEXTURE_ATLAS_KEY, L"ObeliskEffects.png");
+		loadAndInsertTexture(BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, L"ObeliskEffects_NM.png");
 		loadAndInsertTexture(BG_MOON_ATLAS_TEXTURE_KEY, L"MoonSprite.png");
 		loadAndInsertTexture(BG_MOON_NORMAL_MAP_TEXTURE_KEY, L"MoonSprite_NM.png");
 		loadAndInsertTexture(BG_TREE_1_TEXTURE_KEY, L"BG_Tree_1_112x128.png");
 		loadAndInsertTexture(BG_TREE_1_NORMAL_MAP_TEXTURE_KEY, L"BG_Tree_1_112x128_NM.png");
-
 		loadAndInsertTexture(BG_TREE_2_TEXTURE_KEY, L"BG_Tree_2_128x96.png");
 		loadAndInsertTexture(BG_TREE_2_NORMAL_MAP_TEXTURE_KEY, L"BG_Tree_2_128x96_NM.png");
 		loadAndInsertTexture(BG_FLOWER_TEXTURE_KEY, L"BG_Flower_16x16.png");
@@ -503,30 +591,38 @@ namespace jh
 		loadAndInsertTexture(BG_TORCH_TEXTURE_KEY, L"BG_Torch_16x16.png");
 		loadAndInsertTexture(BG_MUSHROOM_STATUE_TEXTURE_KEY, L"BG_MushRoomStatue_192x192.png");
 		loadAndInsertTexture(BG_MUSHROOM_STATUE_NORMAL_MAP_TEXTURE_KEY, L"BG_MushRoomStatue_192x192_NM.png");
-
 		loadAndInsertTexture(BG_FOREGROUND_GRASS_TEXTURE_KEY, L"BG_FOREGROUND_Grass_212x11.png");
 		loadAndInsertTexture(BG_LARGE_LIGHTNING_TEXTURE_KEY, L"BG_Large_Lightning_64x48.png");
 		loadAndInsertTexture(BG_LARGE_LIGHTNING_NORMAL_MAP_TEXTURE_KEY, L"BG_Large_Lightning_64x48_NM.png");
 		loadAndInsertTexture(BG_SMALL_LIGHTNING_TEXTURE_KEY, L"BG_SmallLightning_32x32.png");
 		loadAndInsertTexture(BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY, L"BG_SmallLightning_32x32_NM.png");
+#pragma endregion
 
+#pragma region UI
 		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"UI_Border.png");
 		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"UI_Player_HpBar.png");
 		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"UI_Player_StaminarBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY, L"UI_MON_Border_HpBar.png");
 		loadAndInsertTexture(UI_TEXTURE_LEVEL_UP_BORDER_KEY, L"UI_Level_UP_Border_256x256.png");
+#pragma endregion
 
+#pragma region OTHER
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
+#pragma endregion
+#pragma endregion
 	}
 
 	void ResourceMaker::createMaterial()
 	{
+#pragma region MATERIAL
+#pragma region PLAYER
 		insertMaterial(PLAYER_MATERIAL_KEY, SPRITE_SHADER_KEY, PLAYER_TEXTURE_ATLAS_KEY);
 		insertNormalMapMaterial(PLAYER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, PLAYER_TEXTURE_ATLAS_KEY, PLAYER_NORMAL_MAP_TEXTURE_ATLAS_KEY);
+#pragma endregion
 
-
+#pragma region MONSTER
 		insertMaterial(MONSTER_CAGED_SHOKER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY);
 		insertNormalMapMaterial(MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, MONSTER_TEXTURE_CAGED_SHOKER_ATLAS_KEY, MONSTER_TEXTURE_CAGED_SHOKER_NORMAL_MAP_KEY);
 		insertMaterial(MONSTER_SWEEPER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_SWEEPER_ATLAS_KEY);
@@ -544,22 +640,50 @@ namespace jh
 		insertMaterial(MONSTER_BLASTER_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_BLASTER_KEY);
 		insertMaterial(MONSTER_ACIENT_BOSS_MATERIAL_KEY, SPRITE_SHADER_KEY, MONSTER_TEXTURE_ACIENT_BOSS_KEY);
 
+#pragma endregion
+
+#pragma region SKILL
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_BEAM_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_STRIKE_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_TORNADO_KEY);
+#pragma endregion
 
-		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY,	SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY);
-		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY,	SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY);
+#pragma region SKILL_ICON
+		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_ELECTRIC_BEAM_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_ELECTRIC_STRIKE_KEY);
 		insertMaterial(SKILL_ICON_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_ELECTRIC_TORNADO_KEY);
-		insertMaterial(SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY, SPRITE_SHADER_KEY,		SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY);
-		insertMaterial(SKILL_ICON_MATERIAL_SPEED_KEY, SPRITE_SHADER_KEY,			SKILL_ICON_TEXTURE_SPEED_KEY);
-		insertMaterial(SKILL_ICON_MATERIAL_HEALTH_KEY, SPRITE_SHADER_KEY,			SKILL_ICON_TEXTURE_HEALTH_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_MELLE_ATTACK_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_MELLE_ATTACK_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_SPEED_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_SPEED_KEY);
+		insertMaterial(SKILL_ICON_MATERIAL_HEALTH_KEY, SPRITE_SHADER_KEY, SKILL_ICON_TEXTURE_HEALTH_KEY);
 
+#pragma endregion
 
-		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
-		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
+#pragma region SKILL_TEXT
+		insertMaterial(SKILL_TEXT_MATERIAL_ELECTRIC_BEAM_LV_1_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_ELECTRIC_BEAM_LV_1_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_ELECTRIC_STRIKE_LV_1_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_ELECTRIC_STRIKE_LV_1_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_ELECTRIC_TORANDO_LV_1_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_ELECTRIC_TORANDO_LV_1_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_ELECTRIC_DAMAGE_INCREASE_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_ELECTRIC_DAMAGE_INCREASE_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_ELECTRIC_SPAWN_SPEED_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_ELECTRIC_SPAWN_SPEED_KEY);
+
+		insertMaterial(SKILL_TEXT_MATERIAL_MOVEMENT_SPEED_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_MOVEMENT_SPEED_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_SWORD_DAMAGE_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_SWORD_DAMAGE_KEY);
+		insertMaterial(SKILL_TEXT_MATERIAL_RECOVER_HEALTH_KEY, SPRITE_SHADER_KEY, SKILL_TEXT_TEXTURE_RECOVER_HEALTH_KEY);
+#pragma endregion
+
+#pragma region BG_FG_PARRALAX
 		insertMaterial(BG_FOREGROUND_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_FOREGROUND_TEXTURE_KEY);
 		insertNormalMapMaterial(BG_FOREGROUND_NORMALMAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_FOREGROUND_TEXTURE_KEY, BG_FOREGROUND_NORMAL_MAP_TEXTURE_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_1_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_1_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_2_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_2_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_3_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_3_KEY);
+		insertMaterial(BG_PARALLAX_MATERIAL_4_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_4_KEY);
+		//insertMaterial(BG_PARALLAX_MATERIAL_5_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_5_KEY);
+		//insertMaterial(BG_PARALLAX_MATERIAL_6_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_6_KEY);
+#pragma endregion
+
+#pragma region BG_ANIMATED_OBJECT
+		insertMaterial(BG_OBELISK_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
+		insertNormalMapMaterial(BG_OBELISK_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY, BG_OBELISK_TEXTURE_NORMAL_MAP_KEY);
 		insertMaterial(BG_TREE_1_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TREE_1_TEXTURE_KEY);
 		insertNormalMapMaterial(BG_TREE_1_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_TREE_1_TEXTURE_KEY, BG_TREE_1_NORMAL_MAP_TEXTURE_KEY);
 		insertMaterial(BG_TREE_2_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_TREE_2_TEXTURE_KEY);
@@ -576,36 +700,35 @@ namespace jh
 		insertNormalMapMaterial(BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_SMALL_LIGHTNING_TEXTURE_KEY, BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY);
 		insertMaterial(BG_MOON_MATERIAL_KEY, SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY);
 		insertNormalMapMaterial(BG_MOON_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BG_MOON_ATLAS_TEXTURE_KEY, BG_MOON_NORMAL_MAP_TEXTURE_KEY);
+#pragma endregion
 
-
+#pragma region EFFECT
 		insertMaterial(EFFECT_HIT_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_HIT_TEXTURE_ATLAS_KEY);
 		insertMaterial(EFFECT_PLAYER_DASH_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_PLAYER_DASH_TEXTURE_KEY);
 		insertMaterial(EFFECT_GREEN_PORTAL_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY);
 		insertNormalMapMaterial(EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY);
+#pragma endregion
 
-		insertMaterial(BG_PARALLAX_MATERIAL_1_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_1_KEY);
-		insertMaterial(BG_PARALLAX_MATERIAL_2_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_2_KEY);
-		insertMaterial(BG_PARALLAX_MATERIAL_3_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_3_KEY);
-		insertMaterial(BG_PARALLAX_MATERIAL_4_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_4_KEY);
-		//insertMaterial(BG_PARALLAX_MATERIAL_5_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_5_KEY);
-		//insertMaterial(BG_PARALLAX_MATERIAL_6_KEY, BG_NO_LIGHTING_SHADER_KEY, BG_PARALLAX_TEXTURE_6_KEY);
-
-
+#pragma region UI
 		insertMaterial(UI_HP_BORDER_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, UI_HP_BORDER_TEXTURE_KEY);
 		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MONSTER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY);
 		insertMaterial(UI_MATERIAL_LEVEL_UP_BORDER_KEY, SPRITE_SHADER_KEY, UI_TEXTURE_LEVEL_UP_BORDER_KEY);
-
+#pragma endregion
 
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);
 #pragma endregion
 
+#pragma region OTHER
 		insertMaterial(BRIK_NOT_NORMAL_MATERIAL_KEY, SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY);
 		insertNormalMapMaterial(BRIK_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, BRIK_DIFFUSE_TEXTURE_KEY, BRIK_NORMAL_MAP_TEXTURE_KEY);
+
+#pragma endregion
+#pragma endregion
 	}
 
 	void ResourceMaker::createSamplerState()
@@ -640,15 +763,6 @@ namespace jh
 		//);
 	}
 
-	void ResourceMaker::setSamplerState()
-	{
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
-		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
-
-		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
-		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
-	}
-
 	void ResourceMaker::createConstantBuffer()
 	{
 		mspTransformConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::TRANSFORM);
@@ -657,7 +771,20 @@ namespace jh
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
 	}
+#pragma endregion
 
+#pragma region SET
+	void ResourceMaker::setSamplerState()
+	{
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
+		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_BORDER_SAMPLER_SLOT_NUMBER, 1, mcpPointBorderSampler.GetAddressOf());
+
+		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+		//graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetSamplers(POINT_WRAP_SAMPLER_SLOT_NUMBER, 1, mcpPointWrapSampler.GetAddressOf());
+	}
+#pragma endregion
+
+#pragma region LOAD_INSERT
 	void ResourceMaker::loadAndInsertShader(const std::wstring& key, const std::wstring& VSFileName, const std::wstring& PSFileName)
 	{
 		Shader* pShader = new Shader();
@@ -665,7 +792,6 @@ namespace jh
 		pShader->CreateShaders(VSFileName, PSFileName);
 		ResourcesManager::Insert<Shader>(key, pShader);
 	}
-
 	void ResourceMaker::loadAndInsertTexture(const std::wstring& key, const std::wstring& fileName)
 	{
 		Texture* pTexture = new Texture();
@@ -673,7 +799,6 @@ namespace jh
 		pTexture->Load(fileName);
 		ResourcesManager::Insert<Texture>(key, pTexture);
 	}
-
 	void ResourceMaker::insertMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey)
 	{
 		ResourcesManager::Insert<Material>(
@@ -693,6 +818,8 @@ namespace jh
 				ResourcesManager::Find<Texture>(normalMapKey))
 			);
 	}
+
+#pragma endregion
 
 
 	void ResourceMaker::Release()
