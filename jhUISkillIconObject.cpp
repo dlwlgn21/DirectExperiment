@@ -23,6 +23,7 @@ namespace jh
 {
 	UISkillIconObject::UISkillIconObject(const eSkillIconType eIconType)
 		: UISkillObject()
+		, meSkillIconType(eIconType)
 	{
 		setRenderer();
 		setScript();

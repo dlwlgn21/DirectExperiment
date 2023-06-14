@@ -42,6 +42,16 @@ namespace jh
 		COUNT
 	};
 
+	enum class ePlayerSkill
+	{
+		ELECTRIC_BEAM,
+		ELECTRIC_STRIKE,
+		ELECTRIC_TORNADO,
+		SWORD_DAMAGE_LEVEL,
+		MOVEMENT_SPEED,
+		COUNT
+	};
+
 	class Animator;
 	class Transform;
 	class Collider2D;
@@ -67,6 +77,39 @@ namespace jh
 				, AttackDamage(INITIAL_ATTACK_DAMAGE)
 				, CurrEXP(0)
 			    , CurrLevel(1)
+			{
+			}
+		};
+		struct ElectricBeam
+		{
+			UINT CurrElectricBeamLevel;
+			UINT CurrElectricBeamDamageLevel;
+			UINT CurrElectricBeamSpawnSpeedLevel;
+		};
+		struct ElectricStrike
+		{
+			UINT CurrElectricStrikeLevel;
+			UINT CurrElectricStrikeDamageLevel;
+			UINT CurrElectricStrikeSpawnSpeedLevel;
+		};
+		struct ElectricTornado
+		{
+			UINT CurrElectricTornadoLevel;
+			UINT CurrElectricTornadoSpawnSpeedLevel;
+		};
+		struct PlayerSkillStat
+		{
+			ElectricBeam ElectricBeamLevel;
+			ElectricStrike ElectricStrikeLevel;
+			ElectricTornado ElectricTornadoLevel;
+			UINT CurrSwordLevel;
+			UINT CurrMovementSpeedLevel;
+			PlayerSkillStat()
+				: ElectricBeamLevel{ 0, }
+				, ElectricStrikeLevel{ 0, }
+				, ElectricTornadoLevel{ 0, }
+				, CurrSwordLevel(0)
+				, CurrMovementSpeedLevel(0)
 			{
 			}
 		};
@@ -110,11 +153,15 @@ namespace jh
 		const ePlayerState GetPlayerState() const					{ return meState; }
 		const eComboAttackType GetComboAttackType() const			{ return meComboType; }
 		const PlayerStat& GetPlayerStat()	const					{ return mStat; }
+		const PlayerSkillStat& GetPlayerSkillStat() const			{ return mSkillStat; }
 		eAttackType GetAttackType() const							{ return meAttackType; }
 		const bool IsHitAttack() const								{ return mbIsHitAttack; }
 		const bool IsHitSkillAtack() const							{ return mbIsHitSkillAtack; }
 		
+		
+
 		void IncreaseEXP(const UINT exp);
+		void IncreasePlayerSkill(const ePlayerSkill eSkill);
 		void EnemyAttackHiited(UINT damage);
 		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
 		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }
@@ -158,6 +205,7 @@ namespace jh
 		eAttackType						meAttackType;
 		eComboAttackType				meComboType;
 		PlayerStat						mStat;
+		PlayerSkillStat					mSkillStat;
 		float							mStaminaTimer;
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 		PlayerHitEffectScript*			mpPlayerHitEffectScript;

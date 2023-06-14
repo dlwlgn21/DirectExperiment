@@ -7,9 +7,7 @@
 using namespace jh::math;
 
 static constexpr const float WAIT_Y_POS = 10.0f;
-static constexpr const float DEFAULT_X_SCALE_VALUE = 4.0f;
-static constexpr const float DEFAULT_Y_SCALE_VALUE = 1.0f;
-static constexpr const Vector2 DEFAULT_SCALE_VECTOR(DEFAULT_X_SCALE_VALUE, DEFAULT_Y_SCALE_VALUE);
+static constexpr const Vector2 DEFAULT_SCALE_VECTOR(4.0f, 1.0f);
 
 namespace jh
 {
@@ -85,46 +83,6 @@ namespace jh
 	void UISKillTextObject::setTransform()
 	{
 		GetTransform()->SetOnlyXYScale(DEFAULT_SCALE_VECTOR);
-
-		//switch (meSkillTextType)
-		//{
-		//case eSkillTextType::ELECTRIC_BEAM_LV_1:
-		//{
-		//	GetTransform()->SetOnlyXYScale(DEFAULT_SCALE_VECTOR);
-		//	break;
-		//}
-		//case eSkillTextType::ELECTRIC_STRKIE_LV_1:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::ELECTRIC_TORNADO_LV_1:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::ELECTRIC_DAMAGE:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::ELECTRIC_SPAWN_SPEED:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::SWORD_DAMAGE:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::MOVEMENT_SPEED:
-		//{
-		//	break;
-		//}
-		//case eSkillTextType::RECORVER_HEALTH:
-		//{
-		//	break;
-		//}
-		//default:
-		//	assert(false);
-		//	break;
-		//}
 		GetTransform()->SetPosition(Vector3(0.0f, WAIT_Y_POS, LEVEL_UP_UI_SKILL_IOCN_Z_VALUE));
 	}
 }

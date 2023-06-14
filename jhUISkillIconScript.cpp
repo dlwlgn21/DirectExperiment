@@ -15,6 +15,7 @@ namespace jh
 	UISkillIconScript::UISkillIconScript(const eSkillIconType eType)
 		: UILevelUpScript()
 		, meSkillIconType(eType)
+		, meSkillPosition(eSkillPosition::NONE)
 	{
 
 	}
@@ -31,43 +32,28 @@ namespace jh
 
 	void UISkillIconScript::SetStayingXYPosition()
 	{
+		assert(meState != eUILevelUpState::WAIT);
 		const float xPos = mpCameraTransform->GetOnlyXPosition() - X_DSITANCE_FROM_CAMERA_CENTER_POSITION;
-		switch (meSkillIconType)
+		switch (meSkillPosition)
 		{
-		case jh::eSkillIconType::ELECTRIC_BEAM:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
-			break;
-		}
-		case jh::eSkillIconType::ELECTRIC_STRIKE:
+		case eSkillPosition::TOP:
 		{
 			mpTransform->SetOnlyXYPosition(xPos, TOP_BOX_Y_POSITON);
 			break;
 		}
-		case jh::eSkillIconType::ELECTRIC_TORNADO:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, BOTTOM_BOX_Y_POSITON);
-			break;
-		}
-		case jh::eSkillIconType::MELLE_ATTACK_DAMAGE:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, BOTTOM_BOX_Y_POSITON);
-			break;
-		}
-		case jh::eSkillIconType::SPEED:
+		case eSkillPosition::CENTER:
 		{
 			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
 			break;
 		}
-		case jh::eSkillIconType::HEALTH:
+		case eSkillPosition::BOTTOM:
 		{
-			mpTransform->SetOnlyXYPosition(xPos, TOP_BOX_Y_POSITON);
+			mpTransform->SetOnlyXYPosition(xPos, BOTTOM_BOX_Y_POSITON);
 			break;
 		}
 		default:
 			assert(false);
 			break;
 		}
-
 	}
 }

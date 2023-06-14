@@ -15,6 +15,7 @@ namespace jh
 	UISkillTextScript::UISkillTextScript(const eSkillTextType eTextType)
 		: UILevelUpScript()
 		, meSkillTextType(eTextType)
+		, meSkillPosition(eSkillPosition::NONE)
 	{
 
 	}
@@ -31,48 +32,23 @@ namespace jh
 
 	void UISkillTextScript::SetStayingXYPosition()
 	{
+		assert(meState != eUILevelUpState::WAIT);
 		const float xPos = mpCameraTransform->GetOnlyXPosition() + X_DSITANCE_FROM_CAMERA_CENTER_POSITION;
-		switch (meSkillTextType)
+		switch (meSkillPosition)
 		{
-		case eSkillTextType::ELECTRIC_BEAM_LV_1:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
-			break;
-		}
-		case eSkillTextType::ELECTRIC_STRKIE_LV_1:
+		case eSkillPosition::TOP:
 		{
 			mpTransform->SetOnlyXYPosition(xPos, TOP_BOX_Y_POSITON);
 			break;
 		}
-		case eSkillTextType::ELECTRIC_TORNADO_LV_1:
+		case eSkillPosition::CENTER:
+		{
+			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
+			break;
+		}
+		case eSkillPosition::BOTTOM:
 		{
 			mpTransform->SetOnlyXYPosition(xPos, BOTTOM_BOX_Y_POSITON);
-			break;
-		}
-		case eSkillTextType::ELECTRIC_DAMAGE:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
-			break;
-		}
-		case eSkillTextType::ELECTRIC_SPAWN_SPEED:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
-			break;
-		}
-		case eSkillTextType::SWORD_DAMAGE:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, BOTTOM_BOX_Y_POSITON);
-
-			break;
-		}
-		case eSkillTextType::MOVEMENT_SPEED:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, CENTER_BOX_Y_POSITON);
-			break;
-		}
-		case eSkillTextType::RECORVER_HEALTH:
-		{
-			mpTransform->SetOnlyXYPosition(xPos, TOP_BOX_Y_POSITON);
 			break;
 		}
 		default:

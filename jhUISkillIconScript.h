@@ -4,6 +4,8 @@
 
 namespace jh
 {
+
+
 	class Transform;
 	class UISkillIconScript : public UILevelUpScript
 	{
@@ -11,6 +13,8 @@ namespace jh
 		UISkillIconScript(const eSkillIconType eType);
 		virtual ~UISkillIconScript() = default;
 
+		void SetSkillIconPosition(const eSkillPosition ePos)	{ meSkillPosition = ePos; }
+		const eSkillPosition GetSkillPosition() const			{ return meSkillPosition; }
 	private:
 		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
@@ -18,6 +22,7 @@ namespace jh
 
 	private:
 		eSkillIconType		meSkillIconType;
+		eSkillPosition		meSkillPosition;
 	};
 }
 

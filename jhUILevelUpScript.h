@@ -11,6 +11,15 @@ namespace jh
 		STAYING,
 		COUNT
 	};
+	enum class eSkillPosition
+	{
+		TOP,
+		CENTER,
+		BOTTOM,
+		NONE,
+		COUNT
+	};
+
 	class Transform;
 	class UILevelUpScript : public Script
 	{

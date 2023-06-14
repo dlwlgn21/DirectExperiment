@@ -13,6 +13,9 @@ namespace jh
 		UISkillTextScript(const eSkillTextType eTextType);
 		virtual ~UISkillTextScript() = default;
 
+		void SetSkillIconPosition(const eSkillPosition ePos)	{ meSkillPosition = ePos; }
+		const eSkillPosition GetSkillPosition() const			{ return meSkillPosition; }
+
 	private:
 		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
@@ -20,5 +23,6 @@ namespace jh
 
 	private:
 		eSkillTextType		meSkillTextType;
+		eSkillPosition		meSkillPosition;
 	};
 }

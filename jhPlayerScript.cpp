@@ -24,7 +24,7 @@ static constexpr const UINT ROLLING_STAMINA_COST = 1;
 static constexpr const float DEFAULT_MOVEMENT_DISTNANCE		= 5.0f;
 static constexpr const float ATTACK_1_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE;
 static constexpr const float ATTACK_2_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE * 2;
-static constexpr const float ATTACK_3_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE * 3;
+static constexpr const float ATTACK_3_MOVEMENT_DISTANCE		= DEFAULT_MOVEMENT_DISTNANCE * 2;
 static constexpr const float PUSH_ATTACK_MOVEMENT_DISTANCE	= DEFAULT_MOVEMENT_DISTNANCE;
 
 static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
@@ -53,6 +53,7 @@ namespace jh
 		, mpAnimator(nullptr)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
+		, mSkillStat(PlayerSkillStat())
 		, meState(ePlayerState::IDLE)
 		, meAttackType(eAttackType::NORMAL)
 		, meComboType(eComboAttackType::ONE)
@@ -464,6 +465,41 @@ namespace jh
 #pragma endregion
 
 #pragma region STAT
+
+	void PlayerScript::IncreasePlayerSkill(const ePlayerSkill eSkill)
+	{
+		switch (eSkill)
+		{
+		case ePlayerSkill::ELECTRIC_BEAM:
+		{
+			++mSkillStat.ElectricBeamLevel.CurrElectricBeamLevel;
+			break;
+		}
+		case ePlayerSkill::ELECTRIC_STRIKE:
+		{
+			++mSkillStat.ElectricStrikeLevel.CurrElectricStrikeLevel;
+			break;
+		}
+		case ePlayerSkill::ELECTRIC_TORNADO:
+		{
+			++mSkillStat.ElectricTornadoLevel.CurrElectricTornadoLevel;
+			break;
+		}
+		case ePlayerSkill::SWORD_DAMAGE_LEVEL:
+		{
+			++mSkillStat.CurrSwordLevel;
+			break;
+		}
+		case ePlayerSkill::MOVEMENT_SPEED:
+		{
+			++mSkillStat.CurrMovementSpeedLevel;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
 	void PlayerScript::IncreaseEXP(const UINT exp)
 	{
 		mStat.CurrEXP += exp;

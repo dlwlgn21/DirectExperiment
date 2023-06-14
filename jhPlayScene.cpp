@@ -117,6 +117,7 @@ namespace jh
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
 		PlayerSkillManager::GetInstance().SetPlayerScript(pPlayerScript);
+		PlayerLevelManager::GetInstance().SetPlayerScript(pPlayerScript);
 		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_BEAM)), eLayerType::PLAYER_SKILL);
 		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_STRIKE)), eLayerType::PLAYER_SKILL);
 		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::TORNADO)), eLayerType::PLAYER_SKILL);
@@ -140,7 +141,6 @@ namespace jh
 		{
 			this->AddGameObject(skillTexts[i], eLayerType::LEVEL_UP_UI);
 		}
-
 		Scene::Initialize();
 	}
 
