@@ -47,6 +47,7 @@ namespace jh
 	class Collider2D;
 	class PlayerDustEffectScript;
 	class PlayerHitEffectScript;
+	class PlayerLevelUpEffectScript;
 	class PlayerScript final : public Script
 	{
 	public:
@@ -152,13 +153,15 @@ namespace jh
 		const bool IsHitSkillAtack() const							{ return mbIsHitSkillAtack; }
 		
 		
-
+		void IncreaseMovementSpeed();
+		void RecoverHealthFully();
 		void IncreaseEXP(const UINT exp);
 		void EnemyAttackHiited(UINT damage);
-		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
-		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }
-		void SetIsHitAttack(const bool bIsHit)										{ mbIsHitAttack = bIsHit; }
-		void SetIsHitSkillAttack(const bool bIsHit)									{ mbIsHitSkillAtack = bIsHit; }
+		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr);	mpPlayerDustEffetScript = pPlayerDustEffectScript; }
+		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript)	{ assert(pPlayerHitEffectScript != nullptr);	mpPlayerHitEffectScript = pPlayerHitEffectScript; }
+		void SetPlayerLevelUpEffectScript(PlayerLevelUpEffectScript* pScript)			{ assert(pScript != nullptr);					mpPlayerLevelUpEffectScript = pScript;}
+		void SetIsHitAttack(const bool bIsHit)											{ mbIsHitAttack = bIsHit; }
+		void SetIsHitSkillAttack(const bool bIsHit)										{ mbIsHitSkillAtack = bIsHit; }
 	
 	private:
 		void setXPosByComboAttackType(float& xPos);
@@ -201,6 +204,7 @@ namespace jh
 		float							mStaminaTimer;
 		PlayerDustEffectScript*			mpPlayerDustEffetScript;
 		PlayerHitEffectScript*			mpPlayerHitEffectScript;
+		PlayerLevelUpEffectScript*		mpPlayerLevelUpEffectScript;
 		bool							mbIsContiueAttacking;
 		bool							mbIsHitAttack;
 		bool							mbIsHitSkillAtack;

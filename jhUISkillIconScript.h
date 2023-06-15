@@ -1,13 +1,11 @@
 #pragma once
-#include "jhUILevelUpScript.h"
+#include "jhUISkillScript.h"
 #include "jhUISkillObject.h"
 
 namespace jh
 {
-
-
 	class Transform;
-	class UISkillIconScript : public UILevelUpScript
+	class UISkillIconScript : public UISkillScript
 	{
 	public:
 		UISkillIconScript(const eSkillIconType eType);
@@ -16,9 +14,7 @@ namespace jh
 		void SetSkillIconPosition(const eSkillPosition ePos)	{ meSkillPosition = ePos; }
 		const eSkillPosition GetSkillPosition() const			{ return meSkillPosition; }
 	private:
-		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
-		void SetEnteringYPostion(const float yPos) override;
 
 	private:
 		eSkillIconType		meSkillIconType;

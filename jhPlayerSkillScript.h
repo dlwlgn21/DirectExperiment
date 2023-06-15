@@ -1,5 +1,6 @@
 #pragma once
 #include "jhScript.h"
+#include "jhPlayerSkillManager.h"
 
 namespace jh
 {
@@ -23,6 +24,7 @@ namespace jh
 	class Animator;
 	class PlayerSkillScript : public Script
 	{
+		friend class PlayerSkillManager;
 	public:
 		PlayerSkillScript(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, Animator* pAnimator);
 		virtual ~PlayerSkillScript() = default;

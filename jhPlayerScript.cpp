@@ -12,6 +12,7 @@
 #include "jhPlayerDustEffectScript.h"
 #include "jhPlayerHitEffectScript.h"
 #include "jhPlayerLevelManager.h"
+#include "jhPlayerLevelUpEffectScript.h"
 
 
 static constexpr const float DASH_DISTANCE = 45.0f;
@@ -32,6 +33,8 @@ static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
 
 static constexpr const UINT LEVEL_1_INIT_MAXIMUM_EXP = 5;
 static constexpr const float PER_LEVEL_UP_COEFFICEINT_VALUE = 1.1f;
+
+static constexpr const float MOVEMENT_SPEED_INCREASE_AMOUNT_10_PERCENT = 1.1f;
 
 using namespace jh::math;
 
@@ -60,6 +63,7 @@ namespace jh
 		, mStaminaTimer(STAMINA_RECOVER_SECOND)
 		, mpPlayerDustEffetScript(nullptr)
 		, mpPlayerHitEffectScript(nullptr)
+		, mpPlayerLevelUpEffectScript(nullptr)
 		, mbIsContiueAttacking(false)
 		, mbIsHitAttack(false)
 		, mbIsHitSkillAtack(false)
@@ -465,16 +469,24 @@ namespace jh
 #pragma endregion
 
 #pragma region STAT
-
+	void PlayerScript::IncreaseMovementSpeed()
+	{
+		mSpeed *= MOVEMENT_SPEED_INCREASE_AMOUNT_10_PERCENT;
+	}
+	void PlayerScript::RecoverHealthFully()
+	{
+		mStat.CurrentHP = mStat.MaxHP;
+	}
 	void PlayerScript::IncreaseEXP(const UINT exp)
 	{
+		assert(mpPlayerLevelUpEffectScript);
 		mStat.CurrEXP += exp;
 		if (mStat.CurrEXP >= mCurrentLevelExpToLevelUP)
 		{
 			++mStat.CurrLevel;
 			mCurrentLevelExpToLevelUP = static_cast<UINT>(std::ceil(mCurrentLevelExpToLevelUP * PER_LEVEL_UP_COEFFICEINT_VALUE));
 			mStat.CurrEXP = 0;
-			PlayerLevelManager::GetInstance().OnPlayerLevelUP();
+			mpPlayerLevelUpEffectScript->SetStatePlaying();
 		}
 	}
 

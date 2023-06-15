@@ -17,6 +17,8 @@ static constexpr const float BG_LIGHT_Z_VALUE = 1.0f;
 
 #pragma region MONSTER
 static constexpr const float MONSTER_Z_VALUE = 1.7f;
+static constexpr float MONSTER_HP_BORDER_BAR_Z_VALUE = 1.5f;
+static constexpr float MONSTER_HP_BAR_Z_VALUE = 1.4f;
 static constexpr const float MONSTER_EFFECT_Z_VALUE = 1.25f;
 #pragma endregion
 

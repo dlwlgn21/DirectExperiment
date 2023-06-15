@@ -136,6 +136,7 @@ namespace jh
 		static const std::wstring EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY;
 		static const std::wstring EFFECT_PLAYER_DASH_TEXTURE_KEY;
+		static const std::wstring EFFECT_PLAYER_LEVEL_UP_TEXTURE_KEY;
 #pragma endregion
 
 #pragma region BG_ANIMATED_OBJECT_TEXTURE
@@ -219,7 +220,6 @@ namespace jh
 
 #pragma endregion
 
-
 #pragma region UI_MATERIAL
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
@@ -235,6 +235,8 @@ namespace jh
 		static const std::wstring EFFECT_GREEN_PORTAL_MATERIAL_KEY;
 		static const std::wstring EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY;
 		static const std::wstring EFFECT_PLAYER_DASH_MATERIAL_KEY;
+		static const std::wstring EFFECT_PLAYER_LEVEL_UP_MATERIAL_KEY;
+
 #pragma endregion
 
 #pragma region BG_ANIMATED_OBJECTS_MATERIAL

@@ -34,7 +34,7 @@ namespace jh
 		void Initialize();
 		void OnPlayerLevelUP();
 		void OnPlayerSelected(const eSkillPosition eSelectedPostion);
-
+		bool IsProcessingLevelUp() const						{ return mbIsProcessingLevelUp; }
 
 		UISkillSelectBoxObject*				GetSkillSelectBox() { assert(mpSKillSelectBox); return mpSKillSelectBox; }
 		UILevelUpBorderObject*				GetUIBorder()		{ assert(mpUIBorder != nullptr); return mpUIBorder; }
@@ -50,6 +50,7 @@ namespace jh
 		void setSampledSkillInfo(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText, const eSkillPosition ePosition);
 
 		void setPlayerSkillLevel(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText);
+		void setInacitveAllUILevelUpObjects();
 
 	private:
 		PlayerLevelManager()
@@ -59,6 +60,7 @@ namespace jh
 			, mpSkillIconObjects()
 			, mpSkillTextObjects()
 			, mSampledThreeSkillInfo{}
+			, mbIsProcessingLevelUp(false)
 		{
 			mpSkillIconObjects.reserve(static_cast<UINT>(eSkillIconType::COUNT));
 			mpSkillIconObjects.resize(static_cast<UINT>(eSkillIconType::COUNT));
@@ -74,6 +76,7 @@ namespace jh
 		std::vector<UISkillIconObject*>		mpSkillIconObjects;
 		std::vector<UISKillTextObject*>		mpSkillTextObjects;
 		SampledSkillInfo					mSampledThreeSkillInfo[3];
+		bool								mbIsProcessingLevelUp;
 	};
 }
 

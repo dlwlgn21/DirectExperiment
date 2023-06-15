@@ -12,26 +12,24 @@ namespace jh
 	{
 	public:
 		PlayScene();
-		virtual ~PlayScene();
+		virtual ~PlayScene() = default;
 
 
 		void Initialize() override;
 		void Update() override;
-		void FixedUpdate() override;
-		void Release() override;
 
 		void AddMonster(const MonsterPackage& monPack);
 		void AddBossMonster(AcientBossMonsterPackage& monPack);
+		void AddSkillObejct(GameObject* pGameObject);
+
 	private:
 		void instantiateLight(PlayerScript* pPlayerScript);
 		PlayerScript* instantiateCameraAndPlayer();
-		void instantiateMonsters(PlayerScript* pPlayerScript);
 		void instantiateParallaxObjects();
 		void instantiateEnvObject();
 		void instatiateTreeObejct();
 		void instatiateLightningObejct();
 		void instantiateUIObject(PlayerScript* pPlayerScript);
-		void instantiateOtherObjects();
 		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);
 		void instantiateLightObject(const LightAttribute& lightAttribute, const jh::math::Vector2& pos);
 		void instantiateLightObject(const LightAttribute& lightAttribute, Transform* pTransform);

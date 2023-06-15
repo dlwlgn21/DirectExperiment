@@ -12,15 +12,8 @@ static constexpr const float Y_MOVEMENT_DISTANCE = 2.0f;
 namespace jh
 {
 	UISkillSelectBoxScript::UISkillSelectBoxScript()
-		: UILevelUpScript()
+		: UISkillScript()
 	{
-	}
-
-
-	void UISkillSelectBoxScript::SetWaitingPosition()
-	{
-		SetState(eUILevelUpState::WAIT);
-		mpTransform->SetOnlyYPosition(WAIT_Y_POS);
 	}
 
 	void UISkillSelectBoxScript::setSelectBoxPositionByInput()
@@ -59,28 +52,30 @@ namespace jh
 			{
 				// if Top selected
 				PlayerLevelManager::GetInstance().OnPlayerSelected(eSkillPosition::TOP);
+				return;
 			}
 			else if (currYPos < CENTER_BOX_Y_POSITON)
 			{
 				// if Bottom selected
 				PlayerLevelManager::GetInstance().OnPlayerSelected(eSkillPosition::BOTTOM);
+				return;
 			}
 			else
 			{
 				// if Center selected
 				PlayerLevelManager::GetInstance().OnPlayerSelected(eSkillPosition::CENTER);
+				return;
 			}
 		}
+
+		// There is NO input 
+		mpTransform->SetOnlyXYPosition(xPos, currYPos);
 	}
 
 	void UISkillSelectBoxScript::SetStayingXYPosition()
 	{
 		assert(meState != eUILevelUpState::WAIT);
 		setSelectBoxPositionByInput();
-	}
-	void UISkillSelectBoxScript::SetEnteringYPostion(const float yPos)
-	{
-		mpTransform->SetOnlyXYPosition(mpCameraTransform->GetOnlyXPosition(), yPos - (DESCENT_SPEED * Time::DeltaTime()));
 	}
 
 }

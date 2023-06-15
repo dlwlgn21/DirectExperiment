@@ -14,15 +14,17 @@ using namespace jh::math;
 namespace jh
 {
 	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 3.0f;
-	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 2.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
+	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 10.0f;
+	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 12.0f;
+	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 15.0f;
+	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 16.0f;
+	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 20.0f;
+	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 22.0f;
+	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 100.0f;
+
+
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
 	static constexpr const float WARDEN_Y_POS = -2.0f;
@@ -61,37 +63,37 @@ namespace jh
 		if (mSweeperRespawnTimer <= 0.0f)
 			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 
-		//mWardenRespawnTimer -= Time::DeltaTime();
-		//if (mWardenRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_WARDEN);}
+		mWardenRespawnTimer -= Time::DeltaTime();
+		if (mWardenRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_WARDEN);}
 
-		//mZombieRespawnTimer -= Time::DeltaTime();
-		//if (mZombieRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+		mZombieRespawnTimer -= Time::DeltaTime();
+		if (mZombieRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
 
-		//mHeabySlicerRespawnTimer -= Time::DeltaTime();
-		//if (mHeabySlicerRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
+		mHeabySlicerRespawnTimer -= Time::DeltaTime();
+		if (mHeabySlicerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
 
-		//mLightSlicerRespawnTimer -= Time::DeltaTime();
-		//if (mLightSlicerRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
+		mLightSlicerRespawnTimer -= Time::DeltaTime();
+		if (mLightSlicerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
 
-		//mDaggerRespawnTimer -= Time::DeltaTime();
-		//if (mDaggerRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_DAGGER);}
+		mDaggerRespawnTimer -= Time::DeltaTime();
+		if (mDaggerRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_DAGGER);}
 
-		//mArcherRespawnTimer -= Time::DeltaTime();
-		//if (mArcherRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_ARCHER);}
+		mArcherRespawnTimer -= Time::DeltaTime();
+		if (mArcherRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_ARCHER);}
 
-		//mBlasterRespawnTimer -= Time::DeltaTime();
-		//if (mBlasterRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_BLASTER);}
+		mBlasterRespawnTimer -= Time::DeltaTime();
+		if (mBlasterRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_BLASTER);}
 
-		//mAcientBossRespawnTimer -= Time::DeltaTime();
-		//if (mAcientBossRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);}
+		mAcientBossRespawnTimer -= Time::DeltaTime();
+		if (mAcientBossRespawnTimer <= 0.0f)
+			{spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)

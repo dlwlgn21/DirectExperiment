@@ -1,19 +1,17 @@
 #pragma once
-#include "jhUILevelUpScript.h"
+#include "jhUISkillScript.h"
 
 namespace jh
 {
 	class Transform;
-	class UISkillSelectBoxScript: public UILevelUpScript
+	class UISkillSelectBoxScript: public UISkillScript
 	{
 	public:
 		UISkillSelectBoxScript();
 		virtual ~UISkillSelectBoxScript() = default;
 
 	private:
-		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
-		void SetEnteringYPostion(const float yPos) override;
 		void setSelectBoxPositionByInput();
 	};
 }

@@ -16,7 +16,7 @@ static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
 static constexpr const UINT ELECTRIC_BEAM_ANIMATION_DAMGAE_VAILED_INDEX = 3;
 static constexpr const UINT ELECTRIC_BEAM_DAMAGE = 3;
 static constexpr const float ELECTRIC_BEAM_COOL_TIME = 3.0f;
-static constexpr const float ELECTRIC_BEAM_PUSH_DISTANCE = 2.0f;
+static constexpr const float ELECTRIC_BEAM_PUSH_DISTANCE = 0.0f;
 
 
 namespace jh

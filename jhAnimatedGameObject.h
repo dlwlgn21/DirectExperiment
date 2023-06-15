@@ -20,9 +20,6 @@ namespace jh
 		virtual void setAnimator();
 		virtual void setRenderer();
 		virtual void setScript();
-
-	private:
-		
 	};
 }
 

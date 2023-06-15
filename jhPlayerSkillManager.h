@@ -21,20 +21,29 @@ namespace jh
 		void Update();
 		void SetPlayerScript(PlayerScript* pPlayerScript) { assert(pPlayerScript != nullptr); mpPlayerScript = pPlayerScript; }
 
-		PlayerSkillObject* MakePlayerSkilObjectOrNull(const ePlayerSkillType eSkillType);
+		void AddSkillObject(const ePlayerSkillType eSkillType);
+
+		void IncreaseElectricSkillDamage(const ePlayerSkillType eSkillType);
+		void DecreaseElectricSkillCollTime(const ePlayerSkillType eSkillType);
 
 	private:
+		PlayerSkillObject* makePlayerSkilObjectOrNull(const ePlayerSkillType eSkillType);
 		void fillAnimInfo(SkillAnimationInfo& animInfo, const float width, const float height, const float mag, const UINT spriteCount, const float animDuration, const std::wstring& animKey);
-	
+		void increaseElectricSkillDamage(const ePlayerSkillType eSkillType);
+		void decreaseElectricSkillCollTime(const ePlayerSkillType eSkillType);
+
 	private:
 		PlayerSkillManager()
 			: mpPlayerScript(nullptr)
+			, mpPlayerSkillObjects()
 		{
-
+			mpPlayerSkillObjects.reserve(static_cast<UINT>(ePlayerSkillType::COUNT));
+			mpPlayerSkillObjects.resize(static_cast<UINT>(ePlayerSkillType::COUNT));
 		}
 		~PlayerSkillManager() = default;
 
 	private:
 		PlayerScript* mpPlayerScript;
+		std::vector<PlayerSkillObject*>		mpPlayerSkillObjects;
 	};
 }

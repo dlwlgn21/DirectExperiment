@@ -8,21 +8,11 @@ static constexpr const float X_DSITANCE_FROM_CAMERA_CENTER_POSITION = 1.0f;
 namespace jh
 {
 	UISkillTextScript::UISkillTextScript(const eSkillTextType eTextType)
-		: UILevelUpScript()
+		: UISkillScript()
 		, meSkillTextType(eTextType)
 		, meSkillPosition(eSkillPosition::NONE)
 	{
 
-	}
-
-	void UISkillTextScript::SetWaitingPosition()
-	{
-		SetState(eUILevelUpState::WAIT);
-	}
-
-	void UISkillTextScript::SetEnteringYPostion(const float yPos)
-	{
-		mpTransform->SetOnlyXYPosition(mpCameraTransform->GetOnlyXPosition(), yPos - (DESCENT_SPEED * Time::DeltaTime()));
 	}
 
 	void UISkillTextScript::SetStayingXYPosition()

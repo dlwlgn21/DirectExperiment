@@ -201,6 +201,8 @@
     <ClInclude Include="jhPlayerDustEffectScript.h" />
     <ClInclude Include="jhPlayerHitEffectScript.h" />
     <ClInclude Include="jhPlayerLevelManager.h" />
+    <ClInclude Include="jhPlayerLevelUpEffectObject.h" />
+    <ClInclude Include="jhPlayerLevelUpEffectScript.h" />
     <ClInclude Include="jhPlayerScript.h" />
     <ClInclude Include="jhPlayerSkillElectricBeamScript.h" />
     <ClInclude Include="jhPlayerSkillElectricStrikeScript.h" />
@@ -233,6 +235,7 @@
     <ClInclude Include="jhUISkillIconScript.h" />
     <ClInclude Include="jhUISKillLevepUPConstantValues.h" />
     <ClInclude Include="jhUISkillObject.h" />
+    <ClInclude Include="jhUISkillScript.h" />
     <ClInclude Include="jhUISkillSelectBoxObject.h" />
     <ClInclude Include="jhUISkillSelectBoxScript.h" />
     <ClInclude Include="jhUISkillTextObject.h" />
@@ -304,6 +307,8 @@
     <ClCompile Include="jhPlayerDustEffectScript.cpp" />
     <ClCompile Include="jhPlayerHitEffectScript.cpp" />
     <ClCompile Include="jhPlayerLevelManager.cpp" />
+    <ClCompile Include="jhPlayerLevelUpEffectObject.cpp" />
+    <ClCompile Include="jhPlayerLevelUpEffectScript.cpp" />
     <ClCompile Include="jhPlayerScript.cpp" />
     <ClCompile Include="jhPlayerSkillElectricBeamScript.cpp" />
     <ClCompile Include="jhPlayerSkillElectricStrikeScript.cpp" />
@@ -332,6 +337,7 @@
     <ClCompile Include="jhUISkillIconObject.cpp" />
     <ClCompile Include="jhUISkillIconScript.cpp" />
     <ClCompile Include="jhUISkillObject.cpp" />
+    <ClCompile Include="jhUISkillScript.cpp" />
     <ClCompile Include="jhUISkillSelectBoxObject.cpp" />
     <ClCompile Include="jhUISkillSelectBoxScript.cpp" />
     <ClCompile Include="jhUISkillTextObject.cpp" />

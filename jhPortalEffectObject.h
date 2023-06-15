@@ -9,7 +9,7 @@ namespace jh
 		PortalEffectObject();
 		virtual ~PortalEffectObject() = default;
 
-	protected:
+	private:
 		void setAnimator() override;
 		void setRenderer() override;
 		void setScript() override;

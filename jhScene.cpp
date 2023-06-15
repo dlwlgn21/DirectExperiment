@@ -1,5 +1,5 @@
 #include "jhScene.h"
-
+#include "jhPlayerLevelManager.h"
 
 namespace jh
 {
@@ -46,6 +46,11 @@ namespace jh
 	{
 		for (int i = 0; i < static_cast<UINT>(eLayerType::COUNT); ++i)
 		{
+			if (PlayerLevelManager::GetInstance().IsProcessingLevelUp())
+			{
+				mLayers[static_cast<UINT>(eLayerType::LEVEL_UP_UI)]->Update();
+				return;
+			}
 			mLayers[i]->Update();
 		}
 	}

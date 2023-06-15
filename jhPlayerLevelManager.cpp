@@ -2,13 +2,17 @@
 #include <random>
 #include "jhPlayerLevelManager.h"
 #include "jhUILevelUPBorderObject.h"
+#include "jhUISkillScript.h"
 #include "jhUISkillIconScript.h"
 #include "jhUISkillTextScript.h"
 #include "jhPlayerScript.h"
 #include "jhUISkillSelectBoxObject.h"
+#include "jhPlayerSkillManager.h"
+
 
 namespace jh
 {
+#pragma region INIT
 	void PlayerLevelManager::Initialize()
 	{
 #pragma region UI_LEVEL_UP_BORDER
@@ -23,6 +27,7 @@ namespace jh
 			mpSkillIconObjects[i] = new UISkillIconObject(static_cast<eSkillIconType>(i));
 			mpSkillIconObjects[i]->Initialize();
 			mpSkillIconObjects[i]->SetState(GameObject::eGameObjectState::INACTIVE);
+			static_cast<UISkillScript*>(mpSkillIconObjects[i]->GetScriptOrNull())->SetUILevelUpBorderScript(static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull()));
 		}
 #pragma endregion
 #pragma region SKILL_TEXT
@@ -32,15 +37,17 @@ namespace jh
 			assert(mpSkillTextObjects[i] != nullptr);
 			mpSkillTextObjects[i]->Initialize();
 			mpSkillTextObjects[i]->SetState(GameObject::eGameObjectState::INACTIVE);
+			static_cast<UISkillScript*>(mpSkillTextObjects[i]->GetScriptOrNull())->SetUILevelUpBorderScript(static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull()));
 		}
 #pragma endregion
 #pragma region SKILL_SELECT_BOX
 		mpSKillSelectBox = new UISkillSelectBoxObject();
 		mpSKillSelectBox->Initialize();
 		mpSKillSelectBox->SetState(GameObject::eGameObjectState::INACTIVE);
+		static_cast<UISkillScript*>(mpSKillSelectBox->GetScriptOrNull())->SetUILevelUpBorderScript(static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull()));
 #pragma endregion
-
 	}
+#pragma endregion
 
 #pragma region SET_PLAYER_CAMERA
 	void PlayerLevelManager::SetPlayerScript(PlayerScript* pPlayerScript)
@@ -74,8 +81,10 @@ namespace jh
 	}
 #pragma endregion
 
+#pragma region CALL_BACK
 	void PlayerLevelManager::OnPlayerLevelUP()
 	{
+		mbIsProcessingLevelUp = true;
 		assert(mpPlayerScript != nullptr);
 		mpUIBorder->SetState(GameObject::eGameObjectState::ACTIVE);
 		static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull())->SetState(eUILevelUpState::ENTERING);
@@ -221,14 +230,17 @@ namespace jh
 		static_cast<UILevelUpScript*>(mpSKillSelectBox->GetScriptOrNull())->SetState(eUILevelUpState::ENTERING);
 #pragma endregion
 	}
-
 	void PlayerLevelManager::OnPlayerSelected(const eSkillPosition eSelectedPostion)
 	{
 		assert(mpPlayerScript != nullptr);
 		const eSkillIconType eSmapledSkillIocnType = mSampledThreeSkillInfo[static_cast<UINT>(eSelectedPostion)].eSkillIcon;
 		const eSkillTextType eSmapledSkillTextType = mSampledThreeSkillInfo[static_cast<UINT>(eSelectedPostion)].eSkillText;
 		setPlayerSkillLevel(eSmapledSkillIocnType, eSmapledSkillTextType);
+
+		setInacitveAllUILevelUpObjects();
+		mbIsProcessingLevelUp = false;
 	}
+#pragma endregion
 
 #pragma region SET_SKILL_TEXT
 	void PlayerLevelManager::setSkillTextObjectStateToActive(const eSkillTextType eTextType)
@@ -245,7 +257,7 @@ namespace jh
 	}
 #pragma endregion
 
-
+#pragma region SET_SAMPLEED_SKILL_INFO
 	void PlayerLevelManager::setSampledSkillInfo(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText, const eSkillPosition ePosition)
 	{
 		mSampledThreeSkillInfo[static_cast<UINT>(ePosition)].eSkillIcon = eSkillIcon;
@@ -253,7 +265,9 @@ namespace jh
 		mSampledThreeSkillInfo[static_cast<UINT>(ePosition)].ePosition = ePosition;
 	}
 
+#pragma endregion
 
+#pragma region SET_PLAYER_SKILL_LEVEL
 	void PlayerLevelManager::setPlayerSkillLevel(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText)
 	{
 		switch (eSkillText)
@@ -261,16 +275,19 @@ namespace jh
 		case jh::eSkillTextType::ELECTRIC_BEAM_LV_1:
 		{
 			mpPlayerScript->mSkillStat.ElectricBeamLevel.bIsSpawnBeam = true;
+			PlayerSkillManager::GetInstance().AddSkillObject(ePlayerSkillType::ELETRIC_BEAM);
 			break;
 		}
 		case jh::eSkillTextType::ELECTRIC_STRKIE_LV_1:
 		{
 			mpPlayerScript->mSkillStat.ElectricStrikeLevel.bIsSpawnStrike = true;
+			PlayerSkillManager::GetInstance().AddSkillObject(ePlayerSkillType::ELETRIC_STRIKE);
 			break;
 		}
 		case jh::eSkillTextType::ELECTRIC_TORNADO_LV_1:
 		{
 			mpPlayerScript->mSkillStat.ElectricTornadoLevel.bIsSpawnTornado = true;
+			PlayerSkillManager::GetInstance().AddSkillObject(ePlayerSkillType::TORNADO);
 			break;
 		}
 		case jh::eSkillTextType::ELECTRIC_DAMAGE:
@@ -280,11 +297,13 @@ namespace jh
 			case eSkillIconType::ELECTRIC_BEAM:
 			{
 				++mpPlayerScript->mSkillStat.ElectricBeamLevel.CurrElectricBeamDamageLevel;
+				PlayerSkillManager::GetInstance().IncreaseElectricSkillDamage(ePlayerSkillType::ELETRIC_BEAM);
 				break;
 			}
 			case eSkillIconType::ELECTRIC_STRIKE:
 			{
 				++mpPlayerScript->mSkillStat.ElectricStrikeLevel.CurrElectricStrikeDamageLevel;
+				PlayerSkillManager::GetInstance().IncreaseElectricSkillDamage(ePlayerSkillType::ELETRIC_STRIKE);
 				break;
 			}
 			default:
@@ -302,18 +321,21 @@ namespace jh
 			{
 				assert(mpPlayerScript->mSkillStat.ElectricBeamLevel.bIsSpawnBeam);
 				++mpPlayerScript->mSkillStat.ElectricBeamLevel.CurrElectricBeamSpawnSpeedLevel;
+				PlayerSkillManager::GetInstance().DecreaseElectricSkillCollTime(ePlayerSkillType::ELETRIC_BEAM);
 				break;
 			}
 			case eSkillIconType::ELECTRIC_STRIKE:
 			{
 				assert(mpPlayerScript->mSkillStat.ElectricStrikeLevel.bIsSpawnStrike);
 				++mpPlayerScript->mSkillStat.ElectricStrikeLevel.CurrElectricStrikeSpawnSpeedLevel;
+				PlayerSkillManager::GetInstance().DecreaseElectricSkillCollTime(ePlayerSkillType::ELETRIC_STRIKE);
 				break;
 			}
 			case eSkillIconType::ELECTRIC_TORNADO:
 			{
 				assert(mpPlayerScript->mSkillStat.ElectricTornadoLevel.bIsSpawnTornado);
 				++mpPlayerScript->mSkillStat.ElectricTornadoLevel.CurrElectricTornadoSpawnSpeedLevel;
+				PlayerSkillManager::GetInstance().DecreaseElectricSkillCollTime(ePlayerSkillType::TORNADO);
 				break;
 			}
 			default:
@@ -330,6 +352,7 @@ namespace jh
 		case jh::eSkillTextType::MOVEMENT_SPEED:
 		{
 			++mpPlayerScript->mSkillStat.CurrMovementSpeedLevel;
+			mpPlayerScript->mSpeed *= 1.1f;
 			break;
 		}
 		case jh::eSkillTextType::RECORVER_HEALTH:
@@ -343,4 +366,26 @@ namespace jh
 		}
 	}
 
+#pragma endregion
+
+	void PlayerLevelManager::setInacitveAllUILevelUpObjects()
+	{
+		mpUIBorder->SetState(GameObject::eGameObjectState::INACTIVE);
+		static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull())->InitWaitingStatePosition();
+
+		mpSKillSelectBox->SetState(GameObject::eGameObjectState::INACTIVE);
+		static_cast<UILevelUpScript*>(mpSKillSelectBox->GetScriptOrNull())->InitWaitingStatePosition();
+
+		for (auto* pSkillObject : mpSkillIconObjects)
+		{
+			pSkillObject->SetState(GameObject::eGameObjectState::INACTIVE);
+			static_cast<UILevelUpScript*>(pSkillObject->GetScriptOrNull())->InitWaitingStatePosition();
+		}
+
+		for (auto* pSkillTextObject : mpSkillTextObjects)
+		{
+			pSkillTextObject->SetState(GameObject::eGameObjectState::INACTIVE);
+			static_cast<UILevelUpScript*>(pSkillTextObject->GetScriptOrNull())->InitWaitingStatePosition();
+		}
+	}
 }

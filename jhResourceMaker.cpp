@@ -136,6 +136,7 @@ namespace jh
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_TEXTURE_KEY = L"PlayerDashEffectTexture";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY = L"GreenPortalTexture";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
+	const std::wstring ResourceMaker::EFFECT_PLAYER_LEVEL_UP_TEXTURE_KEY = L"LevelUpTexture";
 #pragma endregion
 
 
@@ -245,6 +246,7 @@ namespace jh
 	const std::wstring ResourceMaker::EFFECT_PLAYER_DASH_MATERIAL_KEY = L"PlayerDashEffectMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_MATERIAL_KEY = L"GreenPortalMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
+	const std::wstring ResourceMaker::EFFECT_PLAYER_LEVEL_UP_MATERIAL_KEY = L"LevelUpMaterialKey";
 #pragma endregion
 
 #pragma region OTHER
@@ -568,6 +570,7 @@ namespace jh
 		loadAndInsertTexture(EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY, L"GreenPortalSpriteSheet_NM.png");
 		loadAndInsertTexture(EFFECT_HIT_TEXTURE_ATLAS_KEY, L"EffectAtals.png");
 		loadAndInsertTexture(EFFECT_PLAYER_DASH_TEXTURE_KEY, L"DASHSMOKE2.png");
+		loadAndInsertTexture(EFFECT_PLAYER_LEVEL_UP_TEXTURE_KEY, L"EFFECT_Player_levelUpEffect_48x48.png");
 #pragma endregion
 
 #pragma region BG_FG_PARRLAX
@@ -711,6 +714,7 @@ namespace jh
 		insertMaterial(EFFECT_HIT_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_HIT_TEXTURE_ATLAS_KEY);
 		insertMaterial(EFFECT_PLAYER_DASH_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_PLAYER_DASH_TEXTURE_KEY);
 		insertMaterial(EFFECT_GREEN_PORTAL_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY);
+		insertMaterial(EFFECT_PLAYER_LEVEL_UP_MATERIAL_KEY, SPRITE_SHADER_KEY, EFFECT_PLAYER_LEVEL_UP_TEXTURE_KEY);
 		insertNormalMapMaterial(EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY, NORMAL_MAP_SPRITE_SHADER_KEY, EFFECT_GREEN_PORTAL_TEXTURE_ATLAS_KEY, EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY);
 #pragma endregion
 

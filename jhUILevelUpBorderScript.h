@@ -12,7 +12,6 @@ namespace jh
 		virtual ~UILevelUpBorderScript() = default;
 		
 	private:
-		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
 		void SetEnteringYPostion(const float yPos) override;
 	};

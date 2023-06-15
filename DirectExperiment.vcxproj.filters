@@ -394,6 +394,15 @@
     <Filter Include="Component\Script\UI\LevelUP\SkillSelectBox">
       <UniqueIdentifier>{de605bf6-226a-4795-a0c4-d2133f0a0f14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\SkillBase">
+      <UniqueIdentifier>{1e914749-7bf2-4a11-be6b-d575ec3b8640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\Effect\PlayerLevelUP">
+      <UniqueIdentifier>{e61379ec-c4a3-40c9-bddd-926dbc0f3781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Effect\PlayerLevelUp">
+      <UniqueIdentifier>{d0dc7322-70fc-4a4f-bbf3-48d2cf35325c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -729,6 +738,15 @@
     <ClInclude Include="jhUISKillLevepUPConstantValues.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="jhUISkillScript.h">
+      <Filter>Component\Script\UI\LevelUP\SkillBase</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerLevelUpEffectObject.h">
+      <Filter>GameObject\AnimatedGameObject\Effect\PlayerLevelUP</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerLevelUpEffectScript.h">
+      <Filter>Component\Script\Effect\PlayerLevelUp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1033,6 +1051,15 @@
     </ClCompile>
     <ClCompile Include="jhUISkillSelectBoxScript.cpp">
       <Filter>Component\Script\UI\LevelUP\SkillSelectBox</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\SkillBase</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerLevelUpEffectObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\Effect\PlayerLevelUP</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerLevelUpEffectScript.cpp">
+      <Filter>Component\Script\Effect\PlayerLevelUp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

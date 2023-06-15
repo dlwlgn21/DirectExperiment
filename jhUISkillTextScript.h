@@ -1,13 +1,11 @@
 #pragma once
-#include "jhUILevelUpScript.h"
+#include "jhUISkillScript.h"
 #include "jhUISkillTextObject.h"
 
 namespace jh
 {
-
-
 	class Transform;
-	class UISkillTextScript : public UILevelUpScript
+	class UISkillTextScript : public UISkillScript
 	{
 	public:
 		UISkillTextScript(const eSkillTextType eTextType);
@@ -17,9 +15,7 @@ namespace jh
 		const eSkillPosition GetSkillPosition() const			{ return meSkillPosition; }
 
 	private:
-		void SetWaitingPosition() override;
 		void SetStayingXYPosition() override;
-		void SetEnteringYPostion(const float yPos) override;
 
 	private:
 		eSkillTextType		meSkillTextType;

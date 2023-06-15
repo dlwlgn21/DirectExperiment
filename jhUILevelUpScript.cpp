@@ -2,7 +2,7 @@
 #include "jhTransform.h"
 #include "jhTime.h"
 
-
+static constexpr const float WAIT_Y_POS = 10.0f;
 static constexpr const float FINAL_Y_POS = 0.0f;
 static constexpr const float DESCENT_SPEED = 4.0f;
 
@@ -28,6 +28,7 @@ namespace jh
 		{
 		case eUILevelUpState::WAIT:
 		{
+			SetWaitingPosition();
 			break;
 		}
 		case eUILevelUpState::ENTERING:
@@ -50,5 +51,17 @@ namespace jh
 			assert(false);
 			break;
 		}
+	}
+
+	void UILevelUpScript::InitWaitingStatePosition()
+	{
+		SetState(eUILevelUpState::WAIT);
+		SetWaitingPosition();
+	}
+
+	void UILevelUpScript::SetWaitingPosition()
+	{
+		const float cameraXPos = mpCameraTransform->GetOnlyXPosition();
+		mpTransform->SetOnlyXYPosition(cameraXPos, WAIT_Y_POS);
 	}
 }

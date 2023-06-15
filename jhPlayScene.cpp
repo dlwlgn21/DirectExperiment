@@ -50,6 +50,9 @@
 #include "jhUILevelUPBorderObject.h"
 #include "jhUISkillSelectBoxObject.h"
 
+#include "jhPlayerLevelUpEffectObject.h"
+#include "jhPlayerLevelUpEffectScript.h"
+
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;
@@ -71,7 +74,6 @@ static constexpr const Vector4 AMBIENT(0.1f, 0.1f, 0.1f, 1.0f);
 
 namespace jh
 {
-	Transform* pExperimentTransform;
 	void instatiateFlowerObejct()
 	{
 		BGFlowerObject* pBGFlower = nullptr;
@@ -89,47 +91,34 @@ namespace jh
 		}
 	}
 
-	void PlayScene::instatiateTreeObejct()
-	{
-		const float X_DIFF_POS = 7.0f;
-		instantiateEnvTreeObject(3.0f, eTreeShapeType::HIGH, eTreeAnimType::BLINK);
-		instantiateEnvTreeObject(X_DIFF_POS, eTreeShapeType::WIDE, eTreeAnimType::MARKINGS);
-		instantiateEnvTreeObject(X_DIFF_POS * 3, eTreeShapeType::HIGH, eTreeAnimType::BLOOD);
-		instantiateEnvTreeObject(X_DIFF_POS * 4, eTreeShapeType::WIDE, eTreeAnimType::OVER_GROWN);
-
-
-		instantiateEnvTreeObject(-5.0f, eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
-		instantiateEnvTreeObject(-X_DIFF_POS - 3.0f, eTreeShapeType::HIGH, eTreeAnimType::MARKINGS);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 3), eTreeShapeType::WIDE, eTreeAnimType::BLINK);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 4), eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
-		instantiateEnvTreeObject(-(X_DIFF_POS * 5), eTreeShapeType::HIGH, eTreeAnimType::OVER_GROWN);
-	}
-
-
 	PlayScene::PlayScene()
 		: Scene(eSceneType::PLAY_SCENE)
 	{
 	}
-	PlayScene::~PlayScene()
-	{
-	}
+
 	void PlayScene::Initialize()
 	{
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		assert(pPlayerScript != nullptr);
+#pragma region INIT_MANAGERS
 		PlayerSkillManager::GetInstance().SetPlayerScript(pPlayerScript);
 		PlayerLevelManager::GetInstance().SetPlayerScript(pPlayerScript);
-		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_BEAM)), eLayerType::PLAYER_SKILL);
-		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::ELETRIC_STRIKE)), eLayerType::PLAYER_SKILL);
-		AddGameObject(static_cast<GameObject*>(PlayerSkillManager::GetInstance().MakePlayerSkilObjectOrNull(ePlayerSkillType::TORNADO)), eLayerType::PLAYER_SKILL);
 		MonsterSpawner::GetInstance().Initialize(pPlayerScript);
+#pragma endregion
+
+#pragma region INSTANTIATE_OBJECTS
 		instantiateLight(pPlayerScript);
 		instantiateParallaxObjects();
 		instantiateEnvObject();
 		instantiateUIObject(pPlayerScript);
-		instantiateOtherObjects();
+#pragma endregion
+
+#pragma region COLLISION_CHECK
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
+#pragma endregion
+
+#pragma region LEVEL_UP_UI
 		this->AddGameObject(PlayerLevelManager::GetInstance().GetUIBorder(), eLayerType::LEVEL_UP_UI);
 		auto& skillIcons = PlayerLevelManager::GetInstance().GetUISkillIcons();
 		auto& skillTexts = PlayerLevelManager::GetInstance().GetUISkillTexts();
@@ -143,6 +132,7 @@ namespace jh
 			this->AddGameObject(skillTexts[i], eLayerType::LEVEL_UP_UI);
 		}
 		this->AddGameObject(PlayerLevelManager::GetInstance().GetSkillSelectBox(), eLayerType::LEVEL_UP_UI);
+#pragma endregion
 		Scene::Initialize();
 	}
 
@@ -152,36 +142,8 @@ namespace jh
 		Scene::Update();
 	}
 
-	void PlayScene::FixedUpdate()
-	{
-		Scene::FixedUpdate();
-	}
-
-
-	void PlayScene::Release()
-	{
-		Scene::Release();
-	}
-
-	void PlayScene::instantiateLight(PlayerScript* pPlayerScript)
-	{
-		assert(pPlayerScript != nullptr);
-		// Directional Light
-		{
-			//instantiateLightObject(LightingManager::makeLightAttribute(eLightType::DIRECTIONAL, Vector4(4.0f, 4.0f, 4.0f, 1.0f), 0.0f), Vector2(0.0f, -5.0f));
-		}
-		// Point Light
-		{
-			//LightAttribute lightAttribute;
-			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
-			//lightAttribute.ELightType = eLightType::POINT;
-			//lightAttribute.Diffuse = WHITE_COLOR;
-			//lightAttribute.Radius = 15.0f;
-			//instantiateLightObject(lightAttribute, Vector2(0.0f, 0.0f));
-		}
-
-	}
-
+#pragma region INSTANTIATE
+#pragma region PLAYER_AND_CAMERA
 	PlayerScript* PlayScene::instantiateCameraAndPlayer()
 	{
 		// MainCamera
@@ -220,57 +182,26 @@ namespace jh
 		PlayerWeaponColliderObject* pPlayerWeaponColliderObject = Instantiate<PlayerWeaponColliderObject>(eLayerType::PLAYER);
 		pPlayerWeaponColliderObject->GetTransform()->SetPosition(Vector3(0.0f, -2.2f, SCENE_COLLIDER_Z_VALUE));
 		pPlayerWeaponColliderObject->SetPlayerTransformAndScript(pPlayer->GetTransform(), static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
-	
+
 		HitEffectObject* pHitEffectObejct = new HitEffectObject(eHitEffectType::BLOOD, static_cast<PlayerScript*>(pPlayer->GetScriptOrNull()));
 		pPlayer->SetHitEffectToPlayerScript(pHitEffectObejct);
 		AddGameObject(pHitEffectObejct, eLayerType::EFFECT);
+
+
+		PlayerScript* pPlayerScript = static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
+		assert(pPlayerScript != nullptr);
+		PlayerLevelUpEffectObject* pLevelUpEffectObject = new PlayerLevelUpEffectObject(pPlayerScript);
+		AddGameObject(pLevelUpEffectObject, eLayerType::EFFECT);
+		pPlayerScript->SetPlayerLevelUpEffectScript(static_cast<PlayerLevelUpEffectScript*>(pLevelUpEffectObject->GetScriptOrNull()));
 
 		const float INDENCITY_VALUE = 4.0f;
 		const float RADIUS = 10.0f;
 		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, Vector4(INDENCITY_VALUE, INDENCITY_VALUE, INDENCITY_VALUE, 1.0f), RADIUS), pPlayer->GetTransform());
 
-		return static_cast<PlayerScript*>(pPlayer->GetScriptOrNull());
+		return pPlayerScript;
 	}
-
-	void PlayScene::instantiateMonsters(PlayerScript* pPlayerScript)
-	{	
-		assert(pPlayerScript);
-		//MonsterPackage monPack = MonsterManager::GetInstance().MakeMonster();
-		//MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(6.0f, -1.7f, 4.0f));
-		//AddMonster(monPack);
-		//MonstePackage monPack2 = MonsterManager::GetInstance().MakeMonster(eMonsterType::LV_1_CAGED_SHOKER, pPlayerScript, Vector3(-6.0f, -1.8f, 4.0f), MonsterManager::CAGED_SHOKER_SCALE_VECTOR);
-		//addMonster(monPack2);
-
-		//MonsterPackage monPack3 = MonsterObjectPool::GetInstance().Get(eMonsterType::LV_1_SWEEPER, pPlayerScript, Vector3(3.0f, -1.8f, 4.0f));
-		//AddMonster(monPack3);
-	}
-
-	void PlayScene::AddMonster(const MonsterPackage& monPack)
-	{
-		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIHpBarObject != nullptr && monPack.pUIBorderBarObject != nullptr);
-		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
-		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pUIBorderBarObject, eLayerType::MONSTER);
-
-	}
-
-	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)
-	{
-		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr);
-		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
-		{
-			assert(monPack.pColliderObject[i] != nullptr);
-		}
-		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
-		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
-		{
-			this->AddGameObject(monPack.pColliderObject[i], eLayerType::MONSTER);
-		}
-	}
-
+#pragma endregion
+#pragma region FG_AND_PARALLAX
 	void PlayScene::instantiateParallaxObjects()
 	{
 		// ForeGround
@@ -322,7 +253,9 @@ namespace jh
 			//pParallaxSix->GetTransform()->SetPosition(Vector3(0.0f, 0.6f, PARALLAX_6_DEPTH));
 		}
 	}
+#pragma endregion
 
+#pragma region ENV
 	void PlayScene::instantiateEnvObject()
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
@@ -335,7 +268,21 @@ namespace jh
 		instatiateFlowerObejct();
 		instatiateTreeObejct();
 	}
+	void PlayScene::instatiateTreeObejct()
+	{
+		const float X_DIFF_POS = 7.0f;
+		instantiateEnvTreeObject(3.0f, eTreeShapeType::HIGH, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(X_DIFF_POS, eTreeShapeType::WIDE, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(X_DIFF_POS * 3, eTreeShapeType::HIGH, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(X_DIFF_POS * 4, eTreeShapeType::WIDE, eTreeAnimType::OVER_GROWN);
 
+
+		instantiateEnvTreeObject(-5.0f, eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(-X_DIFF_POS - 3.0f, eTreeShapeType::HIGH, eTreeAnimType::MARKINGS);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 3), eTreeShapeType::WIDE, eTreeAnimType::BLINK);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 4), eTreeShapeType::WIDE, eTreeAnimType::BLOOD);
+		instantiateEnvTreeObject(-(X_DIFF_POS * 5), eTreeShapeType::HIGH, eTreeAnimType::OVER_GROWN);
+	}
 	void PlayScene::instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType)
 	{
 		BGTreeObject* pBGTreeObject = new BGTreeObject(eTreeType, eAnimType);
@@ -344,7 +291,8 @@ namespace jh
 		BGTorchObject* pBGTorch = Instantiate<BGTorchObject>(eLayerType::BACKGROUND);
 		pBGTorch->SetPosition(xPos);
 	}
-
+#pragma endregion
+#pragma region LIGHTING
 	void PlayScene::instatiateLightningObejct()
 	{
 		const Vector4 DIFFUSE(1.0f, 1.0f, 1.0f, 1.0f);
@@ -371,54 +319,6 @@ namespace jh
 		instantiateLightObject(LightingManager::makeLightAttribute(eLightType::POINT, DIFFUSE, RADIUS), pBGSmallLightning->GetTransform());
 
 	}
-
-
-	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
-	{
-		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);
-		this->AddGameObject(pHealthBorderOject, eLayerType::UI);
-
-		UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR, pPlayerScript);
-		this->AddGameObject(pHpBarOject, eLayerType::UI);
-
-		UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER, pPlayerScript);
-		this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
-
-		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, pPlayerScript);
-		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
-	}
-
-	void PlayScene::instantiateOtherObjects()
-	{
-		//GameObject* pBrickNormal = Instantiate<GameObject>(eLayerType::PLAYER);
-		//NormalMapMaterial* pMat = new NormalMapMaterial(
-		//	ResourcesManager::Find<Shader>(ResourceMaker::NORMAL_MAP_SPRITE_SHADER_KEY),
-		//	ResourcesManager::Find<Texture>(ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY),
-		//	ResourcesManager::Find<Texture>(ResourceMaker::BRIK_NORMAL_MAP_TEXTURE_KEY)
-		//);
-
-		//SpriteRenderer* pSpriteRender = new SpriteRenderer(
-		//	ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-		//	pMat
-		//);
-		//pBrickNormal->AddComponent(pSpriteRender);
-		//pBrickNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
-		//pBrickNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-		//pExperimentTransform = pBrickNormal->GetTransform();
-
-		//GameObject* pBrickNotNormal = Instantiate<GameObject>(eLayerType::PLAYER);
-		//SpriteRenderer* pNotNormalSpriteRender = new SpriteRenderer(
-		//	ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-		//	ResourcesManager::Find<Material>(ResourceMaker::BRIK_NOT_NORMAL_MATERIAL_KEY)
-		//);
-		//pBrickNotNormal->AddComponent(pNotNormalSpriteRender);
-		//pBrickNotNormal->GetTransform()->SetPosition(Vector3(0.0f, 1.0f, 2.0f));
-		//pBrickNotNormal->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-		//pExperimentTransform = pBrickNormal->GetTransform();
-	}
-
-
-
 	void PlayScene::instantiateLightObject(const LightAttribute& lightAttribute, const jh::math::Vector2& pos)
 	{
 		GameObject* pLightObject = Instantiate<GameObject>(eLayerType::PARTICLE);
@@ -442,5 +342,71 @@ namespace jh
 		pLightObject->AddComponent(pLightComponent);
 		pLightComponent->SetFollowingTransform(pTransform);
 	}
+	void PlayScene::instantiateLight(PlayerScript* pPlayerScript)
+	{
+		assert(pPlayerScript != nullptr);
+		// Directional Light
+		{
+			//instantiateLightObject(LightingManager::makeLightAttribute(eLightType::DIRECTIONAL, Vector4(4.0f, 4.0f, 4.0f, 1.0f), 0.0f), Vector2(0.0f, -5.0f));
+		}
+		// Point Light
+		{
+			//LightAttribute lightAttribute;
+			//ZeroMemory(&lightAttribute, sizeof(LightAttribute));
+			//lightAttribute.ELightType = eLightType::POINT;
+			//lightAttribute.Diffuse = WHITE_COLOR;
+			//lightAttribute.Radius = 15.0f;
+			//instantiateLightObject(lightAttribute, Vector2(0.0f, 0.0f));
+		}
+	}
+#pragma endregion
+#pragma region UI
+	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
+	{
+		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);
+		this->AddGameObject(pHealthBorderOject, eLayerType::UI);
 
+		UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR, pPlayerScript);
+		this->AddGameObject(pHpBarOject, eLayerType::UI);
+
+		UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER, pPlayerScript);
+		this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
+
+		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, pPlayerScript);
+		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
+	}
+#pragma endregion
+#pragma endregion
+#pragma region ADD_GAME_OBECJT
+	void PlayScene::AddMonster(const MonsterPackage& monPack)
+	{
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIHpBarObject != nullptr && monPack.pUIBorderBarObject != nullptr);
+		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
+		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pUIBorderBarObject, eLayerType::MONSTER);
+	}
+
+	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)
+	{
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			assert(monPack.pColliderObject[i] != nullptr);
+		}
+		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
+		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
+		{
+			this->AddGameObject(monPack.pColliderObject[i], eLayerType::MONSTER);
+		}
+	}
+
+	void PlayScene::AddSkillObejct(GameObject* pGameObject)
+	{
+		assert(pGameObject != nullptr);
+		this->AddGameObject(pGameObject, eLayerType::PLAYER_SKILL);
+	}
+#pragma endregion
 }
