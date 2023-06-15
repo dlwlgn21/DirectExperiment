@@ -2,6 +2,7 @@
 #include "jhScript.h"
 #include "jhGraphicDeviceDX11.h"
 #include "jhMath.h"
+#include "jhPlayerLevelManager.h"
 
 static constexpr const int		INITIAL_HP = 10;
 static constexpr const int		INITIAL_STAMINA = 5;
@@ -41,17 +42,6 @@ namespace jh
 		THREE,
 		COUNT
 	};
-
-	enum class ePlayerSkill
-	{
-		ELECTRIC_BEAM,
-		ELECTRIC_STRIKE,
-		ELECTRIC_TORNADO,
-		SWORD_DAMAGE_LEVEL,
-		MOVEMENT_SPEED,
-		COUNT
-	};
-
 	class Animator;
 	class Transform;
 	class Collider2D;
@@ -60,6 +50,8 @@ namespace jh
 	class PlayerScript final : public Script
 	{
 	public:
+		friend class PlayerLevelManager;
+
 		struct PlayerStat
 		{
 			int MaxHP;
@@ -82,21 +74,22 @@ namespace jh
 		};
 		struct ElectricBeam
 		{
-			UINT CurrElectricBeamLevel;
+			bool bIsSpawnBeam;
 			UINT CurrElectricBeamDamageLevel;
 			UINT CurrElectricBeamSpawnSpeedLevel;
 		};
 		struct ElectricStrike
 		{
-			UINT CurrElectricStrikeLevel;
+			bool bIsSpawnStrike;
 			UINT CurrElectricStrikeDamageLevel;
 			UINT CurrElectricStrikeSpawnSpeedLevel;
 		};
 		struct ElectricTornado
 		{
-			UINT CurrElectricTornadoLevel;
+			bool bIsSpawnTornado;
 			UINT CurrElectricTornadoSpawnSpeedLevel;
 		};
+
 		struct PlayerSkillStat
 		{
 			ElectricBeam ElectricBeamLevel;
@@ -161,7 +154,6 @@ namespace jh
 		
 
 		void IncreaseEXP(const UINT exp);
-		void IncreasePlayerSkill(const ePlayerSkill eSkill);
 		void EnemyAttackHiited(UINT damage);
 		void SetPlayerDustEffectScript(PlayerDustEffectScript* pPlayerDustEffectScript) { assert(pPlayerDustEffectScript != nullptr); mpPlayerDustEffetScript = pPlayerDustEffectScript; }
 		void SetPlayerHitEffectScript(PlayerHitEffectScript* pPlayerHitEffectScript) { assert(pPlayerHitEffectScript != nullptr); mpPlayerHitEffectScript = pPlayerHitEffectScript; }

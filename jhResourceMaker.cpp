@@ -67,6 +67,7 @@ namespace jh
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_BEAM_KEY = L"SkillElectricBeamTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeTexture";
 	const std::wstring ResourceMaker::SKILL_TEXTURE_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoTexture";
+	const std::wstring ResourceMaker::SKILL_SELECT_BOX_TEXTURE_KEY = L"SkillSelectBoxTexture";
 #pragma endregion
 
 #pragma region SKILL_ICON_TEXTURE
@@ -174,6 +175,8 @@ namespace jh
 	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_BEAM_KEY = L"SkillElectricBeamMaterial";
 	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_STRIKE_KEY = L"SkillElectricStrikeMaterial";
 	const std::wstring ResourceMaker::SKILL_MATERIAL_ELECTRIC_TORNADO_KEY = L"SkillElectricTornadoMaterial";
+	const std::wstring ResourceMaker::SKILL_SELECT_BOX_MATERIAL_KEY = L"SkillSelectBoxMaterial";
+
 #pragma endregion
 
 #pragma region SKILL_ICON_MATERIAL
@@ -536,6 +539,7 @@ namespace jh
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_BEAM_KEY, L"SKILL_ElectricBeam_375x64.png");
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_STRIKE_KEY, L"SKILL_ElectricStrike_80x176.png");
 		loadAndInsertTexture(SKILL_TEXTURE_ELECTRIC_TORNADO_KEY, L"SKILL_ElectricTornado_64x64.png");
+		loadAndInsertTexture(SKILL_SELECT_BOX_TEXTURE_KEY, L"SKILL_SELECT_BOX.png");
 #pragma endregion
 
 #pragma region SKILL_ICON
@@ -646,6 +650,7 @@ namespace jh
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_BEAM_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_BEAM_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_STRIKE_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_STRIKE_KEY);
 		insertMaterial(SKILL_MATERIAL_ELECTRIC_TORNADO_KEY, SPRITE_SHADER_KEY, SKILL_TEXTURE_ELECTRIC_TORNADO_KEY);
+		insertMaterial(SKILL_SELECT_BOX_MATERIAL_KEY, SPRITE_SHADER_KEY, SKILL_SELECT_BOX_TEXTURE_KEY);
 #pragma endregion
 
 #pragma region SKILL_ICON

@@ -388,6 +388,12 @@
     <Filter Include="Component\Script\UI\LevelUP\SkillText">
       <UniqueIdentifier>{be3d0bfd-7479-4f6a-933e-f264fa3811d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\LevelUP\SelectBox">
+      <UniqueIdentifier>{00da69ce-dd5f-4804-b098-b31e42644b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\LevelUP\SkillSelectBox">
+      <UniqueIdentifier>{de605bf6-226a-4795-a0c4-d2133f0a0f14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -714,6 +720,15 @@
     <ClInclude Include="jhUISkillTextScript.h">
       <Filter>Component\Script\UI\LevelUP\SkillText</Filter>
     </ClInclude>
+    <ClInclude Include="jhUISkillSelectBoxObject.h">
+      <Filter>GameObject\UI\LevelUP\SelectBox</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISkillSelectBoxScript.h">
+      <Filter>Component\Script\UI\LevelUP\SkillSelectBox</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUISKillLevepUPConstantValues.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1012,6 +1027,12 @@
     </ClCompile>
     <ClCompile Include="jhUISkillTextScript.cpp">
       <Filter>Component\Script\UI\LevelUP\SkillText</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillSelectBoxObject.cpp">
+      <Filter>GameObject\UI\LevelUP\SelectBox</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUISkillSelectBoxScript.cpp">
+      <Filter>Component\Script\UI\LevelUP\SkillSelectBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

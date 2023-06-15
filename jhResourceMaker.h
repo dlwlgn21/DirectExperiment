@@ -82,6 +82,9 @@ namespace jh
 		static const std::wstring MONSTER_TEXTURE_ACIENT_BOSS_KEY;
 #pragma endregion
 
+#pragma region SKILL
+		static const std::wstring SKILL_SELECT_BOX_TEXTURE_KEY;
+
 #pragma region SKILL_ICON_TEXTURE
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_TEXTURE_ELECTRIC_STRIKE_KEY;
@@ -104,6 +107,8 @@ namespace jh
 		static const std::wstring SKILL_TEXT_TEXTURE_SWORD_DAMAGE_KEY;
 		static const std::wstring SKILL_TEXT_TEXTURE_MOVEMENT_SPEED_KEY;
 		static const std::wstring SKILL_TEXT_TEXTURE_RECOVER_HEALTH_KEY;
+
+#pragma endregion
 #pragma endregion
 
 #pragma region BG_FG_PARRALAX_TEXTURE
@@ -185,6 +190,9 @@ namespace jh
 		static const std::wstring MONSTER_ACIENT_BOSS_MATERIAL_KEY;
 #pragma endregion
 
+#pragma region SKILL
+		static const std::wstring SKILL_SELECT_BOX_MATERIAL_KEY;
+
 #pragma region SKILL_ICON_MATERIAL
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_BEAM_KEY;
 		static const std::wstring SKILL_MATERIAL_ELECTRIC_STRIKE_KEY;
@@ -208,6 +216,9 @@ namespace jh
 		static const std::wstring SKILL_TEXT_MATERIAL_MOVEMENT_SPEED_KEY;
 		static const std::wstring SKILL_TEXT_MATERIAL_RECOVER_HEALTH_KEY;
 #pragma endregion
+
+#pragma endregion
+
 
 #pragma region UI_MATERIAL
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;

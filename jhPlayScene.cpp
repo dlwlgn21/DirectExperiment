@@ -48,6 +48,7 @@
 #include "jhPlayerSkillObject.h"
 #include "jhPlayerLevelManager.h"
 #include "jhUILevelUPBorderObject.h"
+#include "jhUISkillSelectBoxObject.h"
 
 using namespace jh::math;
 
@@ -141,6 +142,7 @@ namespace jh
 		{
 			this->AddGameObject(skillTexts[i], eLayerType::LEVEL_UP_UI);
 		}
+		this->AddGameObject(PlayerLevelManager::GetInstance().GetSkillSelectBox(), eLayerType::LEVEL_UP_UI);
 		Scene::Initialize();
 	}
 

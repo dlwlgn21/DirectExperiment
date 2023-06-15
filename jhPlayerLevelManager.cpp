@@ -2,10 +2,10 @@
 #include <random>
 #include "jhPlayerLevelManager.h"
 #include "jhUILevelUPBorderObject.h"
-#include "jhUILevelUpScript.h"
 #include "jhUISkillIconScript.h"
 #include "jhUISkillTextScript.h"
 #include "jhPlayerScript.h"
+#include "jhUISkillSelectBoxObject.h"
 
 namespace jh
 {
@@ -34,8 +34,15 @@ namespace jh
 			mpSkillTextObjects[i]->SetState(GameObject::eGameObjectState::INACTIVE);
 		}
 #pragma endregion
+#pragma region SKILL_SELECT_BOX
+		mpSKillSelectBox = new UISkillSelectBoxObject();
+		mpSKillSelectBox->Initialize();
+		mpSKillSelectBox->SetState(GameObject::eGameObjectState::INACTIVE);
+#pragma endregion
+
 	}
 
+#pragma region SET_PLAYER_CAMERA
 	void PlayerLevelManager::SetPlayerScript(PlayerScript* pPlayerScript)
 	{
 		assert(pPlayerScript != nullptr);
@@ -45,6 +52,7 @@ namespace jh
 	void PlayerLevelManager::SetCameraTransform(Transform* pCameraTransform)
 	{
 		assert(pCameraTransform != nullptr);
+		assert(mpSKillSelectBox != nullptr && mpUIBorder != nullptr);
 		static_cast<UILevelUpScript*>(mpUIBorder->GetScriptOrNull())->SetCameraTransform(pCameraTransform);
 #pragma region SKILL_ICON
 		for (UINT i = 0; i < static_cast<UINT>(eSkillIconType::COUNT); ++i)
@@ -60,7 +68,11 @@ namespace jh
 			static_cast<UILevelUpScript*>(mpSkillTextObjects[i]->GetScriptOrNull())->SetCameraTransform(pCameraTransform);
 		}
 #pragma endregion
+#pragma region SKILL_SELECT_BOX
+		static_cast<UILevelUpScript*>(mpSKillSelectBox->GetScriptOrNull())->SetCameraTransform(pCameraTransform);
+#pragma endregion
 	}
+#pragma endregion
 
 	void PlayerLevelManager::OnPlayerLevelUP()
 	{
@@ -101,57 +113,74 @@ namespace jh
 		}
 #pragma endregion
 
+#pragma region SKILL_TEXT
+		SampledSkillInfo skillInfo;
+		ZeroMemory(&skillInfo, sizeof(SampledSkillInfo));
 		for (UINT i = 0; i < MAX_CHOICE_COUNT; ++i)
 		{
 			const eSkillIconType eSkillType = static_cast<eSkillIconType>(selectedSkillIconIndexs[i]);
 			const PlayerScript::PlayerSkillStat& playerSkillStat = mpPlayerScript->GetPlayerSkillStat();
+			const eSkillPosition eSkillPos = static_cast<eSkillPosition>(i);
 			switch (eSkillType)
 			{
 			case eSkillIconType::ELECTRIC_BEAM:
 			{
-				if (playerSkillStat.ElectricBeamLevel.CurrElectricBeamLevel == 0)
+				if (!playerSkillStat.ElectricBeamLevel.bIsSpawnBeam)
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_BEAM_LV_1);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_BEAM_LV_1);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_BEAM_LV_1, eSkillIconType::ELECTRIC_BEAM);
+					
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_BEAM, eSkillTextType::ELECTRIC_BEAM_LV_1, eSkillPos);
 				}
 				else
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_DAMAGE);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_DAMAGE);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_DAMAGE, eSkillIconType::ELECTRIC_BEAM);
+				
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_BEAM, eSkillTextType::ELECTRIC_DAMAGE, eSkillPos);
 				}
 				break;
 			}
 			case eSkillIconType::ELECTRIC_STRIKE:
 			{
-				if (playerSkillStat.ElectricStrikeLevel.CurrElectricStrikeLevel == 0)
+				if (!playerSkillStat.ElectricStrikeLevel.bIsSpawnStrike)
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_STRKIE_LV_1);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_STRKIE_LV_1);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_STRKIE_LV_1, eSkillIconType::ELECTRIC_STRIKE);
+					
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_STRIKE, eSkillTextType::ELECTRIC_STRKIE_LV_1, eSkillPos);
 				}
 				else
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_DAMAGE);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_DAMAGE);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_DAMAGE, eSkillIconType::ELECTRIC_STRIKE);
+
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_STRIKE, eSkillTextType::ELECTRIC_DAMAGE, eSkillPos);
 				}
 				break;
 			}
 			case eSkillIconType::ELECTRIC_TORNADO:
 			{
-				if (playerSkillStat.ElectricTornadoLevel.CurrElectricTornadoLevel == 0)
+				if (!playerSkillStat.ElectricTornadoLevel.bIsSpawnTornado)
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_TORNADO_LV_1);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_TORNADO_LV_1);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_TORNADO_LV_1, eSkillIconType::ELECTRIC_TORNADO);
+				
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_TORNADO, eSkillTextType::ELECTRIC_TORNADO_LV_1, eSkillPos);
+
 				}
 				else
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_SPAWN_SPEED);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_SPAWN_SPEED);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_SPAWN_SPEED, eSkillIconType::ELECTRIC_TORNADO);
+				
+					setSampledSkillInfo(eSkillIconType::ELECTRIC_TORNADO, eSkillTextType::ELECTRIC_SPAWN_SPEED, eSkillPos);
 				}
 				break;
 			}
@@ -160,6 +189,8 @@ namespace jh
 				setSkillTextObjectStateToActive(eSkillTextType::SWORD_DAMAGE);
 				setSkillTextStateToEntering(eSkillTextType::SWORD_DAMAGE);
 				setSkillTextPositionToSkillIconPostion(eSkillTextType::SWORD_DAMAGE, eSkillIconType::MELLE_ATTACK_DAMAGE);
+
+				setSampledSkillInfo(eSkillIconType::MELLE_ATTACK_DAMAGE, eSkillTextType::SWORD_DAMAGE, eSkillPos);
 				break;
 			}
 			case eSkillIconType::SPEED:
@@ -167,6 +198,7 @@ namespace jh
 				setSkillTextObjectStateToActive(eSkillTextType::MOVEMENT_SPEED);
 				setSkillTextStateToEntering(eSkillTextType::MOVEMENT_SPEED);
 				setSkillTextPositionToSkillIconPostion(eSkillTextType::MOVEMENT_SPEED, eSkillIconType::SPEED);
+				setSampledSkillInfo(eSkillIconType::SPEED, eSkillTextType::MOVEMENT_SPEED, eSkillPos);
 				break;
 			}
 			case eSkillIconType::HEALTH:
@@ -174,6 +206,7 @@ namespace jh
 				setSkillTextObjectStateToActive(eSkillTextType::RECORVER_HEALTH);
 				setSkillTextStateToEntering(eSkillTextType::RECORVER_HEALTH);
 				setSkillTextPositionToSkillIconPostion(eSkillTextType::RECORVER_HEALTH, eSkillIconType::HEALTH);
+				setSampledSkillInfo(eSkillIconType::HEALTH, eSkillTextType::RECORVER_HEALTH, eSkillPos);
 				break;
 			}
 			default:
@@ -181,6 +214,20 @@ namespace jh
 				break;
 			}
 		}
+#pragma endregion
+
+#pragma region SKILL_SELECT_BOX
+		mpSKillSelectBox->SetState(GameObject::eGameObjectState::ACTIVE);
+		static_cast<UILevelUpScript*>(mpSKillSelectBox->GetScriptOrNull())->SetState(eUILevelUpState::ENTERING);
+#pragma endregion
+	}
+
+	void PlayerLevelManager::OnPlayerSelected(const eSkillPosition eSelectedPostion)
+	{
+		assert(mpPlayerScript != nullptr);
+		const eSkillIconType eSmapledSkillIocnType = mSampledThreeSkillInfo[static_cast<UINT>(eSelectedPostion)].eSkillIcon;
+		const eSkillTextType eSmapledSkillTextType = mSampledThreeSkillInfo[static_cast<UINT>(eSelectedPostion)].eSkillText;
+		setPlayerSkillLevel(eSmapledSkillIocnType, eSmapledSkillTextType);
 	}
 
 #pragma region SET_SKILL_TEXT
@@ -198,5 +245,102 @@ namespace jh
 	}
 #pragma endregion
 
+
+	void PlayerLevelManager::setSampledSkillInfo(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText, const eSkillPosition ePosition)
+	{
+		mSampledThreeSkillInfo[static_cast<UINT>(ePosition)].eSkillIcon = eSkillIcon;
+		mSampledThreeSkillInfo[static_cast<UINT>(ePosition)].eSkillText = eSkillText;
+		mSampledThreeSkillInfo[static_cast<UINT>(ePosition)].ePosition = ePosition;
+	}
+
+
+	void PlayerLevelManager::setPlayerSkillLevel(const eSkillIconType eSkillIcon, const eSkillTextType eSkillText)
+	{
+		switch (eSkillText)
+		{
+		case jh::eSkillTextType::ELECTRIC_BEAM_LV_1:
+		{
+			mpPlayerScript->mSkillStat.ElectricBeamLevel.bIsSpawnBeam = true;
+			break;
+		}
+		case jh::eSkillTextType::ELECTRIC_STRKIE_LV_1:
+		{
+			mpPlayerScript->mSkillStat.ElectricStrikeLevel.bIsSpawnStrike = true;
+			break;
+		}
+		case jh::eSkillTextType::ELECTRIC_TORNADO_LV_1:
+		{
+			mpPlayerScript->mSkillStat.ElectricTornadoLevel.bIsSpawnTornado = true;
+			break;
+		}
+		case jh::eSkillTextType::ELECTRIC_DAMAGE:
+		{
+			switch (eSkillIcon)
+			{
+			case eSkillIconType::ELECTRIC_BEAM:
+			{
+				++mpPlayerScript->mSkillStat.ElectricBeamLevel.CurrElectricBeamDamageLevel;
+				break;
+			}
+			case eSkillIconType::ELECTRIC_STRIKE:
+			{
+				++mpPlayerScript->mSkillStat.ElectricStrikeLevel.CurrElectricStrikeDamageLevel;
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
+			break;
+		}
+
+		case jh::eSkillTextType::ELECTRIC_SPAWN_SPEED:
+		{
+			switch (eSkillIcon)
+			{
+			case eSkillIconType::ELECTRIC_BEAM:
+			{
+				assert(mpPlayerScript->mSkillStat.ElectricBeamLevel.bIsSpawnBeam);
+				++mpPlayerScript->mSkillStat.ElectricBeamLevel.CurrElectricBeamSpawnSpeedLevel;
+				break;
+			}
+			case eSkillIconType::ELECTRIC_STRIKE:
+			{
+				assert(mpPlayerScript->mSkillStat.ElectricStrikeLevel.bIsSpawnStrike);
+				++mpPlayerScript->mSkillStat.ElectricStrikeLevel.CurrElectricStrikeSpawnSpeedLevel;
+				break;
+			}
+			case eSkillIconType::ELECTRIC_TORNADO:
+			{
+				assert(mpPlayerScript->mSkillStat.ElectricTornadoLevel.bIsSpawnTornado);
+				++mpPlayerScript->mSkillStat.ElectricTornadoLevel.CurrElectricTornadoSpawnSpeedLevel;
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
+			break;
+		}
+		case jh::eSkillTextType::SWORD_DAMAGE:
+		{
+			++mpPlayerScript->mSkillStat.CurrSwordLevel;
+			break;
+		}
+		case jh::eSkillTextType::MOVEMENT_SPEED:
+		{
+			++mpPlayerScript->mSkillStat.CurrMovementSpeedLevel;
+			break;
+		}
+		case jh::eSkillTextType::RECORVER_HEALTH:
+		{
+			mpPlayerScript->mStat.CurrentHP = mpPlayerScript->mStat.MaxHP;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
 
 }

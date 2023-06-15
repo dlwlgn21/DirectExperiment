@@ -231,7 +231,10 @@
     <ClInclude Include="jhUIBarScript.h" />
     <ClInclude Include="jhUILevelUpBorderScript.h" />
     <ClInclude Include="jhUISkillIconScript.h" />
+    <ClInclude Include="jhUISKillLevepUPConstantValues.h" />
     <ClInclude Include="jhUISkillObject.h" />
+    <ClInclude Include="jhUISkillSelectBoxObject.h" />
+    <ClInclude Include="jhUISkillSelectBoxScript.h" />
     <ClInclude Include="jhUISkillTextObject.h" />
     <ClInclude Include="jhUISkillTextScript.h" />
     <ClInclude Include="jhWeaponColliderScript.h" />
@@ -329,6 +332,8 @@
     <ClCompile Include="jhUISkillIconObject.cpp" />
     <ClCompile Include="jhUISkillIconScript.cpp" />
     <ClCompile Include="jhUISkillObject.cpp" />
+    <ClCompile Include="jhUISkillSelectBoxObject.cpp" />
+    <ClCompile Include="jhUISkillSelectBoxScript.cpp" />
     <ClCompile Include="jhUISkillTextObject.cpp" />
     <ClCompile Include="jhUISkillTextScript.cpp" />
     <ClCompile Include="jhWeaponColliderScript.cpp" />

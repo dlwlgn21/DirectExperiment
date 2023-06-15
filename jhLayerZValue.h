@@ -29,6 +29,7 @@ static constexpr const float PLAYER_SKILL_EFFECT_Z_VALUE = 1.2f;
 
 #pragma region LEVEL_UP
 static constexpr const float LEVEL_UP_UI_Z_VALUE = 1.1f;
-static constexpr const float LEVEL_UP_UI_SKILL_IOCN_Z_VALUE = 1.0f;
+static constexpr const float LEVEL_UP_UI_SKILL_IOCN_Z_VALUE = 1.05f;
+static constexpr const float LEVEL_UP_UI_SKILL_SELECT_BOX_Z_VALUE = 1.0f;
 #pragma endregion
 

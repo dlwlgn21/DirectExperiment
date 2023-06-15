@@ -1,14 +1,9 @@
 #include "jhUISkillTextScript.h"
 #include "jhTransform.h"
 #include "jhTime.h"
-
-static constexpr const float TOP_BOX_Y_POSITON = 2.0f;
-static constexpr const float CENTER_BOX_Y_POSITON = 0.0f;
-static constexpr const float BOTTOM_BOX_Y_POSITON = -2.0f;
+#include "jhUISKillLevepUPConstantValues.h"
 
 static constexpr const float X_DSITANCE_FROM_CAMERA_CENTER_POSITION = 1.0f;
-
-static constexpr const float DESCENT_SPEED = 4.0f;
 
 namespace jh
 {

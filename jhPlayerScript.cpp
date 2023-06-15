@@ -466,40 +466,6 @@ namespace jh
 
 #pragma region STAT
 
-	void PlayerScript::IncreasePlayerSkill(const ePlayerSkill eSkill)
-	{
-		switch (eSkill)
-		{
-		case ePlayerSkill::ELECTRIC_BEAM:
-		{
-			++mSkillStat.ElectricBeamLevel.CurrElectricBeamLevel;
-			break;
-		}
-		case ePlayerSkill::ELECTRIC_STRIKE:
-		{
-			++mSkillStat.ElectricStrikeLevel.CurrElectricStrikeLevel;
-			break;
-		}
-		case ePlayerSkill::ELECTRIC_TORNADO:
-		{
-			++mSkillStat.ElectricTornadoLevel.CurrElectricTornadoLevel;
-			break;
-		}
-		case ePlayerSkill::SWORD_DAMAGE_LEVEL:
-		{
-			++mSkillStat.CurrSwordLevel;
-			break;
-		}
-		case ePlayerSkill::MOVEMENT_SPEED:
-		{
-			++mSkillStat.CurrMovementSpeedLevel;
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
-	}
 	void PlayerScript::IncreaseEXP(const UINT exp)
 	{
 		mStat.CurrEXP += exp;
