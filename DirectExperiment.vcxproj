@@ -212,6 +212,8 @@
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPortalEffectObject.h" />
     <ClInclude Include="jhPortalEffectScript.h" />
+    <ClInclude Include="jhProtectCrystalObject.h" />
+    <ClInclude Include="jhProtectingCrystalScript.h" />
     <ClInclude Include="jhRenderer.h" />
     <ClInclude Include="jhResource.h" />
     <ClInclude Include="jhResourceMaker.h" />
@@ -318,6 +320,8 @@
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPortalEffectObject.cpp" />
     <ClCompile Include="jhPortalEffectScript.cpp" />
+    <ClCompile Include="jhProtectCrystalObject.cpp" />
+    <ClCompile Include="jhProtectingCrystalScript.cpp" />
     <ClCompile Include="jhRenderer.cpp" />
     <ClCompile Include="jhResource.cpp" />
     <ClCompile Include="jhResourceMaker.cpp" />

@@ -49,6 +49,7 @@ namespace jh
 		MONSTER_EFFECT,
 		PARTICLE,
 		LEVEL_UP_UI,
+		PROTECTING_OBJECT,
 		UI,
 		COUNT = 16,
 	};
@@ -60,6 +61,7 @@ namespace jh
 		PLAYER_WEAPON,
 		PLAYER_SKILL,
 		MONSTER_WEAPON,
+		PROTECTING_OBJECT,
 		COUNT
 	};
 

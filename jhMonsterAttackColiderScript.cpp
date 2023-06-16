@@ -6,6 +6,7 @@
 #include "jhPlayer.h"
 #include "jhPlayerScript.h"
 #include "jhMonsterAnimIndexInformation.h"
+#include "jhProtectingCrystalScript.h"
 
 using namespace jh::math;
 static constexpr const float START_COUNTING_TIME = 0.1f;
@@ -174,7 +175,95 @@ namespace jh
 				assert(false);
 				break;
 			}
+			return;
+		}
 
+		if (pOtherCollider->GetColliderLayerType() == eColliderLayerType::PROTECTING_OBJECT)
+		{
+			const UINT CURR_IDX = mpAnimator->GetCurrentAnimationIndex();
+			ProtectingCrystalScript* pCrystalScript = static_cast<ProtectingCrystalScript*>(pOtherCollider->GetOwner()->GetScriptOrNull());
+			assert(pCrystalScript != nullptr);
+
+			switch (meMonsterType)
+			{
+			case eMonsterType::LV_1_CAGED_SHOKER:
+			{
+				if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+				{
+					pCrystalScript->DecreaseHP(CAGED_SHOCKER_ATTACk_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_SWEEPER:
+			{
+				if (CURR_IDX == SWEEPER_ATTACK_VAILED_INDEX)
+				{
+					pCrystalScript->DecreaseHP(SWEEPER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_WARDEN:
+			{
+				if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX)
+				{
+					pCrystalScript->DecreaseHP(WARDEN_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ZOMBIE:
+			{
+				if (CURR_IDX == ZOMBIE_ATTACK_VAILED_INDEX)
+				{
+					pCrystalScript->DecreaseHP(ZOMBIE_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_HEABY_SLICER:
+			{
+				if (CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_2)
+				{
+					pCrystalScript->DecreaseHP(HEABY_SLICER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_LIGHT_SLICER:
+			{
+				if (CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_2 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_3)
+				{
+					pCrystalScript->DecreaseHP(LIGHT_SLICER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_DAGGER:
+			{
+				if (CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_1 || CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_2)
+				{
+					pCrystalScript->DecreaseHP(DAGGER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_ARCHER:
+			{
+				if (CURR_IDX == ARCHER_ATTACK_VAILED_INDEX)
+				{
+					pCrystalScript->DecreaseHP(ARCHER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			case eMonsterType::LV_1_BLASTER:
+			{
+				if (CURR_IDX == BLASTER_ATTACK_VAILED_INDEX)
+				{
+					pCrystalScript->DecreaseHP(BLASTER_ATTACK_DAMAGE);
+				}
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
+
+			return;
 		}
 	}
 

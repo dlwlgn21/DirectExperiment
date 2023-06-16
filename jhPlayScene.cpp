@@ -53,6 +53,9 @@
 #include "jhPlayerLevelUpEffectObject.h"
 #include "jhPlayerLevelUpEffectScript.h"
 
+#include "jhProtectCrystalObject.h"
+#include "jhProtectingCrystalScript.h"
+
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;
@@ -71,6 +74,7 @@ static constexpr const Vector4 GREEN_COLOR(0.0f, 1.0f, 0.0f, 1.0f);
 static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
 static constexpr const Vector4 AMBIENT(0.1f, 0.1f, 0.1f, 1.0f);
 
+static constexpr const float PLAYER_SPAWN_X_POS = -30.0f;
 
 namespace jh
 {
@@ -116,6 +120,7 @@ namespace jh
 #pragma region COLLISION_CHECK
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
+		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PROTECTING_OBJECT, eLayerType::MONSTER);
 #pragma endregion
 
 #pragma region LEVEL_UP_UI
@@ -133,6 +138,13 @@ namespace jh
 		}
 		this->AddGameObject(PlayerLevelManager::GetInstance().GetSkillSelectBox(), eLayerType::LEVEL_UP_UI);
 #pragma endregion
+
+#pragma region PROTECTING_CRYSTAL
+		ProtectingCrystalObject* pCrystal = new ProtectingCrystalObject();
+		static_cast<ProtectingCrystalScript*>(pCrystal->GetScriptOrNull())->SetPlayerScript(pPlayerScript);
+		this->AddGameObject(pCrystal, eLayerType::PROTECTING_OBJECT);
+#pragma endregion
+
 		Scene::Initialize();
 	}
 
@@ -173,7 +185,7 @@ namespace jh
 
 		// Player
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
-		pPlayer->GetTransform()->SetPosition(Vector3(0.0f, -2.0f, PLAYER_Z_VALUE));
+		pPlayer->GetTransform()->SetPosition(Vector3(PLAYER_SPAWN_X_POS, -2.0f, PLAYER_Z_VALUE));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);

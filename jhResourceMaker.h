@@ -157,7 +157,9 @@ namespace jh
 		static const std::wstring BG_SMALL_LIGHTNING_TEXTURE_KEY;
 		static const std::wstring BG_SMALL_LIGHTNING_NORMAL_MAP_TEXTURE_KEY;
 #pragma endregion
-
+#pragma region PROTECT_CRYSTAL
+		static const std::wstring PROTECT_CRYSTAL_TEXTURE_KEY;
+#pragma endregion
 #pragma region OTHER
 		static const std::wstring BG_MOON_ATLAS_TEXTURE_KEY;
 		static const std::wstring BG_MOON_NORMAL_MAP_TEXTURE_KEY;
@@ -272,14 +274,15 @@ namespace jh
 		static const std::wstring BG_PARALLAX_MATERIAL_6_KEY;
 #pragma endregion
 
-
+#pragma region PROTECT_CRYSTAL
+		static const std::wstring PROTECT_CRYSTAL_MATERIAL_KEY;
+#pragma endregion
 
 #pragma region OTHER
 		static const std::wstring BRIK_MATERIAL_KEY;
 		static const std::wstring BRIK_NOT_NORMAL_MATERIAL_KEY;
 		static const std::wstring DEBUG_MATERIAL_KEY;
 #pragma endregion
-
 
 #pragma endregion
 

@@ -5,6 +5,16 @@
 
 namespace jh
 {
+	enum eStagePhase
+	{
+		FIRST_ZOMBIE_WARDEN_STAGE,
+		SECOND_BLASTER_DAGGER_STAGE,
+		THIRD_ARCHER_SHOKER_STAGE,
+		FORTH_LIGHT_HEABY_SLICER_STAGE,
+		FIFTH_BOSS_STAGE,
+		COUNT
+	};
+
 	class PlayScene;
 	class PlayerScript;
 	class MonsterScript;
@@ -83,5 +93,6 @@ namespace jh
 		float								mAcientBossRespawnTimer;
 		std::vector<PortalEffectObject*>	mPortalEffectObjects;
 		jh::math::Vector3					mPlayerPos;
+		eStagePhase							meStagePhase;
 	};
 }

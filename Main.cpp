@@ -55,7 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             app.Run();
-            //jh::Editor::GetInstance().Run();
+            jh::Editor::GetInstance().Run();
             app.Present();
         }
     }

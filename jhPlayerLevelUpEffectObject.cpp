@@ -7,6 +7,8 @@
 #include "jhPlayerScript.h"
 #include "jhPlayerLevelUpEffectScript.h"
 #include "jhLayerZValue.h"
+
+
 using namespace jh::math;
 
 namespace jh
@@ -31,7 +33,7 @@ namespace jh
 		const float WIDTH = 48.0f;
 		const float HEIGHT = 48.0f;
 		const float BASIC_DURATION = 0.1f;
-		const float MAG = 150.0f;
+		const float MAG = 100.0f;
 		const Vector2 ANIM_SIZE(WIDTH, HEIGHT);
 		const Vector2 OFFSET(Vector2::Zero);
 		OnceAnimator* pAnimator = new OnceAnimator();

@@ -21,7 +21,7 @@ namespace jh
 		__forceinline void SetOnlyXPosition(const float xPos)						{ mPosition.x = xPos; }
 		__forceinline void SetOnlyYPosition(const float yPos)						{ mPosition.y = yPos; }
 		__forceinline void SetOnlyYZPosition(const float yPos, const float zPos)	{ mPosition.y = yPos;  mPosition.z = zPos; }
-		
+		__forceinline void SetOnlyZPosition(const float zPos)						{ mPosition.z = zPos; }
 		
 		__forceinline void SetOnlyXYPosition(const float xPos, const float yPos)	{ mPosition.x = xPos; mPosition.y = yPos; }
 		__forceinline void SetOnlyXYPosition(const jh::math::Vector2 pos)	{ mPosition.x = pos.x; mPosition.y = pos.y; }
@@ -32,6 +32,7 @@ namespace jh
 		__forceinline void SetOnlyXYScale(const float xAndyScale)					{ mScale.x = xAndyScale; mScale.y = xAndyScale; }
 		__forceinline void SetOnlyXYScale(const jh::math::Vector2 xyScale)			{ mScale.x = xyScale.x; mScale.y = xyScale.y; }
 		__forceinline void SetScale(const jh::math::Vector3 scale)					{ mScale = scale; }
+		
 		void SetParent(GameObject* pGameObject) { assert(pGameObject != nullptr); mpParent = pGameObject->GetTransform(); }
 
 		__forceinline jh::math::Vector3 GetPosition() const			{ return mPosition; }

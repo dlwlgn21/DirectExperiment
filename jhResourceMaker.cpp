@@ -138,7 +138,9 @@ namespace jh
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_TEXTURE_KEY = L"GreenPortalNormalTexture";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_LEVEL_UP_TEXTURE_KEY = L"LevelUpTexture";
 #pragma endregion
-
+#pragma region PROTECT_CRYSTAL
+	const std::wstring ResourceMaker::PROTECT_CRYSTAL_TEXTURE_KEY = L"ProtectCryTexture";
+#pragma endregion
 
 #pragma region OTHER
 	const std::wstring ResourceMaker::BRIK_DIFFUSE_TEXTURE_KEY = L"BrickTexture";
@@ -247,6 +249,10 @@ namespace jh
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_MATERIAL_KEY = L"GreenPortalMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_GREEN_PORTAL_NORMAL_MAP_MATERIAL_KEY = L"GreenPortalNormalMaterialKey";
 	const std::wstring ResourceMaker::EFFECT_PLAYER_LEVEL_UP_MATERIAL_KEY = L"LevelUpMaterialKey";
+#pragma endregion
+
+#pragma region PROTECT_CRYSTAL
+	const std::wstring ResourceMaker::PROTECT_CRYSTAL_MATERIAL_KEY = L"ProtectCryMaterial";
 #pragma endregion
 
 #pragma region OTHER
@@ -614,6 +620,10 @@ namespace jh
 		loadAndInsertTexture(UI_TEXTURE_LEVEL_UP_BORDER_KEY, L"UI_Level_UP_Border_256x256.png");
 #pragma endregion
 
+#pragma region PROTECT_CRYSTAL
+		loadAndInsertTexture(PROTECT_CRYSTAL_TEXTURE_KEY, L"PROTECT_Object_64x64.png");
+#pragma endregion
+
 #pragma region OTHER
 		loadAndInsertTexture(BRIK_DIFFUSE_TEXTURE_KEY, L"brickwall.jpg");
 		loadAndInsertTexture(BRIK_NORMAL_MAP_TEXTURE_KEY, L"brickwall_normal.jpg");
@@ -730,6 +740,10 @@ namespace jh
 #pragma region DEBUG
 		Material* pDebugMaterial = new Material(ResourcesManager::Find<Shader>(DEBUG_SHADER_KEY), nullptr);
 		ResourcesManager::Insert<Material>(DEBUG_MATERIAL_KEY, pDebugMaterial);
+#pragma endregion
+
+#pragma region PROTECT_CRYSTAL
+		insertMaterial(PROTECT_CRYSTAL_MATERIAL_KEY, SPRITE_SHADER_KEY, PROTECT_CRYSTAL_TEXTURE_KEY);
 #pragma endregion
 
 #pragma region OTHER

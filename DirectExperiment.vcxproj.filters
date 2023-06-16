@@ -403,6 +403,12 @@
     <Filter Include="Component\Script\Effect\PlayerLevelUp">
       <UniqueIdentifier>{d0dc7322-70fc-4a4f-bbf3-48d2cf35325c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\AnimatedGameObject\BG\Crystal">
+      <UniqueIdentifier>{322a80af-a482-48b6-9c0e-df4384728c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\ProtectingCrystal">
+      <UniqueIdentifier>{df1ecff1-a3c3-4597-8083-6859c825be41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -747,6 +753,12 @@
     <ClInclude Include="jhPlayerLevelUpEffectScript.h">
       <Filter>Component\Script\Effect\PlayerLevelUp</Filter>
     </ClInclude>
+    <ClInclude Include="jhProtectCrystalObject.h">
+      <Filter>GameObject\AnimatedGameObject\BG\Crystal</Filter>
+    </ClInclude>
+    <ClInclude Include="jhProtectingCrystalScript.h">
+      <Filter>Component\Script\ProtectingCrystal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1060,6 +1072,12 @@
     </ClCompile>
     <ClCompile Include="jhPlayerLevelUpEffectScript.cpp">
       <Filter>Component\Script\Effect\PlayerLevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="jhProtectCrystalObject.cpp">
+      <Filter>GameObject\AnimatedGameObject\BG\Crystal</Filter>
+    </ClCompile>
+    <ClCompile Include="jhProtectingCrystalScript.cpp">
+      <Filter>Component\Script\ProtectingCrystal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
