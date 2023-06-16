@@ -5,7 +5,7 @@
 
 namespace jh
 {
-	enum eStagePhase
+	enum class eStagePhase
 	{
 		FIRST_ZOMBIE_WARDEN_STAGE,
 		SECOND_BLASTER_DAGGER_STAGE,
@@ -31,6 +31,7 @@ namespace jh
 		
 		void Initialize(PlayerScript* pPlayerScript);
 		void Update();
+		const eStagePhase GetStagePhase() const { return meStagePhase; }
 
 	private:
 		MonsterSpawner()
@@ -43,10 +44,12 @@ namespace jh
 			, mDaggerRespawnTimer(DAGGER_RESPAWN_TIME)
 			, mArcherRespawnTimer(ARCHER_RESPAWN_TIME)
 			, mBlasterRespawnTimer(BLASTER_RESPAWN_TIME)
-			, mAcientBossRespawnTimer(ACIENT_BOSS_RESPAWN_TIME)
 			, mpScene(nullptr)
 			, mpPlayerScript(nullptr)
 			, mPlayerPos(jh::math::Vector3::Zero)
+			, mTotalTimeTimer(0.0f)
+			, meStagePhase(eStagePhase::FIRST_ZOMBIE_WARDEN_STAGE)
+			, mbIsSpawnAcientBoss(false)
 		{
 			mPortalEffectObjects.reserve(static_cast<UINT>(eMonsterType::COUNT));
 			mPortalEffectObjects.resize(static_cast<UINT>(eMonsterType::COUNT));
@@ -77,6 +80,7 @@ namespace jh
 		void playPortalEffectAnimation(const eMonsterType eMonType, const MonsterScript* pMonsterScript);
 		void spawnMonster(const eMonsterType eMonType);
 		void addMonsterAtScene(const eMonsterType eMonType, const jh::math::Vector3& spawnPos);
+		void changeStagePhase(const eStagePhase ePhase) { meStagePhase = ePhase; }
 
 	private:
 		PlayScene*							mpScene;
@@ -90,9 +94,10 @@ namespace jh
 		float								mDaggerRespawnTimer;
 		float								mArcherRespawnTimer;
 		float								mBlasterRespawnTimer;
-		float								mAcientBossRespawnTimer;
 		std::vector<PortalEffectObject*>	mPortalEffectObjects;
 		jh::math::Vector3					mPlayerPos;
 		eStagePhase							meStagePhase;
+		float								mTotalTimeTimer;
+		bool								mbIsSpawnAcientBoss;
 	};
 }

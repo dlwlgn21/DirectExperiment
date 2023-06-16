@@ -17,7 +17,7 @@ static constexpr const UINT  ELECTRIC_TORNADO_ANIMATION_DAMGAE_VAILED_INDEX = 3;
 static constexpr const UINT  ELECTRIC_TORNADO_DAMAGE = 0;
 static constexpr const float ELECTRIC_TORNADO_COOL_TIME = 2.0f;
 static constexpr const float ELECTRIC_TORNADO_SPEED = 3.0f;
-static constexpr const float ELECTRIC_TORNADO_PUSH_DISTANCE = 1.0f;
+static constexpr const float ELECTRIC_TORNADO_PUSH_DISTANCE = 3.0f;
 
 namespace jh
 {
@@ -39,7 +39,6 @@ namespace jh
 	void PlayerSkillElectricTornadoScript::Update()
 	{
 		mePlayerLookDirection = mpPlayerScript->GetPlayerLookDirection();
-
 		switch (meState)
 		{
 		case eSKillState::WAIT:

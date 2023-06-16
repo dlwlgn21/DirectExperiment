@@ -74,7 +74,7 @@ static constexpr const Vector4 GREEN_COLOR(0.0f, 1.0f, 0.0f, 1.0f);
 static constexpr const Vector4 BLUE_COLOR(0.0f, 0.0f, 1.0f, 1.0f);
 static constexpr const Vector4 AMBIENT(0.1f, 0.1f, 0.1f, 1.0f);
 
-static constexpr const float PLAYER_SPAWN_X_POS = -30.0f;
+static constexpr const float PLAYER_SPAWN_X_POS = 0.0f;
 
 namespace jh
 {
@@ -150,7 +150,10 @@ namespace jh
 
 	void PlayScene::Update()
 	{
-		MonsterSpawner::GetInstance().Update();
+		if (!PlayerLevelManager::GetInstance().IsProcessingLevelUp()) 
+		{
+			MonsterSpawner::GetInstance().Update();
+		}
 		Scene::Update();
 	}
 

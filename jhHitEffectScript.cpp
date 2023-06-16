@@ -108,16 +108,15 @@ namespace jh
 		eObjectLookDirection eLookDir = eObjectLookDirection::LEFT;
 		switch (meType)
 		{
-		case MONSTER:
+		case eHitObjectType::MONSTER:
 		{
 			eLookDir = static_cast<MonsterScript*>(mpFollwingScript)->GetMonsterLookDirection();
 			break;
 		}
-		case PLAYER:
-			break;
-		case COUNT:
+		case eHitObjectType::PLAYER:
 			break;
 		default:
+			assert(false);
 			break;
 		}
 

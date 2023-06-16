@@ -9,7 +9,7 @@ using namespace jh::math;
 static constexpr const float PI = 3.14592f;
 
 static constexpr const float CRYSTAL_SPEED = 1.0f;
-static constexpr const int	CRYSTAL_MAX_HP = 5;
+static constexpr const int	CRYSTAL_MAX_HP = 20;
 static constexpr const float INVINCIVILTY_TIME = 2.0f;
 static constexpr const float STATE_CHANGE_Y_POSITON = -1.0f;
 static constexpr const float X_DISTANCE_FROM_PLAYER = 2.0f;
@@ -52,7 +52,6 @@ namespace jh
 				return;
 			}
 			currYPos -= mSpeed * Time::DeltaTime();
-			//currXPos -= mSpeed * Time::DeltaTime();
 			setFinalPosision(movingXPos, currYPos);
 			break;
 		}
@@ -100,7 +99,6 @@ namespace jh
 		SetState(eCrystalState::HITTED);
 		if (mCurrHp <= 0)
 		{
-			int a = 0;
 			SetState(eCrystalState::DEAD);
 		}
 	}

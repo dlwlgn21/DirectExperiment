@@ -8,22 +8,33 @@
 #include "jhMonsterScript.h"
 #include "jhLayerZValue.h"
 #include "jhPlayerScript.h"
+#include "jhMonsterManager.h"
 
 using namespace jh::math;
 
 namespace jh
 {
-	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 2.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 5.0f;
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
+	// PHASE_1
+	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 7.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 3.0f;
+	
+	// PHASE_2
+	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 10.0f;
+	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 10.0f;
+	
+	// PHASE_3
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 10.0f;
-	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 12.0f;
-	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 15.0f;
-	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 16.0f;
-	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 20.0f;
-	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 22.0f;
-	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 100.0f;
+	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 5.0f;
 
+	// PHASE_4
+	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 12.0f;
+
+	// BOSS
+	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 100.0f;
+	
+	// OTHER
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
@@ -35,6 +46,11 @@ namespace jh
 	static constexpr const float ARCHER_Y_POS = -2.3f;
 	static constexpr const float BLASTER_Y_POS = -2.0f;
 	static constexpr const float ACIENT_BOSS_Y_POS = -0.3f;
+
+	static constexpr const float PHASE_1_END_TIME = 30.0f;
+	static constexpr const float PHASE_2_END_TIME = PHASE_1_END_TIME * 2;
+	static constexpr const float PHASE_3_END_TIME = PHASE_1_END_TIME * 3;
+	static constexpr const float PHASE_4_END_TIME = PHASE_1_END_TIME * 4;
 
 	void MonsterSpawner::Initialize(PlayerScript* pPlayerScript)
 	{
@@ -54,46 +70,86 @@ namespace jh
 	void MonsterSpawner::Update()
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
+		mTotalTimeTimer += Time::DeltaTime();
+		switch (meStagePhase)
+		{
+		case eStagePhase::FIRST_ZOMBIE_WARDEN_STAGE:
+		{
+			if (mTotalTimeTimer > PHASE_1_END_TIME)
+			{
+				changeStagePhase(eStagePhase::SECOND_BLASTER_DAGGER_STAGE);
+			}
 
-		mCagedShokerRespawnTimer -= Time::DeltaTime();
-		if (mCagedShokerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+			mZombieRespawnTimer -= Time::DeltaTime();
+			if (mZombieRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+			mWardenRespawnTimer -= Time::DeltaTime();
+			if (mWardenRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_WARDEN);}
+			return;
+		}
+		case eStagePhase::SECOND_BLASTER_DAGGER_STAGE:
+		{
+			if (mTotalTimeTimer > PHASE_2_END_TIME)
+			{
+				changeStagePhase(eStagePhase::THIRD_ARCHER_SHOKER_STAGE);
+			}
+			mBlasterRespawnTimer -= Time::DeltaTime();
+			if (mBlasterRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_BLASTER);}
+			mDaggerRespawnTimer -= Time::DeltaTime();
+			if (mDaggerRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_DAGGER);}
+			break;
+		}
+		case eStagePhase::THIRD_ARCHER_SHOKER_STAGE:
+		{
+			if (mTotalTimeTimer > PHASE_3_END_TIME)
+			{
+				changeStagePhase(eStagePhase::FORTH_LIGHT_HEABY_SLICER_STAGE);
+			}
+			mArcherRespawnTimer -= Time::DeltaTime();
+			if (mArcherRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_ARCHER);}
+			mCagedShokerRespawnTimer -= Time::DeltaTime();
+			if (mCagedShokerRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_CAGED_SHOKER);}
+			return;
+		}
+		case eStagePhase::FORTH_LIGHT_HEABY_SLICER_STAGE:
+		{
+			if (mTotalTimeTimer > PHASE_4_END_TIME)
+			{
+				changeStagePhase(eStagePhase::FIFTH_BOSS_STAGE);
+			}
 
-		mSweeperRespawnTimer -= Time::DeltaTime();
-		if (mSweeperRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_SWEEPER);}
+			mHeabySlicerRespawnTimer -= Time::DeltaTime();
+			if (mHeabySlicerRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
 
-		mWardenRespawnTimer -= Time::DeltaTime();
-		if (mWardenRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_WARDEN);}
+			mLightSlicerRespawnTimer -= Time::DeltaTime();
+			if (mLightSlicerRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
 
-		mZombieRespawnTimer -= Time::DeltaTime();
-		if (mZombieRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
-
-		mHeabySlicerRespawnTimer -= Time::DeltaTime();
-		if (mHeabySlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_HEABY_SLICER);}
-
-		mLightSlicerRespawnTimer -= Time::DeltaTime();
-		if (mLightSlicerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_LIGHT_SLICER);}
-
-		mDaggerRespawnTimer -= Time::DeltaTime();
-		if (mDaggerRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_DAGGER);}
-
-		mArcherRespawnTimer -= Time::DeltaTime();
-		if (mArcherRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ARCHER);}
-
-		mBlasterRespawnTimer -= Time::DeltaTime();
-		if (mBlasterRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_BLASTER);}
-
-		mAcientBossRespawnTimer -= Time::DeltaTime();
-		if (mAcientBossRespawnTimer <= 0.0f)
-			{spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);}
+			break;
+		}
+		case eStagePhase::FIFTH_BOSS_STAGE:
+		{
+			if (mbIsSpawnAcientBoss)
+			{
+				return;
+			}
+			spawnMonster(eMonsterType::LV_1_ACIENT_BOSS);
+			mbIsSpawnAcientBoss = true;
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+		//mSweeperRespawnTimer -= Time::DeltaTime();
+		//if (mSweeperRespawnTimer <= 0.0f)
+		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -125,7 +181,8 @@ namespace jh
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
-			MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_Y_POS, MONSTER_Z_VALUE));
+			//MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_Y_POS, MONSTER_Z_VALUE));
+			MonsterPackage monPack = MonsterManager::GetInstance().MakeMonster(eMonType, mpPlayerScript, Vector3(spawnXPos, ZOMBIE_Y_POS, MONSTER_Z_VALUE));
 			mpScene->AddMonster(monPack);
 			resetTimer(eMonType);
 			break;
@@ -179,7 +236,8 @@ namespace jh
 
 	void MonsterSpawner::addMonsterAtScene(const eMonsterType eMonType, const jh::math::Vector3& spawnPos)
 	{
-		MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
+		//MonsterPackage monPack = MonsterObjectPool::GetInstance().Get(eMonType, mpPlayerScript, spawnPos);
+		MonsterPackage monPack = MonsterManager::GetInstance().MakeMonster(eMonType, mpPlayerScript, spawnPos);
 		mpScene->AddMonster(monPack);
 		setPortalEffectPosition(eMonType, spawnPos);
 		playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
@@ -193,62 +251,62 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			//mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
-			mCagedShokerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
+			//mCagedShokerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			//mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
-			mSweeperRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
+			//mSweeperRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
-			//mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
-			mWardenRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
+			//mWardenRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
-			//mZombieRespawnTimer = ZOMBIE_RESPAWN_TIME;
-			mZombieRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mZombieRespawnTimer = ZOMBIE_RESPAWN_TIME;
+			//mZombieRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
-			//mHeabySlicerRespawnTimer = HEABY_SLICER_RESPAWN_TIME;
-			mHeabySlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mHeabySlicerRespawnTimer = HEABY_SLICER_RESPAWN_TIME;
+			//mHeabySlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
-			//mLightSlicerRespawnTimer = LIGHT_SLICER_RESPAWN_TIME;
-			mLightSlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mLightSlicerRespawnTimer = LIGHT_SLICER_RESPAWN_TIME;
+			//mLightSlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_DAGGER:
 		{
-			//mDaggerRespawnTimer = DAGGER_RESPAWN_TIME;
-			mDaggerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mDaggerRespawnTimer = DAGGER_RESPAWN_TIME;
+			//mDaggerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ARCHER:
 		{
-			//mArcherRespawnTimer = ARCHER_RESPAWN_TIME;
-			mArcherRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mArcherRespawnTimer = ARCHER_RESPAWN_TIME;
+			//mArcherRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_BLASTER:
 		{
-			//mBlasterRespawnTimer = BLASTER_RESPAWN_TIME;
-			mBlasterRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			mBlasterRespawnTimer = BLASTER_RESPAWN_TIME;
+			//mBlasterRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ACIENT_BOSS:
 		{
 			//mAcientBossRespawnTimer = ACIENT_BOSS_RESPAWN_TIME;
-			mAcientBossRespawnTimer = WAIT_TIME_FOR_DEBUGING;
+			//mAcientBossRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		default:

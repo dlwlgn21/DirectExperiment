@@ -14,10 +14,11 @@
 #include "jhPlayerSkillElectricStrikeScript.h"
 #include "jhPlayerSkillElectricTornadoScript.h"
 #include "jhLayerZValue.h"
+#include "jhMonsterSpawner.h"
 
 using namespace jh::math;
 
-static constexpr const float ELECTRIC_BEAM_XY_SCALE_VALUE = 12.0f;
+static constexpr const float ELECTRIC_BEAM_XY_SCALE_VALUE = 15.0f;
 static constexpr const float ELECTRIC_BEAM_Y_POS_DISTANCE_FROM_PLAYER = 0.5f;
 static constexpr const float ELECTRIC_STRIKE_XY_SCALE_VALUE = 20.0f;
 static constexpr const float ELECTRIC_TORNADO_XY_SCALE_VALUE = 12.0f;
@@ -36,6 +37,15 @@ namespace jh
 		setScript(pPlayerScript);
 		setTransform(pPlayerScript);
 		setCollider2D();
+	}
+
+	void PlayerSkillObject::Update()
+	{
+		if (MonsterSpawner::GetInstance().GetStagePhase() == eStagePhase::FIFTH_BOSS_STAGE)
+		{
+			return;
+		}
+		AnimatedGameObject::Update();
 	}
 
 	Animator* PlayerSkillObject::setAnimator(const std::wstring& textureKey, SkillAnimationInfo& animInfo)

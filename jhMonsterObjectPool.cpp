@@ -13,7 +13,7 @@ namespace jh
 			return MonsterManager::GetInstance().MakeMonster(eMonType, pPlayerScript, pos);
 		}
 		MonsterPackage retPack = mMonsterVectorQ[static_cast<UINT>(eMonType)]->front();
-		//retPack.pMonster->SetActive();
+		retPack.pMonster->SetActive();
 		mMonsterVectorQ[static_cast<UINT>(eMonType)]->pop();
 		return retPack;
 	}

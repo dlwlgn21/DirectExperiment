@@ -33,6 +33,7 @@ namespace jh
 		PlayerSkillObject(const ePlayerSkillType eSkillType, PlayerScript* pPlayerScript, const std::wstring& textureKey, const std::wstring& materialKey, SkillAnimationInfo& animInfo);
 		virtual ~PlayerSkillObject() = default;
 
+		void Update() override;
 	private:
 		Animator* setAnimator(const std::wstring& textureKey, SkillAnimationInfo& animInfo);
 		void setRenderer(const std::wstring& materialKey);

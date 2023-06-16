@@ -5,7 +5,7 @@
 
 namespace jh
 {
-	enum eHitObjectType
+	enum class eHitObjectType
 	{
 		MONSTER,
 		PLAYER,

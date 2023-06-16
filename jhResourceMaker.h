@@ -177,19 +177,30 @@ namespace jh
 #pragma region MONSTER_MATERIAL
 		static const std::wstring MONSTER_CAGED_SHOKER_MATERIAL_KEY;
 		static const std::wstring MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_SWEEPER_MATERIAL_KEY;
 		static const std::wstring MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_WARDEN_MATERIAL_KEY;
 		static const std::wstring MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_ZOMBIE_MATERIAL_KEY;
 		static const std::wstring MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY;
+		static const std::wstring MONSTER_HEABY_SLICER_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_LIGHT_SLICER_MATERIAL_KEY;
 		static const std::wstring MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY;
+
+		static const std::wstring MONSTER_DAGGER_MATERIAL_KEY;
 		static const std::wstring MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_ARCHER_MATERIAL_KEY;
 		static const std::wstring MONSTER_ARCHER_NORMAL_MAP_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_BLASTER_MATERIAL_KEY;
+
 		static const std::wstring MONSTER_ACIENT_BOSS_MATERIAL_KEY;
 #pragma endregion
 

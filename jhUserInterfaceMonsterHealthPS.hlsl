@@ -1,11 +1,11 @@
 #include "globals.hlsli"
 
-//struct MonsterUI
-//{
-//    float4 MonsterHPRatio;
-//};
+struct MonsterUI
+{
+    float4 MonsterHPRatio;
+};
 
-//StructuredBuffer<MonsterUI> MonsterUIStructuredBuffer : register(t14);
+StructuredBuffer<MonsterUI> MonsterUIStructuredBuffer : register(t14);
 
 float4 main(VertexOut vIn) : SV_TARGET
 {

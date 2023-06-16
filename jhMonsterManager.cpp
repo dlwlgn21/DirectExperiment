@@ -473,8 +473,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_HEABY_SLICER_MATERIAL_KEY),
 				pHeabySlicerAnimator,
 				pPlayerScript,
 				eType
@@ -543,8 +543,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_MATERIAL_KEY),
 				pLightSlicerAnimator,
 				pPlayerScript,
 				eType
@@ -613,8 +613,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_MATERIAL_KEY),
 				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
 				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_DAGGER_NORMAL_MAP_MATERIAL_KEY),
 				pDaggerAnimator,
@@ -808,8 +808,6 @@ namespace jh
 		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 1), MAX_SPRITE_COUNT);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MOVING_ANIM_KEY, animInfo);
 
-
-
 		modifyAnimationInfoForNewAnimation(animInfo, Vector2(0.0f, ACIENT_BOSS_HEIGHT * 2), MAX_SPRITE_COUNT);
 		createAnimation(pBossAnimator, AcientBossMonsterScript::ACIENT_BOSS_MELLE_ATTACK_ANIM_KEY, animInfo);
 
@@ -841,7 +839,6 @@ namespace jh
 		{
 			info.pMonsterAttackColiderObject[i] = new AcientBossMonsterAttackColiderObject(static_cast<eBossMonsterColliderType>(i));
 		}
-
 
 		Monster* pMonster = new BossMonster(info);
 		info.pHitEffectObject = new HitEffectObject(eHitEffectType::ELECTRIC, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()), info.pPlayerScript);
