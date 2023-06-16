@@ -118,9 +118,10 @@ namespace jh
 #pragma endregion
 
 #pragma region COLLISION_CHECK
+		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER_ATTACK_COLLIDER);
+		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PROTECTING_OBJECT, eLayerType::MONSTER_ATTACK_COLLIDER);
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER, eLayerType::MONSTER);
 		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PLAYER_SKILL, eLayerType::MONSTER);
-		CollisionManager::GetInstance().SetCollisionLayerCheck(eLayerType::PROTECTING_OBJECT, eLayerType::MONSTER);
 #pragma endregion
 
 #pragma region LEVEL_UP_UI
@@ -231,16 +232,16 @@ namespace jh
 		const Vector3 PARALLAX_BG_SCLAE_VECTOR(PARALLAX_ASPECT_RATIO * PARALLAX_MAG, PARALLAX_MAG, 1.0f);
 
 		{
-			BGForegroundObject* pBGObject = Instantiate<BGForegroundObject>(eLayerType::BACKGROUND);
-			pBGObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
-			pBGObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, BG_FOREGROUND_Z_VALUE));
+			BGForegroundObject* pForeGroundObject = Instantiate<BGForegroundObject>(eLayerType::BACKGROUND);
+			pForeGroundObject->GetTransform()->SetScale(FORE_GROUND_SCLAE_VECTOR);
+			pForeGroundObject->GetTransform()->SetPosition(Vector3(0.0f, -4.75f, BG_FOREGROUND_Z_VALUE));
 		}
 
 		{
-			//ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
-			//pParallaxOne->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY);
-			//pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
-			//pParallaxOne->GetTransform()->SetOnlyXYPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
+			ParallaxObject* pParallaxOne = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_1_DEPTH);
+			pParallaxOne->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_1_KEY);
+			pParallaxOne->GetTransform()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
+			pParallaxOne->GetTransform()->SetPosition(Vector3(0.0f, 0.0f, PARALLAX_1_DEPTH));
 
 			ParallaxObject* pParallaxTwo = Instantiate<ParallaxObject>(eLayerType::BACKGROUND, PARALLAX_2_DEPTH);
 			pParallaxTwo->SetRenderer(ResourceMaker::BG_PARALLAX_MATERIAL_2_KEY);
@@ -398,9 +399,9 @@ namespace jh
 		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIHpBarObject != nullptr && monPack.pUIBorderBarObject != nullptr);
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
-		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER);
-		this->AddGameObject(monPack.pUIBorderBarObject, eLayerType::MONSTER);
+		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER_ATTACK_COLLIDER);
+		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER_UI);
+		this->AddGameObject(monPack.pUIBorderBarObject, eLayerType::MONSTER_UI);
 	}
 
 	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)
@@ -412,9 +413,10 @@ namespace jh
 		}
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
+		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER_UI);
 		for (UINT i = 0; i < static_cast<UINT>(eBossMonsterColliderType::COUNT); ++i)
 		{
-			this->AddGameObject(monPack.pColliderObject[i], eLayerType::MONSTER);
+			this->AddGameObject(monPack.pColliderObject[i], eLayerType::MONSTER_ATTACK_COLLIDER);
 		}
 	}
 

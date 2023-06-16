@@ -47,6 +47,7 @@ namespace jh
 		Monster* pMonster;
 		HitEffectObject* pHitEffectObejct;
 		AcientBossMonsterAttackColiderObject* pColliderObject[4];
+		UIBarObject* pUIHpBarObject;
 	};
 
 	struct AnimationInfo

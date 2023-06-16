@@ -180,10 +180,10 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY),
-				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_CAGED_SHOKER_MATERIAL_KEY),
 				pCagedShokerAnimator,
 				pPlayerScript,
 				eType
@@ -328,10 +328,10 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY),
-				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_WARDEN_MATERIAL_KEY),
 				pWardenAnimator,
 				pPlayerScript,
 				eType
@@ -856,8 +856,12 @@ namespace jh
 			retPackage.pColliderObject[i]->GetTransform()->SetPosition(Vector3(position.x, position.y + i, COLLIDER_Z_VALUE));
 		}
 
+		UIBarObject* pUIObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		retPackage.pUIHpBarObject = pUIObject;
+		static_cast<BossMonster*>(retPackage.pMonster)->SetBossUIHpBarObject(pUIObject);
 		setTransform(retPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);
 
+		retPackage.pUIHpBarObject->Initialize();
 		retPackage.pMonster->Initialize();
 		retPackage.pHitEffectObejct->Initialize();
 

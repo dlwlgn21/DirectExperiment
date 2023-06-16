@@ -57,12 +57,11 @@ namespace jh
 	}
 
 	UIBarObject::UIBarObject(MonsterScript* pMonsterScript)
-		: GameObject(eLayerType::UI)
+		: GameObject(eLayerType::MONSTER_UI)
 		, meType(eUIBarType::MONSTER_HP_BAR)
 	{
 		assert(pMonsterScript != nullptr);
 		setMonsterUI(pMonsterScript);
-
 	}
 
 	UIBarObject::UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript)
@@ -131,8 +130,11 @@ namespace jh
 	{
 		assert(pMonsterScript != nullptr);
 		setRenderer();
+		if (pMonsterScript->GetMonsterType() == eMonsterType::LV_1_ACIENT_BOSS)
+		{
+			GetTransform()->SetOnlyXScale(3.0f);
+		}
 		//GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE + 4.0f, BAR_Z_VALUE));
-		//GetTransform()->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
 		this->AddScript(pScript);
 		pScript->SetMounsterUIType(meType);

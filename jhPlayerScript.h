@@ -6,7 +6,7 @@
 
 static constexpr const int		INITIAL_HP = 10;
 static constexpr const int		INITIAL_STAMINA = 5;
-static constexpr const int		INITIAL_ATTACK_DAMAGE = 3;
+static constexpr const int		INITIAL_ATTACK_DAMAGE = 2;
 
 static constexpr const int		ATTACK_STAMINA_COST = 1;
 static constexpr const int		DASH_STAMINA_COST = 1;

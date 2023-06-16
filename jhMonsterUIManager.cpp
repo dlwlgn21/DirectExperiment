@@ -14,6 +14,10 @@ namespace jh
 	}
 	void MonsterUIManager::WriteMonsterUIDataAtBuffer()
 	{
+		if (mMonsterUIAttributes.size() == 0)
+		{
+			return;
+		}
 		assert(mspMonsterUIStructuredBuffer != nullptr);
 		mspMonsterUIStructuredBuffer->WirteDataAtBuffer(mMonsterUIAttributes.data(), static_cast<UINT>(mMonsterUIAttributes.size()));
 		MonsterUIBuffer buffer;
@@ -23,6 +27,10 @@ namespace jh
 	}
 	void MonsterUIManager::SetPipeline()
 	{
+		if (mMonsterUIAttributes.size() == 0)
+		{
+			return;
+		}
 		mspMonsterUIStructuredBuffer->SetPipeline();
 		mspMonsterUIConstantBuffer->SetPipeline();
 	}

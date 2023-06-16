@@ -65,6 +65,7 @@ namespace jh
 			mpScene->AddGameObject(static_cast<GameObject*>(mPortalEffectObjects[i]), eLayerType::EFFECT);
 			mPortalEffectObjects[i]->Initialize();
 		}
+		mPortalEffectObjects[static_cast<UINT>(eMonsterType::LV_1_ACIENT_BOSS)]->GetTransform()->SetScale(Vector3(12.0f, 12.0f, 1.0f));
 	}
 
 	void MonsterSpawner::Update()
@@ -222,6 +223,8 @@ namespace jh
 		{
 			Vector3 spawnPos(spawnXPos, ACIENT_BOSS_Y_POS, MONSTER_Z_VALUE);
 			AcientBossMonsterPackage monPack = MonsterManager::GetInstance().MakeAcientBossMonster(mpPlayerScript, spawnPos);
+			setPortalEffectPosition(eMonType, spawnPos);
+			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			mpScene->AddBossMonster(monPack);
 			//setPortalEffectPosition(eMonType, spawnPos);
 			//playPortalEffectAnimation(eMonType, static_cast<AcientBossMonsterScript*>(monPack.pMonster->GetScriptOrNull()));

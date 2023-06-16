@@ -2,7 +2,7 @@
 #include "jhTransform.h"
 #include "jhTime.h"
 
-static constexpr const float DESCENT_SPEED = 4.0f;
+static constexpr const float DESCENT_SPEED = 8.0f;
 
 namespace jh
 {

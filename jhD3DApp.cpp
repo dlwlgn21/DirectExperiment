@@ -27,7 +27,7 @@ namespace jh
 		PlayerLevelManager::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
 		LightingManager::GetInstance().Initialize();
-		//MonsterUIManager::GetInstance().Initialize();
+		MonsterUIManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
@@ -84,8 +84,8 @@ namespace jh
 		Time::Render(mHDC);
 		graphics::GraphicDeviceDX11::GetInstance().ClearRenderTargetAndDepthStencilView();
 		
-		//MonsterUIManager::GetInstance().WriteMonsterUIDataAtBuffer();
-		//MonsterUIManager::GetInstance().SetPipeline();
+		MonsterUIManager::GetInstance().WriteMonsterUIDataAtBuffer();
+		MonsterUIManager::GetInstance().SetPipeline();
 
 		LightingManager::GetInstance().WriteLightDataAtBuffer();
 		LightingManager::GetInstance().SetPipeline();
@@ -93,7 +93,7 @@ namespace jh
 		CameraManager::GetInstance().Render();
 		//CollisionManager::GetInstance().Render();
 
-		//MonsterUIManager::GetInstance().ClearMonsterUIAttribute();
+		MonsterUIManager::GetInstance().ClearMonsterUIAttribute();
 		LightingManager::GetInstance().ClearLightAttribute();
 	}
 	void D3DApp::Release()

@@ -12,6 +12,7 @@ namespace jh
 		Animator*								pAnimator;
 		AcientBossMonsterAttackColiderObject*	pMonsterAttackColiderObject[4];
 		eMonsterType							eMonType;
+		UIBarObject*							pUIBarObejct;
 	};
 
 	class BossMonster final : public Monster
@@ -22,7 +23,7 @@ namespace jh
 
 		void SetInactive() override;
 		void SetHitEffectObject(HitEffectObject* pHitEffectObject) override;
-
+		void SetBossUIHpBarObject(UIBarObject* pUIBarObejct);
 	private:
 		AcientBossMonsterInfo mBossMonsterInfo;
 	};

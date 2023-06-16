@@ -9,7 +9,7 @@
 #include "jhHitEffectObject.h"
 #include "jhHitEffectScript.h"
 #include "jhTransform.h"
-
+#include "jhUIBarObject.h"
 #include "jhAcientBossMonsterScript.h"
 #include "jhAcientBossMonsterAttackColiderObject.h"
 #include "jhAcientBossMonsterAttackColiderScript.h"
@@ -71,6 +71,11 @@ namespace jh
 	{
 		mBossMonsterInfo.pHitEffectObject = pHitEffectObject;
 	}
+	void BossMonster::SetBossUIHpBarObject(UIBarObject* pUIBarObejct)
+	{
+		assert(pUIBarObejct != nullptr);
+		mBossMonsterInfo.pUIBarObejct = pUIBarObejct;
+	}
 	void BossMonster::SetInactive()
 	{
 		assert(mBossMonsterInfo.pHitEffectObject != nullptr);
@@ -80,5 +85,6 @@ namespace jh
 		{
 			mBossMonsterInfo.pMonsterAttackColiderObject[i]->SetState(eGameObjectState::INACTIVE);
 		}
+		mBossMonsterInfo.pUIBarObejct->SetState(eGameObjectState::INACTIVE);
 	}
 }
