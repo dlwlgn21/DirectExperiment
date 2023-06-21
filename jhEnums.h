@@ -15,6 +15,8 @@ namespace jh
 		COLLIDER,
 		RENDERER,
 		ANIMATOR,
+		AUDIO_LISTENER,
+		AUDIO_SOURCE,
 		SCRIPT,
 		LIGHT,
 		COUNT
@@ -33,6 +35,7 @@ namespace jh
 		MATERIAL,
 		SHADER,
 		TEXTURE,
+		AUDIO_CLIP,
 		COUNT
 	};
 

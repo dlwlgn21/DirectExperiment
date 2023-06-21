@@ -415,6 +415,21 @@
     <Filter Include="Component\Renderer\MonsterHPSpriteRenderer">
       <UniqueIdentifier>{71b2bb2c-450f-44ed-841e-f06a2fd29311}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{d3c7ba4d-1e46-4f3d-8710-ce42a3671663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{eadcb377-f98f-4807-bb72-c44e5289a2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\AudioClip">
+      <UniqueIdentifier>{89ee9589-aaa7-49af-99de-ad6c96446e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio\AuidoSource">
+      <UniqueIdentifier>{189f1ab6-e927-4926-881c-daef9c4863f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio\AudioListener">
+      <UniqueIdentifier>{b8c6ac6b-4aaa-4bbd-ae02-84d25bcbf1b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -771,6 +786,21 @@
     <ClInclude Include="jhMonsterHPSpriteRenderer.h">
       <Filter>Component\Renderer\MonsterHPSpriteRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="jhFmodManager.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioClip.h">
+      <Filter>Resource\AudioClip</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioSource.h">
+      <Filter>Component\Audio\AuidoSource</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioListener.h">
+      <Filter>Component\Audio\AudioListener</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSFXEnum.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1096,6 +1126,18 @@
     </ClCompile>
     <ClCompile Include="jhMonsterHPSpriteRenderer.cpp">
       <Filter>Component\Renderer\MonsterHPSpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhFmodManager.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioClip.cpp">
+      <Filter>Resource\AudioClip</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioSource.cpp">
+      <Filter>Component\Audio\AuidoSource</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioListener.cpp">
+      <Filter>Component\Audio\AudioListener</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

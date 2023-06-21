@@ -56,6 +56,10 @@
 #include "jhProtectCrystalObject.h"
 #include "jhProtectingCrystalScript.h"
 
+#include "jhAudioClip.h"
+#include "jhAudioListener.h"
+#include "jhAudioSource.h"
+
 using namespace jh::math;
 
 static constexpr const float PARALLAX_1_DEPTH = 100.0f;
@@ -146,6 +150,12 @@ namespace jh
 		this->AddGameObject(pCrystal, eLayerType::PROTECTING_OBJECT);
 #pragma endregion
 
+
+#pragma region AUDIO_OBJECT
+		//GameObject* pBGMObject = new GameObject();
+
+#pragma endregion
+
 		Scene::Initialize();
 	}
 
@@ -172,7 +182,11 @@ namespace jh
 		CameraManager::GetInstance().SetCamera(pCameraComponent);
 		CameraScript* pCameraScript = new CameraScript();
 		pCameraObject->AddComponent(pCameraScript);
-
+		//AudioListener* pAudioListener = new AudioListener();
+		//pCameraObject->AddComponent(pAudioListener);
+		AudioSource* pBGMSource = new AudioSource(ResourceMaker::GetInstance().GetAudioClipOrNull(eSFXType::BGM));
+		pCameraObject->AddComponent(pBGMSource);
+		pBGMSource->Play();
 		PlayerLevelManager::GetInstance().SetCameraTransform(pCameraObject->GetTransform());
 
 		// UICamera
@@ -191,6 +205,9 @@ namespace jh
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(PLAYER_SPAWN_X_POS, -2.0f, PLAYER_Z_VALUE));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
+		AudioListener* pAudioListener = new AudioListener();
+		pPlayer->AddComponent(pAudioListener);
+		
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());

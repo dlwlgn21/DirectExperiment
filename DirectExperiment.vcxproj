@@ -70,6 +70,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -77,10 +93,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\DirectExperiment\Fmod\Library\Release;D:\DirectExperiment\Fmod\Library\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodstudioL_vc.lib;fmodL_vc.lib;fmod_vc.lib;fmodstudio_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,12 +111,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\DirectExperiment\Fmod\Library\Release;D:\DirectExperiment\Fmod\Library\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodstudioL_vc.lib;fmodL_vc.lib;fmod_vc.lib;fmodstudio_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,10 +129,13 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\DirectExperiment\Fmod\Library\Release;D:\DirectExperiment\Fmod\Library\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodstudioL_vc.lib;fmodL_vc.lib;fmod_vc.lib;fmodstudio_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,17 +147,22 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\DirectExperiment\Fmod\Library\Release;D:\DirectExperiment\Fmod\Library\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodstudioL_vc.lib;fmodL_vc.lib;fmod_vc.lib;fmodstudio_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="jhAcientBossMonsterAttackColiderObject.h" />
     <ClInclude Include="jhAcientBossMonsterAttackColiderScript.h" />
+    <ClInclude Include="jhAudioClip.h" />
+    <ClInclude Include="jhAudioSource.h" />
     <ClInclude Include="jhBGGroundGrass.h" />
     <ClInclude Include="jhBGLightningObject.h" />
     <ClInclude Include="jhBGMushRoomSatueObject.h" />
@@ -160,6 +190,7 @@
     <ClInclude Include="jhDebugObject.h" />
     <ClInclude Include="jhEditor.h" />
     <ClInclude Include="jhEffectScript.h" />
+    <ClInclude Include="jhFmodManager.h" />
     <ClInclude Include="jhHitEffectScript.h" />
     <ClInclude Include="jhEngine.h" />
     <ClInclude Include="jhEntity.h" />
@@ -222,6 +253,7 @@
     <ClInclude Include="jhResourcesManager.h" />
     <ClInclude Include="jhSceneManager.h" />
     <ClInclude Include="jhScript.h" />
+    <ClInclude Include="jhSFXEnum.h" />
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhPlayerSkillObject.h" />
     <ClInclude Include="jhPlayerSkillScript.h" />
@@ -249,10 +281,13 @@
     <ClInclude Include="jhScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="jhUILevelUPBorderObject.h" />
+    <ClInclude Include="jhAudioListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jhAcientBossMonsterAttackColiderObject.cpp" />
     <ClCompile Include="jhAcientBossMonsterAttackColiderScript.cpp" />
+    <ClCompile Include="jhAudioClip.cpp" />
+    <ClCompile Include="jhAudioSource.cpp" />
     <ClCompile Include="jhBGGroundGrass.cpp" />
     <ClCompile Include="jhBGLightningObject.cpp" />
     <ClCompile Include="jhBGMushRoomSatueObject.cpp" />
@@ -277,6 +312,7 @@
     <ClCompile Include="jhDebugObject.cpp" />
     <ClCompile Include="jhEditor.cpp" />
     <ClCompile Include="jhEffectScript.cpp" />
+    <ClCompile Include="jhFmodManager.cpp" />
     <ClCompile Include="jhHitEffectScript.cpp" />
     <ClCompile Include="jhEntity.cpp" />
     <ClCompile Include="jhEnums.h" />
@@ -359,6 +395,7 @@
     <ClCompile Include="jhTexture.cpp" />
     <ClCompile Include="jhTime.cpp" />
     <ClCompile Include="jhScene.cpp" />
+    <ClCompile Include="jhAudioListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc" />

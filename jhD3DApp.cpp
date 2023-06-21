@@ -9,6 +9,7 @@
 #include "jhLightingManager.h"
 #include "jhMonsterUIManager.h"
 #include "jhPlayerLevelManager.h"
+#include "jhFmodManager.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -23,6 +24,7 @@ namespace jh
 		Input::Initialize();
 		graphics::GraphicDeviceDX11::GetInstance().InitializeDevice(mScreenWidth, mScreenHeight, mHwnd);
 		CollisionManager::GetInstance().Initialize();
+		FmodManager::GetInstace().Initialize();
 		ResourceMaker::GetInstance().Initialize();
 		PlayerLevelManager::GetInstance().Initialize();
 		SceneManager::GetInstance().Initialize();
@@ -94,6 +96,7 @@ namespace jh
 	}
 	void D3DApp::Release()
 	{
+		FmodManager::GetInstace().Release();
 		SceneManager::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();

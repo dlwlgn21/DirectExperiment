@@ -286,6 +286,13 @@ namespace jh
 #pragma endregion
 #pragma endregion
 
+#pragma region AUDIO_KEY
+	const std::wstring ResourceMaker::AUDIO_BGM_KEY = L"AudioBGM";
+
+#pragma endregion
+
+
+
 	void ResourceMaker::Initialize()
 	{
 		createMeshs();
@@ -295,6 +302,7 @@ namespace jh
 		createSamplerState();
 		setSamplerState();
 		createConstantBuffer();
+		createAudioClip();
 	}
 #pragma region CREATE
 	void ResourceMaker::createMeshs()
@@ -839,7 +847,16 @@ namespace jh
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
 	}
+
+	void ResourceMaker::createAudioClip()
+	{
+		loadAndInsertAtAudioClipVector(eSFXType::BGM, L"MUSIC_BGM.wav");
+	}
+
 #pragma endregion
+
+
+
 
 #pragma region SET
 	void ResourceMaker::setSamplerState()
@@ -886,13 +903,21 @@ namespace jh
 				ResourcesManager::Find<Texture>(normalMapKey))
 			);
 	}
-
+	void ResourceMaker::loadAndInsertAtAudioClipVector(const eSFXType eType, const std::wstring& fileName)
+	{
+		std::unique_ptr<AudioClip> spAudioClip = std::make_unique<AudioClip>();
+		assert(spAudioClip != nullptr);
+		spAudioClip->Load(fileName);
+		assert(mspAudioClips[static_cast<UINT>(eType)] == nullptr);
+		mspAudioClips[static_cast<UINT>(eType)] = std::move(spAudioClip);
+	}
 #pragma endregion
 
 
 	void ResourceMaker::Release()
 	{
 		//mspColliderConstantBuffer.reset();
+		mspAudioClips.clear();
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();

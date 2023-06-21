@@ -1,6 +1,8 @@
 #pragma once
 #include "jhGraphicDeviceDX11.h"
 #include "jhConstantBuffer.h"
+#include "jhAudioClip.h"
+#include "jhSFXEnum.h"
 
 constexpr const UINT RECT_VERTEX_COUNT = 4;
 constexpr const UINT POINT_BORDER_SAMPLER_SLOT_NUMBER = 0;
@@ -33,7 +35,7 @@ namespace jh
 
 		void PushBackDebugMesh(DebugMesh debugMesh) { mDebugMeshs.push_back(debugMesh); }
 		std::vector<DebugMesh>& GetDebugMeshs() { return mDebugMeshs; }
-
+		AudioClip* GetAudioClipOrNull(const eSFXType eType) { return mspAudioClips[static_cast<UINT>(eType)].get(); }
 
 	public:
 #pragma region MESH
@@ -300,6 +302,11 @@ namespace jh
 
 #pragma endregion
 
+#pragma region AUDIO
+		static const std::wstring AUDIO_BGM_KEY;
+
+#pragma endregion
+
 	private:
 		void createMeshs();
 		void createShaders();
@@ -307,6 +314,7 @@ namespace jh
 		void createMaterial();
 		void createSamplerState();
 		void createConstantBuffer();
+		void createAudioClip();
 
 		void setSamplerState();
 
@@ -314,6 +322,8 @@ namespace jh
 		void loadAndInsertTexture(const std::wstring& key, const std::wstring& fileName);
 		void insertMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey);
 		void insertNormalMapMaterial(const std::wstring& key, const std::wstring& shaderKey, const std::wstring& textureKey, const std::wstring& normalMapKey);
+		void loadAndInsertAtAudioClipVector(const eSFXType eType, const std::wstring& fileName);
+
 	private:
 		ResourceMaker()
 			: mVertices{}
@@ -326,24 +336,29 @@ namespace jh
 			, mspColliderConstantBuffer()
 			, mspUIBarConstantBuffer()
 			, mDebugMeshs()
+			, mspAudioClips()
 		{
 			mDebugMeshs.reserve(128);
+			mspAudioClips.reserve(static_cast<UINT>(eSFXType::COUNT));
+			mspAudioClips.resize(static_cast<UINT>(eSFXType::COUNT));
 		}
 		~ResourceMaker() = default;
 
 	private:
-		Vertex											mVertices[RECT_VERTEX_COUNT];
-		NormalMapShaderVertex							mNormalMapVertex[RECT_VERTEX_COUNT];
+		Vertex												mVertices[RECT_VERTEX_COUNT];
+		NormalMapShaderVertex								mNormalMapVertex[RECT_VERTEX_COUNT];
 
-		Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointBorderSampler;
+		Microsoft::WRL::ComPtr<ID3D11SamplerState>			mcpPointBorderSampler;
 		//Microsoft::WRL::ComPtr<ID3D11SamplerState>		mcpPointWrapSampler;
 
-		std::unique_ptr<ConstantBuffer>					mspTransformConstantBuffer;
-		std::unique_ptr<ConstantBuffer>					mspAnimationConstantBuffer;
-		std::unique_ptr<ConstantBuffer>					mspUVTranslationConstantBuffer;
-		std::unique_ptr<ConstantBuffer>					mspColliderConstantBuffer;
-		std::unique_ptr<ConstantBuffer>					mspUIBarConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspTransformConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspAnimationConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspUVTranslationConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspColliderConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspUIBarConstantBuffer;
 
-		std::vector<DebugMesh>							mDebugMeshs;
+		std::vector<DebugMesh>								mDebugMeshs;
+	
+		std::vector<std::unique_ptr<AudioClip>>				mspAudioClips;
 	};
 }
