@@ -33,7 +33,7 @@ cbuffer UIBarBuffer : register(b3)
 
 cbuffer MonsterUIBuffer : register(b5)
 {
-    uint CountOfMonsterInScene;
+    float4 MonsterHPRatio;
 }
 
 

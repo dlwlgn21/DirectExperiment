@@ -409,6 +409,12 @@
     <Filter Include="Component\Script\ProtectingCrystal">
       <UniqueIdentifier>{df1ecff1-a3c3-4597-8083-6859c825be41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Material\MonsterUIMaterial">
+      <UniqueIdentifier>{9dcd90a4-86ac-44a9-984a-c541e4cffc5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer\MonsterHPSpriteRenderer">
+      <UniqueIdentifier>{71b2bb2c-450f-44ed-841e-f06a2fd29311}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -759,6 +765,12 @@
     <ClInclude Include="jhProtectingCrystalScript.h">
       <Filter>Component\Script\ProtectingCrystal</Filter>
     </ClInclude>
+    <ClInclude Include="jhMonsterUIMaterial.h">
+      <Filter>Resource\Material\MonsterUIMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterHPSpriteRenderer.h">
+      <Filter>Component\Renderer\MonsterHPSpriteRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1079,6 +1091,12 @@
     <ClCompile Include="jhProtectingCrystalScript.cpp">
       <Filter>Component\Script\ProtectingCrystal</Filter>
     </ClCompile>
+    <ClCompile Include="jhMonsterUIMaterial.cpp">
+      <Filter>Resource\Material\MonsterUIMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterHPSpriteRenderer.cpp">
+      <Filter>Component\Renderer\MonsterHPSpriteRenderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -1134,6 +1152,9 @@
       <Filter>ShaderResource\VS</Filter>
     </FxCompile>
     <FxCompile Include="jhLevelUpPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceExpPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>

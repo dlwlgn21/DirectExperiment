@@ -97,7 +97,6 @@ namespace jh
 	}
 	void Mesh::Render()
 	{
-		static const UINT VERTEX_COUNT = 4;
 		graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->DrawIndexed(mIndexCount, 0, 0);
 	}
 }

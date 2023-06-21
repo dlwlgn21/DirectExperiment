@@ -52,7 +52,7 @@ namespace jh
 	{
 	public:
 		friend class PlayerLevelManager;
-
+		friend class PlayerLevelUpEffectScript;
 		struct PlayerStat
 		{
 			int MaxHP;
@@ -61,6 +61,7 @@ namespace jh
 			int CurrentStamina;
 			UINT CurrEXP;
 			UINT CurrLevel;
+			UINT MaxEXP;
 			int AttackDamage;
 			PlayerStat()
 				: MaxHP(INITIAL_HP)
@@ -70,6 +71,7 @@ namespace jh
 				, AttackDamage(INITIAL_ATTACK_DAMAGE)
 				, CurrEXP(0)
 			    , CurrLevel(1)
+				, MaxEXP(LEVEL_1_INITIONAL_MAXIMUM_EXP)
 			{
 			}
 		};
@@ -151,7 +153,7 @@ namespace jh
 		eAttackType GetAttackType() const							{ return meAttackType; }
 		const bool IsHitAttack() const								{ return mbIsHitAttack; }
 		const bool IsHitSkillAtack() const							{ return mbIsHitSkillAtack; }
-		
+		const bool IsLevelUping() const								{ return mbIsLevelUping; }
 		
 		void IncreaseMovementSpeed();
 		void RecoverHealthFully();
@@ -182,6 +184,9 @@ namespace jh
 		bool checkIsNormalAttackKeyPressed();
 		void setIsContinueAttacking();
 
+	public:
+		static constexpr const UINT LEVEL_1_INITIONAL_MAXIMUM_EXP = 5;
+
 	private:
 		Transform*						mpTranform;
 		Animator*						mpAnimator;
@@ -210,7 +215,7 @@ namespace jh
 		bool							mbIsHitSkillAtack;
 		bool							mbIsStartCountingDashTimer;
 		bool							mbIsStartCountingRollingTimer;
-
+		bool							mbIsLevelUping;
 		float							mDashIntervalTimer;
 		float							mDashIntervalTime;
 

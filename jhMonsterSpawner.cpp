@@ -16,6 +16,7 @@ namespace jh
 {
 	// PHASE_1
 	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 7.0f;
+	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
 	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 3.0f;
 	
 	// PHASE_2
@@ -34,7 +35,6 @@ namespace jh
 	const float MonsterSpawner::ACIENT_BOSS_RESPAWN_TIME = 100.0f;
 	
 	// OTHER
-	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
 
 	static constexpr const float CAGED_SHOKER_Y_POS = -1.7f;
 	static constexpr const float SWEEPER_Y_POS = -1.8f;
@@ -47,7 +47,7 @@ namespace jh
 	static constexpr const float BLASTER_Y_POS = -2.0f;
 	static constexpr const float ACIENT_BOSS_Y_POS = -0.3f;
 
-	static constexpr const float PHASE_1_END_TIME = 30.0f;
+	static constexpr const float PHASE_1_END_TIME = 10.0f;
 	static constexpr const float PHASE_2_END_TIME = PHASE_1_END_TIME * 2;
 	static constexpr const float PHASE_3_END_TIME = PHASE_1_END_TIME * 3;
 	static constexpr const float PHASE_4_END_TIME = PHASE_1_END_TIME * 4;
@@ -74,16 +74,16 @@ namespace jh
 		mTotalTimeTimer += Time::DeltaTime();
 		switch (meStagePhase)
 		{
-		case eStagePhase::FIRST_ZOMBIE_WARDEN_STAGE:
+		case eStagePhase::FIRST_WARDEN_SWEEPER_STAGE:
 		{
 			if (mTotalTimeTimer > PHASE_1_END_TIME)
 			{
 				changeStagePhase(eStagePhase::SECOND_BLASTER_DAGGER_STAGE);
 			}
 
-			mZombieRespawnTimer -= Time::DeltaTime();
-			if (mZombieRespawnTimer <= 0.0f)
-				{spawnMonster(eMonsterType::LV_1_ZOMBIE);}
+			mSweeperRespawnTimer -= Time::DeltaTime();
+			if (mSweeperRespawnTimer <= 0.0f)
+				{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 			mWardenRespawnTimer -= Time::DeltaTime();
 			if (mWardenRespawnTimer <= 0.0f)
 				{spawnMonster(eMonsterType::LV_1_WARDEN);}
@@ -148,9 +148,6 @@ namespace jh
 			assert(false);
 			break;
 		}
-		//mSweeperRespawnTimer -= Time::DeltaTime();
-		//if (mSweeperRespawnTimer <= 0.0f)
-		//	{spawnMonster(eMonsterType::LV_1_SWEEPER);}
 	}
 
 	void MonsterSpawner::spawnMonster(const eMonsterType eMonType)
@@ -226,8 +223,6 @@ namespace jh
 			setPortalEffectPosition(eMonType, spawnPos);
 			playPortalEffectAnimation(eMonType, static_cast<MonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			mpScene->AddBossMonster(monPack);
-			//setPortalEffectPosition(eMonType, spawnPos);
-			//playPortalEffectAnimation(eMonType, static_cast<AcientBossMonsterScript*>(monPack.pMonster->GetScriptOrNull()));
 			resetTimer(eMonType);
 			break;
 		}

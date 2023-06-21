@@ -28,7 +28,6 @@ namespace jh
 		void FixedUpdate() override;
 		void Render() override;
 
-
 		void CreateViewMatrix();
 		void CreateProjectionMatrix();
 

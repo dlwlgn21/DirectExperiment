@@ -390,18 +390,24 @@ namespace jh
 
 		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, pPlayerScript);
 		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
+
+		UIBarObject* pExpBorderOject = new UIBarObject(eUIBarType::EXP_BORDER, pPlayerScript);
+		this->AddGameObject(pExpBorderOject, eLayerType::UI);
+
+		UIBarObject* pExpBarOject = new UIBarObject(eUIBarType::EXP_BAR, pPlayerScript);
+		this->AddGameObject(pExpBarOject, eLayerType::UI);
+
 	}
 #pragma endregion
 #pragma endregion
 #pragma region ADD_GAME_OBECJT
 	void PlayScene::AddMonster(const MonsterPackage& monPack)
 	{
-		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIHpBarObject != nullptr && monPack.pUIBorderBarObject != nullptr);
+		assert(monPack.pMonster != nullptr && monPack.pHitEffectObejct != nullptr && monPack.pMonsterAttackColliderObject != nullptr && monPack.pUIHpBarObject != nullptr);
 		this->AddGameObject(monPack.pMonster, eLayerType::MONSTER);
 		this->AddGameObject(monPack.pHitEffectObejct, eLayerType::MONSTER_EFFECT);
 		this->AddGameObject(monPack.pMonsterAttackColliderObject, eLayerType::MONSTER_ATTACK_COLLIDER);
 		this->AddGameObject(monPack.pUIHpBarObject, eLayerType::MONSTER_UI);
-		this->AddGameObject(monPack.pUIBorderBarObject, eLayerType::MONSTER_UI);
 	}
 
 	void PlayScene::AddBossMonster(AcientBossMonsterPackage& monPack)

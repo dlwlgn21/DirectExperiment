@@ -9,6 +9,7 @@ namespace jh
 	{
 		SPRITE_RENDERER,
 		MESH_RENDERER,
+		MONSTER_HP_RENDERER,
 		COUNT
 	};
 	class Renderer : public Component
@@ -23,6 +24,7 @@ namespace jh
 		virtual void FixedUpdate() override;
 		virtual void Render() override;
 
+		eComponentRendererType GetType() const { return meRendererType; }
 
 	protected:
 		const eComponentRendererType meRendererType;

@@ -254,10 +254,10 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY),
-				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_SWEEPER_MATERIAL_KEY),
 				pSweeperAnimator,
 				pPlayerScript,
 				eType
@@ -777,7 +777,6 @@ namespace jh
 		retMonsterPackage.pHitEffectObejct->Initialize();
 		retMonsterPackage.pMonsterAttackColliderObject->Initialize();
 		retMonsterPackage.pUIHpBarObject->Initialize();
-		retMonsterPackage.pUIBorderBarObject->Initialize();
 		return retMonsterPackage;
 	}
 
@@ -856,7 +855,7 @@ namespace jh
 			retPackage.pColliderObject[i]->GetTransform()->SetPosition(Vector3(position.x, position.y + i, COLLIDER_Z_VALUE));
 		}
 
-		UIBarObject* pUIObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		UIBarObject* pUIObject = new UIBarObject(eUIBarType::MONSTER_HP_BAR, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
 		retPackage.pUIHpBarObject = pUIObject;
 		static_cast<BossMonster*>(retPackage.pMonster)->SetBossUIHpBarObject(pUIObject);
 		setTransform(retPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);
@@ -988,11 +987,6 @@ namespace jh
 		UIBarObject* pUIHpBarObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
 		retMonsterPackage.pUIHpBarObject = pUIHpBarObject;
 		pMonster->SetUIHpBarObject(pUIHpBarObject);
-	
-		UIBarObject* pUIBorderBarObject = new UIBarObject(eUIBarType::MONSTER_HP_BORDER, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
-		retMonsterPackage.pUIBorderBarObject = pUIBorderBarObject;
-		pMonster->SetUIBorderBarObject(pUIBorderBarObject);
-
 	}
 	void MonsterManager::createAttackCollider(MonsterInfo& monInfo, MonsterPackage& retMonsterPackage, const float yPos)
 	{

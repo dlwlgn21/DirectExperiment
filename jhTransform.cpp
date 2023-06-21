@@ -48,9 +48,6 @@ namespace jh
 		}
 	}
 
-	void Transform::Render()
-	{
-	}
 	void Transform::WriteMatrixDataAtContantBuffer()
 	{
 		TransformBuffer buffer;

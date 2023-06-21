@@ -7,7 +7,7 @@ namespace jh
 		RIGHT,
 		COUNT
 	};
-
+	
 	enum class eComponentType
 	{
 		TRANSFORM,
@@ -19,7 +19,7 @@ namespace jh
 		LIGHT,
 		COUNT
 	};
-
+	
 	enum class eColliderShapeType
 	{
 		RECT,

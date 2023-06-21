@@ -1,28 +1,23 @@
-#include "jhMeshRenderer.h"
+#include "jhMonsterHPSpriteRenderer.h"
 #include "jhTransform.h"
 #include "jhMesh.h"
 
 namespace jh
 {
-	MeshRenderer::MeshRenderer(Mesh* pMesh, Material* pMaterial)
-		: Renderer(eComponentRendererType::MESH_RENDERER, pMesh, pMaterial)
+	MonsterHPRenderer::MonsterHPRenderer(Mesh* pMesh, Material* pMaterial)
+		: Renderer(eComponentRendererType::MONSTER_HP_RENDERER, pMesh, pMaterial)
 		, mpTransform(nullptr)
 	{
 	}
 
-	void MeshRenderer::Initialize()
+	void MonsterHPRenderer::Initialize()
 	{
 		mpTransform = GetOwner()->GetTransform();
 		assert(mpTransform != nullptr);
 	}
-	void MeshRenderer::Update()
-	{
-	}
-	void MeshRenderer::FixedUpdate()
-	{
-	}
 
-	void MeshRenderer::Render()
+
+	void MonsterHPRenderer::Render()
 	{
 		mpTransform->WriteMatrixDataAtContantBuffer();
 
@@ -33,7 +28,7 @@ namespace jh
 		clearPipeline();
 	}
 
-	void MeshRenderer::setPipeline()
+	void MonsterHPRenderer::setPipeline()
 	{
 		assert(mpMesh != nullptr && mpMaterial != nullptr);
 		mpTransform->SetPipeline();
@@ -41,7 +36,7 @@ namespace jh
 		mpMesh->SetPipeline();
 	}
 
-	void MeshRenderer::clearPipeline()
+	void MonsterHPRenderer::clearPipeline()
 	{
 		mpMaterial->ClearPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
 	}

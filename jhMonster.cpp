@@ -48,19 +48,17 @@ namespace jh
 
 	void Monster::SetInactive()
 	{
-		assert(mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMonsterAttackColiderObject != nullptr && mMonsterInfo.pUIHpBarObject != nullptr && mMonsterInfo.pUIBorderBarObject != nullptr && mMonsterInfo.pHitEffectObject != nullptr);
+		assert(mMonsterInfo.pHitEffectObject != nullptr && mMonsterInfo.pMonsterAttackColiderObject != nullptr && mMonsterInfo.pUIHpBarObject != nullptr && mMonsterInfo.pHitEffectObject != nullptr);
 		this->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pHitEffectObject->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pMonsterAttackColiderObject->SetState(eGameObjectState::INACTIVE);
 		mMonsterInfo.pUIHpBarObject->SetState(eGameObjectState::INACTIVE);
-		mMonsterInfo.pUIBorderBarObject->SetState(eGameObjectState::INACTIVE);
 		MonsterPackage monPack;
 		ZeroMemory(&monPack, sizeof(MonsterPackage));
 		monPack.pMonster = this;
 		monPack.pHitEffectObejct = mMonsterInfo.pHitEffectObject;
 		monPack.pMonsterAttackColliderObject = mMonsterInfo.pMonsterAttackColiderObject;
 		monPack.pUIHpBarObject = mMonsterInfo.pUIHpBarObject;
-		monPack.pUIBorderBarObject = mMonsterInfo.pUIBorderBarObject;
 		MonsterObjectPool::GetInstance().Return(mMonsterInfo.eMonType, monPack);
 	}
 

@@ -72,6 +72,7 @@ namespace jh
 
 	void PlayerLevelUpEffectScript::AnimStart()
 	{
+
 	}
 	void PlayerLevelUpEffectScript::AninComplete()
 	{

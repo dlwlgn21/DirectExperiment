@@ -7,7 +7,7 @@ namespace jh
 {
 	enum class eStagePhase
 	{
-		FIRST_ZOMBIE_WARDEN_STAGE,
+		FIRST_WARDEN_SWEEPER_STAGE,
 		SECOND_BLASTER_DAGGER_STAGE,
 		THIRD_ARCHER_SHOKER_STAGE,
 		FORTH_LIGHT_HEABY_SLICER_STAGE,
@@ -48,7 +48,7 @@ namespace jh
 			, mpPlayerScript(nullptr)
 			, mPlayerPos(jh::math::Vector3::Zero)
 			, mTotalTimeTimer(0.0f)
-			, meStagePhase(eStagePhase::FIRST_ZOMBIE_WARDEN_STAGE)
+			, meStagePhase(eStagePhase::FIRST_WARDEN_SWEEPER_STAGE)
 			, mbIsSpawnAcientBoss(false)
 		{
 			mPortalEffectObjects.reserve(static_cast<UINT>(eMonsterType::COUNT));

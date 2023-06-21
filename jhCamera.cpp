@@ -5,6 +5,7 @@
 #include "jhSceneManager.h"
 #include "jhScene.h"
 #include "jhRenderer.h"
+#include "jhMonsterHPSpriteRenderer.h"
 
 using namespace jh::math;
 namespace jh
@@ -52,7 +53,7 @@ namespace jh
 				const std::vector<GameObject*>& layerGameObjects = pLayer->GetAllGameObjects();
 
 				if (layerGameObjects.empty())	{continue;}
-
+				
 				for (auto* pGameObject : layerGameObjects)
 				{
 					if (pGameObject == nullptr) {continue;}
@@ -65,10 +66,8 @@ namespace jh
 				}
 			}
 		}
-		
-
-
 	}
+
 	void Camera::CreateViewMatrix()
 	{
 		Transform* pTransform = GetOwner()->GetTransform();

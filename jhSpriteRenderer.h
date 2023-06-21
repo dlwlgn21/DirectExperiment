@@ -12,8 +12,6 @@ namespace jh
 		virtual ~SpriteRenderer() = default;
 
 		void Initialize() override;
-		void Update() override;
-		void FixedUpdate() override;
 		void Render() override;
 
 	private:

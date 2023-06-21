@@ -7,12 +7,15 @@ namespace jh
 	{
 		HEALTH_BORDER,
 		STAMINAR_BORDER,
+		EXP_BORDER,
 		HEALTH_BAR,
 		STAMINA_BAR,
+		EXP_BAR,
 		MONSTER_HP_BAR,
-		MONSTER_HP_BORDER,
+		MOSNTER_HP_CIRCLE,
 		COUNT
 	};
+	class Mesh;
 	class PlayerScript;
 	class UIBarScript;
 	class MonsterScript;
@@ -30,7 +33,8 @@ namespace jh
 		void setRenderer();
 		void setScript(PlayerScript* pPlayerScript);
 		void setMonsterUI(MonsterScript* pMonsterScript);
+		void setAnimator();
 	private:
-		const eUIBarType meType;
+		const eUIBarType		meType;
 	};
 }

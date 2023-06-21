@@ -1,11 +1,10 @@
 #pragma once
 #include "jhEngine.h"
-#include "jhMath.h"
-#include "jhMonsterUIStructuredBuffer.h"
 #include "jhConstantBuffer.h"
 
 namespace jh
 {
+	class GameObject;
 	class MonsterUIManager final
 	{
 	public:
@@ -17,29 +16,23 @@ namespace jh
 
 		MonsterUIManager(MonsterUIManager& other) = delete;
 		MonsterUIManager& operator=(MonsterUIManager& other) = delete;
+		void WriteMonsterUIDataAtBuffer(float monsterHPRatio);
 
-		__forceinline void PushMonsterUIAttribute(MonsterUIAttribute info) { mMonsterUIAttributes.push_back(info); }
-		__forceinline void ClearMonsterUIAttribute()					   { mMonsterUIAttributes.clear(); }
-		
-		void Initialize();
-		void WriteMonsterUIDataAtBuffer();
 		void SetPipeline();
-
 	private:
 		MonsterUIManager()
-			: mMonsterUIAttributes()
-			, mspMonsterUIStructuredBuffer()
-			, mspMonsterUIConstantBuffer()
+			: mspMonsterUIConstantBuffer()
+			, mCurrRatioValue(0.0f)
 		{
-
+			mspMonsterUIConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::MONSTER_UI);
 		}
 		~MonsterUIManager()
 		{
-			mspMonsterUIStructuredBuffer.reset();
 			mspMonsterUIConstantBuffer.reset();
 		}
-		std::vector<MonsterUIAttribute>					mMonsterUIAttributes;
-		std::unique_ptr<MonsterUIStructuredBuffer>		mspMonsterUIStructuredBuffer;
 		std::unique_ptr<ConstantBuffer>					mspMonsterUIConstantBuffer;
+	public:
+		float											mCurrRatioValue;
+		GameObject*										mpCurrMonster;
 	};
 }

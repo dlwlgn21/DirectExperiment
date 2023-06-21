@@ -50,7 +50,9 @@ namespace jh
 		static const std::wstring DEBUG_SHADER_KEY;
 		static const std::wstring UI_HP_SHADER_KEY;
 		static const std::wstring UI_STAMINA_SHADER_KEY;
+		static const std::wstring UI_EXP_SHADER_KEY;
 		static const std::wstring UI_MONSTER_HP_SHADER_KEY;
+		static const std::wstring UI_BOSS_MONSTER_HP_SHADER_KEY;
 		static const std::wstring NORMAL_MAP_SPRITE_SHADER_KEY;
 		static const std::wstring UI_LEVEL_UP_SHADER_KEY;
 #pragma endregion
@@ -125,9 +127,10 @@ namespace jh
 #pragma region UI_TEXTURE
 		static const std::wstring UI_HP_BORDER_TEXTURE_KEY;
 		static const std::wstring UI_HP_BAR_TEXTURE_KEY;
+		static const std::wstring UI_EXP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_STAMINA_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_TEXTURE_KEY;
-		static const std::wstring UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY;
+		static const std::wstring UI_MONSTER_HP_CIRCLE_TEXTURE_KEY;
 		static const std::wstring UI_TEXTURE_LEVEL_UP_BORDER_KEY;
 #pragma endregion
 
@@ -236,10 +239,10 @@ namespace jh
 #pragma region UI_MATERIAL
 		static const std::wstring UI_HP_BORDER_MATERIAL_KEY;
 		static const std::wstring UI_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_EXP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_MATERIAL_KEY;
-		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
-		static const std::wstring UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_MONSTER_HP_CIRCLE_MATERIAL_KEY;
 		static const std::wstring UI_MATERIAL_LEVEL_UP_BORDER_KEY;
 #pragma endregion
 

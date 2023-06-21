@@ -1,6 +1,7 @@
 #include "jhSpriteRenderer.h"
 #include "jhTransform.h"
 #include "jhAnimator.h"
+#include "jhMesh.h"
 
 namespace jh
 {
@@ -14,12 +15,6 @@ namespace jh
 	{
 		mpTransform = GetOwner()->GetTransform();
 		assert(mpTransform != nullptr);
-	}
-	void SpriteRenderer::Update()
-	{
-	}
-	void SpriteRenderer::FixedUpdate()
-	{
 	}
 
 	void SpriteRenderer::Render()

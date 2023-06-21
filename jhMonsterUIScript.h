@@ -6,7 +6,7 @@ namespace jh
 {
 	class MonsterScript;
 	class Transform;
-	class MonsterUIScript : public Script
+	class MonsterUIScript final : public Script
 	{
 	public:
 		MonsterUIScript(MonsterScript* pMonsterScript);

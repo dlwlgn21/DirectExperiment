@@ -49,6 +49,16 @@ namespace jh
 
 		UINT							AnimationType;
 		UINT							IsFlip;
+		AnimationBuffer()
+			: LeftTop()
+			, Size()
+			, Offset()
+			, AtlasImageSize()
+			, AnimationType()
+			, IsFlip()
+		{
+			static_assert(sizeof(AnimationBuffer) % SIMD_ALIGN_SIZE == 0);
+		}
 	};
 
 
@@ -65,15 +75,20 @@ namespace jh
 	struct alignas(SIMD_ALIGN_SIZE) UIBarBuffer
 	{
 		jh::math::Vector4			    UV;
+		UIBarBuffer()
+			: UV(jh::math::Vector4::Zero)
+		{
+			static_assert(sizeof(UIBarBuffer) % SIMD_ALIGN_SIZE == 0);
+		}
 	};
 
 	struct alignas(SIMD_ALIGN_SIZE) MonsterUIBuffer
 	{
-		UINT					CountOfMonsterInScene;
+		jh::math::Vector4				MonsterHPRatio;
 		MonsterUIBuffer()
-			: CountOfMonsterInScene(0)
+			: MonsterHPRatio(jh::math::Vector4::Zero)
 		{
-			static_assert(sizeof(MonsterUIBuffer) == SIMD_ALIGN_SIZE);
+			static_assert(sizeof(MonsterUIBuffer) % SIMD_ALIGN_SIZE == 0);
 		}
 	};
 
@@ -125,10 +140,10 @@ namespace jh
 		}
 	};
 	
-	struct alignas(SIMD_ALIGN_SIZE) MonsterUIAttribute
-	{
-		jh::math::Vector4 MonsterHPRatio;
-	};
+	//struct alignas(SIMD_ALIGN_SIZE) MonsterUIAttribute
+	//{
+	//	jh::math::Vector4 MonsterHPRatio;
+	//};
 
 
 	enum class eShaderStage

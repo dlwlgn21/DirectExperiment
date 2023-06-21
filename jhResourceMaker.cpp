@@ -8,6 +8,8 @@
 #include "jhNormalMapMaterial.h"
 #include "jhNormalMapShader.h"
 #include "jhNormalMapMesh.h"
+#include "jhMonsterUIMaterial.h"
+#include "jhMonsterUIMesh.h"
 
 using namespace jh::math;
 
@@ -15,14 +17,15 @@ namespace jh
 {
 #pragma region KEYS
 #pragma region MESH
-	const std::wstring ResourceMaker::RECT_MESH_KEY = L"RectMeshKey";
-	const std::wstring ResourceMaker::BATTLE_BG_MESH_KEY = L"BattleBGMeshKey";
-	const std::wstring ResourceMaker::DEBUG_RECT_MESH_KEY = L"DebugRectMeshKey";
+	const std::wstring ResourceMaker::RECT_MESH_KEY = L"RectMesh";
+	const std::wstring ResourceMaker::BATTLE_BG_MESH_KEY = L"BattleBGMesh";
+	const std::wstring ResourceMaker::DEBUG_RECT_MESH_KEY = L"DebugRectMesh";
 
 	// Added Part FOR NORMAL_MAP At 2023-05-23 16:40
-	const std::wstring ResourceMaker::RECT_NORMAL_MAP_MESH_KEY = L"NormalMapMeshKey";
+	const std::wstring ResourceMaker::RECT_NORMAL_MAP_MESH_KEY = L"NormalMapMeshy";
 
-	const std::wstring ResourceMaker::UI_LEVEL_UP_MESH_KEY = L"UILevelUPMeshKey";
+	const std::wstring ResourceMaker::UI_LEVEL_UP_MESH_KEY = L"UILevelUPMesh";
+
 #pragma endregion
 
 #pragma region SHADER
@@ -31,8 +34,10 @@ namespace jh
 	const std::wstring ResourceMaker::BG_NO_LIGHTING_SHADER_KEY = L"BattleBGShader";
 	const std::wstring ResourceMaker::DEBUG_SHADER_KEY = L"DebugShader";
 	const std::wstring ResourceMaker::UI_HP_SHADER_KEY = L"UIHPShader";
+	const std::wstring ResourceMaker::UI_EXP_SHADER_KEY = L"UIEXPShader";
 	const std::wstring ResourceMaker::UI_STAMINA_SHADER_KEY = L"UIStaminaShader";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_SHADER_KEY = L"UIMonsterShader";
+	const std::wstring ResourceMaker::UI_BOSS_MONSTER_HP_SHADER_KEY = L"UIBossHpShader";
 	const std::wstring ResourceMaker::UI_LEVEL_UP_SHADER_KEY = L"UILevelUPShader";
 #pragma endregion
 
@@ -93,9 +98,10 @@ namespace jh
 #pragma region UI_TEXTURE
 	const std::wstring ResourceMaker::UI_HP_BORDER_TEXTURE_KEY = L"UIHpBorder";
 	const std::wstring ResourceMaker::UI_HP_BAR_TEXTURE_KEY = L"UIHpBar";
+	const std::wstring ResourceMaker::UI_EXP_BAR_TEXTURE_KEY = L"UIEXPBar";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_TEXTURE_KEY = L"UIStaminaBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
-	const std::wstring ResourceMaker::UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY = L"UIMonsterBorderBar";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_CIRCLE_TEXTURE_KEY = L"UIMonsterCi";
 	const std::wstring ResourceMaker::UI_TEXTURE_LEVEL_UP_BORDER_KEY = L"UILevelUPBorder";
 #pragma endregion
 
@@ -219,9 +225,10 @@ namespace jh
 #pragma region UI_MATERIAL
 	const std::wstring ResourceMaker::UI_HP_BORDER_MATERIAL_KEY = L"UIHPBorderMaterial";
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
+	const std::wstring ResourceMaker::UI_EXP_BAR_MATERIAL_KEY = L"UIEXPBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
-	const std::wstring ResourceMaker::UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY = L"UIBorderMonsterMaterial";
+	const std::wstring ResourceMaker::UI_MONSTER_HP_CIRCLE_MATERIAL_KEY = L"UIMonsterCircleMaterial";
 	const std::wstring ResourceMaker::UI_MATERIAL_LEVEL_UP_BORDER_KEY = L"UILevelUPMaterial";
 #pragma endregion
 
@@ -514,7 +521,9 @@ namespace jh
 		loadAndInsertShader(BG_NO_LIGHTING_SHADER_KEY, L"jhBackGroundVS.hlsl", L"jhBackGroundPS.hlsl");
 		loadAndInsertShader(UI_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceHealthPS.hlsl");
 		loadAndInsertShader(UI_STAMINA_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
+		loadAndInsertShader(UI_EXP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceExpPS.hlsl");
 		loadAndInsertShader(UI_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceMonsterHealthPS.hlsl");
+		loadAndInsertShader(UI_BOSS_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhBackGroundPS.hlsl");
 		loadAndInsertShader(UI_LEVEL_UP_SHADER_KEY, L"jhLevelUpVS.hlsl", L"jhLevelUpPS.hlsl");
 
 
@@ -628,9 +637,10 @@ namespace jh
 #pragma region UI
 		loadAndInsertTexture(UI_HP_BORDER_TEXTURE_KEY, L"UI_Border.png");
 		loadAndInsertTexture(UI_HP_BAR_TEXTURE_KEY, L"UI_Player_HpBar.png");
+		loadAndInsertTexture(UI_EXP_BAR_TEXTURE_KEY, L"UI_Player_ExpBar.png");
 		loadAndInsertTexture(UI_STAMINA_BAR_TEXTURE_KEY, L"UI_Player_StaminarBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
-		loadAndInsertTexture(UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY, L"UI_MON_Border_HpBar.png");
+		loadAndInsertTexture(UI_MONSTER_HP_CIRCLE_TEXTURE_KEY, L"UI_MON_Circle_64x64.png");
 		loadAndInsertTexture(UI_TEXTURE_LEVEL_UP_BORDER_KEY, L"UI_Level_UP_Border_256x256.png");
 #pragma endregion
 
@@ -756,9 +766,19 @@ namespace jh
 #pragma region UI
 		insertMaterial(UI_HP_BORDER_MATERIAL_KEY, BG_NO_LIGHTING_SHADER_KEY, UI_HP_BORDER_TEXTURE_KEY);
 		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
+		insertMaterial(UI_EXP_BAR_MATERIAL_KEY, UI_EXP_SHADER_KEY, UI_EXP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
-		insertMaterial(UI_MONSTER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BAR_TEXTURE_KEY);
-		insertMaterial(UI_MONSTER_BORDER_HP_BAR_MATERIAL_KEY, UI_MONSTER_HP_SHADER_KEY, UI_MONSTER_HP_BORDER_BAR_TEXTURE_KEY);
+
+#pragma region MONSTER_UI
+		ResourcesManager::Insert<Material>(
+			UI_MONSTER_HP_BAR_MATERIAL_KEY,
+			new MonsterUIMaterial(
+				ResourcesManager::Find<Shader>(UI_MONSTER_HP_SHADER_KEY),
+				ResourcesManager::Find<Texture>(UI_MONSTER_HP_BAR_TEXTURE_KEY))
+			);
+#pragma endregion
+
+		insertMaterial(UI_MONSTER_HP_CIRCLE_MATERIAL_KEY, SPRITE_SHADER_KEY, UI_MONSTER_HP_CIRCLE_TEXTURE_KEY);
 		insertMaterial(UI_MATERIAL_LEVEL_UP_BORDER_KEY, SPRITE_SHADER_KEY, UI_TEXTURE_LEVEL_UP_BORDER_KEY);
 #pragma endregion
 

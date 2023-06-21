@@ -11,7 +11,6 @@ namespace jh
 		virtual ~Transform() = default;
 
 		void FixedUpdate() override;
-		void Render() override;
 
 		void WriteMatrixDataAtContantBuffer();
 		void SetPipeline();

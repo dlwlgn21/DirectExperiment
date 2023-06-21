@@ -14,7 +14,6 @@
 #include "jhPlayerLevelManager.h"
 #include "jhPlayerLevelUpEffectScript.h"
 
-
 static constexpr const float DASH_DISTANCE = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
 
@@ -31,7 +30,6 @@ static constexpr const float PUSH_ATTACK_MOVEMENT_DISTANCE	= DEFAULT_MOVEMENT_DI
 static constexpr const UINT PLAYER_VALIED_ATTACK_INDEX = 1;
 static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
 
-static constexpr const UINT LEVEL_1_INIT_MAXIMUM_EXP = 5;
 static constexpr const float PER_LEVEL_UP_COEFFICEINT_VALUE = 1.1f;
 
 static constexpr const float MOVEMENT_SPEED_INCREASE_AMOUNT_10_PERCENT = 1.1f;
@@ -69,11 +67,12 @@ namespace jh
 		, mbIsHitSkillAtack(false)
 		, mbIsStartCountingDashTimer(false)
 		, mbIsStartCountingRollingTimer(false)
+		, mbIsLevelUping(false)
 		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
 		, mDashIntervalTime(DASH_INTERVAL_SECOND)
 		, mRollingIntervalTimer(ROLLING_INTERVAL_SECOND)
 		, mRollingIntervalTime(ROLLING_INTERVAL_SECOND)
-		, mCurrentLevelExpToLevelUP(LEVEL_1_INIT_MAXIMUM_EXP)
+		, mCurrentLevelExpToLevelUP(LEVEL_1_INITIONAL_MAXIMUM_EXP)
 	{
 	}
 
@@ -486,7 +485,9 @@ namespace jh
 			++mStat.CurrLevel;
 			mCurrentLevelExpToLevelUP = static_cast<UINT>(std::ceil(mCurrentLevelExpToLevelUP * PER_LEVEL_UP_COEFFICEINT_VALUE));
 			mStat.CurrEXP = 0;
+			mStat.MaxEXP = mCurrentLevelExpToLevelUP;
 			mpPlayerLevelUpEffectScript->SetStatePlaying();
+			mbIsLevelUping = true;
 		}
 	}
 

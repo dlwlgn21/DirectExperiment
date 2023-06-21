@@ -17,7 +17,7 @@ namespace jh
 
 		void Initialize() override;
 		void Update() override;
-
+		//void FixedUpdate() override;
 		void AddMonster(const MonsterPackage& monPack);
 		void AddBossMonster(AcientBossMonsterPackage& monPack);
 		void AddSkillObejct(GameObject* pGameObject);

@@ -181,11 +181,13 @@
     <ClInclude Include="jhMonsterAttackColiderObject.h" />
     <ClInclude Include="jhMonsterAttackColiderScript.h" />
     <ClInclude Include="jhMonsterAnimIndexInformation.h" />
+    <ClInclude Include="jhMonsterHPSpriteRenderer.h" />
     <ClInclude Include="jhMonsterManager.h" />
     <ClInclude Include="jhMonsterObjectPool.h" />
     <ClInclude Include="jhMonsterScript.h" />
     <ClInclude Include="jhMonsterSpawner.h" />
     <ClInclude Include="jhMonsterUIManager.h" />
+    <ClInclude Include="jhMonsterUIMaterial.h" />
     <ClInclude Include="jhMonsterUIScript.h" />
     <ClInclude Include="jhMonsterUIStructuredBuffer.h" />
     <ClInclude Include="jhNormalMapMaterial.h" />
@@ -289,11 +291,13 @@
     <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMonsterAttackColiderObject.cpp" />
     <ClCompile Include="jhMonsterAttackColiderScript.cpp" />
+    <ClCompile Include="jhMonsterHPSpriteRenderer.cpp" />
     <ClCompile Include="jhMonsterManager.cpp" />
     <ClCompile Include="jhMonsterObjectPool.cpp" />
     <ClCompile Include="jhMonsterScript.cpp" />
     <ClCompile Include="jhMonsterSpawner.cpp" />
     <ClCompile Include="jhMonsterUIManager.cpp" />
+    <ClCompile Include="jhMonsterUIMaterial.cpp" />
     <ClCompile Include="jhMonsterUIScript.cpp" />
     <ClCompile Include="jhMonsterUIStructuredBuffer.cpp" />
     <ClCompile Include="jhNormalMapMaterial.cpp" />
@@ -441,6 +445,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="jhUserIntefaceStaminaPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceExpPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>

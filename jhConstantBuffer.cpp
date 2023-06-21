@@ -121,7 +121,6 @@ namespace jh
 		}
 		case eConstantBufferType::MONSTER_UI:
 		{
-			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(MONSTER_UI_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(MONSTER_UI_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 		}

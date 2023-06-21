@@ -9,7 +9,6 @@
 #include "jhUISkillSelectBoxObject.h"
 #include "jhPlayerSkillManager.h"
 
-
 namespace jh
 {
 #pragma region INIT
@@ -239,6 +238,7 @@ namespace jh
 
 		setInacitveAllUILevelUpObjects();
 		mbIsProcessingLevelUp = false;
+		mpPlayerScript->mbIsLevelUping = false;
 	}
 #pragma endregion
 

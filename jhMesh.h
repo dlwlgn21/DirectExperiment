@@ -12,7 +12,7 @@ namespace jh
 		bool CreateVertexBuffer(void* pData, UINT size);
 		bool CreateIndexBuffer(void* pData, UINT indexCount);
 		virtual void SetPipeline();
-		void Render();
+		virtual void Render();
 
 	protected:
 		void setVertexBuffer();
