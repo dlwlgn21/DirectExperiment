@@ -12,8 +12,7 @@ static constexpr const float CRYSTAL_SPEED = 1.0f;
 static constexpr const int	CRYSTAL_MAX_HP = 20;
 static constexpr const float INVINCIVILTY_TIME = 2.0f;
 static constexpr const float STATE_CHANGE_Y_POSITON = -1.0f;
-static constexpr const float X_DISTANCE_FROM_PLAYER = 2.0f;
-
+static constexpr const float FINAL_X_POSITION = -7.0f;
 
 namespace jh
 {
@@ -25,7 +24,6 @@ namespace jh
 		, meCrystalState(eCrystalState::ENTERING)
 		, mInvincivlityTimer(INVINCIVILTY_TIME)
 		, mpPlayerScript(nullptr)
-		, mpPlayerTransform(nullptr)
 	{
 	}
 
@@ -34,13 +32,10 @@ namespace jh
 		assert(mpPlayerScript != nullptr);
 		mpTransform = GetOwner()->GetTransform();
 		assert(mpTransform != nullptr);
-		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
-		assert(mpPlayerTransform);
 	}
 	void ProtectingCrystalScript::Update()
 	{
-		assert(mpTransform != nullptr && mpPlayerScript != nullptr && mpPlayerTransform != nullptr);
-		float movingXPos = mpPlayerTransform->GetOnlyXPosition() - X_DISTANCE_FROM_PLAYER;
+		assert(mpTransform != nullptr);
 		switch (meCrystalState)
 		{
 		case eCrystalState::ENTERING:
@@ -52,7 +47,7 @@ namespace jh
 				return;
 			}
 			currYPos -= mSpeed * Time::DeltaTime();
-			setFinalPosision(movingXPos, currYPos);
+			setFinalPosision(FINAL_X_POSITION, currYPos);
 			break;
 		}
 		case eCrystalState::STAYING:
@@ -64,7 +59,7 @@ namespace jh
 				accumYValue = 0.0f;
 			}
 			float yPos = std::sin(accumYValue) - 1.0f;
-			setFinalPosision(movingXPos, yPos);
+			setFinalPosision(FINAL_X_POSITION, yPos);
 			break;
 		}
 		case eCrystalState::HITTED:

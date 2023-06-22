@@ -16,12 +16,14 @@ namespace jh
 		void Stop();
 		void Set3DAttributes(const jh::math::Vector3& pos, const jh::math::Vector3& vel);
 		void SetLoop(const bool bIsLoop) { mbIsLoop = bIsLoop; }
+		void SetVolumn(const float value);
 
 	private:
 		FMOD::Sound*		mpSound;
 		FMOD::Channel*		mpChannel;
 		float				mMinDistance;
 		float				mMaxDistance;
+		float				mVolumn;
 		bool				mbIsLoop;
 	};
 }

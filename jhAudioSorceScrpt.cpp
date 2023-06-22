@@ -11,9 +11,7 @@ namespace jh
 	{
 		assert(mpFollowingTransform != nullptr);
 	}
-	void AudioSorceScript::Initialize()
-	{
-	}
+
 	void AudioSorceScript::Update()
 	{
 		GetOwner()->GetTransform()->SetPosition(mpFollowingTransform->GetPosition());

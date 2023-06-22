@@ -49,6 +49,8 @@ namespace jh
 
 
 #pragma region ANIMATION_EVENT
+		void AnimationIdleStart();
+
 		void AnimationMovingStart();
 		void AnimationMovingComplete();
 

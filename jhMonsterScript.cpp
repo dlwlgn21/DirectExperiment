@@ -94,6 +94,8 @@ static constexpr const UINT DAGGER_EXP			= 3;
 static constexpr const UINT BLASTER_EXP			= 3;
 #pragma endregion
 
+static constexpr const UINT MANIPULATED_VALUE = 1;
+
 namespace jh
 {
 	MonsterScript::MonsterScript(eMonsterType eMonsterType, PlayerScript* pPlayerScript)
@@ -832,7 +834,7 @@ namespace jh
 		{
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
-			if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+			if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 - MANIPULATED_VALUE || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2 - MANIPULATED_VALUE)
 			{
 				choiceAttackingSFX(RANDOM);
 			}
@@ -840,7 +842,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
-			if (CURR_IDX == SWEEPER_ATTACK_VAILED_INDEX)
+			if (CURR_IDX == SWEEPER_ATTACK_VAILED_INDEX - MANIPULATED_VALUE)
 			{
 				choiceAttackingSFX(RANDOM);
 			}
@@ -848,7 +850,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
-			if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX)
+			if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX - MANIPULATED_VALUE)
 			{
 				playEruptionSFX();
 			}
@@ -864,7 +866,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
-			if (CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_2)
+			if (CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_1 - MANIPULATED_VALUE || CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_2 - MANIPULATED_VALUE)
 			{
 				choiceAttackingSFX(RANDOM);
 			}
@@ -880,7 +882,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_DAGGER:
 		{
-			if (CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_1 || CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_2)
+			if (CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_1 - MANIPULATED_VALUE || CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_2 - MANIPULATED_VALUE)
 			{
 				choiceAttackingSFX(RANDOM);
 			}
@@ -888,7 +890,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_ARCHER:
 		{
-			if (CURR_IDX == ARCHER_ATTACK_VAILED_INDEX)
+			if (CURR_IDX == ARCHER_ATTACK_VAILED_INDEX - MANIPULATED_VALUE)
 			{
 				playEruptionSFX();
 			}
@@ -896,7 +898,7 @@ namespace jh
 		}
 		case eMonsterType::LV_1_BLASTER:
 		{
-			if (CURR_IDX == BLASTER_ATTACK_VAILED_INDEX)
+			if (CURR_IDX == BLASTER_ATTACK_VAILED_INDEX - MANIPULATED_VALUE)
 			{
 				playEruptionSFX();
 			}

@@ -872,7 +872,7 @@ namespace jh
 		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_SPAWN, L"SFX_Portal.wav");
 
 
-
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_MOVING, L"SFX_BossMonsterMoving.wav");
 		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_FISTING, L"SFX_BossMoMonsterFisting.wav");
 		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_SWING, L"SFX_BossMonsterSpin.wav");
 		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_ERUPTION, L"SFX_BossMonsterEruption.wav");

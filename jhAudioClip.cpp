@@ -8,9 +8,9 @@ namespace jh
 		, mpChannel(nullptr)
 		, mMinDistance(1.0f)
 		, mMaxDistance(1000.0f)
+		, mVolumn(1.0f)
 		, mbIsLoop(false)
 	{
-
 	}
 
 	AudioClip::~AudioClip()
@@ -40,7 +40,6 @@ namespace jh
 	{
 		if (mbIsLoop)	{mpSound->setMode(FMOD_LOOP_NORMAL);}
 		else			{mpSound->setMode(FMOD_LOOP_OFF);}
-
 		FmodManager::GetInstace().SoundPlay(mpSound, &mpChannel);
 	}
 	void AudioClip::Stop()
@@ -53,6 +52,12 @@ namespace jh
 		FMOD_VECTOR fmodVel({ vel.x, vel.y, vel.z });
 
 		mpChannel->set3DAttributes(&fmodPos, &fmodVel);
+	}
+
+	void AudioClip::SetVolumn(const float value)
+	{
+		assert(value < 1.0f && value > 0.0f);
+		mVolumn = value;
 	}
 
 }

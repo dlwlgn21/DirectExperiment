@@ -39,7 +39,6 @@ namespace jh
 		float				mInvincivlityTimer;
 		eCrystalState		meCrystalState;
 		PlayerScript*		mpPlayerScript;
-		Transform*			mpPlayerTransform;
 	};
 }
 

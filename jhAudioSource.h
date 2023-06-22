@@ -15,7 +15,7 @@ namespace jh
 		void Play();
 		void Stop();
 		void SetLoop(const bool bIsloop);
-
+		void SetVolumn(const float value);
 		AudioClip* GetClip() { return mpAudioClip; }
 
 	private:

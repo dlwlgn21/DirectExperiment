@@ -70,6 +70,7 @@ namespace jh
 		assert(mpPlayerScript != nullptr);
 		mpPlayerTransform = mpPlayerScript->GetOwner()->GetTransform();
 		assert(mpPlayerTransform);
+		SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_MOVING);
 	}
 	void AcientBossMonsterScript::Update()
 	{
@@ -106,19 +107,18 @@ namespace jh
 				meState != eBossMonsterState::MELLE_ATTACKING &&
 				meState != eBossMonsterState::SPIN_ATTACKING)
 			{
-				if (sDist(sGen) == MELEE_ATTACK_NUMBER)
+				if (absDisatanceFromPlayer < SPIN_ATTACK_AWARENESS_RANGE)
+				{
+					setState(eBossMonsterState::SPIN_ATTACKING);
+				}
+				else
 				{
 					setLookDir(distanceFromPlayer);
 					flipLookDirection();
 					setState(eBossMonsterState::MELLE_ATTACKING);
 				}
-				else
-				{
-					setState(eBossMonsterState::SPIN_ATTACKING);
-				}
 				return;
 			}
-
 			break;
 		}
 		case eBossMonsterPhase::LV_2_PHASE:
@@ -245,6 +245,7 @@ namespace jh
 		{
 			mCurrHP = 0;
 			setState(eBossMonsterState::DEATH);
+			SFXManager::GetInstance().Stop(eSFXType::BOSS_MONSTER_MOVING);
 		}
 
 	}
@@ -275,14 +276,6 @@ namespace jh
 			}
 			break;
 		}
-		//case jh::eBossMonsterState::SPIN_ATTACKING:
-		//{
-		//	if (CURR_IDX == SPIN_ATTACK_VAILED_INDEX_1 || CURR_IDX == SPIN_ATTACK_VAILED_INDEX_2)
-		//	{
-
-		//	}
-		//	break;
-		//}
 		case jh::eBossMonsterState::RANGE_ATTACKING:
 		{
 			if (CURR_IDX == RANGE_ATTACK_VAILED_INDEX)
@@ -293,7 +286,7 @@ namespace jh
 		}
 		case jh::eBossMonsterState::SUPER_ATTACKING:
 		{
-			if (CURR_IDX == SUPER_ATTACK_VAILED_INDEX)
+			if (CURR_IDX == (SUPER_ATTACK_VAILED_INDEX - 5))
 			{
 				SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_POWER_ERUPTION);
 			}
@@ -372,15 +365,16 @@ namespace jh
 
 
 #pragma region ANIMATION_EVENT
+	void AcientBossMonsterScript::AnimationIdleStart()
+	{
+	}
+
 	void AcientBossMonsterScript::AnimationMovingStart()
 	{
-
 	}
 	void AcientBossMonsterScript::AnimationMovingComplete()
 	{
-
 	}
-
 
 	void AcientBossMonsterScript::AnimationMelleAttackStart()
 	{
@@ -473,6 +467,9 @@ namespace jh
 	{
 		mpAnimator = static_cast<Animator*>(GetOwner()->GetComponentOrNull(eComponentType::ANIMATOR));
 		assert(mpAnimator != nullptr);
+		mpAnimator->GetStartEvent(ACIENT_BOSS_IDLE_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationIdleStart, this);
+
+
 		mpAnimator->GetStartEvent(ACIENT_BOSS_MOVING_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMovingStart, this);
 		mpAnimator->GetCompleteEvent(ACIENT_BOSS_MOVING_ANIM_KEY) = std::bind(&AcientBossMonsterScript::AnimationMovingComplete, this);
 

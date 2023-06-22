@@ -21,6 +21,10 @@ namespace jh
 		void Play(const eSFXType eType);
 		void Stop(const eSFXType eType);
 		void SetAudioSource(const eSFXType eType, AudioSource* pAudioSource);
+	
+	private:
+		void setVolumn(const eSFXType eType, const float value);
+		void setLoop(const eSFXType eType, const bool bIsLoop);
 	private:
 		SFXManager()
 			: mpAudioSources()

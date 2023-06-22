@@ -10,7 +10,6 @@ namespace jh
 		AudioSorceScript(Transform* pFollowingTransform);
 		virtual ~AudioSorceScript() = default;
 
-		void Initialize() override;
 		void Update() override;
 
 	private:

@@ -36,4 +36,9 @@ namespace jh
 	{
 		mpAudioClip->SetLoop(bIsloop);
 	}
+	void AudioSource::SetVolumn(const float value)
+	{
+		assert(value < 1.0f && value > 0.0f);
+		mpAudioClip->SetVolumn(value);
+	}
 }
