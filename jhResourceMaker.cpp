@@ -850,7 +850,46 @@ namespace jh
 
 	void ResourceMaker::createAudioClip()
 	{
-		loadAndInsertAtAudioClipVector(eSFXType::BGM, L"MUSIC_BGM.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BGM, L"SFX_PlaySceneBgm.wav");
+
+#pragma region PLAYER
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_SWING_ATTACK_1, L"SFX_PlayerSwing1.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_SWING_ATTACK_2, L"SFX_PlayerSwing2.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_SWING_ATTACK_3, L"SFX_PlayerSwing3.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_HITTED_1, L"SFX_PlayerHit1.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_HITTED_2, L"SFX_PlayerHit2.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_DASH, L"SFX_PlayerDash.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_ROLLING, L"SFX_PlayerRolling.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_FOOTSTEP, L"SFX_PlayerFootStep.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::PLAYER_LEVEL_UP, L"SFX_LevelUP.wav");
+
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_HITTED, L"SFX_MonsterHit.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_DIE, L"SFX_MonsterDie.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_SWING_1, L"SFX_MonsterAttack1.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_SWING_2, L"SFX_MonsterAttack2.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_SWING_3, L"SFX_MonsterAttack3.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_ERUPTION, L"SFX_MonsterEruption.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::MONSTER_SPAWN, L"SFX_Portal.wav");
+
+
+
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_FISTING, L"SFX_BossMoMonsterFisting.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_SWING, L"SFX_BossMonsterSpin.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_ERUPTION, L"SFX_BossMonsterEruption.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_POWER_ERUPTION, L"SFX_BossMonsterEruption2.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_BUFF, L"SFX_BossMonsterBuff.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::BOSS_MONSTER_DIE, L"SFX_BossMonsterDie.wav");
+
+
+		loadAndInsertAtAudioClipVector(eSFXType::UI_LEVEL_UP_MOVING, L"SFX_UILevelUpMove.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::UI_LEVEL_UP_CHOICE, L"SFX_UILevelUpChoice.wav");
+
+
+		loadAndInsertAtAudioClipVector(eSFXType::SKILL_BEAM, L"SFX_SKILLBeam.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::SKILL_STRIKE, L"SFX_SkillStrike.wav");
+		loadAndInsertAtAudioClipVector(eSFXType::SKILL_PUSH, L"SFX_SkillTornado.wav");
+#pragma endregion
+
 	}
 
 #pragma endregion
@@ -910,6 +949,10 @@ namespace jh
 		spAudioClip->Load(fileName);
 		assert(mspAudioClips[static_cast<UINT>(eType)] == nullptr);
 		mspAudioClips[static_cast<UINT>(eType)] = std::move(spAudioClip);
+		if (eType == eSFXType::PLAYER_FOOTSTEP)
+		{
+			mspAudioClips[static_cast<UINT>(eType)]->SetLoop(true);
+		}
 	}
 #pragma endregion
 
@@ -917,12 +960,12 @@ namespace jh
 	void ResourceMaker::Release()
 	{
 		//mspColliderConstantBuffer.reset();
-		mspAudioClips.clear();
 		mspUVTranslationConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
 		mspUIBarConstantBuffer.reset();
 		mcpPointBorderSampler.Reset();
+		mspAudioClips.clear();
 		//mcpPointWrapSampler.Reset();
 	}
 }

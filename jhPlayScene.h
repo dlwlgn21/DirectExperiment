@@ -3,6 +3,7 @@
 #include "jhMonsterManager.h"
 #include "jhBGTreeObject.h"
 #include "jhGraphics.h"
+#include "jhSFXEnum.h"
 
 namespace jh
 {
@@ -21,7 +22,7 @@ namespace jh
 		void AddMonster(const MonsterPackage& monPack);
 		void AddBossMonster(AcientBossMonsterPackage& monPack);
 		void AddSkillObejct(GameObject* pGameObject);
-
+		void AddSFXObject(const eSFXType eType);
 	private:
 		void instantiateLight(PlayerScript* pPlayerScript);
 		PlayerScript* instantiateCameraAndPlayer();
@@ -33,6 +34,9 @@ namespace jh
 		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);
 		void instantiateLightObject(const LightAttribute& lightAttribute, const jh::math::Vector2& pos);
 		void instantiateLightObject(const LightAttribute& lightAttribute, Transform* pTransform);
+
+	private:
+		PlayerScript* mpPlayerScript;
 	};
 }
 

@@ -59,6 +59,8 @@
 #include "jhAudioClip.h"
 #include "jhAudioListener.h"
 #include "jhAudioSource.h"
+#include "jhAudioSorceScrpt.h"
+#include "jhSFXManager.h"
 
 using namespace jh::math;
 
@@ -101,12 +103,14 @@ namespace jh
 
 	PlayScene::PlayScene()
 		: Scene(eSceneType::PLAY_SCENE)
+		, mpPlayerScript(nullptr)
 	{
 	}
 
 	void PlayScene::Initialize()
 	{
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
+		mpPlayerScript = pPlayerScript;
 		assert(pPlayerScript != nullptr);
 #pragma region INIT_MANAGERS
 		PlayerSkillManager::GetInstance().SetPlayerScript(pPlayerScript);
@@ -182,11 +186,11 @@ namespace jh
 		CameraManager::GetInstance().SetCamera(pCameraComponent);
 		CameraScript* pCameraScript = new CameraScript();
 		pCameraObject->AddComponent(pCameraScript);
-		//AudioListener* pAudioListener = new AudioListener();
-		//pCameraObject->AddComponent(pAudioListener);
-		AudioSource* pBGMSource = new AudioSource(ResourceMaker::GetInstance().GetAudioClipOrNull(eSFXType::BGM));
-		pCameraObject->AddComponent(pBGMSource);
-		pBGMSource->Play();
+		//AudioSource* pBGMSource = new AudioSource(ResourceMaker::GetInstance().GetAudioClipOrNull(eSFXType::BGM));
+		//pCameraObject->AddComponent(pBGMSource);
+		//pBGMSource->Play();
+		AudioListener* pAudioListener = new AudioListener();
+		pCameraObject->AddComponent(pAudioListener);
 		PlayerLevelManager::GetInstance().SetCameraTransform(pCameraObject->GetTransform());
 
 		// UICamera
@@ -205,9 +209,9 @@ namespace jh
 		Player* pPlayer = Instantiate<Player>(eLayerType::PLAYER);
 		pPlayer->GetTransform()->SetPosition(Vector3(PLAYER_SPAWN_X_POS, -2.0f, PLAYER_Z_VALUE));
 		pPlayer->GetTransform()->SetScale(Vector3(6.0f, 6.0f, 1.0f));
-		AudioListener* pAudioListener = new AudioListener();
-		pPlayer->AddComponent(pAudioListener);
-		
+		//AudioListener* pAudioListener = new AudioListener();
+		//pPlayer->AddComponent(pAudioListener);
+
 		PlayerDustEffectObject* pPlayerDustEffectObject = Instantiate<PlayerDustEffectObject>(eLayerType::EFFECT);
 		pPlayer->SetDustEffectToPlayerScript(pPlayerDustEffectObject);
 		pCameraScript->SetPlayerTransform(pPlayer->GetTransform());
@@ -234,6 +238,7 @@ namespace jh
 		return pPlayerScript;
 	}
 #pragma endregion
+
 #pragma region FG_AND_PARALLAX
 	void PlayScene::instantiateParallaxObjects()
 	{
@@ -287,7 +292,6 @@ namespace jh
 		}
 	}
 #pragma endregion
-
 #pragma region ENV
 	void PlayScene::instantiateEnvObject()
 	{
@@ -392,6 +396,7 @@ namespace jh
 			//instantiateLightObject(lightAttribute, Vector2(0.0f, 0.0f));
 		}
 	}
+
 #pragma endregion
 #pragma region UI
 	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
@@ -447,6 +452,21 @@ namespace jh
 	{
 		assert(pGameObject != nullptr);
 		this->AddGameObject(pGameObject, eLayerType::PLAYER_SKILL);
+	}
+
+	void PlayScene::AddSFXObject(const eSFXType eType)
+	{
+		GameObject* pAuidoObject = new GameObject();
+		//pAuidoObject->GetTransform()->SetParent(mpPlayerScript->GetOwner());
+
+		AudioSource* pAudioSource = new AudioSource(ResourceMaker::GetInstance().GetAudioClipOrNull(eType));
+		pAuidoObject->AddComponent(pAudioSource);
+
+		AudioSorceScript* pScript = new AudioSorceScript(mpPlayerScript->GetOwner()->GetTransform());
+		pAuidoObject->AddScript(pScript);
+
+		this->AddGameObject(pAuidoObject, eLayerType::SFX);
+		SFXManager::GetInstance().SetAudioSource(eType, pAudioSource);
 	}
 #pragma endregion
 }

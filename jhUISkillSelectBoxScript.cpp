@@ -4,6 +4,7 @@
 #include "jhInput.h"
 #include "jhUISKillLevepUPConstantValues.h"
 #include "jhPlayerLevelManager.h"
+#include "jhSFXManager.h"
 
 using namespace jh::math;
 
@@ -31,6 +32,7 @@ namespace jh
 			currYPos -= Y_MOVEMENT_DISTANCE;
 			prevYpos = currYPos;
 			mpTransform->SetOnlyXYPosition(xPos, currYPos);
+			SFXManager::GetInstance().Play(eSFXType::UI_LEVEL_UP_MOVING);
 			return;
 		}
 		else if (Input::GetKeyState(eKeyCode::UP) == eKeyState::DOWN)
@@ -43,11 +45,13 @@ namespace jh
 			currYPos += Y_MOVEMENT_DISTANCE;
 			prevYpos = currYPos;
 			mpTransform->SetOnlyXYPosition(xPos, currYPos);
+			SFXManager::GetInstance().Play(eSFXType::UI_LEVEL_UP_MOVING);
 			return;
 		}
 
 		if (Input::GetKeyState(eKeyCode::ENTER) == eKeyState::UP)
 		{
+			SFXManager::GetInstance().Play(eSFXType::UI_LEVEL_UP_CHOICE);
 			if (currYPos > CENTER_BOX_Y_POSITON)
 			{
 				// if Top selected

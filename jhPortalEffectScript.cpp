@@ -1,6 +1,7 @@
 #include "jhPortalEffectScript.h"
 #include "jhOnceAnimator.h"
 #include "jhTransform.h"
+#include "jhSFXManager.h"
 
 using namespace jh::math;
 
@@ -40,7 +41,7 @@ namespace jh
 	}
 	void PortalEffectScript::PortalOpenAnimStart()
 	{
-
+		SFXManager::GetInstance().Play(eSFXType::MONSTER_SPAWN);
 	}
 	void PortalEffectScript::PortalOpenAnimComplete()
 	{
@@ -50,7 +51,6 @@ namespace jh
 
 	void PortalEffectScript::PortalStayAnimStart()
 	{
-
 	}
 	void PortalEffectScript::PortalStayAnimComplete()
 	{

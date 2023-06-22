@@ -162,6 +162,7 @@
     <ClInclude Include="jhAcientBossMonsterAttackColiderObject.h" />
     <ClInclude Include="jhAcientBossMonsterAttackColiderScript.h" />
     <ClInclude Include="jhAudioClip.h" />
+    <ClInclude Include="jhAudioSorceScrpt.h" />
     <ClInclude Include="jhAudioSource.h" />
     <ClInclude Include="jhBGGroundGrass.h" />
     <ClInclude Include="jhBGLightningObject.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="jhSceneManager.h" />
     <ClInclude Include="jhScript.h" />
     <ClInclude Include="jhSFXEnum.h" />
+    <ClInclude Include="jhSFXManager.h" />
     <ClInclude Include="jhShader.h" />
     <ClInclude Include="jhPlayerSkillObject.h" />
     <ClInclude Include="jhPlayerSkillScript.h" />
@@ -287,6 +289,7 @@
     <ClCompile Include="jhAcientBossMonsterAttackColiderObject.cpp" />
     <ClCompile Include="jhAcientBossMonsterAttackColiderScript.cpp" />
     <ClCompile Include="jhAudioClip.cpp" />
+    <ClCompile Include="jhAudioSorceScrpt.cpp" />
     <ClCompile Include="jhAudioSource.cpp" />
     <ClCompile Include="jhBGGroundGrass.cpp" />
     <ClCompile Include="jhBGLightningObject.cpp" />
@@ -370,6 +373,7 @@
     <ClCompile Include="jhScript.cpp" />
     <ClCompile Include="jhPlayerSkillObject.cpp" />
     <ClCompile Include="jhPlayerSkillScript.cpp" />
+    <ClCompile Include="jhSFXManager.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructuredBuffer.cpp" />
     <ClCompile Include="jhTransform.cpp" />

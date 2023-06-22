@@ -5,8 +5,16 @@
 #include "jhTime.h"
 #include "jhCollider2D.h"
 #include "jhBossMonster.h"
-
+#include "jhSFXManager.h"
 #include <random>
+
+static constexpr const float ATTACK_SFX_INTERVAL_TIME = 0.1f;
+static constexpr const UINT MELLE_ATTACK_VAILED_INDEX = 12;
+static constexpr const UINT SPIN_ATTACK_VAILED_INDEX_1 = 9;
+static constexpr const UINT SPIN_ATTACK_VAILED_INDEX_2 = 16;
+static constexpr const UINT RANGE_ATTACK_VAILED_INDEX = 10;
+static constexpr const UINT SUPER_ATTACK_VAILED_INDEX = 12;
+
 static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 
 static constexpr const float INVINCIBILITY_TIME = 0.5f;
@@ -44,6 +52,7 @@ namespace jh
 		, mInvincibilityTimer(INVINCIBILITY_TIME)
 		, mbIsCountingInvincibilityTime(false)
 		, mbIsHittted(false)
+		, mAttackSFXTimer(ATTACK_SFX_INTERVAL_TIME)
 	{
 		mAttackingAwarenessRange = MELEE_ATTACK_AWARENESS_RANGE;
 		mpPlayerScript = pPlayerScript;
@@ -188,6 +197,21 @@ namespace jh
 			mpTranform->SetOnlyXPosition(currPos + moveXPos);
 		}
 #pragma endregion
+
+
+		if (meState == eBossMonsterState::SUPER_ATTACKING ||
+			meState == eBossMonsterState::MELLE_ATTACKING ||
+			meState == eBossMonsterState::RANGE_ATTACKING)
+		{
+			mAttackSFXTimer -= Time::DeltaTime();
+			if (mAttackSFXTimer < 0.0f)
+			{
+				playAttackingSFX();
+				mAttackSFXTimer = ATTACK_SFX_INTERVAL_TIME;
+			}
+		}
+
+
 		setAnimaionFlip();
 		playAnimation();
 	}
@@ -199,7 +223,7 @@ namespace jh
 	void AcientBossMonsterScript::decreaseHP(const int amount)
 	{
 		mCurrHP -= std::abs(amount);
-		
+		SFXManager::GetInstance().Play(eSFXType::MONSTER_HITTED);
 		if (mePhase == eBossMonsterPhase::LV_1_PHASE && mCurrHP <= PHASE_2_HP)
 		{
 			if (mePhase != eBossMonsterPhase::LV_2_PHASE)
@@ -234,6 +258,50 @@ namespace jh
 		else
 		{
 			meLookDir = eObjectLookDirection::LEFT;
+		}
+	}
+
+	void AcientBossMonsterScript::playAttackingSFX()
+	{
+		const UINT CURR_IDX = mpAnimator->GetCurrentAnimationIndex();
+
+		switch (meState)
+		{
+		case jh::eBossMonsterState::MELLE_ATTACKING:
+		{
+			if (CURR_IDX == MELLE_ATTACK_VAILED_INDEX)
+			{
+				SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_FISTING);
+			}
+			break;
+		}
+		//case jh::eBossMonsterState::SPIN_ATTACKING:
+		//{
+		//	if (CURR_IDX == SPIN_ATTACK_VAILED_INDEX_1 || CURR_IDX == SPIN_ATTACK_VAILED_INDEX_2)
+		//	{
+
+		//	}
+		//	break;
+		//}
+		case jh::eBossMonsterState::RANGE_ATTACKING:
+		{
+			if (CURR_IDX == RANGE_ATTACK_VAILED_INDEX)
+			{
+				SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_ERUPTION);
+			}
+			break;
+		}
+		case jh::eBossMonsterState::SUPER_ATTACKING:
+		{
+			if (CURR_IDX == SUPER_ATTACK_VAILED_INDEX)
+			{
+				SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_POWER_ERUPTION);
+			}
+			break;
+		}
+		default:
+			assert(false);
+			break;
 		}
 	}
 
@@ -325,6 +393,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_SWING);
 		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationSpinAttackComplete()
@@ -341,6 +410,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationBuffStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_BUFF);
 		mpAnimator->InitializeCurrAnimation();
 		mbIsCountingInvincibilityTime = true;
 	}
@@ -358,6 +428,7 @@ namespace jh
 	}
 	void AcientBossMonsterScript::AnimationDieStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::BOSS_MONSTER_DIE);
 		mpAnimator->InitializeCurrAnimation();
 	}
 	void AcientBossMonsterScript::AnimationDieComplete()

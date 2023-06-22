@@ -55,6 +55,7 @@ namespace jh
 		PARTICLE,
 		LEVEL_UP_UI,
 		PROTECTING_OBJECT,
+		SFX,
 		UI,
 		COUNT = 16,
 	};

@@ -137,6 +137,7 @@ namespace jh
 		void RollingAnimationStart();
 		void RollingAnimationComplete();
 
+		void HitAnimationStart();
 		void HitAnimationComplete();
 #pragma endregion
 #pragma region COLLISION_TRIGGER
@@ -164,7 +165,7 @@ namespace jh
 		void SetPlayerLevelUpEffectScript(PlayerLevelUpEffectScript* pScript)			{ assert(pScript != nullptr);					mpPlayerLevelUpEffectScript = pScript;}
 		void SetIsHitAttack(const bool bIsHit)											{ mbIsHitAttack = bIsHit; }
 		void SetIsHitSkillAttack(const bool bIsHit)										{ mbIsHitSkillAtack = bIsHit; }
-	
+
 	private:
 		void setXPosByComboAttackType(float& xPos);
 		void setPosByLookDirection(float& xPos, const float xDistance);
@@ -216,6 +217,7 @@ namespace jh
 		bool							mbIsStartCountingDashTimer;
 		bool							mbIsStartCountingRollingTimer;
 		bool							mbIsLevelUping;
+		bool							mbIsPlayingFootstepSFX;
 		float							mDashIntervalTimer;
 		float							mDashIntervalTime;
 

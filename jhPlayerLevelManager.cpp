@@ -8,7 +8,7 @@
 #include "jhPlayerScript.h"
 #include "jhUISkillSelectBoxObject.h"
 #include "jhPlayerSkillManager.h"
-
+#include "jhSFXManager.h"
 namespace jh
 {
 #pragma region INIT
@@ -83,6 +83,7 @@ namespace jh
 #pragma region CALL_BACK
 	void PlayerLevelManager::OnPlayerLevelUP()
 	{
+		SFXManager::GetInstance().Stop(eSFXType::PLAYER_FOOTSTEP);
 		mbIsProcessingLevelUp = true;
 		assert(mpPlayerScript != nullptr);
 		mpUIBorder->SetState(GameObject::eGameObjectState::ACTIVE);

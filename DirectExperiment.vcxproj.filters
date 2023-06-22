@@ -430,6 +430,12 @@
     <Filter Include="Component\Audio\AudioListener">
       <UniqueIdentifier>{b8c6ac6b-4aaa-4bbd-ae02-84d25bcbf1b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SFXManager">
+      <UniqueIdentifier>{1bbd1ddb-f22a-4684-b5c6-edad4f65bcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\AudioSource">
+      <UniqueIdentifier>{a1a110e0-b00f-4ff3-a083-ec6a6faf81a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -801,6 +807,12 @@
     <ClInclude Include="jhSFXEnum.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="jhSFXManager.h">
+      <Filter>SFXManager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioSorceScrpt.h">
+      <Filter>Component\Script\AudioSource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1138,6 +1150,12 @@
     </ClCompile>
     <ClCompile Include="jhAudioListener.cpp">
       <Filter>Component\Audio\AudioListener</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSFXManager.cpp">
+      <Filter>SFXManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioSorceScrpt.cpp">
+      <Filter>Component\Script\AudioSource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,12 +9,19 @@
 #include "jhPlayerScript.h"
 #include "jhMonsterAnimIndexInformation.h"
 #include "jhPlayerSkillElectricBeamScript.h"
+#include "jhSFXManager.h"
+
+
+#include "jhMonsterAnimIndexInformation.h"
+
 
 using namespace jh::math;
 
 static constexpr const UINT PLAYER_VAILED_ATTACK_ANIMATION_INDEX = 1;
 static constexpr const float SPAWNING_TIME = 3.0f;
 static constexpr const float HIT_PUSH_ATTACK_DISTANCE = 15.0f;
+
+static constexpr const float ATTACK_SFX_INTERVAL_TIME = 0.1f;
 
 #pragma region MONSTERS_AWARENESS_RANGE
 static constexpr const float ATTACKING_AWARENESS_DEFAULT_RANGE = 2.0f;
@@ -103,11 +110,11 @@ namespace jh
 		, mAttackingAwarenessRange(ATTACKING_AWARENESS_DEFAULT_RANGE)
 		, mAttackingMovementDistance(0.0f)
 		, mSpawningTimer(SPAWNING_TIME)
+		, mAttackSFXTimer(ATTACK_SFX_INTERVAL_TIME)
 		, mHittedPushDistance(HIT_PUSH_ATTACK_DISTANCE)
 		, meLookDir(eObjectLookDirection::LEFT)
 		, meState(eMonsterState::SPAWNING)
 		, meMonsterType(eMonsterType)
-		
 	{
 		setAwarenessRange();
 		setAnimKey();
@@ -133,6 +140,7 @@ namespace jh
 		, meLookDir(eObjectLookDirection::LEFT)
 		, meState(eMonsterState::SPAWNING)
 		, meMonsterType(eMonsterType::LV_1_ACIENT_BOSS)
+		, mAttackSFXTimer(ATTACK_SFX_INTERVAL_TIME)
 	{
 	}
 
@@ -162,6 +170,15 @@ namespace jh
 		setPosition();
 		setAnimationFlip();
 		playAnimation();
+		if (meState == eMonsterState::ATTACKING)
+		{
+			mAttackSFXTimer -= Time::DeltaTime();
+			if (mAttackSFXTimer < 0.0f)
+			{
+				playAttackingSFX();
+				mAttackSFXTimer = ATTACK_SFX_INTERVAL_TIME;
+			}
+		}
 	}
 
 #pragma region ANIMATION_EVENT
@@ -172,10 +189,12 @@ namespace jh
 	void MonsterScript::AnimationAttackComplete()
 	{
 		setState(eMonsterState::TRACING);
+		mAttackSFXTimer = ATTACK_SFX_INTERVAL_TIME;
 	}
 
 	void MonsterScript::AnimationHittedStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::MONSTER_HITTED);
 		mpAnimator->InitializeCurrAnimation();
 	}
 	void MonsterScript::AnimationHittedComplete()
@@ -185,6 +204,7 @@ namespace jh
 
 	void MonsterScript::AnimationDieStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::MONSTER_DIE);
 		mpAnimator->InitializeCurrAnimation();
 	}
 	void MonsterScript::AnimationDieComplete()
@@ -803,6 +823,122 @@ namespace jh
 			break;
 		}
 	}
+
+	void MonsterScript::playAttackingSFX()
+	{
+		const int RANDOM = std::rand() % 3;
+		const UINT CURR_IDX = mpAnimator->GetCurrentAnimationIndex();
+		switch (meMonsterType)
+		{
+		case eMonsterType::LV_1_CAGED_SHOKER:
+		{
+			if (CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_1 || CURR_IDX == CAGED_SHOCKER_ATTACk_VAILED_INDEX_2)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_SWEEPER:
+		{
+			if (CURR_IDX == SWEEPER_ATTACK_VAILED_INDEX)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_WARDEN:
+		{
+			if (CURR_IDX == WARDEN_ATTACK_VAILED_INDEX)
+			{
+				playEruptionSFX();
+			}
+			break;
+		}
+		case eMonsterType::LV_1_ZOMBIE:
+		{
+			if (CURR_IDX == ZOMBIE_ATTACK_VAILED_INDEX)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_HEABY_SLICER:
+		{
+			if (CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == HEABY_SLICER_ATTACK_VAILED_INDEX_2)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_LIGHT_SLICER:
+		{
+			if (CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_1 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_2 || CURR_IDX == LIGHT_SLICER_ATTACK_VAILED_INDEX_3)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_DAGGER:
+		{
+			if (CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_1 || CURR_IDX == DAGGER_ATTACK_VAILED_INDEX_2)
+			{
+				choiceAttackingSFX(RANDOM);
+			}
+			break;
+		}
+		case eMonsterType::LV_1_ARCHER:
+		{
+			if (CURR_IDX == ARCHER_ATTACK_VAILED_INDEX)
+			{
+				playEruptionSFX();
+			}
+			break;
+		}
+		case eMonsterType::LV_1_BLASTER:
+		{
+			if (CURR_IDX == BLASTER_ATTACK_VAILED_INDEX)
+			{
+				playEruptionSFX();
+			}
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+		return;
+	}
+
+	void MonsterScript::playEruptionSFX()
+	{
+		SFXManager::GetInstance().Play(eSFXType::MONSTER_ERUPTION);
+	}
+
+	void MonsterScript::choiceAttackingSFX(const int random)
+	{
+		switch (random)
+		{
+		case 0:
+		{
+			SFXManager::GetInstance().Play(eSFXType::MONSTER_SWING_1);
+			break;
+		}
+		case 1:
+		{
+			SFXManager::GetInstance().Play(eSFXType::MONSTER_SWING_2);
+			break;
+		}
+		case 2:
+		{
+			SFXManager::GetInstance().Play(eSFXType::MONSTER_SWING_3);
+			break;
+		}
+		default:
+			assert(false);
+			break;
+		}
+	}
+
 
 	void MonsterScript::playHitEffectAnimation()
 	{

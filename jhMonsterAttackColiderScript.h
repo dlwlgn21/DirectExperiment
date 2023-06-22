@@ -30,6 +30,8 @@ namespace jh
 		void setPosByMonsterLookDirectionAndMonsterState();
 		void damageToPlayer(PlayerScript* pPlayerScript, const UINT damage);
 		void adjustColliderDistance();
+
+
 	private:
 		Collider2D*					mpCollider;
 		Transform*					mpTransform;

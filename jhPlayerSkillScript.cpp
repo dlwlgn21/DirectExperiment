@@ -3,6 +3,7 @@
 #include "jhTransform.h"
 #include "jhAnimator.h"
 #include "jhTime.h"
+#include "jhSFXManager.h"
 
 using namespace jh::math;
 
@@ -90,6 +91,27 @@ namespace jh
 		meState = eState;
 		if (meState == eSKillState::PLAYING)
 		{
+			switch (meSkillType)
+			{
+			case ePlayerSkillType::ELETRIC_BEAM:
+			{
+				SFXManager::GetInstance().Play(eSFXType::SKILL_BEAM);
+				break;
+			}
+			case ePlayerSkillType::ELETRIC_STRIKE:
+			{
+				SFXManager::GetInstance().Play(eSFXType::SKILL_STRIKE);
+				break;
+			}
+			case ePlayerSkillType::TORNADO:
+			{
+				SFXManager::GetInstance().Play(eSFXType::SKILL_PUSH);
+				break;
+			}
+			default:
+				assert(false);
+				break;
+			}
 			mpAnimator->InitializeCurrAnimation();
 		}
 	}

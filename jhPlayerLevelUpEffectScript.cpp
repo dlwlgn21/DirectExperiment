@@ -6,7 +6,7 @@
 #include "jhDebugHelper.h"
 #include "jhLayerZValue.h"
 #include "jhPlayerLevelManager.h"
-
+#include "jhSFXManager.h"
 using namespace jh::math;
 
 namespace jh
@@ -72,7 +72,7 @@ namespace jh
 
 	void PlayerLevelUpEffectScript::AnimStart()
 	{
-
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_LEVEL_UP);
 	}
 	void PlayerLevelUpEffectScript::AninComplete()
 	{

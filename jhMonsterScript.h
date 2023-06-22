@@ -77,8 +77,11 @@ namespace jh
 		void setAnimationFlip();
 		void setState(const eMonsterState eState)				{ meState = eState; }
 		void playAnimation();
+		void playAttackingSFX();
+		void playEruptionSFX();
+		void choiceAttackingSFX(const int random);
 		bool isCloseEnoughFromPlayerToChangeAttackingState(const float xPos);
-
+		
 	protected:
 		Transform*						mpTranform;
 		Transform*						mpPlayerTransform;
@@ -103,6 +106,7 @@ namespace jh
 		std::wstring					mAnimHittedKey;
 		std::wstring					mAnimDieKey;
 		eMonsterState					meState;
+		float							mAttackSFXTimer;
 
 	};
 }

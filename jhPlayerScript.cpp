@@ -13,6 +13,8 @@
 #include "jhPlayerHitEffectScript.h"
 #include "jhPlayerLevelManager.h"
 #include "jhPlayerLevelUpEffectScript.h"
+#include "jhSFXManager.h"
+
 
 static constexpr const float DASH_DISTANCE = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
@@ -33,6 +35,7 @@ static constexpr const UINT PLAYER_VALIED_DASH_INDEX = 0;
 static constexpr const float PER_LEVEL_UP_COEFFICEINT_VALUE = 1.1f;
 
 static constexpr const float MOVEMENT_SPEED_INCREASE_AMOUNT_10_PERCENT = 1.1f;
+
 
 using namespace jh::math;
 
@@ -68,6 +71,7 @@ namespace jh
 		, mbIsStartCountingDashTimer(false)
 		, mbIsStartCountingRollingTimer(false)
 		, mbIsLevelUping(false)
+		, mbIsPlayingFootstepSFX(false)
 		, mDashIntervalTimer(DASH_INTERVAL_SECOND)
 		, mDashIntervalTime(DASH_INTERVAL_SECOND)
 		, mRollingIntervalTimer(ROLLING_INTERVAL_SECOND)
@@ -95,6 +99,13 @@ namespace jh
 		{
 			setStateByInput(xPos);
 		}
+
+		if (meState != ePlayerState::MOVING)
+		{
+			SFXManager::GetInstance().Stop(eSFXType::PLAYER_FOOTSTEP);
+			mbIsPlayingFootstepSFX = false;
+		}
+
 		processIfDash(xPos);
 		processIfRolling(xPos);
 		setAnimationFlip();
@@ -108,9 +119,9 @@ namespace jh
 	{
 		mpAnimator->InitializeCurrAnimation();
 	}
-
 	void PlayerScript::AttackOneAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_SWING_ATTACK_1);
 		mpAnimator->InitializeCurrAnimation();
 		mbIsContiueAttacking = false;
 		decreaseStamina(ATTACK_STAMINA_COST);
@@ -132,6 +143,7 @@ namespace jh
 
 	void PlayerScript::AttackTwoAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_SWING_ATTACK_2);
 		mpAnimator->InitializeCurrAnimation();
 		mbIsContiueAttacking = false;
 	}
@@ -153,6 +165,7 @@ namespace jh
 
 	void PlayerScript::AttackThreeAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_SWING_ATTACK_3);
 		mpAnimator->InitializeCurrAnimation();
 		mbIsContiueAttacking = false;
 	}
@@ -165,6 +178,7 @@ namespace jh
 
 	void PlayerScript::PushAttackAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_SWING_ATTACK_2);
 		decreaseStamina(ATTACK_STAMINA_COST);
 	}
 
@@ -175,12 +189,26 @@ namespace jh
 
 	void PlayerScript::DashAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_DASH);
 		decreaseStamina(DASH_STAMINA_COST);
 	}
 
 	void PlayerScript::DashAnimationComplete()
 	{
 		setState(ePlayerState::IDLE);
+	}
+
+	void PlayerScript::HitAnimationStart()
+	{
+		int zeroOrOne = std::rand() % 2;
+		if (zeroOrOne == 0)
+		{
+			SFXManager::GetInstance().Play(eSFXType::PLAYER_HITTED_1);
+		}
+		else
+		{
+			SFXManager::GetInstance().Play(eSFXType::PLAYER_HITTED_2);
+		}
 	}
 
 	void PlayerScript::HitAnimationComplete()
@@ -190,6 +218,7 @@ namespace jh
 
 	void PlayerScript::RollingAnimationStart()
 	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_ROLLING);
 	}
 
 	void PlayerScript::RollingAnimationComplete()
@@ -244,6 +273,7 @@ namespace jh
 		mpAnimator->GetStartEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimDashKey) = std::bind(&PlayerScript::DashAnimationComplete, this);
 
+		mpAnimator->GetStartEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimHittedKey) = std::bind(&PlayerScript::HitAnimationComplete, this);
 
 		mpAnimator->GetStartEvent(mAnimRollingKey) = std::bind(&PlayerScript::RollingAnimationStart, this);
@@ -266,12 +296,23 @@ namespace jh
 			xPos += (mSpeed * Time::DeltaTime());
 			setState(ePlayerState::MOVING);
 			meLookDir = eObjectLookDirection::RIGHT;
+			if (!mbIsPlayingFootstepSFX)
+			{
+				SFXManager::GetInstance().Play(eSFXType::PLAYER_FOOTSTEP);
+				mbIsPlayingFootstepSFX = true;
+			}
 		}
 		else if (Input::GetKeyState(eKeyCode::LEFT) == eKeyState::PRESSED)
 		{
 			xPos -= (mSpeed * Time::DeltaTime());
 			setState(ePlayerState::MOVING);
 			meLookDir = eObjectLookDirection::LEFT;
+		
+			if (!mbIsPlayingFootstepSFX)
+			{
+				SFXManager::GetInstance().Play(eSFXType::PLAYER_FOOTSTEP);
+				mbIsPlayingFootstepSFX = true;
+			}
 		}
 
 		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::DOWN)

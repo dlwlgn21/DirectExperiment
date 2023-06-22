@@ -80,9 +80,9 @@ namespace jh
 
 		void playAnimation();
 		void flipLookDirection();
+		void playAttackingSFX();
 	private:
 		void decreaseHP(const int amount) override;
-
 
 	private:
 		eBossMonsterState				meState;
@@ -90,6 +90,7 @@ namespace jh
 		float							mInvincibilityTimer;
 		bool							mbIsCountingInvincibilityTime;
 		bool							mbIsHittted;
+		float							mAttackSFXTimer;
 	};
 
 }
