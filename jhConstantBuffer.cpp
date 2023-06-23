@@ -26,13 +26,10 @@ namespace jh
 			mBufferDesc.ByteWidth = sizeof(AnimationBuffer);
 			break;
 		}
-		case eConstantBufferType::UV_TRANSLATION:
+		case eConstantBufferType::UI_STAGE_TIME:
 		{
-			mBufferDesc.ByteWidth = sizeof(UVTranslatationBuffer);
+			mBufferDesc.ByteWidth = sizeof(UITimeBuffer);
 			break;
-			//case eConstantBufferType::COLLIDER_COLOR:
-			//	mBufferDesc.ByteWidth = sizeof(ColliderBuffer);
-			//	break;
 		}
 		case eConstantBufferType::UI_BAR:
 		{
@@ -99,10 +96,9 @@ namespace jh
 			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(ANINATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 		}
-		case eConstantBufferType::UV_TRANSLATION:
+		case eConstantBufferType::UI_STAGE_TIME:
 		{
-			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->VSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
-			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(BG_UV_TRANSLATION_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
+			graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(UI_TIME_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());
 			break;
 			//case eConstantBufferType::COLLIDER_COLOR:
 			//	graphics::GraphicDeviceDX11::GetInstance().GetDeivceContext()->PSSetConstantBuffers(COLLIDER_CB_SLOT_NUMBER, 1, mcpConstantBuffer.GetAddressOf());

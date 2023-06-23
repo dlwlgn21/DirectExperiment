@@ -31,6 +31,7 @@ namespace jh
 
 	private:
 		void setRenderer();
+		void setRenderer(MonsterScript* pMonsterScript);
 		void setScript(PlayerScript* pPlayerScript);
 		void setMonsterUI(MonsterScript* pMonsterScript);
 		void setAnimator();

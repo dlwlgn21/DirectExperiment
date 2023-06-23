@@ -14,7 +14,7 @@
 #include "jhPlayerLevelManager.h"
 #include "jhPlayerLevelUpEffectScript.h"
 #include "jhSFXManager.h"
-
+#include "jhGameStateManager.h"
 
 static constexpr const float DASH_DISTANCE = 45.0f;
 static constexpr const float DASH_INTERVAL_SECOND = 1.0f;
@@ -54,6 +54,7 @@ namespace jh
 		, mAnimDashKey(L"PlayerDash")
 		, mAnimHittedKey(L"PlayerHitted")
 		, mAnimRollingKey(L"PlayerRolling")
+		, mAnimDieKey(L"PlayerDie")
 		, mpAnimator(nullptr)
 		, meLookDir(eObjectLookDirection::RIGHT)
 		, mStat(PlayerStat())
@@ -225,6 +226,15 @@ namespace jh
 	{
 		setState(ePlayerState::IDLE);
 	}
+
+	void PlayerScript::DieAnimationStart()
+	{
+		SFXManager::GetInstance().Play(eSFXType::PLAYER_HITTED_2);
+	}
+	void PlayerScript::DieAnimationComplete()
+	{
+		GameStateManager::GetInstance().OnPlayerDeadOrCrystalDestroyed();
+	}
 #pragma endregion
 
 #pragma region COLLISION_TRIGGER
@@ -278,11 +288,14 @@ namespace jh
 
 		mpAnimator->GetStartEvent(mAnimRollingKey) = std::bind(&PlayerScript::RollingAnimationStart, this);
 		mpAnimator->GetCompleteEvent(mAnimRollingKey) = std::bind(&PlayerScript::RollingAnimationComplete, this);
+
+		mpAnimator->GetStartEvent(mAnimDieKey) = std::bind(&PlayerScript::DieAnimationStart, this);
+		mpAnimator->GetCompleteEvent(mAnimDieKey) = std::bind(&PlayerScript::DieAnimationComplete, this);
 	}
 
 	void PlayerScript::setStateByInput(float& xPos)
 	{
-		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH || meState == ePlayerState::ROLLING)
+		if (meState == ePlayerState::ATTACKING || meState == ePlayerState::HITTED || meState == ePlayerState::DASH || meState == ePlayerState::ROLLING || meState == ePlayerState::DEAD)
 		{
 			return;
 		}
@@ -436,6 +449,7 @@ namespace jh
 			mpPlayerHitEffectScript->SetStatePlaying();
 			break;
 		case ePlayerState::DEAD:
+			mpAnimator->PlayAnimation(mAnimDieKey, true);
 			break;
 		default:
 			assert(false);
@@ -519,6 +533,10 @@ namespace jh
 	}
 	void PlayerScript::IncreaseEXP(const UINT exp)
 	{
+		if (meState == ePlayerState::DEAD)
+		{
+			return;
+		}
 		assert(mpPlayerLevelUpEffectScript);
 		mStat.CurrEXP += exp;
 		if (mStat.CurrEXP >= mCurrentLevelExpToLevelUP)
@@ -550,10 +568,15 @@ namespace jh
 
 	void PlayerScript::decreaseHP(CHAR amount)
 	{
+		if (meState == ePlayerState::DEAD)
+		{
+			return;
+		}
 		mStat.CurrentHP -= std::abs(amount);
 		if (mStat.CurrentHP <= 0)
 		{
 			mStat.CurrentHP = 0;
+			setState(ePlayerState::DEAD);
 		}
 	}
 

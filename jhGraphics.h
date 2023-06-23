@@ -10,7 +10,7 @@
 
 static constexpr const UINT TRANSFORM_CB_SLOT_NUMBER = 0;
 static constexpr const UINT ANINATION_CB_SLOT_NUMBER = 1;
-static constexpr const UINT BG_UV_TRANSLATION_CB_SLOT_NUMBER = 2;
+static constexpr const UINT UI_TIME_CB_SLOT_NUMBER = 2;
 static constexpr const UINT COLLIDER_CB_SLOT_NUMBER = 3;
 static constexpr const UINT UI_BAR_CB_SLOT_NUMBER = 3;
 static constexpr const UINT LIGHT_CB_SLOT_NUMBER = 4;
@@ -62,9 +62,14 @@ namespace jh
 	};
 
 
-	struct alignas(SIMD_ALIGN_SIZE) UVTranslatationBuffer
+	struct alignas(SIMD_ALIGN_SIZE) UITimeBuffer
 	{
-		jh::math::Vector4			    UVPosition;
+		jh::math::Vector4			    Time;
+		UITimeBuffer()
+			: Time(jh::math::Vector4::Zero)
+		{
+			static_assert(sizeof(UITimeBuffer) % SIMD_ALIGN_SIZE == 0);
+		}
 	};
 
 	struct alignas(SIMD_ALIGN_SIZE) ColliderBuffer
@@ -140,11 +145,6 @@ namespace jh
 		}
 	};
 	
-	//struct alignas(SIMD_ALIGN_SIZE) MonsterUIAttribute
-	//{
-	//	jh::math::Vector4 MonsterHPRatio;
-	//};
-
 
 	enum class eShaderStage
 	{

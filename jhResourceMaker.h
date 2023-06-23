@@ -29,7 +29,7 @@ namespace jh
 
 		ConstantBuffer* GetTransformCBOrNull() const { return mspTransformConstantBuffer.get(); }
 		ConstantBuffer* GetAnimationCBOrNull() const { return mspAnimationConstantBuffer.get(); }
-		ConstantBuffer* GetUVTranslationCBOrNull() const { return mspUVTranslationConstantBuffer.get(); }
+		ConstantBuffer* GetUITimeCBOrNull() const { return mspUITImeConstantBuffer.get(); }
 		//ConstantBuffer* GetColliderCBOrNull() const { return mspColliderConstantBuffer.get(); }
 		ConstantBuffer* GetUIBarCBOrNull() const { return mspUIBarConstantBuffer.get(); }
 
@@ -55,8 +55,10 @@ namespace jh
 		static const std::wstring UI_EXP_SHADER_KEY;
 		static const std::wstring UI_MONSTER_HP_SHADER_KEY;
 		static const std::wstring UI_BOSS_MONSTER_HP_SHADER_KEY;
+		static const std::wstring UI_MENU_SHADER_KEY;
 		static const std::wstring NORMAL_MAP_SPRITE_SHADER_KEY;
 		static const std::wstring UI_LEVEL_UP_SHADER_KEY;
+		static const std::wstring UI_TIME_BAR_SHADER_KEY;
 #pragma endregion
 
 #pragma region TEXTURE
@@ -134,6 +136,12 @@ namespace jh
 		static const std::wstring UI_MONSTER_HP_BAR_TEXTURE_KEY;
 		static const std::wstring UI_MONSTER_HP_CIRCLE_TEXTURE_KEY;
 		static const std::wstring UI_TEXTURE_LEVEL_UP_BORDER_KEY;
+		static const std::wstring UI_TEXTURE_TIME_BAR_KEY;
+		static const std::wstring UI_TEXTURE_START_BUTTON_KEY;
+		static const std::wstring UI_TEXTURE_QUIT_BUTTON_KEY;
+		static const std::wstring UI_TEXTURE_SELECT_BUTTON_KEY;
+		static const std::wstring UI_TEXTURE_NEW_GAME_BUTTON_KEY;
+		static const std::wstring UI_TEXTURE_GAME_COMPLETE_KEY;
 #pragma endregion
 
 #pragma region EFFECT_TEXTRUE
@@ -244,8 +252,18 @@ namespace jh
 		static const std::wstring UI_EXP_BAR_MATERIAL_KEY;
 		static const std::wstring UI_STAMINA_BAR_MATERIAL_KEY;
 		static const std::wstring UI_MONSTER_HP_BAR_MATERIAL_KEY;
+		static const std::wstring UI_BOSS_MONSTER_HP_BAR_MATERIAL_KEY;
+
 		static const std::wstring UI_MONSTER_HP_CIRCLE_MATERIAL_KEY;
 		static const std::wstring UI_MATERIAL_LEVEL_UP_BORDER_KEY;
+		static const std::wstring UI_MATERIAL_TIME_BAR_KEY;
+
+		static const std::wstring UI_MATERIAL_START_BUTTON_KEY;
+		static const std::wstring UI_MATERIAL_QUIT_BUTTON_KEY;
+		static const std::wstring UI_MATERIAL_SELECT_BUTTON_KEY;
+		static const std::wstring UI_MATERIAL_NEW_GAME_BUTTON_KEY;
+		static const std::wstring UI_MATERIAL_GAME_COMPLETE_KEY;
+
 #pragma endregion
 
 #pragma region EFFECT_MATERIAL
@@ -332,7 +350,7 @@ namespace jh
 			//, mcpPointWrapSampler()
 			, mspTransformConstantBuffer()
 			, mspAnimationConstantBuffer()
-			, mspUVTranslationConstantBuffer()
+			, mspUITImeConstantBuffer()
 			, mspColliderConstantBuffer()
 			, mspUIBarConstantBuffer()
 			, mDebugMeshs()
@@ -353,7 +371,7 @@ namespace jh
 
 		std::unique_ptr<ConstantBuffer>						mspTransformConstantBuffer;
 		std::unique_ptr<ConstantBuffer>						mspAnimationConstantBuffer;
-		std::unique_ptr<ConstantBuffer>						mspUVTranslationConstantBuffer;
+		std::unique_ptr<ConstantBuffer>						mspUITImeConstantBuffer;
 		std::unique_ptr<ConstantBuffer>						mspColliderConstantBuffer;
 		std::unique_ptr<ConstantBuffer>						mspUIBarConstantBuffer;
 

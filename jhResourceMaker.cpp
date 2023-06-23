@@ -39,6 +39,8 @@ namespace jh
 	const std::wstring ResourceMaker::UI_MONSTER_HP_SHADER_KEY = L"UIMonsterShader";
 	const std::wstring ResourceMaker::UI_BOSS_MONSTER_HP_SHADER_KEY = L"UIBossHpShader";
 	const std::wstring ResourceMaker::UI_LEVEL_UP_SHADER_KEY = L"UILevelUPShader";
+	const std::wstring ResourceMaker::UI_MENU_SHADER_KEY = L"UIMenuShader";
+	const std::wstring ResourceMaker::UI_TIME_BAR_SHADER_KEY = L"UITimeShader";
 #pragma endregion
 
 #pragma region TEXTURE
@@ -103,6 +105,12 @@ namespace jh
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_TEXTURE_KEY = L"UIMonsterBar";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_CIRCLE_TEXTURE_KEY = L"UIMonsterCi";
 	const std::wstring ResourceMaker::UI_TEXTURE_LEVEL_UP_BORDER_KEY = L"UILevelUPBorder";
+	const std::wstring ResourceMaker::UI_TEXTURE_TIME_BAR_KEY =			L"UITimeBar";
+	const std::wstring ResourceMaker::UI_TEXTURE_START_BUTTON_KEY =		L"UIStartButton";
+	const std::wstring ResourceMaker::UI_TEXTURE_QUIT_BUTTON_KEY =		L"UIExitButton";
+	const std::wstring ResourceMaker::UI_TEXTURE_SELECT_BUTTON_KEY =		L"UISelectButton";
+	const std::wstring ResourceMaker::UI_TEXTURE_NEW_GAME_BUTTON_KEY =		L"UINewGameButton";
+	const std::wstring ResourceMaker::UI_TEXTURE_GAME_COMPLETE_KEY =		L"UIGameComplete";
 #pragma endregion
 
 #pragma region BG_FG_PARRALAX_TEXTURE
@@ -227,9 +235,18 @@ namespace jh
 	const std::wstring ResourceMaker::UI_HP_BAR_MATERIAL_KEY = L"UIHpBarMaterial";
 	const std::wstring ResourceMaker::UI_EXP_BAR_MATERIAL_KEY = L"UIEXPBarMaterial";
 	const std::wstring ResourceMaker::UI_STAMINA_BAR_MATERIAL_KEY = L"UIStaminarBarMaterial";
+
 	const std::wstring ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY = L"UIMonsterMaterial";
+	const std::wstring ResourceMaker::UI_BOSS_MONSTER_HP_BAR_MATERIAL_KEY = L"UIBossMonsterMaterial";
 	const std::wstring ResourceMaker::UI_MONSTER_HP_CIRCLE_MATERIAL_KEY = L"UIMonsterCircleMaterial";
+
 	const std::wstring ResourceMaker::UI_MATERIAL_LEVEL_UP_BORDER_KEY = L"UILevelUPMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_TIME_BAR_KEY =		L"UITimeBarMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_START_BUTTON_KEY = L"UIStartButtonMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_QUIT_BUTTON_KEY = L"UIExitButtonMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_SELECT_BUTTON_KEY = L"UISelectButtonMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_NEW_GAME_BUTTON_KEY = L"UINewGameButtonMaterial";
+	const std::wstring ResourceMaker::UI_MATERIAL_GAME_COMPLETE_KEY = L"UIGameCompleteMaterial";
 #pragma endregion
 
 #pragma region BG_FG_PARRALAX_MATERIAL
@@ -531,8 +548,12 @@ namespace jh
 		loadAndInsertShader(UI_STAMINA_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserIntefaceStaminaPS.hlsl");
 		loadAndInsertShader(UI_EXP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceExpPS.hlsl");
 		loadAndInsertShader(UI_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceMonsterHealthPS.hlsl");
-		loadAndInsertShader(UI_BOSS_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhBackGroundPS.hlsl");
+		loadAndInsertShader(UI_BOSS_MONSTER_HP_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceBossMonsterHealthPS.hlsl");
+		loadAndInsertShader(UI_MENU_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhBackGroundPS.hlsl");
+
 		loadAndInsertShader(UI_LEVEL_UP_SHADER_KEY, L"jhLevelUpVS.hlsl", L"jhLevelUpPS.hlsl");
+
+		loadAndInsertShader(UI_TIME_BAR_SHADER_KEY, L"jhUserInterfaceVS.hlsl", L"jhUserInterfaceTimeBarPS.hlsl");
 
 
 		Shader* pNormalMapSpriteShader = new NormalMapShader();
@@ -650,6 +671,12 @@ namespace jh
 		loadAndInsertTexture(UI_MONSTER_HP_BAR_TEXTURE_KEY, L"UI_MON_HpBar.png");
 		loadAndInsertTexture(UI_MONSTER_HP_CIRCLE_TEXTURE_KEY, L"UI_MON_Circle_64x64.png");
 		loadAndInsertTexture(UI_TEXTURE_LEVEL_UP_BORDER_KEY, L"UI_Level_UP_Border_256x256.png");
+		loadAndInsertTexture(UI_TEXTURE_TIME_BAR_KEY, L"UI_StageTimeBar.png");
+		loadAndInsertTexture(UI_TEXTURE_START_BUTTON_KEY, L"UI_StartButton.png");
+		loadAndInsertTexture(UI_TEXTURE_QUIT_BUTTON_KEY, L"UI_QuitButton.png");
+		loadAndInsertTexture(UI_TEXTURE_SELECT_BUTTON_KEY, L"UI_SelectBox.png");
+		loadAndInsertTexture(UI_TEXTURE_NEW_GAME_BUTTON_KEY, L"UI_NewGameButton.png");
+		loadAndInsertTexture(UI_TEXTURE_GAME_COMPLETE_KEY, L"UIGameComplete.png");
 #pragma endregion
 
 #pragma region PROTECT_CRYSTAL
@@ -776,12 +803,28 @@ namespace jh
 		insertMaterial(UI_HP_BAR_MATERIAL_KEY, UI_HP_SHADER_KEY, UI_HP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_EXP_BAR_MATERIAL_KEY, UI_EXP_SHADER_KEY, UI_EXP_BAR_TEXTURE_KEY);
 		insertMaterial(UI_STAMINA_BAR_MATERIAL_KEY, UI_STAMINA_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
+		insertMaterial(UI_MATERIAL_START_BUTTON_KEY, UI_MENU_SHADER_KEY, UI_TEXTURE_START_BUTTON_KEY);
+		insertMaterial(UI_MATERIAL_QUIT_BUTTON_KEY, UI_MENU_SHADER_KEY, UI_TEXTURE_QUIT_BUTTON_KEY);
+		insertMaterial(UI_MATERIAL_SELECT_BUTTON_KEY, UI_MENU_SHADER_KEY, UI_TEXTURE_SELECT_BUTTON_KEY);
+		insertMaterial(UI_MATERIAL_NEW_GAME_BUTTON_KEY, UI_MENU_SHADER_KEY, UI_TEXTURE_NEW_GAME_BUTTON_KEY);
+		insertMaterial(UI_MATERIAL_GAME_COMPLETE_KEY, UI_MENU_SHADER_KEY, UI_TEXTURE_GAME_COMPLETE_KEY);
+
+
+		insertMaterial(UI_MATERIAL_TIME_BAR_KEY, UI_TIME_BAR_SHADER_KEY, UI_TEXTURE_TIME_BAR_KEY);
+		//insertMaterial(UI_MATERIAL_TIME_BAR_KEY, UI_MENU_SHADER_KEY, UI_STAMINA_BAR_TEXTURE_KEY);
 
 #pragma region MONSTER_UI
 		ResourcesManager::Insert<Material>(
 			UI_MONSTER_HP_BAR_MATERIAL_KEY,
 			new MonsterUIMaterial(
 				ResourcesManager::Find<Shader>(UI_MONSTER_HP_SHADER_KEY),
+				ResourcesManager::Find<Texture>(UI_MONSTER_HP_BAR_TEXTURE_KEY))
+			);
+
+		ResourcesManager::Insert<Material>(
+			UI_BOSS_MONSTER_HP_BAR_MATERIAL_KEY,
+			new MonsterUIMaterial(
+				ResourcesManager::Find<Shader>(UI_BOSS_MONSTER_HP_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_MONSTER_HP_BAR_TEXTURE_KEY))
 			);
 #pragma endregion
@@ -843,7 +886,7 @@ namespace jh
 	{
 		mspTransformConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::TRANSFORM);
 		mspAnimationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::ANIMATION);
-		mspUVTranslationConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UV_TRANSLATION);
+		mspUITImeConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_STAGE_TIME);
 		//mspColliderConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::COLLIDER_COLOR);
 		mspUIBarConstantBuffer = std::make_unique<ConstantBuffer>(eConstantBufferType::UI_BAR);
 	}
@@ -960,7 +1003,7 @@ namespace jh
 	void ResourceMaker::Release()
 	{
 		//mspColliderConstantBuffer.reset();
-		mspUVTranslationConstantBuffer.reset();
+		mspUITImeConstantBuffer.reset();
 		mspAnimationConstantBuffer.reset();
 		mspTransformConstantBuffer.reset();
 		mspUIBarConstantBuffer.reset();

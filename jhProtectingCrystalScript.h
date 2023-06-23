@@ -5,6 +5,7 @@ namespace jh
 {
 	enum class eCrystalState
 	{
+		START_MENU,
 		ENTERING,
 		STAYING,
 		HITTED,

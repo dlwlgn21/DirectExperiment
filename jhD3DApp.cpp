@@ -11,7 +11,7 @@
 #include "jhPlayerLevelManager.h"
 #include "jhFmodManager.h"
 #include "jhSFXManager.h"
-
+#include "jhGameStateManager.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -33,6 +33,7 @@ namespace jh
 		LightingManager::GetInstance().Initialize();
 		SFXManager::GetInstance().Initialize();
 		SFXManager::GetInstance().Play(eSFXType::BGM);
+		GameStateManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
@@ -65,7 +66,6 @@ namespace jh
 		SetFocus(mHwnd);
 		UpdateWindow(mHwnd);
 	}
-
 	void D3DApp::Run()
 	{
 		Update();
@@ -98,11 +98,12 @@ namespace jh
 
 		LightingManager::GetInstance().ClearLightAttribute();
 	}
+
 	void D3DApp::Release()
 	{
+		SceneManager::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		FmodManager::GetInstace().Release();
-		SceneManager::GetInstance().Release();
 		graphics::GraphicDeviceDX11::GetInstance().Release();
 	}
 	void D3DApp::Present()

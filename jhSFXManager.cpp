@@ -17,7 +17,7 @@ namespace jh
 		PlayScene* pPlayScene = static_cast<PlayScene*>(SceneManager::GetInstance().GetCurrentScene());
 		assert(pPlayScene != nullptr);
 		pPlayScene->AddSFXObject(eSFXType::BGM);
-
+		setLoop(eSFXType::BGM, true);
 		pPlayScene->AddSFXObject(eSFXType::PLAYER_SWING_ATTACK_1);
 
 		pPlayScene->AddSFXObject(eSFXType::PLAYER_SWING_ATTACK_2);
@@ -59,7 +59,6 @@ namespace jh
 		pPlayScene->AddSFXObject(eSFXType::BOSS_MONSTER_POWER_ERUPTION);
 		pPlayScene->AddSFXObject(eSFXType::BOSS_MONSTER_BUFF);
 		pPlayScene->AddSFXObject(eSFXType::BOSS_MONSTER_DIE);
-
 
 		pPlayScene->AddSFXObject(eSFXType::UI_LEVEL_UP_MOVING);
 		pPlayScene->AddSFXObject(eSFXType::UI_LEVEL_UP_CHOICE);

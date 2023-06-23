@@ -17,18 +17,18 @@ namespace jh
 	// PHASE_1
 	const float MonsterSpawner::ZOMBIE_RESPAWN_TIME = 7.0f;
 	const float MonsterSpawner::SWEEPER_RESPAWN_TIME = 7.0f;
-	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 3.0f;
+	const float MonsterSpawner::WARDEN_RESPAWN_TIME = 5.0f;
 	
 	// PHASE_2
-	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 10.0f;
+	const float MonsterSpawner::BLASTER_RESPAWN_TIME = 7.0f;
 	const float MonsterSpawner::DAGGER_RESPAWN_TIME = 10.0f;
 	
 	// PHASE_3
 	const float MonsterSpawner::CAGED_SHOKER_RESPAWN_TIME = 10.0f;
-	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::ARCHER_RESPAWN_TIME = 7.0f;
 
 	// PHASE_4
-	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 5.0f;
+	const float MonsterSpawner::LIGHT_SLICER_RESPAWN_TIME = 8.0f;
 	const float MonsterSpawner::HEABY_SLICER_RESPAWN_TIME = 12.0f;
 
 	// BOSS
@@ -47,7 +47,7 @@ namespace jh
 	static constexpr const float BLASTER_Y_POS = -2.0f;
 	static constexpr const float ACIENT_BOSS_Y_POS = -0.3f;
 
-	static constexpr const float PHASE_1_END_TIME = 10.0f;
+	static constexpr const float PHASE_1_END_TIME = 25.0f;
 	static constexpr const float PHASE_2_END_TIME = PHASE_1_END_TIME * 2;
 	static constexpr const float PHASE_3_END_TIME = PHASE_1_END_TIME * 3;
 	static constexpr const float PHASE_4_END_TIME = PHASE_1_END_TIME * 4;
@@ -72,6 +72,7 @@ namespace jh
 	{
 		assert(mpScene != nullptr && mpPlayerScript != nullptr);
 		mTotalTimeTimer += Time::DeltaTime();
+		mStageChangeTimer += Time::DeltaTime();
 		switch (meStagePhase)
 		{
 		case eStagePhase::FIRST_WARDEN_SWEEPER_STAGE:
@@ -79,6 +80,7 @@ namespace jh
 			if (mTotalTimeTimer > PHASE_1_END_TIME)
 			{
 				changeStagePhase(eStagePhase::SECOND_BLASTER_DAGGER_STAGE);
+				mStageChangeTimer = 0.0f;
 			}
 
 			mSweeperRespawnTimer -= Time::DeltaTime();
@@ -94,6 +96,8 @@ namespace jh
 			if (mTotalTimeTimer > PHASE_2_END_TIME)
 			{
 				changeStagePhase(eStagePhase::THIRD_ARCHER_SHOKER_STAGE);
+				mStageChangeTimer = 0.0f;
+
 			}
 			mBlasterRespawnTimer -= Time::DeltaTime();
 			if (mBlasterRespawnTimer <= 0.0f)
@@ -108,6 +112,8 @@ namespace jh
 			if (mTotalTimeTimer > PHASE_3_END_TIME)
 			{
 				changeStagePhase(eStagePhase::FORTH_LIGHT_HEABY_SLICER_STAGE);
+				mStageChangeTimer = 0.0f;
+
 			}
 			mArcherRespawnTimer -= Time::DeltaTime();
 			if (mArcherRespawnTimer <= 0.0f)
@@ -122,6 +128,7 @@ namespace jh
 			if (mTotalTimeTimer > PHASE_4_END_TIME)
 			{
 				changeStagePhase(eStagePhase::FIFTH_BOSS_STAGE);
+				mStageChangeTimer = 0.0f;
 			}
 
 			mHeabySlicerRespawnTimer -= Time::DeltaTime();
@@ -136,6 +143,7 @@ namespace jh
 		}
 		case eStagePhase::FIFTH_BOSS_STAGE:
 		{
+			mStageChangeTimer = 0.0f;
 			if (mbIsSpawnAcientBoss)
 			{
 				return;
@@ -250,61 +258,50 @@ namespace jh
 		case eMonsterType::LV_1_CAGED_SHOKER:
 		{
 			mCagedShokerRespawnTimer = CAGED_SHOKER_RESPAWN_TIME;
-			//mCagedShokerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_SWEEPER:
 		{
 			mSweeperRespawnTimer = SWEEPER_RESPAWN_TIME;
-			//mSweeperRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_WARDEN:
 		{
 			mWardenRespawnTimer = WARDEN_RESPAWN_TIME;
-			//mWardenRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ZOMBIE:
 		{
 			mZombieRespawnTimer = ZOMBIE_RESPAWN_TIME;
-			//mZombieRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_HEABY_SLICER:
 		{
 			mHeabySlicerRespawnTimer = HEABY_SLICER_RESPAWN_TIME;
-			//mHeabySlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_LIGHT_SLICER:
 		{
 			mLightSlicerRespawnTimer = LIGHT_SLICER_RESPAWN_TIME;
-			//mLightSlicerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_DAGGER:
 		{
 			mDaggerRespawnTimer = DAGGER_RESPAWN_TIME;
-			//mDaggerRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ARCHER:
 		{
 			mArcherRespawnTimer = ARCHER_RESPAWN_TIME;
-			//mArcherRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_BLASTER:
 		{
 			mBlasterRespawnTimer = BLASTER_RESPAWN_TIME;
-			//mBlasterRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		case eMonsterType::LV_1_ACIENT_BOSS:
 		{
-			//mAcientBossRespawnTimer = ACIENT_BOSS_RESPAWN_TIME;
-			//mAcientBossRespawnTimer = WAIT_TIME_FOR_DEBUGING;
 			break;
 		}
 		default:

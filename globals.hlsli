@@ -16,9 +16,9 @@ cbuffer AnimationBuffer : register(b1)
     uint IsAnimFlip;
 };
 
-cbuffer UVTranslationBuffer : register(b2)
+cbuffer UITimeBuffer : register(b2)
 {
-    float4 UVTranslationPostion;
+    float4 TimeRatio;
 };
 
 //cbuffer ColliderBuffer : register(b3)

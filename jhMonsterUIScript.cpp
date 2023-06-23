@@ -13,7 +13,7 @@
 
 using namespace jh::math;
 
-static constexpr float HP_BAR_Y_DISTANCE_FROM_MONSTER = -1.5f;
+static constexpr float HP_BAR_Y_DISTANCE_FROM_MONSTER = 1.5f;
 static constexpr float HP_BAR_Y_DISTANCE_FROM_BOSS_MONSTER = 2.5f;
 
 namespace jh
@@ -49,7 +49,7 @@ namespace jh
 			mpTransform->SetPosition(Vector3(currMonPos.x, currMonPos.y + HP_BAR_Y_DISTANCE_FROM_BOSS_MONSTER, MONSTER_HP_BAR_Z_VALUE));
 			return;
 		}
-		mpTransform->SetOnlyXYScale(hpRatio * 0.7f);
-		mpTransform->SetPosition(Vector3(currMonPos.x, currMonPos.y- 0.3f, MONSTER_HP_BAR_Z_VALUE));
+		mpTransform->SetOnlyXScale(hpRatio);
+		mpTransform->SetPosition(Vector3(currMonPos.x, currMonPos.y + HP_BAR_Y_DISTANCE_FROM_MONSTER, MONSTER_HP_BAR_Z_VALUE));
 	}
 }

@@ -436,6 +436,36 @@
     <Filter Include="Component\Script\AudioSource">
       <UniqueIdentifier>{a1a110e0-b00f-4ff3-a083-ec6a6faf81a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\UI\StartUI">
+      <UniqueIdentifier>{5ce83f60-5466-4c4b-8aed-a5682ac8e9c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\StartUI\Button">
+      <UniqueIdentifier>{1ab76d85-dc3c-4c40-b6ad-d405769a07e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\StartMenu">
+      <UniqueIdentifier>{c525b1c2-b847-428d-821b-62a3cd6800d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStateManager">
+      <UniqueIdentifier>{bd917597-b61a-463d-ad6c-e69a34287a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\GameOverMenu">
+      <UniqueIdentifier>{155d7b90-7d5e-47fa-8d0f-801cc88ee690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\Menu">
+      <UniqueIdentifier>{97abd51e-4e50-4bf8-a241-9879356d2ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\Menu\Base">
+      <UniqueIdentifier>{f669ecce-f562-47f3-835b-9d1604089b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\TimeBar">
+      <UniqueIdentifier>{8835147e-01f0-4f8e-a08c-06eac68dac63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\GameComplete">
+      <UniqueIdentifier>{8fa53d15-d7c8-48f8-bb31-fd3ae53fa78d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\UI\GameCompleteScript">
+      <UniqueIdentifier>{d1c9a406-a014-448b-ac10-f12e39f59119}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -813,6 +843,33 @@
     <ClInclude Include="jhAudioSorceScrpt.h">
       <Filter>Component\Script\AudioSource</Filter>
     </ClInclude>
+    <ClInclude Include="jhMenuButtonObejct.h">
+      <Filter>GameObject\UI\StartUI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStartMenuSelectBoxScript.h">
+      <Filter>Component\Script\UI\StartMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGameStateManager.h">
+      <Filter>GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGameOberMenuSelectBoxScript.h">
+      <Filter>Component\Script\UI\GameOverMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMenuSelectBoxScript.h">
+      <Filter>Component\Script\UI\Menu\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUITimeBarObject.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhUITimeBarScript.h">
+      <Filter>Component\Script\UI\TimeBar</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGameCompleteObject.h">
+      <Filter>GameObject\UI\GameComplete</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGameCompleteScript.h">
+      <Filter>Component\Script\UI\GameCompleteScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -1157,6 +1214,33 @@
     <ClCompile Include="jhAudioSorceScrpt.cpp">
       <Filter>Component\Script\AudioSource</Filter>
     </ClCompile>
+    <ClCompile Include="jhMenuButtonObejct.cpp">
+      <Filter>GameObject\UI\StartUI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStartMenuSelectBoxScript.cpp">
+      <Filter>Component\Script\UI\StartMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGameStateManager.cpp">
+      <Filter>GameStateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGameOberMenuSelectBoxScript.cpp">
+      <Filter>Component\Script\UI\GameOverMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMenuSelectBoxScript.cpp">
+      <Filter>Component\Script\UI\Menu\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUITimeBarObject.cpp">
+      <Filter>GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhUITimeBarScript.cpp">
+      <Filter>Component\Script\UI\TimeBar</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGameCompleteObject.cpp">
+      <Filter>GameObject\UI\GameComplete</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGameCompleteScript.cpp">
+      <Filter>Component\Script\UI\GameCompleteScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectExperiment.rc">
@@ -1215,6 +1299,12 @@
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
     <FxCompile Include="jhUserInterfaceExpPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceBossMonsterHealthPS.hlsl">
+      <Filter>ShaderResource\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="jhUserInterfaceTimeBarPS.hlsl">
       <Filter>ShaderResource\PS</Filter>
     </FxCompile>
   </ItemGroup>

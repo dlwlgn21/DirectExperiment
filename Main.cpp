@@ -113,9 +113,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+    case WM_CLOSE:
+    {
+        DestroyWindow(hWnd);
+        break;
+    }
     case WM_DESTROY:
+    {
         PostQuitMessage(0);
         break;
+    }
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
@@ -128,6 +135,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     UNREFERENCED_PARAMETER(lParam);
     switch (message)
     {
+
     case WM_INITDIALOG:
         return (INT_PTR)TRUE;
 
@@ -138,6 +146,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             return (INT_PTR)TRUE;
         }
         break;
+
     }
     return (INT_PTR)FALSE;
 }

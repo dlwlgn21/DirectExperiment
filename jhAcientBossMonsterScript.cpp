@@ -6,6 +6,7 @@
 #include "jhCollider2D.h"
 #include "jhBossMonster.h"
 #include "jhSFXManager.h"
+#include "jhGameStateManager.h"
 #include <random>
 
 static constexpr const float ATTACK_SFX_INTERVAL_TIME = 0.1f;
@@ -31,6 +32,7 @@ static constexpr float ACIENT_BOSS_INITIAL_SPEED = 1.0f;
 
 static constexpr const UINT PHASE_2_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.7f);
 static constexpr const UINT PHASE_3_HP = static_cast<UINT>(ACIENT_BOSS_INITIAL_HP * 0.5f);
+
 
 
 namespace jh
@@ -428,6 +430,7 @@ namespace jh
 	void AcientBossMonsterScript::AnimationDieComplete()
 	{
 		static_cast<BossMonster*>(GetOwner())->SetInactive();
+		GameStateManager::GetInstance().OnKillBossMonster();
 	}
 #pragma endregion
 

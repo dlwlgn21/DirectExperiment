@@ -591,7 +591,7 @@ namespace jh
 			fillAnimationDurationArray(
 				animDurations,
 				DEFAULT_ANIM_DURATION,
-				DEFAULT_ANIM_DURATION,
+				DEFAULT_ANIM_DURATION + 0.05f,
 				DEFAULT_ANIM_DURATION,
 				DEFAULT_ANIM_DURATION
 			);

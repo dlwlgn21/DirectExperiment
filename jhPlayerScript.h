@@ -4,7 +4,7 @@
 #include "jhMath.h"
 #include "jhPlayerLevelManager.h"
 
-static constexpr const int		INITIAL_HP = 10;
+static constexpr const int		INITIAL_HP = 100;
 static constexpr const int		INITIAL_STAMINA = 5;
 static constexpr const int		INITIAL_ATTACK_DAMAGE = 2;
 
@@ -139,6 +139,9 @@ namespace jh
 
 		void HitAnimationStart();
 		void HitAnimationComplete();
+
+		void DieAnimationStart();
+		void DieAnimationComplete();
 #pragma endregion
 #pragma region COLLISION_TRIGGER
 		void OnTriggerEnter(Collider2D* pOtherCollider) override;
@@ -201,6 +204,7 @@ namespace jh
 		const std::wstring				mAnimDashKey;
 		const std::wstring				mAnimHittedKey;
 		const std::wstring				mAnimRollingKey;
+		const std::wstring				mAnimDieKey;
 		eObjectLookDirection			meLookDir;
 		ePlayerState					meState;
 		eAttackType						meAttackType;

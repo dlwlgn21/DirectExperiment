@@ -32,6 +32,10 @@ namespace jh
 		void Initialize(PlayerScript* pPlayerScript);
 		void Update();
 		const eStagePhase GetStagePhase() const { return meStagePhase; }
+		float GetStageChangeTimerTime() const	{ return mStageChangeTimer; }
+
+	public:
+		static constexpr const float STAGE_CHANGE_TIME = 25.0f;
 
 	private:
 		MonsterSpawner()
@@ -50,6 +54,7 @@ namespace jh
 			, mTotalTimeTimer(0.0f)
 			, meStagePhase(eStagePhase::FIRST_WARDEN_SWEEPER_STAGE)
 			, mbIsSpawnAcientBoss(false)
+			, mStageChangeTimer(0.0f)
 		{
 			mPortalEffectObjects.reserve(static_cast<UINT>(eMonsterType::COUNT));
 			mPortalEffectObjects.resize(static_cast<UINT>(eMonsterType::COUNT));
@@ -98,6 +103,7 @@ namespace jh
 		jh::math::Vector3					mPlayerPos;
 		eStagePhase							meStagePhase;
 		float								mTotalTimeTimer;
+		float								mStageChangeTimer;
 		bool								mbIsSpawnAcientBoss;
 	};
 }

@@ -9,6 +9,7 @@ namespace jh
 {
 	class Transform;
 	class PlayerScript;
+	class ProtectingCrystalScript;
 	class PlayScene final : public Scene
 	{
 	public:
@@ -23,6 +24,13 @@ namespace jh
 		void AddBossMonster(AcientBossMonsterPackage& monPack);
 		void AddSkillObejct(GameObject* pGameObject);
 		void AddSFXObject(const eSFXType eType);
+
+		void SetIsStartGameTrue()	{ mbIsStartGame = true; }	
+		bool IsStartGame() const	{ return mbIsStartGame; }
+		void InstantiateUIObject();
+		void ChangeCrystalState();
+		PlayerScript* GetPlayerScript() { assert(mpPlayerScript != nullptr); return mpPlayerScript; }
+		std::vector<GameObject*>& GetUIObjects() { return mpUIObjects; }
 	private:
 		void instantiateLight(PlayerScript* pPlayerScript);
 		PlayerScript* instantiateCameraAndPlayer();
@@ -30,13 +38,15 @@ namespace jh
 		void instantiateEnvObject();
 		void instatiateTreeObejct();
 		void instatiateLightningObejct();
-		void instantiateUIObject(PlayerScript* pPlayerScript);
 		void instantiateEnvTreeObject(const float xPos, const eTreeShapeType eTreeType, const eTreeAnimType eAnimType);
 		void instantiateLightObject(const LightAttribute& lightAttribute, const jh::math::Vector2& pos);
 		void instantiateLightObject(const LightAttribute& lightAttribute, Transform* pTransform);
 
 	private:
-		PlayerScript* mpPlayerScript;
+		PlayerScript*				mpPlayerScript;
+		ProtectingCrystalScript*	mpCrystalScript;
+		bool						mbIsStartGame;
+		std::vector<GameObject*>	mpUIObjects;
 	};
 }
 

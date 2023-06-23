@@ -49,6 +49,7 @@
 #include "jhPlayerLevelManager.h"
 #include "jhUILevelUPBorderObject.h"
 #include "jhUISkillSelectBoxObject.h"
+#include "jhUITimeBarObject.h"
 
 #include "jhPlayerLevelUpEffectObject.h"
 #include "jhPlayerLevelUpEffectScript.h"
@@ -61,6 +62,11 @@
 #include "jhAudioSource.h"
 #include "jhAudioSorceScrpt.h"
 #include "jhSFXManager.h"
+
+#include "jhMenuButtonObejct.h"
+#include "jhStartMenuSelectBoxScript.h"
+
+#include "jhGameCompleteObject.h"
 
 using namespace jh::math;
 
@@ -104,7 +110,11 @@ namespace jh
 	PlayScene::PlayScene()
 		: Scene(eSceneType::PLAY_SCENE)
 		, mpPlayerScript(nullptr)
+		, mpCrystalScript(nullptr)
+		, mbIsStartGame(false)
+		, mpUIObjects()
 	{
+		mpUIObjects.reserve(8);
 	}
 
 	void PlayScene::Initialize()
@@ -122,7 +132,6 @@ namespace jh
 		instantiateLight(pPlayerScript);
 		instantiateParallaxObjects();
 		instantiateEnvObject();
-		instantiateUIObject(pPlayerScript);
 #pragma endregion
 
 #pragma region COLLISION_CHECK
@@ -147,31 +156,81 @@ namespace jh
 		}
 		this->AddGameObject(PlayerLevelManager::GetInstance().GetSkillSelectBox(), eLayerType::LEVEL_UP_UI);
 #pragma endregion
-
+		
 #pragma region PROTECTING_CRYSTAL
 		ProtectingCrystalObject* pCrystal = new ProtectingCrystalObject();
-		static_cast<ProtectingCrystalScript*>(pCrystal->GetScriptOrNull())->SetPlayerScript(pPlayerScript);
+		mpCrystalScript = static_cast<ProtectingCrystalScript*>(pCrystal->GetScriptOrNull());
+		assert(mpCrystalScript != nullptr);
+		mpCrystalScript->SetPlayerScript(pPlayerScript);
 		this->AddGameObject(pCrystal, eLayerType::PROTECTING_OBJECT);
 #pragma endregion
 
-
-#pragma region AUDIO_OBJECT
-		//GameObject* pBGMObject = new GameObject();
+#pragma region START_MENU_BUTTON
+		MenuButtonObejct* pStartButton = new MenuButtonObejct(eMenuButtonType::START);
+		MenuButtonObejct* pQuitButton = new MenuButtonObejct(eMenuButtonType::QUIT);
+		MenuButtonObejct* pSelectButton = new MenuButtonObejct(eMenuButtonType::START_SELECT_BOX);
+		static_cast<StartMenuSelectBoxScrip*>(pSelectButton->GetScriptOrNull())->SetTopButtonObject(pStartButton);
+		static_cast<StartMenuSelectBoxScrip*>(pSelectButton->GetScriptOrNull())->SetBottomButtonObject(pQuitButton);
+		this->AddGameObject(pStartButton, eLayerType::UI);
+		this->AddGameObject(pQuitButton, eLayerType::UI);
+		this->AddGameObject(pSelectButton, eLayerType::UI);
 
 #pragma endregion
-
 		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
 	{
-		if (!PlayerLevelManager::GetInstance().IsProcessingLevelUp()) 
+		if (!PlayerLevelManager::GetInstance().IsProcessingLevelUp() && mbIsStartGame) 
 		{
 			MonsterSpawner::GetInstance().Update();
 		}
 		Scene::Update();
 	}
+	void PlayScene::InstantiateUIObject()
+	{
+		assert(mpPlayerScript != nullptr);
+		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, mpPlayerScript);
+		this->AddGameObject(pHealthBorderOject, eLayerType::UI);
+		pHealthBorderOject->Initialize();
+		mpUIObjects.push_back(pHealthBorderOject);
 
+		UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR, mpPlayerScript);
+		this->AddGameObject(pHpBarOject, eLayerType::UI);
+		pHpBarOject->Initialize();
+		mpUIObjects.push_back(pHpBarOject);
+
+		UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER, mpPlayerScript);
+		this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
+		pStaminaBorderOject->Initialize();
+		mpUIObjects.push_back(pStaminaBorderOject);
+
+
+		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, mpPlayerScript);
+		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
+		pStaminarBarOject->Initialize();
+		mpUIObjects.push_back(pStaminarBarOject);
+
+		UIBarObject* pExpBorderOject = new UIBarObject(eUIBarType::EXP_BORDER, mpPlayerScript);
+		this->AddGameObject(pExpBorderOject, eLayerType::UI);
+		pExpBorderOject->Initialize();
+		mpUIObjects.push_back(pExpBorderOject);
+
+		UIBarObject* pExpBarOject = new UIBarObject(eUIBarType::EXP_BAR, mpPlayerScript);
+		this->AddGameObject(pExpBarOject, eLayerType::UI);
+		pExpBarOject->Initialize();
+		mpUIObjects.push_back(pExpBarOject);
+
+		UITimeBarObject* pTimeBarOject = new UITimeBarObject();
+		this->AddGameObject(pTimeBarOject, eLayerType::UI);
+		pTimeBarOject->Initialize();
+		mpUIObjects.push_back(pTimeBarOject);
+	}
+	void PlayScene::ChangeCrystalState()
+	{
+		assert(mpCrystalScript != nullptr);
+		mpCrystalScript->SetState(eCrystalState::ENTERING);
+	}
 #pragma region INSTANTIATE
 #pragma region PLAYER_AND_CAMERA
 	PlayerScript* PlayScene::instantiateCameraAndPlayer()
@@ -239,6 +298,8 @@ namespace jh
 	}
 #pragma endregion
 
+
+
 #pragma region FG_AND_PARALLAX
 	void PlayScene::instantiateParallaxObjects()
 	{
@@ -296,9 +357,8 @@ namespace jh
 	void PlayScene::instantiateEnvObject()
 	{
 		BGMoonObject* pBGMoon = Instantiate<BGMoonObject>(eLayerType::BACKGROUND);
-		//ObeliskObject* pObeliskObject = Instantiate<ObeliskObject>(eLayerType::BACKGROUND);
 		BGMushRoomStatueObject* pBGMushroomStatue = Instantiate<BGMushRoomStatueObject>(eLayerType::BACKGROUND);
-		pBGMushroomStatue->SetPosition(-45.0f);
+		pBGMushroomStatue->SetPosition(-15.0f);
 
 
 		instatiateLightningObejct();
@@ -398,29 +458,7 @@ namespace jh
 	}
 
 #pragma endregion
-#pragma region UI
-	void PlayScene::instantiateUIObject(PlayerScript* pPlayerScript)
-	{
-		UIBarObject* pHealthBorderOject = new UIBarObject(eUIBarType::HEALTH_BORDER, pPlayerScript);
-		this->AddGameObject(pHealthBorderOject, eLayerType::UI);
 
-		UIBarObject* pHpBarOject = new UIBarObject(eUIBarType::HEALTH_BAR, pPlayerScript);
-		this->AddGameObject(pHpBarOject, eLayerType::UI);
-
-		UIBarObject* pStaminaBorderOject = new UIBarObject(eUIBarType::STAMINAR_BORDER, pPlayerScript);
-		this->AddGameObject(pStaminaBorderOject, eLayerType::UI);
-
-		UIBarObject* pStaminarBarOject = new UIBarObject(eUIBarType::STAMINA_BAR, pPlayerScript);
-		this->AddGameObject(pStaminarBarOject, eLayerType::UI);
-
-		UIBarObject* pExpBorderOject = new UIBarObject(eUIBarType::EXP_BORDER, pPlayerScript);
-		this->AddGameObject(pExpBorderOject, eLayerType::UI);
-
-		UIBarObject* pExpBarOject = new UIBarObject(eUIBarType::EXP_BAR, pPlayerScript);
-		this->AddGameObject(pExpBarOject, eLayerType::UI);
-
-	}
-#pragma endregion
 #pragma endregion
 #pragma region ADD_GAME_OBECJT
 	void PlayScene::AddMonster(const MonsterPackage& monPack)

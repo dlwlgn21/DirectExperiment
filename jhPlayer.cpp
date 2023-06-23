@@ -27,28 +27,22 @@ namespace jh
 
 	Player::Player()
 		: GameObject(eLayerType::PLAYER)
+		, mpDashEffect(nullptr)
+		, mpHitEffect(nullptr)
 	{
 		setRenderer();
 		setAnimator();
 		setScript();
 		setCollider();
 	}
-	void Player::Initialize()
+
+	void Player::Inactive()
 	{
-		GameObject::Initialize();
+		mpDashEffect->SetState(eGameObjectState::INACTIVE);
+		mpHitEffect->SetState(eGameObjectState::INACTIVE);
+		this->SetState(eGameObjectState::INACTIVE);
 	}
-	void Player::Update()
-	{
-		GameObject::Update();
-	}
-	void Player::FixedUpdate()
-	{
-		GameObject::FixedUpdate();
-	}
-	void Player::Render()
-	{
-		GameObject::Render();
-	}
+
 	void Player::SetDustEffectToPlayerScript(PlayerDustEffectObject* pPlayerDustEffectObject)
 	{
 		assert(pPlayerDustEffectObject != nullptr);
@@ -59,11 +53,13 @@ namespace jh
 		PlayerDustEffectScript* pScript = new PlayerDustEffectScript(static_cast<PlayerScript*>(this->GetScriptOrNull()));
 		pPlayerDustEffectObject->AddScript(pScript);
 		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerDustEffectScript(pScript);
+		mpDashEffect = pPlayerDustEffectObject;
 	}
 	void Player::SetHitEffectToPlayerScript(HitEffectObject* pHitEffectObject)
 	{
 		assert(pHitEffectObject != nullptr);
 		static_cast<PlayerScript*>(this->GetScriptOrNull())->SetPlayerHitEffectScript(static_cast<PlayerHitEffectScript*>(pHitEffectObject->GetScriptOrNull()));
+		mpHitEffect = pHitEffectObject;
 	}
 
 	void Player::setAnimator()
@@ -173,6 +169,17 @@ namespace jh
 			OFFSET,
 			8,
 			0.075f,
+			MAGNINICATION
+		);
+
+		pPlayerAnimator->Create(
+			L"PlayerDie",
+			pAtlas,
+			Vector2(0.0f, HEIGHT * 26),
+			ANIM_SIZE,
+			OFFSET,
+			6,
+			0.1f,
 			MAGNINICATION
 		);
 

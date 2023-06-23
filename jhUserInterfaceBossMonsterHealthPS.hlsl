@@ -9,9 +9,15 @@ float4 main(VertexOut vIn) : SV_TARGET
     {
         discard;
     }
-    if (vIn.UV.y > Y_RESTRICTION_VALUE)
+
+    if (vIn.UV.x > MonsterHPRatio.x)
     {
-        discard;
+        if (vIn.UV.y > Y_RESTRICTION_VALUE)
+        {
+            discard;
+        }
+        return float4(0.0f, 0.0f, 0.0f, 1.0f);
     }
-    return float4(0.0f, 0.0f, 0.0f, 1.0f);
+    
+    return color;
 }

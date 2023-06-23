@@ -80,11 +80,11 @@ namespace jh
 
 	UIBarObject::UIBarObject(MonsterScript* pMonsterScript)
 		: GameObject(eLayerType::MONSTER_UI)
-		, meType(eUIBarType::MOSNTER_HP_CIRCLE)
+		, meType(eUIBarType::MONSTER_HP_BAR)
 	{
 		assert(pMonsterScript != nullptr);
 		setMonsterUI(pMonsterScript);
-		setAnimator();
+		//setAnimator();
 	}
 	UIBarObject::UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript)
 		: GameObject(eLayerType::MONSTER_UI)
@@ -124,9 +124,34 @@ namespace jh
 			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_EXP_BAR_MATERIAL_KEY);
 			break;
 		}
+
+		default:
+			assert(false);
+			break;
+		}
+
+		assert(pMesh != nullptr);
+		assert(pMaterial != nullptr);
+		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
+		this->AddComponent(pSpriteRenderer);
+	}
+
+	void UIBarObject::setRenderer(MonsterScript* pMonsterScript)
+	{
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
+		Material* pMaterial = nullptr;
+		switch (meType)
+		{
 		case eUIBarType::MONSTER_HP_BAR:
 		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
+			if (pMonsterScript->GetMonsterType() != eMonsterType::LV_1_ACIENT_BOSS)
+			{
+				pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
+			}
+			else
+			{
+				pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_BOSS_MONSTER_HP_BAR_MATERIAL_KEY);
+			}
 			break;
 		}
 		case eUIBarType::MOSNTER_HP_CIRCLE:
@@ -138,7 +163,6 @@ namespace jh
 			assert(false);
 			break;
 		}
-
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
@@ -154,12 +178,16 @@ namespace jh
 	void UIBarObject::setMonsterUI(MonsterScript* pMonsterScript)
 	{
 		assert(pMonsterScript != nullptr);
-		setRenderer();
+		setRenderer(pMonsterScript);
 		if (pMonsterScript->GetMonsterType() == eMonsterType::LV_1_ACIENT_BOSS)
 		{
 			GetTransform()->SetOnlyXScale(3.0f);
 		}
-		//GetTransform()->SetPosition(Vector3(0.0f, STAMINA_BORDER_Y_VALUE + 4.0f, BAR_Z_VALUE));
+		else
+		{
+			GetTransform()->SetOnlyXScale(3.0f);
+			GetTransform()->SetOnlyYScale(0.2f);
+		}
 		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
 		this->AddScript(pScript);
 		pScript->SetMounsterUIType(meType);
