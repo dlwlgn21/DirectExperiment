@@ -15,7 +15,7 @@ static constexpr const int   X_DISTNACE_RANDOM_RANGE = 2;
 static constexpr const float DISTANCE_FROM_PLAYER_Y_DISTANCE = 10.0f;
 static constexpr const float ELECTRIC_STRIKE_Y_POS_DISTANCE_FROM_PLAYER = 1.5f;
 static constexpr const UINT ELECTRIC_STRIKE_ANIMATION_DAMGAE_VAILED_INDEX = 3;
-static constexpr const UINT ELECTRIC_STRIKE_DAMAGE = 6;
+static constexpr const UINT ELECTRIC_STRIKE_DAMAGE = 2;
 static constexpr const float ELECTRIC_STRIKE_COOL_TIME = 1.0f;
 static constexpr const float ELECTRIC_STRIKE_PUSH_DISTANCE = 0.0f;
 

@@ -7,14 +7,13 @@
 #include "Fmod/Include/fmod_common.h"
 #include "Fmod/Include/fmod_studio.hpp"
 
-//#ifdef _DEBUG
-//#pragma comment(lib, "D:/DirectExperiment/Fmod/Library/Debug/fmodL_vc.lib")
-//#pragma comment(lib, "D:/DirectExperiment/Fmod/Library/Debug/fmodstudioL_vc.lib")
-//#else
-//#pragma comment(lib, "..\\..\\Fmod\\Library\\Release\\fmod_vc.lib")
-//#pragma comment(lib, "..\\..\\Fmod\\Library\\Release\\fmodstudio_vc.lib")
-//assert(fasle);
-//#endif // _DEBUG
+#ifdef _DEBUG
+#pragma comment(lib, "fmodL_vc.lib")
+#pragma comment(lib, "fmodstudioL_vc.lib")
+#else
+#pragma comment(lib, "fmod_vc.lib")
+#pragma comment(lib, "fmodstudio_vc.lib")
+#endif // _DEBUG
 
 namespace jh
 {

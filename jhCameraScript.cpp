@@ -8,9 +8,9 @@
 
 using namespace jh::math;
 
-static constexpr const INT PLAYER_HITTED_CAM_SHAKE_RANGE = 7;
-static constexpr const INT SKILL_ATTACK_CAM_SHAKE_RANGE = 15;
-static constexpr const INT POWER_ATTACK_CAM_SHAKE_RANGE = 10;
+static constexpr const INT PLAYER_HITTED_CAM_SHAKE_RANGE = 4;
+static constexpr const INT SKILL_ATTACK_CAM_SHAKE_RANGE = 5;
+static constexpr const INT POWER_ATTACK_CAM_SHAKE_RANGE = 4;
 static constexpr const float RESTRICTION = 100.0f;
 static constexpr const float Y_CAMERA_POS = 0.0f;
 static constexpr const float PLAYER_POWER_ATTACK_CAM_SHAKE_TIME = 0.2f;
