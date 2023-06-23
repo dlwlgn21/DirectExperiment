@@ -179,16 +179,13 @@ namespace jh
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_TORNADO_LV_1);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_TORNADO_LV_1);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_TORNADO_LV_1, eSkillIconType::ELECTRIC_TORNADO);
-				
 					setSampledSkillInfo(eSkillIconType::ELECTRIC_TORNADO, eSkillTextType::ELECTRIC_TORNADO_LV_1, eSkillPos);
-
 				}
 				else
 				{
 					setSkillTextObjectStateToActive(eSkillTextType::ELECTRIC_SPAWN_SPEED);
 					setSkillTextStateToEntering(eSkillTextType::ELECTRIC_SPAWN_SPEED);
 					setSkillTextPositionToSkillIconPostion(eSkillTextType::ELECTRIC_SPAWN_SPEED, eSkillIconType::ELECTRIC_TORNADO);
-				
 					setSampledSkillInfo(eSkillIconType::ELECTRIC_TORNADO, eSkillTextType::ELECTRIC_SPAWN_SPEED, eSkillPos);
 				}
 				break;
@@ -348,6 +345,7 @@ namespace jh
 		case jh::eSkillTextType::SWORD_DAMAGE:
 		{
 			++mpPlayerScript->mSkillStat.CurrSwordLevel;
+			++mpPlayerScript->mStat.AttackDamage;
 			break;
 		}
 		case jh::eSkillTextType::MOVEMENT_SPEED:
