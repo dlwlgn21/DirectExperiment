@@ -32,6 +32,6 @@ namespace jh
 	void UITimeBarObject::setTransform()
 	{
 		GetTransform()->SetScale(Vector3(10.0f, 0.1f, 1.0f));
-		GetTransform()->SetPosition(Vector3(0.0f, 4.0f, 1.0f));
+		GetTransform()->SetPosition(Vector3(0.0f, 4.0f + 2.0f, 1.0f));
 	}
 }

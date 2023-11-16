@@ -32,24 +32,26 @@ namespace jh
 		SceneManager::GetInstance().Initialize();
 		LightingManager::GetInstance().Initialize();
 		SFXManager::GetInstance().Initialize();
-		SFXManager::GetInstance().Play(eSFXType::BGM);
+		//SFXManager::GetInstance().Play(eSFXType::BGM);
 		GameStateManager::GetInstance().Initialize();
 	}
 	void D3DApp::initializeWindow(LPCWSTR className, LPCWSTR titleName, const UINT screenWidth, const UINT screenHeight, HINSTANCE hInstance, const int nCmdShow)
 	{
 		mScreenWidth = screenWidth;
 		mScreenHeight = screenHeight;
-		RECT wr{ 0, 0, static_cast<LONG>(mScreenWidth), static_cast<LONG>(mScreenHeight) };
-		AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
+
+
+		//RECT wr{ 0, 0, static_cast<LONG>(mScreenWidth), static_cast<LONG>(mScreenHeight) };
+		//AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 
 		mHwnd = CreateWindowW(
 			className,
 			titleName,
 			WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT,
+			0,
 			CW_USEDEFAULT,
-			wr.right - wr.left,
-			wr.bottom - wr.top,
+			0,
 			nullptr,
 			nullptr,
 			hInstance,
@@ -60,7 +62,34 @@ namespace jh
 		{
 			assert(false);
 		}
+		// New Part
+		HMONITOR hMonitor = MonitorFromWindow(mHwnd, MONITOR_DEFAULTTONEAREST);
+		MONITORINFO monitorInfo = { sizeof(MONITORINFO) };
+		if (!GetMonitorInfo(hMonitor, &monitorInfo))
+		{
+			assert(false);
+		}
+
+		mHwnd = CreateWindowW(
+			className,
+			titleName,
+			WS_POPUP | WS_VISIBLE,
+			monitorInfo.rcMonitor.left,
+			monitorInfo.rcMonitor.top,
+			monitorInfo.rcMonitor.right - monitorInfo.rcMonitor.left,
+			monitorInfo.rcMonitor.bottom - monitorInfo.rcMonitor.top,
+			nullptr,
+			nullptr,
+			hInstance,
+			nullptr
+		);
+		if (mHwnd == nullptr)
+		{
+			assert(false);
+		}
+
 		mHDC = GetDC(mHwnd);
+		SetWindowPos(mHwnd, nullptr, 0, 0, mScreenWidth, mScreenHeight, 0);
 		ShowWindow(mHwnd, nCmdShow);
 		SetForegroundWindow(mHwnd);
 		SetFocus(mHwnd);
@@ -101,6 +130,7 @@ namespace jh
 
 	void D3DApp::Release()
 	{
+		SFXManager::GetInstance().StopAllSFX();
 		SceneManager::GetInstance().Release();
 		ResourceMaker::GetInstance().Release();
 		FmodManager::GetInstace().Release();

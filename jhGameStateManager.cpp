@@ -7,6 +7,7 @@
 #include "jhMenuButtonObejct.h"
 #include "jhGameOberMenuSelectBoxScript.h"
 #include "jhGameCompleteObject.h"
+#include "jhSFXManager.h"
 
 namespace jh
 {
@@ -46,7 +47,5 @@ namespace jh
 		{
 			pObject->SetState(GameObject::eGameObjectState::INACTIVE);
 		}
-
 	}
-
 }

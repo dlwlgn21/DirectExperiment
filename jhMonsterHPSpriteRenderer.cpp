@@ -1,6 +1,9 @@
 #include "jhMonsterHPSpriteRenderer.h"
 #include "jhTransform.h"
 #include "jhMesh.h"
+#include "jhMonsterUIManager.h"
+#include "jhMonsterScript.h"
+#include "jhMonsterUIScript.h"
 
 namespace jh
 {
@@ -34,6 +37,11 @@ namespace jh
 		mpTransform->SetPipeline();
 		mpMaterial->SetPipeline(Material::DEFAULT_TEXTURE_SLOT_NUMBER_0);
 		mpMesh->SetPipeline();
+		MonsterUIScript* pUIScript = static_cast<MonsterUIScript*>(GetOwner()->GetScriptOrNull());
+		const MonsterHPstatus monHpStat = pUIScript->GetMonsterScript()->GetCurrentHPStatus();
+		const float hpRatio = static_cast<float>(monHpStat.CurrHP) / monHpStat.MaxHP;
+		MonsterUIManager::GetInstance().WriteMonsterUIDataAtBuffer(hpRatio);
+		MonsterUIManager::GetInstance().SetPipeline();
 	}
 
 	void MonsterHPRenderer::clearPipeline()

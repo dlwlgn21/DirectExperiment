@@ -401,10 +401,10 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
-				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
-				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY),
-				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
-				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY),
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_NORMAL_MAP_MATERIAL_KEY),
+				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
+				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_ZOMBIE_MATERIAL_KEY),
 				pZombieAnimator,
 				pPlayerScript,
 				eType
@@ -473,6 +473,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_HEABY_SLICER_NORMAL_MAP_MATERIAL_KEY),
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_HEABY_SLICER_MATERIAL_KEY),
 				pHeabySlicerAnimator,
@@ -543,6 +545,8 @@ namespace jh
 			ZeroMemory(&monInfo, sizeof(MonsterInfo));
 			createMonsterInfo(
 				monInfo,
+				//ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY),
+				//ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_NORMAL_MAP_MATERIAL_KEY),
 				ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY),
 				ResourcesManager::Find<Material>(ResourceMaker::MONSTER_LIGHT_SLICER_MATERIAL_KEY),
 				pLightSlicerAnimator,
@@ -855,7 +859,7 @@ namespace jh
 			retPackage.pColliderObject[i]->GetTransform()->SetPosition(Vector3(position.x, position.y + i, COLLIDER_Z_VALUE));
 		}
 
-		UIBarObject* pUIObject = new UIBarObject(eUIBarType::MONSTER_HP_BAR, static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
+		UIBarObject* pUIObject = new UIBarObject(static_cast<MonsterScript*>(pMonster->GetScriptOrNull()));
 		retPackage.pUIHpBarObject = pUIObject;
 		static_cast<BossMonster*>(retPackage.pMonster)->SetBossUIHpBarObject(pUIObject);
 		setTransform(retPackage.pMonster->GetTransform(), position, ACIENT_BOSS_SCALE_VECTOR);

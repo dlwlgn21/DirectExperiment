@@ -15,6 +15,7 @@ namespace jh
 		void Initialize() override;
 		void Update() override;
 
+		const MonsterScript* GetMonsterScript() { assert(mpMonsterScript != nullptr); return mpMonsterScript; }
 		void SetMounsterUIType(const eUIBarType eUIType) { meType = eUIType; }
 
 	private:

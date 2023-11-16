@@ -24,7 +24,6 @@ namespace jh
 	public:
 		UIBarObject(const eUIBarType eType, PlayerScript* pPlayerScript);
 		UIBarObject(MonsterScript* pMonsterScript);
-		UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript);
 		virtual ~UIBarObject() = default;
 
 		const eUIBarType GetUIType() const { return meType; }

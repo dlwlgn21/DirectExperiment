@@ -66,7 +66,7 @@ namespace jh
 	void PlayerSkillElectricStrikeScript::setWatingPosition()
 	{
 		const Vector2 playerPos = mpPlayerTransform->GetOnlyXYPosition();
-		const float yPos = playerPos.y + DISTANCE_FROM_PLAYER_Y_DISTANCE;
+		const float yPos = playerPos.y + DISTANCE_FROM_PLAYER_Y_DISTANCE + 10.0f;
 
 		static std::random_device rd;
 		static std::mt19937 gen(rd());

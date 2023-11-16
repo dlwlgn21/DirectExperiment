@@ -59,6 +59,7 @@ namespace jh
 					if (pGameObject == nullptr) {continue;}
 					if (pGameObject->GetState() != GameObject::eGameObjectState::ACTIVE) { continue; }
 					Renderer* pRenderer = static_cast<Renderer*>(pGameObject->GetComponentOrNull(eComponentType::RENDERER));
+					//if (pRenderer != nullptr && pRenderer->GetType() != eComponentRendererType::MONSTER_HP_RENDERER)	
 					if (pRenderer != nullptr)	
 					{ 
 						pRenderer->Render(); 

@@ -94,4 +94,16 @@ namespace jh
 		assert(mpAudioSources[static_cast<UINT>(eType)] != nullptr);
 		mpAudioSources[static_cast<UINT>(eType)]->SetLoop(bIsLoop);
 	}
+
+	void SFXManager::StopAllSFX()
+	{
+		for (auto* pSource : mpAudioSources)
+		{
+			if (pSource == nullptr)
+			{
+				continue;
+			}
+			pSource->Stop();
+		}
+	}
 }

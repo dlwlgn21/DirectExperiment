@@ -11,7 +11,6 @@ namespace jh
 	{
 		assert(mpShader != nullptr);
 		mpShader->SetPipeline();
-		//MonsterUIManager::GetInstance().SetPipeline();
 		mpTexture->SetPipeline(textureSlotNumber);
 	}
 

@@ -119,6 +119,7 @@ namespace jh
 
 	void PlayScene::Initialize()
 	{
+
 		PlayerScript* pPlayerScript = instantiateCameraAndPlayer();
 		mpPlayerScript = pPlayerScript;
 		assert(pPlayerScript != nullptr);

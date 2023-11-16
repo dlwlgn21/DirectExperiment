@@ -105,18 +105,18 @@ namespace jh
 	}
 	void BGLightningObject::setRenderer()
 	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_NORMAL_MAP_MESH_KEY);
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
 		Material* pMaterial = nullptr;
 		switch (meType)
 		{
 		case eBGLightningType::LARGE:
 		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_LARGE_LIGHTNING_NORMAL_MAP_MATERIAL_KEY);
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_LARGE_LIGHTNING_MATERIAL_KEY);
 			break;
 		}
 		case eBGLightningType::SMALL:
 		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_SMALL_LIGHTNING_NORMAL_MAP_MATERIAL_KEY);
+			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::BG_SMALL_LIGHTNING_MATERIAL_KEY);
 			break;
 		}
 		default:

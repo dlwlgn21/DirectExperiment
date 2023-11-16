@@ -308,8 +308,6 @@ namespace jh
 
 #pragma endregion
 
-
-
 	void ResourceMaker::Initialize()
 	{
 		createMeshs();
@@ -817,7 +815,8 @@ namespace jh
 		ResourcesManager::Insert<Material>(
 			UI_MONSTER_HP_BAR_MATERIAL_KEY,
 			new MonsterUIMaterial(
-				ResourcesManager::Find<Shader>(UI_MONSTER_HP_SHADER_KEY),
+				//ResourcesManager::Find<Shader>(UI_MONSTER_HP_SHADER_KEY),
+				ResourcesManager::Find<Shader>(UI_BOSS_MONSTER_HP_SHADER_KEY),
 				ResourcesManager::Find<Texture>(UI_MONSTER_HP_BAR_TEXTURE_KEY))
 			);
 

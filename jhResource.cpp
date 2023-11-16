@@ -6,9 +6,7 @@ namespace jh
 		: meType(eType)
 	{
 	}
-	Resource::~Resource()
-	{
-	}
+
 	HRESULT Resource::Load(const std::wstring& path)
 	{
 		return S_OK;

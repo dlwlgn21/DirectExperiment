@@ -1,10 +1,7 @@
 #include "jhUILevelUpScript.h"
 #include "jhTransform.h"
 #include "jhTime.h"
-
-static constexpr const float WAIT_Y_POS = 10.0f;
-static constexpr const float FINAL_Y_POS = 0.0f;
-static constexpr const float DESCENT_SPEED = 4.0f;
+#include "jhUISKillLevepUPConstantValues.h"
 
 namespace jh
 {

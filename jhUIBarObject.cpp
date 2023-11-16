@@ -84,15 +84,8 @@ namespace jh
 	{
 		assert(pMonsterScript != nullptr);
 		setMonsterUI(pMonsterScript);
-		//setAnimator();
 	}
-	UIBarObject::UIBarObject(const eUIBarType eType, MonsterScript* pMonsterScript)
-		: GameObject(eLayerType::MONSTER_UI)
-		, meType(eType)
-	{
-		assert(pMonsterScript != nullptr);
-		setMonsterUI(pMonsterScript);
-	}
+
 	void UIBarObject::setRenderer()
 	{
 		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
@@ -129,52 +122,28 @@ namespace jh
 			assert(false);
 			break;
 		}
-
 		assert(pMesh != nullptr);
 		assert(pMaterial != nullptr);
 		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
 		this->AddComponent(pSpriteRenderer);
 	}
 
-	void UIBarObject::setRenderer(MonsterScript* pMonsterScript)
-	{
-		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
-		Material* pMaterial = nullptr;
-		switch (meType)
-		{
-		case eUIBarType::MONSTER_HP_BAR:
-		{
-			if (pMonsterScript->GetMonsterType() != eMonsterType::LV_1_ACIENT_BOSS)
-			{
-				pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
-			}
-			else
-			{
-				pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_BOSS_MONSTER_HP_BAR_MATERIAL_KEY);
-			}
-			break;
-		}
-		case eUIBarType::MOSNTER_HP_CIRCLE:
-		{
-			pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_CIRCLE_MATERIAL_KEY);
-			break;
-		}
-		default:
-			assert(false);
-			break;
-		}
-		assert(pMesh != nullptr);
-		assert(pMaterial != nullptr);
-		SpriteRenderer* pSpriteRenderer = new SpriteRenderer(pMesh, pMaterial);
-		this->AddComponent(pSpriteRenderer);
-	}
+
 	void UIBarObject::setScript(PlayerScript* pPlayerScript)
 	{
 		assert(pPlayerScript != nullptr);
 		UIBarScript* pScript = new UIBarScript(meType, pPlayerScript);
 		this->AddScript(pScript);
 	}
-
+	void UIBarObject::setRenderer(MonsterScript* pMonsterScript)
+	{
+		Mesh* pMesh = ResourcesManager::Find<Mesh>(ResourceMaker::RECT_MESH_KEY);
+		Material* pMaterial = ResourcesManager::Find<Material>(ResourceMaker::UI_MONSTER_HP_BAR_MATERIAL_KEY);
+		assert(pMesh != nullptr);
+		assert(pMaterial != nullptr);
+		Renderer* pHPRenderer = new MonsterHPRenderer(pMesh, pMaterial);
+		this->AddComponent(pHPRenderer);
+	}
 	void UIBarObject::setMonsterUI(MonsterScript* pMonsterScript)
 	{
 		assert(pMonsterScript != nullptr);
@@ -185,8 +154,8 @@ namespace jh
 		}
 		else
 		{
-			GetTransform()->SetOnlyXScale(3.0f);
-			GetTransform()->SetOnlyYScale(0.2f);
+			GetTransform()->SetOnlyXScale(1.5f);
+			GetTransform()->SetOnlyYScale(0.5f);
 		}
 		MonsterUIScript* pScript = new MonsterUIScript(pMonsterScript);
 		this->AddScript(pScript);
